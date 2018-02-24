@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/print_task_detail"
+                android:layout_width="13dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/detail"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/task_detail"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/task_detail"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/print_task_time"
+                android:layout_width="13dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/time"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/task_time"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/yyyy_mm_dd_hh_mm_ss"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/print_task_destination"
+                android:layout_width="13dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/destination"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/task_destination"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/postal_address"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/print_ideal_price"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:text="Ideal Price"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/task_ideal_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ideal price"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/print_lowest_bid"
+                android:layout_width="13dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lowest_bid"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/task_lowest_bid"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/the_lowest_bid"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:gravity="top"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/print_my_bid"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/my_bid"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/task_my_bid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/type_my_bid"
+                android:inputType="numberDecimal" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/List_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bid_list"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
+        <ListView
+            android:id="@+id/provider_bid_lkist"
+            android:layout_width="match_parent"
+            android:layout_height="247dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/Cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cancel" />
+
+            <Button
+                android:id="@+id/Bid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/bid" />
+
+            <Button
+                android:id="@+id/Back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/back" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
