@@ -16,6 +16,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".requester.RequesterAcceptedTaskDetail"
+            android:label="@string/title_activity_requester_accepted_task_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".requester.RequesterFinishedTaskDetail" />
+        <activity android:name=".provider.ProviderMapActivity" />
+        <activity android:name=".EditProfileActivity" />
+        <activity android:name=".requester.RequestTaskControl" />
+        <activity android:name=".provider.ViewTaskDetailActivity" />
+        <activity android:name=".provider.ProviderTaskListActivity" />
+        <activity android:name=".provider.ProviderBidHistoryActivity" />
+        <activity android:name=".requester.RequesterMapActivity" />
+        <activity android:name=".requester.RequesterEditTaskActivity" />
+        <activity android:name=".provider.MakeABidActivity"></activity>
     </application>
 
 </manifest>

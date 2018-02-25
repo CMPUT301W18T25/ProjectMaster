@@ -36,4 +36,7 @@
     <string name="view_and_edit">View And Edit</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="bid_list">Bid List</string>
+    <string name="title_activity_requester_accepted_task_detail">RequesterAcceptedTaskDetail
+    </string>
+    <string name="title_activity_provider_bid_history">ProviderBidHistoryActivity</string>
 </resources>
