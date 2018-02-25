@@ -7,19 +7,19 @@
     <string name="button">Button</string>
     <string name="provider">Provider</string>
     <string name="consumer">Consumer</string>
-    <string name="type_your_name">Type your name</string>
-    <string name="name">Name</string>
+
+
     <string name="phone">Phone</string>
     <string name="type_your_phone">Type your phone</string>
     <string name="check_validation">Check Validation</string>
-    <string name="available_task_list">Available Task List</string>
+
     <string name="available_task_list">Available Task List</string>
     <string name="search">Search</string>
     <string name="view_on_map">View On Map</string>
     <string name="type_the_search_key_word">Type the search key word</string>
     <string name="bid_history">Bid History</string>
     <string name="task_detail">task detail</string>
-    <string name="bid_list">Bid List</string>
+
     <string name="back">Back</string>
     <string name="cancel">Cancel</string>
     <string name="bid">Bid</string>

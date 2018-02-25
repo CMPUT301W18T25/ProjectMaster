@@ -147,31 +147,11 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/select1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="select" />
-
-                <Button
-                    android:id="@+id/select2"
-                    android:layout_width="match_parent"
-                    android:layout_height="63dp"
-                    android:text="select" />
-
-                <Button
-                    android:id="@+id/select3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="select" />
-
             </LinearLayout>
 
             <ListView
                 android:id="@+id/c_bid_list"
-                android:layout_width="290dp"
+                android:layout_width="match_parent"
                 android:layout_height="196dp">
 
             </ListView>
