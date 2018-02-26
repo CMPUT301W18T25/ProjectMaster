@@ -2,25 +2,35 @@ package com.example.mayingnan.project301;
 
 import android.media.Image;
 
+import java.util.Arrays;
+
 /**
  * Created by Xingyuan Yang on 2018/2/25.
  */
 
 public class Photo {
     private String photoName;
-    private Image photo;
+    private byte[] compressedImage;
 
-    public void  addPhoto(String photoName, Image photo){
+    public void Photo(){
 
     }
-    public void  updatePhoto(String photoName, Image photo){
+
+    public void  addPhoto(byte[] newImage){
+        System.arraycopy(newImage, 0, this.compressedImage, 0, this.compressedImage.length);
+    }
+    public void  updatePhoto(byte[] newImage){
+        System.arraycopy(newImage, 0, this.compressedImage, 0, this.compressedImage.length);
 
     }
     public void savePhoto(){
 
     }
     public void  deletePhoto(){
-
+        Arrays.fill(this.compressedImage, (byte) 0 );
+    }
+    public byte[] getPhoto(){
+        return compressedImage;
     }
 
 

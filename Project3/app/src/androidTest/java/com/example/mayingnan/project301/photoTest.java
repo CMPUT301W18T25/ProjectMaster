@@ -8,8 +8,17 @@ import java.io.File;
 import com.example.mayingnan.project301.allUserActivity.LogInActivity;
 import java.io.IOException;
 
-
 import java.nio.ByteBuffer;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+import android.util.Log;
+
+import java.io.ByteArrayOutputStream;
+
+
 
 /**
  * Created by julianstys on 2018-02-25.
@@ -25,23 +34,46 @@ public class photoTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void addPhotoTest(){
+        Bitmap bmImg = BitmapFactory.decodeFile("/data/data/project3/Project301/test.png");
+        Photo new_photo = new Photo();
 
-        assertTrue (true);
+        //https://stackoverflow.com/questions/13758560/android-bitmap-to-byte-array-and-back-skimagedecoderfactory-returned-null?lq=1
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmImg.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+
+        new_photo.addPhoto(byteArray);
+
+        assertEquals(byteArray, new_photo.getPhoto());
 
     }
     public void updatePhotoTest(){
+        Bitmap bmImg = BitmapFactory.decodeFile("/data/data/project3/Project301/test.png");
+        Photo new_photo = new Photo();
 
-        assertTrue (true);
+        //https://stackoverflow.com/questions/13758560/android-bitmap-to-byte-array-and-back-skimagedecoderfactory-returned-null?lq=1
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmImg.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+
+        new_photo.addPhoto(byteArray);
+
+        assertEquals(byteArray, new_photo.getPhoto());
     }
-    public void deletePhotoTest() {
+    public void deletePhotoTest(){
+        Bitmap bmImg = BitmapFactory.decodeFile("/data/data/project3/Project301/test.png");
+        Photo new_photo = new Photo();
 
-        assertTrue (true);
+        //https://stackoverflow.com/questions/13758560/android-bitmap-to-byte-array-and-back-skimagedecoderfactory-returned-null?lq=1
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmImg.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+
+        new_photo.addPhoto(byteArray);
+        assertEquals(byteArray, new_photo.getPhoto());
+
+        new_photo.deletePhoto();
+        assertEquals(byteArray, new_photo.getPhoto());
+
     }
-
-    public void savePhotoTest() {
-
-        assertTrue (true);
-    }
-
-
 }
