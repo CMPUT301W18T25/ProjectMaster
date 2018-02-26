@@ -15,7 +15,7 @@ public class ChooseUserActivity extends AppCompatActivity {
     private Button requesterButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_character);
     }

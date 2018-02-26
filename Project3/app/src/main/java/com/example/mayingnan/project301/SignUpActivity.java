@@ -17,7 +17,7 @@ public class SignUpActivity extends AppCompatActivity {
     private UserListControl userListControl;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
     }
