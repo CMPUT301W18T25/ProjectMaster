@@ -3,10 +3,10 @@ package com.example.mayingnan.project301.providerActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.mayingnan.project301.Map;
 import com.example.mayingnan.project301.R;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ProviderMapActivity extends AppCompatActivity {
     private Map providerMap;

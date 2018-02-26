@@ -17,6 +17,11 @@ public class Task {
     private ArrayList<Bid> taskBidList;
     private Photo taskPhoto;
 
+
+    public Task(String s, String s1, String michael, Object o, String bidding, String s2, ArrayList<Bid> bidList, Photo emptyPhoto) {
+    }
+
+
     public Task(){
         this.taskName=null;
         this.taskDetails=null;
@@ -26,6 +31,7 @@ public class Task {
         this.taskAddress=null;
         this.taskBidList=null;
         this.taskPhoto=null;    }
+
 
     public Task(String taskName, String taskDetails, String taskRequester, String taskProvider,
                      String taskStatus, String taskAddress, ArrayList<Bid> taskBidList, Photo taskPhoto){
