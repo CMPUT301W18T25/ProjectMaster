@@ -38,52 +38,46 @@ public class photoTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void addPhotoTest(){
-        File imgFile = new  File("/data/data/project3/Project301/test.png");
-        Photo test_photo;
+        Bitmap bmImg = BitmapFactory.decodeFile("/data/data/project3/Project301/test.png");
+        Photo new_photo = new Photo();
 
-        if(imgFile.exists()){
-           BufferedImage image = new BufferedImage(200, 200, BufferedImage.TYPE_INT_ARGB);
+        //https://stackoverflow.com/questions/13758560/android-bitmap-to-byte-array-and-back-skimagedecoderfactory-returned-null?lq=1
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmImg.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
 
-           image = ImageIO.read(imgFile);
-           test_photo.addPhoto("test.png", image);
-        }
+        new_photo.addPhoto(byteArray);
 
-        assertEquals("test.png", test_photo.photoName);
+        assertEquals(byteArray, new_photo.getPhoto());
 
     }
     public void updatePhotoTest(){
-        File imgFile = new File("/data/data/project3/Project301/test.png");
-        Photo test_photo;
+        Bitmap bmImg = BitmapFactory.decodeFile("/data/data/project3/Project301/test.png");
+        Photo new_photo = new Photo();
 
-        if(imgFile.exists()){
-           BufferedImage image = new BufferedImage(200, 200, BufferedImage.TYPE_INT_ARGB);
+        //https://stackoverflow.com/questions/13758560/android-bitmap-to-byte-array-and-back-skimagedecoderfactory-returned-null?lq=1
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmImg.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
 
-           image = ImageIO.read(imgFile);
-           test_photo.addPhoto("test.png", image);
-        }
+        new_photo.addPhoto(byteArray);
 
-        imgFile = new File("/data/data/project3/Project301/test1.png");
-
-        if(imgFile.exists()){
-           BufferedImage image = new BufferedImage(200, 200, BufferedImage.TYPE_INT_ARGB);
-
-           image = ImageIO.read(imgFile);
-           test_photo.updatePhoto("test1.png", image);
-        }
-
-        assertEquals("test.png", test_photo.photoName);
-    }
+        assertEquals(byteArray, new_photo.getPhoto());
+      }
     public void deletePhotoTest(){
-        File imgFile = new File("/data/data/project3/Project301/test.png");
-        Photo test_photo;
+      Bitmap bmImg = BitmapFactory.decodeFile("/data/data/project3/Project301/test.png");
+      Photo new_photo = new Photo();
 
-        if(imgFile.exists()){
-           BufferedImage image = new BufferedImage(200, 200, BufferedImage.TYPE_INT_ARGB);
+      //https://stackoverflow.com/questions/13758560/android-bitmap-to-byte-array-and-back-skimagedecoderfactory-returned-null?lq=1
+      ByteArrayOutputStream stream = new ByteArrayOutputStream();
+      bmImg.compress(Bitmap.CompressFormat.PNG, 100, stream);
+      byte[] byteArray = stream.toByteArray();
 
-           image = ImageIO.read(imgFile);
-           test_photo.addPhoto("test.png", image);
-        }
+      new_photo.addPhoto(byteArray);
+      assertEquals(byteArray, new_photo.getPhoto());
 
-        assertEquals("test.png", test_photo.photoName);
+      new_photo.deletePhoto();
+      assertEquals(byteArray, new_photo.getPhoto());
+
     }
 }

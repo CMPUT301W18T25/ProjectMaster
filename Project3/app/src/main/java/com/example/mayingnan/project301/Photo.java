@@ -8,19 +8,27 @@ import android.media.Image;
 
 public class Photo {
     private String photoName;
-    private String encodedImage;
+    private byte[] compressedImage;
 
-    public void  addPhoto(String photoName, Image photo){
+    public void Photo(){
 
     }
-    public void  updatePhoto(String photoName, Image photo){
+
+    public void  addPhoto(byte[] newImage){
+      System.arraycopy(newImage, 0, this.compressedImage, 0, source.length);
+    }
+    public void  updatePhoto(byte[] newImage){
+      System.arraycopy(newImage, 0, this.compressedImage, 0, source.length);
 
     }
     public void savePhoto(){
 
     }
     public void  deletePhoto(){
-
+      Arrays.fill(this.compressedImage, (byte) 0 );
+    }
+    public byte[] getPhoto(){
+        return compressedImage;
     }
 
 
