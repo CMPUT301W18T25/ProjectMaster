@@ -12,6 +12,18 @@ import javax.imageio.ImageIO;
 
 import java.nio.ByteBuffer;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+import android.util.Log;
+
+import java.io.ByteArrayOutputStream;
+
+import ca.ualberta.cs.swapmyride.Misc.UniqueID;
+import ca.ualberta.cs.swapmyride.R;
+
+
 /**
  * Created by julianstys on 2018-02-25.
  */
