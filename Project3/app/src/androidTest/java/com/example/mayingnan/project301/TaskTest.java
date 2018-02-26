@@ -1,26 +1,31 @@
 package com.example.mayingnan.project301;
 
-import android.test.ActivityInstrumentationTestCase2;
-
-import com.example.mayingnan.project301.allUserActivity.LogInActivity;
-
 import org.junit.Test;
-
 import java.util.ArrayList;
+import static org.junit.Assert.*;
 
 /**
  * Created by julianstys on 2018-02-25.
  */
 
-public class TaskTest extends ActivityInstrumentationTestCase2 {
-
-
-    public TaskTest() {
-        super(LogInActivity.class);
-    }
+public class TaskTest {
 
     @Test
-    public void testTask(){
+    public void testTaskContructor(){
+        ArrayList<Bid> bidList = new ArrayList<Bid>();
+        Photo emptyPhoto = new Photo();
+
+        Task task = new Task("Fetch car","Fetch my car","Michael",null,"bidding","random address",bidList,emptyPhoto);
+        assertEquals("Michael", task.getTaskRequester());
+        assertEquals("Michael", task.getTaskRequester());
+
+        assertNull(task.getTaskProvider());
+        task.setTaskProvider("James");
+        assertEquals("James", task.getTaskProvider());
+
+
+    }
+    public void testTaskNoConstructor(){
         ArrayList<Bid> bidList = new ArrayList<Bid>();
         Photo emptyPhoto = new Photo();
         Task task = new Task();
@@ -33,33 +38,7 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
         task.setTaskRequester("Chris");
         assertEquals("Chris", task.getTaskRequester());
 
-    }
-    public void addTaskTest(){
 
-        assertTrue(true);
-
-    }
-    public void updateTaskTest(){
-        assertTrue(true);
-    }
-    public void deleteTaskTest(){
-
-        assertTrue(true);
-    }
-    public void searchBiddenTasksTest(){
-        assertTrue(true);
-    }
-    public void searchAssignTasksTest(){
-        assertTrue(true);
-    }
-    public void searchAllTasksOfThisRequester(){
-        assertTrue(true);
-    }
-    public void searchAllRequestingTasksTest(){
-        assertTrue(true);
-    }
-    public void searchTaskByTaskNameTest(){
-        assertTrue(true);
     }
 
 }
