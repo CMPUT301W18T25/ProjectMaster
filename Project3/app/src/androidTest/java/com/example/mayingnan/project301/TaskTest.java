@@ -93,8 +93,34 @@ public class TaskTest {
         assertTrue(tc.searchBiddenTasksOfThisProvider(userName).contains(task));
 
     }
-    public void searchAssignTasksOfThisProviderTest(){}
+    public void searchAssignTasksOfThisProviderTest(){
+        String userName = "me";
+        TaskController tc = new TaskController();
+        Task task = new Task();
+        task.setTaskProvider(userName);
+        task.setTaskName("hihi");
+        task.setTaskStatus("processing");
+        tc.addTask(task);
+        assertTrue(tc.searchAssignTasksOfThisProvider(userName).contains(task));
+
+
+
+    }
     public void searchAllTasksOfThisRequesterTest(){
+        String userName = "me";
+        TaskController tc = new TaskController();
+        Task task = new Task();
+        task.setTaskProvider(userName);
+        task.setTaskName("hihi");
+        task.setTaskStatus("processing");
+
+        Task task2= new Task();
+        task2.setTaskProvider(userName);
+        task2.setTaskName("hihihi2");
+        task2.setTaskStatus("finished");
+        tc.addTask(task);
+        assertTrue(tc.searchAllTasksOfThisRequester(userName).contains(task));
+        assertTrue(tc.searchAllTasksOfThisRequester(userName).contains(task2));
 
 
 
