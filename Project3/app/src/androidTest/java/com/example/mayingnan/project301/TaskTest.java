@@ -1,5 +1,7 @@
 package com.example.mayingnan.project301;
 
+import com.example.mayingnan.project301.controller.TaskController;
+
 import org.junit.Test;
 import java.util.ArrayList;
 import static org.junit.Assert.*;
@@ -15,7 +17,8 @@ public class TaskTest {
         ArrayList<Bid> bidList = new ArrayList<Bid>();
         Photo emptyPhoto = new Photo();
 
-        Task task = new Task("Fetch car","Fetch my car","Michael",null,"bidding","random address",bidList,emptyPhoto);
+        Task task = new Task("Fetch","Fetchcar","Michael",null,"bidding","random address",bidList,emptyPhoto);
+
         assertEquals("Michael", task.getTaskRequester());
         assertEquals("Michael", task.getTaskRequester());
 
@@ -40,5 +43,35 @@ public class TaskTest {
 
 
     }
+    public void addTaskTest(){
+
+    }
+    public void deleteTaskTest(){
+
+    }
+    public void requesterUpdateTaskTest(){
+        TaskController tc = new TaskController();
+        Task task = new Task();
+        task.setTaskName("hi");
+        tc.addTask(task);
+        assertEquals(tc.searchTaskByTaskName("hi"),task);
+        task.setTaskName("No");
+        tc.requesterUpdateTask(task);
+        assertEquals(tc.searchTaskByTaskName("No"),task);
+
+
+
+    }
+    public void searchTaskByKeywordTest(){}
+    public void providerSetBidTest(){}
+    public void providerUpdateBidTest(){}
+    public void providerCancelBidTest(){}
+    public void searchBiddenTasksOfThisProviderTest(){
+
+    }
+    public void searchAssignTasksOfThisProviderTest(){}
+    public void searchAllTasksOfThisRequesterTest(){}
+    public void searchAllRequestingTasksTest(){}
+    public void searchTaskByTaskNameTest(){}
 
 }
