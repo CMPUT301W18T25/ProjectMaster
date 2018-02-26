@@ -15,7 +15,8 @@ public class TaskTest {
         ArrayList<Bid> bidList = new ArrayList<Bid>();
         Photo emptyPhoto = new Photo();
 
-        Task task = new Task("Fetch car","Fetch my car","Michael",null,"bidding","random address",bidList,emptyPhoto);
+        Task task = new Task("Fetch","Fetchcar","Michael",null,"bidding","random address",bidList,emptyPhoto);
+
         assertEquals("Michael", task.getTaskRequester());
         assertEquals("Michael", task.getTaskRequester());
 
@@ -40,5 +41,25 @@ public class TaskTest {
 
 
     }
+    public void addTaskTest(){
+
+    }
+    public void deleteTaskTest(){
+
+    }
+    public void requesterUpdateTaskTest(){
+        
+    }
+    public void searchTaskByKeywordTest(){}
+    public void providerSetBidTest(){}
+    public void providerUpdateBidTest(){}
+    public void providerCancelBidTest(){}
+    public void searchBiddenTasksOfThisProviderTest(){
+
+    }
+    public void searchAssignTasksOfThisProviderTest(){}
+    public void searchAllTasksOfThisRequesterTest(){}
+    public void searchAllRequestingTasksTest(){}
+    public void searchTaskByTaskNameTest(){}
 
 }

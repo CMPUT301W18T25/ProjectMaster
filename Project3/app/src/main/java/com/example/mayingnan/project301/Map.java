@@ -7,10 +7,5 @@ import android.webkit.GeolocationPermissions;
  */
 
 public class Map {
-    public void showAllAvailableTasks(){
 
-    }
-    public void showDistance(){
-        //when the task is processing, the map should show process's location and requeter's location
-    }
 }

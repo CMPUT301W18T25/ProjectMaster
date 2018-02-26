@@ -17,7 +17,7 @@ public class Task {
     private ArrayList<Bid> taskBidList;
     private Photo taskPhoto;
 
-    public void Task(){
+    public Task(){
         this.taskName=null;
         this.taskDetails=null;
         this.taskRequester=null;
@@ -27,7 +27,7 @@ public class Task {
         this.taskBidList=null;
         this.taskPhoto=null;    }
 
-    public void Task(String taskName, String taskDetails, String taskRequester, String taskProvider,
+    public Task(String taskName, String taskDetails, String taskRequester, String taskProvider,
                      String taskStatus, String taskAddress, ArrayList<Bid> taskBidList, Photo taskPhoto){
         this.taskName=taskName;
         this.taskDetails=taskDetails;

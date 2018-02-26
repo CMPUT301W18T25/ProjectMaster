@@ -15,7 +15,7 @@ public class UserListController {
 
     }
 
-    public void updateUser(){
+    public void updateUser(User user){
 
     }
 
@@ -23,7 +23,7 @@ public class UserListController {
         return userlist;
     }
 
-    public User getAUseByName(String name){
+    public User getAUserByName(String name){
         User user = new User ();
         return user;
     }
