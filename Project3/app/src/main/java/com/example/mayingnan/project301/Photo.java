@@ -10,9 +10,10 @@ public class Photo {
     private String photoName;
     private Image photo;
 
-    public void  addPhoto(){
+    public void  addPhoto(String photoName, Image photo){
+
     }
-    public void  updatePhoto(){
+    public void  updatePhoto(String photoName, Image photo){
 
     }
     public void savePhoto(){
@@ -24,4 +25,3 @@ public class Photo {
 
 
 }
-
