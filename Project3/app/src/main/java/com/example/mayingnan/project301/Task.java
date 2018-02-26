@@ -17,11 +17,11 @@ public class Task {
     private ArrayList<Bid> taskBidList;
     private Photo taskPhoto;
 
-<<<<<<< HEAD
+
     public Task(String s, String s1, String michael, Object o, String bidding, String s2, ArrayList<Bid> bidList, Photo emptyPhoto) {
     }
 
-=======
+
     public Task(){
         this.taskName=null;
         this.taskDetails=null;
@@ -31,7 +31,7 @@ public class Task {
         this.taskAddress=null;
         this.taskBidList=null;
         this.taskPhoto=null;    }
->>>>>>> 23d42f791c853ad9f79e4513ce1d7fcdca2c9c4d
+
 
     public Task(String taskName, String taskDetails, String taskRequester, String taskProvider,
                      String taskStatus, String taskAddress, ArrayList<Bid> taskBidList, Photo taskPhoto){
