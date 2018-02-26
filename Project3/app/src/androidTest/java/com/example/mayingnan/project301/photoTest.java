@@ -14,7 +14,7 @@ public class photoTest extends ActivityInstrumentationTestCase2 {
         super(LogInActivity.class);
     }
     public void addPhotoTest(){
-        assertTrue(true);
+         assertTrue(true);
     }
     public void updatePhotoTest(){
         assertTrue(true);
