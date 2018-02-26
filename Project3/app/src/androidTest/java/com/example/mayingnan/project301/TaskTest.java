@@ -1,5 +1,7 @@
 package com.example.mayingnan.project301;
 
+import com.example.mayingnan.project301.controller.TaskController;
+
 import org.junit.Test;
 import java.util.ArrayList;
 import static org.junit.Assert.*;
@@ -48,7 +50,17 @@ public class TaskTest {
 
     }
     public void requesterUpdateTaskTest(){
-        
+        TaskController tc = new TaskController();
+        Task task = new Task();
+        task.setTaskName("hi");
+        tc.addTask(task);
+        assertEquals(tc.searchTaskByTaskName("hi"),task);
+        task.setTaskName("No");
+        tc.requesterUpdateTask(task);
+        assertEquals(tc.searchTaskByTaskName("No"),task);
+
+
+
     }
     public void searchTaskByKeywordTest(){}
     public void providerSetBidTest(){}
