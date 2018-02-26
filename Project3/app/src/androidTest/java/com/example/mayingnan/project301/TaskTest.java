@@ -44,10 +44,21 @@ public class TaskTest {
 
     }
     public void addTaskTest(){
+        TaskController tc = new TaskController();
+        Task task = new Task();
+        task.setTaskName("hi");
+        tc.addTask(task);
+        assertEquals(tc.searchTaskByTaskName("hi"),task);
 
     }
     public void deleteTaskTest(){
 
+        TaskController tc = new TaskController();
+        Task task = new Task();
+        task.setTaskName("hi");
+        tc.addTask(task);
+        tc.deleteTask(task);
+        assertFalse(tc.searchTaskByTaskName("hi").contains(task));
     }
     public void requesterUpdateTaskTest(){
         TaskController tc = new TaskController();
@@ -62,16 +73,55 @@ public class TaskTest {
 
 
     }
-    public void searchTaskByKeywordTest(){}
-    public void providerSetBidTest(){}
-    public void providerUpdateBidTest(){}
-    public void providerCancelBidTest(){}
+    public void searchTaskByKeywordTest(){
+        TaskController tc = new TaskController();
+        Task task = new Task();
+        task.setTaskName("hihi");
+        tc.addTask(task);
+        assertTrue(tc.searchTaskByKeyword("hi").contains(task));
+
+    }
+
     public void searchBiddenTasksOfThisProviderTest(){
+        String userName = "me";
+        TaskController tc = new TaskController();
+        Task task = new Task();
+        task.setTaskProvider(userName);
+        task.setTaskName("hihi");
+        task.setTaskStatus("bidding");
+        tc.addTask(task);
+        assertTrue(tc.searchBiddenTasksOfThisProvider(userName).contains(task));
 
     }
     public void searchAssignTasksOfThisProviderTest(){}
-    public void searchAllTasksOfThisRequesterTest(){}
-    public void searchAllRequestingTasksTest(){}
-    public void searchTaskByTaskNameTest(){}
+    public void searchAllTasksOfThisRequesterTest(){
+
+
+
+    }
+    public void searchAllRequestingTasksTest(){
+        TaskController tc= new TaskController();
+        Task task = new Task();
+        task.setTaskStatus("finished");
+
+        Task task2 = new Task();
+        task.setTaskStatus("requesting");
+
+        assertEquals(tc.searchAllRequestingTasks().get(0),task2);
+
+        assertEquals(tc.searchAllRequestingTasks().size(),1);
+
+
+
+    }
+    public void searchTaskByTaskNameTest(){
+        TaskController tc = new TaskController();
+        Task task = new Task();
+        task.setTaskName("hi");
+        assertEquals(tc.searchTaskByTaskName("hi"),task);
+
+
+
+    }
 
 }

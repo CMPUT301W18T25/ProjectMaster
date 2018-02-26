@@ -15,25 +15,29 @@ public class TaskController {
     public void addTask(Task task){}
     public void deleteTask(Task task){}
     public void requesterUpdateTask(Task task){}
-    public void searchTaskByKeyword(String keyword){}
+    public ArrayList<Task>  searchTaskByKeyword(String keyword){
+        ArrayList<Task> taskList = new ArrayList<Task> ();
+        return taskList;
+
+    }
     public void providerSetBid(Task task, Bid bid){}
     public void providerUpdateBid(Task task,Bid bid){}
     public void providerCancelBid(Task task,Bid bid){}
 
 
-    public ArrayList<Task> searchBiddenTasksOfThisProvider(User provider){
+    public ArrayList<Task> searchBiddenTasksOfThisProvider(String userName){
         ArrayList<Task> taskList = new ArrayList<Task> ();
         return taskList;
 
     }
 
-    public ArrayList<Task> searchAssignTasksOfThisProvider(User provider ){
+    public ArrayList<Task> searchAssignTasksOfThisProvider(String userName ){
         ArrayList<Task> taskList = new ArrayList<Task> ();
         return taskList;
 
     }
 
-    public ArrayList<Task> searchAllTasksOfThisRequester(User Requester){
+    public ArrayList<Task> searchAllTasksOfThisRequester(String userName){
         ArrayList<Task> taskList = new ArrayList<Task> ();
         return taskList;
 
