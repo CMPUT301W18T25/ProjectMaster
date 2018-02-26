@@ -16,7 +16,6 @@ public class User {
     private String userType;
     private Photo userPhoto;
 
-
     public String getUserName() {
         return userName;
     }
