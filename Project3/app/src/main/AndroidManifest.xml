@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".allUserActivity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,17 +17,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".requester.RequesterAcceptedTaskDetail"
+            android:name=".requesterActivity.RequesterAcceptedTaskDetailActivity"
             android:label="@string/title_activity_requester_accepted_task_detail"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".requester.RequesterFinishedTaskDetail" />
-        <activity android:name=".provider.ProviderMapActivity" />
-        <activity android:name=".EditProfileActivity" />
-        <activity android:name=".provider.ProviderTaskListActivity" />
-        <activity android:name=".provider.ProviderBidHistoryActivity" />
-        <activity android:name=".requester.RequesterMapActivity" />
-        <activity android:name=".requester.RequesterEditTaskActivity" />
-        <activity android:name=".provider.MakeABidActivity"></activity>
+        <activity android:name=".requesterActivity.RequesterFinishedTaskDetailActivity" />
+        <activity android:name=".providerActivity.ProviderMapActivity" />
+        <activity android:name=".allUserActivity.EditProfileActivity" />
+        <activity android:name=".providerActivity.ProviderTaskListActivity" />
+        <activity android:name=".providerActivity.ProviderBidHistoryActivity" />
+        <activity android:name=".requesterActivity.RequesterMapActivity" />
+        <activity android:name=".requesterActivity.RequesterEditTaskActivity" />
+        <activity android:name=".providerActivity.MakeABidActivity"></activity>
     </application>
 
 </manifest>

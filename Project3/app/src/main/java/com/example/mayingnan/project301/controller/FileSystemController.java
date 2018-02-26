@@ -1,4 +1,4 @@
-package com.example.mayingnan.project301;
+package com.example.mayingnan.project301.controller;
 
 /**
  * Created by mac on 2018-02-25.

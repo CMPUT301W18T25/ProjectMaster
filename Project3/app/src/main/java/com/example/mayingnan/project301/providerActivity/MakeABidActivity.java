@@ -1,4 +1,4 @@
-package com.example.mayingnan.project301.provider;
+package com.example.mayingnan.project301.providerActivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -1,6 +1,6 @@
 
 
-package com.example.mayingnan.project301.requester;
+package com.example.mayingnan.project301.requesterActivity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,11 +12,11 @@ import com.example.mayingnan.project301.R;
  */
 
 
-public class PostTaskActivity extends AppCompatActivity {
+public class RequesterAcceptedTaskDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.consumer_post_task);
+        setContentView(R.layout.consumer_pay);
     }
 }

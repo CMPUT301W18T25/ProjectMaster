@@ -1,8 +1,10 @@
-package com.example.mayingnan.project301;
+package com.example.mayingnan.project301.allUserActivity;
 
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.mayingnan.project301.R;
 
 
 public class MainActivity extends AppCompatActivity {

@@ -2,6 +2,8 @@ package com.example.mayingnan.project301;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.example.mayingnan.project301.allUserActivity.LogInActivity;
+
 /**
  * Created by julianstys on 2018-02-25.
  */

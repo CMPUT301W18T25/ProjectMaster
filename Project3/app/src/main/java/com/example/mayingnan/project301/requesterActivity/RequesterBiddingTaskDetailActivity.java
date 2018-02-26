@@ -1,4 +1,4 @@
-package com.example.mayingnan.project301.requester;
+package com.example.mayingnan.project301.requesterActivity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +11,7 @@ import com.example.mayingnan.project301.R;
 
 
 
-public class RequesterBiddingTaskDetail extends AppCompatActivity {
+public class RequesterBiddingTaskDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

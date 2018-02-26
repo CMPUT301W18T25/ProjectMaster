@@ -1,12 +1,14 @@
 
 
 
-package com.example.mayingnan.project301;
+package com.example.mayingnan.project301.allUserActivity;
 
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.example.mayingnan.project301.R;
 
 
 public class ChooseUserActivity extends AppCompatActivity {

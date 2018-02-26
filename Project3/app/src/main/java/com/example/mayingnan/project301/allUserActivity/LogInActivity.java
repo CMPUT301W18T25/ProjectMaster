@@ -1,38 +1,43 @@
-package com.example.mayingnan.project301.provider;
+
+
+package com.example.mayingnan.project301.allUserActivity;
+
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.Task;
 
 import java.util.ArrayList;
 
-public class ProviderTaskListActivity extends AppCompatActivity {
 
-    private Button searchTask;
-    private Button viewOnMap;
-    private Button BidHistoy;
+public class LogInActivity extends AppCompatActivity {
+
     private ListView taskListView;
-    private TextView taskLabel;
+    private Button viewOnMap;
     private ArrayList<Task> taskList;
     private ArrayAdapter<Task> taskAdapter;
-
+    private EditText usernameText;
+    private Button loginButton;
+    private Button signupButton;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_provider);
+        setContentView(R.layout.activity_main);
     }
-    public void onSearch(){}
 
-    public void showMap(){}
+    public void logIn(){
 
-    public void showHistory(){}
+    }
 
+    public void signUp(){
+
+    }
 }

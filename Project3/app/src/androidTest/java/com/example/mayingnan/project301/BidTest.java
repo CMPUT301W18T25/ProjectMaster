@@ -2,9 +2,7 @@ package com.example.mayingnan.project301;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import org.junit.Test;
-
-import java.util.ArrayList;
+import com.example.mayingnan.project301.allUserActivity.LogInActivity;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

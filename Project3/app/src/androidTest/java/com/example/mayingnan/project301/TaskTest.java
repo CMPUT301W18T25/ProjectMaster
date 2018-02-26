@@ -2,10 +2,11 @@ package com.example.mayingnan.project301;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.example.mayingnan.project301.allUserActivity.LogInActivity;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
-import static org.junit.Assert.*;
 
 /**
  * Created by julianstys on 2018-02-25.

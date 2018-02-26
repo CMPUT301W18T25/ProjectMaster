@@ -2,7 +2,7 @@ package com.example.mayingnan.project301;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import java.util.ArrayList;
+import com.example.mayingnan.project301.allUserActivity.LogInActivity;
 
 /**
  * Created by wdong2 on 2/15/18.
