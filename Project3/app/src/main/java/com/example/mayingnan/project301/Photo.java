@@ -30,7 +30,7 @@ public class Photo {
         Arrays.fill(this.compressedImage, (byte) 0 );
     }
     public byte[] getPhoto(){
-        return compressedImage;
+        return this.compressedImage;
     }
 
 
