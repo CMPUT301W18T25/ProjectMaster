@@ -17,15 +17,9 @@ public class Task {
     private ArrayList<Bid> taskBidList;
     private Photo taskPhoto;
 
-    public void Task(){
-        this.taskName=null;
-        this.taskDetails=null;
-        this.taskRequester=null;
-        this.taskProvider=null;
-        this.taskStatus=null;
-        this.taskAddress=null;
-        this.taskBidList=null;
-        this.taskPhoto=null;    }
+    public Task(String s, String s1, String michael, Object o, String bidding, String s2, ArrayList<Bid> bidList, Photo emptyPhoto) {
+    }
+
 
     public void Task(String taskName, String taskDetails, String taskRequester, String taskProvider,
                      String taskStatus, String taskAddress, ArrayList<Bid> taskBidList, Photo taskPhoto){
