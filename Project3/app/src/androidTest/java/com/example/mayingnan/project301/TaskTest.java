@@ -1,5 +1,7 @@
 package com.example.mayingnan.project301;
 
+import android.test.ActivityInstrumentationTestCase2;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -9,7 +11,12 @@ import static org.junit.Assert.*;
  * Created by julianstys on 2018-02-25.
  */
 
-public class TaskTest {
+public class TaskTest extends ActivityInstrumentationTestCase2 {
+
+
+    public TaskTest() {
+        super(LogInActivity.class);
+    }
 
     @Test
     public void testTask(){
@@ -25,6 +32,33 @@ public class TaskTest {
         task.setTaskRequester("Chris");
         assertEquals("Chris", task.getTaskRequester());
 
+    }
+    public void addTaskTest(){
+
+        assertTrue(true);
 
     }
+    public void updateTaskTest(){
+        assertTrue(true);
+    }
+    public void deleteTaskTest(){
+
+        assertTrue(true);
+    }
+    public void searchBiddenTasksTest(){
+        assertTrue(true);
+    }
+    public void searchAssignTasksTest(){
+        assertTrue(true);
+    }
+    public void searchAllTasksOfThisRequester(){
+        assertTrue(true);
+    }
+    public void searchAllRequestingTasksTest(){
+        assertTrue(true);
+    }
+    public void searchTaskByTaskNameTest(){
+        assertTrue(true);
+    }
+
 }
