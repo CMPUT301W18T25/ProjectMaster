@@ -9,7 +9,7 @@ public class UserListController {
     public ArrayList<User> userlist;
 
 
-    public void addUser(){
+    public void addUser(User user){
 
     }
 

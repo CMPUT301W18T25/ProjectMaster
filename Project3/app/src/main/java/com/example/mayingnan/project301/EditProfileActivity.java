@@ -12,7 +12,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText mobileText;
     private Button saveButton;
     private Button backButton;
-    private UserListControl userListControl;
+    private UserListController userListControl;
 
 
     @Override

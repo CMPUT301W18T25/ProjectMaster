@@ -23,7 +23,6 @@
         <activity android:name=".requester.RequesterFinishedTaskDetail" />
         <activity android:name=".provider.ProviderMapActivity" />
         <activity android:name=".EditProfileActivity" />
-        <activity android:name=".requester.RequestTaskControl" />
         <activity android:name=".provider.ProviderTaskListActivity" />
         <activity android:name=".provider.ProviderBidHistoryActivity" />
         <activity android:name=".requester.RequesterMapActivity" />

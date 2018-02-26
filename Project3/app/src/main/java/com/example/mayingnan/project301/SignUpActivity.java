@@ -14,7 +14,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText emailText;
     private EditText mobileText;
     private Button signUpButton;
-    private UserListControl userListControl;
+    private UserListController userListControl;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
