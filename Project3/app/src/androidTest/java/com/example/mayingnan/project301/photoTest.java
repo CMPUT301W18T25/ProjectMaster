@@ -1,11 +1,16 @@
 package com.example.mayingnan.project301;
 
+import android.media.Image;
+import android.media.Image.Plane;
+import android.provider.ContactsContract;
 import android.test.ActivityInstrumentationTestCase2;
 import java.io.File;
 import com.example.mayingnan.project301.allUserActivity.LogInActivity;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+
+import java.nio.ByteBuffer;
 
 /**
  * Created by julianstys on 2018-02-25.
@@ -19,6 +24,7 @@ public class photoTest extends ActivityInstrumentationTestCase2 {
     public photoTest() {
         super(LogInActivity.class);
     }
+
     public void addPhotoTest(){
         File imgFile = new  File("/data/data/project3/Project301/test.png");
         Photo test_photo;
@@ -31,6 +37,7 @@ public class photoTest extends ActivityInstrumentationTestCase2 {
         }
 
         assertEquals("test.png", test_photo.photoName);
+
     }
     public void updatePhotoTest(){
         File imgFile = new File("/data/data/project3/Project301/test.png");
