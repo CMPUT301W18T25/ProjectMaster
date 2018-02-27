@@ -20,7 +20,7 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
     public BidTest() {
         super(LogInActivity.class);
     }
-    public void setBidAmountTest(){
+    public void testSetBidAmount(){
         ArrayList<Bid> bidList = new ArrayList<Bid> ();
         Photo emptyPhoto = new Photo();
         Task biddedTask = new Task("Fetch","Fetchcar","Michael",null,"bidding","random address",bidList,emptyPhoto);
@@ -43,7 +43,7 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
 
 
     }
-    public void providerUpdateBidTest(){
+    public void testProviderUpdateBid(){
         ArrayList<Bid> bidList = new ArrayList<Bid>();
         Photo emptyPhoto = new Photo();
         Task biddedTask = new Task("Fetch","Fetchcar","Michael",null,"bidding","random address",bidList,emptyPhoto);
@@ -59,7 +59,7 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
         assertEquals(0.11, biddedTask.getTaskBidList ().get (1).getBidAmount());
 
     }
-    public void providerCancelBidTest(){
+    public void testProviderCancelBid(){
         ArrayList<Bid> bidList = new ArrayList<Bid>();
 
         Photo emptyPhoto = new Photo();
@@ -89,7 +89,7 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
         assertEquals(4, bidList.size());
 
     }
-    public void providerSetBidTest(){
+    public void testProviderSetBid(){
         ArrayList<Bid> bidList = new ArrayList<Bid>();
         Photo emptyPhoto = new Photo();
         Task biddedTask = new Task("Fetch","Fetchcar","Michael",null,"bidding","random address",bidList,emptyPhoto);

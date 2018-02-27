@@ -28,6 +28,7 @@ public class TaskTest {
 
 
     }
+    @Test
     public void testTaskNoConstructor(){
         ArrayList<Bid> bidList = new ArrayList<Bid>();
         Photo emptyPhoto = new Photo();
@@ -43,7 +44,8 @@ public class TaskTest {
 
 
     }
-    public void addTaskTest(){
+    @Test
+    public void testAddTask(){
         TaskController tc = new TaskController();
         Task task = new Task();
         task.setTaskName("hi");
@@ -51,7 +53,8 @@ public class TaskTest {
         assertEquals(tc.searchTaskByTaskName("hi"),task);
 
     }
-    public void deleteTaskTest(){
+    @Test
+    public void testDeleteTask(){
 
         TaskController tc = new TaskController();
         Task task = new Task();
@@ -60,6 +63,7 @@ public class TaskTest {
         tc.deleteTask(task);
         assertFalse(tc.searchTaskByTaskName("hi").contains(task));
     }
+    @Test
     public void requesterUpdateTaskTest(){
         TaskController tc = new TaskController();
         Task task = new Task();
@@ -73,6 +77,7 @@ public class TaskTest {
 
 
     }
+    @Test
     public void searchTaskByKeywordTest(){
         TaskController tc = new TaskController();
         Task task = new Task();
@@ -81,7 +86,7 @@ public class TaskTest {
         assertTrue(tc.searchTaskByKeyword("hi").contains(task));
 
     }
-
+    @Test
     public void searchBiddenTasksOfThisProviderTest(){
         String userName = "me";
         TaskController tc = new TaskController();
@@ -93,6 +98,7 @@ public class TaskTest {
         assertTrue(tc.searchBiddenTasksOfThisProvider(userName).contains(task));
 
     }
+    @Test
     public void searchAssignTasksOfThisProviderTest(){
         String userName = "me";
         TaskController tc = new TaskController();
@@ -106,6 +112,7 @@ public class TaskTest {
 
 
     }
+    @Test
     public void searchAllTasksOfThisRequesterTest(){
         String userName = "me";
         TaskController tc = new TaskController();
@@ -125,6 +132,7 @@ public class TaskTest {
 
 
     }
+    @Test
     public void searchAllRequestingTasksTest(){
         TaskController tc= new TaskController();
         Task task = new Task();
@@ -140,6 +148,7 @@ public class TaskTest {
 
 
     }
+    @Test
     public void searchTaskByTaskNameTest(){
         TaskController tc = new TaskController();
         Task task = new Task();

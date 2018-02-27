@@ -19,7 +19,7 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
     public OfflineTest() {
         super(LogInActivity.class);
     }
-    public void OfflineAddTaskTest(){
+    public void testOfflineAddTask(){
         Task offlineTask = new Task();
         FileSystemController fc = new FileSystemController();
         fc.saveToFile(offlineTask);
@@ -29,7 +29,7 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
 
     }
 
-    public void OfflineEditTaskTest(){
+    public void testOfflineEditTask(){
         //create a task online
         FileSystemController fc = new FileSystemController();
         Task newTask = new Task();

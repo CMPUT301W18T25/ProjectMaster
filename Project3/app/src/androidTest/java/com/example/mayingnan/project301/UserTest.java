@@ -35,7 +35,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         uc.updateUser(user);
         assertEquals(uc.getAUserByName("tester"),user);
     }
-    public void getAllUsersTest(){
+    public void testGetAllUsers(){
         User user1 = new User();
         user1.setUserName("yue");
         User user2 = new User();
@@ -49,7 +49,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         assertTrue(userList.contains(user2));
 
     }
-    public void getAUserByNameTest(){
+    public void testGetAUserByName(){
         User user1 = new User();
         user1.setUserName("y1");
         User user2 = new User();

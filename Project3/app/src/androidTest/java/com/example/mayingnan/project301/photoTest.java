@@ -33,7 +33,7 @@ public class photoTest extends ActivityInstrumentationTestCase2 {
         super(LogInActivity.class);
     }
 
-    public void addPhotoTest(){
+    public void testAddPhoto(){
         Bitmap bmImg = BitmapFactory.decodeFile("/data/data/project3/Project301/test.png");
         Photo new_photo = new Photo();
 
@@ -47,7 +47,7 @@ public class photoTest extends ActivityInstrumentationTestCase2 {
         assertEquals(byteArray, new_photo.getPhoto());
 
     }
-    public void updatePhotoTest(){
+    public void testUpdatePhoto(){
         Bitmap bmImg = BitmapFactory.decodeFile("/data/data/project3/Project301/test.png");
         Photo new_photo = new Photo();
 
@@ -60,7 +60,7 @@ public class photoTest extends ActivityInstrumentationTestCase2 {
 
         assertEquals(byteArray, new_photo.getPhoto());
     }
-    public void deletePhotoTest(){
+    public void testDeletePhoto(){
         Bitmap bmImg = BitmapFactory.decodeFile("/data/data/project3/Project301/test.png");
         Photo new_photo = new Photo();
 
