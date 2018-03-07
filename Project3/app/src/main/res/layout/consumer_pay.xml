@@ -13,40 +13,66 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/print6"
+                android:layout_width="93dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Task Name :"
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/confirm_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Info of task name"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/print1"
-                android:layout_width="156dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:text="Task Detail :"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/confirm_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Info of task"
+                android:text="Info of task detail"
                 android:textSize="20sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/print2"
-                android:layout_width="38dp"
+                android:layout_width="39dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Task Time :"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/confirm_time"
@@ -60,17 +86,18 @@
 
         <LinearLayout
             android:layout_width="394dp"
-            android:layout_height="62dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/print3"
-                android:layout_width="68dp"
+                android:layout_width="62dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Task Location :"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/confirm_location"
@@ -84,17 +111,18 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="63dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/print7"
-                android:layout_width="wrap_content"
+                android:layout_width="92dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Ideal Price :"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/confirm_ideal_price"
@@ -107,16 +135,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="68dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/print4"
-                android:layout_width="162dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:text="Deal Price :"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/confirm_price"
@@ -130,16 +159,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="73dp"
-            android:gravity="center_vertical|center_horizontal"
+            android:layout_height="41dp"
+            android:gravity="top"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/print5"
-                android:layout_width="162dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:text="Task Status :"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/confirm_status"
@@ -150,6 +180,11 @@
                 android:textSize="20sp" />
 
         </LinearLayout>
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="246dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -163,6 +198,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="pay" />
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delete"
+                android:visibility="visible" />
 
             <Button
                 android:id="@+id/back_button"
