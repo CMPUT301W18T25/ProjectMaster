@@ -11,6 +11,14 @@ import java.util.ArrayList;
 public class FileSystemController {
     private String FILENAME;
 
+    public boolean testTrue(String name){
+        return true;
+    }
+
+    public boolean testFalse(String name){
+        return false;
+    }
+
     public void saveToFile(Task task){
 
     }
