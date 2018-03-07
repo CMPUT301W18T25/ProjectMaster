@@ -24,6 +24,13 @@ public class TaskController {
     public void providerUpdateBid(Task task,Bid bid){}
     public void providerCancelBid(Task task,Bid bid){}
 
+    public boolean testTrue(String name){
+        return true;
+    }
+
+    public boolean testFalse(String name){
+        return false;
+    }
 
     public ArrayList<Task> searchBiddenTasksOfThisProvider(String userName){
         ArrayList<Task> taskList = new ArrayList<Task> ();
