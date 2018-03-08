@@ -7,14 +7,26 @@ import android.media.Image;
  */
 
 public class User {
-
+    private String id;
     private String userName;
     private String userPhone;
     private String userAddress;
     private String userEmail;
     private String userPassword;
     private String userType;
-    private Photo userPhoto;
+    public User(){
+        super();
+    }
+    public User(String id,String userName,String userPhone,String userAddress,String userEmail,String userPassword,String userType){
+        this.id = id;
+        this.userName = userName;
+        this.userAddress = userAddress;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.userType = userType;
+
+    }
+
 
     public String getUserName() {
         return userName;
@@ -64,11 +76,10 @@ public class User {
         this.userType = userType;
     }
 
-    public Photo getUserPhoto() {
-        return userPhoto;
+    public String getId(){
+        return this.id;
     }
-
-    public void setUserPhoto(Photo userPhoto) {
-        this.userPhoto = userPhoto;
+    public void setId(String id){
+        this.id = id;
     }
 }
