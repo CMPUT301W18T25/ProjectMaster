@@ -26,11 +26,11 @@ public class TaskController {
 
     public boolean testTrue(String name){
         return true;
-    }
+    } //created by wdong2 for testing
 
     public boolean testFalse(String name){
         return false;
-    }
+    } //created by wdong2 for testing
 
     public ArrayList<Task> searchBiddenTasksOfThisProvider(String userName){
         ArrayList<Task> taskList = new ArrayList<Task> ();
