@@ -1,4 +1,8 @@
-package com.example.mayingnan.project301;
+package com.example.mayingnan.project301.ActivityTest;
+
+/**
+ * Created by wdong2 on 3/8/18.
+ */
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
@@ -12,15 +16,11 @@ import com.example.mayingnan.project301.controller.FileSystemController;
 import com.example.mayingnan.project301.controller.UserListController;
 import com.robotium.solo.Solo;
 
-/**
- * Created by wdong2 on 3/7/18.
- */
-
-public class MainActivityTest extends ActivityInstrumentationTestCase2 {
+public class LogInActivityTest extends ActivityInstrumentationTestCase2 {
 
     private Solo solo;
 
-    public MainActivityTest() {
+    public LogInActivityTest() {
         super(LogInActivity.class);
     }
 
@@ -81,10 +81,10 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2 {
 
         String invalidUserName = "IUN";
 
-        assertFalse(ULC.testFalse(invalidUserName));
+        assertFalse(ULC.checkLogInInfo(invalidUserName));
 
         String validUserName = "wdong2";
 
-        assertTrue(ULC.testTrue(validUserName));
+        assertTrue(ULC.checkLogInInfo(validUserName));
     }
 }

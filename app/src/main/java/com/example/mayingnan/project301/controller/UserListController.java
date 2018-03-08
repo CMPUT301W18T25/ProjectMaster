@@ -22,19 +22,24 @@ public class UserListController {
 
     public boolean testTrue(String name){
         return true;
-    }
+    } //created by wdong2 for testing
 
     public boolean testFalse(String name){
         return false;
-    }
+    }//created by wdong2 for testing
 
-    public boolean checkUserName(String name){
+    public boolean checkLogInInfo(String name){   //created by wdong2 for testing
         /**
          * return true for valid user name and passward; false otherwise
          */
         if (name == "wdong2"){ return true;}
         if (name == "IUN"){ return false;}
         return true;
+    }
+
+    public boolean checkValidationSignUp (String name, String email, String phone, String passward){ //created by wdong2 for testing
+        if (name == "wdong2"){return true;}
+        return false;
     }
 
     public static class addUser extends AsyncTask<User, Void, Void> {
