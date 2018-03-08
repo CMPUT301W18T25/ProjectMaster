@@ -40,6 +40,7 @@ public class UserListController {
     public static class addUser extends AsyncTask<User, Void, Void> {
 
         @Override
+
         protected Void doInBackground(User... user) {
             verifySettings();
 
@@ -52,6 +53,8 @@ public class UserListController {
                     if(result.isSucceeded())
                     {
                         user0.setId(result.getId());
+                        Log.i("Success","Elasticsearch ");
+
                     }
                     else
                     {
