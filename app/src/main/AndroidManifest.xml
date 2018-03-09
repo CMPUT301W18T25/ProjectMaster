@@ -10,17 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".requesterActivity.RequesterAcceptedTaskDetailActivity"
-            android:label="@string/title_activity_requester_accepted_task_detail"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".requesterActivity.RequesterFinishedTaskDetailActivity" />
-        <activity android:name=".providerActivity.ProviderMapActivity" />
-        <activity android:name=".allUserActivity.EditProfileActivity" />
-        <activity android:name=".providerActivity.ProviderTaskListActivity" />
-        <activity android:name=".providerActivity.ProviderBidHistoryActivity" />
-        <activity android:name=".requesterActivity.RequesterMapActivity" />
-        <activity android:name=".requesterActivity.RequesterEditTaskActivity" />
-        <activity android:name=".providerActivity.MakeABidActivity">
+            android:name=".allUserActivity.LogInActivity"
+            android:label="LogInActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
