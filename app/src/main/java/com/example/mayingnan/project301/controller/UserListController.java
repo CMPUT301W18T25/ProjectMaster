@@ -10,9 +10,12 @@ import com.searchly.jestdroid.JestDroidClient;
 import com.example.mayingnan.project301.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 
 public class UserListController {
 
@@ -75,12 +78,42 @@ public class UserListController {
         }
     }
 
-    public void updateUser(User user){
+    // TODO we need a function which gets tweets from elastic search
+    public static class GetAllUsers extends AsyncTask<String, Void, ArrayList<User>> {
+        @Override
+        protected ArrayList<User> doInBackground(String... search_parameters) {
+            verifySettings();
 
-    }
+            ArrayList<User> users = new ArrayList<User>();
 
-    public ArrayList<User> getAllUsers(){
-        return userlist;
+//            String query = "{ \"size\": 4, \n" +
+//                    "    \"query\" : {\n" +
+//                    "        \"term\" : { \"userName\" : \"\" }\n" +
+//                    "    }\n" +
+//                    "}" ;
+
+            String query = "{ \"size\": 100 }" ;
+            Log.i("Query", "The query was " + query);
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t25")
+                    .addType("user")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<User> foundUsers
+                            = result.getSourceAsObjectList(User.class);
+                    users.addAll(foundUsers);
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+
+            return users;
+        }
     }
 
     public User getAUserByName(String name){
