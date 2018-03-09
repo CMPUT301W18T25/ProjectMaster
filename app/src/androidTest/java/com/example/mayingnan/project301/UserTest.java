@@ -19,9 +19,8 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testAddUser(){
-        String test = "test";
+        String test = "testii";
         User user = new User(test,test,test,test,test,test,test);
-        UserListController uc = new UserListController();
         UserListController.addUser addUser = new UserListController.addUser();
 
         addUser.execute(user);

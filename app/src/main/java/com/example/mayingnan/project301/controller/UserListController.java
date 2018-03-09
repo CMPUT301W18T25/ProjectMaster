@@ -46,18 +46,18 @@ public class UserListController {
 
         @Override
 
-        protected Void doInBackground(User... user) {
+        protected Void doInBackground(User... users) {
             verifySettings();
 
-            for (User user0 : user) {
-                Index index = new Index.Builder(user0).index("CMPUT301W18T25").type("user").build();
+            for (User user : users) {
+                Index index = new Index.Builder(user).index("cmput301w18t25").type("user").build();
 
                 try {
                     // where is the client?
                     DocumentResult result = client.execute(index);
                     if(result.isSucceeded())
                     {
-                        user0.setId(result.getId());
+                        user.setId(result.getId());
                         Log.i("Success","Elasticsearch ");
 
                     }
@@ -90,7 +90,7 @@ public class UserListController {
 
     public static void verifySettings() {
         if (client == null) {
-            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080/");
+            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080");
             DroidClientConfig config = builder.build();
 
             JestClientFactory factory = new JestClientFactory();
