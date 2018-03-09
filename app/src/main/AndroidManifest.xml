@@ -20,7 +20,12 @@
         <activity android:name=".providerActivity.ProviderBidHistoryActivity" />
         <activity android:name=".requesterActivity.RequesterMapActivity" />
         <activity android:name=".requesterActivity.RequesterEditTaskActivity" />
-        <activity android:name=".providerActivity.MakeABidActivity"></activity>
+        <activity android:name=".providerActivity.MakeABidActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -5,7 +5,7 @@
     android:id="@+id/log_in"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mayingnan.project301.allUserActivity.MainActivity">
+    tools:context="com.example.mayingnan.project301.allUserActivity.LogInActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
