@@ -1,0 +1,246 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:2:1-23:12
+MERGED from [com.android.support:multidex:1.0.3] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/multidex-1.0.3.aar/065ae4ef8054b9b8ee6d0afb58e264c8/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:design:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/9a96e50deb9d28cf9fec0a9c0c5d189f/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/0f750b304acb886cf789e426906d79c2/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/20b1851a89d451eaafcff53af5fe7c16/AndroidManifest.xml:2:1-11:12
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-11.8.0.aar/f061b633de26f4a4fe928107dc929d97/AndroidManifest.xml:17:1-32:12
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/e3adeb7a08cd5d898dcafb9f4b42e70e/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/72f2f319b64e8a93e6725d1df70159eb/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/9352357fa7108a56d687b75621ea1f1a/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:transition:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/b91644ce7c9abd2317675dfa81dff3a3/AndroidManifest.xml:17:1-28:12
+MERGED from [com.google.android.gms:play-services-base:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/30385f30908d6c16d917e626aec4dafd/AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-tasks:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-tasks-11.8.0.aar/07732303562ed71e469c34f9c19e0ea8/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/8dec79319056641a9d870728acb78494/AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-v4:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/f67de8c66b607feae09bf6e05cd9a7c4/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/3706a9ee44cba431e48bc9521757cc09/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/5390399165b95901fd59e22eaf49a7a7/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/ee5e99c5f1a018b21015aace0ddf0ec3/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/d4eb4a740e3e49cae1a3df1c86f55a67/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-compat:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/740013e3df45f1ee1e674dda0dc2d4c5/AndroidManifest.xml:17:1-31:12
+MERGED from [com.google.android.gms:play-services-maps-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-license-11.8.0.aar/d77215d5010536d52dae77bd2a1627e6/AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-base-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.8.0.aar/7d5ee0b646a4faa3bb1cbbd07c134037/AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-basement-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-11.8.0.aar/a2a513f1fd947b0ed9f2cdabd3b84adb/AndroidManifest.xml:2:1-6:12
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/05682620f82071c6a8375a9c1357b0f1/AndroidManifest.xml:17:1-30:12
+MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.8.0.aar/65152abcdea77f3c98138bd147b792ff/AndroidManifest.xml:2:1-6:12
+INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:2:1-23:12
+INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:2:1-23:12
+	package
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:3:5-47
+		INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:2:1-23:12
+		INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:2:1-23:12
+		INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:5:5-21:19
+MERGED from [com.android.support:design:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/9a96e50deb9d28cf9fec0a9c0c5d189f/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:design:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/9a96e50deb9d28cf9fec0a9c0c5d189f/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/0f750b304acb886cf789e426906d79c2/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/0f750b304acb886cf789e426906d79c2/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/20b1851a89d451eaafcff53af5fe7c16/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/20b1851a89d451eaafcff53af5fe7c16/AndroidManifest.xml:9:5-20
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-11.8.0.aar/f061b633de26f4a4fe928107dc929d97/AndroidManifest.xml:30:5-20
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-11.8.0.aar/f061b633de26f4a4fe928107dc929d97/AndroidManifest.xml:30:5-20
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/e3adeb7a08cd5d898dcafb9f4b42e70e/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/e3adeb7a08cd5d898dcafb9f4b42e70e/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/72f2f319b64e8a93e6725d1df70159eb/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/72f2f319b64e8a93e6725d1df70159eb/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/9352357fa7108a56d687b75621ea1f1a/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/9352357fa7108a56d687b75621ea1f1a/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:transition:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/b91644ce7c9abd2317675dfa81dff3a3/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:transition:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/b91644ce7c9abd2317675dfa81dff3a3/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-base:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/30385f30908d6c16d917e626aec4dafd/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/30385f30908d6c16d917e626aec4dafd/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-tasks:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-tasks-11.8.0.aar/07732303562ed71e469c34f9c19e0ea8/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-tasks-11.8.0.aar/07732303562ed71e469c34f9c19e0ea8/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/8dec79319056641a9d870728acb78494/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/8dec79319056641a9d870728acb78494/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-v4:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/f67de8c66b607feae09bf6e05cd9a7c4/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-v4:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/f67de8c66b607feae09bf6e05cd9a7c4/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/3706a9ee44cba431e48bc9521757cc09/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/3706a9ee44cba431e48bc9521757cc09/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/5390399165b95901fd59e22eaf49a7a7/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/5390399165b95901fd59e22eaf49a7a7/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/ee5e99c5f1a018b21015aace0ddf0ec3/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/ee5e99c5f1a018b21015aace0ddf0ec3/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/d4eb4a740e3e49cae1a3df1c86f55a67/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/d4eb4a740e3e49cae1a3df1c86f55a67/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/740013e3df45f1ee1e674dda0dc2d4c5/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/740013e3df45f1ee1e674dda0dc2d4c5/AndroidManifest.xml:25:5-29:19
+MERGED from [com.google.android.gms:play-services-maps-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-license-11.8.0.aar/d77215d5010536d52dae77bd2a1627e6/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-maps-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-license-11.8.0.aar/d77215d5010536d52dae77bd2a1627e6/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-base-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.8.0.aar/7d5ee0b646a4faa3bb1cbbd07c134037/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-base-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.8.0.aar/7d5ee0b646a4faa3bb1cbbd07c134037/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-basement-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-11.8.0.aar/a2a513f1fd947b0ed9f2cdabd3b84adb/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-basement-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-11.8.0.aar/a2a513f1fd947b0ed9f2cdabd3b84adb/AndroidManifest.xml:5:5-20
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/05682620f82071c6a8375a9c1357b0f1/AndroidManifest.xml:24:5-28:19
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/05682620f82071c6a8375a9c1357b0f1/AndroidManifest.xml:24:5-28:19
+MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.8.0.aar/65152abcdea77f3c98138bd147b792ff/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.8.0.aar/65152abcdea77f3c98138bd147b792ff/AndroidManifest.xml:5:5-20
+	android:supportsRtl
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:10:9-35
+	android:label
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:8:9-41
+	android:roundIcon
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:9:9-54
+	android:icon
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:7:9-43
+	android:allowBackup
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:11:9-40
+activity#com.example.mayingnan.project301.allUserActivity.LogInActivity
+ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:12:9-20:20
+	android:label
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:14:13-42
+	android:theme
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:15:13-56
+	android:name
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:13:13-58
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:16:13-19:29
+action#android.intent.action.MAIN
+ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:17:17-68
+	android:name
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:17:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:18:17-76
+	android:name
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml:18:27-74
+uses-sdk
+INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:multidex:1.0.3] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/multidex-1.0.3.aar/065ae4ef8054b9b8ee6d0afb58e264c8/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:multidex:1.0.3] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/multidex-1.0.3.aar/065ae4ef8054b9b8ee6d0afb58e264c8/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:design:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/9a96e50deb9d28cf9fec0a9c0c5d189f/AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:design:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/9a96e50deb9d28cf9fec0a9c0c5d189f/AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/0f750b304acb886cf789e426906d79c2/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/0f750b304acb886cf789e426906d79c2/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/20b1851a89d451eaafcff53af5fe7c16/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/20b1851a89d451eaafcff53af5fe7c16/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-11.8.0.aar/f061b633de26f4a4fe928107dc929d97/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-11.8.0.aar/f061b633de26f4a4fe928107dc929d97/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/e3adeb7a08cd5d898dcafb9f4b42e70e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/e3adeb7a08cd5d898dcafb9f4b42e70e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/72f2f319b64e8a93e6725d1df70159eb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/72f2f319b64e8a93e6725d1df70159eb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/9352357fa7108a56d687b75621ea1f1a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/9352357fa7108a56d687b75621ea1f1a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/b91644ce7c9abd2317675dfa81dff3a3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/b91644ce7c9abd2317675dfa81dff3a3/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/30385f30908d6c16d917e626aec4dafd/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/30385f30908d6c16d917e626aec4dafd/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-tasks-11.8.0.aar/07732303562ed71e469c34f9c19e0ea8/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-tasks-11.8.0.aar/07732303562ed71e469c34f9c19e0ea8/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/8dec79319056641a9d870728acb78494/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/8dec79319056641a9d870728acb78494/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/f67de8c66b607feae09bf6e05cd9a7c4/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/f67de8c66b607feae09bf6e05cd9a7c4/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/3706a9ee44cba431e48bc9521757cc09/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/3706a9ee44cba431e48bc9521757cc09/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/5390399165b95901fd59e22eaf49a7a7/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/5390399165b95901fd59e22eaf49a7a7/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/ee5e99c5f1a018b21015aace0ddf0ec3/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/ee5e99c5f1a018b21015aace0ddf0ec3/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/d4eb4a740e3e49cae1a3df1c86f55a67/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/d4eb4a740e3e49cae1a3df1c86f55a67/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/740013e3df45f1ee1e674dda0dc2d4c5/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/740013e3df45f1ee1e674dda0dc2d4c5/AndroidManifest.xml:21:5-23:58
+MERGED from [com.google.android.gms:play-services-maps-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-license-11.8.0.aar/d77215d5010536d52dae77bd2a1627e6/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-maps-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-license-11.8.0.aar/d77215d5010536d52dae77bd2a1627e6/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-base-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.8.0.aar/7d5ee0b646a4faa3bb1cbbd07c134037/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-base-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.8.0.aar/7d5ee0b646a4faa3bb1cbbd07c134037/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-basement-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-11.8.0.aar/a2a513f1fd947b0ed9f2cdabd3b84adb/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-basement-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-11.8.0.aar/a2a513f1fd947b0ed9f2cdabd3b84adb/AndroidManifest.xml:4:5-43
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/05682620f82071c6a8375a9c1357b0f1/AndroidManifest.xml:20:5-22:41
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/05682620f82071c6a8375a9c1357b0f1/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.8.0.aar/65152abcdea77f3c98138bd147b792ff/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.8.0.aar/65152abcdea77f3c98138bd147b792ff/AndroidManifest.xml:4:5-43
+INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/9a96e50deb9d28cf9fec0a9c0c5d189f/AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mayingnan/Desktop/Project/ProjectMaster/app/src/main/AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:design:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/9a96e50deb9d28cf9fec0a9c0c5d189f/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/0f750b304acb886cf789e426906d79c2/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/0f750b304acb886cf789e426906d79c2/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/e3adeb7a08cd5d898dcafb9f4b42e70e/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:animated-vector-drawable:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-26.1.0.aar/e3adeb7a08cd5d898dcafb9f4b42e70e/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/72f2f319b64e8a93e6725d1df70159eb/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-26.1.0.aar/72f2f319b64e8a93e6725d1df70159eb/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/9352357fa7108a56d687b75621ea1f1a/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:recyclerview-v7:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-26.1.0.aar/9352357fa7108a56d687b75621ea1f1a/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:transition:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/b91644ce7c9abd2317675dfa81dff3a3/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:transition:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/transition-26.1.0.aar/b91644ce7c9abd2317675dfa81dff3a3/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-v4:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/f67de8c66b607feae09bf6e05cd9a7c4/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-v4:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-v4-26.1.0.aar/f67de8c66b607feae09bf6e05cd9a7c4/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/3706a9ee44cba431e48bc9521757cc09/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-fragment:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-fragment-26.1.0.aar/3706a9ee44cba431e48bc9521757cc09/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/5390399165b95901fd59e22eaf49a7a7/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-ui:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-core-ui-26.1.0.aar/5390399165b95901fd59e22eaf49a7a7/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/ee5e99c5f1a018b21015aace0ddf0ec3/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/ee5e99c5f1a018b21015aace0ddf0ec3/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/d4eb4a740e3e49cae1a3df1c86f55a67/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/d4eb4a740e3e49cae1a3df1c86f55a67/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/740013e3df45f1ee1e674dda0dc2d4c5/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/740013e3df45f1ee1e674dda0dc2d4c5/AndroidManifest.xml:26:9-28:38
+	android:value
+		ADDED from [com.android.support:design:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/9a96e50deb9d28cf9fec0a9c0c5d189f/AndroidManifest.xml:28:13-35
+	android:name
+		ADDED from [com.android.support:design:26.1.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/9a96e50deb9d28cf9fec0a9c0c5d189f/AndroidManifest.xml:27:13-51
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.android.gms:play-services-maps:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-11.8.0.aar/f061b633de26f4a4fe928107dc929d97/AndroidManifest.xml:23:5-79
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-11.8.0.aar/f061b633de26f4a4fe928107dc929d97/AndroidManifest.xml:23:22-76
+uses-permission#android.permission.INTERNET
+ADDED from [com.google.android.gms:play-services-maps:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-11.8.0.aar/f061b633de26f4a4fe928107dc929d97/AndroidManifest.xml:24:5-67
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-11.8.0.aar/f061b633de26f4a4fe928107dc929d97/AndroidManifest.xml:24:22-64
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-11.8.0.aar/f061b633de26f4a4fe928107dc929d97/AndroidManifest.xml:26:5-28:35
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-11.8.0.aar/f061b633de26f4a4fe928107dc929d97/AndroidManifest.xml:27:9-41
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-maps-11.8.0.aar/f061b633de26f4a4fe928107dc929d97/AndroidManifest.xml:28:9-32
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/30385f30908d6c16d917e626aec4dafd/AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/30385f30908d6c16d917e626aec4dafd/AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/30385f30908d6c16d917e626aec4dafd/AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/30385f30908d6c16d917e626aec4dafd/AndroidManifest.xml:24:13-79
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/8dec79319056641a9d870728acb78494/AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/8dec79319056641a9d870728acb78494/AndroidManifest.xml:25:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:11.8.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/8dec79319056641a9d870728acb78494/AndroidManifest.xml:24:13-58
+meta-data#android.arch.lifecycle.VERSION
+ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/05682620f82071c6a8375a9c1357b0f1/AndroidManifest.xml:25:9-27:47
+	android:value
+		ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/05682620f82071c6a8375a9c1357b0f1/AndroidManifest.xml:27:13-44
+	android:name
+		ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/mayingnan/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/05682620f82071c6a8375a9c1357b0f1/AndroidManifest.xml:26:13-58
