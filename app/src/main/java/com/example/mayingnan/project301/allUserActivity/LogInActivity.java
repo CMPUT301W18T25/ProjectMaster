@@ -35,7 +35,7 @@ public class LogInActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.log_in);
 
 
         //settle login button
@@ -43,7 +43,7 @@ public class LogInActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (LogInActivity.this, ChooseUserActivity.class);
+                Intent intent = new Intent (LogInActivity.this, UserCharacterActivity.class);
                 startActivity(intent);
 
 

@@ -19,18 +19,22 @@
             </intent-filter>
         </activity>
         <activity android:name=".allUserActivity.SignUpActivity"/>
-        <activity android:name=".allUserActivity.EditProfileActivity"/>
-        <activity android:name=".allUserActivity.ChooseUserActivity"/>
-        <activity android:name=".providerActivity.MakeABidActivity"/>
-        <activity android:name=".providerActivity.ProviderMapActivity"/>
+        <activity android:name=".allUserActivity.EditInfoActivity"/>
+        <activity android:name=".allUserActivity.UserCharacterActivity"/>
+
         <activity android:name=".providerActivity.ProviderBidHistoryActivity"/>
-        <activity android:name=".providerActivity.ProviderTaskListActivity"/>
-        <activity android:name=".requesterActivity.PostTaskActivity"/>
-        <activity android:name=".requesterActivity.RequesterAcceptedTaskDetailActivity"/>
-        <activity android:name=".requesterActivity.RequesterBiddingTaskDetailActivity"/>
+        <activity android:name=".providerActivity.ProviderTaskBidActivity"/>
+        <activity android:name=".providerActivity.ProviderMapActivity"/>
+        <activity android:name=".providerActivity.ProviderMainActivity"/>
+        <activity android:name=".providerActivity.ProviderTaskFinishActivity"/>
+
+        <activity android:name=".requesterActivity.RequesterPostTaskActivity"/>
+        <activity android:name=".requesterActivity.RequesterPayActivity"/>
+        <activity android:name=".requesterActivity.RequesterMainActivity"/>
         <activity android:name=".requesterActivity.RequesterEditTaskActivity"/>
         <activity android:name=".requesterActivity.RequesterMapActivity"/>
-        <activity android:name=".requesterActivity.RequesterTaskManagerActivity"/>
+        <activity android:name=".requesterActivity.RequesterEditListActivity"/>
+        <activity android:name=".requesterActivity.RequesterViewTaskActivity"/>
 
 
 
