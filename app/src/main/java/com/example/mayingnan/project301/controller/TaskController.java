@@ -2,7 +2,6 @@ package com.example.mayingnan.project301.controller;
 
 import com.example.mayingnan.project301.Bid;
 import com.example.mayingnan.project301.Task;
-import com.example.mayingnan.project301.User;
 
 import java.util.ArrayList;
 
@@ -21,8 +20,8 @@ public class TaskController {
 
     }
     public void providerSetBid(Task task, Bid bid){}
-    public void providerUpdateBid(Task task,Bid bid){}
-    public void providerCancelBid(Task task,Bid bid){}
+    public void providerUpdateBid(Task task, Bid bid){}
+    public void providerCancelBid(Task task, Bid bid){}
 
     public boolean testTrue(String name){
         return true;

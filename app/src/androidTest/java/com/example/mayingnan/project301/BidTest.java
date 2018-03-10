@@ -6,9 +6,6 @@ import com.example.mayingnan.project301.allUserActivity.LogInActivity;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 /**
  * Created by julianstys on 2018-02-25.
  */
