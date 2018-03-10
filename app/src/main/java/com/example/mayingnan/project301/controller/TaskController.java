@@ -78,41 +78,78 @@ public class TaskController {
     }
 
     public static class getTaskById extends AsyncTask<String, Void, Task> {
+
+        private String id;
+
+        public getTaskById(String arg_id){
+            this.id = arg_id;
+        }
+
         @Override
-        protected Task doInBackground(String... search_parameters) {
+        protected Task doInBackground(String... arg_id) {
             verifySettings();
+            Task rt_task = new Task();
 
-            Task task = new Task();
+            for (String a_id : arg_id){
+                Task task = new Task();
 
-            String query = "{ \n"+
-                    "\"query\":{\n"+
-                    "\"term\":{\"taskID\":\""+search_parameters[0]+"\"}\n"+
-                    "}\n"+"}";
+                String query = "{ \n"+
+                        "\"query\":{\n"+
+                        "\"term\":{\"taskID\":\""+a_id+"\"}\n"+
+                        "}\n"+"}";
 
-            Log.i("Query", "The query was " + query);
-            Search search = new Search.Builder(query)
-                    .addIndex("cmput301w18t25")
-                    .addType("task")
-                    .build();
-            try {
-                SearchResult result = client.execute(search);
-                if (result.isSucceeded()) {
-                    Task store_task
-                            = result.getSourceAsObject(Task.class);
-                    task = store_task;
-                } else {
-                    Log.i("Error", "The task search query failed");
+                Log.i("Query", "The query was " + query);
+                Search search = new Search.Builder(query)
+                        .addIndex("cmput301w18t25")
+                        .addType("task")
+                        .build();
+                try {
+                    SearchResult result = client.execute(search);
+                    if (result.isSucceeded()) {
+                        Task store_task
+                                = result.getSourceAsObject(Task.class);
+                        task = store_task;
+                    } else {
+                        Log.i("Error", "The task search query failed");
+                    }
+                    // TODO get the results of the query
+                } catch (Exception e) {
+                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
                 }
-                // TODO get the results of the query
-            } catch (Exception e) {
-                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
-            return task;
+            return rt_task;
         }
     }
 
-    public static class deleteTask extends AsyncTask<String, Void, Void>{
-        protected Void doInBackground(String... search_parameters) { return null;}
+    public static class deleteTaskById extends AsyncTask<String, Void, Void>{
+
+        private String id;
+
+        public deleteTaskById(String arg_id){
+            this.id = arg_id;
+        }
+
+        @Override
+        protected Void doInBackground(String... ids) {
+            verifySettings();
+
+            for (String a_id : ids){
+
+                Delete delete = new Delete.Builder(a_id).index("cmput301w18t25").type("task").build();
+                try {
+                    DocumentResult result = client.execute(delete);
+                    if (result.isSucceeded()) {
+                        Log.i("Debug", "Successful delete");
+                    } else {
+                        Log.i("Error", "Elastic search was not able to deletes.");
+                    }
+                } catch (Exception e) {
+                    Log.i("Error", "We failed to add a request to elastic search!");
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
     }
     public void requesterUpdateTask(Task task){}
     public ArrayList<Task>  searchTaskByKeyword(String keyword){
