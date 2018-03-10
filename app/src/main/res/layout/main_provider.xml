@@ -12,11 +12,12 @@
             android:id="@+id/provider_task_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="cursive"
             android:text="@string/available_task_list"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
-            android:textStyle="italic" />
+            android:textStyle="bold|italic" />
 
         <ListView
             android:id="@+id/provider_list"
@@ -37,15 +38,20 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:fontFamily="cursive"
                 android:hint="@string/type_the_search_key_word"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
             <Button
                 android:id="@+id/search_button"
                 android:layout_width="142dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/search" />
+                android:fontFamily="cursive"
+                android:text="@string/search"
+                android:textStyle="bold|italic" />
         </LinearLayout>
 
         <LinearLayout
@@ -59,14 +65,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/view_on_map" />
+                android:fontFamily="cursive"
+                android:text="@string/view_on_map"
+                android:textStyle="bold|italic" />
 
             <Button
                 android:id="@+id/provider_bid_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/bid_history" />
+                android:fontFamily="cursive"
+                android:text="@string/bid_history"
+                android:textStyle="bold|italic" />
         </LinearLayout>
 
     </LinearLayout>

@@ -25,7 +25,9 @@
                 android:layout_width="158dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="@string/name"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
@@ -35,9 +37,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:fontFamily="cursive"
                 android:hint="@string/type_your_name"
                 android:inputType="textPersonName"
-                android:textSize="18sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
         </LinearLayout>
 
         <LinearLayout
@@ -48,10 +53,12 @@
 
             <TextView
                 android:id="@+id/login_print_password"
-                android:layout_width="32dp"
+                android:layout_width="43dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="@string/password"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
@@ -61,8 +68,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:fontFamily="cursive"
                 android:hint="@string/type_your_password"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textStyle="bold|italic" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,7 +85,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/log_in" />
+                android:fontFamily="cursive"
+                android:text="@string/log_in"
+                android:textStyle="bold|italic" />
         </LinearLayout>
 
         <LinearLayout
@@ -90,7 +101,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/sign_up" />
+                android:fontFamily="cursive"
+                android:text="@string/sign_up"
+                android:textStyle="bold|italic" />
         </LinearLayout>
 
     </LinearLayout>
