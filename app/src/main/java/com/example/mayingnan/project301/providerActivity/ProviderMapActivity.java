@@ -5,22 +5,11 @@ import android.os.Bundle;
 
 import com.example.mayingnan.project301.R;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 public class ProviderMapActivity extends AppCompatActivity {
-    private Map providerMap;
-    private ArrayList tasklist;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.provider_task_finish);
+        setContentView(R.layout.view_on_map);
     }
-
-    public void showList(){}
-    public void editInfo(){}
-    public void OnClick(){}
-
-
 }
