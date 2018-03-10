@@ -38,13 +38,23 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        //settle login button
+        Button loginButton = (Button) findViewById(R.id.login_button);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (LogInActivity.this, ChooseUserActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
 
 
 
 
-
+        //settle signup button
         Button signUpButton = (Button) findViewById(R.id.signup_button);
-
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

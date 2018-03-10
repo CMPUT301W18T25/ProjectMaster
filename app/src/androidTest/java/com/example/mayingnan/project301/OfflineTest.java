@@ -6,8 +6,6 @@ import com.example.mayingnan.project301.allUserActivity.LogInActivity;
 import com.example.mayingnan.project301.controller.FileSystemController;
 import com.example.mayingnan.project301.controller.TaskController;
 
-import java.util.ArrayList;
-
 /**
  * Created by julianstys on 2018-02-25.
  */
