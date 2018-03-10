@@ -19,10 +19,11 @@
 
             <TextView
                 android:id="@+id/print6"
-                android:layout_width="93dp"
+                android:layout_width="142dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="Task Name :"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
@@ -31,8 +32,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="Info of task name"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
         </LinearLayout>
 
         <LinearLayout
@@ -43,9 +46,11 @@
 
             <TextView
                 android:id="@+id/print1"
-                android:layout_width="160dp"
+                android:layout_width="142dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="cursive"
                 android:text="Task Detail :"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
@@ -54,8 +59,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="Info of task detail"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
         </LinearLayout>
 
@@ -67,10 +74,11 @@
 
             <TextView
                 android:id="@+id/print2"
-                android:layout_width="39dp"
+                android:layout_width="142dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="Task Time :"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
@@ -79,8 +87,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="Info of time"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
         </LinearLayout>
 
@@ -92,10 +102,12 @@
 
             <TextView
                 android:id="@+id/print3"
-                android:layout_width="62dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="Task Location :"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
@@ -104,8 +116,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="Info of location"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
         </LinearLayout>
 
@@ -117,10 +131,12 @@
 
             <TextView
                 android:id="@+id/print7"
-                android:layout_width="92dp"
+                android:layout_width="28dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="Ideal Price :"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
@@ -129,8 +145,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="Info of ideal price"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
         </LinearLayout>
 
         <LinearLayout
@@ -141,9 +159,11 @@
 
             <TextView
                 android:id="@+id/print4"
-                android:layout_width="160dp"
+                android:layout_width="142dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="cursive"
                 android:text="Deal Price :"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
@@ -152,8 +172,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="Info of deal price"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
         </LinearLayout>
 
@@ -165,9 +187,11 @@
 
             <TextView
                 android:id="@+id/print5"
-                android:layout_width="160dp"
+                android:layout_width="142dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="cursive"
                 android:text="Task Status :"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
@@ -176,8 +200,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="Info if status"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
 
         </LinearLayout>
 
@@ -197,6 +223,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="pay" />
 
             <Button
@@ -204,6 +231,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="Delete"
                 android:visibility="visible" />
 
@@ -212,6 +240,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="cursive"
                 android:text="Back" />
         </LinearLayout>
 

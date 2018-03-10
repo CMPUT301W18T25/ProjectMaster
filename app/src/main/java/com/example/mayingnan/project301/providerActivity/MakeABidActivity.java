@@ -29,7 +29,7 @@ public class MakeABidActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.provider_task_info);
+        setContentView(R.layout.provider_task_bid);
     }
 
     public void getTaskDetails(){}
