@@ -15,7 +15,7 @@ public class ProviderMapActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.provider_map_task);
+        setContentView(R.layout.provider_task_finish);
     }
 
     public void showList(){}
