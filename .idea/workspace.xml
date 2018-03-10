@@ -10,7 +10,9 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42543190-1432-4de2-9d5a-45b8a3aa085e" name="Default" comment="" />
+    <list default="true" id="42543190-1432-4de2-9d5a-45b8a3aa085e" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mayingnan/project301/Task.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mayingnan/project301/Task.java" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +45,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TaskTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TaskTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/example/mayingnan/project301/TaskTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
@@ -53,27 +55,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TaskController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TaskController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mayingnan/project301/controller/TaskController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="320">
               <caret line="16" column="48" lean-forward="false" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
               <folding>
-                <marker date="1520716774331" expanded="true" signature="379:380" ph="{...}" />
-                <marker date="1520716774331" expanded="true" signature="493:585" ph="{...}" />
+                <element signature="imports" expanded="true" />
                 <marker date="1520716774331" expanded="false" signature="543:549" ph="&lt;~&gt;" />
                 <marker date="1520716774331" expanded="false" signature="790:800" ph=" { " />
                 <marker date="1520716774331" expanded="false" signature="893:903" ph=" { " />
                 <marker date="1520716774331" expanded="false" signature="916:922" ph=" }" />
-                <marker date="1520716774331" expanded="true" signature="1031:1123" ph="{...}" />
                 <marker date="1520716774331" expanded="false" signature="1081:1087" ph="&lt;~&gt;" />
-                <marker date="1520716774331" expanded="true" signature="1201:1293" ph="{...}" />
                 <marker date="1520716774331" expanded="false" signature="1251:1257" ph="&lt;~&gt;" />
-                <marker date="1520716774331" expanded="true" signature="1368:1460" ph="{...}" />
                 <marker date="1520716774331" expanded="false" signature="1418:1424" ph="&lt;~&gt;" />
-                <marker date="1520716774331" expanded="true" signature="1515:1607" ph="{...}" />
                 <marker date="1520716774331" expanded="false" signature="1565:1571" ph="&lt;~&gt;" />
-                <marker date="1520716774331" expanded="true" signature="1672:1764" ph="{...}" />
                 <marker date="1520716774331" expanded="false" signature="1722:1728" ph="&lt;~&gt;" />
               </folding>
             </state>
@@ -83,44 +79,42 @@
       <file leaf-file-name="Task.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mayingnan/project301/Task.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="500">
+              <caret line="25" column="17" lean-forward="false" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
               <folding>
-                <marker date="1520716774331" expanded="true" signature="556:807" ph="{...}" />
-                <marker date="1520716774331" expanded="true" signature="1010:1315" ph="{...}" />
-                <marker date="1520716774331" expanded="false" signature="1354:1364" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="1389:1395" ph=" }" />
-                <marker date="1520716774331" expanded="false" signature="1443:1453" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="1510:1520" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="1539:1545" ph=" }" />
-                <marker date="1520716774331" expanded="false" signature="1582:1592" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="1613:1619" ph=" }" />
-                <marker date="1520716774331" expanded="false" signature="1655:1665" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="1685:1691" ph=" }" />
-                <marker date="1520716774331" expanded="false" signature="1725:1735" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="1753:1759" ph=" }" />
-                <marker date="1520716774331" expanded="false" signature="1794:1804" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="1823:1829" ph=" }" />
-                <marker date="1520716774331" expanded="false" signature="1867:1877" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="1896:1902" ph=" }" />
-                <marker date="1520716774331" expanded="false" signature="1929:1939" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="1956:1962" ph=" }" />
-                <marker date="1520716774331" expanded="false" signature="2023:2033" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="2056:2062" ph=" }" />
-                <marker date="1520716774331" expanded="false" signature="2113:2123" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="2152:2158" ph=" }" />
-                <marker date="1520716774331" expanded="false" signature="2213:2223" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="2256:2262" ph=" }" />
-                <marker date="1520716774331" expanded="false" signature="2315:2325" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="2356:2362" ph=" }" />
-                <marker date="1520716774331" expanded="false" signature="2411:2421" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="2448:2454" ph=" }" />
-                <marker date="1520716774331" expanded="false" signature="2505:2515" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="2544:2550" ph=" }" />
-                <marker date="1520716774331" expanded="false" signature="2609:2619" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="2648:2654" ph=" }" />
-                <marker date="1520716774331" expanded="false" signature="2700:2710" ph=" { " />
-                <marker date="1520716774331" expanded="false" signature="2735:2741" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="1372:1382" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="1407:1413" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="1461:1471" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="1528:1538" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="1557:1563" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="1600:1610" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="1631:1637" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="1673:1683" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="1703:1709" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="1743:1753" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="1771:1777" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="1812:1822" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="1841:1847" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="1885:1895" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="1914:1920" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="1947:1957" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="1974:1980" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="2041:2051" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="2074:2080" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="2131:2141" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="2170:2176" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="2231:2241" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="2274:2280" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="2333:2343" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="2374:2380" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="2429:2439" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="2466:2472" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="2523:2533" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="2562:2568" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="2627:2637" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="2666:2672" ph=" }" />
+                <marker date="1520717002633" expanded="false" signature="2718:2728" ph=" { " />
+                <marker date="1520717002633" expanded="false" signature="2753:2759" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -166,6 +160,7 @@
     <findStrings>
       <find>success</find>
       <find>error</find>
+      <find>tc.add</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2042,6 +2037,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/mayingnan/project301/allUserActivity/LogInActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/mayingnan/project301/Task.java" />
       </list>
     </option>
   </component>
@@ -2555,7 +2551,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520716897323" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520717062586" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -2628,7 +2624,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520716897325" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520717062586" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2676,7 +2672,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520716897325" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520717062586" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2708,6 +2704,27 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -2838,7 +2855,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520716897326" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1520717062588" />
       </method>
     </configuration>
     <list size="2">
@@ -3154,50 +3171,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mayingnan/project301/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <marker date="1520716774331" expanded="true" signature="556:807" ph="{...}" />
-            <marker date="1520716774331" expanded="true" signature="1010:1315" ph="{...}" />
-            <marker date="1520716774331" expanded="false" signature="1354:1364" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="1389:1395" ph=" }" />
-            <marker date="1520716774331" expanded="false" signature="1443:1453" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="1510:1520" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="1539:1545" ph=" }" />
-            <marker date="1520716774331" expanded="false" signature="1582:1592" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="1613:1619" ph=" }" />
-            <marker date="1520716774331" expanded="false" signature="1655:1665" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="1685:1691" ph=" }" />
-            <marker date="1520716774331" expanded="false" signature="1725:1735" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="1753:1759" ph=" }" />
-            <marker date="1520716774331" expanded="false" signature="1794:1804" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="1823:1829" ph=" }" />
-            <marker date="1520716774331" expanded="false" signature="1867:1877" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="1896:1902" ph=" }" />
-            <marker date="1520716774331" expanded="false" signature="1929:1939" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="1956:1962" ph=" }" />
-            <marker date="1520716774331" expanded="false" signature="2023:2033" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="2056:2062" ph=" }" />
-            <marker date="1520716774331" expanded="false" signature="2113:2123" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="2152:2158" ph=" }" />
-            <marker date="1520716774331" expanded="false" signature="2213:2223" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="2256:2262" ph=" }" />
-            <marker date="1520716774331" expanded="false" signature="2315:2325" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="2356:2362" ph=" }" />
-            <marker date="1520716774331" expanded="false" signature="2411:2421" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="2448:2454" ph=" }" />
-            <marker date="1520716774331" expanded="false" signature="2505:2515" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="2544:2550" ph=" }" />
-            <marker date="1520716774331" expanded="false" signature="2609:2619" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="2648:2654" ph=" }" />
-            <marker date="1520716774331" expanded="false" signature="2700:2710" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="2735:2741" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mayingnan/project301/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="791">
@@ -3242,31 +3215,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mayingnan/project301/controller/TaskController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="16" column="48" lean-forward="false" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
-          <folding>
-            <marker date="1520716774331" expanded="true" signature="379:380" ph="{...}" />
-            <marker date="1520716774331" expanded="true" signature="493:585" ph="{...}" />
-            <marker date="1520716774331" expanded="false" signature="543:549" ph="&lt;~&gt;" />
-            <marker date="1520716774331" expanded="false" signature="790:800" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="893:903" ph=" { " />
-            <marker date="1520716774331" expanded="false" signature="916:922" ph=" }" />
-            <marker date="1520716774331" expanded="true" signature="1031:1123" ph="{...}" />
-            <marker date="1520716774331" expanded="false" signature="1081:1087" ph="&lt;~&gt;" />
-            <marker date="1520716774331" expanded="true" signature="1201:1293" ph="{...}" />
-            <marker date="1520716774331" expanded="false" signature="1251:1257" ph="&lt;~&gt;" />
-            <marker date="1520716774331" expanded="true" signature="1368:1460" ph="{...}" />
-            <marker date="1520716774331" expanded="false" signature="1418:1424" ph="&lt;~&gt;" />
-            <marker date="1520716774331" expanded="true" signature="1515:1607" ph="{...}" />
-            <marker date="1520716774331" expanded="false" signature="1565:1571" ph="&lt;~&gt;" />
-            <marker date="1520716774331" expanded="true" signature="1672:1764" ph="{...}" />
-            <marker date="1520716774331" expanded="false" signature="1722:1728" ph="&lt;~&gt;" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3438,6 +3386,67 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="15" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mayingnan/project301/Task.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="25" column="17" lean-forward="false" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+          <folding>
+            <marker date="1520717002633" expanded="false" signature="1372:1382" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="1407:1413" ph=" }" />
+            <marker date="1520717002633" expanded="false" signature="1461:1471" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="1528:1538" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="1557:1563" ph=" }" />
+            <marker date="1520717002633" expanded="false" signature="1600:1610" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="1631:1637" ph=" }" />
+            <marker date="1520717002633" expanded="false" signature="1673:1683" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="1703:1709" ph=" }" />
+            <marker date="1520717002633" expanded="false" signature="1743:1753" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="1771:1777" ph=" }" />
+            <marker date="1520717002633" expanded="false" signature="1812:1822" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="1841:1847" ph=" }" />
+            <marker date="1520717002633" expanded="false" signature="1885:1895" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="1914:1920" ph=" }" />
+            <marker date="1520717002633" expanded="false" signature="1947:1957" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="1974:1980" ph=" }" />
+            <marker date="1520717002633" expanded="false" signature="2041:2051" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="2074:2080" ph=" }" />
+            <marker date="1520717002633" expanded="false" signature="2131:2141" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="2170:2176" ph=" }" />
+            <marker date="1520717002633" expanded="false" signature="2231:2241" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="2274:2280" ph=" }" />
+            <marker date="1520717002633" expanded="false" signature="2333:2343" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="2374:2380" ph=" }" />
+            <marker date="1520717002633" expanded="false" signature="2429:2439" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="2466:2472" ph=" }" />
+            <marker date="1520717002633" expanded="false" signature="2523:2533" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="2562:2568" ph=" }" />
+            <marker date="1520717002633" expanded="false" signature="2627:2637" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="2666:2672" ph=" }" />
+            <marker date="1520717002633" expanded="false" signature="2718:2728" ph=" { " />
+            <marker date="1520717002633" expanded="false" signature="2753:2759" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mayingnan/project301/controller/TaskController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="16" column="48" lean-forward="false" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1520716774331" expanded="false" signature="543:549" ph="&lt;~&gt;" />
+            <marker date="1520716774331" expanded="false" signature="790:800" ph=" { " />
+            <marker date="1520716774331" expanded="false" signature="893:903" ph=" { " />
+            <marker date="1520716774331" expanded="false" signature="916:922" ph=" }" />
+            <marker date="1520716774331" expanded="false" signature="1081:1087" ph="&lt;~&gt;" />
+            <marker date="1520716774331" expanded="false" signature="1251:1257" ph="&lt;~&gt;" />
+            <marker date="1520716774331" expanded="false" signature="1418:1424" ph="&lt;~&gt;" />
+            <marker date="1520716774331" expanded="false" signature="1565:1571" ph="&lt;~&gt;" />
+            <marker date="1520716774331" expanded="false" signature="1722:1728" ph="&lt;~&gt;" />
+          </folding>
         </state>
       </provider>
     </entry>
