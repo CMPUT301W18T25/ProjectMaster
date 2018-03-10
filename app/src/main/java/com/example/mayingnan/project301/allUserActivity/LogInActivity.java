@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class LogInActivity extends AppCompatActivity {
 
-    private LogInActivity activity = this;
+    //private LogInActivity activity = this;
 
     private ListView taskListView;
     private Button viewOnMap;
@@ -36,13 +36,20 @@ public class LogInActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
+
+
+
         Button signUpButton = (Button) findViewById(R.id.signup_button);
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
-
+            @Override
             public void onClick(View v) {
-                setResult(RESULT_OK);
-                Intent intent = new Intent(activity, SignUpActivity.class);
+                //setResult(RESULT_OK);
+                Intent intent = new Intent(LogInActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }
         });
