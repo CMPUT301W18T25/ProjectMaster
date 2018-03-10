@@ -1,23 +1,12 @@
 package com.example.mayingnan.project301;
 
-import android.media.Image;
-import android.media.Image.Plane;
-import android.provider.ContactsContract;
-import android.test.ActivityInstrumentationTestCase2;
-import java.io.File;
-import com.example.mayingnan.project301.allUserActivity.LogInActivity;
-import java.io.IOException;
-
-import java.nio.ByteBuffer;
-
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Base64;
-import android.util.Log;
+import android.test.ActivityInstrumentationTestCase2;
+
+import com.example.mayingnan.project301.allUserActivity.LogInActivity;
 
 import java.io.ByteArrayOutputStream;
-
 
 
 /**
