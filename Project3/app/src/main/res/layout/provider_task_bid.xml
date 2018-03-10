@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -18,8 +17,8 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/print6"
-                android:layout_width="142dp"
+                android:id="@+id/textView"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="cursive"
                 android:text="Task Name :"
@@ -28,25 +27,24 @@
                 android:textStyle="bold|italic" />
 
             <TextView
-                android:id="@+id/confirm_name"
+                android:id="@+id/p_task_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="cursive"
-                android:text="Info of task name"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
+            android:gravity="top"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/print1"
-                android:layout_width="142dp"
+                android:id="@+id/print_task_detail"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="cursive"
                 android:text="Task Detail :"
@@ -55,26 +53,24 @@
                 android:textStyle="bold|italic" />
 
             <TextView
-                android:id="@+id/confirm_detail"
-                android:layout_width="wrap_content"
+                android:id="@+id/p_task_detail"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="cursive"
-                android:text="Info of task detail"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
+            android:gravity="top"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/print2"
-                android:layout_width="142dp"
+                android:id="@+id/print_task_time"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="cursive"
                 android:text="Task Time :"
@@ -83,42 +79,12 @@
                 android:textStyle="bold|italic" />
 
             <TextView
-                android:id="@+id/confirm_time"
-                android:layout_width="wrap_content"
+                android:id="@+id/p_task_time"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="cursive"
-                android:text="Info of time"
-                android:textSize="20sp"
-                android:textStyle="bold|italic" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="394dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/print3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="cursive"
-                android:text="Task Location :"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
-                android:textStyle="bold|italic" />
-
-            <TextView
-                android:id="@+id/confirm_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="cursive"
-                android:text="Info of location"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>
@@ -130,10 +96,34 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/print7"
-                android:layout_width="28dp"
+                android:id="@+id/print_task_destination"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="cursive"
+                android:text="@string/destination"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/p_task_destination"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="cursive"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/print_ideal_price"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="cursive"
                 android:text="Ideal Price :"
                 android:textColor="@color/colorPrimaryDark"
@@ -141,107 +131,122 @@
                 android:textStyle="bold|italic" />
 
             <TextView
-                android:id="@+id/confirm_ideal_price"
+                android:id="@+id/p_task_idealprice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="cursive"
-                android:text="Info of ideal price"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/print4"
-                android:layout_width="142dp"
+                android:id="@+id/print_lowest_bid"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="cursive"
-                android:text="Deal Price :"
+                android:text="Lowest Bid :"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
             <TextView
-                android:id="@+id/confirm_price"
-                android:layout_width="wrap_content"
+                android:id="@+id/p_task_lowestbid"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="cursive"
-                android:text="Info of deal price"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/List_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="cursive"
+            android:text="@string/bid_list"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+
+        <ListView
+            android:id="@+id/provider_bid_lkist"
+            android:layout_width="match_parent"
+            android:layout_height="245dp"
+            android:layout_weight="1" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="41dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
             android:gravity="top"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/print5"
-                android:layout_width="142dp"
+                android:id="@+id/print_my_bid"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="cursive"
-                android:text="Task Status :"
+                android:text="My Bid :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
-            <TextView
-                android:id="@+id/confirm_status"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/p_task_mybid"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:ems="10"
                 android:fontFamily="cursive"
-                android:text="Info if status"
-                android:textSize="20sp"
+                android:hint="Type your bid "
+                android:inputType="numberDecimal"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>
 
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapView"
-            android:layout_width="match_parent"
-            android:layout_height="246dp" />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/pay_button"
+                android:id="@+id/Cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="cursive"
-                android:text="pay" />
+                android:text="@string/cancel"
+                android:textStyle="bold" />
 
             <Button
-                android:id="@+id/delete_button"
+                android:id="@+id/Bid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="cursive"
-                android:text="Delete"
-                android:visibility="visible" />
+                android:text="@string/bid"
+                android:textStyle="bold|italic" />
 
             <Button
-                android:id="@+id/back_button"
+                android:id="@+id/Back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="cursive"
-                android:text="Back" />
+                android:text="@string/back"
+                android:textStyle="bold|italic" />
         </LinearLayout>
 
     </LinearLayout>

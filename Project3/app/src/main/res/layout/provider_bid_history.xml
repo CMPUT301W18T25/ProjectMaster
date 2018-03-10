@@ -12,10 +12,12 @@
             android:id="@+id/provider_list_name"
             android:layout_width="match_parent"
             android:layout_height="42dp"
+            android:fontFamily="cursive"
             android:text="Bid History"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
 
         <ListView
             android:id="@+id/provider_bid_history"
@@ -28,7 +30,9 @@
             android:id="@+id/back_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Back" />
+            android:fontFamily="cursive"
+            android:text="Back"
+            android:textStyle="bold|italic" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

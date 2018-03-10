@@ -11,18 +11,35 @@
         android:gravity="top|left"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/show_list"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:text="Show List"
-            android:textSize="10sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/edit_info"
-            android:layout_width="wrap_content"
-            android:layout_height="31dp"
-            android:text="Edit Info"
-            android:textSize="10sp" />
+            <Button
+                android:id="@+id/show_list"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:fontFamily="cursive"
+                android:text="Show List"
+                android:textSize="10sp"
+                android:textStyle="bold|italic" />
+
+            <Button
+                android:id="@+id/edit_info"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:fontFamily="cursive"
+                android:text="Edit profile"
+                android:textSize="10sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView2"
+            android:layout_width="match_parent"
+            android:layout_height="455dp" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
