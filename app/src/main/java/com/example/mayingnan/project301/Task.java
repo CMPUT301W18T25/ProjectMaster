@@ -13,6 +13,7 @@ public class Task {
     private String taskProvider;
     private String taskStatus;
     private String taskAddress;
+    private String taskID;
 
     private ArrayList<Bid> taskBidList;
     private Photo taskPhoto;
@@ -20,7 +21,12 @@ public class Task {
 
     public Task(String s, String s1, String michael, Object o, String bidding, String s2, ArrayList<Bid> bidList, Photo emptyPhoto) {
     }
-
+    public String getId(){
+        return this.taskID;
+    }
+    public void setId(String id){
+        this.taskID = id;
+    }
 
     public Task(){
         this.taskName=null;
