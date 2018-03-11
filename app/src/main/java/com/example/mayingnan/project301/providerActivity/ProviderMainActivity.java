@@ -1,8 +1,8 @@
 package com.example.mayingnan.project301.providerActivity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.Task;
-import com.example.mayingnan.project301.allUserActivity.LogInActivity;
-import com.example.mayingnan.project301.allUserActivity.SignUpActivity;
 import com.example.mayingnan.project301.requesterActivity.RequesterViewTaskActivity;
 
 import java.util.ArrayList;

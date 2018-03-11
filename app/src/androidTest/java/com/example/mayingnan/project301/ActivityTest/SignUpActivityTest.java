@@ -6,9 +6,7 @@ package com.example.mayingnan.project301.ActivityTest;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.EditText;
 
-import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.allUserActivity.LogInActivity;
 import com.example.mayingnan.project301.allUserActivity.SignUpActivity;
 import com.robotium.solo.Solo;

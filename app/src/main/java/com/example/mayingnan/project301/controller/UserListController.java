@@ -5,11 +5,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.mayingnan.project301.OnAsyncTaskCompleted;
-import com.example.mayingnan.project301.User;
 import com.example.mayingnan.project301.UserUtil;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
+import com.example.mayingnan.project301.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import io.searchbox.core.Delete;
+import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
@@ -97,7 +98,6 @@ public class UserListController {
     }
 
     public static class addUser extends AsyncTask<User, Void, Void> {
-        public OnAsyncTaskCompleted listener;
         @Override
 
         protected Void doInBackground(User... users) {

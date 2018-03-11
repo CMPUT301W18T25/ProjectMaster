@@ -1,5 +1,7 @@
 package com.example.mayingnan.project301;
 
+import android.media.Image;
+
 /**
  * Created by  on 2018/2/25.
  */
@@ -15,7 +17,7 @@ public class User {
     public User(){
         super();
     }
-    public User(String id, String userName, String userPhone, String userAddress, String userEmail, String userPassword, String userType){
+    public User(String id,String userName,String userPhone,String userAddress,String userEmail,String userPassword,String userType){
         this.id = id;
         this.userName = userName;
         this.userAddress = userAddress;

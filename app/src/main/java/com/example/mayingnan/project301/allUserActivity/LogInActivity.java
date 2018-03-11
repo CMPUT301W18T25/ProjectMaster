@@ -1,5 +1,3 @@
-
-
 package com.example.mayingnan.project301.allUserActivity;
 
 
@@ -20,7 +18,7 @@ import java.util.ArrayList;
 
 public class LogInActivity extends AppCompatActivity {
 
-    //private LogInActivity activity = this;
+    private LogInActivity activity = this;
 
     private ListView taskListView;
     private Button viewOnMap;

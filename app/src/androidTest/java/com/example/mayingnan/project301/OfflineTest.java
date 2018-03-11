@@ -6,6 +6,8 @@ import com.example.mayingnan.project301.allUserActivity.LogInActivity;
 import com.example.mayingnan.project301.controller.FileSystemController;
 import com.example.mayingnan.project301.controller.TaskController;
 
+import java.util.ArrayList;
+
 /**
  * Created by julianstys on 2018-02-25.
  */
@@ -33,7 +35,6 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
         Task newTask = new Task();
         TaskController tc= new TaskController();
         newTask.setTaskName("goToSouthgate");
-        tc.addTask(newTask);
 
         //if go offline, save to file
         newTask.setTaskName("goToCalgary");

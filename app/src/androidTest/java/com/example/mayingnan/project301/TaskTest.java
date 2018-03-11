@@ -1,15 +1,17 @@
 package com.example.mayingnan.project301;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import com.example.mayingnan.project301.controller.TaskController;
+import com.example.mayingnan.project301.controller.UserListController;
 
 import org.junit.Test;
-
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by julianstys on 2018-02-25.
@@ -51,29 +53,64 @@ public class TaskTest {
     }
     @Test
     public void testAddTask(){
-        TaskController tc = new TaskController();
+        TaskController.addTask addTaskCtl = new TaskController.addTask();
         Task task = new Task();
         task.setTaskName("hi");
-        tc.addTask(task);
-        assertEquals(tc.searchTaskByTaskName("hi"),task);
+        addTaskCtl.execute(task);
 
+        AsyncTask.Status taskStatus;
+        do {
+            taskStatus = addTaskCtl.getStatus();
+        } while (taskStatus != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        TaskController.getTaskById getTask = new TaskController.getTaskById(task.getId());
+
+        getTask.execute(task.getId());
+        Task result_task = new Task();
+        try {
+            result_task = getTask.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        int valid = 0;
+
+        Log.i("username   ", result_task.getTaskName());
+
+        if (result_task.getTaskName().equals(task.getTaskName())){
+            valid = 1;
+        }
+
+        TaskController.deleteTaskById deleteCtl = new TaskController.deleteTaskById(task.getId());
+        deleteCtl.execute(task.getId());
+        assertEquals(valid,1);
     }
+
     @Test
     public void testDeleteTask(){
+        TaskController.deleteTaskById deleteCtl = new TaskController.deleteTaskById("temp");
+        Task up_task = new Task();
+        up_task.setTaskName("hi");
 
-        TaskController tc = new TaskController();
-        Task task = new Task();
-        task.setTaskName("hi");
-        tc.addTask(task);
-        tc.deleteTask(task);
-        assertFalse(tc.searchTaskByTaskName("hi").contains(task));
+        // it is tested in testAddTask
+
+
     }
+
+
+
     @Test
     public void requesterUpdateTaskTest(){
         TaskController tc = new TaskController();
         Task task = new Task();
         task.setTaskName("hi");
-        tc.addTask(task);
         assertEquals(tc.searchTaskByTaskName("hi"),task);
         task.setTaskName("No");
         tc.requesterUpdateTask(task);
@@ -87,7 +124,6 @@ public class TaskTest {
         TaskController tc = new TaskController();
         Task task = new Task();
         task.setTaskName("hihi");
-        tc.addTask(task);
         assertTrue(tc.searchTaskByKeyword("hi").contains(task));
 
     }
@@ -99,7 +135,6 @@ public class TaskTest {
         task.setTaskProvider(userName);
         task.setTaskName("hihi");
         task.setTaskStatus("bidding");
-        tc.addTask(task);
         assertTrue(tc.searchBiddenTasksOfThisProvider(userName).contains(task));
 
     }
@@ -111,7 +146,6 @@ public class TaskTest {
         task.setTaskProvider(userName);
         task.setTaskName("hihi");
         task.setTaskStatus("processing");
-        tc.addTask(task);
         assertTrue(tc.searchAssignTasksOfThisProvider(userName).contains(task));
 
 
@@ -130,7 +164,6 @@ public class TaskTest {
         task2.setTaskProvider(userName);
         task2.setTaskName("hihihi2");
         task2.setTaskStatus("finished");
-        tc.addTask(task);
         assertTrue(tc.searchAllTasksOfThisRequester(userName).contains(task));
         assertTrue(tc.searchAllTasksOfThisRequester(userName).contains(task2));
 

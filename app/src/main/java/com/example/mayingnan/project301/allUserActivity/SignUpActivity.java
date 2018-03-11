@@ -1,5 +1,3 @@
-
-
 package com.example.mayingnan.project301.allUserActivity;
 
 
