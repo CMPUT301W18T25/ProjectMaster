@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".allUserActivity.LogInActivity"
-            android:label="LogInActivity"
+            android:label="ProjectMaster"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -31,12 +31,6 @@
         <activity android:name=".requesterActivity.RequesterEditTaskActivity"/>
         <activity android:name=".requesterActivity.RequesterMapActivity"/>
         <activity android:name=".requesterActivity.RequesterTaskManagerActivity"/>
-
-
-
-
-
-
     </application>
 
 </manifest>
