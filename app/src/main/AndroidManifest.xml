@@ -2,6 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mayingnan.project301">
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+
+    <!-- Map stuff -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,35 +24,58 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyA4sogxKNZegze6mUWHbtqWjCdRaN_2x-M" />
+
+
         <activity
             android:name=".allUserActivity.LogInActivity"
             android:label="LogInActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+            android:theme="@style/AppTheme.NoActionBar">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
         </activity>
-        <activity android:name=".allUserActivity.SignUpActivity"/>
-        <activity android:name=".allUserActivity.EditInfoActivity"/>
-        <activity android:name=".allUserActivity.UserCharacterActivity"/>
+        <activity android:name=".allUserActivity.SignUpActivity" />
+        <activity android:name=".allUserActivity.EditInfoActivity" />
+        <activity android:name=".allUserActivity.UserCharacterActivity" />
+        <activity android:name=".providerActivity.ProviderBidHistoryActivity" />
+        <activity android:name=".providerActivity.ProviderTaskBidActivity" />
+        <activity android:name=".providerActivity.ProviderMapActivity" />
+        <activity
+            android:name=".providerActivity.ProviderGoogleMapActivity"
+            android:label="@string/title_activity_provider_google_map" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-        <activity android:name=".providerActivity.ProviderBidHistoryActivity"/>
-        <activity android:name=".providerActivity.ProviderTaskBidActivity"/>
-        <activity android:name=".providerActivity.ProviderMapActivity"/>
-        <activity android:name=".providerActivity.ProviderMainActivity"/>
-        <activity android:name=".providerActivity.ProviderTaskFinishActivity"/>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".providerActivity.ProviderMainActivity" />
+        <activity android:name=".providerActivity.ProviderTaskFinishActivity" />
+        <activity android:name=".requesterActivity.RequesterPostTaskActivity" />
+        <activity android:name=".requesterActivity.RequesterPayActivity" />
+        <activity android:name=".requesterActivity.RequesterMainActivity" />
+        <activity android:name=".requesterActivity.RequesterEditTaskActivity" />
+        <activity android:name=".requesterActivity.RequesterMapActivity" />
+        <activity android:name=".requesterActivity.RequesterEditListActivity" />
+        <activity android:name=".requesterActivity.RequesterViewTaskActivity" />
 
-        <activity android:name=".requesterActivity.RequesterPostTaskActivity"/>
-        <activity android:name=".requesterActivity.RequesterPayActivity"/>
-        <activity android:name=".requesterActivity.RequesterMainActivity"/>
-        <activity android:name=".requesterActivity.RequesterEditTaskActivity"/>
-        <activity android:name=".requesterActivity.RequesterMapActivity"/>
-        <activity android:name=".requesterActivity.RequesterEditListActivity"/>
-        <activity android:name=".requesterActivity.RequesterViewTaskActivity"/>
-
-
-
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
 
 
 
