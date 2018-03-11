@@ -98,7 +98,6 @@ public class UserListController {
     }
 
     public static class addUser extends AsyncTask<User, Void, Void> {
-        public OnAsyncTaskCompleted listener;
         @Override
 
         protected Void doInBackground(User... users) {

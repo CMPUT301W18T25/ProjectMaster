@@ -11,18 +11,17 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 /**
  * Created by wdong2 on 2/15/18.
  */
 
-public class UserTest extends ActivityInstrumentationTestCase2 {
+public class UserTest{
 
-
-    public UserTest() {
-        super(LogInActivity.class);
-    }
-
-    public void testAddUser(){
+    @Test
+    public void testAddUser() throws Exception{
         String test = "test8";
         User user = new User(test,test,test,test,test,test,test);
         UserListController.addUser addUser = new UserListController.addUser();
@@ -64,6 +63,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         assertEquals(found,1);
 
     }
+    @Test
 
     public void testGetAUserByName(){
         User user1 = new User();
@@ -109,6 +109,8 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         assertEquals(found,1);
 
     }
+    @Test
+
     public void testcheckUserByNameAndPassword(){
         User user1 = new User();
         user1.setUserName("y12");
@@ -140,6 +142,8 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
         deleteAllUsers.execute("");
     }
+    @Test
+
     public void testUpdateUser(){
         User user1 = new User();
         user1.setUserName("yue12");
@@ -183,6 +187,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
 
 
     }
+    @Test
 
 
     public void testCheckValidationSignUp (){
