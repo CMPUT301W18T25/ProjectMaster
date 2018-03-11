@@ -1,3 +1,7 @@
+## Watch the video 
+https://www.youtube.com/playlist?list=PLhO3X757HABdao5hv4HGQSWPX0tnN4lCO
+Use android studio built in git hub to push and pull
+
 ## Contribution Procedure
 1. Clone the repository to your own machine.  
 Clone with SSH:
