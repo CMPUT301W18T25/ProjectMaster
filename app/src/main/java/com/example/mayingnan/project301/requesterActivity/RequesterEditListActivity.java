@@ -5,16 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.mayingnan.project301.R;
 
-/**
- * Created by User on 2018/2/25.
- */
-
-
-public class RequesterTaskManagerActivity extends AppCompatActivity {
+public class RequesterEditListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_consumer);
+        setContentView(R.layout.requester_edit_list);
     }
 }

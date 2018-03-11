@@ -35,7 +35,6 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
         Task newTask = new Task();
         TaskController tc= new TaskController();
         newTask.setTaskName("goToSouthgate");
-        tc.addTask(newTask);
 
         //if go offline, save to file
         newTask.setTaskName("goToCalgary");

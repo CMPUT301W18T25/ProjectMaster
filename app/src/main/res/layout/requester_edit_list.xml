@@ -12,11 +12,12 @@
             android:id="@+id/c_task_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="cursive"
             android:text="Posted Task List"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
-            android:textStyle="italic" />
+            android:textStyle="bold|italic" />
 
         <ListView
             android:id="@+id/c_list"
@@ -36,7 +37,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/view_on_map" />
+                android:fontFamily="cursive"
+                android:text="@string/view_on_map"
+                android:textStyle="bold|italic" />
 
         </LinearLayout>
 

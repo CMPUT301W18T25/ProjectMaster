@@ -1,14 +1,14 @@
-package com.example.mayingnan.project301.allUserActivity;
+package com.example.mayingnan.project301.requesterActivity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.controller.UserListController;
 
-public class EditProfileActivity extends AppCompatActivity {
+public class RequesterEditInfoActivity extends AppCompatActivity {
 
     private EditText usernameText;
     private EditText emailText;

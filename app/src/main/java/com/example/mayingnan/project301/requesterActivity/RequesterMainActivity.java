@@ -1,5 +1,3 @@
-
-
 package com.example.mayingnan.project301.requesterActivity;
 
 import android.os.Bundle;
@@ -12,11 +10,11 @@ import com.example.mayingnan.project301.R;
  */
 
 
-public class RequesterAcceptedTaskDetailActivity extends AppCompatActivity {
+public class RequesterMainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.consumer_pay);
+        setContentView(R.layout.requester_main);
     }
 }

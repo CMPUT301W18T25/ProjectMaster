@@ -111,7 +111,6 @@ public class TaskTest {
         TaskController tc = new TaskController();
         Task task = new Task();
         task.setTaskName("hi");
-        tc.addTask(task);
         assertEquals(tc.searchTaskByTaskName("hi"),task);
         task.setTaskName("No");
         tc.requesterUpdateTask(task);
@@ -125,7 +124,6 @@ public class TaskTest {
         TaskController tc = new TaskController();
         Task task = new Task();
         task.setTaskName("hihi");
-        tc.addTask(task);
         assertTrue(tc.searchTaskByKeyword("hi").contains(task));
 
     }
@@ -137,7 +135,6 @@ public class TaskTest {
         task.setTaskProvider(userName);
         task.setTaskName("hihi");
         task.setTaskStatus("bidding");
-        tc.addTask(task);
         assertTrue(tc.searchBiddenTasksOfThisProvider(userName).contains(task));
 
     }
@@ -149,7 +146,6 @@ public class TaskTest {
         task.setTaskProvider(userName);
         task.setTaskName("hihi");
         task.setTaskStatus("processing");
-        tc.addTask(task);
         assertTrue(tc.searchAssignTasksOfThisProvider(userName).contains(task));
 
 
@@ -168,7 +164,6 @@ public class TaskTest {
         task2.setTaskProvider(userName);
         task2.setTaskName("hihihi2");
         task2.setTaskStatus("finished");
-        tc.addTask(task);
         assertTrue(tc.searchAllTasksOfThisRequester(userName).contains(task));
         assertTrue(tc.searchAllTasksOfThisRequester(userName).contains(task2));
 

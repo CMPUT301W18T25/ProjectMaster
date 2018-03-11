@@ -6,15 +6,9 @@ package com.example.mayingnan.project301.ActivityTest;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.EditText;
-import android.widget.ListView;
 
-import com.example.mayingnan.project301.R;
-import com.example.mayingnan.project301.allUserActivity.ChooseUserActivity;
 import com.example.mayingnan.project301.allUserActivity.LogInActivity;
 import com.example.mayingnan.project301.allUserActivity.SignUpActivity;
-import com.example.mayingnan.project301.controller.FileSystemController;
-import com.example.mayingnan.project301.controller.UserListController;
 import com.robotium.solo.Solo;
 
 public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
@@ -25,8 +19,9 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
         super(SignUpActivity.class);
     }
 
+    @Override
     public void setUp() throws Exception {
-        solo = new Solo(getInstrumentation());
+        solo = new Solo(getInstrumentation(), getActivity());
     }
 
     public void testStart() throws Exception {
@@ -37,20 +32,21 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
         SignUpActivity activity = (SignUpActivity)solo.getCurrentActivity();
 
         solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
-
-        solo.clickOnButton("Check Validation");
+/**
+        solo.clickOnButton("Log In");
 
         solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
 
         solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
-
-        solo.clickOnButton("Check Validation");
+ */
+        solo.clickOnButton("Log In");
 
         solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
 
         solo.goBack();
 
         solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
+
     }
 
 
