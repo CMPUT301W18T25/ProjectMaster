@@ -21,8 +21,9 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
         super(SignUpActivity.class);
     }
 
+    @Override
     public void setUp() throws Exception {
-        solo = new Solo(getInstrumentation());
+        solo = new Solo(getInstrumentation(), getActivity());
     }
 
     public void testStart() throws Exception {
@@ -33,20 +34,21 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
         SignUpActivity activity = (SignUpActivity)solo.getCurrentActivity();
 
         solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
-
-        solo.clickOnButton("Check Validation");
+/**
+        solo.clickOnButton("Log In");
 
         solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
 
         solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
-
-        solo.clickOnButton("Check Validation");
+ */
+        solo.clickOnButton("Log In");
 
         solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
 
         solo.goBack();
 
         solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
+
     }
 
 

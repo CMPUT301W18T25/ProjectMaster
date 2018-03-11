@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".allUserActivity.LogInActivity"
-            android:label="LogInActivity"
+            android:label="ProjectMaster"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -33,6 +33,7 @@
         <activity android:name=".requesterActivity.RequesterMainActivity"/>
         <activity android:name=".requesterActivity.RequesterEditTaskActivity"/>
         <activity android:name=".requesterActivity.RequesterMapActivity"/>
+        <activity android:name=".requesterActivity.RequesterTaskManagerActivity"/>
         <activity android:name=".requesterActivity.RequesterEditListActivity"/>
         <activity android:name=".requesterActivity.RequesterViewTaskActivity"/>
         <activity android:name=".requesterActivity.RequesterEditInfoActivity"/>
@@ -42,6 +43,7 @@
 
 
 
+>>>>>>> 9518353ddec295eedf36629c49a4ad4fed4edd0d
     </application>
 
 </manifest>
