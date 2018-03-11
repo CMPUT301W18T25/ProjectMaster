@@ -1,28 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
+    android:layout_height="match_parent"
+    tools:context=".providerActivity.ProviderMapActivity">
+    <fragment
+        class="com.google.android.gms.maps.MapFragment"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="top|left"
-        android:orientation="vertical">
+        android:layout_height="match_parent" />
 
-        <Button
-            android:id="@+id/show_list"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:text="Show List"
-            android:textSize="10sp" />
 
-        <Button
-            android:id="@+id/edit_info"
-            android:layout_width="wrap_content"
-            android:layout_height="31dp"
-            android:text="Edit Info"
-            android:textSize="10sp" />
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+
+</FrameLayout>
