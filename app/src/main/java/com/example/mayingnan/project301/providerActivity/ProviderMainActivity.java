@@ -12,7 +12,7 @@ import com.example.mayingnan.project301.Task;
 
 import java.util.ArrayList;
 
-public class ProviderTaskListActivity extends AppCompatActivity {
+public class ProviderMainActivity extends AppCompatActivity {
 
     private Button searchTask;
     private Button viewOnMap;
@@ -27,7 +27,7 @@ public class ProviderTaskListActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_provider);
+        setContentView(R.layout.provider_main);
     }
     public void onSearch(){}
 

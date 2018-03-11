@@ -10,11 +10,11 @@ import com.example.mayingnan.project301.R;
  */
 
 
-public class RequesterTaskManagerActivity extends AppCompatActivity {
+public class RequesterPostTaskActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_consumer);
+        setContentView(R.layout.requester_post_task);
     }
 }

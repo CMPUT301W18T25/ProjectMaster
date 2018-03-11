@@ -22,7 +22,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText emailText;
     private EditText mobileText;
     private EditText passwardText;
-    private Button signUpButton;
+    private Button checkValidationButton;
     private UserListController userListControl;
 
     @Override
@@ -30,22 +30,22 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
-        Button signUpButton = (Button) findViewById(R.id.check_validation);
+        Button checkValidationButton = (Button) findViewById(R.id.check_validation);
         usernameText = (EditText) findViewById(R.id.signup_name);
         emailText = (EditText) findViewById(R.id.signup_email);
         mobileText = (EditText) findViewById(R.id.signup_phone);
         passwardText = (EditText) findViewById(R.id.signup_password);
 
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-
+        checkValidationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                setResult(RESULT_OK);
+                //setResult(RESULT_OK);
                 String enterName = usernameText.getText().toString();
                 String enterEmail = emailText.getText().toString();
                 String enterPhone= mobileText.getText().toString();
                 String enterPassward = passwardText.getText().toString();
                 //deal with those variables
-                Intent intent = new Intent(activity, LogInActivity.class);
+                Intent intent = new Intent(activity, UserCharacterActivity.class);
                 startActivity(intent);
             }
         });

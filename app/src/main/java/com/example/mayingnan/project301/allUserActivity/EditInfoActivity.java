@@ -8,7 +8,7 @@ import android.widget.EditText;
 import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.controller.UserListController;
 
-public class EditProfileActivity extends AppCompatActivity {
+public class EditInfoActivity extends AppCompatActivity {
 
     private EditText usernameText;
     private EditText emailText;

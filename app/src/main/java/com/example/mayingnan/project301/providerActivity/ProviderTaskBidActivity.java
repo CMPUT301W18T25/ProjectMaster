@@ -12,7 +12,7 @@ import com.example.mayingnan.project301.R;
 
 import java.util.ArrayList;
 
-public class MakeABidActivity extends AppCompatActivity {
+public class ProviderTaskBidActivity extends AppCompatActivity {
 
     private TextView taskDetail;
     private TextView taskTime;
