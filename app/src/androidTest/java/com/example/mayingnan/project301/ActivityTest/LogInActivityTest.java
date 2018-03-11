@@ -6,13 +6,10 @@ package com.example.mayingnan.project301.ActivityTest;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.EditText;
-import android.widget.ListView;
 
-import com.example.mayingnan.project301.allUserActivity.ChooseUserActivity;
+import com.example.mayingnan.project301.allUserActivity.UserCharacterActivity;
 import com.example.mayingnan.project301.allUserActivity.LogInActivity;
 import com.example.mayingnan.project301.allUserActivity.SignUpActivity;
-import com.example.mayingnan.project301.controller.FileSystemController;
 import com.example.mayingnan.project301.controller.UserListController;
 import com.robotium.solo.Solo;
 
@@ -63,7 +60,7 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.clickOnButton("Log In");
 
-        solo.assertCurrentActivity("Wrong Activity", ChooseUserActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
 
         solo.goBack();
 

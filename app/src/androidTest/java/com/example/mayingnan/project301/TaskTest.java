@@ -3,8 +3,13 @@ package com.example.mayingnan.project301;
 import com.example.mayingnan.project301.controller.TaskController;
 
 import org.junit.Test;
+
 import java.util.ArrayList;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by julianstys on 2018-02-25.
