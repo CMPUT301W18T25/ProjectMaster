@@ -19,7 +19,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".allUserActivity.SignUpActivity"/>
-        <activity android:name=".allUserActivity.EditInfoActivity"/>
         <activity android:name=".allUserActivity.UserCharacterActivity"/>
 
         <activity android:name=".providerActivity.ProviderBidHistoryActivity"/>
@@ -27,6 +26,7 @@
         <activity android:name=".providerActivity.ProviderMapActivity"/>
         <activity android:name=".providerActivity.ProviderMainActivity"/>
         <activity android:name=".providerActivity.ProviderTaskFinishActivity"/>
+        <activity android:name=".providerActivity.ProviderEditInfoActivity"/>
 
         <activity android:name=".requesterActivity.RequesterPostTaskActivity"/>
         <activity android:name=".requesterActivity.RequesterPayActivity"/>
@@ -35,6 +35,7 @@
         <activity android:name=".requesterActivity.RequesterMapActivity"/>
         <activity android:name=".requesterActivity.RequesterEditListActivity"/>
         <activity android:name=".requesterActivity.RequesterViewTaskActivity"/>
+        <activity android:name=".requesterActivity.RequesterEditInfoActivity"/>
 
 
 
