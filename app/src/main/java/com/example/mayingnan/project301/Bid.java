@@ -5,11 +5,11 @@ package com.example.mayingnan.project301;
  */
 
 public class Bid {
-    private String taskName;
+    private String taskID;
     private Float bidAmount;
     private String providerName;
     public Bid(String taskName,Float bidAmount, String providerName){
-        this.taskName = taskName;
+        this.taskID = taskName;
         this.bidAmount = bidAmount;
         this.providerName = providerName;
 
@@ -19,7 +19,7 @@ public class Bid {
         this.bidAmount = bidAmount;
     }
     public String getTaskName(){
-        return this.taskName;
+        return this.taskID;
     }
     public Float getBidAmount(){
         return this.bidAmount;

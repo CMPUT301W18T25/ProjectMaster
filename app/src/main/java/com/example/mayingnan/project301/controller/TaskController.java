@@ -14,6 +14,8 @@ import com.searchly.jestdroid.JestDroidClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -179,25 +181,115 @@ public class TaskController {
         }
     }
 
-    public ArrayList<Task>  searchTaskByKeyword(String keyword){
-        ArrayList<Task> taskList = new ArrayList<Task> ();
-        return taskList;
+    public static class providerSetBid extends AsyncTask<Void, Void, Void>{
+        //new MyTask(int foo, long bar, double arple).execute();
 
+        Task current_task;
+        Bid current_bid;
+
+        public providerSetBid(Task current_task, Bid current_bid){
+            this.current_task = current_task;
+            this.current_bid = current_bid;
+            this.current_task.addBid(this.current_bid);
+        }
+
+        @Override
+        protected Void doInBackground(Void... nul) {
+
+            verifySettings();
+
+            String query = TaskUtil.serializer(this.current_task);
+
+            Index index = new Index.Builder(query)
+                    .index("cmput301w18t25").type("task").id(this.current_task.getId()).build();
+            try {
+                DocumentResult result = client.execute(index);
+                if (result.isSucceeded()) {
+                    Log.i("Success", "Successful update the bid");
+                } else {
+                    Log.i("Error", "We failed to update new bid to elastic search!");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.i("Error", "We failed to connect Elasticsearch server");
+            }
+            return null;
+        }
     }
 
-    public void providerSetBid(Task task, Bid bid){}
+    public static class providerCancelBid extends AsyncTask<Void, Void, Boolean>{
 
-    public void providerUpdateBid(Task task,Bid bid){}
+        Task current_task;
+        String providerName;
+        Boolean rt_val;
 
-    public void providerCancelBid(Task task,Bid bid){}
+        public providerCancelBid(Task current_task, String providerName){
+            this.current_task = current_task;
+            this.providerName = providerName;
+            this.rt_val = this.current_task.cancelBid(this.providerName);
+        }
 
-    public boolean testTrue(String name){
-        return true;
-    } //created by wdong2 for testing
+        @Override
+        protected Boolean doInBackground(Void... nul) {
+            if (this.rt_val){
+                verifySettings();
 
-    public boolean testFalse(String name){
-        return false;
-    } //created by wdong2 for testing
+                String query = TaskUtil.serializer(this.current_task);
+
+                Index index = new Index.Builder(query)
+                        .index("cmput301w18t25").type("task").id(this.current_task.getId()).build();
+                try {
+                    DocumentResult result = client.execute(index);
+                    if (result.isSucceeded()) {
+                        Log.i("Success", "Successful cancel provider's bid");
+                    } else {
+                        Log.i("Error", "We failed to cancel provider's bid to elastic search!");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.i("Error", "We failed to connect Elasticsearch server");
+                }
+                return true;
+            }
+            else {
+                return false;
+            }
+
+        }
+    }
+
+    public static class searchTaskByKeyword extends AsyncTask<String, Void, ArrayList<Task>>{
+        protected ArrayList<Task> doInBackground(String... search_parameters) {
+            verifySettings();
+
+            ArrayList<Task> result_tasks = new ArrayList<Task>();
+
+            String query = "{ \n"+
+                    "\"query\":{\n"+
+                    "\"term\":{\"userName\":\""+search_parameters[0]+"\"}\n"+
+                    "}\n"+"}";
+
+            Log.i("Query", "The query was " + query);
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t25")
+                    .addType("user")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<Task> foundUsers
+                            = result.getSourceAsObjectList(Task.class);
+                    result_tasks.addAll(foundUsers);
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return result_tasks;
+        }
+    }
 
     public ArrayList<Task> searchBiddenTasksOfThisProvider(String userName){
         ArrayList<Task> taskList = new ArrayList<Task> ();
@@ -228,6 +320,17 @@ public class TaskController {
         return taskList;
 
     }
+
+    public boolean testTrue(String name){
+        return true;
+    } //created by wdong2 for testing
+
+    public boolean testFalse(String name){
+        return false;
+    } //created by wdong2 for testing
+
+    // no need to use it, providerSetBis is good enough
+    public void providerUpdateBid(Task task,Bid bid){}
 
     public static void verifySettings() {
         if (client == null) {

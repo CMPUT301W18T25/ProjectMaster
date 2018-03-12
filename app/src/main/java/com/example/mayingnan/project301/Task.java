@@ -38,7 +38,6 @@ public class Task {
         this.taskBidList=null;
         this.taskPhoto=null;    }
 
-
     public Task(String taskName, String taskDetails, String taskRequester, String taskProvider,
                      String taskStatus, String taskAddress, ArrayList<Bid> taskBidList, Photo taskPhoto){
         this.taskName=taskName;
@@ -104,6 +103,27 @@ public class Task {
     public void setTaskPhoto(Photo taskPhoto){
         this.taskPhoto=taskPhoto;
     }
+    public boolean addBid(Bid bid){
+        for (int i = 0; i<taskBidList.size();i++){
+            String selectedItemProvider = taskBidList.get(i).getProviderName();
+            if (selectedItemProvider.equals(bid.getProviderName())){
+                taskBidList.set(i, bid);
+                return true;
+            }
+        }
+        taskBidList.add(bid);
+        return false;
+    }
+    public boolean cancelBid(String providerName){
+        for (int i = 0; i<taskBidList.size();i++){
+            if (providerName.equals(taskBidList.get(i).getProviderName())){
+                taskBidList.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
 

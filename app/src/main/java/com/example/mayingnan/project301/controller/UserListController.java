@@ -72,6 +72,7 @@ public class UserListController {
         }
         return found;
     }
+
     public boolean addUserAndCheck(User user){
         boolean checkValidUser = checkValidationSignUp (user.getUserName());
         if(checkValidUser){
