@@ -28,7 +28,7 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
 
 
     }
-
+    /*
     public void testOfflineEditTask(){
         //create a task online
         FileSystemController fc = new FileSystemController();
@@ -48,4 +48,5 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
         assertEquals(tc.searchTaskByTaskName("goToCalgary"),newTask);
 
     }
+    */
 }

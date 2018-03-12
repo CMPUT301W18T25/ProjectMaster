@@ -57,7 +57,7 @@ public class Task {
 
     // Getters
     public String getTaskName(){
-        return taskName;
+        return this.taskName;
     }
     public String getTaskDetails(){
         return taskDetails;
