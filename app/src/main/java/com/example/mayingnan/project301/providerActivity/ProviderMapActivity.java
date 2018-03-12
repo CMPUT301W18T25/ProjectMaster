@@ -28,14 +28,14 @@ public class ProviderMapActivity extends AppCompatActivity {
         });
 
         //settle editprofile button
-        Button editInfoButton = (Button) findViewById(R.id.edit_info);
-        editInfoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent info2 = new Intent(ProviderMapActivity.this, ProviderEditInfoActivity.class);
-                startActivity(info2);
+        // Button editInfoButton = (Button) findViewById(R.id.edit_info);
+        //editInfoButton.setOnClickListener(new View.OnClickListener() {
+        //  @Override
+        //public void onClick(View view) {
+        //  Intent info2 = new Intent(ProviderMapActivity.this, ProviderEditInfoActivity.class);
+        //startActivity(info2);
 
-            }
-        });
+        //}
+        //});
     }
 }

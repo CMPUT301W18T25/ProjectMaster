@@ -233,7 +233,7 @@
                 android:layout_weight="1"
                 android:fontFamily="cursive"
                 android:text="Delete"
-                android:visibility="visible" />
+                android:visibility="invisible" />
 
             <Button
                 android:id="@+id/back_button"

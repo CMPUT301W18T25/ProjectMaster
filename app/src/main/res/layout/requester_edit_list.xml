@@ -20,15 +20,30 @@
             android:textStyle="bold|italic" />
 
         <ListView
-            android:id="@+id/c_list"
+            android:id="@+id/post_list"
             android:layout_width="match_parent"
-            android:layout_height="392dp">
+            android:layout_height="379dp">
 
         </ListView>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/main_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="cursive"
+                android:text="Main menu"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
