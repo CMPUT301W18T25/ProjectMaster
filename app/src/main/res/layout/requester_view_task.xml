@@ -182,7 +182,7 @@
             android:orientation="horizontal">
 
             <ListView
-                android:id="@+id/c_bid_list"
+                android:id="@+id/bid_list"
                 android:layout_width="match_parent"
                 android:layout_height="250dp">
 

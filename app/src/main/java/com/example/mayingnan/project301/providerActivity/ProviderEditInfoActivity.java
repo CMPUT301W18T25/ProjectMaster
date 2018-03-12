@@ -43,7 +43,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMapActivity.class);
+                Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMainActivity.class);
                 startActivity(info2);
 
             }

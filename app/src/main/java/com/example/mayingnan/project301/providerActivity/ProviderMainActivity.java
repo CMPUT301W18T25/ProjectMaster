@@ -34,7 +34,7 @@ public class ProviderMainActivity extends AppCompatActivity {
         setContentView(R.layout.provider_main);
 
         //settle viewOnMap button
-        Button viewOnMapButton = (Button) findViewById(R.id.provider_map_button);
+        viewOnMapButton = (Button) findViewById(R.id.provider_map_button);
         viewOnMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +51,17 @@ public class ProviderMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //setResult(RESULT_OK);
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderBidHistoryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //settle editProfile button
+        Button editProfileButton = (Button) findViewById(R.id.edit_profile_button);
+        editProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //setResult(RESULT_OK);
+                Intent intent = new Intent(ProviderMainActivity.this, ProviderEditInfoActivity.class);
                 startActivity(intent);
             }
         });
