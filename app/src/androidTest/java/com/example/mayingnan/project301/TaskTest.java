@@ -19,6 +19,7 @@ import static org.junit.Assert.*;
 
 public class TaskTest {
 
+    /*
     @Test
     public void testTaskContructor(){
         ArrayList<Bid> bidList = new ArrayList<Bid>();
@@ -52,10 +53,16 @@ public class TaskTest {
 
     }
     @Test
+    */
+    // TODO more failing test cases
+    // add passed w8 for more cases
+    @Test
     public void testAddTask(){
+
         TaskController.addTask addTaskCtl = new TaskController.addTask();
         Task task = new Task();
         task.setTaskName("hi");
+
         addTaskCtl.execute(task);
 
         AsyncTask.Status taskStatus;
@@ -69,57 +76,206 @@ public class TaskTest {
             e.printStackTrace();
         }
 
-        TaskController.getTaskById getTask = new TaskController.getTaskById(task.getId());
+        if (!(task.getId() == null)){
+            if (!task.getId().isEmpty()){
+                assertTrue(true);
+            }
+        }
+    }
 
-        getTask.execute(task.getId());
-        Task result_task = new Task();
+    @Test
+    // basic passed, w8 for failure test cases
+    public void testGetTask(){
+        TaskController.addTask addTaskCtl = new TaskController.addTask();
+        Task task = new Task();
+        Task rt_task = new Task();
+        ArrayList<Task> single_task = new ArrayList<Task>();
+
+
+        task.setTaskName("gg");
+
+        addTaskCtl.execute(task);
+
+        AsyncTask.Status taskStatus;
+        do {
+            taskStatus = addTaskCtl.getStatus();
+        } while (taskStatus != AsyncTask.Status.FINISHED);
+
         try {
-            result_task = getTask.get();
+            TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+
+        TaskController.getTaskById getTask = new TaskController.getTaskById();
+        if (task.getId() == null){
+            Log.i("Failure add", task.getId());
+            assertTrue(false);
+        }
+        getTask.execute(task.getId());
+
+        try {
+            rt_task = getTask.get();
+            Log.i("Success", "message");
+
+            if (task.getTaskName().equals(rt_task.getTaskName())){
+                assertTrue(true);
+            }
+            else{
+                assertTrue(false);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.i("Error", "return fail");
+
         } catch (ExecutionException e) {
             e.printStackTrace();
-        }
-        int valid = 0;
-
-        Log.i("username   ", result_task.getTaskName());
-
-        if (result_task.getTaskName().equals(task.getTaskName())){
-            valid = 1;
+            Log.i("Error", "not getting anything");
         }
 
-        TaskController.deleteTaskById deleteCtl = new TaskController.deleteTaskById(task.getId());
-        deleteCtl.execute(task.getId());
-        assertEquals(valid,1);
     }
 
     @Test
     public void testDeleteTask(){
-        TaskController.deleteTaskById deleteCtl = new TaskController.deleteTaskById("temp");
-        Task up_task = new Task();
-        up_task.setTaskName("hi");
+        // add a sample test to db
+        TaskController.addTask addTaskCtl = new TaskController.addTask();
+        Task task = new Task();
+        task.setTaskName("hi");
 
-        // it is tested in testAddTask
+        addTaskCtl.execute(task);
 
+        AsyncTask.Status taskStatus;
+        do {
+            taskStatus = addTaskCtl.getStatus();
+        } while (taskStatus != AsyncTask.Status.FINISHED);
 
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // now delete it
+        TaskController.deleteTaskById deleteTask = new TaskController.deleteTaskById(task.getId());
+        TaskController.getTaskById getTask = new TaskController.getTaskById();
+
+        deleteTask.execute(task.getId());
+
+        AsyncTask.Status taskStatus2;
+        do {
+            taskStatus2 = deleteTask.getStatus();
+        } while (taskStatus2 != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        getTask.execute(task.getId());
+
+        try {
+            Task rt_task = getTask.get();
+            Log.i("Success", "message");
+
+            if (rt_task == null){
+                assertTrue(true);
+            }else {
+                Log.i("Error", "holyshit it got something: "+ rt_task.getTaskName());
+                assertTrue(false);
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.i("Error", "return fail");
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            assertTrue(true);
+            Log.i("Error", "not getting anything");
+        }
     }
-
-
 
     @Test
     public void requesterUpdateTaskTest(){
-        TaskController tc = new TaskController();
-        Task task = new Task();
-        task.setTaskName("hi");
-        tc.addTask(task);
-        assertEquals(tc.searchTaskByTaskName("hi"),task);
-        task.setTaskName("No");
-        tc.requesterUpdateTask(task);
-        assertEquals(tc.searchTaskByTaskName("No"),task);
+        TaskController.requesterUpdateTask updateTask = new TaskController.requesterUpdateTask();
+        TaskController.addTask addTask = new TaskController.addTask();
+        TaskController.getTaskById getTask = new TaskController.getTaskById();
+        Task test_task = new Task();
+        Task empty_task = new Task();
 
+        // init test task info, all info should be tested
+        test_task.setTaskDetails("Details");
+        test_task.setTaskName("Test");
+        test_task.setTaskProvider("A donkey");
+        test_task.setTaskRequester("A snake");
 
+        // now add test task to db
+        addTask.execute(test_task);
+
+        // w8 5sec for update to be done
+        AsyncTask.Status taskStatus;
+        do {
+            taskStatus = addTask.getStatus();
+        } while (taskStatus != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // now update local test task
+        test_task.setTaskDetails("Details-1");
+        test_task.setTaskName("Test-1");
+        test_task.setTaskProvider("donkey-1");
+        test_task.setTaskRequester("snake-1");
+
+        // now update the local to db
+        updateTask.execute(test_task);
+
+        AsyncTask.Status taskStatus2;
+        do {
+            taskStatus2 = addTask.getStatus();
+        } while (taskStatus2 != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // now try to get cloud task info
+        getTask.execute(test_task.getId());
+        try {
+            empty_task = getTask.get();
+
+            if (    empty_task.getTaskName().equals(test_task.getTaskName())    &&
+                    empty_task.getTaskDetails().equals(test_task.getTaskDetails()) &&
+                    empty_task.getTaskProvider().equals(test_task.getTaskProvider()) &&
+                    empty_task.getTaskRequester().equals(test_task.getTaskRequester())
+               )
+            {
+                assertTrue(true);
+            }
+            else{
+                Log.i("Error: WTF", empty_task.getTaskName() + empty_task.getTaskDetails() + empty_task.getTaskProvider() + empty_task.getTaskRequester());
+                assertTrue(false);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            assertTrue(false);
+            Log.i("Error", "return fail");
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            assertTrue(false);
+            Log.i("Error", "not getting anything");
+        }
 
     }
+
+    /*
     @Test
     public void searchTaskByKeywordTest(){
         TaskController tc = new TaskController();
@@ -201,5 +357,6 @@ public class TaskTest {
 
 
     }
+    */
 
 }

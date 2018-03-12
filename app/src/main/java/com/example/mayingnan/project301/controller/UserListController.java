@@ -161,7 +161,6 @@ public class UserListController {
         }
     }
 
-
     public static class getAUserByName extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
         protected ArrayList<User> doInBackground(String... search_parameters) {
@@ -195,11 +194,6 @@ public class UserListController {
             return users;
         }
     }
-
-
-
-
-
 
     public Boolean checkUserByNameAndPassword(String userName,String userPassword){
 
@@ -236,6 +230,7 @@ public class UserListController {
             verifySettings();
             // Serialize object into Json string
             String query = UserUtil.serializer(users[0]);
+
             Index index = new Index.Builder(query)
                     .index("cmput301w18t25").type("user").id(users[0].getId()).build();
 
