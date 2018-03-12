@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.allUserActivity.UserCharacterActivity;
 import com.example.mayingnan.project301.providerActivity.ProviderBidHistoryActivity;
+import com.example.mayingnan.project301.providerActivity.ProviderEditInfoActivity;
 import com.example.mayingnan.project301.providerActivity.ProviderMainActivity;
 import com.example.mayingnan.project301.providerActivity.ProviderMapActivity;
 import com.example.mayingnan.project301.requesterActivity.RequesterMainActivity;
@@ -48,7 +49,7 @@ public class ProviderActivityTest extends ActivityInstrumentationTestCase2 {
         //solo.goBack();
 
         //solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
-        /**
+
          solo.clickOnButton("View On Map");
 
          solo.assertCurrentActivity("Wrong Activity", ProviderMapActivity.class);
@@ -64,7 +65,63 @@ public class ProviderActivityTest extends ActivityInstrumentationTestCase2 {
          solo.goBack();
 
          solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
-        */
+
+        solo.clickOnButton("edit profile");
+
+        solo.assertCurrentActivity("Wrong Activity", ProviderEditInfoActivity.class);
+
+        solo.enterText((EditText) solo.getView(R.id.edit_name),"wdong2");
+
+        solo.enterText((EditText) solo.getView(R.id.edit_email),"wdong2@ualberta.ca");
+
+        solo.enterText((EditText) solo.getView(R.id.edit_phone),"1234567890");
+
+        solo.enterText((EditText) solo.getView(R.id.edit_passward),"abc");
+
+        solo.goBack();
+
+        solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
+    }
+
+    public void testProviderEditProfileActivity() {
+        solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
+
+        //solo.goBack();
+
+        //solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
+
+        solo.clickOnButton("edit profile");
+
+        solo.assertCurrentActivity("Wrong Activity", ProviderEditInfoActivity.class);
+
+        solo.enterText((EditText) solo.getView(R.id.edit_name),"wdong2");
+
+        solo.enterText((EditText) solo.getView(R.id.edit_email),"wdong2@ualberta.ca");
+
+        solo.enterText((EditText) solo.getView(R.id.edit_phone),"1234567890");
+
+        solo.enterText((EditText) solo.getView(R.id.edit_passward),"abc");
+
+        solo.clickOnButton("Save");
+
+        solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
+
+        solo.enterText((EditText) solo.getView(R.id.search_info),"some test");
+
+        solo.goBack();
+
+        solo.enterText((EditText) solo.getView(R.id.edit_name),"wdong2");
+
+        solo.enterText((EditText) solo.getView(R.id.edit_email),"wdong2@ualberta.ca");
+
+        solo.enterText((EditText) solo.getView(R.id.edit_phone),"1234567890");
+
+        solo.enterText((EditText) solo.getView(R.id.edit_passward),"abc");
+
+        solo.clickOnButton("Back");
+
+        solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
+
     }
 
     public void testProviderMapActivity() {
