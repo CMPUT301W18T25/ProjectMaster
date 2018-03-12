@@ -25,6 +25,8 @@
         <activity android:name=".providerActivity.ProviderMainActivity"/>
         <activity android:name=".providerActivity.ProviderTaskFinishActivity"/>
         <activity android:name=".providerActivity.ProviderEditInfoActivity"/>
+        <activity android:name=".providerActivity.ProviderBidHistoryActivity"/>
+        <activity android:name=".providerActivity.ProviderMapActivity"/>
 
         <activity android:name=".requesterActivity.RequesterPostTaskActivity"/>
         <activity android:name=".requesterActivity.RequesterPayActivity"/>
@@ -32,6 +34,8 @@
         <activity android:name=".requesterActivity.RequesterEditListActivity"/>
         <activity android:name=".requesterActivity.RequesterViewTaskActivity"/>
         <activity android:name=".requesterActivity.RequesterEditInfoActivity"/>
+        <activity android:name=".requesterActivity.RequesterEditTaskActivity"/>
+        <activity android:name=".requesterActivity.RequesterMapActivity"/>
     </application>
 
 </manifest>

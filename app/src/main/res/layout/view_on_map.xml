@@ -26,15 +26,6 @@
                 android:textSize="10sp"
                 android:textStyle="bold|italic" />
 
-            <Button
-                android:id="@+id/edit_info"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:fontFamily="cursive"
-                android:text="Edit profile"
-                android:textSize="10sp"
-                android:textStyle="bold|italic" />
         </LinearLayout>
 
         <com.google.android.gms.maps.MapView

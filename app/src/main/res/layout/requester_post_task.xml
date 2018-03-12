@@ -42,7 +42,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
+            android:gravity="top"
             android:orientation="horizontal">
 
             <TextView
@@ -101,8 +101,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
@@ -131,7 +130,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="53dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
@@ -162,7 +161,7 @@
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="cursive"
                 android:text="Task Time"
@@ -170,42 +169,53 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="125dp"
-            android:gravity="center_vertical|center_horizontal"
+            android:layout_height="325dp"
+            android:gravity="top|center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <DatePicker
                 android:id="@+id/post_datePicker"
-                android:layout_width="109dp"
-                android:layout_height="88dp"
+                android:layout_width="138dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1" />
 
             <TimePicker
                 android:id="@+id/post_timePicker"
                 android:layout_width="198dp"
-                android:layout_height="88dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1" />
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/submit_button"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="cursive"
-            android:text="submit"
-            android:textStyle="bold|italic" />
+            android:layout_height="36dp"
+            android:gravity="bottom"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/cancel_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="cursive"
-            android:text="Cancel"
-            android:textStyle="bold|italic" />
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:fontFamily="cursive"
+                android:text="submit"
+                android:textStyle="bold|italic" />
+
+            <Button
+                android:id="@+id/cancel_button"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:fontFamily="cursive"
+                android:text="Cancel"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
