@@ -6,9 +6,7 @@ package com.example.mayingnan.project301.ActivityTest;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.EditText;
 
-import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.allUserActivity.LogInActivity;
 import com.example.mayingnan.project301.allUserActivity.SignUpActivity;
 import com.example.mayingnan.project301.allUserActivity.UserCharacterActivity;
@@ -41,21 +39,7 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.goBack();
 
-        solo.goBack();
-
         solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
-
-        solo.clickOnButton("Sign Up");
-
-        //solo.goBack();
-
-        solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
-
-        solo.enterText((EditText) solo.getView(R.id.signup_password),"passward");
-
-        solo.clickOnButton("Log In");
-
-        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
     }
 
     public void testLogInActivityTransfer() {
