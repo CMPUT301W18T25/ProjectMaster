@@ -29,7 +29,6 @@ public class Task {
     }
 
     public Task(){
-        task.task
         this.taskName=null;
         this.taskDetails=null;
         this.taskRequester=null;
