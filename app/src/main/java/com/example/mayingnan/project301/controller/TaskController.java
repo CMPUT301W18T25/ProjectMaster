@@ -258,11 +258,203 @@ public class TaskController {
         }
     }
 
-    public static class searchTaskByKeyword extends AsyncTask<String, Void, ArrayList<Task>>{
-        protected ArrayList<Task> doInBackground(String... search_parameters) {
+    public static class searchBiddenTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
+        //ArrayList<Task> taskList = new ArrayList<Task> ();
+        String providerName;
+
+        public searchBiddenTasksOfThisProvider(String providerName){
+            this.providerName = providerName;
+        }
+
+        protected ArrayList<Task> doInBackground(Void... nul) {
             verifySettings();
 
             ArrayList<Task> result_tasks = new ArrayList<Task>();
+
+            String query = "{ \n"+
+                    "\"query\":{\n"+
+                    "\"term\":{\"taskProvider\":\""+this.providerName+"\"}\n"+
+                    "\"term\":{\"taskStatus\":\""+"bidden"+"\"}\n"+
+                    "}\n"+"}";
+
+            Log.i("Query", "The query was " + query);
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t25")
+                    .addType("task")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<Task> foundUsers
+                            = result.getSourceAsObjectList(Task.class);
+                    result_tasks.addAll(foundUsers);
+                    Log.i("Success", "Data retrieved from database: ");
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return result_tasks;
+        }
+
+    }
+
+    public static class searchAssignTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
+        String providerName;
+
+        public searchAssignTasksOfThisProvider(String providerName){
+            this.providerName = providerName;
+        }
+
+        protected ArrayList<Task> doInBackground(Void... nul) {
+            verifySettings();
+
+            ArrayList<Task> result_tasks = new ArrayList<Task>();
+
+            String query = "{ \n"+
+                    "\"query\":{\n"+
+                    "\"term\":{\"taskProvider\":\""+this.providerName+"\"}\n"+
+                    "\"term\":{\"taskStatus\":\""+"assigned"+"\"}\n"+
+                    "}\n"+"}";
+
+            Log.i("Query", "The query was " + query);
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t25")
+                    .addType("task")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<Task> foundUsers
+                            = result.getSourceAsObjectList(Task.class);
+                    result_tasks.addAll(foundUsers);
+                    Log.i("Success", "Data retrieved from database: ");
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return result_tasks;
+        }
+
+    }
+
+    public static class searchAllTasksOfThisRequester extends AsyncTask<Void, Void, ArrayList<Task>>{
+        String requesterName;
+
+        public searchAllTasksOfThisRequester(String requesterName){
+            this.requesterName = requesterName;
+        }
+
+        protected ArrayList<Task> doInBackground(Void... nul) {
+            verifySettings();
+
+            ArrayList<Task> result_tasks = new ArrayList<Task>();
+
+            String query = "{ \n"+
+                    "\"query\":{\n"+
+                    "\"term\":{\"taskRequester\":\""+this.requesterName+"\"}\n"+
+                    "}\n"+"}";
+
+            Log.i("Query", "The query was " + query);
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t25")
+                    .addType("task")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<Task> foundUsers
+                            = result.getSourceAsObjectList(Task.class);
+                    result_tasks.addAll(foundUsers);
+                    Log.i("Success", "Data retrieved from database: ");
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return result_tasks;
+        }
+
+
+    }
+
+    public static class searchAllRequestingTasks extends AsyncTask<Void, Void, ArrayList<Task>>{
+
+
+        protected ArrayList<Task> doInBackground(Void... nul) {
+            verifySettings();
+
+            ArrayList<Task> result_tasks = new ArrayList<Task>();
+
+            String query = "{ \n"+
+                    "\"query\":{\n"+
+                    "\"term\":{\"taskStatus\":\""+"requesting"+"\"}\n"+
+                    "}\n"+"}";
+
+            Log.i("Query", "The query was " + query);
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t25")
+                    .addType("task")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<Task> foundUsers
+                            = result.getSourceAsObjectList(Task.class);
+                    result_tasks.addAll(foundUsers);
+                    Log.i("Success", "Data retrieved from database: ");
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return result_tasks;
+        }
+
+
+    }
+
+    //TODO what is it for?
+    public ArrayList<Task> searchTaskByTaskName(String taskname){
+        ArrayList<Task> taskList = new ArrayList<Task> ();
+        return taskList;
+
+    }
+
+    public boolean testTrue(String name){
+        return true;
+    } //created by wdong2 for testing
+
+    public boolean testFalse(String name){
+        return false;
+    } //created by wdong2 for testing
+
+    // no need to use it, providerSetBis is good enough
+    public void providerUpdateBid(Task task,Bid bid){}
+
+    //TODO delay for search
+    /*
+    public static class searchTaskByKeyword extends  {
+        protected ArrayList<Task> doInBackground(ArrayList<String>... search_parameters) {
+            verifySettings();
+
+            ArrayList<Task> result_tasks = new ArrayList<Task>();
+
+            for (int i = 0; i < 0; i++){
+                String query = "{ \n"+
+                        "\"query\":{\n"+
+                        "\"term\":{\"userName\":\""+search_parameters[0]+"\"}\n"+
+                        "}\n"+"}";
+            }
 
             String query = "{ \n"+
                     "\"query\":{\n"+
@@ -290,47 +482,7 @@ public class TaskController {
             return result_tasks;
         }
     }
-
-    public ArrayList<Task> searchBiddenTasksOfThisProvider(String userName){
-        ArrayList<Task> taskList = new ArrayList<Task> ();
-        return taskList;
-
-    }
-
-    public ArrayList<Task> searchAssignTasksOfThisProvider(String userName ){
-        ArrayList<Task> taskList = new ArrayList<Task> ();
-        return taskList;
-
-    }
-
-    public ArrayList<Task> searchAllTasksOfThisRequester(String userName){
-        ArrayList<Task> taskList = new ArrayList<Task> ();
-        return taskList;
-
-    }
-
-    public ArrayList<Task> searchAllRequestingTasks(){
-        ArrayList<Task> taskList = new ArrayList<Task> ();
-        return taskList;
-
-    }
-
-    public ArrayList<Task> searchTaskByTaskName(String taskname){
-        ArrayList<Task> taskList = new ArrayList<Task> ();
-        return taskList;
-
-    }
-
-    public boolean testTrue(String name){
-        return true;
-    } //created by wdong2 for testing
-
-    public boolean testFalse(String name){
-        return false;
-    } //created by wdong2 for testing
-
-    // no need to use it, providerSetBis is good enough
-    public void providerUpdateBid(Task task,Bid bid){}
+    */
 
     public static void verifySettings() {
         if (client == null) {
