@@ -77,18 +77,6 @@ public class UserListController {
         if(checkValidUser){
             UserListController.addUser addUser = new UserListController.addUser();
             addUser.execute(user);
-            // Hang around till is done
-            AsyncTask.Status taskStatus;
-            do {
-                taskStatus = addUser.getStatus();
-            } while (taskStatus != AsyncTask.Status.FINISHED);
-
-            try {
-                TimeUnit.SECONDS.sleep(5);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
         }
         else{
             return false;
