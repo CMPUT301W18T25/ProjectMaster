@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -58,7 +59,13 @@ public class SignUpActivity extends AppCompatActivity {
                 newUser.setUserEmail(enterEmail);
                 newUser.setUserPhone(enterPhone);
                 newUser.setUserPassword(enterPassward);
-                if  (true){//(userListController.addUserAndCheck(newUser) == true){
+                Log.i("Name: ",newUser.getUserName());
+
+                UserListController uc = new UserListController();
+                boolean addSucess = uc.addUserAndCheck(newUser);
+
+                if  (addSucess){
+                    Log.i("Success sign up:",enterName);
                     Intent intent = new Intent(activity, UserCharacterActivity.class);
                     startActivity(intent);
                 }else{
