@@ -7,35 +7,33 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.mayingnan.project301.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ProviderMapActivity extends AppCompatActivity {
+public class ProviderMapActivity extends AppCompatActivity implements OnMapReadyCallback {
+
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_on_map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
 
-        //settle showlist button
-        Button showListButton = (Button) findViewById(R.id.show_list);
-        showListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent info2 = new Intent(ProviderMapActivity.this, ProviderMainActivity.class);
-                startActivity(info2);
-
-            }
-        });
-
-        //settle editprofile button
-        // Button editInfoButton = (Button) findViewById(R.id.edit_info);
-        //editInfoButton.setOnClickListener(new View.OnClickListener() {
-        //  @Override
-        //public void onClick(View view) {
-        //  Intent info2 = new Intent(ProviderMapActivity.this, ProviderEditInfoActivity.class);
-        //startActivity(info2);
-
-        //}
-        //});
+        // Add a marker in Sydney, Australia, and move the camera.
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
