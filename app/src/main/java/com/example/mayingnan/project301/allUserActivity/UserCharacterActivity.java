@@ -11,8 +11,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.mayingnan.project301.R;
+import com.example.mayingnan.project301.controller.UserListController;
 import com.example.mayingnan.project301.providerActivity.ProviderMainActivity;
 import com.example.mayingnan.project301.requesterActivity.RequesterMainActivity;
+
+import java.util.ArrayList;
 
 
 public class UserCharacterActivity extends AppCompatActivity {
@@ -24,15 +27,24 @@ public class UserCharacterActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_character);
+        final Intent intent = getIntent();
 
 
-        Button providerButton = (Button) findViewById(R.id.provider_button);
-        Button requesterButton = (Button) findViewById(R.id.requester_button);
+        providerButton = (Button) findViewById(R.id.provider_button);
+        requesterButton = (Button) findViewById(R.id.requester_button);
 
         //settle provider button
         providerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //get userName
+                String userName = intent.getExtras().get("userName").toString();
+
+                UserListController.GetAllUsers getAllUsers = new UserListController.GetAllUsers();
+                getAllUsers.execute(userName);
+
+
                 Intent intent = new Intent (UserCharacterActivity.this, ProviderMainActivity.class);
                 startActivity(intent);
 
