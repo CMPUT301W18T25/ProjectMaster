@@ -2,6 +2,8 @@ package com.example.mayingnan.project301.requesterActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,10 +15,14 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.mayingnan.project301.R;
+import com.example.mayingnan.project301.Task;
+import com.example.mayingnan.project301.controller.TaskController;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 
+import java.io.ByteArrayOutputStream;
+import java.util.Base64;
 
 
 /**
@@ -43,6 +49,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +69,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
         submitButton=(Button)findViewById(R.id.submit_button);
         cancelButton=(Button)findViewById(R.id.cancel_button);
 
-
+        post_time.setIs24HourView(true); // to set 24 hours mode
 
 
         /**
@@ -70,12 +77,43 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
          */
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View view) {
                 if (check_empty(post_name.getText().toString(),post_detail.getText().toString(),post_destination.getText().toString(),
-                        post_ideal_price.getText().toString(),getDateTimeFromPickers(post_date,post_time).toString())){
+                        post_ideal_price.getText().toString())){
+
+                    //  if (check_empty(post_name.getText().toString(),post_detail.getText().toString(),post_destination.getText().toString(),
+                    //      post_ideal_price.getText().toString(),getDateTimeFromPickers(post_date,post_time).toString())){
 
                     //interface jump
                     Intent info2 = new Intent(RequesterPostTaskActivity.this, RequesterEditListActivity.class);
+
+                    //send data
+                    Task new_task = new Task();
+                    new_task.setTaskName(post_name.getText().toString());
+                    new_task.setTaskDetails(post_detail.getText().toString());
+                    new_task.setTaskAddress(post_destination.getText().toString());
+
+                    new_task.setTaskIdealPrice(Double.parseDouble(post_ideal_price.getText().toString()));
+
+                    /**set photo
+                     ImageView iv1 = (ImageView)findViewById(R.id.c_task_photo);
+                     BitmapDrawable drawable = (BitmapDrawable) iv1.getDrawable();
+                     Bitmap bitmap = drawable.getBitmap();
+                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                     bmap.compress(Bitmap.CompressFormat.PNG,100,bos);
+                     byte[] bb = bos.toByteArray();
+                     String image = Base64.encodeBytes(bb);
+                     */
+
+                    //new_task.setTaskDateTime(getDateTimeFromPickers(post_date,post_time));
+
+
+
+
+                    TaskController.addTask addTaskCtl=new TaskController.addTask();
+                    addTaskCtl.execute(new_task);
+
                     startActivity(info2);
 
                 }else{
@@ -111,23 +149,24 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
      * @param detail
      * @param destination
      * @param ideal_price
-     * @param datetime
      * @return
      */
-    private boolean check_empty(String name, String detail, String destination, String ideal_price, String datetime){
-        if(name.length()==0 || detail.length()==0 || destination.length()==0|| ideal_price.length()==0|| datetime.length()==0 ){
+
+
+    private boolean check_empty(String name, String detail, String destination, String ideal_price)
+    {
+        if(name.length()==0 || detail.length()==0 || destination.length()==0|| ideal_price.length()==0 ){
             return false;
         }
         return true;
     }
-
-
     /**
      * method to get the Date and Time from a DatePicker and TimePicker and return a JodaTime DateTime from them, in current timezone.
      * @param dp
      * @param tp
      * @return
      */
+
     private DateTime getDateTimeFromPickers( DatePicker dp, TimePicker tp) {
 
 
