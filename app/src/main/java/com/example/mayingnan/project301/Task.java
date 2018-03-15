@@ -42,7 +42,7 @@ public class Task {
         this.taskProvider=null;
         this.taskStatus=null;
         this.taskAddress=null;
-        this.taskBidList=null;
+        this.taskBidList= new ArrayList<Bid>();
         this.taskPhoto=null;
         this.taskIdealPrice=null;
         this.taskDateTime=null;
