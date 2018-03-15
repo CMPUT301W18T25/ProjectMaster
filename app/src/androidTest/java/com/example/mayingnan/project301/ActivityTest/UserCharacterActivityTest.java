@@ -6,7 +6,11 @@ package com.example.mayingnan.project301.ActivityTest;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
 
+import com.example.mayingnan.project301.R;
+import com.example.mayingnan.project301.allUserActivity.LogInActivity;
+import com.example.mayingnan.project301.allUserActivity.SignUpActivity;
 import com.example.mayingnan.project301.allUserActivity.UserCharacterActivity;
 import com.example.mayingnan.project301.providerActivity.ProviderMainActivity;
 import com.example.mayingnan.project301.requesterActivity.RequesterMainActivity;
@@ -16,8 +20,8 @@ public class UserCharacterActivityTest extends ActivityInstrumentationTestCase2 
 
     private Solo solo;
 
-    public UserCharacterActivityTest() {
-        super(UserCharacterActivity.class);
+    public UserCharacterActivityTest()  {
+        super(LogInActivity.class);
     }
 
     @Override
@@ -30,13 +34,31 @@ public class UserCharacterActivityTest extends ActivityInstrumentationTestCase2 
     }
 
     public void testProviderButton() {
-        UserCharacterActivity activity = (UserCharacterActivity)solo.getCurrentActivity();
+
+        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
+
+        solo.clickOnButton("Sign Up");
+
+        solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
+/**
+ solo.clickOnButton("Log In");
+ solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
+ solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
+ */
+
+        solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
+
+        solo.enterText((EditText) solo.getView(R.id.signup_password),"passward");
+
+        solo.clickOnButton("Log In");
 
         solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
 
         solo.clickOnButton("provider");
 
         solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
+
+        solo.enterText((EditText) solo.getView(R.id.search_info),"some test");
 
         solo.goBack();
 

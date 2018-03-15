@@ -8,13 +8,24 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.mayingnan.project301.R;
+import com.example.mayingnan.project301.User;
 import com.example.mayingnan.project301.controller.UserListController;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class ProviderEditInfoActivity extends AppCompatActivity {
 
+
+    private String userName;
+    private String editName;
+    private String editEmail;
+    private String editPhone;
+    private String editPassword;
     private EditText usernameText;
     private EditText emailText;
     private EditText mobileText;
+    private EditText passwordText;
     private Button saveButton;
     private Button backButton;
     private UserListController userListControl;
@@ -24,6 +35,14 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_info);
+        final Intent intent = getIntent();
+        userName = intent.getExtras().get("userName").toString();
+
+        //match edit text
+        usernameText = findViewById(R.id.edit_name);
+        emailText = findViewById(R.id.edit_email);
+        mobileText = findViewById(R.id.edit_phone);
+        passwordText = findViewById(R.id.edit_passward);
 
 
         //settle save button
@@ -31,7 +50,39 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //get user input
+                editName = usernameText.getText().toString();
+                editEmail = emailText.getText().toString();
+                editPhone = mobileText.getText().toString();
+                editPassword = passwordText.getText().toString();
+
+                //get user by userName
+                UserListController.GetAllUsers getAllUsers = new UserListController.GetAllUsers();
+                getAllUsers.execute(userName);
+
+                ArrayList<User> Userlist = null;
+                try{
+                    Userlist = getAllUsers.get();
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }catch (ExecutionException e){
+                    e.printStackTrace();
+                }
+                User user = Userlist.get(0);
+
+                //update user info
+                user.setUserName(editName);
+                user.setUserEmail(editEmail);
+                user.setUserPhone(editPhone);
+                user.setUserPassword(editPassword);
+
+                //need to update online
+                //???
+
+                //change activity
                 Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMainActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }
@@ -44,8 +95,8 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMainActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
-
             }
         });
     }

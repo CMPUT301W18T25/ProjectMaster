@@ -13,11 +13,14 @@ import com.example.mayingnan.project301.R;
 
 public class RequesterEditListActivity extends AppCompatActivity {
     private ListView postTaskList;
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_edit_list);
+        final Intent intent = getIntent();
+        userName = intent.getExtras().get("userName").toString();
 
 
         //settle mainMenu button
@@ -26,6 +29,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterEditListActivity.this, RequesterMainActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }
@@ -37,6 +41,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterEditListActivity.this, RequesterMapActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }
@@ -49,6 +54,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskActivity.class);
                 info1.putExtra("info", index);
+                info1.putExtra("userName",userName);
                 startActivity(info1);
             }
         });

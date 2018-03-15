@@ -15,10 +15,14 @@ import com.example.mayingnan.project301.R;
 
 public class RequesterMainActivity extends AppCompatActivity {
 
+    private String userName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_main);
+        final Intent intent = getIntent();
+        userName = intent.getExtras().get("userName").toString();
 
         //settle postNewTask button
         Button postNewTaskButton = (Button) findViewById(R.id.post_button);
@@ -26,6 +30,7 @@ public class RequesterMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterMainActivity.this, RequesterPostTaskActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }
@@ -39,6 +44,7 @@ public class RequesterMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterMainActivity.this, RequesterEditListActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }
@@ -50,6 +56,7 @@ public class RequesterMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterMainActivity.this, RequesterEditInfoActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }

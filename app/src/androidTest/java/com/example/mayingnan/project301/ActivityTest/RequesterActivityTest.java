@@ -10,6 +10,8 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
 import com.example.mayingnan.project301.R;
+import com.example.mayingnan.project301.allUserActivity.LogInActivity;
+import com.example.mayingnan.project301.allUserActivity.SignUpActivity;
 import com.example.mayingnan.project301.allUserActivity.UserCharacterActivity;
 import com.example.mayingnan.project301.providerActivity.ProviderBidHistoryActivity;
 import com.example.mayingnan.project301.providerActivity.ProviderMainActivity;
@@ -26,7 +28,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
     public RequesterActivityTest() {
-        super(RequesterMainActivity.class);
+        super(LogInActivity.class);
     }
 
     @Override
@@ -39,7 +41,26 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testRequesterMainActivity() {
-        RequesterMainActivity activity = (RequesterMainActivity)solo.getCurrentActivity();
+        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
+
+        solo.clickOnButton("Sign Up");
+
+        solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
+/**
+ solo.clickOnButton("Log In");
+ solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
+ solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
+ */
+
+        solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
+
+        solo.enterText((EditText) solo.getView(R.id.signup_password),"passward");
+
+        solo.clickOnButton("Log In");
+
+        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
+
+        solo.clickOnButton("Requester");
 
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
 
@@ -85,6 +106,24 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testRequesterPostTaskActivity() {
+
+        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
+/**
+ solo.clickOnButton("Log In");
+ solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
+ solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
+ */
+
+        solo.enterText((EditText) solo.getView(R.id.login_name),"wdong2");
+
+        solo.enterText((EditText) solo.getView(R.id.login_password),"passward");
+
+        solo.clickOnButton("Log In");
+
+        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
+
+        solo.clickOnButton("Requester");
+
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
 
         solo.clickOnButton("Post New Task");
@@ -111,6 +150,24 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testRequesterEditListActivity() {
+
+        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
+/**
+ solo.clickOnButton("Log In");
+ solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
+ solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
+ */
+
+        solo.enterText((EditText) solo.getView(R.id.login_name),"wdong2");
+
+        solo.enterText((EditText) solo.getView(R.id.login_password),"passward");
+
+        solo.clickOnButton("Log In");
+
+        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
+
+        solo.clickOnButton("Requester");
+
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
 
         solo.clickOnButton("View And Edit");
@@ -129,6 +186,24 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testRequesterEditInfoActivity() {
+
+        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
+/**
+ solo.clickOnButton("Log In");
+ solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
+ solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
+ */
+
+        solo.enterText((EditText) solo.getView(R.id.login_name),"wdong2");
+
+        solo.enterText((EditText) solo.getView(R.id.login_password),"passward");
+
+        solo.clickOnButton("Log In");
+
+        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
+
+        solo.clickOnButton("Requester");
+
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
 
         solo.clickOnButton("Edit Profile");

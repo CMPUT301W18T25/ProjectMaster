@@ -49,8 +49,7 @@ public class Task {
     }
 
     public Task(String taskName, String taskDetails, String taskRequester, String taskProvider,
-                String taskStatus, String taskAddress, ArrayList<Bid> taskBidList, Photo taskPhoto,
-                Double taskIdealPrice, DateTime taskDateTime){
+                String taskStatus, String taskAddress, ArrayList<Bid> taskBidList, Photo taskPhoto){
         this.taskName=taskName;
         this.taskDetails=taskDetails;
         this.taskRequester=taskRequester;
@@ -59,40 +58,12 @@ public class Task {
         this.taskAddress=taskAddress;
         this.taskBidList=taskBidList;
         this.taskPhoto=taskPhoto;
-        this.taskIdealPrice=taskIdealPrice;
-        this.taskDateTime=taskDateTime;
+        this.taskIdealPrice=null;
+        this.taskDateTime=null;
     }
 
     public void requesterAcceptsBid(){
         this.taskPhoto=taskPhoto;
-    }
-
-    // Getters
-    public String getTaskName(){
-        return this.taskName;
-    }
-    public String getTaskDetails(){
-        return taskDetails;
-    }
-    public Double getTaskIdealPrice(){return taskIdealPrice;}
-    public DateTime getTaskDateTime(){return taskDateTime;}
-    public String getTaskRequester(){
-        return taskRequester;
-    }
-    public String getTaskProvider(){
-        return taskProvider;
-    }
-    public String getTaskStatus(){
-        return taskStatus;
-    }
-    public String getTaskAddress(){
-        return taskAddress;
-    }
-    public ArrayList<Bid> getTaskBidList(){
-        return taskBidList;
-    }
-    public Photo getTaskPhoto(){
-        return taskPhoto;
     }
 
     // Setters
@@ -125,6 +96,33 @@ public class Task {
         this.taskPhoto=taskPhoto;
     }
 
+    // Getters
+    public String getTaskName(){
+        return this.taskName;
+    }
+    public String getTaskDetails(){
+        return taskDetails;
+    }
+    public Double getTaskIdealPrice(){return taskIdealPrice;}
+    public DateTime getTaskDateTime(){return taskDateTime;}
+    public String getTaskRequester(){
+        return taskRequester;
+    }
+    public String getTaskProvider(){
+        return taskProvider;
+    }
+    public String getTaskStatus(){
+        return taskStatus;
+    }
+    public String getTaskAddress(){
+        return taskAddress;
+    }
+    public ArrayList<Bid> getTaskBidList(){
+        return taskBidList;
+    }
+    public Photo getTaskPhoto(){
+        return taskPhoto;
+    }
 
     public boolean addBid(Bid bid){
         for (int i = 0; i<taskBidList.size();i++){
@@ -137,6 +135,7 @@ public class Task {
         taskBidList.add(bid);
         return false;
     }
+
     public boolean cancelBid(String providerName){
         for (int i = 0; i<taskBidList.size();i++){
             if (providerName.equals(taskBidList.get(i).getProviderName())){
@@ -146,8 +145,5 @@ public class Task {
         }
         return false;
     }
-
-
-
 
 }

@@ -21,11 +21,14 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
     private TextView taskLabel;
     private ArrayList<Task> taskList;
     private ArrayAdapter<Task> taskAdapter;
+    private String userName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_bid_history);
+        final Intent intent = getIntent();
+        userName = intent.getExtras().get("userName").toString();
 
         //settle back button
         Button backButton = (Button) findViewById(R.id.back_button);
@@ -33,10 +36,15 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(ProviderBidHistoryActivity.this, ProviderMainActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }
         });
+
+        //wdong2:
+        //the two class below could be one class
+        //there will be a "if" statement to decide which class to jump
 
         // settle click on bid history list
         // case1: jump tp finish
@@ -45,6 +53,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskFinishActivity.class);
+                info1.putExtra("userName",userName);
                 info1.putExtra("info", index);
                 startActivity(info1);
             }
@@ -57,6 +66,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskBidActivity.class);
+                info1.putExtra("userName",userName);
                 info1.putExtra("info", index);
                 startActivity(info1);
             }
