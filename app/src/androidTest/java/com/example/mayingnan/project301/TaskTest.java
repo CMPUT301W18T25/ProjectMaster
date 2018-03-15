@@ -275,28 +275,255 @@ public class TaskTest {
 
     }
 
-    /*
+
     @Test
-    public void searchTaskByKeywordTest(){
-        TaskController tc = new TaskController();
-        Task task = new Task();
-        task.setTaskName("hihi");
-        tc.addTask(task);
-        assertTrue(tc.searchTaskByKeyword("hi").contains(task));
+    public void providerSetBidTest(){
+        // init methods to use
+        TaskController.addTask addTask = new TaskController.addTask();
+        TaskController.getTaskById getTask = new TaskController.getTaskById();
+
+        Task my_task = new Task();
+        Task empty_task = new Task();
+        Float my_amount;
+
+        // init test task info, all info should be tested
+        my_task.setTaskDetails("Details");
+        my_task.setTaskName("Test");
+        my_task.setTaskProvider(null);
+        my_task.setTaskRequester("A snake");
+
+        // now add test task to db
+        addTask.execute(my_task);
+
+        // w8 for 5sec
+        AsyncTask.Status taskStatus2;
+        do {
+            taskStatus2 = addTask.getStatus();
+        } while (taskStatus2 != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // now update local task bidlist
+        if (my_task.getId() == null){
+            Log.i("Error", "get ID error ");
+            assertTrue(false);
+        }
+        my_amount = (float)11.11;
+        Bid my_bid = new Bid(my_amount, "A donkey", my_task.getId());
+
+        // update bid list
+        TaskController.providerSetBid setTaskBid = new TaskController.providerSetBid(my_task,my_bid);
+        setTaskBid.execute();
+
+        // w8 for 5sec
+        AsyncTask.Status taskStatus1;
+        do {
+            taskStatus1 = addTask.getStatus();
+        } while (taskStatus1 != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // get task should be updated
+        getTask.execute(my_task.getId());
+
+        // check whether task bid list is updated
+        try{
+            int i;
+            Log.i("Success", "check memory update: " + my_task.getTaskBidList().get(0).getProviderName());
+            empty_task = getTask.get();
+            ArrayList<Bid> temp_bid_list = empty_task.getTaskBidList();
+            for (i = 0; i < temp_bid_list.size(); i++){
+                if (temp_bid_list.get(i).getProviderName().equals("A donkey")){
+                    if (temp_bid_list.get(i).getBidAmount() == (float)11.11){
+                        Log.i("State", Float.toString(temp_bid_list.get(i).getBidAmount()));
+                        assertTrue(true);
+                        break;
+                    }
+                }
+                else{
+                    assertTrue(false);
+                }
+            }
+
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+            assertTrue(false);
+            Log.i("Error", "return fail");
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            assertTrue(false);
+            Log.i("Error", "not getting anything");
+        }
 
     }
+
+    @Test
+    public void providerCancelBidTest(){
+        // init methods to use
+        TaskController.addTask addTask = new TaskController.addTask();
+        TaskController.getTaskById getTask = new TaskController.getTaskById();
+
+        Task my_task = new Task();
+        Task empty_task = new Task();
+        Float my_amount;
+
+        // init test task info, all info should be tested
+        my_task.setTaskDetails("Details");
+        my_task.setTaskName("Test");
+        my_task.setTaskProvider(null);
+        my_task.setTaskRequester("A snake");
+
+        // now add test task to db
+        addTask.execute(my_task);
+
+        // w8 for 5sec
+        AsyncTask.Status taskStatus2;
+        do {
+            taskStatus2 = addTask.getStatus();
+        } while (taskStatus2 != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // now update local task bidlist
+        if (my_task.getId() == null){
+            Log.i("Error", "get ID error ");
+            assertTrue(false);
+        }
+        my_amount = (float)11.11;
+        Bid my_bid = new Bid(my_amount, "A donkey", my_task.getId());
+
+        // update bid list
+        TaskController.providerSetBid setTaskBid = new TaskController.providerSetBid(my_task,my_bid);
+        setTaskBid.execute();
+
+        // w8 for 5 sec
+        AsyncTask.Status taskStatus;
+        do {
+            taskStatus = addTask.getStatus();
+        } while (taskStatus != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // now try to cancel my bid
+        TaskController.providerCancelBid cancelBid = new TaskController.providerCancelBid(my_task, my_bid.getProviderName());
+        cancelBid.execute();
+
+        // w8 for 5 sec
+        AsyncTask.Status taskStatus3;
+        do {
+            taskStatus3 = addTask.getStatus();
+        } while (taskStatus3 != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // get task should be updated
+        getTask.execute(my_task.getId());
+
+        try {
+            empty_task = getTask.get();
+            Log.i("Success", "message");
+
+            if (empty_task.getTaskBidList().size() > 0){
+                assertTrue(false);
+            }
+            else{
+                assertTrue(true);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.i("Error", "return fail");
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            Log.i("Error", "not getting anything");
+        }
+
+    }
+
     @Test
     public void searchBiddenTasksOfThisProviderTest(){
-        String userName = "me";
-        TaskController tc = new TaskController();
-        Task task = new Task();
-        task.setTaskProvider(userName);
-        task.setTaskName("hihi");
-        task.setTaskStatus("bidding");
-        tc.addTask(task);
-        assertTrue(tc.searchBiddenTasksOfThisProvider(userName).contains(task));
+        TaskController.getTaskById getTask = new TaskController.getTaskById();
+        TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider("tester");
+        ArrayList<Task> rt_list;
+        ArrayList<Task> send_list = new ArrayList<Task>();
 
+
+        // init test task info, all info should be tested
+        for (int i = 0; i < 5; i++){
+            Task my_task = new Task();
+
+            send_list.add(my_task);
+            my_task.setTaskDetails("Details-" + Integer.toString(i));
+            my_task.setTaskName("Test-" + Integer.toString(i));
+            my_task.setTaskProvider("tester");
+            my_task.setTaskRequester("A snake");
+            my_task.setTaskStatus("bidden");
+
+            TaskController.addTask addTask = new TaskController.addTask();
+            addTask.execute(my_task);
+
+            if (i == 4){
+                // w8 for 5 sec
+                AsyncTask.Status taskStatus3;
+                do {
+                    taskStatus3 = addTask.getStatus();
+                } while (taskStatus3 != AsyncTask.Status.FINISHED);
+
+                try {
+                    TimeUnit.SECONDS.sleep(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        search.execute();
+
+        try {
+            rt_list = search.get();
+            Log.i("Success", "message");
+            for (int i = 0; i < 5; i++){
+                if (rt_list.get(i).getTaskStatus().equals("bidden")){
+                    if (rt_list.get(i).getTaskName().equals(send_list.get(i).getTaskName())){
+                        assertTrue(false);
+                    }
+                }
+                else {
+                    assertTrue(false);
+                }
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.i("Error", "return fail");
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            Log.i("Error", "not getting anything");
+        }
     }
+    /*
     @Test
     public void searchAssignTasksOfThisProviderTest(){
         String userName = "me";
@@ -308,9 +535,8 @@ public class TaskTest {
         tc.addTask(task);
         assertTrue(tc.searchAssignTasksOfThisProvider(userName).contains(task));
 
-
-
     }
+
     @Test
     public void searchAllTasksOfThisRequesterTest(){
         String userName = "me";
@@ -357,6 +583,17 @@ public class TaskTest {
 
 
     }
+
+    @Test
+    public void searchTaskByKeywordTest(){
+        TaskController tc = new TaskController();
+        Task task = new Task();
+        task.setTaskName("hihi");
+        tc.addTask(task);
+        assertTrue(tc.searchTaskByKeyword("hi").contains(task));
+
+    }
+
     */
 
 }
