@@ -278,11 +278,11 @@ public class TaskController {
             //"                \"taskStatus\" : \"bidden\" \n"+
             String query1 = "{\n" +
                     "        \"query\" : {\n" +
-                    "            \"match\" : {\n" +
-                    "                \"taskProvider\" :\"" + this.providerName + "\"\n" +
-                    "            }\n" +
-                    "            \"match\" : {\n" +
-                    "                \"taskStatus\" : \"bidden\" \n"+
+                    "            \"bool\" : {\n" +
+                    "                \"must\" : { \n" +
+                    "                   {  \"match\" : { \"taskProvider\" :" + this.providerName + "} }\n" +
+                    "                   {  \"match\" : { \"taskStatus\" : bidden} }\n" +
+                    "                 }\n"+
                     "            }\n" +
                     "        }\n" +
                     "}";
