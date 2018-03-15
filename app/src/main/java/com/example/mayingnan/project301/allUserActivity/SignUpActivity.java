@@ -67,6 +67,10 @@ public class SignUpActivity extends AppCompatActivity {
                 if  (addSucess){
                     Log.i("Success sign up:",enterName);
                     Intent intent = new Intent(activity, UserCharacterActivity.class);
+
+                    //deliver userName
+                    intent.putExtra("userName",enterName);
+
                     startActivity(intent);
                 }else{
                     Toast toast = Toast.makeText(context, "Invalid Sign Up information! Please Try Again!", Toast.LENGTH_LONG);

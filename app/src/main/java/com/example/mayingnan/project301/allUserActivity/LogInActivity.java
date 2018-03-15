@@ -62,6 +62,10 @@ public class LogInActivity extends AppCompatActivity {
                 */
                 if (userListController.checkUserByNameAndPassword(enterUsername,enterPassward) == true){
                     Intent intent = new Intent (LogInActivity.this, UserCharacterActivity.class);
+
+                    //deliver userName
+                    intent.putExtra("userName",enterUsername);
+
                     startActivity(intent);
                 }else{
                     //print error message
