@@ -61,10 +61,10 @@ public class SignUpActivity extends AppCompatActivity {
                 newUser.setUserPassword(enterPassward);
                 Log.i("Name: ",newUser.getUserName());
 
-                UserListController uc = new UserListController();
-                boolean addSucess = uc.addUserAndCheck(newUser);
+                UserListController.addUser addUser = new UserListController.addUser();
+                addUser.execute(newUser);
 
-                if  (addSucess){
+                if  (true){
                     Log.i("Success sign up:",enterName);
                     Intent intent = new Intent(activity, UserCharacterActivity.class);
 

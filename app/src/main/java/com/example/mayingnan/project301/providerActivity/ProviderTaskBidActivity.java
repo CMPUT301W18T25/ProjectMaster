@@ -26,12 +26,15 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
     private Button BackButton;
     private Button BidButton;
     private Button CancelButton;
+    private String userName;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_task_bid);
+        final Intent intent = getIntent();
+        userName = intent.getExtras().get("userName").toString();
 
         //settle cancel button : cancel the old bid
         Button cancelButton = (Button) findViewById(R.id.cancel_button);
@@ -39,6 +42,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(ProviderTaskBidActivity.this, ProviderBidHistoryActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }

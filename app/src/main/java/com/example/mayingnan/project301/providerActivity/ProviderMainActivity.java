@@ -19,12 +19,14 @@ import java.util.ArrayList;
 public class ProviderMainActivity extends AppCompatActivity {
 
     private Button searchButton;
+    private Button editProfileButton;
     private Button viewOnMapButton;
-    private Button bidHistoyButton;
+    private Button bidHistoryButton;
     private ListView availablelist;
     private TextView taskLabel;
     private ArrayList<Task> taskList;
     private ArrayAdapter<Task> taskAdapter;
+    private String userName;
 
 
 
@@ -32,6 +34,12 @@ public class ProviderMainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_main);
+        final Intent intent = getIntent();
+        userName = intent.getExtras().get("userName").toString();
+
+        //need to load task and store in the list
+        //use adapter to show on UI
+
 
         //settle viewOnMap button
         viewOnMapButton = (Button) findViewById(R.id.provider_map_button);
@@ -40,28 +48,31 @@ public class ProviderMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //setResult(RESULT_OK);
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderMapActivity.class);
+                intent.putExtra("userName",userName);
                 startActivity(intent);
             }
         });
 
         //settle bidHistory button
-        Button bidHistoryButton = (Button) findViewById(R.id.provider_bid_button);
+        bidHistoryButton = (Button) findViewById(R.id.provider_bid_button);
         bidHistoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //setResult(RESULT_OK);
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderBidHistoryActivity.class);
+                intent.putExtra("userName",userName);
                 startActivity(intent);
             }
         });
 
         //settle editProfile button
-        Button editProfileButton = (Button) findViewById(R.id.edit_profile_button);
+        editProfileButton = (Button) findViewById(R.id.edit_profile_button);
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //setResult(RESULT_OK);
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderEditInfoActivity.class);
+                intent.putExtra("userName",userName);
                 startActivity(intent);
             }
         });
@@ -74,13 +85,20 @@ public class ProviderMainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent info1 = new Intent(ProviderMainActivity.this, RequesterViewTaskActivity.class);
                 info1.putExtra("info", index);
+                info1.putExtra("userName",userName);
                 startActivity(info1);
             }
         });
 
 
         // to do search button
-
+        searchButton = findViewById(R.id.search_button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //need search code
+            }
+        });
 
 
 

@@ -17,11 +17,14 @@ import com.example.mayingnan.project301.R;
 
 public class RequesterViewTaskActivity extends AppCompatActivity {
     private ListView bidList;
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_view_task);
+        final Intent intent = getIntent();
+        userName = intent.getExtras().get("userName").toString();
 
 
         //settle edit button
@@ -30,6 +33,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterViewTaskActivity.this, RequesterEditTaskActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }
@@ -41,6 +45,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterViewTaskActivity.this, RequesterEditListActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }
@@ -52,6 +57,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterViewTaskActivity.this, RequesterPayActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }
@@ -63,6 +69,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterViewTaskActivity.this, RequesterEditListActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }

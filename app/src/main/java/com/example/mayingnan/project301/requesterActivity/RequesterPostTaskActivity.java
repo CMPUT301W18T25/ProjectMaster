@@ -46,6 +46,8 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
     private Button submitButton;
     private Button cancelButton;
 
+    private String userName;
+
 
 
 
@@ -55,6 +57,8 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_post_task);
         context=getApplicationContext();
+        final Intent intent = getIntent();
+        userName = intent.getExtras().get("userName").toString();
 
         /**
          * find view by id.
@@ -113,7 +117,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
 
                     TaskController.addTask addTaskCtl=new TaskController.addTask();
                     addTaskCtl.execute(new_task);
-
+                    info2.putExtra("userName",userName);
                     startActivity(info2);
 
                 }else{
@@ -136,6 +140,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterPostTaskActivity.this, RequesterMainActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }

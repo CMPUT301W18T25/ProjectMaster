@@ -65,7 +65,6 @@ public class LogInActivity extends AppCompatActivity {
 
                     //deliver userName
                     intent.putExtra("userName",enterUsername);
-
                     startActivity(intent);
                 }else{
                     //print error message
