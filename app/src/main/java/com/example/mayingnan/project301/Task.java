@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * Created by User on 2018/2/25.
  */
 
+//TODO add idealprice, photo, do we need time?
 public class Task {
     private String taskName;
     private String taskDetails;
