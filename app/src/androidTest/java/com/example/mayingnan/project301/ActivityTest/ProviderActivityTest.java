@@ -241,16 +241,5 @@ public class ProviderActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
 
-        solo.goBack();
-
-        solo.goBack();
-
-        solo.goBack();
-
-        solo.goBack();
-
-        solo.goBack();
-
-        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
     }
 }
