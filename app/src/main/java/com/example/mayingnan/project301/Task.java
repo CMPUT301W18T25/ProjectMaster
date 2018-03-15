@@ -1,5 +1,7 @@
 package com.example.mayingnan.project301;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 
 /**
@@ -13,13 +15,18 @@ public class Task {
     private String taskProvider;
     private String taskStatus;
     private String taskAddress;
+
     private String taskID;
 
     private ArrayList<Bid> taskBidList;
+
     private Photo taskPhoto;
+    private Double taskIdealPrice;
+    private DateTime taskDateTime;
 
 
-    public Task(String s, String s1, String michael, Object o, String bidding, String s2, ArrayList<Bid> bidList, Photo emptyPhoto) {
+
+    public Task(String s, String s1, String michael, Object o, String bidding, String s2, ArrayList<Bid> bidList, Photo emptyPhoto, Double idealprice, DateTime datetime) {
     }
     public String getId(){
         return this.taskID;
@@ -36,11 +43,14 @@ public class Task {
         this.taskStatus=null;
         this.taskAddress=null;
         this.taskBidList=null;
-        this.taskPhoto=null;    }
-
+        this.taskPhoto=null;
+        this.taskIdealPrice=null;
+        this.taskDateTime=null;
+    }
 
     public Task(String taskName, String taskDetails, String taskRequester, String taskProvider,
-                     String taskStatus, String taskAddress, ArrayList<Bid> taskBidList, Photo taskPhoto){
+                String taskStatus, String taskAddress, ArrayList<Bid> taskBidList, Photo taskPhoto,
+                Double taskIdealPrice, DateTime taskDateTime){
         this.taskName=taskName;
         this.taskDetails=taskDetails;
         this.taskRequester=taskRequester;
@@ -49,6 +59,8 @@ public class Task {
         this.taskAddress=taskAddress;
         this.taskBidList=taskBidList;
         this.taskPhoto=taskPhoto;
+        this.taskIdealPrice=taskIdealPrice;
+        this.taskDateTime=taskDateTime;
     }
 
     public void requesterAcceptsBid(){
@@ -57,11 +69,13 @@ public class Task {
 
     // Getters
     public String getTaskName(){
-        return taskName;
+        return this.taskName;
     }
     public String getTaskDetails(){
         return taskDetails;
     }
+    public Double getTaskIdealPrice(){return taskIdealPrice;}
+    public DateTime getTaskDateTime(){return taskDateTime;}
     public String getTaskRequester(){
         return taskRequester;
     }
@@ -73,9 +87,11 @@ public class Task {
     }
     public String getTaskAddress(){
         return taskAddress;
-    }public ArrayList<Bid> getTaskBidList(){
+    }
+    public ArrayList<Bid> getTaskBidList(){
         return taskBidList;
-    }public Photo getTaskPhoto(){
+    }
+    public Photo getTaskPhoto(){
         return taskPhoto;
     }
 
@@ -86,6 +102,10 @@ public class Task {
     public void setTaskDetails(String taskDetails){
         this.taskDetails=taskDetails;
     }
+    public void setTaskIdealPrice(Double taskIdealPrice){
+        this.taskIdealPrice=taskIdealPrice;
+    }
+    public void setTaskDateTime(DateTime taskDateTime){this.taskDateTime=taskDateTime;}
     public void setTaskRequester(String taskRequester){
         this.taskRequester=taskRequester;
     }
@@ -104,6 +124,29 @@ public class Task {
     public void setTaskPhoto(Photo taskPhoto){
         this.taskPhoto=taskPhoto;
     }
+
+
+    public boolean addBid(Bid bid){
+        for (int i = 0; i<taskBidList.size();i++){
+            String selectedItemProvider = taskBidList.get(i).getProviderName();
+            if (selectedItemProvider.equals(bid.getProviderName())){
+                taskBidList.set(i, bid);
+                return true;
+            }
+        }
+        taskBidList.add(bid);
+        return false;
+    }
+    public boolean cancelBid(String providerName){
+        for (int i = 0; i<taskBidList.size();i++){
+            if (providerName.equals(taskBidList.get(i).getProviderName())){
+                taskBidList.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
 

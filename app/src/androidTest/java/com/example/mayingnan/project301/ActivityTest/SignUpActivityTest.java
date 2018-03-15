@@ -6,9 +6,12 @@ package com.example.mayingnan.project301.ActivityTest;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
 
+import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.allUserActivity.LogInActivity;
 import com.example.mayingnan.project301.allUserActivity.SignUpActivity;
+import com.example.mayingnan.project301.allUserActivity.UserCharacterActivity;
 import com.robotium.solo.Solo;
 
 public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
@@ -33,15 +36,18 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
 /**
-        solo.clickOnButton("Log In");
-
-        solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
+ solo.clickOnButton("Log In");
+ solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
+ solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
+ */
 
         solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
- */
+
+        solo.enterText((EditText) solo.getView(R.id.signup_password),"passward");
+
         solo.clickOnButton("Log In");
 
-        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
 
         solo.goBack();
 
