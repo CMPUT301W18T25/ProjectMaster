@@ -139,7 +139,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
         mockupTasks.add(loc4);
 
         //settle signup button
-        Button showListButton = (Button) findViewById(R.id.show_list);
+        /*Button showListButton = (Button) findViewById(R.id.show_list);
 
         showListButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,7 +152,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
                 startActivity(intent);
 
             }
-        });
+        });*/
 
 
 
@@ -278,7 +278,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
-                            Log.e(TAG, "Exception: %s", task.getException());
+                            Log.e(TAG, "Exception 1: %s", task.getException());
                             mMap.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
@@ -287,7 +287,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
                 });
             }
         } catch (SecurityException e)  {
-            Log.e("Exception: %s", e.getMessage());
+            Log.e("Exception 2: %s", e.getMessage());
         }
     }
 
