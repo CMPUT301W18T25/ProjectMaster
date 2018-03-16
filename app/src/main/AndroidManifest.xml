@@ -8,6 +8,13 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -20,11 +27,13 @@
             android:name=".allUserActivity.LogInActivity"
             android:label="ProjectMaster"
             android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".allUserActivity.SignUpActivity" />
         <activity android:name=".allUserActivity.UserCharacterActivity" />
@@ -48,16 +57,21 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/. 
         -->
+
+        <uses-library android:name="com.google.android.maps" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDSYL-yLpD9BNW-XuCxgm9Bd26bsYVa0G4" />
-
+            android:value="AIzaSyBsL49AqWcx2jlIjUXxF0QeXiP3xyHuq9w" />
+            <!--android:value="AIzaSyBsL49AqWcx2jlIjUXxF0QeXiP3xyHuq9w" /> -->
+            <!--android:value="AIzaSyDSYL-yLpD9BNW-XuCxgm9Bd26bsYVa0G4" /> -->
         <activity
             android:name=".providerActivity.ProviderMapActivity"
             android:label="@string/title_activity_view_on_map" />
         <activity
             android:name=".requesterActivity.RequesterMapActivity"
-            android:label="@string/title_activity_view_on_map"></activity>
+            android:label="@string/title_activity_view_on_map">
+
+        </activity>
     </application>
 
 </manifest>
