@@ -2,6 +2,8 @@ package com.example.mayingnan.project301;
 
 import android.media.Image;
 
+import java.util.ArrayList;
+
 /**
  * Created by  on 2018/2/25.
  */
