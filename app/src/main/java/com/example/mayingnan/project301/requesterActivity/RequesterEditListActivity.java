@@ -1,5 +1,6 @@
 package com.example.mayingnan.project301.requesterActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,11 +10,28 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.mayingnan.project301.R;
+import com.example.mayingnan.project301.Task;
+import com.example.mayingnan.project301.controller.TaskController;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 
 public class RequesterEditListActivity extends AppCompatActivity {
-    private ListView postTaskList;
+    private ListView postedTaskList;
     private String userName;
+    private static final String FILENAME = "ProjectMaster.sav";
+    private ArrayList<Task> tasklist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +66,8 @@ public class RequesterEditListActivity extends AppCompatActivity {
         });
 
         // settle click on post task list
-        postTaskList = (ListView) findViewById(R.id.post_list);
-        postTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        postedTaskList = (ListView) findViewById(R.id.post_list);
+        postedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskActivity.class);
@@ -61,4 +79,17 @@ public class RequesterEditListActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+        search.execute(userName);
+       // Arraylist<Task> tasklist= search.get();
+
+
+    }
+
+
+
+
 }

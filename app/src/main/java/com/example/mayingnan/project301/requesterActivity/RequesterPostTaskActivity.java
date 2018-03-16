@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import com.google.gson.Gson;
 
 import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.Task;
@@ -22,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.Base64;
 
 
@@ -47,7 +49,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
     private Button cancelButton;
 
     private String userName;
-
+    //private ArrayList<Task> tasklist = new ArrayList<>();
 
 
 
@@ -73,7 +75,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
         submitButton=(Button)findViewById(R.id.submit_button);
         cancelButton=(Button)findViewById(R.id.cancel_button);
 
-        post_time.setIs24HourView(true); // to set 24 hours mode
+        //post_time.setIs24HourView(true); // to set 24 hours mode
 
 
         /**
@@ -86,35 +88,32 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
                 if (check_empty(post_name.getText().toString(),post_detail.getText().toString(),post_destination.getText().toString(),
                         post_ideal_price.getText().toString())){
 
-                    //  if (check_empty(post_name.getText().toString(),post_detail.getText().toString(),post_destination.getText().toString(),
-                    //      post_ideal_price.getText().toString(),getDateTimeFromPickers(post_date,post_time).toString())){
 
                     //interface jump
                     Intent info2 = new Intent(RequesterPostTaskActivity.this, RequesterEditListActivity.class);
 
-                    //send data
+                    //set data
                     Task new_task = new Task();
                     new_task.setTaskName(post_name.getText().toString());
                     new_task.setTaskDetails(post_detail.getText().toString());
                     new_task.setTaskAddress(post_destination.getText().toString());
-
                     new_task.setTaskIdealPrice(Double.parseDouble(post_ideal_price.getText().toString()));
-
-                    /**set photo
-                     ImageView iv1 = (ImageView)findViewById(R.id.c_task_photo);
-                     BitmapDrawable drawable = (BitmapDrawable) iv1.getDrawable();
-                     Bitmap bitmap = drawable.getBitmap();
-                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                     bmap.compress(Bitmap.CompressFormat.PNG,100,bos);
-                     byte[] bb = bos.toByteArray();
-                     String image = Base64.encodeBytes(bb);
-                     */
-
+                    new_task.setTaskRequester(userName);
+                    //to do:set photo
+                    //may do:set time
                     //new_task.setTaskDateTime(getDateTimeFromPickers(post_date,post_time));
 
 
 
+                    //to do: send data to posted list(requester)
+                    //tasklist.add(new_task);
 
+
+
+
+
+
+                    //upload new task data to database
                     TaskController.addTask addTaskCtl=new TaskController.addTask();
                     addTaskCtl.execute(new_task);
                     info2.putExtra("userName",userName);
