@@ -73,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Intent intent = new Intent(activity, UserCharacterActivity.class);
 
                     //deliver userName
-                    intent.putExtra("userName",enterName);
+                    intent.putExtra("userId",newUserId);
 
                     startActivity(intent);
                 }else{

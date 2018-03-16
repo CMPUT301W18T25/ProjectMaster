@@ -39,30 +39,19 @@ public class UserCharacterActivity extends AppCompatActivity {
         providerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                User user = new User();
+                String userId = intent.getExtras().get("userId").toString();
 
-                //get userName
-                String userName = intent.getExtras().get("userName").toString();
 
-
-                //get user by userName
-                UserListController.GetAllUsers getAllUsers = new UserListController.GetAllUsers();
-                getAllUsers.execute(userName);
-
-                ArrayList<User>Userlist = null;
-                try{
-                    Userlist = getAllUsers.get();
-                }catch (InterruptedException e){
-                    e.printStackTrace();
-                }catch (ExecutionException e){
-                    e.printStackTrace();
-                }
-                User user = Userlist.get(0);
+                UserListController uc = new UserListController();
+                user = uc.getAUserById(userId);
 
                 //set user type
                 user.setUserType("provider");
+                uc.updateUser(user);
 
                 Intent intent = new Intent (UserCharacterActivity.this, ProviderMainActivity.class);
-                intent.putExtra("userName",userName);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
 
 
@@ -74,30 +63,20 @@ public class UserCharacterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //get userName
-                String userName = intent.getExtras().get("userName").toString();
+                User user = new User();
+                String userId = intent.getExtras().get("userId").toString();
 
 
-                //get user by userName
-                UserListController.GetAllUsers getAllUsers = new UserListController.GetAllUsers();
-                getAllUsers.execute(userName);
+                UserListController uc = new UserListController();
+                user = uc.getAUserById(userId);
 
-                ArrayList<User>Userlist = null;
-                try{
-                    Userlist = getAllUsers.get();
-                }catch (InterruptedException e){
-                    e.printStackTrace();
-                }catch (ExecutionException e){
-                    e.printStackTrace();
-                }
-                User user = Userlist.get(0);
-
-                //ser user type
+                //set user type
                 user.setUserType("requester");
+                uc.updateUser(user);
 
 
                 Intent intent = new Intent (UserCharacterActivity.this, RequesterMainActivity.class);
-                intent.putExtra("userName",userName);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });
