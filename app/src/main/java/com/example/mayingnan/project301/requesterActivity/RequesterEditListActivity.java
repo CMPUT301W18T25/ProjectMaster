@@ -88,9 +88,9 @@ public class RequesterEditListActivity extends AppCompatActivity {
         //tasklist= search.get();
 
         tasklist = new ArrayList<>();
-        RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
+        //RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
         // Attach the adapter to a ListView
-        this.postedTaskList.setAdapter(adapter);
+        //this.postedTaskList.setAdapter(adapter);
 
 
 
