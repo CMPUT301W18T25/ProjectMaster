@@ -275,7 +275,6 @@ public class TaskTest {
 
     }
 
-
     @Test
     public void providerSetBidTest(){
         // init methods to use
@@ -477,36 +476,67 @@ public class TaskTest {
             my_task.setTaskDetails("Details-" + Integer.toString(i));
             my_task.setTaskName("Test-" + Integer.toString(i));
             my_task.setTaskProvider("tester");
-            my_task.setTaskRequester("A snake");
+            my_task.setTaskRequester("snake");
             my_task.setTaskStatus("bidden");
 
             TaskController.addTask addTask = new TaskController.addTask();
             addTask.execute(my_task);
 
-            if (i == 4){
-                // w8 for 5 sec
-                AsyncTask.Status taskStatus3;
-                do {
-                    taskStatus3 = addTask.getStatus();
-                } while (taskStatus3 != AsyncTask.Status.FINISHED);
+            // w8 for 5 sec
+            AsyncTask.Status taskStatus3;
+            do {
+                taskStatus3 = addTask.getStatus();
+            } while (taskStatus3 != AsyncTask.Status.FINISHED);
 
-                try {
-                    TimeUnit.SECONDS.sleep(5);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
         }
+        Task my_task = new Task();
+
+        send_list.add(my_task);
+        my_task.setTaskDetails("Details-");
+        my_task.setTaskName("Test-");
+        my_task.setTaskProvider("tester");
+        my_task.setTaskRequester("A snake");
+        my_task.setTaskStatus("bidden");
+
+        TaskController.addTask addTask = new TaskController.addTask();
+        addTask.execute(my_task);
+
+        // w8 for 5 sec
+        AsyncTask.Status taskStatus3;
+        do {
+            taskStatus3 = addTask.getStatus();
+        } while (taskStatus3 != AsyncTask.Status.FINISHED);
 
         search.execute();
+
+        // w8 for 5 sec
+        AsyncTask.Status taskStatus;
+        do {
+            taskStatus = search.getStatus();
+        } while (taskStatus != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         try {
             rt_list = search.get();
             Log.i("Success", "message");
+
+            if (rt_list.size() == 0){
+                assertTrue(false);
+            }
+
             for (int i = 0; i < 5; i++){
+                Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
+                if (rt_list.get(i) == null){
+                    break;
+                }
                 if (rt_list.get(i).getTaskStatus().equals("bidden")){
-                    if (rt_list.get(i).getTaskName().equals(send_list.get(i).getTaskName())){
-                        assertTrue(false);
+                    if (rt_list.get(i).getTaskProvider().equals(send_list.get(i).getTaskProvider())){
+                        assertTrue(true);
                     }
                 }
                 else {
