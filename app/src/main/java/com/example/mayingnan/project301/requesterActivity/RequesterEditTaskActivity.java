@@ -16,10 +16,14 @@ import com.example.mayingnan.project301.R;
 
 public class RequesterEditTaskActivity extends AppCompatActivity {
 
+    private String userName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_edit_task);
+        final Intent intent = getIntent();
+        userName = intent.getExtras().get("userName").toString();
 
 
         //settle save button
@@ -28,6 +32,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterViewTaskActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }
@@ -40,6 +45,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterViewTaskActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }

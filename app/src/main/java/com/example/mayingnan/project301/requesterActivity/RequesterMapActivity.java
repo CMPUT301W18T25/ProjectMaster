@@ -19,9 +19,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class RequesterMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private String userName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        final Intent intent = getIntent();
+        userName = intent.getExtras().get("userName").toString();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_on_map2);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

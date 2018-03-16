@@ -14,11 +14,14 @@ import java.util.Map;
 public class ProviderTaskFinishActivity extends AppCompatActivity {
     private Map providerMap;
     private ArrayList tasklist;
+    private String userName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_task_finish);
+        final Intent intent = getIntent();
+        userName = intent.getExtras().get("userName").toString();
 
         //settle back button : jump back to history
         Button backButton = (Button) findViewById(R.id.back_button);
@@ -26,6 +29,7 @@ public class ProviderTaskFinishActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(ProviderTaskFinishActivity.this, ProviderBidHistoryActivity.class);
+                info2.putExtra("userName",userName);
                 startActivity(info2);
 
             }

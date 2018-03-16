@@ -58,7 +58,7 @@ public class TaskController {
                     try {
                         result = client.execute(deep_index);
                         if (result.isSucceeded()){
-                            Log.i("Success",a_task[0].getId());
+                            Log.i("Success",a_task[0].getTaskProvider());
                         }
                     }
                     catch (Exception e){
@@ -271,13 +271,19 @@ public class TaskController {
 
             ArrayList<Task> result_tasks = new ArrayList<Task>();
 
-            String query = "{ \n"+
-                    "\"query\":{\n"+
-                    "\"term\":{\"taskProvider\":\""+this.providerName+"\"}\n"+
-                    "\"term\":{\"taskStatus\":\""+"bidden"+"\"}\n"+
-                    "}\n"+"}";
+            String query =
+                    "\n{ \n"+
+                    "   \"query\" : {\n"+
+                    "       \"bool\" : {\n"+
+                    "           \"must\" : [\n"+
+                    "               { \"term\" : {\"taskStatus\" : " + "\"bidden\"}}," + "\n"+
+                    "               { \"term\" : {\"taskProvider\" : " + "\"tester\"}}" + "\n"+
+                    "           ]\n"+
+                    "       }\n"+
+                    "   }\n"+
+                    "}\n";
 
-            Log.i("Query", "The query was " + query);
+            Log.i("Query", "The query was " + query );
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w18t25")
                     .addType("task")
@@ -285,10 +291,10 @@ public class TaskController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<Task> foundUsers
+                    List<Task> rt
                             = result.getSourceAsObjectList(Task.class);
-                    result_tasks.addAll(foundUsers);
-                    Log.i("Success", "Data retrieved from database: ");
+                    result_tasks.addAll(rt);
+                    Log.i("Success", "Data retrieved from database: " + Integer.toString(rt.size()));
                 } else {
                     Log.i("Error", "The search query failed");
                 }

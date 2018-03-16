@@ -11,11 +11,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.mayingnan.project301.R;
+import com.example.mayingnan.project301.User;
 import com.example.mayingnan.project301.controller.UserListController;
 import com.example.mayingnan.project301.providerActivity.ProviderMainActivity;
 import com.example.mayingnan.project301.requesterActivity.RequesterMainActivity;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 
 public class UserCharacterActivity extends AppCompatActivity {
@@ -41,11 +43,26 @@ public class UserCharacterActivity extends AppCompatActivity {
                 //get userName
                 String userName = intent.getExtras().get("userName").toString();
 
+
+                //get user by userName
                 UserListController.GetAllUsers getAllUsers = new UserListController.GetAllUsers();
                 getAllUsers.execute(userName);
 
+                ArrayList<User>Userlist = null;
+                try{
+                    Userlist = getAllUsers.get();
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }catch (ExecutionException e){
+                    e.printStackTrace();
+                }
+                User user = Userlist.get(0);
+
+                //set user type
+                user.setUserType("provider");
 
                 Intent intent = new Intent (UserCharacterActivity.this, ProviderMainActivity.class);
+                intent.putExtra("userName",userName);
                 startActivity(intent);
 
 
@@ -53,16 +70,39 @@ public class UserCharacterActivity extends AppCompatActivity {
         });
 
         //settle requester button
-
         requesterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //get userName
+                String userName = intent.getExtras().get("userName").toString();
+
+
+                //get user by userName
+                UserListController.GetAllUsers getAllUsers = new UserListController.GetAllUsers();
+                getAllUsers.execute(userName);
+
+                ArrayList<User>Userlist = null;
+                try{
+                    Userlist = getAllUsers.get();
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }catch (ExecutionException e){
+                    e.printStackTrace();
+                }
+                User user = Userlist.get(0);
+
+                //ser user type
+                user.setUserType("requester");
+
+
                 Intent intent = new Intent (UserCharacterActivity.this, RequesterMainActivity.class);
+                intent.putExtra("userName",userName);
                 startActivity(intent);
-
-
             }
         });
+
+
 
 
     }

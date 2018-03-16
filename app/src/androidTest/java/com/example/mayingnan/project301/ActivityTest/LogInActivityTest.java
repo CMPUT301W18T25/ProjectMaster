@@ -61,16 +61,41 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2 {
     public void testLogInActivityTransfer() {
         solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
 
-        UserListController ULC = new UserListController();
+        solo.clickOnButton("Sign Up");
+
+        solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
+/**
+ solo.clickOnButton("Log In");
+ solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
+ solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
+ */
+
+        solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
+
+        solo.enterText((EditText) solo.getView(R.id.signup_password),"passward");
+
+        solo.clickOnButton("Log In");
+
+        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
+
+        solo.goBack();
+
+        solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
 /**
  String invalidUserName = "IUN";
  assertFalse(ULC.testFalse(invalidUserName));
  solo.clickOnButton("Log In");
  solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
  */
-        String validUserName = "VUN";
+        solo.enterText((EditText) solo.getView(R.id.signup_password),"");
 
-        assertTrue(ULC.testTrue(validUserName));
+        solo.goBack();
+
+        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
+
+        solo.enterText((EditText) solo.getView(R.id.login_name),"wdong2");
+
+        solo.enterText((EditText) solo.getView(R.id.login_password),"passward");
 
         solo.clickOnButton("Log In");
 
