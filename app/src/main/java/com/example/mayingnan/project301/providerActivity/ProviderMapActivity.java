@@ -88,7 +88,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private GeoDataClient mGeoDataClient;
     private PlaceDetectionClient mPlaceDetectionClient;
-    private final LatLng mDefaultLocation = new LatLng(-33.8523341, 151.2106085);
+    private final LatLng mDefaultLocation = new LatLng(53.5273, -113.5296);
 
     // Testing variables
     private ArrayList<Location> mockupTasks;
@@ -96,6 +96,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mLocationPermissionGranted = false;
         if (savedInstanceState != null) {
             mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
             mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
@@ -139,7 +140,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
         mockupTasks.add(loc4);
 
         //settle signup button
-        Button showListButton = (Button) findViewById(R.id.show_list);
+        /*Button showListButton = (Button) findViewById(R.id.show_list);
 
         showListButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,7 +153,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
                 startActivity(intent);
 
             }
-        });
+        });*/
 
 
 
@@ -278,7 +279,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
-                            Log.e(TAG, "Exception: %s", task.getException());
+                            Log.e(TAG, "Exception 1: %s", task.getException());
                             mMap.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
@@ -287,7 +288,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
                 });
             }
         } catch (SecurityException e)  {
-            Log.e("Exception: %s", e.getMessage());
+            Log.e("Exception 2: %s", e.getMessage());
         }
     }
 
