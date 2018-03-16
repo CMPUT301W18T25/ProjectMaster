@@ -88,7 +88,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private GeoDataClient mGeoDataClient;
     private PlaceDetectionClient mPlaceDetectionClient;
-    private final LatLng mDefaultLocation = new LatLng(-33.8523341, 151.2106085);
+    private final LatLng mDefaultLocation = new LatLng(53.5273, -113.5296);
 
     // Testing variables
     private ArrayList<Location> mockupTasks;
@@ -96,6 +96,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mLocationPermissionGranted = false;
         if (savedInstanceState != null) {
             mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
             mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
