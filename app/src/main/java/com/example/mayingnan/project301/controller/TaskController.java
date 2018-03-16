@@ -307,6 +307,7 @@ public class TaskController {
 
     }
 
+    //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAssignTasksOfThisProvider extends AsyncTask<String, Void, ArrayList<Task>>{
 
         protected ArrayList<Task> doInBackground(String... providerName) {
@@ -314,11 +315,17 @@ public class TaskController {
 
             ArrayList<Task> result_tasks = new ArrayList<Task>();
 
-            String query = "{ \n"+
-                    "\"query\":{\n"+
-                    "\"term\":{\"taskProvider\":\""+providerName[0]+"\"}\n"+
-                    "\"term\":{\"taskStatus\":\""+"assigned"+"\"}\n"+
-                    "}\n"+"}";
+            String query =
+                    "\n{ \n"+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"term\" : {\"taskStatus\" : " + "\"assigned\"}}," + "\n"+
+                            "               { \"term\" : {\"taskProvider\" : \"" + providerName[0] + "\"}}" + "\n"+
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
 
             Log.i("Query", "The query was " + query);
             Search search = new Search.Builder(query)
@@ -344,22 +351,25 @@ public class TaskController {
 
     }
 
-    public static class searchAllTasksOfThisRequester extends AsyncTask<Void, Void, ArrayList<Task>>{
-        String requesterName;
+    //TODO do test for this method, which should be extremely similar to bidden tasks
+    public static class searchAllTasksOfThisRequester extends AsyncTask<String, Void, ArrayList<Task>>{
 
-        public searchAllTasksOfThisRequester(String requesterName){
-            this.requesterName = requesterName;
-        }
-
-        protected ArrayList<Task> doInBackground(Void... nul) {
+        protected ArrayList<Task> doInBackground(String... requesterName) {
             verifySettings();
 
             ArrayList<Task> result_tasks = new ArrayList<Task>();
 
-            String query = "{ \n"+
-                    "\"query\":{\n"+
-                    "\"term\":{\"taskRequester\":\""+this.requesterName+"\"}\n"+
-                    "}\n"+"}";
+            String query =
+                    "\n{ \n"+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"term\" : {\"taskStatus\" : " + "\"assigned\"}}," + "\n"+
+                            "               { \"term\" : {\"taskRequester\" : \"" + requesterName[0] + "\"}}" + "\n"+
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
 
             Log.i("Query", "The query was " + query);
             Search search = new Search.Builder(query)
@@ -386,6 +396,7 @@ public class TaskController {
 
     }
 
+    //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAllRequestingTasks extends AsyncTask<Void, Void, ArrayList<Task>>{
 
 
@@ -394,10 +405,16 @@ public class TaskController {
 
             ArrayList<Task> result_tasks = new ArrayList<Task>();
 
-            String query = "{ \n"+
-                    "\"query\":{\n"+
-                    "\"term\":{\"taskStatus\":\""+"requesting"+"\"}\n"+
-                    "}\n"+"}";
+            String query =
+                    "\n{ \n"+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"term\" : {\"taskStatus\" : " + "\"request\"}}" + "\n"+
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
 
             Log.i("Query", "The query was " + query);
             Search search = new Search.Builder(query)
@@ -421,13 +438,6 @@ public class TaskController {
             return result_tasks;
         }
 
-
-    }
-
-    //TODO what is it for?
-    public ArrayList<Task> searchTaskByTaskName(String taskname){
-        ArrayList<Task> taskList = new ArrayList<Task> ();
-        return taskList;
 
     }
 
