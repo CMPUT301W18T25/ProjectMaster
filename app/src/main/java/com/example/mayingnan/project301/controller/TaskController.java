@@ -307,21 +307,16 @@ public class TaskController {
 
     }
 
-    public static class searchAssignTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
-        String providerName;
+    public static class searchAssignTasksOfThisProvider extends AsyncTask<String, Void, ArrayList<Task>>{
 
-        public searchAssignTasksOfThisProvider(String providerName){
-            this.providerName = providerName;
-        }
-
-        protected ArrayList<Task> doInBackground(Void... nul) {
+        protected ArrayList<Task> doInBackground(String... providerName) {
             verifySettings();
 
             ArrayList<Task> result_tasks = new ArrayList<Task>();
 
             String query = "{ \n"+
                     "\"query\":{\n"+
-                    "\"term\":{\"taskProvider\":\""+this.providerName+"\"}\n"+
+                    "\"term\":{\"taskProvider\":\""+providerName[0]+"\"}\n"+
                     "\"term\":{\"taskStatus\":\""+"assigned"+"\"}\n"+
                     "}\n"+"}";
 
