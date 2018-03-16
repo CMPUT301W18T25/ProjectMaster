@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * Created by User on 2018/2/25.
  */
 
+//TODO add idealprice, photo, do we need time?
 public class Task {
     private String taskName;
     private String taskDetails;
@@ -42,7 +43,7 @@ public class Task {
         this.taskProvider=null;
         this.taskStatus=null;
         this.taskAddress=null;
-        this.taskBidList=null;
+        this.taskBidList= new ArrayList<Bid>();
         this.taskPhoto=null;
         this.taskIdealPrice=null;
         this.taskDateTime=null;

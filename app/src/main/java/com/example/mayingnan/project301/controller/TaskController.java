@@ -274,11 +274,20 @@ public class TaskController {
             String query = "{ \n"+
                     "\"query\":{\n"+
                     "\"term\":{\"taskProvider\":\""+this.providerName+"\"}\n"+
-                    "\"term\":{\"taskStatus\":\""+"bidden"+"\"}\n"+
                     "}\n"+"}";
-
-            Log.i("Query", "The query was " + query);
-            Search search = new Search.Builder(query)
+            //"                \"taskStatus\" : \"bidden\" \n"+
+            String query1 = "{\n" +
+                    "        \"query\" : {\n" +
+                    "            \"bool\" : {\n" +
+                    "                \"must\" : { \n" +
+                    "                   {  \"match\" : { \"taskProvider\" :" + this.providerName + "} }\n" +
+                    "                   {  \"match\" : { \"taskStatus\" : bidden} }\n" +
+                    "                 }\n"+
+                    "            }\n" +
+                    "        }\n" +
+                    "}";
+            Log.i("Query", "The query was " + query1);
+            Search search = new Search.Builder(query1)
                     .addIndex("cmput301w18t25")
                     .addType("task")
                     .build();
