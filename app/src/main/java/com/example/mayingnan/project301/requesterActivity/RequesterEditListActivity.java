@@ -1,5 +1,6 @@
 package com.example.mayingnan.project301.requesterActivity;
 
+import android.app.VoiceInteractor;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -84,7 +85,14 @@ public class RequesterEditListActivity extends AppCompatActivity {
         super.onStart();
         TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
         search.execute(userName);
-       // Arraylist<Task> tasklist= search.get();
+        //tasklist= search.get();
+
+        tasklist = new ArrayList<>();
+        RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
+        // Attach the adapter to a ListView
+        this.postedTaskList.setAdapter(adapter);
+
+
 
 
     }
