@@ -17,10 +17,8 @@ import com.example.mayingnan.project301.controller.UserListController;
 import com.example.mayingnan.project301.providerActivity.ProviderMainActivity;
 import com.example.mayingnan.project301.requesterActivity.RequesterMainActivity;
 
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
-
+@SuppressWarnings("ALL")
 public class UserCharacterActivity extends AppCompatActivity {
 
     private Button providerButton;
@@ -38,10 +36,12 @@ public class UserCharacterActivity extends AppCompatActivity {
 
         //settle provider button
         providerButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressWarnings("ConstantConditions")
             @Override
             public void onClick(View view) {
                 User user = new User();
-                String userId = intent.getExtras().get("userId").toString();
+                //noinspection ConstantConditions,ConstantConditions
+                @SuppressWarnings("ConstantConditions") String userId = intent.getExtras().get("userId").toString();
                 Log.i("userId:",userId);
                 UserListController uc = new UserListController();
                 user = uc.getAUserById(userId);
@@ -60,11 +60,13 @@ public class UserCharacterActivity extends AppCompatActivity {
 
         //settle requester button
         requesterButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressWarnings("ConstantConditions")
             @Override
             public void onClick(View view) {
 
                 User user = new User();
-                String userId = intent.getExtras().get("userId").toString();
+                //noinspection ConstantConditions,ConstantConditions
+                @SuppressWarnings("ConstantConditions") String userId = intent.getExtras().get("userId").toString();
                 Log.i("userId",userId);
 
                 UserListController uc = new UserListController();

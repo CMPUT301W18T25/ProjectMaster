@@ -1,13 +1,10 @@
 package com.example.mayingnan.project301.controller;
 
-import android.os.AsyncTask;
-
 import com.example.mayingnan.project301.Bid;
 import com.example.mayingnan.project301.OnAsyncTaskCompleted;
 import com.example.mayingnan.project301.Task;
 import com.example.mayingnan.project301.TaskUtil;
 import com.example.mayingnan.project301.User;
-import com.example.mayingnan.project301.UserUtil;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
@@ -20,15 +17,12 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import io.searchbox.core.Delete;
-import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
-import static com.example.mayingnan.project301.controller.UserListController.verifySettings;
-
-/**
+/*
  * Created by Xingyuan Yang on 2018-02-25.
  */
 

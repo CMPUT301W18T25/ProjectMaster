@@ -8,21 +8,24 @@ import android.widget.Button;
 
 import com.example.mayingnan.project301.R;
 
-/**
+/*
  * Created by User on 2018/2/25.
  */
 
 
+@SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterMainActivity extends AppCompatActivity {
 
 
     private String userId;
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_main);
         final Intent intent = getIntent();
+        //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
         //settle postNewTask button

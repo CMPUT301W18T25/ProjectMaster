@@ -63,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
                 Log.i("Name: ",newUser.getUserName());
 
                 UserListController uc= new UserListController();
-                String newUserId = null;
+                String newUserId;
                 newUserId = uc.addUserAndCheck(newUser);
 
 

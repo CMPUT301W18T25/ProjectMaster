@@ -1,11 +1,11 @@
 package com.example.mayingnan.project301.ActivityTest;
 
 
-/**
+/*
  * Created by wdong2 on 3/8/18.
  */
 
-import android.app.Activity;
+
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
@@ -17,7 +17,6 @@ import com.example.mayingnan.project301.providerActivity.ProviderBidHistoryActiv
 import com.example.mayingnan.project301.providerActivity.ProviderEditInfoActivity;
 import com.example.mayingnan.project301.providerActivity.ProviderMainActivity;
 import com.example.mayingnan.project301.providerActivity.ProviderMapActivity;
-import com.example.mayingnan.project301.requesterActivity.RequesterMainActivity;
 import com.robotium.solo.Solo;
 
 public class ProviderActivityTest extends ActivityInstrumentationTestCase2 {

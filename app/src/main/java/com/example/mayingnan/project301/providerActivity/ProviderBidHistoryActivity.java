@@ -15,6 +15,7 @@ import com.example.mayingnan.project301.Task;
 
 import java.util.ArrayList;
 
+@SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderBidHistoryActivity extends AppCompatActivity {
     private Button backButton;
     private ListView bidHistoryList;
@@ -23,11 +24,13 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
     private ArrayAdapter<Task> taskAdapter;
     private String userId;
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_bid_history);
         final Intent intent = getIntent();
+        //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
         //settle back button

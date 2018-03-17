@@ -9,7 +9,6 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
 import com.example.mayingnan.project301.R;
-import com.example.mayingnan.project301.allUserActivity.LogInActivity;
 import com.example.mayingnan.project301.allUserActivity.SignUpActivity;
 import com.example.mayingnan.project301.allUserActivity.UserCharacterActivity;
 import com.robotium.solo.Solo;

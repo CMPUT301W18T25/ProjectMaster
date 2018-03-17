@@ -19,11 +19,13 @@ import java.util.ArrayList;
  * Created on 2018/3/15.
  */
 
+@SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterAdapter extends ArrayAdapter<Task> {
     public RequesterAdapter(Context context, ArrayList<Task> users) {
         super(context, 0, users);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -42,6 +44,7 @@ public class RequesterAdapter extends ArrayAdapter<Task> {
         TextView task_idealprice = convertView.findViewById(R.id.adapter_idealprice);
 
         // Return the completed view to render on screen
+        //noinspection ConstantConditions
         task_name.setText(task.getTaskName().toString());
         task_destination.setText(task.getTaskAddress());
         task_idealprice.setText(Double.toString(task.getTaskIdealPrice()));

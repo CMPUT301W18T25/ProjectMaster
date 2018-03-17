@@ -43,6 +43,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
  * Source: The majority of the map code was implemented using the Google developer documentation
  * (https://developers.google.com/maps/documentation/android-api/start)
  */
+@SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private com.example.mayingnan.project301.Task projectTask;
@@ -84,6 +85,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
      *
      * @param savedInstanceState
      */
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +99,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
         }
 
         final Intent intent = getIntent();
+        //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
         setContentView(R.layout.view_on_map);

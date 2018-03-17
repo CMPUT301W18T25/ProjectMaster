@@ -1,6 +1,6 @@
 package com.example.mayingnan.project301.ActivityTest;
 
-/**
+/*
  * Created by wdong2 on 3/8/18.
  */
 

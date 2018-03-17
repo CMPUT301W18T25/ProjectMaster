@@ -2,8 +2,6 @@ package com.example.mayingnan.project301.requesterActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,7 +11,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import com.google.gson.Gson;
 
 import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.Task;
@@ -21,11 +18,6 @@ import com.example.mayingnan.project301.controller.TaskController;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
-
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -35,6 +27,7 @@ import java.util.concurrent.ExecutionException;
 
 
 
+@SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterPostTaskActivity extends AppCompatActivity {
     private Context context;
 
@@ -55,12 +48,14 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
 
 
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_post_task);
         context=getApplicationContext();
         final Intent intent = getIntent();
+        //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
         /**

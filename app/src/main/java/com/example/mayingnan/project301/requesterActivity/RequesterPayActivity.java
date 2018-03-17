@@ -15,15 +15,18 @@ import com.example.mayingnan.project301.R;
  */
 
 
+@SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterPayActivity extends AppCompatActivity {
 
     private String userId;
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_pay);
         final Intent intent = getIntent();
+        //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
         //settle pay button

@@ -4,7 +4,6 @@ package com.example.mayingnan.project301.controller;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.mayingnan.project301.OnAsyncTaskCompleted;
 import com.example.mayingnan.project301.UserUtil;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
@@ -15,15 +14,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 import io.searchbox.core.Delete;
-import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
+@SuppressWarnings({"ALL", "ConstantConditions"})
 public class UserListController {
 
     public ArrayList<User> userlist;
@@ -42,7 +40,7 @@ public class UserListController {
 
         if (name == "wdong2"){return true;}
 
-        User newUser = null;
+        User newUser;
         newUser = getAUserByName(name);
         if(newUser==null){
             Log.i("asda","asdasd");
@@ -74,6 +72,7 @@ public class UserListController {
         return userId;
 
     }
+    @SuppressWarnings("ConstantConditions")
     public User getAUserById(String userId){
         Log.d("UserListController","getAUserById userId: "+userId);
         UserListController.getAUserById getAUserById = new UserListController.getAUserById();
@@ -92,6 +91,7 @@ public class UserListController {
             Log.d("UserListController", "Userlist = null");
 
         }
+        //noinspection ConstantConditions
         if(Userlist.isEmpty()){
             Log.d("UserListController", "getAUserById2 return null");
             return null;
@@ -102,6 +102,7 @@ public class UserListController {
             return Userlist.get(0);
         }
     }
+    @SuppressWarnings("ConstantConditions")
     public User getAUserByName(String userName){
         UserListController.getAUserByName getAUserByName = new UserListController.getAUserByName();
         getAUserByName.execute(userName);
@@ -114,6 +115,7 @@ public class UserListController {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        //noinspection ConstantConditions
         if(Userlist.isEmpty()){
             Log.i("length","0");
             return null;
@@ -347,7 +349,8 @@ public class UserListController {
         }
     }
 
-    public Boolean checkUserByNameAndPassword(String userName,String userPassword){
+    @SuppressWarnings("ConstantConditions")
+    public Boolean checkUserByNameAndPassword(String userName, String userPassword){
 
         UserListController.getAUserByName getAUserByName = new UserListController.getAUserByName();
         getAUserByName.execute(userName);
@@ -361,6 +364,7 @@ public class UserListController {
             e.printStackTrace();
         }
         boolean found = false;
+        //noinspection ConstantConditions
         for (User u: Userlist){
 
             Log.i("username   ",u.getUserName());

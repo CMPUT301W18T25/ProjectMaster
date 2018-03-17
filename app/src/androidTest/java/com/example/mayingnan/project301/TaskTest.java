@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.mayingnan.project301.controller.TaskController;
-import com.example.mayingnan.project301.controller.UserListController;
 
 import org.junit.Test;
 import java.util.ArrayList;
@@ -17,6 +16,7 @@ import static org.junit.Assert.*;
  * Created by julianstys on 2018-02-25.
  */
 
+@SuppressWarnings("ALL")
 public class TaskTest {
 
     /*

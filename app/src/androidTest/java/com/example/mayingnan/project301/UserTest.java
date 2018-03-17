@@ -1,10 +1,8 @@
 package com.example.mayingnan.project301;
 
 import android.os.AsyncTask;
-import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
-import com.example.mayingnan.project301.allUserActivity.LogInActivity;
 import com.example.mayingnan.project301.controller.UserListController;
 
 import java.util.ArrayList;
@@ -18,8 +16,10 @@ import static org.junit.Assert.*;
  * Created by wdong2 on 2/15/18.
  */
 
+@SuppressWarnings("ALL")
 public class UserTest{
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     public void testAddUser() throws Exception{
         String test = "test8";
@@ -49,6 +49,7 @@ public class UserTest{
             e.printStackTrace();
         }
         int found = 0;
+        //noinspection ConstantConditions
         for (User u: Userlist){
 
             Log.i("username   ",u.getUserName());
@@ -97,6 +98,7 @@ public class UserTest{
 
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     public void testGetAUserById(){
         UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
@@ -126,6 +128,7 @@ public class UserTest{
         }
 
 
+        //noinspection ConstantConditions
         Log.i("said",newUser.getUserName());
         newUser = uc.getAUserById(newUser.getId());
         if(newUser!=null){

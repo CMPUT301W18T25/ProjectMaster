@@ -19,7 +19,6 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -27,14 +26,12 @@ import android.content.Context;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
-
-import org.slf4j.helpers.Util;
 
 
 /**
  * The type File io util.
  */
+@SuppressWarnings({"ALL", "ConstantConditions"})
 public class FileIOUtil {
 
 
@@ -44,6 +41,7 @@ public class FileIOUtil {
 	 * @param task the task
 	 * @param context the context
 	 */
+	@SuppressWarnings("ConstantConditions")
 	public static void saveSentTaskInFile(Task task, Context context) {
 		try {
 			String jsonStr= TaskUtil.serializer(task);
@@ -53,10 +51,12 @@ public class FileIOUtil {
 				Log.i("Debug", "null fos in save request");
 			}
 			try {
+				//noinspection ConstantConditions
 				fos.write(jsonStr.getBytes());
 			} catch (NullPointerException e) {
 				Log.i("Debug", "getBytes() threw null pointer exception");
 			}
+			//noinspection ConstantConditions
 			fos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -64,6 +64,7 @@ public class FileIOUtil {
 		}
 	}
 
+	@SuppressWarnings("ConstantConditions")
 	public static void saveOfflineAddTaskInFile(Task task, Context context) {
 		try {
 			String jsonStr= TaskUtil.serializer(task);
@@ -73,10 +74,12 @@ public class FileIOUtil {
 				Log.i("Debug", "null fos in save request");
 			}
 			try {
+				//noinspection ConstantConditions
 				fos.write(jsonStr.getBytes());
 			} catch (NullPointerException e) {
 				Log.i("Debug", "getBytes() threw null pointer exception");
 			}
+			//noinspection ConstantConditions
 			fos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,6 +88,7 @@ public class FileIOUtil {
 	}
 
 
+	@SuppressWarnings("ConstantConditions")
 	public static void saveOfflineEditTaskInFile(Task task, Context context) {
 		try {
 			String jsonStr= TaskUtil.serializer(task);
@@ -94,10 +98,12 @@ public class FileIOUtil {
 				Log.i("Debug", "null fos in save request");
 			}
 			try {
+				//noinspection ConstantConditions
 				fos.write(jsonStr.getBytes());
 			} catch (NullPointerException e) {
 				Log.i("Debug", "getBytes() threw null pointer exception");
 			}
+			//noinspection ConstantConditions
 			fos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -114,7 +120,7 @@ public class FileIOUtil {
 	public static ArrayList<Task> loadMultipleTasksFromFile(Context context, ArrayList<String> fileList) {
 		ArrayList<Task> TaskList = new ArrayList<>();
 		for (String f : fileList) {
-            FileInputStream fis = null;
+            FileInputStream fis;
             try {
                 fis = context.openFileInput(f);
                 BufferedReader in = new BufferedReader(new InputStreamReader(fis));
@@ -129,7 +135,7 @@ public class FileIOUtil {
 
 	public static Task loadSingleTaskFromFile(String fileName, Context context) {
 		Task request = new Task();
-		FileInputStream fis = null;
+		FileInputStream fis;
 		try {
 			fis = context.openFileInput(fileName);
 			BufferedReader in = new BufferedReader(new InputStreamReader(fis));
