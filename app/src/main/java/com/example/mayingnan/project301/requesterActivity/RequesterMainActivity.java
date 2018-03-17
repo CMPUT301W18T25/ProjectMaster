@@ -15,7 +15,7 @@ import com.example.mayingnan.project301.R;
 
 public class RequesterMainActivity extends AppCompatActivity {
 
-    private String userName;
+
     private String userId;
 
     @Override

@@ -37,6 +37,7 @@ public class ProviderMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_main);
         final Intent intent = getIntent();
+        /**
         userId = intent.getExtras().get("userId").toString();
 
         //need to load task and store in the list
@@ -102,7 +103,7 @@ public class ProviderMainActivity extends AppCompatActivity {
             }
         });
 
-
+        */
 
 
     }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -36,6 +37,7 @@ public class LogInActivity extends AppCompatActivity {
     private Button loginButton;
     private Button signUpButton;
     private Context context;
+    private User thisUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class LogInActivity extends AppCompatActivity {
 
                 String enterUsername = usernameText.getText().toString();
                 String enterPassward = passwardText.getText().toString();
+
                 UserListController userListController = new UserListController();
                 /** for testing!
                  if (enterUsername == "wdong2"){
@@ -64,13 +67,15 @@ public class LogInActivity extends AppCompatActivity {
                 if (userListController.checkUserByNameAndPassword(enterUsername,enterPassward) == true){
                     Intent intent = new Intent (LogInActivity.this, UserCharacterActivity.class);
                     UserListController uc = new UserListController();
-                    User thisUser = new User();
+
                     thisUser = uc.getAUserByName(enterUsername);
+                    String Id = thisUser.getUserName();
+                    Log.i("id",Id);
 
 
 
                     //deliver userName
-                    intent.putExtra("userId",thisUser.getId());
+                    intent.putExtra("userId","Id");
                     startActivity(intent);
                 }else{
                     //print error message
