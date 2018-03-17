@@ -56,16 +56,17 @@ public class LogInActivity extends AppCompatActivity {
                 String enterPassward = passwardText.getText().toString();
                 UserListController userListController = new UserListController();
                 /** for testing!
-                if (enterUsername == "wdong2"){
-                    Intent intent = new Intent (LogInActivity.this, UserCharacterActivity.class);
-                    startActivity(intent);
-                }
-                */
+                 if (enterUsername == "wdong2"){
+                 Intent intent = new Intent (LogInActivity.this, UserCharacterActivity.class);
+                 startActivity(intent);
+                 }
+                 */
                 if (userListController.checkUserByNameAndPassword(enterUsername,enterPassward) == true){
                     Intent intent = new Intent (LogInActivity.this, UserCharacterActivity.class);
                     UserListController uc = new UserListController();
                     User thisUser = new User();
                     thisUser = uc.getAUserByName(enterUsername);
+
 
 
                     //deliver userName

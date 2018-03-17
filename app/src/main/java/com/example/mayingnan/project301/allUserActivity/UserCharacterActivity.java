@@ -7,6 +7,7 @@ package com.example.mayingnan.project301.allUserActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -41,14 +42,13 @@ public class UserCharacterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 User user = new User();
                 String userId = intent.getExtras().get("userId").toString();
-
-
-                UserListController uc = new UserListController();
-                user = uc.getAUserById(userId);
+                Log.i("userId:",userId);
+                //UserListController uc = new UserListController();
+                //user = uc.getAUserById(userId);
 
                 //set user type
-                user.setUserType("provider");
-                uc.updateUser(user);
+                //user.setUserType("provider");
+                //uc.updateUser(user);
 
                 Intent intent = new Intent (UserCharacterActivity.this, ProviderMainActivity.class);
                 intent.putExtra("userId",userId);
@@ -65,10 +65,11 @@ public class UserCharacterActivity extends AppCompatActivity {
 
                 User user = new User();
                 String userId = intent.getExtras().get("userId").toString();
-
+                Log.i("userId",userId);
 
                 UserListController uc = new UserListController();
                 user = uc.getAUserById(userId);
+                Log.i("usernamedd",user.getUserName());
 
                 //set user type
                 user.setUserType("requester");

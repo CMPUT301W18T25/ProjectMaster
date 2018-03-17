@@ -58,19 +58,9 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
                 editPhone = mobileText.getText().toString();
                 editPassword = passwordText.getText().toString();
 
-                //get user by userName
-                UserListController.GetAllUsers getAllUsers = new UserListController.GetAllUsers();
-                getAllUsers.execute(userName);
+                UserListController uc = new UserListController();
+                User user = uc.getAUserByName(userName);
 
-                ArrayList<User> Userlist = null;
-                try{
-                    Userlist = getAllUsers.get();
-                }catch (InterruptedException e){
-                    e.printStackTrace();
-                }catch (ExecutionException e){
-                    e.printStackTrace();
-                }
-                User user = Userlist.get(0);
 
                 //update user info
                 user.setUserName(editName);
@@ -78,8 +68,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
                 user.setUserPhone(editPhone);
                 user.setUserPassword(editPassword);
 
-                //need to update online
-                //???
+                uc.updateUser(user);
 
                 //change activity
                 Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMainActivity.class);

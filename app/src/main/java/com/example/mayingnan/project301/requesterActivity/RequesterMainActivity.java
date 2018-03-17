@@ -23,7 +23,7 @@ public class RequesterMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_main);
         final Intent intent = getIntent();
-        userName = intent.getExtras().get("userId").toString();
+        userId = intent.getExtras().get("userId").toString();
 
         //settle postNewTask button
         Button postNewTaskButton = (Button) findViewById(R.id.post_button);

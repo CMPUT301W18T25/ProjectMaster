@@ -96,6 +96,49 @@ public class UserTest{
         assertEquals(found,1);
 
     }
+
+    @Test
+    public void testGetAUserById(){
+        UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
+        deleteAllUsers.execute("");
+        User user1 = new User();
+        user1.setUserName("y3hh");
+        UserListController.addUser addUser = new UserListController.addUser();
+        addUser.execute(user1);
+
+        // Hang around till is done
+        AsyncTask.Status taskStatus;
+        do {
+            taskStatus = addUser.getStatus();
+        } while (taskStatus != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        User newUser  = new User();
+        UserListController uc = new UserListController();
+        int found = 0,found2 = 0;
+        newUser = uc.getAUserByName("y3hh");
+        if(newUser!=null){
+            found = 1;
+        }
+
+
+        Log.i("said",newUser.getUserName());
+        newUser = uc.getAUserById(newUser.getId());
+        if(newUser!=null){
+            found2= 1;
+        }
+
+
+
+        assertEquals(found,1);
+        assertEquals(found2,1);
+
+
+    }
     @Test
 
     public void testcheckUserByNameAndPassword(){

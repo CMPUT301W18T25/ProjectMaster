@@ -125,9 +125,6 @@ public class UserListController {
 
 
     public static class addUser extends AsyncTask<User, Void, String> {
-        protected void onPreExecute (){
-            Log.i("add User","is ready");
-        }
         @Override
 
         protected String doInBackground(User... users) {
@@ -135,6 +132,7 @@ public class UserListController {
             String newId = null;
 
             for (User user : users) {
+                user.setId(user.getUserName());
                 Index index = new Index.Builder(user).index("cmput301w18t25").type("user").build();
 
                 try {
@@ -142,7 +140,6 @@ public class UserListController {
                     DocumentResult result = client.execute(index);
                     if(result.isSucceeded())
                     {
-                        user.setId(result.getId());
                         newId = user.getId();
                         Log.i("Success","Elasticsearch ");
 
@@ -160,9 +157,6 @@ public class UserListController {
             return newId;
 
 
-        }
-        protected void onPostExecute(String result) {
-            Log.i("Upload ",result);
         }
     }
 
@@ -233,9 +227,6 @@ public class UserListController {
 
     }
     public static class getAUserByName extends AsyncTask<String, Void, ArrayList<User>> {
-        protected void onPreExecute (){
-            Log.i("get a user by name ","is ready");
-        }
         @Override
         protected ArrayList<User> doInBackground(String... search_parameters) {
             verifySettings();
@@ -267,9 +258,6 @@ public class UserListController {
             }
             return users;
         }
-        protected void onPostExecute(ArrayList<User> Users){
-            Log.i("getUser","by name");
-        }
     }
 
 
@@ -278,9 +266,6 @@ public class UserListController {
      * Static class that update user profile
      */
     public static class updateUser extends AsyncTask<User, Void, User> {
-        protected void onPreExecute (){
-            Log.i("update user ","is ready");
-        }
 
         @Override
         protected User doInBackground(User... users) {
@@ -303,9 +288,6 @@ public class UserListController {
             return users[0];
         }
 
-        protected void onPostExecute(User user){
-            Log.i("updated","the user");
-        }
 
     }
 

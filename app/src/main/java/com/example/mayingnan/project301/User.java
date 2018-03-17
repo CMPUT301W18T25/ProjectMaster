@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 
 public class User {
-    private String id;
+    private String userId;
     private String userName;
     private String userPhone;
     private String userAddress;
@@ -19,13 +19,14 @@ public class User {
     public User(){
         super();
     }
-    public User(String id,String userName,String userPhone,String userAddress,String userEmail,String userPassword,String userType){
-        this.id = id;
+    public User(String userId,String userName,String userPhone,String userAddress,String userEmail,String userPassword,String userType){
+        this.userId = userId;
         this.userName = userName;
         this.userAddress = userAddress;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.userType = userType;
+        this.userPhone = userPhone;
 
     }
 
@@ -79,9 +80,9 @@ public class User {
     }
 
     public String getId(){
-        return this.id;
+        return userId;
     }
-    public void setId(String id){
-        this.id = id;
+    public void setId(String userId){
+        this.userId = userId;
     }
 }

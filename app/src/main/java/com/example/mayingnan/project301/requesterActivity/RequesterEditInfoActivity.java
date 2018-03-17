@@ -60,19 +60,9 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
                 editPhone = mobileText.getText().toString();
                 editPassword = passwordText.getText().toString();
 
-                //get user by userName
-                UserListController.GetAllUsers getAllUsers = new UserListController.GetAllUsers();
-                getAllUsers.execute(userName);
 
-                ArrayList<User> Userlist = null;
-                try{
-                    Userlist = getAllUsers.get();
-                }catch (InterruptedException e){
-                    e.printStackTrace();
-                }catch (ExecutionException e){
-                    e.printStackTrace();
-                }
-                User user = Userlist.get(0);
+                UserListController uc = new UserListController();
+                User user = uc.getAUserByName(userName);
 
                 //update user info
                 user.setUserName(editName);
@@ -80,9 +70,7 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
                 user.setUserPhone(editPhone);
                 user.setUserPassword(editPassword);
 
-                //need to update online
-                //???
-
+                uc.updateUser(user);
 
                 Intent info2 = new Intent(RequesterEditInfoActivity.this, RequesterMainActivity.class);
                 info2.putExtra("userId",userId);

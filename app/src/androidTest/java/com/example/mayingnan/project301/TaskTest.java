@@ -341,11 +341,11 @@ public class TaskTest {
         // check whether task bid list is updated
         try{
             int i;
-            Log.i("Success", "check memory update: " + my_task.getTaskBidList().get(0).getProviderName());
+            Log.i("Success", "check memory update: " + my_task.getTaskBidList().get(0).getProviderId());
             empty_task = getTask.get();
             ArrayList<Bid> temp_bid_list = empty_task.getTaskBidList();
             for (i = 0; i < temp_bid_list.size(); i++){
-                if (temp_bid_list.get(i).getProviderName().equals("A donkey")){
+                if (temp_bid_list.get(i).getProviderId().equals("A donkey")){
                     if (temp_bid_list.get(i).getBidAmount() == (float)11.11){
                         Log.i("State", Float.toString(temp_bid_list.get(i).getBidAmount()));
                         assertTrue(true);
@@ -427,7 +427,7 @@ public class TaskTest {
         }
 
         // now try to cancel my bid
-        TaskController.providerCancelBid cancelBid = new TaskController.providerCancelBid(my_task, my_bid.getProviderName());
+        TaskController.providerCancelBid cancelBid = new TaskController.providerCancelBid(my_task, my_bid.getProviderId());
         cancelBid.execute();
 
         // w8 for 5 sec
