@@ -850,27 +850,8 @@ public class TaskTest {
         TaskController.searchTaskByKeyword search = new TaskController.searchTaskByKeyword();
         ArrayList<Task> rt_list;
 
-        TaskController.addTask addTask = new TaskController.addTask();
-
-        // w8 for 5 sec
-        AsyncTask.Status taskStatus3;
-        do {
-            taskStatus3 = addTask.getStatus();
-        } while (taskStatus3 != AsyncTask.Status.FINISHED);
-
         search.execute("Test");
 
-        // w8 for 5 sec
-        AsyncTask.Status taskStatus;
-        do {
-            taskStatus = search.getStatus();
-        } while (taskStatus != AsyncTask.Status.FINISHED);
-
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         try {
             rt_list = search.get();
