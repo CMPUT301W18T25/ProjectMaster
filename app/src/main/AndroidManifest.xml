@@ -24,28 +24,30 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".allUserActivity.LogInActivity"
+            android:windowSoftInputMode="stateHidden"
             android:label="ProjectMaster"
             android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".allUserActivity.SignUpActivity" />
-        <activity android:name=".allUserActivity.UserCharacterActivity" />
-        <activity android:name=".providerActivity.ProviderTaskBidActivity" />
-        <activity android:name=".providerActivity.ProviderMainActivity" />
-        <activity android:name=".providerActivity.ProviderTaskFinishActivity" />
-        <activity android:name=".providerActivity.ProviderEditInfoActivity" />
-        <activity android:name=".providerActivity.ProviderBidHistoryActivity" />
-        <activity android:name=".requesterActivity.RequesterPostTaskActivity" />
-        <activity android:name=".requesterActivity.RequesterPayActivity" />
-        <activity android:name=".requesterActivity.RequesterMainActivity" />
-        <activity android:name=".requesterActivity.RequesterEditListActivity" />
-        <activity android:name=".requesterActivity.RequesterViewTaskActivity" />
-        <activity android:name=".requesterActivity.RequesterEditInfoActivity" />
-        <activity android:name=".requesterActivity.RequesterEditTaskActivity" />
+        <activity android:name=".allUserActivity.SignUpActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".allUserActivity.UserCharacterActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".providerActivity.ProviderTaskBidActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".providerActivity.ProviderMainActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".providerActivity.ProviderTaskFinishActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".providerActivity.ProviderEditInfoActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".providerActivity.ProviderBidHistoryActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterPostTaskActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterPayActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterMainActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterEditListActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterViewTaskActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterEditInfoActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterEditTaskActivity" android:windowSoftInputMode="stateHidden"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
