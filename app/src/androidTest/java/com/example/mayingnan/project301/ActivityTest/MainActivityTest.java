@@ -1,15 +1,11 @@
 package com.example.mayingnan.project301.ActivityTest;
 
-import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.example.mayingnan.project301.allUserActivity.LogInActivity;
-import com.example.mayingnan.project301.allUserActivity.SignUpActivity;
-import com.example.mayingnan.project301.allUserActivity.UserCharacterActivity;
-import com.example.mayingnan.project301.controller.UserListController;
-import com.robotium.solo.Solo;
 
-/**
+
+/*
  * Created by wdong2 on 3/7/18.
  */
 

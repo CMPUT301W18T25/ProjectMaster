@@ -9,26 +9,24 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.mayingnan.project301.R;
-import com.example.mayingnan.project301.Task;
-import com.example.mayingnan.project301.controller.TaskController;
-
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by User on 2018/2/25.
  */
 
 
+@SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterViewTaskActivity extends AppCompatActivity {
     private ListView bidList;
     private String userId;
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_view_task);
         final Intent intent = getIntent();
+        //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
 

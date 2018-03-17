@@ -14,6 +14,7 @@ import com.example.mayingnan.project301.R;
 
 import java.util.ArrayList;
 
+@SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderTaskBidActivity extends AppCompatActivity {
 
     private TextView taskDetail;
@@ -30,11 +31,13 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
     private String userId;
 
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_task_bid);
         final Intent intent = getIntent();
+        //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
         //settle cancel button : cancel the old bid

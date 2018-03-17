@@ -1,10 +1,10 @@
 package com.example.mayingnan.project301;
 
-import android.media.Image;
+
 
 import java.util.Arrays;
 
-/**
+/*
  * Created by Xingyuan Yang on 2018/2/25.
  */
 

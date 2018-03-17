@@ -11,9 +11,9 @@ import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.User;
 import com.example.mayingnan.project301.controller.UserListController;
 
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
+
+@SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderEditInfoActivity extends AppCompatActivity {
 
     private String userId;
@@ -32,11 +32,13 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
     private UserListController userListControl;
 
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_info);
         final Intent intent = getIntent();
+        //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
         //match edit text

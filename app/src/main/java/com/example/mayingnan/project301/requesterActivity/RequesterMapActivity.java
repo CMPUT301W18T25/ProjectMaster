@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.mayingnan.project301.R;
-import com.example.mayingnan.project301.providerActivity.ProviderMainActivity;
+
 import com.example.mayingnan.project301.providerActivity.ProviderMapActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 
+@SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
@@ -52,11 +53,13 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
     private ArrayList<Location> mockupTasks;
 
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         final Intent intent = getIntent();
+        //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
         setContentView(R.layout.view_on_map2);
