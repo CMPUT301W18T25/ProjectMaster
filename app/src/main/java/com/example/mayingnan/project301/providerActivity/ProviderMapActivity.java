@@ -1,191 +1,145 @@
 package com.example.mayingnan.project301.providerActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.mayingnan.project301.R;
-import com.example.mayingnan.project301.User;
-import com.example.mayingnan.project301.controller.UserListController;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 
-import com.google.android.gms.location.places.GeoDataClient;
-import com.google.android.gms.location.places.PlaceDetectionClient;
-import com.google.android.gms.location.places.PlaceLikelihood;
-import com.google.android.gms.location.places.PlaceLikelihoodBufferResponse;
-import com.google.android.gms.location.places.Places;
 
+/**
+ * ProviderMapActivity handles the map activity for the provider. The main purpose of
+ * this task is too display all tasks within 5km of the provider on the map UI, and
+ * allow the provider to click on each task to view further information. This activity
+ * first asks user for permission to access the devices location. It then gets the current
+ * location of the user and navigates the map camera to this location.
+ *
+ * Currently, the Task class doesn't have functionality for location, so a 'mockupTasks'
+ * of ArrayList<Locations> is used to test the markers of each task.
+ *
+ * Source: The majority of the map code was implemented using the Google developer documentation
+ * (https://developers.google.com/maps/documentation/android-api/start)
+ */
 public class ProviderMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private com.example.mayingnan.project301.Task projectTask;
     private Task apiTask;
 
-    public double latitude;
-    public double longitude;
-
     private GoogleMap mMap;
     private String userName;
 
-    public Criteria criteria;
-
     private Boolean mLocationPermissionGranted;
 
-    private GoogleApiClient mGoogleApiClient;
-
-    public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=1;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=1;
     private static final int DEFAULT_ZOOM = 15;
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
-    private static final int M_MAX_ENTRIES = 5;
-    private String[] mLikelyPlaceNames;
-    private String[] mLikelyPlaceAddresses;
-    private String[] mLikelyPlaceAttributions;
-    private LatLng[] mLikelyPlaceLatLngs;
 
-    public String bestProvider;
 
     private CameraPosition mCameraPosition;
     private static final String TAG = ProviderMapActivity.class.getSimpleName();
 
     private Location mLastKnownLocation;
-    public LocationManager locationManager;
-
-    private Location mLastLocation;
 
     private FusedLocationProviderClient mFusedLocationProviderClient;
-    private GeoDataClient mGeoDataClient;
-    private PlaceDetectionClient mPlaceDetectionClient;
+
+    // Default location is set to the University of Alberta
     private final LatLng mDefaultLocation = new LatLng(53.5273, -113.5296);
 
     // Testing variables
     private ArrayList<Location> mockupTasks;
 
+
+    /**
+     * The onCreate method checks if a previous state exists, and sets the last
+     * known location if a previous state is found. The FusedLocationProviderClient
+     * is initialized, and is responsible for getting the current location of the
+     * user. The content view is set to view_on_map.xml, and the map fragment is
+     * initialized. The 'Show List' button is implemented which goes back to the
+     * previous Provider Task view.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mLocationPermissionGranted = false;
+
+        // Checks if previous saved state exists
         if (savedInstanceState != null) {
+            Log.d(TAG,"savedInstanceState Found");
             mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
             mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
+
         final Intent intent = getIntent();
         userName = intent.getExtras().get("userName").toString();
-        Log.d("Username", userName);
 
         setContentView(R.layout.view_on_map);
-        // Construct a GeoDataClient.
-        mGeoDataClient = Places.getGeoDataClient(this, null);
-
-        // Construct a PlaceDetectionClient.
-        mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
-
-        // Construct a FusedLocationProviderClient.
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        Log.d("Success", "map fragment");
 
-        mockupTasks=new ArrayList<Location>();
-        Location loc1 = new Location("");
-        loc1.setLatitude(53.5283d);
-        loc1.setLongitude(-113.5296d);
-        mockupTasks.add(loc1);
-        Location loc2 = new Location("");
-        loc2.setLatitude(53.5233d);
-        loc2.setLongitude(-113.5296d);
-        mockupTasks.add(loc2);
-        Location loc3 = new Location("");
-        loc3.setLatitude(53.5253d);
-        loc3.setLongitude(-113.5316d);
-        mockupTasks.add(loc3);
-        Location loc4 = new Location("");
-        loc4.setLatitude(53.5243d);
-        loc4.setLongitude(-113.5156d);
-        mockupTasks.add(loc4);
-
-        //settle signup button
+        // Show List button initialization and connection
         Button showListButton = (Button) findViewById(R.id.show_list);
-
         showListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_OK);
-
-                Log.d("Starting ", "new activity");
-                Intent intent = new Intent(ProviderMapActivity.this, ProviderMainActivity.class);
+                Log.d(TAG, "Show List pressed");
+                Intent intent = new Intent(ProviderMapActivity.this,
+                        ProviderMainActivity.class);
                 intent.putExtra("userName",userName);
                 startActivity(intent);
-
             }
         });
 
-
-
+        // Edit Info button initialization and connection
+        Button editInfoButton = (Button) findViewById(R.id.edit_info);
+        editInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Edit Info pressed");
+                Intent intent = new Intent(ProviderMapActivity.this,
+                        ProviderEditInfoActivity.class);
+                intent.putExtra("userName",userName);
+                startActivity(intent);
+            }
+        });
     }
 
-    private void displayTaskLocations() {
-        mMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
-
-        for (int i=0;i<mockupTasks.size();i++){
-            Log.d(TAG,"Adding marker "+i+", lat: "+mockupTasks.get(i).getLatitude()+", long: "+mockupTasks.get(i).getLongitude());
-            Marker marker = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(mockupTasks.get(i).getLatitude(), mockupTasks.get(i).getLongitude()))
-                    .anchor(0.5f,0.5f)
-                    .title(String.valueOf(i)));
-            marker.showInfoWindow();
-        }
-
-    }
-
-    @Override
-    public boolean onMarkerClick(Marker marker){
-        Log.d(TAG,"Clicked on marker "+marker.getTitle());
-        return true;
-    }
-
-    private void getLocationPermission() {
-    /*
-     * Request location permission, so that we can get the location of the
-     * device. The result of the permission request is handled by a callback,
-     * onRequestPermissionsResult.
+    /**
+     * Requests permission from user for app to access the device location. The user
+     * only needs to give permission once, and then future launches will automatically
+     * have permission
      */
+    private void getLocationPermission() {
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -197,17 +151,24 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
         }
     }
 
+    /**
+     * Manages the result from the permission request from getLocationPermission()
+     * Only ACCESS_FINE_LOCATION is needed and used.
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String permissions[],
                                            @NonNull int[] grantResults) {
         mLocationPermissionGranted = false;
-        Log.d("Requesting", "Permission");
+
         switch (requestCode) {
             case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     mLocationPermissionGranted = true;
                 }
             }
@@ -216,6 +177,11 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
     }
 
 
+    /**
+     * Updates the user's location and sets the map camera to this location. Only works
+     * if user has given the app permission to access the current location
+     *
+     */
     private void updateLocationUI() {
         if (mMap == null) {
             return;
@@ -238,48 +204,27 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
     }
 
 
-
+    /**
+     * Get the location of the device. On a virtual device, this location is set manually
+     * (see Google Map Setup page on wiki), and on Android phones will get the location
+     * automatically. Assumes that the user has given the app permission to access the location
+     *
+     */
     private void getDeviceLocation() {
-        /*
-         * Get the best and most recent location of the device, which may be null in rare
-         * cases when a location is not available.
-         */
         try {
             if (mLocationPermissionGranted) {
                 Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
-
-                mFusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-
-
-                    @Override
-                    public void onSuccess(Location location) {
-                        if (location != null) {
-                            Log.d(TAG, "Longtitude 1: " + String.valueOf(location.getLongitude()));
-                            Log.d(TAG, "Latitude 1: " + String.valueOf(location.getLatitude()));
-                        }
-                    }
-
-
-                });
-
-
 
                 locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful() && task.getResult() != null) {
                             // Set the map's camera position to the current location of the device.
-                            Log.d(TAG, "Current location good.");
-
                             mLastKnownLocation = task.getResult();
-                            Log.d(TAG, "Latitude: "+String.valueOf(mLastKnownLocation.getLatitude()));
-                            Log.d(TAG, "Longitude: "+String.valueOf(mLastKnownLocation.getLongitude()));
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     new LatLng(mLastKnownLocation.getLatitude(),
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                         } else {
-                            Log.d(TAG, "Current location is null. Using defaults.");
-                            Log.e(TAG, "Exception: %s", task.getException());
                             mMap.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
@@ -292,6 +237,12 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
         }
     }
 
+
+    /**
+     * Saves the current state of the map upon app closure
+     *
+     * @param outState
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         if (mMap != null) {
@@ -302,40 +253,62 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
     }
 
 
+    /**
+     * For each task with a location, will display a marker on the map.
+     * The markers will able to be pressed, which will transition to the
+     * ProviderTaskBidActivity
+     *
+     * Currently, the tasks are ArrayList<Location>, which when clicked on,
+     * calls onMarkerClick and Logs the id of the pressed marker
+     */
+    private void displayTaskLocations() {
+        mMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
 
+        for (int i=0;i<mockupTasks.size();i++){
+            Log.d(TAG,"Adding marker "+i+", lat: "+mockupTasks.get(i)
+                    .getLatitude()+", long: "+mockupTasks.get(i).getLongitude());
 
+            Marker marker = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(mockupTasks.get(i).getLatitude(), mockupTasks.get(i).getLongitude()))
+                    .anchor(0.5f,0.5f)
+                    .title(String.valueOf(i)));
+            marker.showInfoWindow();
+        }
+
+    }
+
+
+    /**
+     * Override the behavior when a user clicks on a map marker. Right now, it only
+     * logs the ID of the marker that was pressed, but will eventually transition to
+     * ProviderTaskBidActivity once the Task object has been implemented fully.
+     *
+     * @param marker
+     * @return
+     */
+    @Override
+    public boolean onMarkerClick(Marker marker){
+        Log.d(TAG,"Clicked on marker "+marker.getTitle());
+        return true;
+    }
+
+
+    /**
+     * onMapReady is called when the map has been initialized and connected to the current view.
+     *
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        Log.d(TAG,"onMapReady");
         getLocationPermission();
         updateLocationUI();
         getDeviceLocation();
-        Log.d(TAG,"onMapReady finished");
-        /*mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(53.5283d, -113.5296d))
-                        .anchor(0.5f,0.5f)
-                        .title("0"));
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.5293d, -113.5296d))
-                .anchor(0.5f,0.5f)
-                .title("1"));
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.5293d, -113.5266d))
-                .anchor(0.5f,0.5f)
-                .title("2"));*/
-        displayTaskLocations();
-        //getDeviceLocation();
-        /*mMap = googleMap;
 
-        // Add a marker in Sydney, Australia, and move the camera.
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
-
-
+        // Don't call displayTaskLocations for now since it is used only for testing at the moment
+        /*displayTaskLocations();*/
     }
 
 
