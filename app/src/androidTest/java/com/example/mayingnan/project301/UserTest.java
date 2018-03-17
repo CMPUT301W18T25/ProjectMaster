@@ -177,7 +177,7 @@ public class UserTest{
     @Test
 
 
-    public void testCheckValidationSignUp (){
+    /*public void testCheckValidationSignUp (){
         UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
         deleteAllUsers.execute("");
 
@@ -193,13 +193,55 @@ public class UserTest{
 
         User user2 = new User();
         user2.setUserName("yue15");
-        UserListController uc2 = new UserListController();
-
-        userId = uc2.addUserAndCheck(user2);
+        boolean checkValidUser = uc.checkValidationSignUp("yue15");
+        if(checkValidUser) {
+            Log.i("fault","fault");
+            UserListController uc2 = new UserListController();
+            userId = uc2.addUserAndCheck(user2);
+        }
+        else{
+            userId = null;
+        }
 
         assertEquals(userId,null);
 
+    }
+    */
 
+    public void testCheckValidationSignUp (){
+        UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
+        deleteAllUsers.execute("");
+
+
+        String userId = null;
+        User user1 = new User();
+        user1.setUserName("yue15");
+        UserListController.addUser addUser= new UserListController.addUser();
+        addUser.execute(user1);
+
+        AsyncTask.Status taskStatus2;
+        do {
+            taskStatus2 = addUser.getStatus();
+        } while (taskStatus2 != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        User user2 = new User();
+        user2.setUserName("yue15");
+        UserListController uc = new UserListController();
+        userId = uc.addUserAndCheck(user2);
+
+        assertEquals(userId,null);
+
+        User user3 = new User();
+        user3.setUserName("yue16");
+        UserListController uc2 = new UserListController();
+        userId = uc2.addUserAndCheck(user3);
+
+        assertNotEquals(userId,null);
 
     }
 

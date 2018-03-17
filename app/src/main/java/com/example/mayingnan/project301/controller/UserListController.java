@@ -37,7 +37,7 @@ public class UserListController {
         if (name == "IUN"){ return false;}
         return true;
     }
-
+    //if
     public boolean checkValidationSignUp (String name){
 
         if (name == "wdong2"){return true;}
@@ -95,7 +95,6 @@ public class UserListController {
         }
     }
     public User getAUserByName(String userName){
-
         UserListController.getAUserByName getAUserByName = new UserListController.getAUserByName();
         getAUserByName.execute(userName);
 
@@ -108,6 +107,7 @@ public class UserListController {
             e.printStackTrace();
         }
         if(Userlist.isEmpty()){
+            Log.i("length","0");
             return null;
         }
         else {
@@ -125,6 +125,9 @@ public class UserListController {
 
 
     public static class addUser extends AsyncTask<User, Void, String> {
+        protected void onPreExecute (){
+            Log.i("add User","is ready");
+        }
         @Override
 
         protected String doInBackground(User... users) {
@@ -230,6 +233,9 @@ public class UserListController {
 
     }
     public static class getAUserByName extends AsyncTask<String, Void, ArrayList<User>> {
+        protected void onPreExecute (){
+            Log.i("get a user by name ","is ready");
+        }
         @Override
         protected ArrayList<User> doInBackground(String... search_parameters) {
             verifySettings();
@@ -263,7 +269,7 @@ public class UserListController {
         }
         protected void onPostExecute(ArrayList<User> Users){
             Log.i("getUser","by name");
-        };
+        }
     }
 
 
@@ -272,6 +278,9 @@ public class UserListController {
      * Static class that update user profile
      */
     public static class updateUser extends AsyncTask<User, Void, User> {
+        protected void onPreExecute (){
+            Log.i("update user ","is ready");
+        }
 
         @Override
         protected User doInBackground(User... users) {
@@ -292,6 +301,10 @@ public class UserListController {
                 e.printStackTrace();
             }
             return users[0];
+        }
+
+        protected void onPostExecute(User user){
+            Log.i("updated","the user");
         }
 
     }
@@ -338,9 +351,6 @@ public class UserListController {
 
         }
     }
-
-
-
 
     public Boolean checkUserByNameAndPassword(String userName,String userPassword){
 
