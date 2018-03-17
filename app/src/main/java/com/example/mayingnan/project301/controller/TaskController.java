@@ -37,6 +37,50 @@ public class TaskController {
     private Task current_task;
     private static JestDroidClient client;
 
+    public static class deleteAllTasks extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String... search_parameters) {
+            verifySettings();
+            ArrayList<User> users = new ArrayList<User>();
+
+            String query = "{ \"size\": 500 }" ;
+            Log.i("Query", "The query was " + query);
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t25")
+                    .addType("task")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<User> foundUsers
+                            = result.getSourceAsObjectList(User.class);
+                    users.addAll(foundUsers);
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+
+            for (User u: users){
+                Delete delete = new Delete.Builder(u.getId()).index("cmput301w18t25").type("user").build();
+
+                try {
+                    client.execute(delete);
+
+                } catch (Exception e) {
+                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                }
+
+            }
+            return null;
+
+        }
+    }
+
+
     public static class addTask extends AsyncTask<Task, Void, Void> {
         public OnAsyncTaskCompleted listener;
         @Override
