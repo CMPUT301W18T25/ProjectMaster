@@ -50,6 +50,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
 
     private GoogleMap mMap;
     private String userName;
+    private String userId;
 
     private Boolean mLocationPermissionGranted;
 
@@ -96,7 +97,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
         }
 
         final Intent intent = getIntent();
-        userName = intent.getExtras().get("userName").toString();
+        userId = intent.getExtras().get("userId").toString();
 
         setContentView(R.layout.view_on_map);
 
@@ -114,7 +115,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
                 Log.d(TAG, "Show List pressed");
                 Intent intent = new Intent(ProviderMapActivity.this,
                         ProviderMainActivity.class);
-                intent.putExtra("userName",userName);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });
