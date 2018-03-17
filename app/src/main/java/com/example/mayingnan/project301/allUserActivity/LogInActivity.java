@@ -69,13 +69,11 @@ public class LogInActivity extends AppCompatActivity {
                     UserListController uc = new UserListController();
 
                     thisUser = uc.getAUserByName(enterUsername);
-                    String Id = thisUser.getUserName();
+                    String Id = thisUser.getId();
                     Log.i("id",Id);
 
-
-
                     //deliver userName
-                    intent.putExtra("userId","Id");
+                    intent.putExtra("userId",Id);
                     startActivity(intent);
                 }else{
                     //print error message
