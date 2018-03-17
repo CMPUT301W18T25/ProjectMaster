@@ -503,7 +503,7 @@ public class TaskController {
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
-                            "               { \"multi_match\" : {\"query\" : \"Test\", \"fields\" : [ \"taskName\", \"taskDetails\"] }}" + "\n"+
+                            "               { \"multi_match\" : {\"query\" : \"" +keywords[0] +"\", \"fields\" : [ \"taskName\", \"taskDetails\"] }}" + "\n"+
                             "           ]\n"+
                             "       }\n"+
                             "   }\n"+
