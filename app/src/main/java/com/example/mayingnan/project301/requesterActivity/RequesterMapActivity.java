@@ -73,7 +73,7 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
             public void onClick(View v) {
                 Log.d(TAG, "Go Back pressed");
                 Intent intent = new Intent(RequesterMapActivity.this, RequesterEditListActivity.class);
-                intent.putExtra("userName",userName);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
 
 
