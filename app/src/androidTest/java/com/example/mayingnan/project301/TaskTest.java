@@ -288,7 +288,7 @@ public class TaskTest {
 
         Task my_task = new Task();
         Task empty_task = new Task();
-        Float my_amount;
+        double my_amount;
 
         // init test task info, all info should be tested
         my_task.setTaskDetails("Details");
@@ -316,7 +316,7 @@ public class TaskTest {
             Log.i("Error", "get ID error ");
             assertTrue(false);
         }
-        my_amount = (float)11.11;
+        my_amount = (double)11.11;
         Bid my_bid = new Bid(my_amount, "A donkey", my_task.getId());
 
         // update bid list
@@ -346,8 +346,8 @@ public class TaskTest {
             ArrayList<Bid> temp_bid_list = empty_task.getTaskBidList();
             for (i = 0; i < temp_bid_list.size(); i++){
                 if (temp_bid_list.get(i).getProviderId().equals("A donkey")){
-                    if (temp_bid_list.get(i).getBidAmount() == (float)11.11){
-                        Log.i("State", Float.toString(temp_bid_list.get(i).getBidAmount()));
+                    if (temp_bid_list.get(i).getBidAmount() == (double)11.11){
+                        Log.i("State", Double.toString(temp_bid_list.get(i).getBidAmount()));
                         assertTrue(true);
                         break;
                     }
@@ -379,7 +379,7 @@ public class TaskTest {
 
         Task my_task = new Task();
         Task empty_task = new Task();
-        Float my_amount;
+        double my_amount;
 
         // init test task info, all info should be tested
         my_task.setTaskDetails("Details");
@@ -407,7 +407,7 @@ public class TaskTest {
             Log.i("Error", "get ID error ");
             assertTrue(false);
         }
-        my_amount = (float)11.11;
+        my_amount = (double)11.11;
         Bid my_bid = new Bid(my_amount, "A donkey", my_task.getId());
 
         // update bid list
