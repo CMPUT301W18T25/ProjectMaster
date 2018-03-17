@@ -9,6 +9,11 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.mayingnan.project301.R;
+import com.example.mayingnan.project301.Task;
+import com.example.mayingnan.project301.controller.TaskController;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by User on 2018/2/25.
@@ -74,6 +79,8 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
 
             }
         });
+
+
 
         // settle click on bid list, no change to interface ,but the bid price get selected
         bidList = (ListView) findViewById(R.id.bid_list);

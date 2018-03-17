@@ -70,11 +70,12 @@ public class UserListController {
         else{
             return null;
         }
+        Log.d("UserListController","userId return "+userId);
         return userId;
 
     }
     public User getAUserById(String userId){
-
+        Log.d("UserListController","getAUserById userId: "+userId);
         UserListController.getAUserById getAUserById = new UserListController.getAUserById();
         getAUserById.execute(userId);
 
@@ -87,10 +88,17 @@ public class UserListController {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        if (Userlist == null){
+            Log.d("UserListController", "Userlist = null");
+
+        }
         if(Userlist.isEmpty()){
+            Log.d("UserListController", "getAUserById2 return null");
             return null;
         }
         else {
+            Log.d("UserListController", "getAUserById2 return nonnull");
+
             return Userlist.get(0);
         }
     }
@@ -196,13 +204,18 @@ public class UserListController {
         @Override
         protected ArrayList<User> doInBackground(String... search_parameters) {
             verifySettings();
+            Log.d("UserListController", "getAUserById execute");
+            for (int i=0;i<search_parameters.length;i++){
+                Log.d("UserListController", "search_parameters at "+i+": "+search_parameters[i]);
 
+            }
             ArrayList<User> users = new ArrayList<User>();
 
             String query = "{ \n"+
                     "\"query\":{\n"+
                     "\"term\":{\"userId\":\""+search_parameters[0]+"\"}\n"+
                     "}\n"+"}";
+
 
             Log.i("Query", "The query was " + query);
             Search search = new Search.Builder(query)
@@ -350,7 +363,7 @@ public class UserListController {
         boolean found = false;
         for (User u: Userlist){
 
-            //Log.i("username   ",u.getUserName());
+            Log.i("username   ",u.getUserName());
 
             if(u.getUserPassword().equals(userPassword)){
                 found = true;

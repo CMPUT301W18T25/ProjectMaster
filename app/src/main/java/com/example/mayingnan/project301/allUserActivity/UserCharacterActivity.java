@@ -43,12 +43,12 @@ public class UserCharacterActivity extends AppCompatActivity {
                 User user = new User();
                 String userId = intent.getExtras().get("userId").toString();
                 Log.i("userId:",userId);
-                //UserListController uc = new UserListController();
-                //user = uc.getAUserById(userId);
+                UserListController uc = new UserListController();
+                user = uc.getAUserById(userId);
 
                 //set user type
-                //user.setUserType("provider");
-                //uc.updateUser(user);
+                user.setUserType("provider");
+                uc.updateUser(user);
 
                 Intent intent = new Intent (UserCharacterActivity.this, ProviderMainActivity.class);
                 intent.putExtra("userId",userId);

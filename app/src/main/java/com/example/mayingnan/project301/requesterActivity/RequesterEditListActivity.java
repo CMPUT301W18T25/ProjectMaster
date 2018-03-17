@@ -26,6 +26,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 
 public class RequesterEditListActivity extends AppCompatActivity {
@@ -79,6 +80,15 @@ public class RequesterEditListActivity extends AppCompatActivity {
             }
         });
 
+        TaskController.searchAllTasksOfThisRequester getAll = new TaskController.searchAllTasksOfThisRequester();
+        getAll.execute("user id here");
+        try {
+            ArrayList<Task> save_tasks = getAll.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
     }
     @Override

@@ -25,6 +25,7 @@ import org.joda.time.DateTime;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -118,6 +119,9 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
                     addTaskCtl.execute(new_task);
                     info2.putExtra("userId",userId);
                     startActivity(info2);
+
+
+
 
                 }else{
                     Toast toast = Toast.makeText(context,"Enter name, detail destination, ideal price, date and time",Toast.LENGTH_LONG);
