@@ -444,7 +444,7 @@ public class TaskController {
 
             String [] search_parameters = keywords[0].split("\\s+");
             ArrayList<Task> result_tasks = new ArrayList<Task>();
-
+            /*
             String query =
                     "\n{     \n"+
                             "   \"query\" : {\n"+
@@ -452,13 +452,24 @@ public class TaskController {
                             "           \"must\" : [\n"+
                             "               { \"multi_match\" : {\n" +
                             "                   \"query\" : \""+ search_parameters[0] +"\", \n" +
-                            "                   \"fields : [ \"taskName\", \"taskDetails\" ]\"}  "+
+                            "                   \"fields : [ \"taskName\", \"taskDetails\" ] \n " +
+                            "                   }  \n" +
                             "               }\n" +
                             "           ]\n"+
                             "       }\n"+
                             "   }\n"+
                             "}\n";
-
+            */
+            String query =
+                    "\n{ \n"+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"multi_match\" : {\"query\" : \"Test\", \"fields\" : [ \"taskName\", \"taskDetails\"] }}" + "\n"+
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
             String pre_query =
                     "\n{     \n"+
                     "   \"query\" : {\n"+
@@ -466,7 +477,7 @@ public class TaskController {
                     "           \"must\" : [\n"+
                     "               { \"multi_match\" : {\n" +
                     "                   \"query\" : \""+ search_parameters[0] +"\", \n" +
-                    "                   \"fields : [ \"taskName\", \"taskDetails\" ]\"}  \n" +
+                    "                   \"fields : [ \"taskName\", \"taskDetails\" ]}  \n" +
                     "               }";
 
             String body_query = "";
@@ -475,7 +486,7 @@ public class TaskController {
                         "               , \n" +
                         "               { \"multi_match\" : {\n" +
                         "                   \"query\" : \""+ search_parameters[i] +"\", \n" +
-                        "                   \"fields : [ \"taskName\", \"taskDetails\" ]\"}  \n" +
+                        "                   \"fields : [ \"taskName\", \"taskDetails\" ]}  \n" +
                         "               }";
             }
             String post_query =
@@ -485,8 +496,8 @@ public class TaskController {
                     "}\n";
 
             String final_query = pre_query + body_query + post_query;
-            Log.i("Query", "The query was " + final_query);
-            Search search = new Search.Builder(final_query)
+            Log.i("Query", "The query was " + query);
+            Search search = new Search.Builder(query)
                     .addIndex("cmput301w18t25")
                     .addType("user")
                     .build();
