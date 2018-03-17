@@ -220,13 +220,13 @@ public class TaskController {
     public static class providerCancelBid extends AsyncTask<Void, Void, Boolean>{
 
         Task current_task;
-        String providerName;
+        String providerId;
         Boolean rt_val;
 
-        public providerCancelBid(Task current_task, String providerName){
+        public providerCancelBid(Task current_task, String providerId){
             this.current_task = current_task;
-            this.providerName = providerName;
-            this.rt_val = this.current_task.cancelBid(this.providerName);
+            this.providerId = providerId;
+            this.rt_val = this.current_task.cancelBid(this.providerId);
         }
 
         @Override
@@ -260,10 +260,10 @@ public class TaskController {
 
     public static class searchBiddenTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
         //ArrayList<Task> taskList = new ArrayList<Task> ();
-        String providerName;
+        String providerId;
 
-        public searchBiddenTasksOfThisProvider(String providerName){
-            this.providerName = providerName;
+        public searchBiddenTasksOfThisProvider(String providerId){
+            this.providerId = providerId;
         }
 
         protected ArrayList<Task> doInBackground(Void... nul) {
@@ -307,23 +307,25 @@ public class TaskController {
 
     }
 
-    public static class searchAssignTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
-        String providerName;
+    //TODO do test for this method, which should be extremely similar to bidden tasks
+    public static class searchAssignTasksOfThisProvider extends AsyncTask<String, Void, ArrayList<Task>>{
 
-        public searchAssignTasksOfThisProvider(String providerName){
-            this.providerName = providerName;
-        }
-
-        protected ArrayList<Task> doInBackground(Void... nul) {
+        protected ArrayList<Task> doInBackground(String... providerId) {
             verifySettings();
 
             ArrayList<Task> result_tasks = new ArrayList<Task>();
 
-            String query = "{ \n"+
-                    "\"query\":{\n"+
-                    "\"term\":{\"taskProvider\":\""+this.providerName+"\"}\n"+
-                    "\"term\":{\"taskStatus\":\""+"assigned"+"\"}\n"+
-                    "}\n"+"}";
+            String query =
+                    "\n{ \n"+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"term\" : {\"taskStatus\" : " + "\"assigned\"}}," + "\n"+
+                            "               { \"term\" : {\"taskProvider\" : \"" + providerId[0] + "\"}}" + "\n"+
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
 
             Log.i("Query", "The query was " + query);
             Search search = new Search.Builder(query)
@@ -349,22 +351,24 @@ public class TaskController {
 
     }
 
-    public static class searchAllTasksOfThisRequester extends AsyncTask<Void, Void, ArrayList<Task>>{
-        String requesterName;
+    //TODO do test for this method, which should be extremely similar to bidden tasks
+    public static class searchAllTasksOfThisRequester extends AsyncTask<String, Void, ArrayList<Task>>{
 
-        public searchAllTasksOfThisRequester(String requesterName){
-            this.requesterName = requesterName;
-        }
-
-        protected ArrayList<Task> doInBackground(Void... nul) {
+        protected ArrayList<Task> doInBackground(String... requesterId) {
             verifySettings();
 
             ArrayList<Task> result_tasks = new ArrayList<Task>();
 
-            String query = "{ \n"+
-                    "\"query\":{\n"+
-                    "\"term\":{\"taskRequester\":\""+this.requesterName+"\"}\n"+
-                    "}\n"+"}";
+            String query =
+                    "\n{ \n"+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"term\" : {\"taskRequester\" : \"" + requesterId[0] + "\"}}" + "\n"+
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
 
             Log.i("Query", "The query was " + query);
             Search search = new Search.Builder(query)
@@ -391,18 +395,24 @@ public class TaskController {
 
     }
 
+    //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAllRequestingTasks extends AsyncTask<Void, Void, ArrayList<Task>>{
 
-
         protected ArrayList<Task> doInBackground(Void... nul) {
             verifySettings();
 
             ArrayList<Task> result_tasks = new ArrayList<Task>();
 
-            String query = "{ \n"+
-                    "\"query\":{\n"+
-                    "\"term\":{\"taskStatus\":\""+"requesting"+"\"}\n"+
-                    "}\n"+"}";
+            String query =
+                    "\n{ \n"+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"term\" : {\"taskStatus\" : \"request\"}}" + "\n"+
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
 
             Log.i("Query", "The query was " + query);
             Search search = new Search.Builder(query)
@@ -426,47 +436,66 @@ public class TaskController {
             return result_tasks;
         }
 
-
     }
 
-    //TODO what is it for?
-    public ArrayList<Task> searchTaskByTaskName(String taskname){
-        ArrayList<Task> taskList = new ArrayList<Task> ();
-        return taskList;
-
-    }
-
-    public boolean testTrue(String name){
-        return true;
-    } //created by wdong2 for testing
-
-    public boolean testFalse(String name){
-        return false;
-    } //created by wdong2 for testing
-
-    // no need to use it, providerSetBis is good enough
-    public void providerUpdateBid(Task task,Bid bid){}
-
-    //TODO delay for search
-    /*
-    public static class searchTaskByKeyword extends  {
-        protected ArrayList<Task> doInBackground(ArrayList<String>... search_parameters) {
+    public static class searchTaskByKeyword extends AsyncTask<String, Void, ArrayList<Task>>  {
+        protected ArrayList<Task> doInBackground(String... keywords) {
             verifySettings();
 
+            String [] search_parameters = keywords[0].split("\\s+");
             ArrayList<Task> result_tasks = new ArrayList<Task>();
+            /*
+            String query =
+                    "\n{     \n"+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"multi_match\" : {\n" +
+                            "                   \"query\" : \""+ search_parameters[0] +"\", \n" +
+                            "                   \"fields : [ \"taskName\", \"taskDetails\" ] \n " +
+                            "                   }  \n" +
+                            "               }\n" +
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
+            */
+            String query =
+                    "\n{ \n"+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"multi_match\" : {\"query\" : \"Test\", \"fields\" : [ \"taskName\", \"taskDetails\"] }}" + "\n"+
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
+            String pre_query =
+                    "\n{     \n"+
+                    "   \"query\" : {\n"+
+                    "       \"bool\" : {\n"+
+                    "           \"must\" : [\n"+
+                    "               { \"multi_match\" : {\n" +
+                    "                   \"query\" : \""+ search_parameters[0] +"\", \n" +
+                    "                   \"fields : [ \"taskName\", \"taskDetails\" ]}  \n" +
+                    "               }";
 
-            for (int i = 0; i < 0; i++){
-                String query = "{ \n"+
-                        "\"query\":{\n"+
-                        "\"term\":{\"userName\":\""+search_parameters[0]+"\"}\n"+
-                        "}\n"+"}";
+            String body_query = "";
+            for (int i = 1; i < search_parameters.length; i++){
+                body_query +=
+                        "               , \n" +
+                        "               { \"multi_match\" : {\n" +
+                        "                   \"query\" : \""+ search_parameters[i] +"\", \n" +
+                        "                   \"fields : [ \"taskName\", \"taskDetails\" ]}  \n" +
+                        "               }";
             }
+            String post_query =
+                    "           ]\n"+
+                    "       }\n"+
+                    "   }\n"+
+                    "}\n";
 
-            String query = "{ \n"+
-                    "\"query\":{\n"+
-                    "\"term\":{\"userName\":\""+search_parameters[0]+"\"}\n"+
-                    "}\n"+"}";
-
+            String final_query = pre_query + body_query + post_query;
             Log.i("Query", "The query was " + query);
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w18t25")
@@ -488,7 +517,17 @@ public class TaskController {
             return result_tasks;
         }
     }
-    */
+
+    public boolean testTrue(String name){
+        return true;
+    } //created by wdong2 for testing
+
+    public boolean testFalse(String name){
+        return false;
+    } //created by wdong2 for testing
+
+    // no need to use it, providerSetBis is good enough
+    public void providerUpdateBid(Task task,Bid bid){}
 
     public static void verifySettings() {
         if (client == null) {

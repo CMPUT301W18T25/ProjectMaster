@@ -17,14 +17,14 @@ import com.example.mayingnan.project301.R;
 
 public class RequesterPayActivity extends AppCompatActivity {
 
-    private String userName;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_pay);
         final Intent intent = getIntent();
-        userName = intent.getExtras().get("userName").toString();
+        userId = intent.getExtras().get("userId").toString();
 
         //settle pay button
         Button payButton = (Button) findViewById(R.id.pay_button);
@@ -32,7 +32,7 @@ public class RequesterPayActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterPayActivity.this, RequesterEditListActivity.class);
-                info2.putExtra("userName",userName);
+                info2.putExtra("userId",userId);
                 startActivity(info2);
 
             }
@@ -44,7 +44,7 @@ public class RequesterPayActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterPayActivity.this, RequesterViewTaskActivity.class);
-                info2.putExtra("userName",userName);
+                info2.putExtra("userId",userId);
                 startActivity(info2);
 
             }

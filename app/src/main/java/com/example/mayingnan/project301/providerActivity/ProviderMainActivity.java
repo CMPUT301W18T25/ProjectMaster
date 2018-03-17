@@ -28,6 +28,8 @@ public class ProviderMainActivity extends AppCompatActivity {
     private ArrayAdapter<Task> taskAdapter;
     private String userName;
 
+    private String userId;
+
 
 
     @Override
@@ -35,7 +37,7 @@ public class ProviderMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_main);
         final Intent intent = getIntent();
-        userName = intent.getExtras().get("userName").toString();
+        userId = intent.getExtras().get("userId").toString();
 
         //need to load task and store in the list
         //use adapter to show on UI
@@ -48,7 +50,7 @@ public class ProviderMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //setResult(RESULT_OK);
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderMapActivity.class);
-                intent.putExtra("userName",userName);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });
@@ -60,7 +62,7 @@ public class ProviderMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //setResult(RESULT_OK);
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderBidHistoryActivity.class);
-                intent.putExtra("userName",userName);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });
@@ -72,7 +74,7 @@ public class ProviderMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //setResult(RESULT_OK);
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderEditInfoActivity.class);
-                intent.putExtra("userName",userName);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });
@@ -85,7 +87,7 @@ public class ProviderMainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent info1 = new Intent(ProviderMainActivity.this, RequesterViewTaskActivity.class);
                 info1.putExtra("info", index);
-                info1.putExtra("userName",userName);
+                info1.putExtra("userId",userId);
                 startActivity(info1);
             }
         });

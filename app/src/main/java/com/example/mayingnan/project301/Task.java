@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by User on 2018/2/25.
  */
 
-//TODO add idealprice, photo, do we need time?
+//TODO add idealprice, photo, time set to current by built-in methods?
 public class Task {
     private String taskName;
     private String taskDetails;
@@ -127,8 +127,8 @@ public class Task {
 
     public boolean addBid(Bid bid){
         for (int i = 0; i<taskBidList.size();i++){
-            String selectedItemProvider = taskBidList.get(i).getProviderName();
-            if (selectedItemProvider.equals(bid.getProviderName())){
+            String selectedItemProvider = taskBidList.get(i).getProviderId();
+            if (selectedItemProvider.equals(bid.getProviderId())){
                 taskBidList.set(i, bid);
                 return true;
             }
@@ -139,7 +139,7 @@ public class Task {
 
     public boolean cancelBid(String providerName){
         for (int i = 0; i<taskBidList.size();i++){
-            if (providerName.equals(taskBidList.get(i).getProviderName())){
+            if (providerName.equals(taskBidList.get(i).getProviderId())){
                 taskBidList.remove(i);
                 return true;
             }

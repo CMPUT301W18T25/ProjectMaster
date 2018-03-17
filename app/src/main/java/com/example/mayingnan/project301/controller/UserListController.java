@@ -29,15 +29,6 @@ public class UserListController {
     public ArrayList<User> userlist;
     private static JestDroidClient client;
 
-
-    public boolean testTrue(String name){
-        return true;
-    } //created by wdong2 for testing
-
-    public boolean testFalse(String name){
-        return false;
-    }//created by wdong2 for testing
-
     public boolean checkLogInInfo(String name){   //created by wdong2 for testing
         /**
          * return true for valid user name and passward; false otherwise
@@ -46,13 +37,66 @@ public class UserListController {
         if (name == "IUN"){ return false;}
         return true;
     }
-
+    //if
     public boolean checkValidationSignUp (String name){
 
         if (name == "wdong2"){return true;}
 
+        User newUser = null;
+        newUser = getAUserByName(name);
+        if(newUser==null){
+            Log.i("asda","asdasd");
+            return true;
+        }
+        else {
+            Log.i("userNameadad::",newUser.getUserName());
+            return false;
+        }
+    }
+    public String addUserAndCheck(User user){
+        boolean checkValidUser = checkValidationSignUp(user.getUserName());
+        String userId = null;
+        if(checkValidUser){
+            UserListController.addUser addUser = new UserListController.addUser();
+            addUser.execute(user);
+            try {
+                userId = addUser.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            return null;
+        }
+        return userId;
+
+    }
+    public User getAUserById(String userId){
+
+        UserListController.getAUserById getAUserById = new UserListController.getAUserById();
+        getAUserById.execute(userId);
+
+
+        ArrayList<User> Userlist = null;
+        try {
+            Userlist = getAUserById.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        if(Userlist.isEmpty()){
+            return null;
+        }
+        else {
+            return Userlist.get(0);
+        }
+    }
+    public User getAUserByName(String userName){
         UserListController.getAUserByName getAUserByName = new UserListController.getAUserByName();
-        getAUserByName.execute(name);
+        getAUserByName.execute(userName);
 
         ArrayList<User> Userlist = null;
         try {
@@ -62,34 +106,33 @@ public class UserListController {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        boolean found = true;
-        for (User u: Userlist){
-
-            //Log.i("username   ",u.getUserName());
-            if(u.getUserName().equals(name)){
-                found = false;//duplicate username, not allowed
-            }
+        if(Userlist.isEmpty()){
+            Log.i("length","0");
+            return null;
         }
-        return found;
+        else {
+            Log.i("userName:",Userlist.get(0).getUserName());
+            return Userlist.get(0);
+        }
     }
-    public boolean addUserAndCheck(User user){
-        boolean checkValidUser = checkValidationSignUp (user.getUserName());
-        if(checkValidUser){
-            UserListController.addUser addUser = new UserListController.addUser();
-            addUser.execute(user);
-        }
-        else{
-            return false;
-        }
-        return true;
+
+    public void updateUser(User user){
+
+        UserListController.updateUser updateUser= new UserListController.updateUser();
+        updateUser.execute(user);
 
     }
 
-    public static class addUser extends AsyncTask<User, Void, Void> {
+
+    public static class addUser extends AsyncTask<User, Void, String> {
+        protected void onPreExecute (){
+            Log.i("add User","is ready");
+        }
         @Override
 
-        protected Void doInBackground(User... users) {
+        protected String doInBackground(User... users) {
             verifySettings();
+            String newId = null;
 
             for (User user : users) {
                 Index index = new Index.Builder(user).index("cmput301w18t25").type("user").build();
@@ -100,6 +143,7 @@ public class UserListController {
                     if(result.isSucceeded())
                     {
                         user.setId(result.getId());
+                        newId = user.getId();
                         Log.i("Success","Elasticsearch ");
 
                     }
@@ -113,7 +157,12 @@ public class UserListController {
                 }
 
             }
-            return null;
+            return newId;
+
+
+        }
+        protected void onPostExecute(String result) {
+            Log.i("Upload ",result);
         }
     }
 
@@ -149,7 +198,7 @@ public class UserListController {
     }
 
 
-    public static class getAUserByName extends AsyncTask<String, Void, ArrayList<User>> {
+    public static class getAUserById extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
         protected ArrayList<User> doInBackground(String... search_parameters) {
             verifySettings();
@@ -158,7 +207,7 @@ public class UserListController {
 
             String query = "{ \n"+
                     "\"query\":{\n"+
-                    "\"term\":{\"userName\":\""+search_parameters[0]+"\"}\n"+
+                    "\"term\":{\"userId\":\""+search_parameters[0]+"\"}\n"+
                     "}\n"+"}";
 
             Log.i("Query", "The query was " + query);
@@ -181,42 +230,57 @@ public class UserListController {
             }
             return users;
         }
+
     }
-
-
-
-
-
-
-    public Boolean checkUserByNameAndPassword(String userName,String userPassword){
-
-        UserListController.getAUserByName getAUserByName = new UserListController.getAUserByName();
-        getAUserByName.execute(userName);
-
-        ArrayList<User> Userlist = null;
-        try {
-            Userlist = getAUserByName.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+    public static class getAUserByName extends AsyncTask<String, Void, ArrayList<User>> {
+        protected void onPreExecute (){
+            Log.i("get a user by name ","is ready");
         }
-        boolean found = false;
-        for (User u: Userlist){
+        @Override
+        protected ArrayList<User> doInBackground(String... search_parameters) {
+            verifySettings();
 
-            //Log.i("username   ",u.getUserName());
+            ArrayList<User> users = new ArrayList<User>();
 
-            if(u.getUserPassword().equals(userPassword)){
-                found = true;
+            String query = "{ \n" +
+                    "\"query\":{\n" +
+                    "\"term\":{\"userName\":\"" + search_parameters[0] + "\"}\n" +
+                    "}\n" + "}";
+
+            Log.i("Query", "The query was " + query);
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t25")
+                    .addType("user")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<User> foundUsers
+                            = result.getSourceAsObjectList(User.class);
+                    users.addAll(foundUsers);
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
+            return users;
         }
-        return found;
+        protected void onPostExecute(ArrayList<User> Users){
+            Log.i("getUser","by name");
+        }
     }
+
+
 
     /**
      * Static class that update user profile
      */
     public static class updateUser extends AsyncTask<User, Void, User> {
+        protected void onPreExecute (){
+            Log.i("update user ","is ready");
+        }
 
         @Override
         protected User doInBackground(User... users) {
@@ -237,6 +301,10 @@ public class UserListController {
                 e.printStackTrace();
             }
             return users[0];
+        }
+
+        protected void onPostExecute(User user){
+            Log.i("updated","the user");
         }
 
     }
@@ -284,6 +352,31 @@ public class UserListController {
         }
     }
 
+    public Boolean checkUserByNameAndPassword(String userName,String userPassword){
+
+        UserListController.getAUserByName getAUserByName = new UserListController.getAUserByName();
+        getAUserByName.execute(userName);
+
+        ArrayList<User> Userlist = null;
+        try {
+            Userlist = getAUserByName.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        boolean found = false;
+        for (User u: Userlist){
+
+            //Log.i("username   ",u.getUserName());
+
+            if(u.getUserPassword().equals(userPassword)){
+                found = true;
+            }
+        }
+        return found;
+    }
+
 
     public static void verifySettings() {
         if (client == null) {
@@ -295,5 +388,5 @@ public class UserListController {
             client = (JestDroidClient) factory.getObject();
         }
     }
-    
+
 }

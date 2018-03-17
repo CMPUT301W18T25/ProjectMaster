@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.Task;
+import com.example.mayingnan.project301.User;
 import com.example.mayingnan.project301.controller.UserListController;
 
 import java.util.ArrayList;
@@ -62,9 +63,13 @@ public class LogInActivity extends AppCompatActivity {
                 */
                 if (userListController.checkUserByNameAndPassword(enterUsername,enterPassward) == true){
                     Intent intent = new Intent (LogInActivity.this, UserCharacterActivity.class);
+                    UserListController uc = new UserListController();
+                    User thisUser = new User();
+                    thisUser = uc.getAUserByName(enterUsername);
+
 
                     //deliver userName
-                    intent.putExtra("userName",enterUsername);
+                    intent.putExtra("userId",thisUser.getId());
                     startActivity(intent);
                 }else{
                     //print error message

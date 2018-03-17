@@ -16,6 +16,7 @@ import java.util.concurrent.ExecutionException;
 
 public class ProviderEditInfoActivity extends AppCompatActivity {
 
+    private String userId;
 
     private String userName;
     private String editName;
@@ -36,7 +37,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_info);
         final Intent intent = getIntent();
-        userName = intent.getExtras().get("userName").toString();
+        userId = intent.getExtras().get("userId").toString();
 
         //match edit text
         usernameText = findViewById(R.id.edit_name);
@@ -82,7 +83,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
 
                 //change activity
                 Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMainActivity.class);
-                info2.putExtra("userName",userName);
+                info2.putExtra("userId",userId);
                 startActivity(info2);
 
             }
@@ -95,7 +96,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMainActivity.class);
-                info2.putExtra("userName",userName);
+                info2.putExtra("userId",userId);
                 startActivity(info2);
             }
         });

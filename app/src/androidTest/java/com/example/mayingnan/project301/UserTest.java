@@ -62,6 +62,7 @@ public class UserTest{
         deleteAllUsers.execute("");
         assertEquals(found,1);
 
+
     }
     @Test
 
@@ -82,28 +83,14 @@ public class UserTest{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        UserListController.getAUserByName getAUserByName = new UserListController.getAUserByName();
-        getAUserByName.execute("y3hh");
-
-
-        ArrayList<User> Userlist = null;
-        try {
-            Userlist = getAUserByName.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        User newUser  = new User();
+        UserListController uc = new UserListController();
         int found = 0;
-        for (User u: Userlist){
-
-            Log.i("username   ",u.getUserName());
-
-            if(u.getUserName().equals(user1.getUserName())){
-                found = 1;
-            }
+        newUser = uc.getAUserByName("y3hh");
+        if(newUser!=null){
+            found = 1;
         }
+
         UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
         deleteAllUsers.execute("");
         assertEquals(found,1);
@@ -190,22 +177,71 @@ public class UserTest{
     @Test
 
 
-    public void testCheckValidationSignUp (){
+    /*public void testCheckValidationSignUp (){
         UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
         deleteAllUsers.execute("");
 
+
+        String userId = null;
         User user1 = new User();
         user1.setUserName("yue15");
 
         UserListController uc = new UserListController();
-        boolean addSucess = uc.addUserAndCheck(user1);
-        assertEquals(addSucess,true);
+        userId = uc.addUserAndCheck(user1);
+
+        assertNotEquals(userId,null);
 
         User user2 = new User();
         user2.setUserName("yue15");
-        boolean addFailed = uc.addUserAndCheck(user2);
-        assertEquals(addFailed,false);
+        boolean checkValidUser = uc.checkValidationSignUp("yue15");
+        if(checkValidUser) {
+            Log.i("fault","fault");
+            UserListController uc2 = new UserListController();
+            userId = uc2.addUserAndCheck(user2);
+        }
+        else{
+            userId = null;
+        }
 
+        assertEquals(userId,null);
+
+    }
+    */
+
+    public void testCheckValidationSignUp (){
+        UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
+        deleteAllUsers.execute("");
+
+
+        String userId = null;
+        User user1 = new User();
+        user1.setUserName("yue15");
+        UserListController.addUser addUser= new UserListController.addUser();
+        addUser.execute(user1);
+
+        AsyncTask.Status taskStatus2;
+        do {
+            taskStatus2 = addUser.getStatus();
+        } while (taskStatus2 != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        User user2 = new User();
+        user2.setUserName("yue15");
+        UserListController uc = new UserListController();
+        userId = uc.addUserAndCheck(user2);
+
+        assertEquals(userId,null);
+
+        User user3 = new User();
+        user3.setUserName("yue16");
+        UserListController uc2 = new UserListController();
+        userId = uc2.addUserAndCheck(user3);
+
+        assertNotEquals(userId,null);
 
     }
 

@@ -32,7 +32,7 @@ import java.util.ArrayList;
 public class RequesterMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
-    private String userName;
+    private String userId;
 
     private static final String TAG = ProviderMapActivity.class.getSimpleName();
 
@@ -57,7 +57,7 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
         super.onCreate(savedInstanceState);
 
         final Intent intent = getIntent();
-        userName = intent.getExtras().get("userName").toString();
+        userId = intent.getExtras().get("userId").toString();
 
         setContentView(R.layout.view_on_map2);
 
