@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.mayingnan.project301.providerActivity.ProviderMapActivity" >
-    <!--<Button
+    <Button
         android:id="@+id/show_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,15 +15,6 @@
         android:padding="10dp"
         android:layout_marginTop="20dp"
         android:paddingRight="10dp" />
-    <Button
-        android:id="@+id/edit_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left|top"
-        android:text="Edit Profile"
-        android:padding="10dp"
-        android:layout_marginTop="65dp"
-        android:paddingRight="10dp" /> -->
 
 
 </fragment>
