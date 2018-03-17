@@ -21,8 +21,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -31,9 +29,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
-
 import org.slf4j.helpers.Util;
-
 
 
 /**
@@ -115,22 +111,21 @@ public class FileIOUtil {
 	 * @param context the context
 	 * @return the array list of requests
 	 */
-	/*public static ArrayList<Request> loadRequestFromFile(Context context, ArrayList<String> fileList) {
-		ArrayList<Request> requestList = new ArrayList<>();
-        Gson gson = RequestUtil.customGsonBuilder();
+	public static ArrayList<Task> loadMultipleTasksFromFile(Context context, ArrayList<String> fileList) {
+		ArrayList<Task> TaskList = new ArrayList<>();
 		for (String f : fileList) {
             FileInputStream fis = null;
             try {
                 fis = context.openFileInput(f);
                 BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-                NormalRequest req = gson.fromJson(in, NormalRequest.class);
-                requestList.add(req);
+                Task task = TaskUtil.deserializer(in);
+                TaskList.add(task);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 		}
-		return requestList;
-	}*/
+		return TaskList;
+	}
 
 	public static Task loadSingleTaskFromFile(String fileName, Context context) {
 		Task request = new Task();

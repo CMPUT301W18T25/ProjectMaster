@@ -19,33 +19,5 @@ public class OfflineTest extends ActivityInstrumentationTestCase2 {
     public OfflineTest() {
         super(LogInActivity.class);
     }
-    public void testOfflineAddTask(){
-        Task offlineTask = new Task();
-        FileSystemController fc = new FileSystemController();
-        fc.saveToFile(offlineTask);
-        Task[] tasks = fc.loadFromFile();
-        assertEquals(tasks[0],offlineTask);
 
-
-    }
-    /*
-    public void testOfflineEditTask(){
-        //create a task online
-        FileSystemController fc = new FileSystemController();
-        Task newTask = new Task();
-        TaskController tc= new TaskController();
-        newTask.setTaskName("goToSouthgate");
-
-        //if go offline, save to file
-        newTask.setTaskName("goToCalgary");
-        fc.saveToFile(newTask);
-        //when go online, load from file and update elasticsearch database
-        Task[] tasks = fc.loadFromFile();
-        Task renewedTask = tasks[0];
-        tc.requesterUpdateTask(renewedTask);
-
-        assertEquals(tc.searchTaskByTaskName("goToCalgary"),newTask);
-
-    }
-    */
 }
