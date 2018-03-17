@@ -59,6 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
                 newUser.setUserEmail(enterEmail);
                 newUser.setUserPhone(enterPhone);
                 newUser.setUserPassword(enterPassward);
+                newUser.setId(enterName);
                 Log.i("Name: ",newUser.getUserName());
 
                 UserListController uc= new UserListController();
@@ -74,6 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                     //deliver userName
                     intent.putExtra("userId",newUserId);
+                    Log.i("newUserId",newUserId);
 
                     startActivity(intent);
                 }else{

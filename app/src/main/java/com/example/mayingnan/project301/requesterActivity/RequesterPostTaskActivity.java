@@ -71,8 +71,6 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
         post_destination = (EditText) findViewById(R.id.c_task_location);
         post_ideal_price = (EditText) findViewById(R.id.c_task_idealprice);
         post_photo = (ImageView) findViewById(R.id.c_task_photo);
-        post_date=(DatePicker)findViewById(R.id.post_datePicker);
-        post_time=(TimePicker)findViewById(R.id.post_timePicker);
         submitButton=(Button)findViewById(R.id.submit_button);
         cancelButton=(Button)findViewById(R.id.cancel_button);
 
