@@ -31,6 +31,7 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
     private Button saveButton;
     private Button backButton;
     private UserListController userListControl;
+    private String userId;
 
 
     @Override
@@ -38,7 +39,7 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_info);
         final Intent intent = getIntent();
-        userName = intent.getExtras().get("userName").toString();
+        userId = intent.getExtras().get("userId").toString();
 
         //match edit text
         usernameText = findViewById(R.id.edit_name);
@@ -84,7 +85,7 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
 
 
                 Intent info2 = new Intent(RequesterEditInfoActivity.this, RequesterMainActivity.class);
-                info2.putExtra("userName",userName);
+                info2.putExtra("userId",userId);
                 startActivity(info2);
 
             }
@@ -100,7 +101,7 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
 
                 //change activity
                 Intent info2 = new Intent(RequesterEditInfoActivity.this, RequesterMainActivity.class);
-                info2.putExtra("userName",userName);
+                info2.putExtra("userId",userId);
                 startActivity(info2);
 
             }

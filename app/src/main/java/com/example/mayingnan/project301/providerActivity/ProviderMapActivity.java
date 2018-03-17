@@ -58,6 +58,8 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
 
     private GoogleMap mMap;
     private String userName;
+    private String userId;
+
 
     public Criteria criteria;
 
@@ -102,8 +104,8 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
             mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
         final Intent intent = getIntent();
-        userName = intent.getExtras().get("userName").toString();
-        Log.d("Username", userName);
+        userId= intent.getExtras().get("userId").toString();
+        Log.d("UserId", userId);
 
         setContentView(R.layout.view_on_map);
         // Construct a GeoDataClient.

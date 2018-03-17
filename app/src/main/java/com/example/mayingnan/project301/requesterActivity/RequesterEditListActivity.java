@@ -31,6 +31,7 @@ import java.util.ArrayList;
 public class RequesterEditListActivity extends AppCompatActivity {
     private ListView postedTaskList;
     private String userName;
+    private String userId;
     private static final String FILENAME = "ProjectMaster.sav";
     private ArrayList<Task> tasklist;
 
@@ -39,7 +40,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_edit_list);
         final Intent intent = getIntent();
-        userName = intent.getExtras().get("userName").toString();
+        userId = intent.getExtras().get("userId").toString();
 
 
         //settle mainMenu button
@@ -48,7 +49,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterEditListActivity.this, RequesterMainActivity.class);
-                info2.putExtra("userName",userName);
+                info2.putExtra("userId",userId);
                 startActivity(info2);
 
             }
@@ -60,7 +61,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterEditListActivity.this, RequesterMapActivity.class);
-                info2.putExtra("userName",userName);
+                info2.putExtra("userId",userId);
                 startActivity(info2);
 
             }
@@ -73,7 +74,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskActivity.class);
                 info1.putExtra("info", index);
-                info1.putExtra("userName",userName);
+                info1.putExtra("userId",userId);
                 startActivity(info1);
             }
         });
@@ -84,16 +85,13 @@ public class RequesterEditListActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-        search.execute(userName);
+        search.execute(userId);
         //tasklist= search.get();
 
         tasklist = new ArrayList<>();
         //RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
         // Attach the adapter to a ListView
         //this.postedTaskList.setAdapter(adapter);
-
-
-
 
     }
 

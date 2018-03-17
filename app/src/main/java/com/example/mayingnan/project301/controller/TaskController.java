@@ -220,13 +220,13 @@ public class TaskController {
     public static class providerCancelBid extends AsyncTask<Void, Void, Boolean>{
 
         Task current_task;
-        String providerName;
+        String providerId;
         Boolean rt_val;
 
-        public providerCancelBid(Task current_task, String providerName){
+        public providerCancelBid(Task current_task, String providerId){
             this.current_task = current_task;
-            this.providerName = providerName;
-            this.rt_val = this.current_task.cancelBid(this.providerName);
+            this.providerId = providerId;
+            this.rt_val = this.current_task.cancelBid(this.providerId);
         }
 
         @Override
@@ -260,10 +260,10 @@ public class TaskController {
 
     public static class searchBiddenTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
         //ArrayList<Task> taskList = new ArrayList<Task> ();
-        String providerName;
+        String providerId;
 
-        public searchBiddenTasksOfThisProvider(String providerName){
-            this.providerName = providerName;
+        public searchBiddenTasksOfThisProvider(String providerId){
+            this.providerId = providerId;
         }
 
         protected ArrayList<Task> doInBackground(Void... nul) {
@@ -310,7 +310,7 @@ public class TaskController {
     //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAssignTasksOfThisProvider extends AsyncTask<String, Void, ArrayList<Task>>{
 
-        protected ArrayList<Task> doInBackground(String... providerName) {
+        protected ArrayList<Task> doInBackground(String... providerId) {
             verifySettings();
 
             ArrayList<Task> result_tasks = new ArrayList<Task>();
@@ -321,7 +321,7 @@ public class TaskController {
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
                             "               { \"term\" : {\"taskStatus\" : " + "\"assigned\"}}," + "\n"+
-                            "               { \"term\" : {\"taskProvider\" : \"" + providerName[0] + "\"}}" + "\n"+
+                            "               { \"term\" : {\"taskProvider\" : \"" + providerId[0] + "\"}}" + "\n"+
                             "           ]\n"+
                             "       }\n"+
                             "   }\n"+
@@ -354,7 +354,7 @@ public class TaskController {
     //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAllTasksOfThisRequester extends AsyncTask<String, Void, ArrayList<Task>>{
 
-        protected ArrayList<Task> doInBackground(String... requesterName) {
+        protected ArrayList<Task> doInBackground(String... requesterId) {
             verifySettings();
 
             ArrayList<Task> result_tasks = new ArrayList<Task>();
@@ -364,7 +364,7 @@ public class TaskController {
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
-                            "               { \"term\" : {\"taskRequester\" : \"" + requesterName[0] + "\"}}" + "\n"+
+                            "               { \"term\" : {\"taskRequester\" : \"" + requesterId[0] + "\"}}" + "\n"+
                             "           ]\n"+
                             "       }\n"+
                             "   }\n"+

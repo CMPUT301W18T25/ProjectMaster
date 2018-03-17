@@ -48,7 +48,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
     private Button submitButton;
     private Button cancelButton;
 
-    private String userName;
+    private String userId;
     //private ArrayList<Task> tasklist = new ArrayList<>();
 
 
@@ -60,7 +60,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
         setContentView(R.layout.requester_post_task);
         context=getApplicationContext();
         final Intent intent = getIntent();
-        userName = intent.getExtras().get("userName").toString();
+        userId = intent.getExtras().get("userId").toString();
 
         /**
          * find view by id.
@@ -98,7 +98,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
                     new_task.setTaskDetails(post_detail.getText().toString());
                     new_task.setTaskAddress(post_destination.getText().toString());
                     new_task.setTaskIdealPrice(Double.parseDouble(post_ideal_price.getText().toString()));
-                    new_task.setTaskRequester(userName);
+                    new_task.setTaskRequester(userId);
                     //to do:set photo
                     //may do:set time
                     //new_task.setTaskDateTime(getDateTimeFromPickers(post_date,post_time));
@@ -116,7 +116,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
                     //upload new task data to database
                     TaskController.addTask addTaskCtl=new TaskController.addTask();
                     addTaskCtl.execute(new_task);
-                    info2.putExtra("userName",userName);
+                    info2.putExtra("userId",userId);
                     startActivity(info2);
 
                 }else{
@@ -139,7 +139,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterPostTaskActivity.this, RequesterMainActivity.class);
-                info2.putExtra("userName",userName);
+                info2.putExtra("userId",userId);
                 startActivity(info2);
 
             }
