@@ -16,6 +16,7 @@ public class Task {
     private String taskProvider;
     private String taskStatus;
     private String taskAddress;
+    private Float lowestBid;
 
     private String taskID;
 
@@ -47,6 +48,7 @@ public class Task {
         this.taskPhoto=null;
         this.taskIdealPrice=null;
         this.taskDateTime=null;
+        this.lowestBid = (float)0;
     }
 
     public Task(String taskName, String taskDetails, String taskRequester, String taskProvider,
@@ -61,6 +63,7 @@ public class Task {
         this.taskPhoto=taskPhoto;
         this.taskIdealPrice=null;
         this.taskDateTime=null;
+        this.lowestBid = (float)0.0;
     }
 
     public void requesterAcceptsBid(){
@@ -121,11 +124,15 @@ public class Task {
     public ArrayList<Bid> getTaskBidList(){
         return taskBidList;
     }
+    public float getLowestBid() {return this.lowestBid;}
     public Photo getTaskPhoto(){
         return taskPhoto;
     }
 
     public boolean addBid(Bid bid){
+        if (bid.getBidAmount() < this.lowestBid){
+            this.lowestBid = bid.getBidAmount();
+        }
         for (int i = 0; i<taskBidList.size();i++){
             String selectedItemProvider = taskBidList.get(i).getProviderId();
             if (selectedItemProvider.equals(bid.getProviderId())){
