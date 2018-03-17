@@ -118,19 +118,6 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
                 startActivity(intent);
             }
         });
-
-        // Edit Info button initialization and connection
-        Button editInfoButton = (Button) findViewById(R.id.edit_info);
-        editInfoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "Edit Info pressed");
-                Intent intent = new Intent(ProviderMapActivity.this,
-                        ProviderEditInfoActivity.class);
-                intent.putExtra("userName",userName);
-                startActivity(intent);
-            }
-        });
     }
 
 
