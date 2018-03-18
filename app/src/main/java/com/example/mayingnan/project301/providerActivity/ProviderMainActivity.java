@@ -16,7 +16,6 @@ import com.example.mayingnan.project301.requesterActivity.RequesterViewTaskActiv
 
 import java.util.ArrayList;
 
-@SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderMainActivity extends AppCompatActivity {
 
     private Button searchButton;
@@ -33,14 +32,12 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_main);
         final Intent intent = getIntent();
 
-        //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
         //need to load task and store in the list

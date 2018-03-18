@@ -53,6 +53,7 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
     private ArrayList<Location> mockupTasks;
 
 
+
     @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

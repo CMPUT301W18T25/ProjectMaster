@@ -3,12 +3,20 @@ package com.example.mayingnan.project301.requesterActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.mayingnan.project301.R;
+import com.example.mayingnan.project301.Task;
+import com.example.mayingnan.project301.controller.TaskController;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by User on 2018/2/25.
@@ -19,6 +27,15 @@ import com.example.mayingnan.project301.R;
 public class RequesterViewTaskActivity extends AppCompatActivity {
     private ListView bidList;
     private String userId;
+    private TextView view_name;
+    private TextView view_detail;
+    private TextView view_destination;
+    private TextView view_status;
+    private TextView view_idealprice;
+    private TextView view_lowestbid;
+    private Task view_task;
+    private ArrayList<Task> tasklist;
+
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -28,6 +45,64 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
+
+
+        /**
+         * find view by id.
+         */
+        view_name = (TextView) findViewById(R.id.c_view_name);
+        view_detail= (TextView) findViewById(R.id.c_view_detail);
+        view_destination = (TextView) findViewById(R.id.c_view_destination);
+        view_status = (TextView) findViewById(R.id.c_view_status);
+        view_idealprice = (TextView) findViewById(R.id.c_view_idealprice);
+        view_lowestbid = (TextView) findViewById(R.id.c_lowest_bid);
+
+
+        //get data from database
+        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+        search.execute(userId);
+
+        tasklist = new ArrayList<>();
+        try {
+            tasklist= search.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
+
+        // get index of target task
+        int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
+
+        // get target task
+        view_task=tasklist.get(view_index);
+
+        // get information from target task and set information
+        String temp_name=view_task.getTaskName();
+        view_name.setText(temp_name);
+
+        String temp_detail=view_task.getTaskDetails();
+        view_detail.setText(temp_detail);
+
+        String temp_destination=view_task.getTaskAddress();
+        view_destination.setText(temp_destination);
+
+        String temp_status=view_task.getTaskStatus();
+        view_status.setText(temp_status);
+
+        Double temp_idealprice=view_task.getTaskIdealPrice();
+        view_idealprice.setText(Double.toString(temp_idealprice));
+
+        Double temp_lowestbid=view_task.getLowestBid();
+        view_lowestbid.setText(Double.toString(temp_lowestbid));
+
+
+
+
+
+
 
 
         //settle edit button
