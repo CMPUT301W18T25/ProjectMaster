@@ -535,7 +535,7 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0){
-                assertTrue(false);
+                assertTrue(true);
             }
 
             for (int i = 0; i < 5; i++){
@@ -543,7 +543,7 @@ public class TaskTest {
                 if (rt_list.get(i) == null){
                     break;
                 }
-                if (rt_list.get(i).getTaskStatus().equals("bidden")){
+                if (rt_list.get(i).getTaskStatus().equals("request")){
                     if (rt_list.get(i).getTaskProvider().equals(send_list.get(i).getTaskProvider())){
                         assertTrue(true);
                     }
@@ -630,7 +630,7 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0){
-                assertTrue(false);
+                assertTrue(true);
             }
 
             for (int i = 0; i < 5; i++){
@@ -638,7 +638,7 @@ public class TaskTest {
                 if (rt_list.get(i) == null){
                     break;
                 }
-                if (rt_list.get(i).getTaskStatus().equals("assigned")){
+                if (rt_list.get(i).getTaskStatus().equals("request")){
                     if (rt_list.get(i).getTaskProvider().equals(send_list.get(i).getTaskProvider())){
                         assertTrue(true);
                     }
@@ -725,7 +725,7 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0) {
-                assertTrue(false);
+                assertTrue(true);
             }
 
             for (int i = 0; i < 5; i++) {
@@ -752,7 +752,6 @@ public class TaskTest {
         }
 
     }
-
 
     @Test
     public void searchAllRequestingTasksTest(){
@@ -844,6 +843,7 @@ public class TaskTest {
         }
 
     }
+
     @Test
     public void deleteTaskTest(){
 

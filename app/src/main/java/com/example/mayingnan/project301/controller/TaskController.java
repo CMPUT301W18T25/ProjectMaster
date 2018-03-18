@@ -319,7 +319,7 @@ public class TaskController {
                     "       \"bool\" : {\n"+
                     "           \"must\" : [\n"+
                     "               { \"term\" : {\"taskStatus\" : " + "\"bidden\"}}," + "\n"+
-                    "               { \"term\" : {\"taskProvider\" : " + "\"tester\"}}" + "\n"+
+                    "               { \"term\" : {\"taskProvider\" : " + "\"" + this.providerId +"\"}}" + "\n"+
                     "           ]\n"+
                     "       }\n"+
                     "   }\n"+
