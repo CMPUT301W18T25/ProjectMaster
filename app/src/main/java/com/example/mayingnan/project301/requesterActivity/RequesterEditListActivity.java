@@ -3,6 +3,7 @@ package com.example.mayingnan.project301.requesterActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -89,14 +90,17 @@ public class RequesterEditListActivity extends AppCompatActivity {
         TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
         search.execute(userId);
 
-
-        tasklist = new ArrayList<>();
+        tasklist = new ArrayList<Task>();
         try {
             tasklist= search.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
+        }
+        for(Task task: tasklist){
+            String taskName = task.getTaskName();
+            Log.i("TASKname",taskName);
         }
 
         RequesterAdapter adapter = new RequesterAdapter(this, tasklist);

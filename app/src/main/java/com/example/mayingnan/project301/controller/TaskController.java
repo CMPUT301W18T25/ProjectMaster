@@ -87,20 +87,11 @@ public class TaskController {
             try {
                 // where is the client?
                 DocumentResult result = client.execute(index);
-                Log.i("TEST client result", result.getId());
+                //Log.i("TEST client result", result.getId());
                 if(result.isSucceeded())
                 {
                     a_task[0].setId(result.getId());
                     Log.i("Success","Elasticsearch ");
-                    Index deep_index = new Index.Builder(a_task[0]).index("cmput301w18t25").type("task").build();
-                    try {
-                        result = client.execute(deep_index);
-                        if (result.isSucceeded()){
-                            Log.i("Success",a_task[0].getTaskProvider());
-                        }
-                    }
-                    catch (Exception e){
-                    }
 
                 }
                 else
