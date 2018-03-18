@@ -88,12 +88,14 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
         // settle click on list
+
         availablelist = (ListView) findViewById(R.id.provider_list);
         availablelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent info1 = new Intent(ProviderMainActivity.this, RequesterViewTaskActivity.class);
+                Intent info1 = new Intent(ProviderMainActivity.this, ProviderTaskBidActivity.class);
                 info1.putExtra("info", index);
+                info1.putExtra("status","request");
                 info1.putExtra("userId",userId);
                 startActivity(info1);
             }
@@ -134,9 +136,9 @@ public class ProviderMainActivity extends AppCompatActivity {
         Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",taskList.get(0).getTaskName());
         Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",taskList.get(0).getTaskAddress());
         Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",Double.toString(taskList.get(0).getTaskIdealPrice()));
-        */
 
-        //Task task = taskList.get(0);
+
+                //Task task = taskList.get(0);
         //Test
         Task task1 = new Task();
         task1.setTaskName("a");
@@ -145,6 +147,9 @@ public class ProviderMainActivity extends AppCompatActivity {
         //taskList = new ArrayList<>();
         taskList.add(task1);
         //
+        */
+
+
 
 
         RequesterAdapter adapter = new RequesterAdapter(this, taskList);

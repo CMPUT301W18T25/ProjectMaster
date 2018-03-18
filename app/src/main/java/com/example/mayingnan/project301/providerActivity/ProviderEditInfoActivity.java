@@ -3,6 +3,7 @@ package com.example.mayingnan.project301.providerActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +31,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
     private Button saveButton;
     private Button backButton;
     private UserListController userListControl;
+    private User user;
 
 
     @SuppressWarnings("ConstantConditions")
@@ -39,7 +41,10 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
         setContentView(R.layout.edit_info);
         final Intent intent = getIntent();
         //noinspection ConstantConditions,ConstantConditions
+        //get userId and user
         userId = intent.getExtras().get("userId").toString();
+        UserListController uc = new UserListController();
+        user = uc.getAUserById(userId);
 
         //match edit text
         usernameText = findViewById(R.id.edit_name);
@@ -60,8 +65,8 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
                 editPhone = mobileText.getText().toString();
                 editPassword = passwordText.getText().toString();
 
-                UserListController uc = new UserListController();
-                User user = uc.getAUserByName(userName);
+                Log.i("editEmail",editEmail);
+
 
 
                 //update user info
@@ -70,11 +75,18 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
                 user.setUserPhone(editPhone);
                 user.setUserPassword(editPassword);
 
-                uc.updateUser(user);
+                UserListController.updateUser updateUser= new UserListController.updateUser();
+                updateUser.execute(user);
 
                 //change activity
                 Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMainActivity.class);
                 info2.putExtra("userId",userId);
+                //wait for update
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 startActivity(info2);
 
             }
@@ -93,11 +105,37 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
         });
     }
 
-    public void  saveButton(){
+    public void onStart() {
+        super.onStart();
 
-    }
+        // get information from target task and set information
+        String temp_name=user.getUserName();
+        usernameText.setText(temp_name);
 
-    public void backButton(){
+        if (user.getUserEmail()==null){
+            emailText.setText("");
+        }else {
+            String temp_detail = user.getUserEmail();
+            emailText.setText(temp_detail);
+        }
+
+        if (user.getUserAddress()==null) {
+            mobileText.setText("");
+        }else{
+            String temp_destination = user.getUserAddress();
+            mobileText.setText(temp_destination);
+        }
+
+        String temp_status=user.getUserPassword();
+        passwordText.setText(temp_status);
+
+        /*
+        Double temp_idealprice=view_task.getTaskIdealPrice();
+        taskIdealPrice.setText(Double.toString(temp_idealprice));
+
+        Double temp_lowestbid=view_task.getLowestBid();
+        taskLowestPrice.setText(Double.toString(temp_lowestbid));
+        */
 
     }
 

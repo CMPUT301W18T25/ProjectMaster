@@ -64,29 +64,4 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2 {
  }
  }
 
-     public void testSignUp() {
-        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
-
-        solo.clickOnButton("Sign Up");
-
-        solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
-
-        solo.goBack();
-
-        solo.goBack();
-
-        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
-
-        solo.clickOnButton("Sign Up");
-
-        //solo.goBack();
-
-        solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
-
-        solo.enterText((EditText) solo.getView(R.id.signup_password),"passward");
-
-        solo.clickOnButton("Log In");
-
-        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
-    }
  */
