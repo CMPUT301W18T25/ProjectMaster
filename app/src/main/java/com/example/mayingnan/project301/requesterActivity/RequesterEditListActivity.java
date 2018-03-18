@@ -87,6 +87,14 @@ public class RequesterEditListActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
         search.execute(userId);
 
@@ -98,10 +106,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        for(Task task: tasklist){
-            String taskName = task.getTaskName();
-            Log.i("TASKname",taskName);
-        }
+
 
         RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
         // Attach the adapter to a ListView
