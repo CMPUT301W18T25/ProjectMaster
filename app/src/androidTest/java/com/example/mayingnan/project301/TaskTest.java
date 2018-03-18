@@ -63,6 +63,8 @@ public class TaskTest {
         TaskController.addTask addTaskCtl = new TaskController.addTask();
         Task task = new Task();
         task.setTaskName("hi");
+        task.setTaskAddress("gg home");
+        task.setTaskIdealPrice((Double)11.11);
 
         addTaskCtl.execute(task);
 
