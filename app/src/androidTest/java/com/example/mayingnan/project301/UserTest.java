@@ -3,6 +3,7 @@ package com.example.mayingnan.project301;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.mayingnan.project301.controller.TaskController;
 import com.example.mayingnan.project301.controller.UserListController;
 
 import java.util.ArrayList;
@@ -255,6 +256,9 @@ public class UserTest{
     */
 
     public void testCheckValidationSignUp (){
+        TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
+        deleteAllTasks.execute("");
+
         UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
         deleteAllUsers.execute("");
 
