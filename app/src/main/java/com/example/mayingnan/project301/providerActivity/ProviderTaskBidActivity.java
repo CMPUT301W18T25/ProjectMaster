@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -63,7 +64,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         taskName = (TextView) findViewById(R.id.p_task_name);
         taskDetail= (TextView) findViewById(R.id.p_task_detail);
         taskLocation = (TextView) findViewById(R.id.p_task_destination);
-        taskStatus = (TextView) findViewById(R.id.p_task_status);
+        //taskStatus = (TextView) findViewById(R.id.p_task_status);
         taskIdealPrice = (TextView) findViewById(R.id.p_task_idealprice);
         taskLowestPrice = (TextView) findViewById(R.id.p_task_mybid);
         taskMybid = (EditText)findViewById(R.id.p_task_mybid);
@@ -71,13 +72,11 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         // get index of target task
         int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
 
-        // get target task
-        view_task=tasklist.get(view_index);
 
         //get tast status from last activity
         status = intent.getExtras().get("status").toString();
         //get data from database
-        if (status == "request") {
+        if (status.equals("request")) {
             TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
             search.execute();
 
@@ -92,7 +91,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
             //set bid
             taskMybid.setText("0");
 
-        }else if(status == "bidden"){
+        }else if(status.equals("bidden")){
             TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
             search.execute();
 
@@ -108,7 +107,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
             //bid = view_task.getBit();
             //taskMybid.setText("0");
 
-        }else if(status == "assigned"){
+        }else if(status.equals("assigned")){
             TaskController.searchAssignTasksOfThisProvider search = new TaskController.searchAssignTasksOfThisProvider();
             search.execute(userId);
 
@@ -131,6 +130,8 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
             toast.show();
         }
 
+        // get target task
+        view_task=tasklist.get(view_index);
 
 
         // get information from target task and set information
@@ -144,7 +145,8 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         taskLocation.setText(temp_destination);
 
         String temp_status=view_task.getTaskStatus();
-        taskStatus.setText(temp_status);
+        Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",temp_status);
+        //taskStatus.setText(temp_status);
 
         Double temp_idealprice=view_task.getTaskIdealPrice();
         taskIdealPrice.setText(Double.toString(temp_idealprice));
@@ -158,9 +160,11 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
                 Intent info2 = new Intent(ProviderTaskBidActivity.this, ProviderBidHistoryActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
+                */
 
             }
         });
@@ -172,19 +176,23 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         bidButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
                 Intent info2 = new Intent(ProviderTaskBidActivity.this, ProviderBidHistoryActivity.class);
+                info2.putExtra("userId",userId);
                 startActivity(info2);
+                */
 
             }
         });
 
 
         //settle back button : back to history, no change
-        Button backButton = (Button) findViewById(R.id.back_button);
+        Button backButton = (Button) findViewById(R.id.Back);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(ProviderTaskBidActivity.this, ProviderBidHistoryActivity.class);
+                Intent info2 = new Intent(ProviderTaskBidActivity.this, ProviderMainActivity.class);
+                info2.putExtra("userId",userId);
                 startActivity(info2);
 
             }
