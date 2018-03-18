@@ -77,6 +77,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
 
                 UserListController.updateUser updateUser= new UserListController.updateUser();
                 updateUser.execute(user);
+               // Log.i("resultid:",user.getResultId());
 
                 //change activity
                 Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMainActivity.class);
@@ -108,6 +109,9 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
+
+        UserListController uc2 = new UserListController();
+        user = uc2.getAUserById(userId);
         // get information from target task and set information
         String temp_name=user.getUserName();
         usernameText.setText(temp_name);

@@ -36,5 +36,9 @@ dependencies {
     compile 'com.android.support:multidex:1.0.3'
     compile 'com.novoda:merlin:0.8.0'
     compile 'com.loopj.android:android-async-http:1.4.9'
+    repositories {
+        jcenter()
+    }
+
 
 }

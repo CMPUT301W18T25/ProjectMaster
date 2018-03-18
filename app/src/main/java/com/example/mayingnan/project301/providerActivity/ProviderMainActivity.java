@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.util.Log;
 
+import java.security.Provider;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -151,8 +153,7 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
 
-
-        RequesterAdapter adapter = new RequesterAdapter(this, taskList);
+        ProviderAdapter adapter = new ProviderAdapter(this, taskList);
         // Attach the adapter to a ListView
         this.availablelist.setAdapter(adapter);
 
