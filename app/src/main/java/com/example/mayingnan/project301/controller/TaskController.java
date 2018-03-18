@@ -3,8 +3,7 @@ package com.example.mayingnan.project301.controller;
 import com.example.mayingnan.project301.Bid;
 import com.example.mayingnan.project301.OnAsyncTaskCompleted;
 import com.example.mayingnan.project301.Task;
-import com.example.mayingnan.project301.TaskUtil;
-import com.example.mayingnan.project301.User;
+import com.example.mayingnan.project301.utilities.TaskUtil;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
@@ -36,7 +35,7 @@ public class TaskController {
         @Override
         protected Void doInBackground(String... search_parameters) {
             verifySettings();
-            ArrayList<User> users = new ArrayList<User>();
+            ArrayList<Task> tasks = new ArrayList<Task>();
 
             String query = "{ \"size\": 500 }" ;
             Log.i("Query", "The query was " + query);
@@ -47,9 +46,9 @@ public class TaskController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<User> foundUsers
-                            = result.getSourceAsObjectList(User.class);
-                    users.addAll(foundUsers);
+                    List<Task> foundTasks
+                            = result.getSourceAsObjectList(Task.class);
+                    tasks.addAll(foundTasks);
                 } else {
                     Log.i("Error", "The search query failed");
                 }
@@ -58,8 +57,8 @@ public class TaskController {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
 
-            for (User u: users){
-                Delete delete = new Delete.Builder(u.getId()).index("cmput301w18t25").type("user").build();
+            for (Task task:tasks){
+                Delete delete = new Delete.Builder(task.getId()).index("cmput301w18t25").type("task").build();
 
                 try {
                     client.execute(delete);
@@ -87,20 +86,11 @@ public class TaskController {
             try {
                 // where is the client?
                 DocumentResult result = client.execute(index);
-                Log.i("TEST client result", result.getId());
+                //Log.i("TEST client result", result.getId());
                 if(result.isSucceeded())
                 {
                     a_task[0].setId(result.getId());
                     Log.i("Success","Elasticsearch ");
-                    Index deep_index = new Index.Builder(a_task[0]).index("cmput301w18t25").type("task").build();
-                    try {
-                        result = client.execute(deep_index);
-                        if (result.isSucceeded()){
-                            Log.i("Success",a_task[0].getTaskProvider());
-                        }
-                    }
-                    catch (Exception e){
-                    }
 
                 }
                 else
@@ -116,6 +106,12 @@ public class TaskController {
             return null;
         }
 
+        @Override
+        protected void onPostExecute(Void Void) {
+
+                Log.i("Debug", ",");
+
+        }
     }
 
     public static class getTaskById extends AsyncTask<String, Void, Task> {

@@ -6,19 +6,21 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.mayingnan.project301.utilities.FileIOUtil;
 import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.Task;
 import com.example.mayingnan.project301.controller.TaskController;
 
-import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
-
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.novoda.merlin.Merlin;
+import com.novoda.merlin.NetworkStatus;
+import com.novoda.merlin.registerable.bind.Bindable;
+import com.novoda.merlin.registerable.connection.Connectable;
+import com.novoda.merlin.registerable.disconnection.Disconnectable;
 
 /**
  * Created by User on 2018/2/25.
@@ -36,15 +38,9 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
     private EditText post_destination;
     private EditText post_ideal_price;
     private ImageView post_photo;
-    private DatePicker post_date;
-    private TimePicker post_time;
-
     private Button submitButton;
     private Button cancelButton;
-
     private String userId;
-    //private ArrayList<Task> tasklist = new ArrayList<>();
-
 
 
 
@@ -79,7 +75,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
             @Override
 
             public void onClick(View view) {
-                if (check_empty(post_name.getText().toString(),post_detail.getText().toString(),post_destination.getText().toString(),
+                if (check_empty(post_name.getText().toString(),post_destination.getText().toString(),
                         post_ideal_price.getText().toString())){
 
 
@@ -94,17 +90,6 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
                     new_task.setTaskIdealPrice(Double.parseDouble(post_ideal_price.getText().toString()));
                     new_task.setTaskRequester(userId);
                     //to do:set photo
-                    //may do:set time
-                    //new_task.setTaskDateTime(getDateTimeFromPickers(post_date,post_time));
-
-
-
-                    //to do: send data to posted list(requester)
-                    //tasklist.add(new_task);
-
-
-
-
 
 
                     //upload new task data to database
@@ -112,6 +97,8 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
                     addTaskCtl.execute(new_task);
                     info2.putExtra("userId",userId);
                     startActivity(info2);
+                    FileIOUtil fileIOUtil = new FileIOUtil();
+                    fileIOUtil.saveSentTaskInFile(new_task,context);
 
 
 
@@ -154,34 +141,14 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
      */
 
 
-    private boolean check_empty(String name, String detail, String destination, String ideal_price)
+    private boolean check_empty(String name, String destination, String ideal_price)
     {
-        if(name.length()==0 || detail.length()==0 || destination.length()==0|| ideal_price.length()==0 ){
+        if(name.length()==0 || destination.length()==0|| ideal_price.length()==0 ){
             return false;
         }
         return true;
     }
-    /**
-     * method to get the Date and Time from a DatePicker and TimePicker and return a JodaTime DateTime from them, in current timezone.
-     * @param dp
-     * @param tp
-     * @return
-     */
 
-    private DateTime getDateTimeFromPickers( DatePicker dp, TimePicker tp) {
-
-
-        String year    = Integer.toString(dp.getYear()) ;
-        String month   = StringUtils.leftPad( Integer.toString(dp.getMonth() + 1), 2, "0" );
-        String day     = StringUtils.leftPad( Integer.toString(dp.getDayOfMonth()), 2, "0" );
-        String hour    = StringUtils.leftPad( Integer.toString(tp.getCurrentHour()), 2, "0" );
-        String minutes = StringUtils.leftPad( Integer.toString(tp.getCurrentMinute()), 2, "0" );
-
-        String dateTime = year + "/" + month + "/" + day + " " + hour + ":" + minutes;
-
-        return DateTime.parse(dateTime);
-
-    }
 
 }
 

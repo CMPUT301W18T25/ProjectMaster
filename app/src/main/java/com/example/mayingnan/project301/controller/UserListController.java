@@ -4,7 +4,7 @@ package com.example.mayingnan.project301.controller;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.mayingnan.project301.UserUtil;
+import com.example.mayingnan.project301.utilities.UserUtil;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
@@ -47,18 +47,21 @@ public class UserListController {
             return true;
         }
         else {
-            Log.i("userNameadad::",newUser.getUserName());
+            Log.i("userName:",newUser.getUserName());
+
             return false;
         }
     }
     public String addUserAndCheck(User user){
         boolean checkValidUser = checkValidationSignUp(user.getUserName());
         String userId = null;
+        User newUser = new User();
         if(checkValidUser){
             UserListController.addUser addUser = new UserListController.addUser();
             addUser.execute(user);
             try {
-                userId = addUser.get();
+                newUser = addUser.get();
+                userId = newUser.getId();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
@@ -121,7 +124,8 @@ public class UserListController {
             return null;
         }
         else {
-            Log.i("userName:",Userlist.get(0).getUserName());
+            Log.i("userName1:",Userlist.get(0).getUserName());
+
             return Userlist.get(0);
         }
     }
@@ -134,12 +138,13 @@ public class UserListController {
     }
 
 
-    public static class addUser extends AsyncTask<User, Void, String> {
+    public static class addUser extends AsyncTask<User, Void, User> {
         @Override
 
-        protected String doInBackground(User... users) {
+        protected User doInBackground(User... users) {
             verifySettings();
             String newId = null;
+            User newuser = new User();
 
             for (User user : users) {
                 user.setId(user.getUserName());
@@ -150,7 +155,9 @@ public class UserListController {
                     DocumentResult result = client.execute(index);
                     if(result.isSucceeded())
                     {
-                        newId = user.getId();
+                        newuser.setId(user.getUserName());
+                        user.setResultId(result.getId());
+
                         Log.i("Success","Elasticsearch ");
 
                     }
@@ -164,7 +171,8 @@ public class UserListController {
                 }
 
             }
-            return newId;
+
+            return newuser;
 
 
         }
@@ -288,7 +296,7 @@ public class UserListController {
             // Serialize object into Json string
             String query = UserUtil.serializer(users[0]);
             Index index = new Index.Builder(query)
-                    .index("cmput301w18t25").type("user").id(users[0].getId()).build();
+                    .index("cmput301w18t25").type("user").id(users[0].getResultId()).build();
 
             try {
                 DocumentResult result = client.execute(index);
@@ -334,7 +342,7 @@ public class UserListController {
             }
 
             for (User u: users){
-                Delete delete = new Delete.Builder(u.getId()).index("cmput301w18t25").type("user").build();
+                Delete delete = new Delete.Builder(u.getResultId()).index("cmput301w18t25").type("user").build();
 
                 try {
                     client.execute(delete);
@@ -352,6 +360,7 @@ public class UserListController {
     @SuppressWarnings("ConstantConditions")
     public Boolean checkUserByNameAndPassword(String userName, String userPassword){
 
+
         UserListController.getAUserByName getAUserByName = new UserListController.getAUserByName();
         getAUserByName.execute(userName);
 
@@ -367,10 +376,12 @@ public class UserListController {
         //noinspection ConstantConditions
         for (User u: Userlist){
 
-            Log.i("username   ",u.getUserName());
+            Log.i("username",u.getUserName());
+
 
             if(u.getUserPassword().equals(userPassword)){
                 found = true;
+                return found;
             }
         }
         return found;

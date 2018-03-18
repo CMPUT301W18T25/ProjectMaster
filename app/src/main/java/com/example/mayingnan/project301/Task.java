@@ -8,6 +8,8 @@ import java.util.ArrayList;
  * Created by User on 2018/2/25.
  */
 
+/* status: request, bidden, assigned, done */
+
 //TODO add idealprice, photo, time set to current by built-in methods?
 public class Task {
     private String taskName;

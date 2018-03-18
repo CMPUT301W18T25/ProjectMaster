@@ -42,6 +42,7 @@ public class RequesterMainActivity extends AppCompatActivity {
 
 
 
+
         //settle view button
         Button viewButton = (Button) findViewById(R.id.edit_button);
         viewButton.setOnClickListener(new View.OnClickListener() {

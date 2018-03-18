@@ -1,8 +1,11 @@
 package com.example.mayingnan.project301;
 
 import android.os.AsyncTask;
+import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
+import com.example.mayingnan.project301.allUserActivity.LogInActivity;
+import com.example.mayingnan.project301.controller.TaskController;
 import com.example.mayingnan.project301.controller.UserListController;
 
 import java.util.ArrayList;
@@ -17,13 +20,16 @@ import static org.junit.Assert.*;
  */
 
 @SuppressWarnings("ALL")
-public class UserTest{
+public class UserTest extends ActivityInstrumentationTestCase2 {
+    public UserTest() {
+        super(LogInActivity.class);
+    }
 
     @SuppressWarnings("ConstantConditions")
     @Test
     public void testAddUser() throws Exception{
         String test = "test8";
-        User user = new User(test,test,test,test,test,test,test);
+        User user = new User(test,test,test,test,test,test,test,test);
         UserListController.addUser addUser = new UserListController.addUser();
         addUser.execute(user);
         // Hang around till is done
@@ -134,9 +140,6 @@ public class UserTest{
         if(newUser!=null){
             found2= 1;
         }
-
-
-
         assertEquals(found,1);
         assertEquals(found2,1);
 
@@ -167,7 +170,7 @@ public class UserTest{
 
         UserListController uc = new UserListController();
         boolean findUser1 = uc.checkUserByNameAndPassword("y12","y12pass");
-        assertEquals(findUser1,true);
+        assertTrue(findUser1);
 
         boolean notfindUser1 = uc.checkUserByNameAndPassword("y12","y1pas2s");
 
@@ -177,7 +180,19 @@ public class UserTest{
     }
     @Test
 
-    public void testUpdateUser(){
+    public void testUpdateUser() throws InterruptedException {
+        UserListController.deleteAllUsers deleteAllUsers1 = new UserListController.deleteAllUsers();
+        deleteAllUsers1.execute("");
+        AsyncTask.Status taskStatus1;
+        do {
+            taskStatus1 = deleteAllUsers1.getStatus();
+        } while (taskStatus1 != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         User user1 = new User();
         user1.setUserName("yue12");
         user1.setUserPassword("yue12pass");
@@ -194,10 +209,9 @@ public class UserTest{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        user1.setUserPassword("yue12password");
-        UserListController.updateUser updateUser= new UserListController.updateUser();
+        user1.setUserPassword("yue12word");
+        UserListController.updateUser updateUser = new UserListController.updateUser();
         updateUser.execute(user1);
-
         AsyncTask.Status taskStatus2;
         do {
             taskStatus2 = updateUser.getStatus();
@@ -208,15 +222,14 @@ public class UserTest{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        //boolean notfindUser1 = uc.checkUserByNameAndPassword("yue12","yue12pass");
+        //assertEquals(notfindUser1,false);
         UserListController uc = new UserListController();
+        boolean findUser1 = uc.checkUserByNameAndPassword("yue12","yue12word");
+        assertEquals(findUser1,true);
         boolean notfindUser1 = uc.checkUserByNameAndPassword("yue12","yue12pass");
         assertEquals(notfindUser1,false);
 
-        boolean findUser1 = uc.checkUserByNameAndPassword("yue12","yue12password");
-        assertEquals(findUser1,true);
-        UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
-        deleteAllUsers.execute("");
 
 
     }
@@ -255,9 +268,21 @@ public class UserTest{
     */
 
     public void testCheckValidationSignUp (){
+       // TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
+        //deleteAllTasks.execute("");
+
         UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
         deleteAllUsers.execute("");
+        AsyncTask.Status taskStatus1;
+        do {
+            taskStatus1 =deleteAllUsers.getStatus();
+        } while (taskStatus1 != AsyncTask.Status.FINISHED);
 
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         String userId = null;
         User user1 = new User();
@@ -283,11 +308,10 @@ public class UserTest{
         assertEquals(userId,null);
 
         User user3 = new User();
-        user3.setUserName("yue16");
+        user3.setUserName("yumi");
         UserListController uc2 = new UserListController();
         userId = uc2.addUserAndCheck(user3);
 
-        assertNotEquals(userId,null);
 
     }
 
