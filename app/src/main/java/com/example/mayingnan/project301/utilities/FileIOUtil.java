@@ -14,25 +14,20 @@
  * limitations under the License.
  */
 
-package com.example.mayingnan.project301;
+package com.example.mayingnan.project301.utilities;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
-import com.google.gson.Gson;
+import com.example.mayingnan.project301.Task;
+import com.example.mayingnan.project301.utilities.TaskUtil;
 
 
 /**

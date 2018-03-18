@@ -4,7 +4,7 @@ package com.example.mayingnan.project301.controller;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.mayingnan.project301.UserUtil;
+import com.example.mayingnan.project301.utilities.UserUtil;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;

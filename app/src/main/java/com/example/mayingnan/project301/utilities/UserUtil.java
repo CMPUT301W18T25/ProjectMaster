@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.example.mayingnan.project301;
+package com.example.mayingnan.project301.utilities;
 
+import com.example.mayingnan.project301.User;
 import com.google.gson.Gson;
 
 /**
