@@ -15,6 +15,12 @@ import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.Task;
 import com.example.mayingnan.project301.controller.TaskController;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.novoda.merlin.Merlin;
+import com.novoda.merlin.NetworkStatus;
+import com.novoda.merlin.registerable.bind.Bindable;
+import com.novoda.merlin.registerable.connection.Connectable;
+import com.novoda.merlin.registerable.disconnection.Disconnectable;
 
 /**
  * Created by User on 2018/2/25.

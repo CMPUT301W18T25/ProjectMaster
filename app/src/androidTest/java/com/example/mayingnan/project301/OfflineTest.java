@@ -28,8 +28,6 @@ public class OfflineTest extends ActivityInstrumentationTestCase2{
     public OfflineTest() {
         super(LogInActivity.class);
     }
-
-
     private Context context;
     @Override
     public void setUp() {
@@ -37,52 +35,6 @@ public class OfflineTest extends ActivityInstrumentationTestCase2{
         context = InstrumentationRegistry.getContext();
         Log.i("get context","a");
     }
-
-    public void testSaveSentTask(){
-        String instruction = "sent";
-        Task test_task = new Task();
-
-        // init test task info, all info should be tested
-        test_task.setTaskDetails("Details");
-        test_task.setTaskName("Test");
-        test_task.setTaskProvider("A donkey");
-        test_task.setTaskRequester("A snake");
-        FileSystemController fc= new FileSystemController();
-
-
-        TaskController.addTask addTaskCtl = new TaskController.addTask();
-        addTaskCtl.execute(test_task);
-
-        AsyncTask.Status taskStatus;
-        do {
-            taskStatus = addTaskCtl.getStatus();
-        } while (taskStatus != AsyncTask.Status.FINISHED);
-
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        fc.saveToFile(test_task,instruction,context);
-
-        ArrayList<Task> taskList;
-        taskList =  fc.loadSentTasksFromFile(context);
-        boolean addSucess = false;
-        for (Task task: taskList) {
-            if(task.getTaskName().equals("Test")){
-
-                addSucess = true;
-
-            }
-        }
-        assertEquals(addSucess,true);
-
-
-
-    }
-
-
-
 
 
 }
