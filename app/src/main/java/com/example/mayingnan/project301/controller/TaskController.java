@@ -93,15 +93,7 @@ public class TaskController {
                 {
                     a_task[0].setId(result.getId());
 
-                    String query = TaskUtil.serializer(a_task[0]);
-                    Index index2 = new Index.Builder(query)
-                            .index("cmput301w18t25").type("task").id(a_task[0].getId()).build();
-                    try{
-                        DocumentResult result2 = client.execute(index2);
-                        Log.i("Success", "ID added");
-                    }catch (Exception e){
-                        Log.i("Error", "fail to add iD ");
-                    }
+
 
                     Log.i("Success","Elasticsearch ");
                 }

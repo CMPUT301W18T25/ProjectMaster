@@ -79,6 +79,7 @@ public class TaskTest {
             e.printStackTrace();
         }
 
+        Log.i("Report", task.getId());
         if (!(task.getId() == null)){
             if (!task.getId().isEmpty()){
                 assertTrue(true);
