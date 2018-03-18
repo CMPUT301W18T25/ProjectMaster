@@ -585,5 +585,41 @@ public class TaskController {
         }
     }
 
+    public static class yuqi8delete extends AsyncTask<String, Void, Void>{
+
+        private String id;
+
+        public yuqi8delete(String arg_id){
+            this.id = arg_id;
+        }
+
+        @Override
+        protected Void doInBackground(String... idToDelete) {
+            verifySettings();
+
+            String query = "{ \n"+
+                    "\"size\" : 1000" +
+
+                    "}\n"+"}";
+
+            Log.i("Query", "The query was " + query);
+
+            Delete delete = new Delete.Builder(idToDelete[0]).index("cmput301w18t25").type("task").build();
+            try {
+                DocumentResult result = client.execute(delete);
+                if (result.isSucceeded()) {
+                    Log.i("Success", "Successful delete");
+                } else {
+                    Log.i("Error", "Elastic search was not able to deletes.");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "We failed to add a request to elastic search!");
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
 
 }
