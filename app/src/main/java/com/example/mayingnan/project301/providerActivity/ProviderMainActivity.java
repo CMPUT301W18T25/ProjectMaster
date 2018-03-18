@@ -152,7 +152,7 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
 
-        RequesterAdapter adapter = new RequesterAdapter(this, taskList);
+        ProviderAdapter adapter = new ProviderAdapter(this, taskList);
         // Attach the adapter to a ListView
         this.availablelist.setAdapter(adapter);
 

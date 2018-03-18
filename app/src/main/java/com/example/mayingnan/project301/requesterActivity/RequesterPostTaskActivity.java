@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.mayingnan.project301.controller.OfflineController;
 import com.example.mayingnan.project301.utilities.FileIOUtil;
 import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.Task;
@@ -30,7 +31,7 @@ import com.novoda.merlin.registerable.disconnection.Disconnectable;
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterPostTaskActivity extends AppCompatActivity {
+public class RequesterPostTaskActivity extends AppCompatActivity implements Connectable, Disconnectable, Bindable {
     private Context context;
 
     private EditText post_name;
@@ -41,13 +42,17 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
     private Button submitButton;
     private Button cancelButton;
     private String userId;
-
-
-
-    @SuppressWarnings("ConstantConditions")
+    protected Merlin merlin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // monitor network connectivity
+        merlin = new Merlin.Builder().withConnectableCallbacks().withDisconnectableCallbacks().withBindableCallbacks().build(this);
+        merlin.registerConnectable(this);
+        merlin.registerDisconnectable(this);
+        merlin.registerBindable(this);
+
         setContentView(R.layout.requester_post_task);
         context=getApplicationContext();
         final Intent intent = getIntent();
@@ -66,6 +71,8 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
         cancelButton=(Button)findViewById(R.id.cancel_button);
 
         //post_time.setIs24HourView(true); // to set 24 hours mode
+
+
 
 
         /**
@@ -99,6 +106,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
                     startActivity(info2);
                     FileIOUtil fileIOUtil = new FileIOUtil();
                     fileIOUtil.saveSentTaskInFile(new_task,context);
+
 
 
 
@@ -147,6 +155,41 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        merlin.bind();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        merlin.unbind();
+    }
+
+
+    @Override
+    public void onBind(NetworkStatus networkStatus) {
+        if (networkStatus.isAvailable()) {
+            onConnect();
+        } else if (!networkStatus.isAvailable()) {
+            onDisconnect();
+        }
+    }
+
+    @Override
+    public void onConnect() {
+        // try to update offline accepted request
+
+
+        //
+    }
+
+    @Override
+    public void onDisconnect() {
+        //TODO try to get all task from offline
     }
 
 
