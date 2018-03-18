@@ -92,7 +92,6 @@ public class TaskController {
                 {
                     a_task[0].setId(result.getId());
                     Log.i("Success","Elasticsearch ");
-
                 }
                 else
                 {
