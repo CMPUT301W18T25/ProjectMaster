@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.mayingnan.project301.FileIOUtil;
 import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.Task;
 import com.example.mayingnan.project301.controller.TaskController;
@@ -95,6 +96,8 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
                     addTaskCtl.execute(new_task);
                     info2.putExtra("userId",userId);
                     startActivity(info2);
+                    FileIOUtil fileIOUtil = new FileIOUtil();
+                    fileIOUtil.saveSentTaskInFile(new_task,context);
 
 
 

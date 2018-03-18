@@ -14,7 +14,7 @@ import android.content.Context;
 
 public class FileSystemController {
     private String FILENAME;
-
+    public FileIOUtil FileIOUtil = new FileIOUtil();
     public boolean testTrue(String name){
         return true;
     }

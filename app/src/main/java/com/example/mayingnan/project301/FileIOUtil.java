@@ -16,16 +16,23 @@
 
 package com.example.mayingnan.project301;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import com.google.gson.Gson;
 
 
 /**
@@ -41,12 +48,16 @@ public class FileIOUtil {
 	 * @param task the task
 	 * @param context the context
 	 */
+
 	@SuppressWarnings("ConstantConditions")
-	public static void saveSentTaskInFile(Task task, Context context) {
+	public void saveSentTaskInFile(Task task, Context context) {
 		try {
 			String jsonStr= TaskUtil.serializer(task);
 			String fileName = TaskUtil.generateOnlineSentTaskFileName(task);
-			FileOutputStream fos = context.openFileOutput(fileName, 0);
+			Log.i("asd","abbbbbb");
+
+			FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+			Log.i("asd","aaaaaa");
 			if (fos == null) {
 				Log.i("Debug", "null fos in save request");
 			}
@@ -65,11 +76,11 @@ public class FileIOUtil {
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	public static void saveOfflineAddTaskInFile(Task task, Context context) {
+	public void saveOfflineAddTaskInFile(Task task, Context context) {
 		try {
 			String jsonStr= TaskUtil.serializer(task);
 			String fileName = TaskUtil.generateOfflineAddTaskFileName(task);
-			FileOutputStream fos = context.openFileOutput(fileName, 0);
+			FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
 			if (fos == null) {
 				Log.i("Debug", "null fos in save request");
 			}
@@ -89,11 +100,11 @@ public class FileIOUtil {
 
 
 	@SuppressWarnings("ConstantConditions")
-	public static void saveOfflineEditTaskInFile(Task task, Context context) {
+	public void saveOfflineEditTaskInFile(Task task, Context context) {
 		try {
 			String jsonStr= TaskUtil.serializer(task);
 			String fileName = TaskUtil.generateOfflineEditTaskFileName(task);
-			FileOutputStream fos = context.openFileOutput(fileName, 0);
+			FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
 			if (fos == null) {
 				Log.i("Debug", "null fos in save request");
 			}
@@ -117,23 +128,23 @@ public class FileIOUtil {
 	 * @param context the context
 	 * @return the array list of requests
 	 */
-	public static ArrayList<Task> loadMultipleTasksFromFile(Context context, ArrayList<String> fileList) {
+	public ArrayList<Task> loadMultipleTasksFromFile(Context context, ArrayList<String> fileList) {
 		ArrayList<Task> TaskList = new ArrayList<>();
 		for (String f : fileList) {
-            FileInputStream fis;
-            try {
-                fis = context.openFileInput(f);
-                BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-                Task task = TaskUtil.deserializer(in);
-                TaskList.add(task);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+			FileInputStream fis;
+			try {
+				fis = context.openFileInput(f);
+				BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+				Task task = TaskUtil.deserializer(in);
+				TaskList.add(task);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 		return TaskList;
 	}
 
-	public static Task loadSingleTaskFromFile(String fileName, Context context) {
+	public Task loadSingleTaskFromFile(String fileName, Context context) {
 		Task request = new Task();
 		FileInputStream fis;
 		try {
