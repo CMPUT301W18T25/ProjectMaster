@@ -233,6 +233,7 @@ public class TaskController {
             this.current_task = current_task;
             this.current_bid = current_bid;
             this.current_task.addBid(this.current_bid);
+            this.current_task.setTaskStatus("bidden");
         }
 
         @Override
