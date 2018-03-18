@@ -863,11 +863,7 @@ public class TaskTest {
             rt_list = search.get();
             Log.i("Success", "message");
 
-            if (rt_list.size() == 0) {
-                assertTrue(false);
-            }
-
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < rt_list.size(); i++) {
                 Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
                 if (rt_list.get(i) == null) {
                     break;

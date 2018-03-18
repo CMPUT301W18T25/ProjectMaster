@@ -70,6 +70,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
             }
         });
 
+        /*
         TaskController.searchAllTasksOfThisRequester getAll = new TaskController.searchAllTasksOfThisRequester();
         getAll.execute("user id here");
         try {
@@ -79,7 +80,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
+        */
     }
     @Override
     protected void onStart(){
