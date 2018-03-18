@@ -118,7 +118,7 @@ public class ProviderMainActivity extends AppCompatActivity {
     public void onStart(){
         super.onStart();
 
-        TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
+        TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
         search.execute();
 
         try {
@@ -137,14 +137,14 @@ public class ProviderMainActivity extends AppCompatActivity {
         */
 
         //Task task = taskList.get(0);
-        /* Test
+        //Test
         Task task1 = new Task();
         task1.setTaskName("a");
         task1.setTaskAddress("a");
         task1.setTaskIdealPrice(1.0);
-        taskList = new ArrayList<>();
+        //taskList = new ArrayList<>();
         taskList.add(task1);
-        */
+        //
 
 
         RequesterAdapter adapter = new RequesterAdapter(this, taskList);
