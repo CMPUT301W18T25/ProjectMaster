@@ -119,11 +119,11 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
             emailText.setText(temp_detail);
         }
 
-        if (user.getUserAddress()==null) {
+        if (user.getUserPhone()==null) {
             mobileText.setText("");
         }else{
-            String temp_destination = user.getUserAddress();
-            mobileText.setText(temp_destination);
+            String temp_phone = user.getUserPhone();
+            mobileText.setText(temp_phone);
         }
 
         String temp_status=user.getUserPassword();
