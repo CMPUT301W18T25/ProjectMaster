@@ -416,9 +416,9 @@ public class TaskController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<Task> foundUsers
+                    List<Task> foundResults
                             = result.getSourceAsObjectList(Task.class);
-                    result_tasks.addAll(foundUsers);
+                    result_tasks.addAll(foundResults);
                     Log.i("Success", "Data retrieved from database: ");
                 } else {
                     Log.i("Error", "The search query failed");
@@ -500,6 +500,7 @@ public class TaskController {
             */
             String query =
                     "\n{ \n"+
+                            "\"size\" : 10,\n"+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
