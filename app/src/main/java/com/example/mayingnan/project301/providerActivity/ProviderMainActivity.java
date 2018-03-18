@@ -9,12 +9,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.Task;
+import com.example.mayingnan.project301.controller.TaskController;
+import com.example.mayingnan.project301.requesterActivity.RequesterAdapter;
 import com.example.mayingnan.project301.requesterActivity.RequesterViewTaskActivity;
 
-import java.util.ArrayList;
+
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderMainActivity extends AppCompatActivity {
@@ -110,10 +116,44 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
     }
-    public void onSearch(){}
 
-    public void showMap(){}
+    @Override
+    public void onStart(){
+        super.onStart();
 
-    public void showHistory(){}
+        TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
+        search.execute();
+
+        try {
+            taskList = search.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        /* Test
+        Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",taskList.get(0).getId());
+        Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",taskList.get(0).getTaskName());
+        Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",taskList.get(0).getTaskAddress());
+        Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",Double.toString(taskList.get(0).getTaskIdealPrice()));
+        */
+
+        //Task task = taskList.get(0);
+        /* Test
+        Task task1 = new Task();
+        task1.setTaskName("a");
+        task1.setTaskAddress("a");
+        task1.setTaskIdealPrice(1.0);
+        taskList = new ArrayList<>();
+        taskList.add(task1);
+        */
+
+
+        RequesterAdapter adapter = new RequesterAdapter(this, taskList);
+        // Attach the adapter to a ListView
+        this.availablelist.setAdapter(adapter);
+
+    }
 
 }
