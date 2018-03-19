@@ -21,14 +21,14 @@ import android.content.Context;
 
 public class FileSystemController {
     public FileIOUtil FileIOUtil = new FileIOUtil();
-    public boolean testTrue(String name){
-        return true;
-    }
 
-    public boolean testFalse(String name){
-        return false;
-    }
-    //instruction can be:sent,offlineAdd,offlineEdit
+
+    /**
+     * Save tasks into json file
+     * @param task a task object
+     * @param instruction Three kinds of instruction: offlineAdd, OfflineEdit, sent
+     * @param context current context
+     */
     public void saveToFile(Task task,String instruction,Context context){
         if(instruction.equals("sent")){
             FileIOUtil.saveSentTaskInFile(task,context);
@@ -40,6 +40,12 @@ public class FileSystemController {
             FileIOUtil.saveOfflineEditTaskInFile(task,context);
         }
     }
+
+    /**
+     * Load 'sent' tasks from json file
+     * @param context current context
+     * @return tasks list
+     */
     public ArrayList<Task> loadSentTasksFromFile(Context context){
         ArrayList<Task> Tasks;
         ArrayList<String> SentTaskFiles = TaskUtil.getOfflineAddTaskFileList(context);
@@ -47,12 +53,23 @@ public class FileSystemController {
         return Tasks;
     }
 
+    /**
+     * Load 'offlineAdd' tasks from json file
+     * @param context current context
+     * @return tasks list
+     */
     public ArrayList<Task> loadOfflineAddTasksFromFile(Context context){
         ArrayList<Task> Tasks;
         ArrayList<String> offlineAddTaskFiles = TaskUtil.getOfflineAddTaskFileList(context);
         Tasks = FileIOUtil.loadMultipleTasksFromFile(context, offlineAddTaskFiles);
         return Tasks;
     }
+
+    /**
+     * Load 'offlineEdit' tasks from json file
+     * @param context current context
+     * @return tasks list
+     */
     public ArrayList<Task> loadOfflineEditTasksFromFile(Context context){
         ArrayList<Task> Tasks;
         ArrayList<String> offlineEditTaskFile = TaskUtil.getOfflineEditTaskFileList(context);
@@ -60,7 +77,11 @@ public class FileSystemController {
         return Tasks;
     }
 
-    @SuppressWarnings("ConstantConditions")
+    /**
+     * Delete all json files begin with the specific instruction title
+     * @param context current context
+     * @param instruction Three kinds of instruction: offlineAdd, OfflineEdit, sent
+     */
     public void deleteAllFiles( Context context,String instruction) {
         try {
             ArrayList<String> TaskFiles;
@@ -90,7 +111,11 @@ public class FileSystemController {
         }
     }
 
-    @SuppressWarnings("ConstantConditions")
+    /**
+     * Delete json file based on the file name
+     * @param fileName json file name
+     * @param context current context
+     */
     public void deleteFileByName(String fileName, Context context) {
         try {
 

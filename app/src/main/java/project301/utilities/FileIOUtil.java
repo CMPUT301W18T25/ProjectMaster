@@ -29,7 +29,7 @@ import android.util.Log;
 import project301.Task;
 
 /**
- * Save tasks in offline json file
+ * Save and load tasks from offline json file
  */
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class FileIOUtil {
@@ -42,7 +42,6 @@ public class FileIOUtil {
 	 * @param context the context
 	 */
 
-	@SuppressWarnings("ConstantConditions")
 	public void saveSentTaskInFile(Task task, Context context) {
 		try {
 			String jsonStr= TaskUtil.serializer(task);
@@ -68,7 +67,11 @@ public class FileIOUtil {
 		}
 	}
 
-	@SuppressWarnings("ConstantConditions")
+	/**
+	 * Save offline add request in file.
+	 * @param task a task object
+	 * @param context current context
+	 */
 	public void saveOfflineAddTaskInFile(Task task, Context context) {
 		try {
 			String jsonStr= TaskUtil.serializer(task);
@@ -91,8 +94,11 @@ public class FileIOUtil {
 		}
 	}
 
-
-	@SuppressWarnings("ConstantConditions")
+	/**
+	 * Save offline edit request in file.
+	 * @param task a task object
+	 * @param context current context
+	 */
 	public void saveOfflineEditTaskInFile(Task task, Context context) {
 		try {
 			String jsonStr= TaskUtil.serializer(task);
@@ -116,7 +122,7 @@ public class FileIOUtil {
 	}
 
 	/**
-	 * Load request from file array list.
+	 * Load multiple requests from file array list.
 	 *
 	 * @param context the context
 	 * @return the array list of requests
@@ -137,6 +143,12 @@ public class FileIOUtil {
 		return TaskList;
 	}
 
+	/**
+	 * Load a single request from file array list.
+	 *
+	 * @param context the context
+	 * @return the array list of requests
+	 */
 	public Task loadSingleTaskFromFile(String fileName, Context context) {
 		Task request = new Task();
 		FileInputStream fis;

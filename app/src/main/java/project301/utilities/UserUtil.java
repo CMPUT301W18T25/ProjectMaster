@@ -24,11 +24,21 @@ import com.google.gson.Gson;
  * and deserialize the user object
  */
 public class UserUtil {
+    /**
+     * Convert user object into json string
+     * @param user a user object
+     * @return json string
+     */
     public static String serializer(User user) {
         Gson gson = new Gson();
         return gson.toJson(user);
     }
 
+    /**
+     * Convert json string into user object
+     * @param string json string
+     * @return user object
+     */
     public static User deserializer(String string) {
         Gson gson = new Gson();
         return gson.fromJson(string, User.class);

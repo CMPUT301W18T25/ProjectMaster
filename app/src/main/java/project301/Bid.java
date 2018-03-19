@@ -5,9 +5,9 @@ package project301;
  * @class Detail : Bid model contains all the features of a single bid
  *
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Yuqi Zhang
+ * @author :Julian Stys
+ * @author :Yue Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */

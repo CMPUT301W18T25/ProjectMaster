@@ -18,7 +18,10 @@ import project301.Task;
 
 
 public class OfflineController {
-
+    /**
+     * After the app reconnect to the internet, it will try to execute previously stored offline tasks
+     * @param context current context
+     */
 
     public void tryToExecuteOfflineTasks(Context context){
         FileSystemController fileSystemController = new FileSystemController();

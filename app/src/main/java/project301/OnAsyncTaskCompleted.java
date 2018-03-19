@@ -21,9 +21,9 @@ package project301;
  * @class Detail: Listen to the asnctask to see whether it is finished
  *
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Yuqi Zhang
+ * @author :Julian Stys
+ * @author :Yue Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */

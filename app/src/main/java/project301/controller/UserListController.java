@@ -39,6 +39,11 @@ public class UserListController {
     public ArrayList<User> userlist;
     private static JestDroidClient client;
 
+    /**
+     * Just for testing, will be deleted finally
+     * @param name Username
+     * @return
+     */
     public boolean checkLogInInfo(String name){   //created by wdong2 for testing
         /**
          * return true for valid user name and passward; false otherwise
@@ -47,7 +52,12 @@ public class UserListController {
         if (name == "IUN"){ return false;}
         return true;
     }
-    //if
+
+    /**
+     * Easy interface to check validation sign up
+     * @param name username
+     * @return whether successful or not
+     */
     public boolean checkValidationSignUp (String name){
 
         if (name == "wdong2"){return true;}
@@ -64,6 +74,12 @@ public class UserListController {
             return false;
         }
     }
+
+    /**
+     * Add a user and check whether the name is duplicated.
+     * @param user A user object
+     * @return userId
+     */
     public String addUserAndCheck(User user){
         boolean checkValidUser = checkValidationSignUp(user.getUserName());
         String userId = null;
@@ -87,7 +103,12 @@ public class UserListController {
         return userId;
 
     }
-    @SuppressWarnings("ConstantConditions")
+
+    /**
+     * Get a user object through his id.
+      * @param userId userid
+     * @return a user object
+     */
     public User getAUserById(String userId){
         Log.d("UserListController","getAUserById userId: "+userId);
         UserListController.getAUserById getAUserById = new UserListController.getAUserById();
@@ -117,7 +138,13 @@ public class UserListController {
             return Userlist.get(0);
         }
     }
-    @SuppressWarnings("ConstantConditions")
+
+    /**
+     * Get a user object by the username
+     * @param userName username
+     * @return user object
+     */
+
     public User getAUserByName(String userName){
         UserListController.getAUserByName getAUserByName = new UserListController.getAUserByName();
         getAUserByName.execute(userName);
@@ -142,6 +169,11 @@ public class UserListController {
         }
     }
 
+    /**
+     * Update user
+     *
+     * @param user A user object
+     */
     public void updateUser(User user){
 
         UserListController.updateUser updateUser= new UserListController.updateUser();
@@ -149,6 +181,9 @@ public class UserListController {
 
     }
 
+    /**
+     * A static class used to add user to the ES database
+     */
 
     public static class addUser extends AsyncTask<User, Void, User> {
         @Override
@@ -199,6 +234,11 @@ public class UserListController {
         }
     }
 
+    /**
+     * A static class used to get all user to the ES database
+     */
+
+
     public static class GetAllUsers extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
         protected ArrayList<User> doInBackground(String... search_parameters) {
@@ -230,6 +270,10 @@ public class UserListController {
         }
     }
 
+
+    /**
+     * A static class used to get a user by its Id from the ES database
+     */
 
     public static class getAUserById extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
@@ -270,6 +314,11 @@ public class UserListController {
         }
 
     }
+
+    /**
+     * A static class used to get a user by its name from the ES database
+     */
+
     public static class getAUserByName extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
         protected ArrayList<User> doInBackground(String... search_parameters) {
@@ -323,8 +372,6 @@ public class UserListController {
                 DocumentResult result = client.execute(index);
                 if (result.isSucceeded()) {
                     Log.i("Debug", "Successful update user profile");
-                    Log.i("password",users[0].getUserPassword());
-                    Log.i("name",users[0].getUserPassword());
                 } else {
                     Log.i("Error", "We failed to update user profile to elastic search!");
                 }
@@ -336,6 +383,11 @@ public class UserListController {
 
 
     }
+
+    /**
+     * A static class used to delete all user from the ES database
+     */
+
 
     public static class deleteAllUsers extends AsyncTask<String, Void, Void> {
 
@@ -380,7 +432,12 @@ public class UserListController {
         }
     }
 
-    @SuppressWarnings("ConstantConditions")
+    /**
+     * Check whether the user name and password matching with each other
+     * @param userName username
+     * @param userPassword userpassword
+     * @return
+     */
     public Boolean checkUserByNameAndPassword(String userName, String userPassword){
 
 
@@ -410,7 +467,9 @@ public class UserListController {
         return found;
     }
 
-
+    /**
+     * elastic search database setting
+     */
     public static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080");
