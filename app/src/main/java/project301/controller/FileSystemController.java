@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import android.content.Context;
 
 /**
+ * Save data and load Data in gson file.
  * @classname : FileSystemController
- * @class Detail :Save data and load Data in gson file.
- *
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
  * @author : Yue Ma

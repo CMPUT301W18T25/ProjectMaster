@@ -14,9 +14,9 @@ import project301.providerActivity.ProviderEditInfoActivity;
 import project301.providerActivity.ProviderMainActivity;
 
 /**
- * @classname : RequesterEditInfoActivity
- * @class Detail :
  *
+ * @class Detail :
+ * @classname : RequesterEditInfoActivity
  * @Date :   18/03/2018
  * @author : Yingnan Ma
  * @author : Wang Dong

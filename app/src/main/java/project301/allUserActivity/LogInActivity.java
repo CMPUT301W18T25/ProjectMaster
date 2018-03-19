@@ -24,9 +24,9 @@ import project301.controller.UserListController;
 import java.util.ArrayList;
 
 /**
- * @classname : LoginActivity
  * This is the login activity, when user open the app, this activity
  * will ask the user to sign up an account or login.
+ * @classname : LoginActivity
  * @Date :   18/03/2018
  * @author : Wang Dong
  * @author : Yue Ma

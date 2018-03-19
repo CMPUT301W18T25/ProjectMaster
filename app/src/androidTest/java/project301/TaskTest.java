@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
 @SuppressWarnings("ALL")
 public class TaskTest {
 
-    /*
+
     @Test
     public void testTaskContructor(){
         ArrayList<Bid> bidList = new ArrayList<Bid>();
@@ -58,8 +58,6 @@ public class TaskTest {
 
 
     }
-    @Test
-    */
     // TODO more failing test cases
     // add passed w8 for more cases
     // method addTask

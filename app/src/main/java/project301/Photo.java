@@ -9,9 +9,7 @@ import java.util.Arrays;
  * @class Detail : Photo model contains converted photo information
  *
  * @Date :   18/03/2018
- * @author : Yuqi Zhang
  * @author :Julian Stys
- * @author :Yue Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */

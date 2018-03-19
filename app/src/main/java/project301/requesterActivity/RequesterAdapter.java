@@ -14,8 +14,8 @@ import project301.Task;
 import java.util.ArrayList;
 
 /**
+ * RequesterAdapter is to adapt task and do task arrangement in the arraylist.
  * @classname : RequesterActivity
- * @class Detail :RequesterAdapter is to adapt task and do task arrangement in the arraylist.
  * @Date :   18/03/2018
  * @author : Yingnan Ma
  * @author : Wang Dong

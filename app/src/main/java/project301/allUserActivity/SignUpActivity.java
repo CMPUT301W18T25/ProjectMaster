@@ -19,10 +19,10 @@ import project301.User;
 import project301.controller.UserListController;
 
 /**
- * @classname : SignUpActivity
  * This activity is for a new user to sign up an account.
  * The user need to fill the blank on this activity for creating a new account.
  * The form contains name, phone number, password, and email.
+ * @classname : SignUpActivity
  * @Date :   18/03/2018
  * @author : Wang Dong
  * @author : Yue Ma

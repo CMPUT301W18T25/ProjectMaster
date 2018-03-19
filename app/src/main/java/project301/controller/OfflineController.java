@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 import project301.Task;
 /**
+ * Activities can execute offline tasks through this controller
  * @classname : OfflineController
- * @class Detail: Activities can execute offline tasks through this controller
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
  * @author : Yue Ma
