@@ -4,12 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.concurrent.ExecutionException;
+
+import project301.controller.FileSystemController;
 import project301.utilities.FileIOUtil;
 import project301.R;
 import project301.Task;
@@ -24,6 +28,7 @@ import project301.controller.TaskController;
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
+
 
 
 
@@ -88,9 +93,21 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
                     //upload new task data to database
                     TaskController.addTask addTaskCtl=new TaskController.addTask();
                     addTaskCtl.execute(new_task);
+                    Boolean returnCode = true;
+                    try {
+                        returnCode = addTaskCtl.get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+                    if(!returnCode){
+                        FileSystemController fileSystemController = new FileSystemController();
+                        Log.i("offlineAdd","test");
+                        fileSystemController.saveToFile(new_task,"offlineAdd",context);
+                    }
 
-
-
+                    Log.i("return code ", returnCode.toString());
                     info2.putExtra("userId",userId);
                     startActivity(info2);
                     FileIOUtil fileIOUtil = new FileIOUtil();
@@ -145,7 +162,6 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
 
 
 }
-
 
 
 

@@ -88,11 +88,11 @@ public class TaskController {
     /**
      * A static class to add a task to ES database
      */
-    public static class addTask extends AsyncTask<Task, Void, Void> {
+    public static class addTask extends AsyncTask<Task, Void, Boolean>{
         public OnAsyncTaskCompleted listener;
         @Override
 
-        protected Void doInBackground(Task... a_task) {
+        protected Boolean doInBackground(Task... a_task) {
             verifySettings();
 
             a_task[0].setTaskStatus("request");
@@ -131,16 +131,18 @@ public class TaskController {
             }
             catch (Exception e) {
                 Log.i("Error", "The application failed to build and send the tasks");
+                e.printStackTrace();
+                return false;
             }
 
 
-            return null;
+            return true;
         }
 
         @Override
-        protected void onPostExecute(Void Void) {
+        protected void onPostExecute(Boolean Boolean) {
 
-                Log.i("Debug", ",");
+//      Log.i("Debug", "internet disconnected");
 
         }
     }
@@ -576,6 +578,9 @@ public class TaskController {
                 // TODO get the results of the query
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                Task faultTask = new Task();
+                faultTask.setId("-1");
+                result_tasks.add(faultTask);
             }
             return result_tasks;
         }

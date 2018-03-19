@@ -3,6 +3,7 @@ package project301.requesterActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.ListView;
 
 import project301.R;
 import project301.Task;
+import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
 import java.util.ArrayList;
@@ -36,8 +38,6 @@ public class RequesterEditListActivity extends AppCompatActivity {
 
     @SuppressWarnings("ConstantConditions")
     @Override
-
-    //when on create, settle two buttons: mainmenu, viewonmap and settle the posted task list click.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_edit_list);
@@ -70,7 +70,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
             }
         });
 
-        // settle click on posted task list
+        // settle click on post task list
         postedTaskList = (ListView) findViewById(R.id.post_list);
         postedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -82,27 +82,33 @@ public class RequesterEditListActivity extends AppCompatActivity {
             }
         });
 
-
+        /*
+        TaskController.searchAllTasksOfThisRequester getAll = new TaskController.searchAllTasksOfThisRequester();
+        getAll.execute("user id here");
+        try {
+            ArrayList<Task> save_tasks = getAll.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        */
     }
 
     @Override
-    //when on start, first sleep two seconds to wait for elasticsearch from database
-    //then get data from database according to userid.
-    //then settle the newest task list ro adapter.
     protected void onStart(){
         super.onStart();
 
 
-        // time sleep to wait for elsticsearch finish
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        //get data from database according to userid.
         TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
         search.execute(userId);
+
 
         tasklist = new ArrayList<Task>();
         try {
@@ -112,11 +118,39 @@ public class RequesterEditListActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        if(tasklist.size() == 1 && tasklist.get(0).getId().equals("-1")){
+            Log.i("go","offline");
+
+        }
+        else{
+            OfflineController offlineController = new OfflineController();
+            offlineController.tryToExecuteOfflineTasks(this);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            tasklist = new ArrayList<Task>();
+            try {
+                tasklist= search.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
+            // Attach the adapter to a ListView
+            this.postedTaskList.setAdapter(adapter);
+        }
+        //Log.i("Sign", Integer.toString(tasklist.size()));
 
 
-        //settle the newest list to adapter
-        RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
-        this.postedTaskList.setAdapter(adapter);
 
     }
 
