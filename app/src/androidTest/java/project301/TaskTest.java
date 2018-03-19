@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 /**
  * @classname : TaskTest
- * @class Detail :
+ * @class Detail : This is the test for task-relative methods
  *
  * @Date :   18/03/2018
  * @author : Yuqi Zhang

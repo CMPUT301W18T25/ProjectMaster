@@ -10,7 +10,7 @@ import android.util.Log;
 
 /**
  * @classname : OfflineTest
- * @class Detail :
+ * @class Detail : This is the test class for offline handling methods
  *
  * @Date :   18/03/2018
  * @author : Yue Ma

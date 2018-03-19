@@ -15,7 +15,7 @@ import org.junit.Test;
 
 /**
  * @classname : UserTest
- * @class Detail :
+ * @class Detail : This is the test for user-relative methods
  *
  * @Date :   18/03/2018
  * @author : Yue Ma

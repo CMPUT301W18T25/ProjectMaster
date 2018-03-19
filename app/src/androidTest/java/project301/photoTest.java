@@ -16,7 +16,7 @@ import java.io.ByteArrayOutputStream;
 
 /**
  * @classname : PhotoTest
- * @class Detail :
+ * @class Detail : This is the test for photo handling methods
  *
  * @Date :   18/03/2018
  * @author : Julian Stys
