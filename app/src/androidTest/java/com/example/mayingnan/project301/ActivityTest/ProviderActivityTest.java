@@ -36,18 +36,9 @@ public class ProviderActivityTest extends ActivityInstrumentationTestCase2 {
     public void testProviderMainActivity() {
         solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
 
-        solo.clickOnButton("Sign Up");
+        solo.enterText((EditText) solo.getView(R.id.login_name),"wdong2");
 
-        solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
-/**
- solo.clickOnButton("Log In");
- solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
- solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
- */
-
-        solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
-
-        solo.enterText((EditText) solo.getView(R.id.signup_password),"passward");
+        solo.enterText((EditText) solo.getView(R.id.login_password),"passward");
 
         solo.clickOnButton("Log In");
 
@@ -63,27 +54,27 @@ public class ProviderActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.clickOnButton("Search");
 
-        solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
+        //solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
 
         //solo.goBack();
 
         //solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
 
-         solo.clickOnButton("View On Map");
+        solo.clickOnButton("View On Map");
 
-         solo.assertCurrentActivity("Wrong Activity", ProviderMapActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ProviderMapActivity.class);
 
-         solo.goBack();
+        solo.goBack();
 
-         solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
 
-         solo.clickOnButton("Bid History");
+        solo.clickOnButton("Bid History");
 
-         solo.assertCurrentActivity("Wrong Activity", ProviderBidHistoryActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ProviderBidHistoryActivity.class);
 
-         solo.goBack();
+        solo.goBack();
 
-         solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
 
         solo.clickOnButton("edit profile");
 
