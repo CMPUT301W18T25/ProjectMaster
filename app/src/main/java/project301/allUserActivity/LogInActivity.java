@@ -34,6 +34,9 @@ import java.util.ArrayList;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
+/**
+ * This is the login activity.
+ */
 
 public class LogInActivity extends AppCompatActivity {
 

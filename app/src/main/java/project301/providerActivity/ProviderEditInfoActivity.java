@@ -14,12 +14,17 @@ import project301.controller.UserListController;
 
 /**
  * @classname : ProviderEditInfoActivity
- * this class used to change profile of the user, such as user name.
  * @Date :   18/03/2018
  * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
+
+/**
+ * this class used to change profile of the user, such as user name.
+ */
+
+
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderEditInfoActivity extends AppCompatActivity {

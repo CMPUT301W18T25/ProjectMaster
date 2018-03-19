@@ -26,6 +26,10 @@ import project301.requesterActivity.RequesterMainActivity;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
+/**
+ * User in this activity can choose to be a provider or requestor
+ */
+
 @SuppressWarnings("ALL")
 public class UserCharacterActivity extends AppCompatActivity {
 

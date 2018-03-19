@@ -20,6 +20,9 @@ import android.util.Log;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
+/**
+ * This is the test class for offline handling methods.
+ */
 
 public class OfflineTest extends ActivityInstrumentationTestCase2{
     public OfflineTest() {

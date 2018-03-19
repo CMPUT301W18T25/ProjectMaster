@@ -19,6 +19,10 @@ import project301.allUserActivity.LogInActivity;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
+/**
+ * This is the test class for bid methods.
+ */
+
 
 public class BidTest extends ActivityInstrumentationTestCase2 {
 
