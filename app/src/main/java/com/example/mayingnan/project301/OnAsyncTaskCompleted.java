@@ -18,7 +18,7 @@ package com.example.mayingnan.project301;
 
 /**
  * @classname : OnAsyncTaskCompleted
- * @class Detail :
+ * @class Detail: Listen to the asnctask to see whether it is finished
  *
  * @Date :   18/03/2018
  * @author :

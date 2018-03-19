@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 /**
  * @classname :Photo
- * @class Detail :
+ * @class Detail : Photo model contains converted photo information
  *
  * @Date :   18/03/2018
  * @author :

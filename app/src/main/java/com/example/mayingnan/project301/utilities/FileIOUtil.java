@@ -29,9 +29,8 @@ import android.util.Log;
 import com.example.mayingnan.project301.Task;
 import com.example.mayingnan.project301.utilities.TaskUtil;
 
-
 /**
- * The type File io util.
+ * Save tasks in offline json file
  */
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class FileIOUtil {

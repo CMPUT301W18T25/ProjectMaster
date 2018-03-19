@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * @classname : User
- * @class Detail :
+ * @class Detail: User model contains all the features of a user.
  *
  * @Date :   18/03/2018
  * @author :

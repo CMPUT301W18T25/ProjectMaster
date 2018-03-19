@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  * @classname : Task
- * @class Detail :
+ * @class Detail : Task model contains all the features of a task
  *
  * @Date :   18/03/2018
  * @author :

@@ -23,7 +23,8 @@ import io.searchbox.core.SearchResult;
 
 /**
  * @classname : UserListController
- * @class Detail :
+ * @class Detail: Activities can communicate with task model, bid model through this class.
+ * The class contains method to renew data on the elasticsearch database
  *
  * @Date :   18/03/2018
  * @author :

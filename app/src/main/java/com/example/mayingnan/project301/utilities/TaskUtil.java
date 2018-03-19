@@ -10,7 +10,8 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 
 /**
- * Created by yuqi on 11/03/18.
+ *Task class that help to serilize
+ * and deserialize a task object
  */
 
 public class TaskUtil {
