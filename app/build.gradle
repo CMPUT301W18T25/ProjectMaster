@@ -1,9 +1,10 @@
+
 apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
         multiDexEnabled true
-        applicationId "com.example.mayingnan.project3"
+        applicationId "com.example.project301"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
