@@ -152,9 +152,9 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
             }
         });
 
-        //settle back button
-        Button backButton = (Button) findViewById(R.id.back_button);
-        backButton.setOnClickListener(new View.OnClickListener() {
+        //settle showlist button
+        Button showlist_Button = (Button) findViewById(R.id.showlist_button);
+        showlist_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterViewTaskActivity.this, RequesterEditListActivity.class);
