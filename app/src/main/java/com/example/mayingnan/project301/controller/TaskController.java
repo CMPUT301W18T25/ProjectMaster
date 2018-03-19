@@ -98,6 +98,22 @@ public class TaskController {
                 if(result.isSucceeded())
                 {
                     a_task[0].setId(result.getId());
+
+                    String query = TaskUtil.serializer(a_task[0]);
+
+                    Index index2 = new Index.Builder(query)
+                            .index("cmput301w18t25").type("task").id(a_task[0].getId()).build();
+                    try {
+                        DocumentResult result2 = client.execute(index2);
+                        if (result.isSucceeded()) {
+                            Log.i("Debug", "Successful update user profile");
+                        } else {
+                            Log.i("Error", "We failed to update user profile to elastic search!");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Log.i("Error", "We failed to connect Elasticsearch server");
+                    }
                     Log.i("Success","Elasticsearch ");
 
                 }
@@ -267,6 +283,7 @@ public class TaskController {
                 DocumentResult result = client.execute(index2);
                 if (result.isSucceeded()) {
                     User foundUser = result.getSourceAsObject(User.class);
+                    Log.i("Report: ", current_task.getId());
                     foundUser.addProviderBiddenTask(current_task.getId());
 
                     try {
