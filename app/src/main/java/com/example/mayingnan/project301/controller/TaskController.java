@@ -73,7 +73,6 @@ public class TaskController {
         }
     }
 
-
     public static class addTask extends AsyncTask<Task, Void, Void> {
         public OnAsyncTaskCompleted listener;
         @Override
