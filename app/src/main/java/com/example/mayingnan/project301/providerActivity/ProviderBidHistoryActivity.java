@@ -117,22 +117,6 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
                 }
             }
         });
-/*
-        // settle click on bid history list
-        // case2: jump tp bid
-        bidHistoryList = (ListView) findViewById(R.id.provider_bid_history);
-        bidHistoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskBidActivity.class);
-                info1.putExtra("userId",userId);
-                info1.putExtra("info", index);
-                startActivity(info1);
-            }
-        });
-*/
-
-
 
     }
 
@@ -151,6 +135,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        /*
         //Task task = taskList.get(0);
         //Test
         Task task1 = new Task();
@@ -161,6 +146,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         //taskList = new ArrayList<>();
         taskList.add(task1);
         //
+        */
 
         RequesterAdapter adapter = new RequesterAdapter(this, taskList);
         // Attach the adapter to a ListView
