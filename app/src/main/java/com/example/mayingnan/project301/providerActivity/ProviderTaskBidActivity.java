@@ -158,8 +158,6 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         taskLocation.setText(temp_destination);
 
         String temp_status=view_task.getTaskStatus();
-        Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",temp_status);
-        //taskStatus.setText(temp_status);
 
         Double temp_idealprice=view_task.getTaskIdealPrice();
         taskIdealPrice.setText(Double.toString(temp_idealprice));
@@ -173,11 +171,13 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
-                Intent info2 = new Intent(ProviderTaskBidActivity.this, ProviderBidHistoryActivity.class);
-                info2.putExtra("userId",userId);
-                startActivity(info2);
-                */
+                //print error message
+                Toast toast = Toast.makeText(context, "You cannot cancle your bid!", Toast.LENGTH_LONG);
+                TextView v1 = (TextView) toast.getView().findViewById(android.R.id.message);
+                v1.setTextColor(Color.RED);
+                v1.setTextSize(20);
+                v1.setGravity(Gravity.CENTER);
+                toast.show();
 
             }
         });
@@ -189,11 +189,18 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         bidButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
+                String enterBid_s = taskMybid.getText().toString();
+                //Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaa",enterBid_s);
+                Double enterBid = Double.parseDouble(enterBid_s);
+                //System.out.println(enterBid);
+                bid = new Bid(enterBid,userId);
+
+                TaskController.providerSetBid setTaskBid = new TaskController.providerSetBid(view_task,bid);
+                setTaskBid.execute();
+
                 Intent info2 = new Intent(ProviderTaskBidActivity.this, ProviderBidHistoryActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
-                */
 
             }
         });

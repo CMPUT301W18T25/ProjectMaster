@@ -22,6 +22,11 @@ public class Bid {
         this.providerId= providerId;
         this.taskID = taskID;
     }
+    public Bid(Double bidAmount, String providerId){
+        this.bidAmount = bidAmount;
+        this.providerId= providerId;
+        this.taskID = null;
+    }
 
     public void setBidAmount(Double bidAmount){
         this.bidAmount = bidAmount;
@@ -38,4 +43,5 @@ public class Bid {
     public String getTaskID(){
         return this.taskID;
     }
+    public void setProviderId(String providerId){this.providerId = providerId;}
 }
