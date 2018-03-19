@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +45,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
     private ImageView edit_photo;
     private Task target_task;
     private ArrayList<Task> task_list;
+    private ArrayList<Task> start_list;
     private String view_index;
 
 
@@ -71,6 +73,51 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         edit_photo = (ImageView) findViewById(R.id.c_edit_photo);
 
 
+        /**
+         * set original information
+         */
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+        search.execute(userId);
+
+        start_list = new ArrayList<Task>();
+        try {
+            start_list= search.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
+        // get index of target task
+
+        view_index = intent.getExtras().get("info").toString();
+        final int index = Integer.parseInt(view_index);
+
+
+        // get target task
+        target_task=start_list.get(index);
+
+
+        // get information from target task and set information
+        String temp_name=target_task.getTaskName();
+        edit_name.setText(temp_name);
+
+        String temp_detail=target_task.getTaskDetails();
+        edit_detail.setText(temp_detail);
+
+        String temp_destination=target_task.getTaskAddress();
+        edit_destination.setText(temp_destination);
+
+        Double temp_idealprice=target_task.getTaskIdealPrice();
+        edit_idealprice.setText(Double.toString(temp_idealprice));
 
         /**
          *save button click
@@ -150,11 +197,14 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterViewTaskActivity.class);
                 info2.putExtra("userId",userId);
+                info2.putExtra("info",view_index);
                 startActivity(info2);
 
             }
         });
     }
+
+
 
 
     /**
