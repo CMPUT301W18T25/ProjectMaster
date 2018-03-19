@@ -13,11 +13,14 @@ import java.util.Map;
 
 /**
  * @classname : ProviderTaskFinishActivity
- * After a task finished, this Activity class shows the detail of the finished task (project 5)
  * @Date :   18/03/2018
  * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
+/**
+ * After a task finished, this Activity class shows the detail of the finished task (project 5)
  */
 
 

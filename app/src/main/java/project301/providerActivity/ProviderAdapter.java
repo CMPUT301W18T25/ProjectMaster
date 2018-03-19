@@ -14,11 +14,14 @@ import java.util.ArrayList;
 
 /**
  * @classname : ProviderAdapter
- * this class is an adapter for the task arrayList to show on the UI
  * @Date :   18/03/2018
  * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
+/**
+ * this class is an adapter for the task arrayList to show on the UI
  */
 
 

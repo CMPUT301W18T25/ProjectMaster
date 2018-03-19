@@ -2,11 +2,15 @@ package project301.ActivityTest;
 
 /**
  * @classname : ProviderActivityTest
- * @class Detail : User in this activity can choose to be a provider or requestor
+ * @class Detail :
  * @Date :   18/03/2018
  * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
+/**
+ * Test for all provider activities. Some of test based on requester activity test and sign up activity test.
  */
 
 import android.test.ActivityInstrumentationTestCase2;

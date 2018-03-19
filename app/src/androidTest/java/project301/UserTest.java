@@ -23,6 +23,11 @@ import org.junit.Test;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
+/**
+ * This is the test for user-relative methods.
+ */
+
+
 @SuppressWarnings("ALL")
 public class UserTest extends ActivityInstrumentationTestCase2 {
     public UserTest() {

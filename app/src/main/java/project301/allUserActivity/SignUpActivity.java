@@ -30,6 +30,11 @@ import project301.controller.UserListController;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
+/**
+ * This activity is for a new user to sign up an account.
+ */
+
+
 public class SignUpActivity extends AppCompatActivity {
 
     private SignUpActivity activity = this;

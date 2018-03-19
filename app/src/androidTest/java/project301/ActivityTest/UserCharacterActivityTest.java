@@ -2,11 +2,14 @@ package project301.ActivityTest;
 
 /**
  * @classname : UserCharacterActivityTest
- * @class Detail : User in this activity can choose to be a provider or requestor
  * @Date :   18/03/2018
  * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
+/**
+ * Test whether user in this activity can choose character or not
  */
 
 import android.app.Activity;

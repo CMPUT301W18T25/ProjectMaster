@@ -15,13 +15,16 @@ import project301.Task;
 import project301.controller.TaskController;
 
 /**
- * @classname : ProviderMainActivity
- * This is the main page of provider; it shows a list of requesting task;
  * user could change profile, see bid history, as well as look into a requesting task.
+ * @classname : ProviderMainActivity
  * @Date :   18/03/2018
  * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
+/**
+ * This is the main page of provider; it shows a list of requesting task;
  */
 
 public class ProviderMainActivity extends AppCompatActivity {

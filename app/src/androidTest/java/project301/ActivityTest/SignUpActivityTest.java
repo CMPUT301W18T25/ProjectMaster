@@ -2,11 +2,14 @@ package project301.ActivityTest;
 
 /**
  * @classname : SignUpActivityTest
- * @class Detail : User in this activity can choose to be a provider or requestor
  * @Date :   18/03/2018
  * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
+/**
+ * Test for sign up and sign up an user for further testing.
  */
 
 import android.app.Activity;

@@ -26,12 +26,16 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * @classname : ProviderBidHistoryActivity
- * This class shows a list of task that the status of the tasks are bidden, assigned or done
  * @Date :   18/03/2018
  * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
+
+/**
+ * This class shows a list of task that the status of the tasks are bidden, assigned or done
+ */
+
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderBidHistoryActivity extends AppCompatActivity {
