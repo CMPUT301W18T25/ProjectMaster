@@ -10,7 +10,7 @@ import project301.R;
 
 /**
  * @classname : RequesterMainActivity
- * @class Detail :
+ * @class Detail : requester main is for user to choose their actions: post task,view and edit task or edit profile
  *
  * @Date :   18/03/2018
  * @author : Yingnan Ma
@@ -27,6 +27,8 @@ public class RequesterMainActivity extends AppCompatActivity {
 
     @SuppressWarnings("ConstantConditions")
     @Override
+
+    //when on create, settle three buttons: postnewtask, view and edit, and edit profile
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_main);

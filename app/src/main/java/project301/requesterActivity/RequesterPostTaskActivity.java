@@ -17,15 +17,13 @@ import project301.controller.TaskController;
 
 /**
  * @classname : RequesterPostTaskActivity
- * @class Detail :
+ * @class Detail : RequesterPostTaskActivity is to allow user to post a new task , some informatin cannot be leaft empty.
  *
  * @Date :   18/03/2018
  * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
-
-
 
 
 
@@ -54,9 +52,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
-        /**
-         * find view by id.
-         */
+        //find view by id.
         post_name = (EditText) findViewById(R.id.c_task_name);
         post_detail = (EditText) findViewById(R.id.c_task_detail);
         post_destination = (EditText) findViewById(R.id.c_task_location);
@@ -66,13 +62,12 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
         cancelButton=(Button)findViewById(R.id.cancel_button);
 
 
-        /**
-         * submitButton click
-         */
+        //submitButton click
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
 
             public void onClick(View view) {
+                // check empty of needed information
                 if (check_empty(post_name.getText().toString(),post_destination.getText().toString(),
                         post_ideal_price.getText().toString())){
 
@@ -117,9 +112,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
 
 
 
-        /**
-         * cancelButton click
-         */
+        //cancelButton click
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
