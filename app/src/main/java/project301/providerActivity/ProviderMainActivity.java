@@ -5,11 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -29,15 +26,12 @@ import project301.controller.TaskController;
 
 public class ProviderMainActivity extends AppCompatActivity {
 
-    private Button searchButton;
-    private Button editProfileButton;
-    private Button viewOnMapButton;
-    private Button bidHistoryButton;
+    Button searchButton;
+    Button editProfileButton;
+    Button viewOnMapButton;
+    Button bidHistoryButton;
     private ListView availablelist;
-    private TextView taskLabel;
     private ArrayList<Task> taskList;
-    private ArrayAdapter<Task> taskAdapter;
-    private String userName;
 
     private String userId;
 
@@ -53,7 +47,7 @@ public class ProviderMainActivity extends AppCompatActivity {
         userId = intent.getExtras().get("userId").toString();
 
         //settle viewOnMap button
-        viewOnMapButton = (Button) findViewById(R.id.provider_map_button);
+        viewOnMapButton = findViewById(R.id.provider_map_button);
         viewOnMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +58,7 @@ public class ProviderMainActivity extends AppCompatActivity {
         });
 
         //settle bidHistory button
-        bidHistoryButton = (Button) findViewById(R.id.provider_bid_button);
+        bidHistoryButton = findViewById(R.id.provider_bid_button);
         bidHistoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +69,7 @@ public class ProviderMainActivity extends AppCompatActivity {
         });
 
         //settle editProfile button
-        editProfileButton = (Button) findViewById(R.id.edit_profile_button);
+        editProfileButton = findViewById(R.id.edit_profile_button);
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +81,7 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
         // settle click on list
-        availablelist = (ListView) findViewById(R.id.provider_list);
+        availablelist = findViewById(R.id.provider_list);
         availablelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
