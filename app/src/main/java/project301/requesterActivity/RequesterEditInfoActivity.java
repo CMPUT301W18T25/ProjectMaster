@@ -10,6 +10,8 @@ import android.widget.EditText;
 import project301.R;
 import project301.User;
 import project301.controller.UserListController;
+import project301.providerActivity.ProviderEditInfoActivity;
+import project301.providerActivity.ProviderMainActivity;
 
 /**
  * @classname : RequesterEditInfoActivity
@@ -17,6 +19,7 @@ import project301.controller.UserListController;
  *
  * @Date :   18/03/2018
  * @author : Yingnan Ma
+ * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
@@ -38,6 +41,7 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
     private Button backButton;
     private UserListController userListControl;
     private String userId;
+    private User user;
 
 
     @SuppressWarnings("ConstantConditions")
@@ -48,6 +52,8 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
+        UserListController uc = new UserListController();
+        user = uc.getAUserById(userId);
 
         //match edit text
         usernameText = findViewById(R.id.edit_name);
@@ -68,20 +74,26 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
                 editPhone = mobileText.getText().toString();
                 editPassword = passwordText.getText().toString();
 
-
-                UserListController uc = new UserListController();
-                User user = uc.getAUserByName(userName);
-
                 //update user info
                 user.setUserName(editName);
                 user.setUserEmail(editEmail);
                 user.setUserPhone(editPhone);
                 user.setUserPassword(editPassword);
 
-                uc.updateUser(user);
+                //update user
+                UserListController.updateUser updateUser= new UserListController.updateUser();
+                updateUser.execute(user);
 
+                //change activity
                 Intent info2 = new Intent(RequesterEditInfoActivity.this, RequesterMainActivity.class);
                 info2.putExtra("userId",userId);
+
+                //wait for update
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 startActivity(info2);
 
             }
@@ -102,6 +114,35 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void onStart() {
+        super.onStart();
+
+        //get current user
+        UserListController uc2 = new UserListController();
+        user = uc2.getAUserById(userId);
+
+        // put user original info onto UI
+        String temp_name=user.getUserName();
+        usernameText.setText(temp_name);
+
+        if (user.getUserEmail()==null){
+            emailText.setText("");
+        }else {
+            String temp_detail = user.getUserEmail();
+            emailText.setText(temp_detail);
+        }
+
+        if (user.getUserPhone()==null) {
+            mobileText.setText("");
+        }else{
+            String temp_phone = user.getUserPhone();
+            mobileText.setText(temp_phone);
+        }
+
+        String temp_status=user.getUserPassword();
+        passwordText.setText(temp_status);
     }
 
 

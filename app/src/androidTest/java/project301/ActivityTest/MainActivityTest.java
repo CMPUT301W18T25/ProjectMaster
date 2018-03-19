@@ -6,7 +6,7 @@ import project301.allUserActivity.LogInActivity;
 
 /**
  * @classname : MainActivityTest
- * @class Detail : User in this activity can choose to be a provider or requestor
+ * @class Detail : temp test class
  * @Date :   18/03/2018
  * @author : Wang Dong
  * @version 1.0
