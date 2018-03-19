@@ -19,8 +19,9 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * @classname : RequesterViewTaskActivity
- * @class Detail :
- *
+ * @class Detail :RequesterViewTaskActivity is to allow user to view a target task and choose if to edit this task.
+ *                the bid list will accept data from provider to show all the bid for this task so that requester can choose bid.
+ *                this class also support delete task, jump back to showlist and choose bid.
  * @Date :   18/03/2018
  * @author : Yingnan Ma
  * @version 1.0
@@ -56,9 +57,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
 
 
 
-        /**
-         * find view by id.
-         */
+        //find view by id.
         view_name = (TextView) findViewById(R.id.c_view_name);
         view_detail= (TextView) findViewById(R.id.c_view_detail);
         view_destination = (TextView) findViewById(R.id.c_view_destination);
@@ -201,16 +200,18 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
 
 
     @Override
+    //when on start, first get newest data from database and then update the information
     protected void onStart(){
         super.onStart();
 
-
+        //time sleep
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        //pull data from database
         TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
         search.execute(userId);
 
@@ -222,7 +223,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        Log.i("Sign", Integer.toString(tasklist.size()));
+
 
         // get target task
         final int index = Integer.parseInt(view_index);

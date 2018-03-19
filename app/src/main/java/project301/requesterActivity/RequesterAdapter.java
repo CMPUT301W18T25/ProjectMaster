@@ -15,8 +15,7 @@ import java.util.ArrayList;
 
 /**
  * @classname : RequesterActivity
- * @class Detail :
- *
+ * @class Detail :RequesterAdapter is to adapt task and do task arrangement in the arraylist.
  * @Date :   18/03/2018
  * @author : Yingnan Ma
  * @author : Wang Dong
@@ -33,6 +32,7 @@ public class RequesterAdapter extends ArrayAdapter<Task> {
 
     @SuppressWarnings("ConstantConditions")
     @Override
+
 
     public View getView(int position, View convertView, ViewGroup parent) {
 

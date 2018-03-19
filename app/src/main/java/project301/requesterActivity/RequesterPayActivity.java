@@ -12,7 +12,7 @@ import project301.R;
 
 /**
  * @classname : RequesterPayActivity
- * @class Detail :
+ * @class Detail : pay class is to change the status of task from bidding to processing
  *
  * @Date :   18/03/2018
  * @author : Yingnan Ma
@@ -32,6 +32,7 @@ public class RequesterPayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_pay);
         final Intent intent = getIntent();
+
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 

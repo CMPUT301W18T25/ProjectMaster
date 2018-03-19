@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * @classname : RequesterEditTaskActivity
- * @class Detail :
+ * @class Detail :RequesterEditTaskActivity allows user to edit their task.
  *
  * @Date :   18/03/2018
  * @author : Yingnan Ma
@@ -50,6 +50,9 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
 
     @SuppressWarnings("ConstantConditions")
     @Override
+    //when oncreate, first get newest data from database.
+    //then get index to settle original information.
+    //then settle save button and back. Click save, information get saved, Click back, information not saved.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_edit_task);
@@ -59,11 +62,8 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         userId = intent.getExtras().get("userId").toString();
 
 
+        //find view by id.
 
-
-        /**
-         * find view by id.
-         */
         edit_name = (EditText) findViewById(R.id.c_edit_name);
         edit_detail = (EditText) findViewById(R.id.c_edit_detail);
         edit_destination = (EditText) findViewById(R.id.c_edit_destination);
@@ -71,15 +71,17 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         edit_photo = (ImageView) findViewById(R.id.c_edit_photo);
 
 
-        /**
-         * set original information
-         */
+        //time sleep
 
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
+
+        //get newest data from database.
 
         TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
         search.execute(userId);
@@ -117,13 +119,14 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         Double temp_idealprice=target_task.getTaskIdealPrice();
         edit_idealprice.setText(Double.toString(temp_idealprice));
 
-        /**
-         *save button click
-         */
+
+        //settle save button click
+
         Button saveButton = (Button) findViewById(R.id.save_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // first check empty, name,destination and idealprice cannot leave empty.
                 if (check_empty(edit_name.getText().toString(),edit_destination.getText().toString(),
                         edit_idealprice.getText().toString())){
 
@@ -145,8 +148,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                     }
 
                     // get index of target task
-                    //view_index = intent.getExtras().get("info").toString();
-                    //final int index = Integer.parseInt(view_index);
+
                     last_index = task_list.size()-1;
                     view_index=Integer.toString(last_index);
 
@@ -194,6 +196,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //interface jump
                 Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterViewTaskActivity.class);
                 info2.putExtra("userId",userId);
                 info2.putExtra("info",view_index);
@@ -212,7 +215,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
      * @param detail
      * @param destination
      * @param ideal_price
-     * @return
+     * @return true or false
      */
 
 

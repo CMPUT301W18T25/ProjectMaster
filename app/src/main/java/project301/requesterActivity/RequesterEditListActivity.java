@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * @classname : RequesterEditListActivity
- * @class Detail :
+ * @class Detail : Requesdter edit list is to show a list of posted task, which support click to check details and edit task.
  *
  * @Date :   18/03/2018
  * @author : Yingnan Ma
@@ -36,6 +36,8 @@ public class RequesterEditListActivity extends AppCompatActivity {
 
     @SuppressWarnings("ConstantConditions")
     @Override
+
+    //when on create, settle two buttons: mainmenu, viewonmap and settle the posted task list click.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_edit_list);
@@ -68,7 +70,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
             }
         });
 
-        // settle click on post task list
+        // settle click on posted task list
         postedTaskList = (ListView) findViewById(R.id.post_list);
         postedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -80,30 +82,25 @@ public class RequesterEditListActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        TaskController.searchAllTasksOfThisRequester getAll = new TaskController.searchAllTasksOfThisRequester();
-        getAll.execute("user id here");
-        try {
-            ArrayList<Task> save_tasks = getAll.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        */
+
     }
 
     @Override
+    //when on start, first sleep two seconds to wait for elasticsearch from database
+    //then get data from database according to userid.
+    //then settle the newest task list ro adapter.
     protected void onStart(){
         super.onStart();
 
 
+        // time sleep to wait for elsticsearch finish
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        //get data from database according to userid.
         TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
         search.execute(userId);
 
@@ -116,10 +113,9 @@ public class RequesterEditListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //Log.i("Sign", Integer.toString(tasklist.size()));
 
+        //settle the newest list to adapter
         RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
-        // Attach the adapter to a ListView
         this.postedTaskList.setAdapter(adapter);
 
     }
