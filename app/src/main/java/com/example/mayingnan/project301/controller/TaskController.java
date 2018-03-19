@@ -3,6 +3,7 @@ package com.example.mayingnan.project301.controller;
 import com.example.mayingnan.project301.Bid;
 import com.example.mayingnan.project301.OnAsyncTaskCompleted;
 import com.example.mayingnan.project301.Task;
+import com.example.mayingnan.project301.User;
 import com.example.mayingnan.project301.utilities.TaskUtil;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
@@ -295,6 +296,80 @@ public class TaskController {
                 return false;
             }
 
+        }
+    }
+
+    //TODO test it
+
+    public static class providerGetBiddenTasks extends AsyncTask<String, Void, ArrayList<String>>{
+
+        @Override
+        protected ArrayList<String> doInBackground(String... providerID) {
+            ArrayList<String> rtTasks = new ArrayList<>();
+            User foundUser;
+
+            verifySettings();
+
+            String query = "{ \n"+
+                    "\"query\":{\n"+
+                    "\"term\":{\"userId\":\""+providerID[0]+"\"}\n"+
+                    "}\n"+"}";
+
+            Index index = new Index.Builder(query)
+                    .index("cmput301w18t25").type("userst").id(providerID[0]).build();
+            try {
+                DocumentResult result = client.execute(index);
+                if (result.isSucceeded()) {
+                    foundUser = result.getSourceAsObject(User.class);
+                    rtTasks = foundUser.getProviderBiddenTask();
+                    Log.i("Success", "Successful cancel provider's bid");
+                } else {
+                    rtTasks = null;
+                    Log.i("Error", "We failed to cancel provider's bid to elastic search!");
+                }
+            } catch (IOException e) {
+                rtTasks = null;
+                e.printStackTrace();
+                Log.i("Error", "We failed to connect Elasticsearch server");
+            }
+            return rtTasks;
+        }
+    }
+
+    // TODO change provider variable to requester variable
+
+    public static class requesterGetBiddenTasks extends AsyncTask<String, Void, ArrayList<String>>{
+
+        @Override
+        protected ArrayList<String> doInBackground(String... providerID) {
+            ArrayList<String> rtTasks = new ArrayList<>();
+            User foundUser;
+
+            verifySettings();
+
+            String query = "{ \n"+
+                    "\"query\":{\n"+
+                    "\"term\":{\"userId\":\""+providerID[0]+"\"}\n"+
+                    "}\n"+"}";
+
+            Index index = new Index.Builder(query)
+                    .index("cmput301w18t25").type("userst").id(providerID[0]).build();
+            try {
+                DocumentResult result = client.execute(index);
+                if (result.isSucceeded()) {
+                    foundUser = result.getSourceAsObject(User.class);
+                    rtTasks = foundUser.getProviderBiddenTask();
+                    Log.i("Success", "Successful cancel provider's bid");
+                } else {
+                    rtTasks = null;
+                    Log.i("Error", "We failed to cancel provider's bid to elastic search!");
+                }
+            } catch (IOException e) {
+                rtTasks = null;
+                e.printStackTrace();
+                Log.i("Error", "We failed to connect Elasticsearch server");
+            }
+            return rtTasks;
         }
     }
 
