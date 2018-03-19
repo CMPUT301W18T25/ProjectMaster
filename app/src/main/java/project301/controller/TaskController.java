@@ -24,7 +24,8 @@ import io.searchbox.core.SearchResult;
 
 /**
  * @classname : TaskController
- * @class Detail :
+ * @class Detail : Activities can communicate with task model, bid model through this class.
+ * The class contains method to renew data on the elasticsearch database
  *
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
@@ -38,6 +39,9 @@ public class TaskController {
     private Task current_task;
     private static JestDroidClient client;
 
+    /**
+     * A static class to delete all tasks in ES database
+     */
     public static class deleteAllTasks extends AsyncTask<String, Void, Void> {
 
         @Override
@@ -80,7 +84,9 @@ public class TaskController {
 
         }
     }
-
+    /**
+     * A static class to add a task to ES database
+     */
     public static class addTask extends AsyncTask<Task, Void, Void> {
         public OnAsyncTaskCompleted listener;
         @Override
@@ -137,7 +143,9 @@ public class TaskController {
 
         }
     }
-
+    /**
+     * A static class to get a task by its id from ES database
+     */
     public static class getTaskById extends AsyncTask<String, Void, Task> {
 
         private String id;
@@ -175,7 +183,9 @@ public class TaskController {
             return task;
         }
     }
-
+    /**
+     * A static class to delete a task by its id in ES database
+     */
     public static class deleteTaskById extends AsyncTask<String, Void, Void>{
 
         private String id;
@@ -212,6 +222,9 @@ public class TaskController {
             return null;
         }
     }
+    /**
+     * A static class to update tasks in ES database
+     */
 
     public static class requesterUpdateTask extends AsyncTask<Task, Void, Void>{
 
@@ -238,7 +251,9 @@ public class TaskController {
             return null;
         }
     }
-
+    /**
+     * A static class to set bid in ES database
+     */
     public static class providerSetBid extends AsyncTask<Void, Void, Void>{
         //new MyTask(int foo, long bar, double arple).execute();
 
@@ -286,7 +301,9 @@ public class TaskController {
             return null;
         }
     }
-
+    /**
+     * A static class to cancel a bid in ES database
+     */
     public static class providerCancelBid extends AsyncTask<Void, Void, Boolean>{
 
         Task current_task;
@@ -329,7 +346,9 @@ public class TaskController {
     }
 
     //TODO test it
-
+    /**
+     * A static class to get provider bidden tasks in ES database
+     */
     public static class providerGetBiddenTasks extends AsyncTask<String, Void, ArrayList<String>>{
 
         @Override
@@ -366,7 +385,9 @@ public class TaskController {
     }
 
     // TODO change provider variable to requester variable
-
+    /**
+     * A static class to get requester bidden tasks in ES database
+     */
     public static class requesterGetBiddenTasks extends AsyncTask<String, Void, ArrayList<String>>{
 
         @Override
@@ -401,7 +422,9 @@ public class TaskController {
             return rtTasks;
         }
     }
-
+    /**
+     * A static class to search bidden tasks in ES database
+     */
     public static class searchBiddenTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
         //ArrayList<Task> taskList = new ArrayList<Task> ();
         String providerId;
@@ -450,6 +473,9 @@ public class TaskController {
         }
 
     }
+    /**
+     * A static class to search all tasks of this provider in ES database
+     */
 
     //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAssignTasksOfThisProvider extends AsyncTask<String, Void, ArrayList<Task>>{
@@ -494,6 +520,9 @@ public class TaskController {
         }
 
     }
+    /**
+     * A static class to search all tasks of this requester in ES database
+     */
 
     //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAllTasksOfThisRequester extends AsyncTask<String, Void, ArrayList<Task>>{
@@ -538,7 +567,9 @@ public class TaskController {
 
 
     }
-
+    /**
+     * A static class to search all requesting tasks in ES database
+     */
     //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAllRequestingTasks extends AsyncTask<Void, Void, ArrayList<Task>>{
 
@@ -581,7 +612,9 @@ public class TaskController {
         }
 
     }
-
+    /**
+     * A static class to search task by key word in ES database
+     */
     public static class searchTaskByKeyword extends AsyncTask<String, Void, ArrayList<Task>>  {
         protected ArrayList<Task> doInBackground(String... keywords) {
             verifySettings();
@@ -671,9 +704,13 @@ public class TaskController {
         return false;
     } //created by wdong2 for testing
 
-    // no need to use it, providerSetBis is good enough
+    // no need to use it, providerSetBids is good enough
+
     public void providerUpdateBid(Task task,Bid bid){}
 
+    /**
+     * verify ES database setting
+     */
     public static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
@@ -685,6 +722,9 @@ public class TaskController {
         }
     }
 
+    /**
+     * For development, will delete finally
+     */
     public static class yuqi8delete extends AsyncTask<String, Void, Void>{
 
         private String id;

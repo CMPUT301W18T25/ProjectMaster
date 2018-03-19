@@ -139,6 +139,11 @@ public class Task {
         return taskPhoto;
     }
 
+    /**
+     * Add a bid into task list
+     * @param bid a bid object
+     * @return
+     */
     public boolean addBid(Bid bid){
         if (bid.getBidAmount() < this.lowestBid){
             this.lowestBid = (Double) bid.getBidAmount();
@@ -154,6 +159,11 @@ public class Task {
         return false;
     }
 
+    /**
+     * Cancel a bid of this provider
+     * @param providerName provider name
+     * @return
+     */
     public boolean cancelBid(String providerName){
         for (int i = 0; i<taskBidList.size();i++){
             if (providerName.equals(taskBidList.get(i).getProviderId())){
