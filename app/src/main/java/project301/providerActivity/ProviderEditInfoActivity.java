@@ -61,7 +61,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
 
 
         //settle save button
-        Button saveButton = (Button) findViewById(R.id.save_button);
+        saveButton = (Button) findViewById(R.id.save_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,14 +74,13 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
 
                 Log.i("editEmail",editEmail);
 
-
-
                 //update user info
                 user.setUserName(editName);
                 user.setUserEmail(editEmail);
                 user.setUserPhone(editPhone);
                 user.setUserPassword(editPassword);
 
+                //update user
                 UserListController.updateUser updateUser= new UserListController.updateUser();
                 updateUser.execute(user);
 
@@ -105,10 +104,12 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
 
 
         //settle back button (no data saving)
-        Button backButton = (Button) findViewById(R.id.back_button);
+        backButton = (Button) findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //change activity
                 Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMainActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
