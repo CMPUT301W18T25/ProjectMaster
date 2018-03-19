@@ -56,9 +56,9 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         UserListController uc = new UserListController();
         user = uc.getAUserById(userId);
 
+        //get all bidden task of this provider (user) into a list
         TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
         search.execute();
-
         try {
             taskList = search.get();
         } catch (InterruptedException e) {
@@ -79,37 +79,32 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
             }
         });
 
-        //wdong2:
-        //the two class below could be one class
-        //there will be a "if" statement to decide which class to jump
-
-        // settle click on bid history list
-        // case1: jump tp finish
+        // settle click on bid history list based on the task status
         bidHistoryList = (ListView) findViewById(R.id.provider_bid_history);
         bidHistoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Task task = taskList.get(index);
                 String status = task.getTaskStatus();
-                if (status == "request") {
+                if (status.equals("request")) {
                     Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskBidActivity.class);
                     info1.putExtra("userId", userId);
                     info1.putExtra("info", index);
                     info1.putExtra("status","request");
                     startActivity(info1);
-                } else if (status == "bidden") {
+                } else if (status.equals("bidden")) {
                     Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskBidActivity.class);
                     info1.putExtra("userId", userId);
                     info1.putExtra("info", index);
                     info1.putExtra("status","bidden");
                     startActivity(info1);
-                } else if (status == "assigned") {
+                } else if (status.equals("assigned")) {
                     Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskBidActivity.class);
                     info1.putExtra("userId", userId);
                     info1.putExtra("info", index);
                     info1.putExtra("status","assigned");
                     startActivity(info1);
-                } else if (status == "done") {
+                } else if (status.equals("done")) {
                     Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskFinishActivity.class);
                     info1.putExtra("userId", userId);
                     info1.putExtra("info", index);
@@ -132,19 +127,16 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-
-
+        //the following code is for testing
         /*
-        //Task task = taskList.get(0);
-        //Test
+        Task task = taskList.get(0);
         Task task1 = new Task();
         task1.setTaskName("a");
         task1.setTaskAddress("a");
         task1.setTaskIdealPrice(1.0);
         task1.setTaskStatus("bidden");
-        //taskList = new ArrayList<>();
+        taskList = new ArrayList<>();
         taskList.add(task1);
-        //
         */
 
         RequesterAdapter adapter = new RequesterAdapter(this, taskList);

@@ -49,18 +49,14 @@ public class ProviderMainActivity extends AppCompatActivity {
         setContentView(R.layout.provider_main);
         final Intent intent = getIntent();
 
+        //get userId
         userId = intent.getExtras().get("userId").toString();
-
-        //need to load task and store in the list
-        //use adapter to show on UI
-
 
         //settle viewOnMap button
         viewOnMapButton = (Button) findViewById(R.id.provider_map_button);
         viewOnMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_OK);
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderMapActivity.class);
                 intent.putExtra("userId",userId);
                 startActivity(intent);
@@ -72,7 +68,6 @@ public class ProviderMainActivity extends AppCompatActivity {
         bidHistoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_OK);
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderBidHistoryActivity.class);
                 intent.putExtra("userId",userId);
                 startActivity(intent);
@@ -84,7 +79,6 @@ public class ProviderMainActivity extends AppCompatActivity {
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_OK);
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderEditInfoActivity.class);
                 intent.putExtra("userId",userId);
                 startActivity(intent);
@@ -93,19 +87,18 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
         // settle click on list
-
         availablelist = (ListView) findViewById(R.id.provider_list);
         availablelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent info1 = new Intent(ProviderMainActivity.this, ProviderTaskBidActivity.class);
                 info1.putExtra("info", index);
+                //provide the task status for the next activity
                 info1.putExtra("status","request");
                 info1.putExtra("userId",userId);
                 startActivity(info1);
             }
         });
-
 
         // to do search button
         searchButton = findViewById(R.id.search_button);
@@ -115,10 +108,6 @@ public class ProviderMainActivity extends AppCompatActivity {
                 //need search code
             }
         });
-
-
-
-
     }
 
     @Override
@@ -136,31 +125,22 @@ public class ProviderMainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        /* Test
+        // Testing
+        /*
         Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",taskList.get(0).getId());
         Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",taskList.get(0).getTaskName());
         Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",taskList.get(0).getTaskAddress());
         Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",Double.toString(taskList.get(0).getTaskIdealPrice()));
-
-
-                //Task task = taskList.get(0);
-        //Test
         Task task1 = new Task();
         task1.setTaskName("a");
         task1.setTaskAddress("a");
         task1.setTaskIdealPrice(1.0);
-        //taskList = new ArrayList<>();
+        taskList = new ArrayList<>();
         taskList.add(task1);
-        //
         */
 
-
-
-
-        ProviderAdapter adapter = new ProviderAdapter(this, taskList);
         // Attach the adapter to a ListView
+        ProviderAdapter adapter = new ProviderAdapter(this, taskList);
         this.availablelist.setAdapter(adapter);
-
     }
-
 }

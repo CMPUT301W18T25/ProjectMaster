@@ -56,7 +56,6 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
     private Bid bid;
     private Task view_task;
 
-
     @SuppressWarnings("ConstantConditions")
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,13 +67,10 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         userId = intent.getExtras().get("userId").toString();
 
 
-        /**
-         * find view by id.
-         */
+        // find view by id.
         taskName = (TextView) findViewById(R.id.p_task_name);
         taskDetail= (TextView) findViewById(R.id.p_task_detail);
         taskLocation = (TextView) findViewById(R.id.p_task_destination);
-        //taskStatus = (TextView) findViewById(R.id.p_task_status);
         taskIdealPrice = (TextView) findViewById(R.id.p_task_idealprice);
         taskLowestPrice = (TextView) findViewById(R.id.p_task_mybid);
         taskMybid = (EditText)findViewById(R.id.p_task_mybid);
@@ -98,7 +94,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            //set bid
+            //set initiallized bid
             taskMybid.setText("0");
 
         }else if(status.equals("bidden")){
@@ -142,7 +138,9 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
 
         // get target task
         view_task=tasklist.get(view_index);
-        Log.i("idddddddddddddddddd", view_task.getId());
+        // test id correctness
+        Log.i("id", view_task.getId());
+
 
         // get information from target task and set information
         String temp_name=view_task.getTaskName();
@@ -187,9 +185,15 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String enterBid_s = taskMybid.getText().toString();
-                //Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaa",enterBid_s);
+
+                //test input type
+                //Log.i("enterBid_s",enterBid_s);
+
                 Double enterBid = Double.parseDouble(enterBid_s);
+
+                //test bid type
                 //System.out.println(enterBid);
+
                 bid = new Bid(enterBid,userId);
 
                 TaskController.providerSetBid setTaskBid = new TaskController.providerSetBid(view_task,bid);
@@ -224,28 +228,6 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        /*
-        // get information from target task and set information
-        String temp_name=view_task.getTaskName();
-        taskName.setText(temp_name);
-
-        String temp_detail=view_task.getTaskDetails();
-        taskDetail.setText(temp_detail);
-
-        String temp_destination=view_task.getTaskAddress();
-        taskLocation.setText(temp_destination);
-
-        String temp_status=view_task.getTaskStatus();
-        taskStatus.setText(temp_status);
-
-        Double temp_idealprice=view_task.getTaskIdealPrice();
-        taskIdealPrice.setText(Double.toString(temp_idealprice));
-
-        Double temp_lowestbid=view_task.getLowestBid();
-        taskLowestPrice.setText(Double.toString(temp_lowestbid));
-        */
-
     }
-
 
 }

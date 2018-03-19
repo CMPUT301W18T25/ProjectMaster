@@ -84,11 +84,14 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
 
                 UserListController.updateUser updateUser= new UserListController.updateUser();
                 updateUser.execute(user);
-                // Log.i("resultid:",user.getResultId());
+
+                //testing result
+                Log.i("resultid:",user.getResultId());
 
                 //change activity
                 Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMainActivity.class);
                 info2.putExtra("userId",userId);
+
                 //wait for update
                 try {
                     Thread.sleep(2000);
@@ -101,7 +104,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
         });
 
 
-        //settle back button
+        //settle back button (no data saving)
         Button backButton = (Button) findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,10 +119,11 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-
+        //get current user
         UserListController uc2 = new UserListController();
         user = uc2.getAUserById(userId);
-        // get information from target task and set information
+
+        // put user original info onto UI
         String temp_name=user.getUserName();
         usernameText.setText(temp_name);
 
@@ -139,15 +143,6 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
 
         String temp_status=user.getUserPassword();
         passwordText.setText(temp_status);
-
-        /*
-        Double temp_idealprice=view_task.getTaskIdealPrice();
-        taskIdealPrice.setText(Double.toString(temp_idealprice));
-
-        Double temp_lowestbid=view_task.getLowestBid();
-        taskLowestPrice.setText(Double.toString(temp_lowestbid));
-        */
-
     }
 
 }

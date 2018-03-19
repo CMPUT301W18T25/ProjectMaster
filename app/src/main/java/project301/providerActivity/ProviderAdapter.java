@@ -31,6 +31,7 @@ public class ProviderAdapter extends ArrayAdapter<Task> {
     @SuppressWarnings("ConstantConditions")
     @Override
 
+    //get the view of the list information
     public View getView(int position, View convertView, ViewGroup parent) {
 
         // Get the data item for this position
