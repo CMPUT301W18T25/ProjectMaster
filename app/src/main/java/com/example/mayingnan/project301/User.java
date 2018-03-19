@@ -1,5 +1,7 @@
 package com.example.mayingnan.project301;
 
+import java.util.ArrayList;
+
 /**
  * @classname : User
  * @class Detail :
@@ -21,6 +23,9 @@ public class User {
     private String userPassword;
     private String userType;
     private String resultId;
+    private ArrayList<String> providerBiddenTask;
+    private ArrayList<String> requesterBiddenTask;
+
     public User(){
         super();
     }
@@ -33,10 +38,10 @@ public class User {
         this.userType = userType;
         this.userPhone = userPhone;
         this.resultId = resultId;
+        this.providerBiddenTask = new ArrayList<String>();
+        this.requesterBiddenTask = new ArrayList<String>();
 
     }
-
-
 
     public String getUserName() {
         return userName;
@@ -98,5 +103,25 @@ public class User {
     }
     public void setResultId(String resultId){
         this.resultId = resultId;
+    }
+
+    public ArrayList<String> getProviderBiddenTask(){
+        return this.providerBiddenTask;
+    }
+    public void addProviderBiddenTask(String taskID){
+        providerBiddenTask.add(taskID);
+    }
+    public void removeABiddenTask(String taskID){
+        providerBiddenTask.remove(taskID);
+    }
+
+    public ArrayList<String> getRequesterBiddenTask(){
+        return this.requesterBiddenTask;
+    }
+    public void addRequesterBiddenTask(String taskID){
+        requesterBiddenTask.add(taskID);
+    }
+    public void removeRequesterBiddenTask(String taskID){
+        requesterBiddenTask.remove(taskID);
     }
 }
