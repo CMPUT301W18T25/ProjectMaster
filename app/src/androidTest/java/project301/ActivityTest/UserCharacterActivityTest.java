@@ -45,11 +45,6 @@ public class UserCharacterActivityTest extends ActivityInstrumentationTestCase2 
         solo.clickOnButton("Sign Up");
 
         solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
-/*
- solo.clickOnButton("Log In");
- solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
- solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
- */
 
         solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
 
