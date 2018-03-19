@@ -258,6 +258,7 @@ public class TaskController {
 
             String query = TaskUtil.serializer(this.current_task);
 
+            this.current_task.setTaskStatus("bidden");
             Index index = new Index.Builder(query)
                     .index("cmput301w18t25").type("task").id(this.current_task.getId()).build();
             try {
@@ -274,17 +275,21 @@ public class TaskController {
 
             String query2 = "{ \n"+
                     "\"query\":{\n"+
-                    "\"term\":{\"userId\":\""+current_bid.getProviderId()+"\"}\n"+
+                    "\"term\":{\"userId\":\""+this.current_bid.getProviderId()+"\"}\n"+
                     "}\n"+"}";
 
             Index index2 = new Index.Builder(query2)
-                    .index("cmput301w18t25").type("userst").id(current_bid.getProviderId()).build();
+                    .index("cmput301w18t25").type("userst").id(this.current_bid.getProviderId()).build();
+
+            //UserListController.getAUserById getAUserById = new UserListController.getAUserById();
+            //getAUserById.execute(this.current_bid.getProviderId());
+            Log.i("Report", this.current_bid.getProviderId());
             try {
                 DocumentResult result = client.execute(index2);
                 if (result.isSucceeded()) {
                     User foundUser = result.getSourceAsObject(User.class);
-                    Log.i("Report: ", current_task.getId());
-                    foundUser.addProviderBiddenTask(current_task.getId());
+
+                    foundUser.addProviderBiddenTask(this.current_task.getId());
 
                     try {
                         DocumentResult result2 = client.execute(index2);

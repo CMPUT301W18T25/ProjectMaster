@@ -145,7 +145,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
 
         // get target task
         view_task=tasklist.get(view_index);
-
+        Log.i("idddddddddddddddddd", view_task.getId());
 
         // get information from target task and set information
         String temp_name=view_task.getTaskName();

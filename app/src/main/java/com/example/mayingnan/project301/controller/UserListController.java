@@ -159,7 +159,7 @@ public class UserListController {
             User newuser = new User();
 
             for (User user : users) {
-                user.setId(user.getUserName());
+                user.setId(user.getId());
                 Index index = new Index.Builder(user).index("cmput301w18t25").type("userst").build();
 
                 try {
