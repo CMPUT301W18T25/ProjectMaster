@@ -14,9 +14,9 @@ import com.example.mayingnan.project301.Task;
 import java.util.ArrayList;
 
 /**
- * author: Yingnan Ma
- * version:1.0
- * Created on 2018/3/15.
+ *
+ * @author :
+ * @version 1.0
  */
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
@@ -45,14 +45,29 @@ public class ProviderAdapter extends ArrayAdapter<Task> {
 
         // Return the completed view to render on screen
         //noinspection ConstantConditions
+        //get taskName
         String taskName = task.getTaskName().toString();
-        String taskAddress = task.getTaskAddress().toString();
-        String taskIdealPrice = Double.toString(task.getTaskIdealPrice());
+        //get taskAddress
+        String taskAddress;
+        if (task.getTaskAddress()==null){
+            taskAddress = "";
+        }else{
+            taskAddress = task.getTaskAddress().toString();
+        }
+        //get taskIdealPrice
+        String taskIdealPrice;
+        if (task.getTaskIdealPrice()==null){
+            taskIdealPrice = "";
+        }else{
+            taskIdealPrice = Double.toString(task.getTaskIdealPrice());
+        }
+
+        //set task info
         task_name.setText(taskName);
         task_destination.setText(taskAddress);
         task_idealprice.setText(taskIdealPrice);
 
-        Log.i("a",task.getTaskAddress().toString());
+        //Log.i("a",task.getTaskAddress().toString());
         return convertView;
     }
 }
