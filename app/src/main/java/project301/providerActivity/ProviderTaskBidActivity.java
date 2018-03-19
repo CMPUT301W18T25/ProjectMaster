@@ -197,9 +197,14 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
 
                 TaskController.providerSetBid setTaskBid = new TaskController.providerSetBid(view_task,bid);
                 setTaskBid.execute();
-
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Intent info2 = new Intent(ProviderTaskBidActivity.this, ProviderBidHistoryActivity.class);
                 info2.putExtra("userId",userId);
+
                 startActivity(info2);
 
             }

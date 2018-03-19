@@ -271,9 +271,10 @@ public class TaskController {
 
             verifySettings();
 
-            String query = TaskUtil.serializer(this.current_task);
 
             this.current_task.setTaskStatus("bidden");
+            String query = TaskUtil.serializer(this.current_task);
+
             Index index = new Index.Builder(query)
                     .index("cmput301w18t25").type("task").id(this.current_task.getId()).build();
             try {
@@ -443,8 +444,7 @@ public class TaskController {
                     "   \"query\" : {\n"+
                     "       \"bool\" : {\n"+
                     "           \"must\" : [\n"+
-                    "               { \"term\" : {\"taskStatus\" : " + "\"bidden\"}}," + "\n"+
-                    "               { \"term\" : {\"taskProvider\" : " + "\"tester\"}}" + "\n"+
+                    "               { \"term\" : {\"taskStatus\" : " + "\"bidden\"}}" +
                     "           ]\n"+
                     "       }\n"+
                     "   }\n"+
@@ -460,7 +460,21 @@ public class TaskController {
                 if (result.isSucceeded()) {
                     List<Task> rt
                             = result.getSourceAsObjectList(Task.class);
-                    result_tasks.addAll(rt);
+                    for(Task task:rt){
+
+                        ArrayList<Bid> BiddenList = task.getTaskBidList();
+                        for(Bid bid:BiddenList){
+                            if(bid.getProviderId().equals(providerId)){
+                                result_tasks.add(task);
+
+
+                            }
+                        }
+                    }
+
+                    Log.i("allbidden","test");
+
+
                     Log.i("Success", "Data retrieved from database: " + Integer.toString(rt.size()));
                 } else {
                     Log.i("Error", "The search query failed");

@@ -59,6 +59,17 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         UserListController uc = new UserListController();
         user = uc.getAUserById(userId);
 
+        TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
+        search.execute();
+
+        try {
+            taskList = search.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
         //settle back button
         Button backButton = (Button) findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -124,16 +135,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
-        search.execute();
 
-        try {
-            taskList = search.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
 
         /*
         //Task task = taskList.get(0);
