@@ -14,14 +14,18 @@
             android:layout_width="189dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Task name :" />
+            android:fontFamily="serif"
+            android:text="Task name :"
+            android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/adapter_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:fontFamily="serif"
+            android:text="TextView"
+            android:textStyle="bold|italic" />
     </LinearLayout>
 
     <LinearLayout
@@ -34,14 +38,18 @@
             android:layout_width="189dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Destination :" />
+            android:fontFamily="serif"
+            android:text="Destination :"
+            android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/adapter_destination"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:fontFamily="serif"
+            android:text="TextView"
+            android:textStyle="bold|italic" />
     </LinearLayout>
 
     <LinearLayout
@@ -54,14 +62,18 @@
             android:layout_width="189dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ideal Price :" />
+            android:fontFamily="serif"
+            android:text="Ideal Price :"
+            android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/adapter_idealprice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:fontFamily="serif"
+            android:text="TextView"
+            android:textStyle="bold|italic" />
     </LinearLayout>
 
 </LinearLayout>

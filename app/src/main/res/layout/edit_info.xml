@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Edit Your Information Here"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimaryDark"
@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Name :"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:hint="Edit your name"
                 android:inputType="textPersonName"
                 android:textStyle="bold|italic" />
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Email :"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:hint="Edit your email"
                 android:inputType="textEmailAddress"
                 android:textStyle="bold|italic" />
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Phone :"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:hint="Edit your phone"
                 android:inputType="phone"
                 android:textStyle="bold|italic" />
@@ -128,10 +128,10 @@
 
             <TextView
                 android:id="@+id/print_passward"
-                android:layout_width="55dp"
+                android:layout_width="82dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Password :"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
@@ -143,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:hint="Edit your password"
                 android:inputType="text"
                 android:textStyle="bold|italic" />
@@ -160,7 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Save"
                 android:textStyle="bold|italic" />
 
@@ -169,7 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Back"
                 android:textStyle="bold" />
 

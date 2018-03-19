@@ -21,10 +21,10 @@
                 android:id="@+id/print6"
                 android:layout_width="142dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Task Name :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <TextView
@@ -32,9 +32,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Info of task name"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
         </LinearLayout>
 
@@ -48,10 +48,10 @@
                 android:id="@+id/print1"
                 android:layout_width="142dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Task Detail :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <TextView
@@ -59,9 +59,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Info of task detail"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>
@@ -74,13 +74,13 @@
 
             <TextView
                 android:id="@+id/print3"
-                android:layout_width="0dp"
+                android:layout_width="31dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
-                android:text="Task Location :"
+                android:fontFamily="serif"
+                android:text="Deatination :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <TextView
@@ -88,9 +88,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Info of location"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>
@@ -103,13 +103,13 @@
 
             <TextView
                 android:id="@+id/print7"
-                android:layout_width="28dp"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Ideal Price :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <TextView
@@ -117,9 +117,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Info of ideal price"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
         </LinearLayout>
 
@@ -133,10 +133,10 @@
                 android:id="@+id/print4"
                 android:layout_width="142dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Deal Price :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <TextView
@@ -144,9 +144,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Info of deal price"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>
@@ -161,10 +161,10 @@
                 android:id="@+id/print5"
                 android:layout_width="142dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Task Status :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <TextView
@@ -172,9 +172,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Info if status"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>
@@ -190,8 +190,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
-                android:text="pay" />
+                android:fontFamily="serif"
+                android:text="pay"
+                android:textStyle="bold|italic" />
 
             <Button
                 android:id="@+id/delete_button"
@@ -207,8 +208,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
-                android:text="Back" />
+                android:fontFamily="serif"
+                android:text="Back"
+                android:textStyle="bold|italic" />
         </LinearLayout>
 
     </LinearLayout>

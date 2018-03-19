@@ -41,7 +41,9 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
     private TextView view_idealprice;
     private TextView view_lowestbid;
     private Task view_task;
+    private Task target_task;
     private ArrayList<Task> tasklist;
+    private ArrayList<Task> deletedlist;
     private String view_index;
 
 
@@ -88,6 +90,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
         // get target task
         view_task=tasklist.get(view_index);
 
+
         // get information from target task and set information
         String temp_name=view_task.getTaskName();
         view_name.setText(temp_name);
@@ -106,12 +109,6 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
 
         Double temp_lowestbid=view_task.getLowestBid();
         view_lowestbid.setText(Double.toString(temp_lowestbid));
-
-
-
-
-
-
 
 
         //settle edit button
@@ -133,8 +130,37 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
         deleteTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String index = intent.getExtras().get("info").toString();
+
+                //interface jump
                 Intent info2 = new Intent(RequesterViewTaskActivity.this, RequesterEditListActivity.class);
+
+                //get data from database
+                deletedlist = new ArrayList<>();
+                TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+                search.execute(userId);
+                try {
+                    deletedlist= search.get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+                // get index of target task
+                final int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
+
+                // get target task
+                target_task=deletedlist.get(view_index);
+
+                //delete task from database
+                TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(target_task.getId());
+                deleteTaskById.execute(target_task.getId());
+
+
+
                 info2.putExtra("userId",userId);
+                info2.putExtra("info",index);
                 startActivity(info2);
 
             }

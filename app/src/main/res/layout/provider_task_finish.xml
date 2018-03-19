@@ -18,10 +18,10 @@
                 android:id="@+id/print10"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Task Name :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <TextView
@@ -29,8 +29,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
-                android:textSize="20sp"
+                android:fontFamily="serif"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
         </LinearLayout>
 
@@ -44,10 +44,10 @@
                 android:id="@+id/print1"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Task Detail :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <TextView
@@ -55,8 +55,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
-                android:textSize="20sp"
+                android:fontFamily="serif"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>
@@ -71,10 +71,10 @@
                 android:id="@+id/print3"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Destination :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <TextView
@@ -82,8 +82,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
-                android:textSize="20sp"
+                android:fontFamily="serif"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>
@@ -98,10 +98,10 @@
                 android:id="@+id/textView4"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Ideal Price :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <TextView
@@ -109,8 +109,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
-                android:textSize="20sp"
+                android:fontFamily="serif"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
         </LinearLayout>
 
@@ -124,10 +124,10 @@
                 android:id="@+id/print4"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Bid Price :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <TextView
@@ -135,15 +135,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
-                android:textSize="20sp"
+                android:fontFamily="serif"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="64dp"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
@@ -151,10 +151,10 @@
                 android:id="@+id/print5"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Task Status :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <TextView
@@ -162,8 +162,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
-                android:textSize="20sp"
+                android:fontFamily="serif"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>
@@ -179,7 +179,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Back"
                 android:textStyle="bold|italic" />
         </LinearLayout>

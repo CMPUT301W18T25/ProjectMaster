@@ -21,10 +21,10 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Task Name :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <EditText
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:hint="Type task name"
                 android:inputType="text"
                 android:textStyle="bold|italic" />
@@ -50,10 +50,10 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Task Detail :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <EditText
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:hint="Type the task detail"
                 android:inputType="text"
                 android:textStyle="bold|italic" />
@@ -80,10 +80,10 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Destination :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <EditText
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:hint="Type the location"
                 android:inputType="text"
                 android:textStyle="bold|italic" />
@@ -110,10 +110,10 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Ideal Price :"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
             <EditText
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:hint="Type your ideal price"
                 android:inputType="numberDecimal"
                 android:textStyle="bold|italic" />
@@ -136,9 +136,9 @@
 
             <TextView
                 android:id="@+id/textView5"
-                android:layout_width="121dp"
+                android:layout_width="151dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Task Photo :"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
@@ -179,7 +179,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="submit"
                 android:textStyle="bold|italic" />
 
@@ -188,7 +188,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
+                android:fontFamily="serif"
                 android:text="Cancel"
                 android:textStyle="bold|italic" />
         </LinearLayout>
