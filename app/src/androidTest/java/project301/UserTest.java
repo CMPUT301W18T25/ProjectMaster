@@ -34,8 +34,10 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     @SuppressWarnings("ConstantConditions")
     @Test
     public void testAddUser() throws Exception{
-        String test = "test8";
-        User user = new User(test,test,test,test,test,test,test,test);
+        User user = new User();
+        user.setUserName("Tom");
+        user.setUserPassword("maf19044");
+
         UserListController.addUser addUser = new UserListController.addUser();
         addUser.execute(user);
         // Hang around till is done
@@ -81,7 +83,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
 
     public void testGetAUserByName(){
         User user1 = new User();
-        user1.setUserName("y3hh");
+        user1.setUserName("Mike");
         UserListController.addUser addUser = new UserListController.addUser();
         addUser.execute(user1);
 
@@ -99,7 +101,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         User newUser  = new User();
         UserListController uc = new UserListController();
         int found = 0;
-        newUser = uc.getAUserByName("y3hh");
+        newUser = uc.getAUserByName("Mike");
         if(newUser!=null){
             found = 1;
         }
@@ -116,7 +118,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
         deleteAllUsers.execute("");
         User user1 = new User();
-        user1.setUserName("y3hh");
+        user1.setUserName("jason");
         UserListController.addUser addUser = new UserListController.addUser();
         addUser.execute(user1);
 
@@ -134,14 +136,14 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         User newUser  = new User();
         UserListController uc = new UserListController();
         int found = 0,found2 = 0;
-        newUser = uc.getAUserByName("y3hh");
+        newUser = uc.getAUserByName("jason");
         if(newUser!=null){
             found = 1;
         }
 
 
         //noinspection ConstantConditions
-        Log.i("said",newUser.getUserName());
+        //Log.i("said",newUser.getUserName());
         newUser = uc.getAUserById(newUser.getId());
         if(newUser!=null){
             found2= 1;
@@ -155,8 +157,8 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
 
     public void testcheckUserByNameAndPassword(){
         User user1 = new User();
-        user1.setUserName("y12");
-        user1.setUserPassword("y12pass");
+        user1.setUserName("yueMa");
+        user1.setUserPassword("yueMa2019");
 
 
         UserListController.addUser addUser = new UserListController.addUser();
@@ -175,10 +177,10 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         }
 
         UserListController uc = new UserListController();
-        boolean findUser1 = uc.checkUserByNameAndPassword("y12","y12pass");
+        boolean findUser1 = uc.checkUserByNameAndPassword("yueMa","yueMa2019");
         assertTrue(findUser1);
 
-        boolean notfindUser1 = uc.checkUserByNameAndPassword("y12","y1pas2s");
+        boolean notfindUser1 = uc.checkUserByNameAndPassword("yueMa","yueMi2018");
 
         assertEquals(notfindUser1,false);
         UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
@@ -201,7 +203,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         }
         User user1 = new User();
         user1.setUserName("yue12");
-        user1.setUserPassword("yue12pass");
+        user1.setUserPassword("yue12password");
         UserListController.addUser addUser = new UserListController.addUser();
         addUser.execute(user1);
         // Hang around till is done
@@ -215,7 +217,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        user1.setUserPassword("yue12word");
+        user1.setUserPassword("yue12fakepassword");
         UserListController.updateUser updateUser = new UserListController.updateUser();
         updateUser.execute(user1);
         AsyncTask.Status taskStatus2;
@@ -231,9 +233,9 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         //boolean notfindUser1 = uc.checkUserByNameAndPassword("yue12","yue12pass");
         //assertEquals(notfindUser1,false);
         UserListController uc = new UserListController();
-        boolean findUser1 = uc.checkUserByNameAndPassword("yue12","yue12word");
+        boolean findUser1 = uc.checkUserByNameAndPassword("yue12","yue12password");
         assertEquals(findUser1,true);
-        boolean notfindUser1 = uc.checkUserByNameAndPassword("yue12","yue12pass");
+        boolean notfindUser1 = uc.checkUserByNameAndPassword("yue12","yue12fakepassword");
         assertEquals(notfindUser1,false);
 
 
@@ -292,7 +294,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
 
         String userId = null;
         User user1 = new User();
-        user1.setUserName("yue15");
+        user1.setUserName("yueLiu");
         UserListController.addUser addUser= new UserListController.addUser();
         addUser.execute(user1);
 
@@ -307,7 +309,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
             e.printStackTrace();
         }
         User user2 = new User();
-        user2.setUserName("yue15");
+        user2.setUserName("yueLiu");
         UserListController uc = new UserListController();
         userId = uc.addUserAndCheck(user2);
 
