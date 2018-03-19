@@ -34,6 +34,7 @@ import io.searchbox.core.SearchResult;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
+//todo(by wdong2): a method to get the provider bidden amount by given a task (and userId)
 public class TaskController {
 
     private Task current_task;

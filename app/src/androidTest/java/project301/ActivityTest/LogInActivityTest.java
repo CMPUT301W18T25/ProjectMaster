@@ -46,16 +46,6 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.clickOnButton("Sign Up");
 
-        solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
-
-        solo.goBack();
-
-        solo.goBack();
-
-        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
-
-        solo.clickOnButton("Sign Up");
-
         //solo.goBack();
 
         solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");

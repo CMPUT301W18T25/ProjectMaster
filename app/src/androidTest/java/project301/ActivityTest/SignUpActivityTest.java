@@ -39,24 +39,12 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
         SignUpActivity activity = (SignUpActivity)solo.getCurrentActivity();
 
         solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
-/**
- solo.clickOnButton("Log In");
- solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
- solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
- */
 
         solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
 
         solo.enterText((EditText) solo.getView(R.id.signup_password),"passward");
 
         solo.clickOnButton("Log In");
-
-        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
-
-        solo.goBack();
-
-        solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
-
     }
 
 
