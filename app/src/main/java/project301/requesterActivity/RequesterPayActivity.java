@@ -11,13 +11,12 @@ import android.widget.Button;
 import project301.R;
 
 /**
- * @classname : RequesterPayActivity
- * @class Detail : pay class is to change the status of task from bidding to processing
- *
+ * Detail : pay class is to change the status of task from bidding to processing
  * @Date :   18/03/2018
  * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ * @classname : RequesterPayActivity
  */
 
 
