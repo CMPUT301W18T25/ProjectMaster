@@ -88,6 +88,7 @@ public class TaskController {
         protected Void doInBackground(Task... a_task) {
             verifySettings();
 
+            a_task[0].setTaskStatus("request");
             Index index = new Index.Builder(a_task[0]).index("cmput301w18t25").type("task").build();
 
             try {
