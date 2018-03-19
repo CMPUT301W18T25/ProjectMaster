@@ -15,9 +15,7 @@ import project301.R;
  * @class Detail :
  *
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */

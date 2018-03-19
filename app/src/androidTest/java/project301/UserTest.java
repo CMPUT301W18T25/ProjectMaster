@@ -18,9 +18,7 @@ import org.junit.Test;
  * @class Detail :
  *
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Yue Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */

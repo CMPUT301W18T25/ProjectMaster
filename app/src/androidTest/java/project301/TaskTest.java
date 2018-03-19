@@ -18,8 +18,6 @@ import static org.junit.Assert.*;
  *
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
- * @author :
- * @author :
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */

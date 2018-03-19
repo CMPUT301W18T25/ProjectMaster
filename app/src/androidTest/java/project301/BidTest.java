@@ -11,9 +11,7 @@ import project301.allUserActivity.LogInActivity;
  * @class Detail :
  *
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Yuqi Zhang
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */

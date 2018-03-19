@@ -13,12 +13,9 @@ import java.util.Map;
 
 /**
  * @classname : ProviderTaskFinishActivity
- * @class Detail :
- *
+ * After a task finished, this Activity class shows the detail of the finished task
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */

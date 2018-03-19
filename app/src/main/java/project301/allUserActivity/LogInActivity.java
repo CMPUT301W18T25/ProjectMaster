@@ -24,16 +24,15 @@ import project301.controller.UserListController;
 import java.util.ArrayList;
 
 /**
-        * @classname : LoginActivity
-        * This is the login activity, when user open the app, this activity
-        * will ask the user to sign up an account or login.
-        * @Date :   18/03/2018
-        * @author : Yingnan Ma
-        * @author : Wang Dong
-        * @author : Xingyuan Yang
-        * @version 1.0
-        * @copyright : copyright (c) 2018 CMPUT301W18T25
-        */
+ * @classname : LoginActivity
+ * This is the login activity, when user open the app, this activity
+ * will ask the user to sign up an account or login.
+ * @Date :   18/03/2018
+ * @author : Wang Dong
+ * @author : Yue Ma
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
 
 
 public class LogInActivity extends AppCompatActivity {

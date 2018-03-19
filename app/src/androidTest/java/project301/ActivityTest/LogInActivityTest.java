@@ -15,6 +15,15 @@ import project301.allUserActivity.UserCharacterActivity;
 
 import com.robotium.solo.Solo;
 
+/**
+ * @classname : LogInActivityTest
+ * @class Detail : User in this activity can choose to be a provider or requestor
+ * @Date :   18/03/2018
+ * @author : Wang Dong
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
 public class LogInActivityTest extends ActivityInstrumentationTestCase2 {
 
     private Solo solo;

@@ -24,12 +24,9 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * @classname : ProviderTaskBidActivity
- * @class Detail :
- *
+ * This is the Activity class for user to bid on an exsiting task
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */

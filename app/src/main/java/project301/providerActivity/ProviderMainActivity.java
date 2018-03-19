@@ -19,12 +19,10 @@ import project301.controller.TaskController;
 
 /**
  * @classname : ProviderMainActivity
- * @class Detail :
- *
+ * This is the main page of provider; it shows a list of requesting task;
+ * user could change profile, see bid history, as well as look into a requesting task.
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */

@@ -21,9 +21,7 @@ import project301.requesterActivity.RequesterMainActivity;
  * @classname : UserCharacterActivity
  * @class Detail : User in this activity can choose to be a provider or requestor
  * @Date :   18/03/2018
- * @author : Yingnan Ma
  * @author : Wang Dong
- * @author : Xingyuan Yang
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */

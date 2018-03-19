@@ -13,7 +13,7 @@ import android.util.Log;
  * @class Detail :
  *
  * @Date :   18/03/2018
- * @author :
+ * @author : Yue Ma
  * @author :
  * @author :
  * @version 1.0

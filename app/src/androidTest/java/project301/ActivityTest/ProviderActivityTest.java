@@ -1,10 +1,13 @@
 package project301.ActivityTest;
 
-
-/*
- * Created by wdong2 on 3/8/18.
+/**
+ * @classname : ProviderActivityTest
+ * @class Detail : User in this activity can choose to be a provider or requestor
+ * @Date :   18/03/2018
+ * @author : Wang Dong
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
-
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;

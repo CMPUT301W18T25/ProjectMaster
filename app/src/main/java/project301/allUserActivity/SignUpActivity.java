@@ -24,9 +24,8 @@ import project301.controller.UserListController;
  * The user need to fill the blank on this activity for creating a new account.
  * The form contains name, phone number, password, and email.
  * @Date :   18/03/2018
- * @author : Yingnan Ma
  * @author : Wang Dong
- * @author : Xingyuan Yang
+ * @author : Yue Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
