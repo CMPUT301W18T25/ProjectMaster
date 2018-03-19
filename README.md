@@ -7,7 +7,7 @@
 * Android Studio
 
 ## Javadoc
-[LINK TO JAVADOC]
+[LINK TO JAVADOC] https://cmput301w18t25.github.io/ProjectMaster/
 
 ## Note
 * Android Studio 2.2.3
