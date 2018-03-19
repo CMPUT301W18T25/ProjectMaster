@@ -21,12 +21,12 @@
 
 
 ## Authors:
-Xingyuan(Roy) Yang
-Yuqi Zhang
-Yue Ma
-Wang Dong
-Yingnan Ma
-Julian Stys
+* Xingyuan(Roy) Yang
+* Yuqi Zhang
+* Yue Ma
+* Wang Dong
+* Yingnan Ma
+* Julian Stys
 
 
 ## License:
