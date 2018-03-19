@@ -47,6 +47,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
     private ArrayList<Task> task_list;
     private ArrayList<Task> start_list;
     private String view_index;
+    private Integer last_index;
 
 
 
@@ -147,9 +148,10 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                     }
 
                     // get index of target task
-                    view_index = intent.getExtras().get("info").toString();
-                    final int index = Integer.parseInt(view_index);
-
+                    //view_index = intent.getExtras().get("info").toString();
+                    //final int index = Integer.parseInt(view_index);
+                    last_index = task_list.size()-1;
+                    view_index=Integer.toString(last_index);
 
                     // get target task
                     target_task=task_list.get(index);
