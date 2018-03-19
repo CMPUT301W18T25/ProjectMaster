@@ -127,6 +127,7 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
         String temp_name=user.getUserName();
         usernameText.setText(temp_name);
 
+        //check empty
         if (user.getUserEmail()==null){
             emailText.setText("");
         }else {
@@ -141,10 +142,10 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
             mobileText.setText(temp_phone);
         }
 
+        //set password
         String temp_status=user.getUserPassword();
         passwordText.setText(temp_status);
     }
-
 
 
 }

@@ -101,6 +101,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     }
+                    //doing offline
                     if(!returnCode){
                         FileSystemController fileSystemController = new FileSystemController();
                         Log.i("offlineAdd","test");

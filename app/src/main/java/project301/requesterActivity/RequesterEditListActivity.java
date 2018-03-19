@@ -82,24 +82,14 @@ public class RequesterEditListActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        TaskController.searchAllTasksOfThisRequester getAll = new TaskController.searchAllTasksOfThisRequester();
-        getAll.execute("user id here");
-        try {
-            ArrayList<Task> save_tasks = getAll.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        */
+
     }
 
     @Override
     protected void onStart(){
         super.onStart();
 
-
+        //time sleep
         try {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
@@ -109,7 +99,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
         TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
         search.execute(userId);
 
-
+        //get task
         tasklist = new ArrayList<Task>();
         try {
             tasklist= search.get();
@@ -118,6 +108,8 @@ public class RequesterEditListActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
+        //doing offline
         if(tasklist.size() == 1 && tasklist.get(0).getId().equals("-1")){
             Log.i("go","offline");
 
