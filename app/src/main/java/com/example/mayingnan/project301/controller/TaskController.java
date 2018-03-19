@@ -4,7 +4,6 @@ import com.example.mayingnan.project301.Bid;
 import com.example.mayingnan.project301.OnAsyncTaskCompleted;
 import com.example.mayingnan.project301.Task;
 import com.example.mayingnan.project301.utilities.TaskUtil;
-import com.example.mayingnan.project301.utilities.UserUtil;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
@@ -82,7 +81,6 @@ public class TaskController {
         protected Void doInBackground(Task... a_task) {
             verifySettings();
 
-            a_task[0].setTaskStatus("request");
             Index index = new Index.Builder(a_task[0]).index("cmput301w18t25").type("task").build();
 
             try {
@@ -92,10 +90,8 @@ public class TaskController {
                 if(result.isSucceeded())
                 {
                     a_task[0].setId(result.getId());
-
-
-
                     Log.i("Success","Elasticsearch ");
+
                 }
                 else
                 {
@@ -229,7 +225,6 @@ public class TaskController {
             this.current_task = current_task;
             this.current_bid = current_bid;
             this.current_task.addBid(this.current_bid);
-            this.current_task.setTaskStatus("bidden");
         }
 
         @Override
@@ -316,7 +311,7 @@ public class TaskController {
                     "       \"bool\" : {\n"+
                     "           \"must\" : [\n"+
                     "               { \"term\" : {\"taskStatus\" : " + "\"bidden\"}}," + "\n"+
-                    "               { \"term\" : {\"taskProvider\" : " + "\"" + this.providerId +"\"}}" + "\n"+
+                    "               { \"term\" : {\"taskProvider\" : " + "\"tester\"}}" + "\n"+
                     "           ]\n"+
                     "       }\n"+
                     "   }\n"+

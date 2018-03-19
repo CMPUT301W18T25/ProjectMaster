@@ -63,8 +63,6 @@ public class TaskTest {
         TaskController.addTask addTaskCtl = new TaskController.addTask();
         Task task = new Task();
         task.setTaskName("hi");
-        task.setTaskAddress("gg home");
-        task.setTaskIdealPrice((Double)11.11);
 
         addTaskCtl.execute(task);
 
@@ -79,7 +77,6 @@ public class TaskTest {
             e.printStackTrace();
         }
 
-        Log.i("Report", task.getId());
         if (!(task.getId() == null)){
             if (!task.getId().isEmpty()){
                 assertTrue(true);
@@ -536,7 +533,7 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0){
-                assertTrue(true);
+                assertTrue(false);
             }
 
             for (int i = 0; i < 5; i++){
@@ -544,7 +541,7 @@ public class TaskTest {
                 if (rt_list.get(i) == null){
                     break;
                 }
-                if (rt_list.get(i).getTaskStatus().equals("request")){
+                if (rt_list.get(i).getTaskStatus().equals("bidden")){
                     if (rt_list.get(i).getTaskProvider().equals(send_list.get(i).getTaskProvider())){
                         assertTrue(true);
                     }
@@ -631,7 +628,7 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0){
-                assertTrue(true);
+                assertTrue(false);
             }
 
             for (int i = 0; i < 5; i++){
@@ -639,7 +636,7 @@ public class TaskTest {
                 if (rt_list.get(i) == null){
                     break;
                 }
-                if (rt_list.get(i).getTaskStatus().equals("request")){
+                if (rt_list.get(i).getTaskStatus().equals("assigned")){
                     if (rt_list.get(i).getTaskProvider().equals(send_list.get(i).getTaskProvider())){
                         assertTrue(true);
                     }
@@ -726,7 +723,7 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0) {
-                assertTrue(true);
+                assertTrue(false);
             }
 
             for (int i = 0; i < 5; i++) {
@@ -753,6 +750,7 @@ public class TaskTest {
         }
 
     }
+
 
     @Test
     public void searchAllRequestingTasksTest(){
@@ -816,93 +814,20 @@ public class TaskTest {
 
         try {
             rt_list = search.get();
-            Log.i("Success", rt_list.get(0).getTaskStatus());
+            Log.i("Success", "message");
 
             if (rt_list.size() == 0) {
                 assertTrue(false);
             }
 
-            for (int i = 0; i < rt_list.size(); i++) {
+            for (int i = 0; i < 5; i++) {
                 Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
                 if (rt_list.get(i) == null) {
                     break;
                 }
                 if (rt_list.get(i).getTaskStatus().equals("request")) {
-                    assertTrue(true);
-                } else {
-                    assertTrue(false);
-                }
-            }
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            Log.i("Error", "return fail");
-
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-            Log.i("Error", "not getting anything");
-        }
-
-    }
-
-    @Test
-    public void deleteTaskTest(){
-
-        TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
-        deleteAllTasks.execute("");
-    }
-
-    @Test
-    public void searchTaskByKeywordTest(){
-        TaskController.searchTaskByKeyword search = new TaskController.searchTaskByKeyword();
-        ArrayList<Task> rt_list;
-
-        ///
-        TaskController.addTask addTaskCtl = new TaskController.addTask();
-        Task task = new Task();
-        task.setTaskName("a");
-        task.setTaskStatus("request");
-        task.setTaskIdealPrice((Double)10.1);
-        task.setTaskAddress("home");
-        task.setTaskRequester("dw");
-
-        addTaskCtl.execute(task);
-
-        AsyncTask.Status taskStatus;
-        do {
-            taskStatus = addTaskCtl.getStatus();
-        } while (taskStatus != AsyncTask.Status.FINISHED);
-
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        if (!(task.getId() == null)){
-            if (!task.getId().isEmpty()){
-                assertTrue(true);
-            }
-        }
-        ///
-
-        search.execute("hi");
-        try {
-            rt_list = search.get();
-            Log.i("Success", Integer.toString(rt_list.size()));
-
-            if (rt_list == null) {
-                assertTrue(false);
-            }
-            for (int i = 0; i < rt_list.size(); i++) {
-                Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
-                if (rt_list.get(i) == null) {
-                    assertTrue(false);
-                }
-                if (rt_list.get(i).getTaskStatus().equals("request")) {
-                    if (rt_list.get(i).getTaskStatus().equals("request")) {
+                    if (rt_list.get(i).getTaskProvider().equals(send_list.get(i).getTaskProvider())) {
                         assertTrue(true);
-                        Log.i("Success", "we got DATA! ");
                     }
                 } else {
                     assertTrue(false);
@@ -917,6 +842,51 @@ public class TaskTest {
             e.printStackTrace();
             Log.i("Error", "not getting anything");
         }
+
+    }
+    @Test
+    public void deleteTaskTest(){
+
+        TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
+        deleteAllTasks.execute("");
+    }
+
+    @Test
+    public void searchTaskByKeywordTest(){
+        TaskController.searchTaskByKeyword search = new TaskController.searchTaskByKeyword();
+        ArrayList<Task> rt_list;
+
+        search.execute("Test");
+
+
+        try {
+            rt_list = search.get();
+            Log.i("Success", "message");
+
+            for (int i = 0; i < rt_list.size(); i++) {
+                Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
+                if (rt_list.get(i) == null) {
+                    break;
+                }
+                if (rt_list.get(i).getTaskStatus().equals("request")) {
+                    if (rt_list.get(i).getTaskName().contains("Test") || rt_list.get(i).getTaskDetails().contains("Test")) {
+                        assertTrue(true);
+                    }
+                } else {
+                    assertTrue(false);
+                }
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.i("Error", "return fail");
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            Log.i("Error", "not getting anything");
+        }
+
+
     }
 
 }

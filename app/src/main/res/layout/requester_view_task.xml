@@ -251,7 +251,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="cursive"
-                android:text="back"
+                android:text="Show List"
                 android:textStyle="italic" />
         </LinearLayout>
 

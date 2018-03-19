@@ -16,13 +16,8 @@ import android.widget.Toast;
 
 import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.Task;
-import com.example.mayingnan.project301.User;
-import com.example.mayingnan.project301.controller.TaskController;
-import com.example.mayingnan.project301.controller.UserListController;
-import com.example.mayingnan.project301.requesterActivity.RequesterAdapter;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderBidHistoryActivity extends AppCompatActivity {
@@ -33,7 +28,6 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
     private ArrayAdapter<Task> taskAdapter;
     private Context context;
     private String userId;
-    private User user;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -44,8 +38,6 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
         this.context = getApplicationContext();
-        UserListController uc = new UserListController();
-        user = uc.getAUserById(userId);
 
         //settle back button
         Button backButton = (Button) findViewById(R.id.back_button);
@@ -72,25 +64,22 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
                 Task task = taskList.get(index);
                 String status = task.getTaskStatus();
                 if (status == "request") {
-                    Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskBidActivity.class);
+                    Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskFinishActivity.class);
                     info1.putExtra("userId", userId);
                     info1.putExtra("info", index);
-                    info1.putExtra("status","request");
                     startActivity(info1);
                 } else if (status == "bidden") {
-                    Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskBidActivity.class);
+                    Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskFinishActivity.class);
                     info1.putExtra("userId", userId);
                     info1.putExtra("info", index);
-                    info1.putExtra("status","bidden");
                     startActivity(info1);
                 } else if (status == "assigned") {
-                    Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskBidActivity.class);
+                    Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskFinishActivity.class);
                     info1.putExtra("userId", userId);
                     info1.putExtra("info", index);
-                    info1.putExtra("status","assigned");
                     startActivity(info1);
                 } else if (status == "done") {
-                    Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskFinishActivity.class);
+                    Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskBidActivity.class);
                     info1.putExtra("userId", userId);
                     info1.putExtra("info", index);
                     startActivity(info1);
@@ -122,36 +111,5 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
 
 
 
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
-        search.execute();
-
-        try {
-            taskList = search.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-        //Task task = taskList.get(0);
-        //Test
-        Task task1 = new Task();
-        task1.setTaskName("a");
-        task1.setTaskAddress("a");
-        task1.setTaskIdealPrice(1.0);
-        task1.setTaskStatus("bidden");
-        //taskList = new ArrayList<>();
-        taskList.add(task1);
-        //
-
-        RequesterAdapter adapter = new RequesterAdapter(this, taskList);
-        // Attach the adapter to a ListView
-        this.bidHistoryList.setAdapter(adapter);
     }
 }

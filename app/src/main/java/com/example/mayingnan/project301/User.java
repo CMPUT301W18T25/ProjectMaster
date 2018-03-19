@@ -12,10 +12,11 @@ public class User {
     private String userEmail;
     private String userPassword;
     private String userType;
+    private String resultId;
     public User(){
         super();
     }
-    public User(String userId,String userName,String userPhone,String userAddress,String userEmail,String userPassword,String userType){
+    public User(String userId,String userName,String userPhone,String userAddress,String userEmail,String userPassword,String userType,String resultId){
         this.userId = userId;
         this.userName = userName;
         this.userAddress = userAddress;
@@ -23,6 +24,7 @@ public class User {
         this.userPassword = userPassword;
         this.userType = userType;
         this.userPhone = userPhone;
+        this.resultId = resultId;
 
     }
 
@@ -83,4 +85,10 @@ public class User {
         this.userId = userId;
     }
 
+    public String getResultId(){
+        return resultId;
+    }
+    public void setResultId(String resultId){
+        this.resultId = resultId;
+    }
 }

@@ -107,6 +107,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        Log.i("Sign", Integer.toString(tasklist.size()));
 
         RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
         // Attach the adapter to a ListView

@@ -146,21 +146,14 @@ public class Task {
         return false;
     }
 
-    public boolean cancelBid(String providerID){
+    public boolean cancelBid(String providerName){
         for (int i = 0; i<taskBidList.size();i++){
-            if (providerID.equals(taskBidList.get(i).getProviderId())){
+            if (providerName.equals(taskBidList.get(i).getProviderId())){
                 taskBidList.remove(i);
                 return true;
             }
         }
         return false;
     }
-    public Bid getMyBid(String providerID){
-        for (int i = 0; i < taskBidList.size(); i++){
-            if (taskBidList.get(i).getProviderId().equals(providerID)){
-                return taskBidList.get(i);
-            }
-        }
-        return null;
-    }
+
 }

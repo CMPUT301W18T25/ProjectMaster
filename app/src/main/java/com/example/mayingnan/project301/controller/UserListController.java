@@ -147,24 +147,16 @@ public class UserListController {
             User newuser = new User();
 
             for (User user : users) {
-                Index index = new Index.Builder(user).index("cmput301w18t25").type("userst").build();
+                user.setId(user.getUserName());
+                Index index = new Index.Builder(user).index("cmput301w18t25").type("user").build();
 
                 try {
                     // where is the client?
                     DocumentResult result = client.execute(index);
-
                     if(result.isSucceeded())
                     {
-                        user.setId(result.getId());
-                        newuser = user;
-
-
-                        String query = UserUtil.serializer(newuser);
-                        Index index2 = new Index.Builder(query)
-                                .index("cmput301w18t25").type("userst").id(newuser.getId()).build();
-
-
-                        DocumentResult result2 = client.execute(index2);
+                        newuser.setId(user.getUserName());
+                        user.setResultId(result.getId());
 
                         Log.i("Success","Elasticsearch ");
 
@@ -179,7 +171,7 @@ public class UserListController {
                 }
 
             }
-            Log.i("newUserid",newuser.getId());
+
             return newuser;
 
 
@@ -197,7 +189,7 @@ public class UserListController {
             Log.i("Query", "The query was " + query);
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w18t25")
-                    .addType("userst")
+                    .addType("user")
                     .build();
             try {
                 SearchResult result = client.execute(search);
@@ -231,14 +223,14 @@ public class UserListController {
 
             String query = "{ \n"+
                     "\"query\":{\n"+
-                    "\"term\":{\"_id\":\""+search_parameters[0]+"\"}\n"+
+                    "\"term\":{\"userId\":\""+search_parameters[0]+"\"}\n"+
                     "}\n"+"}";
 
 
             Log.i("Query", "The query was " + query);
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w18t25")
-                    .addType("userst")
+                    .addType("user")
                     .build();
             try {
                 SearchResult result = client.execute(search);
@@ -272,7 +264,7 @@ public class UserListController {
             Log.i("Query", "The query was " + query);
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w18t25")
-                    .addType("userst")
+                    .addType("user")
                     .build();
             try {
                 SearchResult result = client.execute(search);
@@ -304,14 +296,12 @@ public class UserListController {
             // Serialize object into Json string
             String query = UserUtil.serializer(users[0]);
             Index index = new Index.Builder(query)
-                    .index("cmput301w18t25").type("userst").id(users[0].getId()).build();
+                    .index("cmput301w18t25").type("user").id(users[0].getResultId()).build();
 
             try {
                 DocumentResult result = client.execute(index);
                 if (result.isSucceeded()) {
                     Log.i("Debug", "Successful update user profile");
-                    Log.i("password",users[0].getUserPassword());
-                    Log.i("name",users[0].getUserPassword());
                 } else {
                     Log.i("Error", "We failed to update user profile to elastic search!");
                 }
@@ -335,7 +325,7 @@ public class UserListController {
             Log.i("Query", "The query was " + query);
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w18t25")
-                    .addType("userst")
+                    .addType("user")
                     .build();
             try {
                 SearchResult result = client.execute(search);
@@ -352,7 +342,7 @@ public class UserListController {
             }
 
             for (User u: users){
-                Delete delete = new Delete.Builder(u.getId()).index("cmput301w18t25").type("userst").build();
+                Delete delete = new Delete.Builder(u.getResultId()).index("cmput301w18t25").type("user").build();
 
                 try {
                     client.execute(delete);

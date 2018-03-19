@@ -29,7 +29,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     @Test
     public void testAddUser() throws Exception{
         String test = "test8";
-        User user = new User(test,test,test,test,test,test,test);
+        User user = new User(test,test,test,test,test,test,test,test);
         UserListController.addUser addUser = new UserListController.addUser();
         addUser.execute(user);
         // Hang around till is done
@@ -110,7 +110,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
         deleteAllUsers.execute("");
         User user1 = new User();
-        user1.setUserName("yq1");
+        user1.setUserName("y3hh");
         UserListController.addUser addUser = new UserListController.addUser();
         addUser.execute(user1);
 
@@ -128,14 +128,10 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         User newUser  = new User();
         UserListController uc = new UserListController();
         int found = 0,found2 = 0;
-        newUser = uc.getAUserByName("yq1");
-
+        newUser = uc.getAUserByName("y3hh");
         if(newUser!=null){
             found = 1;
         }
-        Log.i("Name:",newUser.getUserName());
-
-        Log.i("Id:",newUser.getId());
 
 
         //noinspection ConstantConditions
@@ -200,8 +196,6 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         User user1 = new User();
         user1.setUserName("yue12");
         user1.setUserPassword("yue12pass");
-        user1.setUserPhone("78072989");
-
         UserListController.addUser addUser = new UserListController.addUser();
         addUser.execute(user1);
         // Hang around till is done

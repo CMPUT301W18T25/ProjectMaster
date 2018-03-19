@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.mayingnan.project301.controller.OfflineController;
 import com.example.mayingnan.project301.utilities.FileIOUtil;
 import com.example.mayingnan.project301.R;
 import com.example.mayingnan.project301.Task;
@@ -31,7 +30,7 @@ import com.novoda.merlin.registerable.disconnection.Disconnectable;
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterPostTaskActivity extends AppCompatActivity implements Connectable, Disconnectable, Bindable {
+public class RequesterPostTaskActivity extends AppCompatActivity {
     private Context context;
 
     private EditText post_name;
@@ -42,17 +41,13 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
     private Button submitButton;
     private Button cancelButton;
     private String userId;
-    protected Merlin merlin;
+
+
+
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // monitor network connectivity
-        merlin = new Merlin.Builder().withConnectableCallbacks().withDisconnectableCallbacks().withBindableCallbacks().build(this);
-        merlin.registerConnectable(this);
-        merlin.registerDisconnectable(this);
-        merlin.registerBindable(this);
-
         setContentView(R.layout.requester_post_task);
         context=getApplicationContext();
         final Intent intent = getIntent();
@@ -69,10 +64,6 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
         post_photo = (ImageView) findViewById(R.id.c_task_photo);
         submitButton=(Button)findViewById(R.id.submit_button);
         cancelButton=(Button)findViewById(R.id.cancel_button);
-
-        //post_time.setIs24HourView(true); // to set 24 hours mode
-
-
 
 
         /**
@@ -102,11 +93,13 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
                     //upload new task data to database
                     TaskController.addTask addTaskCtl=new TaskController.addTask();
                     addTaskCtl.execute(new_task);
+
+
+
                     info2.putExtra("userId",userId);
                     startActivity(info2);
                     FileIOUtil fileIOUtil = new FileIOUtil();
                     fileIOUtil.saveSentTaskInFile(new_task,context);
-
 
 
 
@@ -155,41 +148,6 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
             return false;
         }
         return true;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        merlin.bind();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        merlin.unbind();
-    }
-
-
-    @Override
-    public void onBind(NetworkStatus networkStatus) {
-        if (networkStatus.isAvailable()) {
-            onConnect();
-        } else if (!networkStatus.isAvailable()) {
-            onDisconnect();
-        }
-    }
-
-    @Override
-    public void onConnect() {
-        // try to update offline accepted request
-
-
-        //
-    }
-
-    @Override
-    public void onDisconnect() {
-        //TODO try to get all task from offline
     }
 
 
