@@ -254,6 +254,47 @@ public class TaskController {
                 e.printStackTrace();
                 Log.i("Error", "We failed to connect Elasticsearch server");
             }
+
+            String query2 = "{ \n"+
+                    "\"query\":{\n"+
+                    "\"term\":{\"userId\":\""+current_bid.getProviderId()+"\"}\n"+
+                    "}\n"+"}";
+
+            Index index2 = new Index.Builder(query2)
+                    .index("cmput301w18t25").type("userst").id(current_bid.getProviderId()).build();
+            try {
+                DocumentResult result = client.execute(index2);
+                if (result.isSucceeded()) {
+                    User foundUser = result.getSourceAsObject(User.class);
+                    foundUser.addProviderBiddenTask(current_task.getId());
+
+                    try {
+                        DocumentResult result2 = client.execute(index2);
+                        if (result2.isSucceeded()) {
+                            User foundUser2 = result.getSourceAsObject(User.class);
+                            foundUser2.addProviderBiddenTask(current_task.getId());
+
+                            // update user here
+                            UserListController.updateUser updateUser = new UserListController.updateUser();
+                            updateUser.execute(foundUser2);
+
+                            Log.i("Success", "Successful cancel provider's bid");
+                        } else {
+                            Log.i("Error", "We failed to cancel provider's bid to elastic search!");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Log.i("Error", "We failed to connect Elasticsearch server");
+                    }
+
+                    Log.i("Success", "Successful cancel provider's bid");
+                } else {
+                    Log.i("Error", "We failed to cancel provider's bid to elastic search!");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.i("Error", "We failed to connect Elasticsearch server");
+            }
             return null;
         }
     }
