@@ -14,15 +14,14 @@ import project301.Task;
 import java.util.ArrayList;
 
 /**
- * @classname : RequesterActivity
- * @class Detail :RequesterAdapter is to adapt task and do task arrangement in the arraylist.
+ * Detail :RequesterAdapter is to adapt task and do task arrangement in the arraylist.
  * @Date :   18/03/2018
  * @author : Yingnan Ma
  * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ * @classname : RequesterActivity
  */
-
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterAdapter extends ArrayAdapter<Task> {

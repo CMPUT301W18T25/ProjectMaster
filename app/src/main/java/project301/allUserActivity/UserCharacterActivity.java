@@ -18,8 +18,8 @@ import project301.providerActivity.ProviderMainActivity;
 import project301.requesterActivity.RequesterMainActivity;
 
 /**
+ * User in this activity can choose to be a provider or requestor
  * @classname : UserCharacterActivity
- * @class Detail : User in this activity can choose to be a provider or requestor
  * @Date :   18/03/2018
  * @author : Wang Dong
  * @version 1.0

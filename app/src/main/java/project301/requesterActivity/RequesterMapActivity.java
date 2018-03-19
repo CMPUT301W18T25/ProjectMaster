@@ -30,9 +30,18 @@ import com.google.android.gms.tasks.Task;
 import java.util.ArrayList;
 
 /**
- * @classname : RequesterMapActivity
- * @class Detail :
+ * RequesterMapActivity handles the map activity for the Requester. The main purpose of
+ * this task is too display all tasks within 5km of the Requester on the map UI, and
+ * allow the Requester to click on each task to view further information. This activity
+ * first asks user for permission to access the devices location. It then gets the current
+ * location of the user and navigates the map camera to this location.
  *
+ * Currently, the Task class doesn't have functionality for location, so a 'mockupTasks'
+ * of ArrayList<Locations> is used to test the markers of each task.
+ *
+ * Source: The majority of the map code was implemented using the Google developer documentation
+ * (https://developers.google.com/maps/documentation/android-api/start)
+ * @classname : RequesterMapActivity
  * @Date :   18/03/2018
  * @author : Julian Stys
  * @author : Xingyuan Yang

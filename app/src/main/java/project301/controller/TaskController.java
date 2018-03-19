@@ -23,10 +23,9 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
 /**
- * @classname : TaskController
- * @class Detail : Activities can communicate with task model, bid model through this class.
+ * Activities can communicate with task model, bid model through this class.
  * The class contains method to renew data on the elasticsearch database
- *
+ * @classname : TaskController
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
  * @author : Yue Ma

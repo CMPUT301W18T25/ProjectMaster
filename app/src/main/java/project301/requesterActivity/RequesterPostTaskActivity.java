@@ -20,13 +20,12 @@ import project301.Task;
 import project301.controller.TaskController;
 
 /**
- * @classname : RequesterPostTaskActivity
- * @class Detail : RequesterPostTaskActivity is to allow user to post a new task , some informatin cannot be leaft empty.
- *
+ * Detail : RequesterPostTaskActivity is to allow user to post a new task , some informatin cannot be leaft empty.
  * @Date :   18/03/2018
  * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ * @classname : RequesterPostTaskActivity
  */
 
 

@@ -31,18 +31,6 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 
 
 /**
- * @classname : ProviderMapActivity
- * @class Detail :
- *
- * @Date :   18/03/2018
- * @author : Xingyuan Yang
- * @author : Julian Stys
- * @version 1.0
- * @copyright : copyright (c) 2018 CMPUT301W18T25
- */
-
-
-/**
  * ProviderMapActivity handles the map activity for the provider. The main purpose of
  * this task is too display all tasks within 5km of the provider on the map UI, and
  * allow the provider to click on each task to view further information. This activity
@@ -54,7 +42,15 @@ import com.google.android.gms.location.FusedLocationProviderClient;
  *
  * Source: The majority of the map code was implemented using the Google developer documentation
  * (https://developers.google.com/maps/documentation/android-api/start)
+ *
+ * @Date :   18/03/2018
+ * @author : Xingyuan Yang
+ * @author : Julian Stys
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
+
+
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
