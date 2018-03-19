@@ -388,7 +388,7 @@ public class TaskTest {
         double my_amount;
 
         // init test task info, all info should be tested
-       // my_task.setTaskDetails("Details");
+        // my_task.setTaskDetails("Details");
         //my_task.setTaskName("Test");
         //my_task.setTaskProvider(null);
         //my_task.setTaskRequester("A snake");
@@ -497,12 +497,11 @@ public class TaskTest {
             my_task.setTaskRequester("Jason");
             my_task.setTaskStatus("bidden");
 
-           // my_task.setTaskDetails("Details-" + Integer.toString(i));
-           // my_task.setTaskName("Test-" + Integer.toString(i));
-           // my_task.setTaskProvider("tester");
-           // my_task.setTaskRequester("snake");
-           // my_task.setTaskStatus("bidden");
-
+            // my_task.setTaskDetails("Details-" + Integer.toString(i));
+            // my_task.setTaskName("Test-" + Integer.toString(i));
+            // my_task.setTaskProvider("tester");
+            // my_task.setTaskRequester("snake");
+            // my_task.setTaskStatus("bidden");
             TaskController.addTask addTask = new TaskController.addTask();
             addTask.execute(my_task);
 

@@ -274,7 +274,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     */
 
     public void testCheckValidationSignUp (){
-       // TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
+        // TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
         //deleteAllTasks.execute("");
 
         UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
