@@ -1,18 +1,6 @@
 
 package project301.ActivityTest;
 
-/**
- * Test for all requester activities. Some of test based on provider activity test and sign up activity test.
- * @classname : RequesterActivityTest
- * @Date :   18/03/2018
- * @author : Wang Dong
- * @version 1.0
- * @copyright : copyright (c) 2018 CMPUT301W18T25
- */
-
-/**
- * Test for all requester activities. Some of test based on provider activity test and sign up activity test.
- */
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
@@ -30,6 +18,20 @@ import project301.requesterActivity.RequesterMapActivity;
 import project301.requesterActivity.RequesterPostTaskActivity;
 import project301.requesterActivity.RequesterViewTaskActivity;
 import com.robotium.solo.Solo;
+
+/**
+ * Test for all requester activities. Some of test based on provider activity test and sign up activity test.
+ * @classname : RequesterActivityTest
+ * @Date :   18/03/2018
+ * @author : Wang Dong
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
+/**
+ * Test for all requester activities. Some of test based on provider activity test and sign up activity test.
+ */
+
 
 public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 

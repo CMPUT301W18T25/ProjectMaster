@@ -1,18 +1,5 @@
 package project301.ActivityTest;
 
-/**
- * Test for all provider activities. Some of test based on requester activity test and sign up activity test.
- * @classname : ProviderActivityTest
- * @Date :   18/03/2018
- * @author : Wang Dong
- * @version 1.0
- * @copyright : copyright (c) 2018 CMPUT301W18T25
- */
-
-/**
- * Test for all provider activities. Some of test based on requester activity test and sign up activity test.
- */
-
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
@@ -27,6 +14,19 @@ import project301.providerActivity.ProviderMapActivity;
 import project301.providerActivity.ProviderTaskBidActivity;
 
 import com.robotium.solo.Solo;
+
+/**
+ * Test for all provider activities. Some of test based on requester activity test and sign up activity test.
+ * @classname : ProviderActivityTest
+ * @Date :   18/03/2018
+ * @author : Wang Dong
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
+/**
+ * Test for all provider activities. Some of test based on requester activity test and sign up activity test.
+ */
 
 public class ProviderActivityTest extends ActivityInstrumentationTestCase2 {
 

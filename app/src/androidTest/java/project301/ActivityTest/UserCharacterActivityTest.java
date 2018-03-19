@@ -1,5 +1,17 @@
 package project301.ActivityTest;
 
+import android.app.Activity;
+import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
+
+import project301.R;
+import project301.allUserActivity.LogInActivity;
+import project301.allUserActivity.SignUpActivity;
+import project301.allUserActivity.UserCharacterActivity;
+import project301.providerActivity.ProviderMainActivity;
+import project301.requesterActivity.RequesterMainActivity;
+import com.robotium.solo.Solo;
+
 /**
  * Test whether user in this activity can choose character or not.
  * @classname : UserCharacterActivityTest
@@ -12,18 +24,6 @@ package project301.ActivityTest;
 /**
  * Test whether user in this activity can choose character or not.
  */
-
-import android.app.Activity;
-import android.test.ActivityInstrumentationTestCase2;
-import android.widget.EditText;
-
-import project301.R;
-import project301.allUserActivity.LogInActivity;
-import project301.allUserActivity.SignUpActivity;
-import project301.allUserActivity.UserCharacterActivity;
-import project301.providerActivity.ProviderMainActivity;
-import project301.requesterActivity.RequesterMainActivity;
-import com.robotium.solo.Solo;
 
 public class UserCharacterActivityTest extends ActivityInstrumentationTestCase2 {
 

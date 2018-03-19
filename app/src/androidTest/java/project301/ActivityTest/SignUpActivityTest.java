@@ -1,5 +1,14 @@
 package project301.ActivityTest;
 
+import android.app.Activity;
+import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
+
+import project301.R;
+import project301.allUserActivity.SignUpActivity;
+import project301.allUserActivity.UserCharacterActivity;
+import com.robotium.solo.Solo;
+
 /**
  * Test for sign up and sign up an user for further testing.
  * @classname : SignUpActivityTest
@@ -12,15 +21,6 @@ package project301.ActivityTest;
 /**
  * Test for sign up and sign up an user for further testing.
  */
-
-import android.app.Activity;
-import android.test.ActivityInstrumentationTestCase2;
-import android.widget.EditText;
-
-import project301.R;
-import project301.allUserActivity.SignUpActivity;
-import project301.allUserActivity.UserCharacterActivity;
-import com.robotium.solo.Solo;
 
 public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
 
