@@ -1,6 +1,7 @@
 package project301.ActivityTest;
 
 /**
+ * Test whether user in this activity can choose character or not.
  * @classname : UserCharacterActivityTest
  * @Date :   18/03/2018
  * @author : Wang Dong
@@ -9,7 +10,7 @@ package project301.ActivityTest;
  */
 
 /**
- * Test whether user in this activity can choose character or not
+ * Test whether user in this activity can choose character or not.
  */
 
 import android.app.Activity;

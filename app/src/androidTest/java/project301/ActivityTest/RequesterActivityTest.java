@@ -2,6 +2,7 @@
 package project301.ActivityTest;
 
 /**
+ * Test for all requester activities. Some of test based on provider activity test and sign up activity test.
  * @classname : RequesterActivityTest
  * @Date :   18/03/2018
  * @author : Wang Dong

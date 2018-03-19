@@ -1,6 +1,7 @@
 package project301.ActivityTest;
 
 /**
+ * Test for sign up and sign up an user for further testing.
  * @classname : SignUpActivityTest
  * @Date :   18/03/2018
  * @author : Wang Dong
