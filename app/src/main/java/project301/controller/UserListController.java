@@ -27,9 +27,8 @@ import io.searchbox.core.SearchResult;
  * The class contains method to renew data on the elasticsearch database
  *
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Yuqi Zhang
+ * @author : Yue Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */

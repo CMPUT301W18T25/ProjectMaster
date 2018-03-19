@@ -20,7 +20,6 @@ import android.content.Context;
  */
 
 public class FileSystemController {
-    private String FILENAME;
     public FileIOUtil FileIOUtil = new FileIOUtil();
     public boolean testTrue(String name){
         return true;
@@ -60,4 +59,47 @@ public class FileSystemController {
         Tasks = FileIOUtil.loadMultipleTasksFromFile(context, offlineEditTaskFile);
         return Tasks;
     }
+
+    @SuppressWarnings("ConstantConditions")
+    public void deleteAllFiles( Context context,String instruction) {
+        try {
+            ArrayList<String> TaskFiles;
+            if(instruction == "sent"){
+                TaskFiles = TaskUtil.getSentTaskFileList(context);
+
+            }
+            else if(instruction == "offlineAdd"){
+
+                TaskFiles = TaskUtil.getOfflineAddTaskFileList(context);
+
+            }
+
+            else{
+
+                TaskFiles = TaskUtil.getOfflineEditTaskFileList(context);
+
+            }
+
+            for(String file: TaskFiles){
+                context.deleteFile(file);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    public void deleteFileByName(String fileName, Context context) {
+        try {
+
+            context.deleteFile(fileName);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
 }
