@@ -1,9 +1,8 @@
 package project301;
 
 /**
+ * Listen to the asnctask to see whether it is finished
  * @classname : OnAsyncTaskCompleted
- * @class Detail: Listen to the asnctask to see whether it is finished
- *
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
  * @author :Julian Stys

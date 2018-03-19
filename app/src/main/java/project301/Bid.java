@@ -1,9 +1,8 @@
 package project301;
 
 /**
+ * Bid model contains all the features of a single bid
  * @classname : Bid
- * @class Detail : Bid model contains all the features of a single bid
- *
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
  * @author :Julian Stys

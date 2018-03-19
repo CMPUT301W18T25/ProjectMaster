@@ -5,9 +5,8 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 
 /**
+ * Task model contains all the features of a task
  * @classname : Task
- * @class Detail : Task model contains all the features of a task
- *
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
  * @author :Julian Stys

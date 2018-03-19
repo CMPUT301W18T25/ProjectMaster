@@ -5,9 +5,8 @@ package project301;
 import java.util.Arrays;
 
 /**
+ * Photo model contains converted photo information
  * @classname :Photo
- * @class Detail : Photo model contains converted photo information
- *
  * @Date :   18/03/2018
  * @author :Julian Stys
  * @version 1.0
