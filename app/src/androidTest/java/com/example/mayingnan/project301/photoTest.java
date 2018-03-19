@@ -14,8 +14,14 @@ import java.io.ByteArrayOutputStream;
 
 
 
-/*
- * Created by julianstys on 2018-02-25.
+/**
+ * @classname : PhotoTest
+ * @class Detail :
+ *
+ * @Date :   18/03/2018
+ * @author : Julian Stys
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
 //https://www.dyclassroom.com/image-processing-project/how-to-read-and-write-image-file-in-java

@@ -15,8 +15,17 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+
 /**
- * Created by wdong2 on 2/15/18.
+ * @classname : UserTest
+ * @class Detail :
+ *
+ * @Date :   18/03/2018
+ * @author :
+ * @author :
+ * @author :
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
 @SuppressWarnings("ALL")

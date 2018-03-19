@@ -8,8 +8,15 @@ import com.example.mayingnan.project301.utilities.TaskUtil;
 import java.util.ArrayList;
 import android.content.Context;
 
-/*
- * Created by Xingyuan Yang on 2018-02-25.
+/**
+ * @classname : FileSystemController
+ * @class Detail :Save data and load Data in gson file.
+ *
+ * @Date :   18/03/2018
+ * @author : Yuqi Zhang
+ * @author : Yue Ma
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
 public class FileSystemController {

@@ -13,9 +13,15 @@ import com.example.mayingnan.project301.User;
 import com.example.mayingnan.project301.controller.UserListController;
 
 /**
+ * @classname : ProviderEditInfoActivity
+ * @class Detail :
  *
+ * @Date :   18/03/2018
+ * @author :
+ * @author :
  * @author :
  * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
 @SuppressWarnings({"ALL", "ConstantConditions"})

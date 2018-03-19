@@ -5,7 +5,15 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 
 /**
- * Created by User on 2018/2/25.
+ * @classname : Task
+ * @class Detail :
+ *
+ * @Date :   18/03/2018
+ * @author :
+ * @author :
+ * @author :
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
 /* status: request, bidden, assigned, done */

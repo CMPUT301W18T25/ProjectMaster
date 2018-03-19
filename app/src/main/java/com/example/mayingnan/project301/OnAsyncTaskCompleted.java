@@ -17,6 +17,19 @@
 package com.example.mayingnan.project301;
 
 /**
+ * @classname : OnAsyncTaskCompleted
+ * @class Detail :
+ *
+ * @Date :   18/03/2018
+ * @author :
+ * @author :
+ * @author :
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
+
+/**
  * The interface On async task completed, will be
  * called after the async event is done.
  */

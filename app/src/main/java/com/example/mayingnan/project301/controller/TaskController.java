@@ -21,8 +21,15 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
-/*
- * Created by Xingyuan Yang on 2018-02-25.
+/**
+ * @classname : TaskController
+ * @class Detail :
+ *
+ * @Date :   18/03/2018
+ * @author : Yuqi Zhang
+ * @author : Yue Ma
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
 public class TaskController {

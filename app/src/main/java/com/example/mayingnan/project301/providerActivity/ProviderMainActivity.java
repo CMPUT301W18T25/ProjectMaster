@@ -21,9 +21,15 @@ import com.example.mayingnan.project301.requesterActivity.RequesterAdapter;
 import com.example.mayingnan.project301.requesterActivity.RequesterViewTaskActivity;
 
 /**
+ * @classname : ProviderMainActivity
+ * @class Detail :
  *
+ * @Date :   18/03/2018
+ * @author :
+ * @author :
  * @author :
  * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
 public class ProviderMainActivity extends AppCompatActivity {

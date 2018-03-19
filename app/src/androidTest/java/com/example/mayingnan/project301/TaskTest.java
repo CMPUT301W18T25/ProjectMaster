@@ -13,7 +13,15 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.*;
 
 /**
- * Created by julianstys on 2018-02-25.
+ * @classname : TaskTest
+ * @class Detail :
+ *
+ * @Date :   18/03/2018
+ * @author : Yuqi Zhang
+ * @author :
+ * @author :
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
 @SuppressWarnings("ALL")

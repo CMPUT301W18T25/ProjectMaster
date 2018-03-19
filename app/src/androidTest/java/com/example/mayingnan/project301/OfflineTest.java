@@ -20,7 +20,15 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by julianstys on 2018-02-25.
+ * @classname : OfflineTest
+ * @class Detail :
+ *
+ * @Date :   18/03/2018
+ * @author :
+ * @author :
+ * @author :
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
 

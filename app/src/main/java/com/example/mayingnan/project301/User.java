@@ -1,7 +1,15 @@
 package com.example.mayingnan.project301;
 
 /**
- * Created by  on 2018/2/25.
+ * @classname : User
+ * @class Detail :
+ *
+ * @Date :   18/03/2018
+ * @author :
+ * @author :
+ * @author :
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
 public class User {

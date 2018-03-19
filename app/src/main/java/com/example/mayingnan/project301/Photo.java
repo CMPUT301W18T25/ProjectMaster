@@ -4,9 +4,18 @@ package com.example.mayingnan.project301;
 
 import java.util.Arrays;
 
-/*
- * Created by Xingyuan Yang on 2018/2/25.
+/**
+ * @classname :Photo
+ * @class Detail :
+ *
+ * @Date :   18/03/2018
+ * @author :
+ * @author :
+ * @author :
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
+
 
 public class Photo {
     private String photoName;

@@ -29,6 +29,18 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 
+/**
+ * @classname : RequesterMapActivity
+ * @class Detail :
+ *
+ * @Date :   18/03/2018
+ * @author : Julian Stys
+ * @author : Xingyuan Yang
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
+
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
