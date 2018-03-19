@@ -18,15 +18,16 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * @classname : RequesterViewTaskActivity
- * @class Detail :RequesterViewTaskActivity is to allow user to view a target task and choose if to edit this task.
+ * Detail :RequesterViewTaskActivity is to allow user to view a target task and choose if to edit this task.
  *                the bid list will accept data from provider to show all the bid for this task so that requester can choose bid.
  *                this class also support delete task, jump back to showlist and choose bid.
  * @Date :   18/03/2018
  * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ * @classname : RequesterViewTaskActivity
  */
+
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterViewTaskActivity extends AppCompatActivity {

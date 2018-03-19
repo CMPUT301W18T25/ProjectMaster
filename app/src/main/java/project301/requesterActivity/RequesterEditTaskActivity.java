@@ -19,13 +19,12 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * @classname : RequesterEditTaskActivity
- * @class Detail :RequesterEditTaskActivity allows user to edit their task.
- *
+ * Detail :RequesterEditTaskActivity allows user to edit their task.
  * @Date :   18/03/2018
  * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ * @classname : RequesterEditTaskActivity
  */
 
 

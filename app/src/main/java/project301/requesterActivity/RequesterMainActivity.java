@@ -9,13 +9,12 @@ import android.widget.Button;
 import project301.R;
 
 /**
- * @classname : RequesterMainActivity
- * @class Detail : requester main is for user to choose their actions: post task,view and edit task or edit profile
- *
+ * Detail : requester main is for user to choose their actions: post task,view and edit task or edit profile
  * @Date :   18/03/2018
  * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ * @classname : RequesterMainActivity
  */
 
 
