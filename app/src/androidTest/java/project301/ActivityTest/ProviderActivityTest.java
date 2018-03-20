@@ -119,7 +119,11 @@ public class ProviderActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.enterText((EditText) solo.getView(R.id.edit_name),"wdong22");
 
+        solo.clearEditText((EditText) solo.getView(R.id.edit_email));
+
         solo.enterText((EditText) solo.getView(R.id.edit_email),"wdong2@ualberta.ca");
+
+        solo.clearEditText((EditText) solo.getView(R.id.edit_phone));
 
         solo.enterText((EditText) solo.getView(R.id.edit_phone),"1234567890");
 
