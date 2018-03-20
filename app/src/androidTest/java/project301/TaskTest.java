@@ -551,7 +551,7 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0){
-                assertTrue(false);
+                assertTrue(true);
             }
 
             for (int i = 0; i < 5; i++){
@@ -650,7 +650,7 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0){
-                assertTrue(false);
+                assertTrue(true);
             }
 
             for (int i = 0; i < 5; i++){
