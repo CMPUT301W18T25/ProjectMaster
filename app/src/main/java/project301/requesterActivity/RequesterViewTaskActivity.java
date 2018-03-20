@@ -172,6 +172,10 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
                 TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(target_task.getId());
                 deleteTaskById.execute(target_task.getId());
 
+                FileSystemController FC = new FileSystemController();
+                String FileName = "sent-"+target_task.getId()+".json";
+                FC.deleteFileByName(FileName,getApplication());
+
 
 
                 info2.putExtra("userId",userId);
@@ -222,7 +226,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
     //when on start, first get newest data from database and then update the information
     protected void onStart(){
         super.onStart();
-
+        FileSystemController FC = new FileSystemController();
         //time sleep
         try {
             Thread.sleep(1500);
@@ -243,11 +247,12 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
+            for(Task task:tasklist){
+                FC.saveToFile(task,"sent",getApplication());
+            }
         }
-        else{
-            FileSystemController FC = new FileSystemController();
-            tasklist = FC.loadSentTasksFromFile(getApplication());
-        }
+        tasklist = FC.loadSentTasksFromFile(getApplication());
+
 
 
         // get target task

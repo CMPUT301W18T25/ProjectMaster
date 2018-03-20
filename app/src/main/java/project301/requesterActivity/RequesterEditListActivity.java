@@ -104,18 +104,11 @@ public class RequesterEditListActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+        FileSystemController FC = new FileSystemController();
 
 
-        //doing offline
-        if(!merlinsBeard.isConnected()){
-            Log.i("go","offline");
-            FileSystemController FC = new FileSystemController();
-            tasklist = FC.loadSentTasksFromFile(getApplication());
-            RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
-            // Attach the adapter to a ListView
-            this.postedTaskList.setAdapter(adapter);
-        }
-        else{
+
+        if(merlinsBeard.isConnected()){
             OfflineController offlineController = new OfflineController();
             offlineController.tryToExecuteOfflineTasks(getApplication());
             //try again, will change in the future
@@ -128,6 +121,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
             }
             TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
             search.execute(userId);
+
             tasklist = new ArrayList<Task>();
             try {
                 tasklist= search.get();
@@ -136,12 +130,15 @@ public class RequesterEditListActivity extends AppCompatActivity {
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-
-            RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
-            adapter.notifyDataSetChanged();
-            // Attach the adapter to a ListView
-            this.postedTaskList.setAdapter(adapter);
+            for(Task task:tasklist){
+                FC.saveToFile(task,"sent",getApplication());
+            }
         }
+        tasklist = FC.loadSentTasksFromFile(getApplication());
+        RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
+        adapter.notifyDataSetChanged();
+        // Attach the adapter to a ListView
+        this.postedTaskList.setAdapter(adapter);
         //Log.i("Sign", Integer.toString(tasklist.size()));
 
     }

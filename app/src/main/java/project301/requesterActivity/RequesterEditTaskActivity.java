@@ -68,7 +68,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         userId = intent.getExtras().get("userId").toString();
         merlinsBeard = MerlinsBeard.from(context);
 
-
+        FileSystemController FC = new FileSystemController();
 
         //find view by id.
 
@@ -100,12 +100,13 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
+            for(Task task:start_list){
+                FC.saveToFile(task,"sent",getApplication());
+            }
         }
-        else{
-            FileSystemController FC = new FileSystemController();
-            start_list = FC.loadSentTasksFromFile(context);
 
-        }
+        start_list = FC.loadSentTasksFromFile(context);
+
 
 
 
@@ -132,7 +133,6 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         Double temp_idealprice=target_task.getTaskIdealPrice();
         edit_idealprice.setText(Double.toString(temp_idealprice));
 
-
         //settle save button click
 
         Button saveButton = (Button) findViewById(R.id.save_button);
@@ -140,6 +140,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // first check empty, name,destination and idealprice cannot leave empty.
+                FileSystemController FC = new FileSystemController();
 
                 if (check_empty(edit_name.getText().toString(),edit_destination.getText().toString(),
                         edit_idealprice.getText().toString())){
@@ -190,6 +191,20 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                         offlineController.tryToExecuteOfflineTasks(getApplication());
                         TaskController.requesterUpdateTask update = new TaskController.requesterUpdateTask();
                         update.execute(target_task);
+
+                        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+                        search.execute(userId);
+                        try {
+                            task_list = search.get();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        }
+                        for(Task task:task_list){
+                            FC.saveToFile(task,"sent",getApplication());
+                        }
+
                     }
                     //offline
                     else{
@@ -242,6 +257,8 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         super.onStart();
         //fetch new list
         task_list = new ArrayList<>();
+        FileSystemController FC = new FileSystemController();
+
         if(merlinsBeard.isConnected()) {
             OfflineController offlineController = new OfflineController();
             offlineController.tryToExecuteOfflineTasks(getApplication());
@@ -255,11 +272,12 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
+            for(Task task:task_list){
+                FC.saveToFile(task,"sent",getApplication());
+            }
         }
-        else{
-            FileSystemController FC = new FileSystemController();
-            task_list=FC.loadSentTasksFromFile(getApplication());
-        }
+
+        task_list=FC.loadSentTasksFromFile(getApplication());
 
 
 
