@@ -88,12 +88,13 @@ public class TaskController {
     /**
      * A static class to add a task to ES database
      */
-    public static class addTask extends AsyncTask<Task, Void, Boolean>{
+    public static class addTask extends AsyncTask<Task, Void, String>{
         public OnAsyncTaskCompleted listener;
         @Override
 
-        protected Boolean doInBackground(Task... a_task) {
+        protected String doInBackground(Task... a_task) {
             verifySettings();
+            String taskId = "taskId";
 
             a_task[0].setTaskStatus("request");
             Index index = new Index.Builder(a_task[0]).index("cmput301w18t25").type("task").build();
@@ -105,6 +106,7 @@ public class TaskController {
                 if(result.isSucceeded())
                 {
                     a_task[0].setId(result.getId());
+                    taskId = result.getId();
 
                     String query = TaskUtil.serializer(a_task[0]);
 
@@ -132,19 +134,13 @@ public class TaskController {
             catch (Exception e) {
                 Log.i("Error", "The application failed to build and send the tasks");
                 e.printStackTrace();
-                return false;
+                return taskId;
             }
 
 
-            return true;
+            return taskId;
         }
 
-        @Override
-        protected void onPostExecute(Boolean Boolean) {
-
-//      Log.i("Debug", "internet disconnected");
-
-        }
     }
     /**
      * A static class to get a task by its id from ES database
@@ -229,13 +225,12 @@ public class TaskController {
      * A static class to update tasks in ES database
      */
 
-    public static class requesterUpdateTask extends AsyncTask<Task, Void, Void>{
+    public static class requesterUpdateTask extends AsyncTask<Task, Void, Boolean>{
 
         @Override
-        protected Void doInBackground(Task... single_task) {
+        protected Boolean doInBackground(Task... single_task) {
 
             verifySettings();
-
             String query = TaskUtil.serializer(single_task[0]);
 
             Index index = new Index.Builder(query)
@@ -249,9 +244,11 @@ public class TaskController {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+
                 Log.i("Error", "We failed to connect Elasticsearch server");
+                return false;
             }
-            return null;
+            return true;
         }
     }
     /**

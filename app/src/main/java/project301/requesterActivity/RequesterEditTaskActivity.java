@@ -4,14 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.novoda.merlin.MerlinsBeard;
+
 import project301.R;
 import project301.Task;
+import project301.controller.FileSystemController;
+import project301.controller.OfflineController;
 import project301.controller.TaskController;
 import project301.utilities.FileIOUtil;
 
@@ -44,6 +49,8 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
     private ArrayList<Task> start_list;
     private String view_index;
     private Integer last_index;
+    protected MerlinsBeard merlinsBeard;
+
 
 
 
@@ -59,6 +66,8 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
+        merlinsBeard = MerlinsBeard.from(context);
+
 
 
         //find view by id.
@@ -81,18 +90,24 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
 
 
         //get newest data from database.
-
-        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-        search.execute(userId);
-
-        start_list = new ArrayList<Task>();
-        try {
-            start_list= search.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        if(merlinsBeard.isConnected()) {
+            TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+            search.execute(userId);
+            start_list = new ArrayList<Task>();
+            try {
+                start_list= search.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
         }
+        else{
+            FileSystemController FC = new FileSystemController();
+            start_list = FC.loadSentTasksFromFile(context);
+
+        }
+
 
 
         // get index of target task
@@ -126,6 +141,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // first check empty, name,destination and idealprice cannot leave empty.
+
                 if (check_empty(edit_name.getText().toString(),edit_destination.getText().toString(),
                         edit_idealprice.getText().toString())){
 
@@ -136,14 +152,20 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
 
                     //get data from database
                     task_list = new ArrayList<>();
-                    TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-                    search.execute(userId);
-                    try {
-                        task_list= search.get();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
+                    if(merlinsBeard.isConnected()) {
+                        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+                        search.execute(userId);
+                        try {
+                            task_list = search.get();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else{
+                        FileSystemController FC = new FileSystemController();
+                        task_list=FC.loadSentTasksFromFile(context);
                     }
 
                     // get index of target task
@@ -163,15 +185,23 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                     //to do:set photo
 
                     //upload to database
-                    TaskController.requesterUpdateTask update = new TaskController.requesterUpdateTask();
-                    update.execute(target_task);
+                    if(merlinsBeard.isConnected()) {
+                        OfflineController offlineController = new OfflineController();
+                        offlineController.tryToExecuteOfflineTasks(context);
+                        TaskController.requesterUpdateTask update = new TaskController.requesterUpdateTask();
+                        update.execute(target_task);
+                    }
+                    //offline
+                    else{
+                        FileSystemController fileSystemController = new FileSystemController();
+                        fileSystemController.saveToFile(target_task,"offlineEdit",context);
+                        Log.i("offlineEdit","test");
+                    }
 
                     info2.putExtra("userId",userId);
                     info2.putExtra("info",view_index);
 
                     startActivity(info2);
-                    FileIOUtil fileIOUtil = new FileIOUtil();
-                    fileIOUtil.saveSentTaskInFile(target_task,context);
 
 
 

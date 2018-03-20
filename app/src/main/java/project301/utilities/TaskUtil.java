@@ -70,7 +70,7 @@ public class TaskUtil {
         ArrayList<String> sentTaskFileList = new ArrayList<>();
         for (String f : fileList) {
             if (f != null && f.startsWith("sent-")) {
-                Log.i("Debug", f);
+               // Log.i("Debug", f);
                 sentTaskFileList.add(f);
             }
         }
@@ -104,7 +104,7 @@ public class TaskUtil {
         ArrayList<String> OfflineEditTaskFileList = new ArrayList<>();
         for (String f : fileList) {
             if (f != null && f.startsWith("offlineEdit-")) {
-                Log.i("Debug", f);
+                //Log.i("Debug", f);
                 OfflineEditTaskFileList.add(f);
             }
         }

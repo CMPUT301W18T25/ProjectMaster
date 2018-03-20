@@ -46,10 +46,10 @@ public class FileIOUtil {
 		try {
 			String jsonStr= TaskUtil.serializer(task);
 			String fileName = TaskUtil.generateOnlineSentTaskFileName(task);
-			Log.i("asd","abbbbbb");
+			//Log.i("asd","abbbbbb");
 
 			FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
-			Log.i("asd","aaaaaa");
+			//yLog.i("asd","aaaaaa");
 			if (fos == null) {
 				Log.i("Debug", "null fos in save request");
 			}

@@ -19,6 +19,7 @@ import com.novoda.merlin.registerable.disconnection.Disconnectable;
 
 import project301.R;
 import project301.Task;
+import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
@@ -116,6 +117,11 @@ public class RequesterEditListActivity extends AppCompatActivity {
         //doing offline
         if(!merlinsBeard.isConnected()){
             Log.i("go","offline");
+            FileSystemController FC = new FileSystemController();
+            tasklist = FC.loadSentTasksFromFile(context);
+            RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
+            // Attach the adapter to a ListView
+            this.postedTaskList.setAdapter(adapter);
         }
         else{
             OfflineController offlineController = new OfflineController();

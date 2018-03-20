@@ -6,7 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
 import project301.R;
+import project301.Task;
+import project301.controller.FileSystemController;
+import project301.controller.TaskController;
 
 /**
  * Detail : requester main is for user to choose their actions: post task,view and edit task or edit profile
@@ -73,7 +79,30 @@ public class RequesterMainActivity extends AppCompatActivity {
 
             }
         });
+        //clean offline files and load new files
+
+        ArrayList<Task> tasklist= new ArrayList<>();
+        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+        search.execute(userId);
+        try {
+            tasklist= search.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        FileSystemController FC = new FileSystemController();
+        FC.deleteAllFiles(getApplicationContext(),"sent");
+        FC.deleteAllFiles(getApplicationContext(),"offlineAdd");
+        FC.deleteAllFiles(getApplicationContext(),"offlineEdit");
+        for(Task task: tasklist){
+            FC.saveToFile(task,"sent",getApplicationContext());
+        }
+
+
+
 
 
     }
+
 }

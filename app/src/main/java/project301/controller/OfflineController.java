@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import project301.Task;
+import project301.utilities.FileIOUtil;
+
 /**
  * Activities can execute offline tasks through this controller
  * @classname : OfflineController
@@ -32,23 +34,45 @@ public class OfflineController {
             String fileName = "offlineAdd-" + task.getId() + ".json";
             TaskController.addTask addTaskCtl=new TaskController.addTask();
             addTaskCtl.execute(task);
-            Boolean sucess = false;
+            String taskId = "taskId";
             try {
-                sucess=addTaskCtl.get();
+                taskId=addTaskCtl.get();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-            if(sucess) {
+            if(!taskId.equals("taskId")) {
                 fileSystemController.deleteFileByName(fileName, context);
+                task.setId(taskId);
+                FileIOUtil fileIOUtil = new FileIOUtil();
+                fileIOUtil.saveSentTaskInFile(task,context);
             }
         }
         ArrayList<Task> OfflineEditTasks = fileSystemController.loadOfflineEditTasksFromFile(context);
         for(Task task: OfflineEditTasks){
             String fileName = "offlineEdit-" + task.getId() + ".json";
+            String sentFileName = "sent-" + task.getId() + ".json";
+
             TaskController.requesterUpdateTask requesterUpdateTask=new TaskController.requesterUpdateTask();
             requesterUpdateTask.execute(task);
+            Boolean success = true;
+            try {
+                success=requesterUpdateTask.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            if(success) {
+                fileSystemController.deleteFileByName(fileName, context);
+                fileSystemController.deleteFileByName(sentFileName, context);
+
+                FileIOUtil fileIOUtil = new FileIOUtil();
+                fileIOUtil.saveSentTaskInFile(task,context);
+            }
+
         }
+
     }
 }

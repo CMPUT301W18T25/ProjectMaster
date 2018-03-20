@@ -117,6 +117,8 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
                         offlineController.tryToExecuteOfflineTasks(context);
                         TaskController.addTask addTaskCtl = new TaskController.addTask();
                         addTaskCtl.execute(new_task);
+                        FileIOUtil fileIOUtil = new FileIOUtil();
+                        fileIOUtil.saveSentTaskInFile(new_task,context);
                     }
                     //doing offline
                     else{
@@ -130,11 +132,6 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
 
                     info2.putExtra("userId",userId);
                     startActivity(info2);
-                    FileIOUtil fileIOUtil = new FileIOUtil();
-                    fileIOUtil.saveSentTaskInFile(new_task,context);
-
-
-
 
                 }else{
                     Toast toast = Toast.makeText(context,"Enter name, detail destination, ideal price, date and time",Toast.LENGTH_LONG);

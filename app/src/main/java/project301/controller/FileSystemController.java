@@ -47,7 +47,7 @@ public class FileSystemController {
      */
     public ArrayList<Task> loadSentTasksFromFile(Context context){
         ArrayList<Task> Tasks;
-        ArrayList<String> SentTaskFiles = TaskUtil.getOfflineAddTaskFileList(context);
+        ArrayList<String> SentTaskFiles = TaskUtil.getSentTaskFileList(context);
         Tasks = FileIOUtil.loadMultipleTasksFromFile(context, SentTaskFiles);
         return Tasks;
     }
@@ -84,11 +84,11 @@ public class FileSystemController {
     public void deleteAllFiles( Context context,String instruction) {
         try {
             ArrayList<String> TaskFiles;
-            if(instruction == "sent"){
+            if(instruction.equals("sent")){
                 TaskFiles = TaskUtil.getSentTaskFileList(context);
 
             }
-            else if(instruction == "offlineAdd"){
+            else if(instruction.equals("offlineAdd")){
 
                 TaskFiles = TaskUtil.getOfflineAddTaskFileList(context);
 

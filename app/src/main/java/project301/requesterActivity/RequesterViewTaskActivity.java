@@ -1,5 +1,6 @@
 package project301.requesterActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +11,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.novoda.merlin.MerlinsBeard;
 import com.novoda.merlin.NetworkStatus;
 
 import project301.R;
 import project301.Task;
+import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
@@ -47,6 +50,8 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
     private ArrayList<Task> tasklist;
     private ArrayList<Task> deletedlist;
     private String view_index;
+    protected MerlinsBeard merlinsBeard;
+    private Context context;
 
 
     @SuppressWarnings("ConstantConditions")
@@ -55,6 +60,8 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_view_task);
         final Intent intent = getIntent();
+        context = getApplicationContext();
+        merlinsBeard = MerlinsBeard.from(context);
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
         view_index=intent.getExtras().get("info").toString();
@@ -69,19 +76,27 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
         view_idealprice = (TextView) findViewById(R.id.c_view_idealprice);
         view_lowestbid = (TextView) findViewById(R.id.c_lowest_bid);
 
+        tasklist = new ArrayList<Task>();
 
         //get data from database
-        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-        search.execute(userId);
-
-        tasklist = new ArrayList<>();
-        try {
-            tasklist= search.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        if(merlinsBeard.isConnected()){
+            TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+            search.execute(userId);
+            try {
+                tasklist= search.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
         }
+        else{
+            FileSystemController FC = new FileSystemController();
+            tasklist = FC.loadSentTasksFromFile(context);
+        }
+
+
+
 
 
         // get index of target task
@@ -210,22 +225,28 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
 
         //time sleep
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         //pull data from database
-        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-        search.execute(userId);
+        if(merlinsBeard.isConnected()) {
+            TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+            search.execute(userId);
 
-        tasklist = new ArrayList<Task>();
-        try {
-            tasklist= search.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+            tasklist = new ArrayList<Task>();
+            try {
+                tasklist = search.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            FileSystemController FC = new FileSystemController();
+            tasklist = FC.loadSentTasksFromFile(context);
         }
 
 
