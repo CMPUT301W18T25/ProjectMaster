@@ -55,7 +55,9 @@ public class RequesterAdapter extends ArrayAdapter<Task> {
         //noinspection ConstantConditions
         task_name.setText(task.getTaskName().toString());
         task_destination.setText(task.getTaskAddress());
-        task_idealprice.setText(Double.toString(task.getTaskIdealPrice()));
+        if("add".equalsIgnoreCase(task.getTaskAddress())){
+            task_idealprice.setText(Double.toString(task.getTaskIdealPrice()));
+        }
 
         Log.i("a","a");
         return convertView;

@@ -97,7 +97,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
             }
 
             //set initiallized bid
-            taskMybid.setText("0");
+            //taskMybid.setText("0");
 
         }else if(status.equals("bidden")){
             TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
@@ -157,10 +157,15 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         String temp_status=view_task.getTaskStatus();
 
         Double temp_idealprice=view_task.getTaskIdealPrice();
-        taskIdealPrice.setText(Double.toString(temp_idealprice));
+        if(temp_idealprice!=null){
+            taskIdealPrice.setText(Double.toString(temp_idealprice));
+        }
+
 
         Double temp_lowestbid=view_task.getLowestBid();
-        taskLowestPrice.setText(Double.toString(temp_lowestbid));
+        if(temp_idealprice!=null) {
+            taskLowestPrice.setText(Double.toString(temp_lowestbid));
+        }
 
 
         //settle cancel button : cancel the old bid
@@ -230,6 +235,35 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        TaskController.searchAllBid searchAllBid = new TaskController.searchAllBid();
+        searchAllBid.execute(view_task.getId());
+        Double myBidAmount = 0.0;
+        ArrayList<Bid> allBidOfThisTask = new ArrayList<>();
+        try {
+            allBidOfThisTask = searchAllBid.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        for(Bid bid: allBidOfThisTask){
+            if(!bid.equals(null)) {
+                if (bid.getProviderId().equals(userId)) {
+                    if (bid.getBidAmount() != null) {
+                        myBidAmount = bid.getBidAmount();
+                        break;
+
+                    }
+
+                }
+            }
+        }
+        taskMybid.setText(Double.toString(myBidAmount));
+
+
+
+
+
     }
 
 }

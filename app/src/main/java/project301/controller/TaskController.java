@@ -368,6 +368,8 @@ public class TaskController {
             verifySettings();
 
             String query = "{ \n"+
+                    "\"size\" : 30,\n"+
+
                     "\"query\":{\n"+
                     "\"term\":{\"userId\":\""+providerID[0]+"\"}\n"+
                     "}\n"+"}";
@@ -449,6 +451,8 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
+                            "\"size\" : 30,\n"+
+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
@@ -509,6 +513,8 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
+                            "\"size\" : 30,\n"+
+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
@@ -556,6 +562,8 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
+                            "\"size\" : 30,\n"+
+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
@@ -605,6 +613,8 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
+                            "\"size\" : 30,\n"+
+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
@@ -634,6 +644,53 @@ public class TaskController {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
             return result_tasks;
+        }
+
+    }
+
+    /**
+     * A static class to search all bid of a task
+     */
+    //TODO do test for this method, which should be extremely similar to bidden tasks
+    public static class searchAllBid extends AsyncTask<String, Void, ArrayList<Bid>>{
+
+        protected ArrayList<Bid> doInBackground(String...taskIds) {
+            verifySettings();
+            ArrayList<Bid> bidList = new ArrayList<Bid>();
+
+            String query =
+                    "\n{ \n"+
+                            "\"size\" : 30,\n"+
+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"term\" : {\"_id\" : \"" + taskIds[0] + "\"}}" + "\n"+
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
+
+            Log.i("Query", "The query was " + query);
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t25")
+                    .addType("task")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<Task> foundTask
+                            = result.getSourceAsObjectList(Task.class);
+                    bidList.addAll(foundTask.get(0).getTaskBidList());
+
+                    Log.i("Success", "Data retrieved from database: ");
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return bidList;
         }
 
     }
