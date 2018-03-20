@@ -12,6 +12,7 @@ import com.searchly.jestdroid.JestDroidClient;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -111,7 +112,7 @@ public class TaskController {
                             .index("cmput301w18t25").type("task").id(a_task[0].getId()).build();
                     try {
                         DocumentResult result2 = client.execute(index2);
-                        if (result.isSucceeded()) {
+                        if (result2.isSucceeded()) {
                             Log.i("Debug", "Successful update user profile");
                         } else {
                             Log.i("Error", "We failed to update user profile to elastic search!");
@@ -732,8 +733,10 @@ public class TaskController {
      */
     public static void verifySettings() {
         if (client == null) {
-            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
+            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080");
+            builder.connTimeout(20000).readTimeout(20000);
             DroidClientConfig config = builder.build();
+
 
             JestClientFactory factory = new JestClientFactory();
             factory.setDroidClientConfig(config);

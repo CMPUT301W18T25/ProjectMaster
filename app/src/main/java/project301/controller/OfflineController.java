@@ -1,9 +1,11 @@
 package project301.controller;
 
 import android.content.Context;
+import android.text.BoringLayout;
 
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import project301.Task;
 /**
@@ -30,7 +32,17 @@ public class OfflineController {
             String fileName = "offlineAdd-" + task.getId() + ".json";
             TaskController.addTask addTaskCtl=new TaskController.addTask();
             addTaskCtl.execute(task);
-            fileSystemController.deleteFileByName(fileName,context);
+            Boolean sucess = false;
+            try {
+                sucess=addTaskCtl.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            if(sucess) {
+                fileSystemController.deleteFileByName(fileName, context);
+            }
         }
         ArrayList<Task> OfflineEditTasks = fileSystemController.loadOfflineEditTasksFromFile(context);
         for(Task task: OfflineEditTasks){

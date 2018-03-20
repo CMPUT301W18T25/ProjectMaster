@@ -1,5 +1,6 @@
 package project301.requesterActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.novoda.merlin.Merlin;
+import com.novoda.merlin.MerlinsBeard;
+import com.novoda.merlin.NetworkStatus;
+import com.novoda.merlin.registerable.bind.Bindable;
+import com.novoda.merlin.registerable.connection.Connectable;
+import com.novoda.merlin.registerable.disconnection.Disconnectable;
 
 import project301.R;
 import project301.Task;
@@ -34,6 +42,10 @@ public class RequesterEditListActivity extends AppCompatActivity {
     private String userId;
     private static final String FILENAME = "ProjectMaster.sav";
     private ArrayList<Task> tasklist;
+    protected MerlinsBeard merlinsBeard;
+
+    protected Context context;
+
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -41,8 +53,12 @@ public class RequesterEditListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_edit_list);
         final Intent intent = getIntent();
+        context=getApplicationContext();
+
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
+        merlinsBeard = MerlinsBeard.from(context);
+
 
 
         //settle mainMenu button
@@ -95,23 +111,11 @@ public class RequesterEditListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-        search.execute(userId);
 
-        //get task
-        tasklist = new ArrayList<Task>();
-        try {
-            tasklist= search.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
 
         //doing offline
-        if(tasklist.size() == 1 && tasklist.get(0).getId().equals("-1")){
+        if(!merlinsBeard.isConnected()){
             Log.i("go","offline");
-
         }
         else{
             OfflineController offlineController = new OfflineController();
@@ -121,17 +125,14 @@ public class RequesterEditListActivity extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+            search.execute(userId);
             tasklist = new ArrayList<Task>();
             try {
                 tasklist= search.get();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
@@ -141,11 +142,5 @@ public class RequesterEditListActivity extends AppCompatActivity {
         }
         //Log.i("Sign", Integer.toString(tasklist.size()));
 
-
-
     }
-
-
-
-
 }

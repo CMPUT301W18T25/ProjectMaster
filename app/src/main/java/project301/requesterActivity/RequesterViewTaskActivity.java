@@ -10,8 +10,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.novoda.merlin.NetworkStatus;
+
 import project301.R;
 import project301.Task;
+import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
 import java.util.ArrayList;
@@ -30,7 +33,7 @@ import java.util.concurrent.ExecutionException;
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterViewTaskActivity extends AppCompatActivity {
+public class RequesterViewTaskActivity extends AppCompatActivity  {
     private ListView bidList;
     private String userId;
     private TextView view_name;
@@ -255,5 +258,6 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
 
 
     }
+
 
 }

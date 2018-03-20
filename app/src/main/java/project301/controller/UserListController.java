@@ -64,12 +64,9 @@ public class UserListController {
         User newUser;
         newUser = getAUserByName(name);
         if(newUser==null){
-            Log.i("asda","asdasd");
             return true;
         }
         else {
-            Log.i("userName:",newUser.getUserName());
-
             return false;
         }
     }
@@ -158,11 +155,10 @@ public class UserListController {
         }
         //noinspection ConstantConditions
         if(Userlist.isEmpty()){
-            Log.i("length","0");
+            //Log.i("length","0");
             return null;
         }
         else {
-            Log.i("userName1:",Userlist.get(0).getUserName());
 
             return Userlist.get(0);
         }

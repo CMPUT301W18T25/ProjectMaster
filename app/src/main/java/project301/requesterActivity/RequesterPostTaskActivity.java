@@ -2,6 +2,8 @@ package project301.requesterActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,13 +13,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 import project301.controller.FileSystemController;
+import project301.controller.OfflineController;
 import project301.utilities.FileIOUtil;
 import project301.R;
 import project301.Task;
 import project301.controller.TaskController;
+import com.novoda.merlin.Merlin;
+import com.novoda.merlin.NetworkStatus;
+import com.novoda.merlin.registerable.bind.Bindable;
+import com.novoda.merlin.registerable.connection.Connectable;
+import com.novoda.merlin.registerable.disconnection.Disconnectable;
+import com.novoda.merlin.MerlinsBeard;
+
 
 /**
  * Detail : RequesterPostTaskActivity is to allow user to post a new task , some informatin cannot be leaft empty.
@@ -32,7 +43,7 @@ import project301.controller.TaskController;
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterPostTaskActivity extends AppCompatActivity {
+public class RequesterPostTaskActivity extends AppCompatActivity implements Connectable, Disconnectable, Bindable{
     private Context context;
 
     private EditText post_name;
@@ -43,6 +54,9 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
     private Button submitButton;
     private Button cancelButton;
     private String userId;
+    protected Merlin merlin;
+    protected MerlinsBeard merlinsBeard;
+
 
 
 
@@ -55,6 +69,13 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
+        // monitor network connectivity
+        merlin = new Merlin.Builder().withConnectableCallbacks().withDisconnectableCallbacks().withBindableCallbacks().build(this);
+        merlin.registerConnectable(this);
+        merlin.registerDisconnectable(this);
+        merlin.registerBindable(this);
+
+        merlinsBeard = MerlinsBeard.from(context);
 
         //find view by id.
         post_name = (EditText) findViewById(R.id.c_task_name);
@@ -90,24 +111,23 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
 
 
                     //upload new task data to database
-                    TaskController.addTask addTaskCtl=new TaskController.addTask();
-                    addTaskCtl.execute(new_task);
-                    Boolean returnCode = true;
-                    try {
-                        returnCode = addTaskCtl.get();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
+                    if(merlinsBeard.isConnected()) {
+                        //Log.i("MerlinBeard","connected");
+                        OfflineController offlineController = new OfflineController();
+                        offlineController.tryToExecuteOfflineTasks(context);
+                        TaskController.addTask addTaskCtl = new TaskController.addTask();
+                        addTaskCtl.execute(new_task);
                     }
                     //doing offline
-                    if(!returnCode){
+                    else{
                         FileSystemController fileSystemController = new FileSystemController();
                         Log.i("offlineAdd","test");
+                        String uniqueID = UUID.randomUUID().toString();
+                        new_task.setId(uniqueID);
+
                         fileSystemController.saveToFile(new_task,"offlineAdd",context);
                     }
 
-                    Log.i("return code ", returnCode.toString());
                     info2.putExtra("userId",userId);
                     startActivity(info2);
                     FileIOUtil fileIOUtil = new FileIOUtil();
@@ -150,7 +170,39 @@ public class RequesterPostTaskActivity extends AppCompatActivity {
      * @param ideal_price
      * @return
      */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        merlin.bind();
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        merlin.unbind();
+    }
+
+    @Override
+    public void onBind(NetworkStatus networkStatus) {
+        if (networkStatus.isAvailable()) {
+            onConnect();
+        } else if (!networkStatus.isAvailable()) {
+            onDisconnect();
+        }
+    }
+
+    @Override
+    public void onConnect() {
+        // try to update offline accepted request
+        OfflineController offlineController = new OfflineController();
+        offlineController.tryToExecuteOfflineTasks(context);
+    }
+
+    @Override
+    public void onDisconnect() {
+        Log.i("Hasn't connected",".");
+
+    }
 
     private boolean check_empty(String name, String destination, String ideal_price)
     {
