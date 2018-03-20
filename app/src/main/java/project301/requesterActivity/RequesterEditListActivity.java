@@ -105,12 +105,6 @@ public class RequesterEditListActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
-        //time sleep
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         //doing offline
         if(!merlinsBeard.isConnected()){
@@ -124,6 +118,9 @@ public class RequesterEditListActivity extends AppCompatActivity {
         else{
             OfflineController offlineController = new OfflineController();
             offlineController.tryToExecuteOfflineTasks(getApplication());
+            //try again, will change in the future
+            offlineController.tryToExecuteOfflineTasks(getApplication());
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

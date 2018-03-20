@@ -11,8 +11,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
 import project301.R;
+import project301.Task;
 import project301.User;
+import project301.controller.FileSystemController;
+import project301.controller.TaskController;
 import project301.controller.UserListController;
 import project301.providerActivity.ProviderMainActivity;
 import project301.requesterActivity.RequesterMainActivity;
@@ -35,12 +41,13 @@ public class UserCharacterActivity extends AppCompatActivity {
 
     private Button providerButton;
     private Button requesterButton;
-
+    private String userId;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_character);
         final Intent intent = getIntent();
+        userId = intent.getExtras().get("userId").toString();
 
 
         providerButton = (Button) findViewById(R.id.provider_button);
@@ -53,14 +60,9 @@ public class UserCharacterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 User user = new User();
                 //noinspection ConstantConditions,ConstantConditions
-                @SuppressWarnings("ConstantConditions") String userId = intent.getExtras().get("userId").toString();
                 Log.i("userId:",userId);
                 UserListController uc = new UserListController();
                 user = uc.getAUserById(userId);
-
-                //set user type
-                user.setUserType("provider");
-                uc.updateUser(user);
 
                 Intent intent = new Intent (UserCharacterActivity.this, ProviderMainActivity.class);
                 intent.putExtra("userId",userId);
@@ -78,16 +80,11 @@ public class UserCharacterActivity extends AppCompatActivity {
 
                 User user = new User();
                 //noinspection ConstantConditions,ConstantConditions
-                @SuppressWarnings("ConstantConditions") String userId = intent.getExtras().get("userId").toString();
-                Log.i("userId",userId);
 
                 UserListController uc = new UserListController();
                 user = uc.getAUserById(userId);
-                Log.i("usernamedd",user.getUserName());
 
-                //set user type
-                user.setUserType("requester");
-                uc.updateUser(user);
+
 
 
                 Intent intent = new Intent (UserCharacterActivity.this, RequesterMainActivity.class);
@@ -97,6 +94,20 @@ public class UserCharacterActivity extends AppCompatActivity {
         });
 
 
+        ArrayList<Task> tasklist= new ArrayList<>();
+        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+        search.execute(userId);
+        try {
+            tasklist= search.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        FileSystemController FC = new FileSystemController();
+        for(Task task: tasklist){
+            FC.saveToFile(task,"sent",getApplication());
+        }
 
 
     }

@@ -237,6 +237,7 @@ public class TaskController {
             Index index = new Index.Builder(query)
                     .index("cmput301w18t25").type("task").id(single_task[0].getId()).build();
             try {
+                Log.i("try to execute","update");
                 DocumentResult result = client.execute(index);
                 if (result.isSucceeded()) {
                     success = true;
@@ -245,7 +246,7 @@ public class TaskController {
                     Log.i("Error", "We failed to update user profile to elastic search!");
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
 
                 Log.i("Error", "We failed to connect Elasticsearch server?");
 
@@ -448,14 +449,14 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                    "   \"query\" : {\n"+
-                    "       \"bool\" : {\n"+
-                    "           \"must\" : [\n"+
-                    "               { \"term\" : {\"taskStatus\" : " + "\"bidden\"}}" +
-                    "           ]\n"+
-                    "       }\n"+
-                    "   }\n"+
-                    "}\n";
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"term\" : {\"taskStatus\" : " + "\"bidden\"}}" +
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
 
             Log.i("Query", "The query was " + query );
             Search search = new Search.Builder(query)
@@ -674,28 +675,28 @@ public class TaskController {
                             "}\n";
             String pre_query =
                     "\n{     \n"+
-                    "   \"query\" : {\n"+
-                    "       \"bool\" : {\n"+
-                    "           \"must\" : [\n"+
-                    "               { \"multi_match\" : {\n" +
-                    "                   \"query\" : \""+ search_parameters[0] +"\", \n" +
-                    "                   \"fields : [ \"taskName\", \"taskDetails\" ]}  \n" +
-                    "               }";
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"multi_match\" : {\n" +
+                            "                   \"query\" : \""+ search_parameters[0] +"\", \n" +
+                            "                   \"fields : [ \"taskName\", \"taskDetails\" ]}  \n" +
+                            "               }";
 
             String body_query = "";
             for (int i = 1; i < search_parameters.length; i++){
                 body_query +=
                         "               , \n" +
-                        "               { \"multi_match\" : {\n" +
-                        "                   \"query\" : \""+ search_parameters[i] +"\", \n" +
-                        "                   \"fields : [ \"taskName\", \"taskDetails\" ]}  \n" +
-                        "               }";
+                                "               { \"multi_match\" : {\n" +
+                                "                   \"query\" : \""+ search_parameters[i] +"\", \n" +
+                                "                   \"fields : [ \"taskName\", \"taskDetails\" ]}  \n" +
+                                "               }";
             }
             String post_query =
                     "           ]\n"+
-                    "       }\n"+
-                    "   }\n"+
-                    "}\n";
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
 
             String final_query = pre_query + body_query + post_query;
             Log.i("Query", "The query was " + query);
@@ -737,7 +738,10 @@ public class TaskController {
      */
     public static void verifySettings() {
         if (client == null) {
-            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080").connTimeout(20000).readTimeout(20000);
+            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080").discoveryEnabled(true).multiThreaded(true);
+
+
+
             DroidClientConfig config = builder.build();
 
 

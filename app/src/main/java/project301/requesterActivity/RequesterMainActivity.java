@@ -81,20 +81,6 @@ public class RequesterMainActivity extends AppCompatActivity {
         });
         //clean offline files and load new files
 
-        ArrayList<Task> tasklist= new ArrayList<>();
-        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-        search.execute(userId);
-        try {
-            tasklist= search.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        FileSystemController FC = new FileSystemController();
-        for(Task task: tasklist){
-            FC.saveToFile(task,"sent",getApplication());
-        }
 
     }
 

@@ -116,9 +116,9 @@ public class FileSystemController {
     public void deleteFiles( Context context) {
         String[] fileList = context.fileList();
 
-            for(String file: fileList){
-                context.deleteFile(file);
-            }
+        for(String file: fileList){
+            context.deleteFile(file);
+        }
 
     }
 

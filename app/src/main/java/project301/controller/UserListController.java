@@ -467,7 +467,7 @@ public class UserListController {
      */
     public static void verifySettings() {
         if (client == null) {
-            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080");
+            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080").discoveryEnabled(true).multiThreaded(true);
             DroidClientConfig config = builder.build();
 
             JestClientFactory factory = new JestClientFactory();
