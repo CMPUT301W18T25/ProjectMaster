@@ -4,12 +4,16 @@ package project301.ActivityTest;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import project301.R;
+import project301.Task;
 import project301.allUserActivity.LogInActivity;
 import project301.allUserActivity.UserCharacterActivity;
 
+import project301.providerActivity.ProviderMainActivity;
 import project301.requesterActivity.RequesterEditInfoActivity;
 import project301.requesterActivity.RequesterEditListActivity;
 import project301.requesterActivity.RequesterEditTaskActivity;
@@ -18,6 +22,8 @@ import project301.requesterActivity.RequesterMapActivity;
 import project301.requesterActivity.RequesterPostTaskActivity;
 import project301.requesterActivity.RequesterViewTaskActivity;
 import com.robotium.solo.Solo;
+
+import java.util.ArrayList;
 
 /**
  * Test for all requester activities. Some of test based on provider activity test and sign up activity test.
@@ -85,28 +91,16 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.assertCurrentActivity("Wrong Activity", RequesterEditListActivity.class);
 
-        solo.goBack();
+        solo.clickOnButton("Main menu");
 
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
 
         solo.clickOnButton("Edit Profile");
 
         solo.assertCurrentActivity("Wrong Activity", RequesterEditInfoActivity.class);
-
-        solo.enterText((EditText) solo.getView(R.id.edit_name),"wdong2");
-
-        solo.enterText((EditText) solo.getView(R.id.edit_email),"wdong2@ualberta.ca");
-
-        solo.enterText((EditText) solo.getView(R.id.edit_phone),"1234567890");
-
-        solo.enterText((EditText) solo.getView(R.id.edit_passward),"abc");
-
-        solo.goBack();
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
     }
 
-    public void testRequesterPostTaskActivity() {
+    public void testRequesterPostAndDeleteTaskActivity() {
 
         solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
 
@@ -138,7 +132,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.assertCurrentActivity("Wrong Activity", RequesterEditListActivity.class);
 
-        solo.clickInList(0);
+        solo.clickInList(-1);
 
         solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskActivity.class);
 
@@ -146,13 +140,35 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.assertCurrentActivity("Wrong Activity", RequesterEditTaskActivity.class);
 
-        //solo.getEditText(solo.getView(R.id.c_view_name));
+        solo.clearEditText((EditText) solo.getView(R.id.c_edit_name));
 
-        //solo.goBack();
+        assertTrue(solo.waitForText("GO!"));
 
-        //solo.clickOnButton("Cancel");
+        solo.clearEditText((EditText) solo.getView(R.id.c_edit_detail));
 
-        //solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
+        solo.clearEditText((EditText) solo.getView(R.id.c_edit_destination));
+
+        solo.clearEditText((EditText) solo.getView(R.id.c_edit_idealprice));
+
+        solo.enterText((EditText) solo.getView(R.id.c_edit_name),"GO!_test");
+
+        solo.enterText((EditText) solo.getView(R.id.c_edit_detail),"two people_test");
+
+        solo.enterText((EditText) solo.getView(R.id.c_edit_destination),"NorthGate_test");
+
+        solo.enterText((EditText) solo.getView(R.id.c_edit_idealprice),"12.34567");
+
+        solo.clickOnButton("Save");
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterEditListActivity.class);
+
+        solo.clickInList(-1);
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskActivity.class);
+
+        solo.clickOnButton("Delete Task");
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterEditListActivity.class);
     }
 
     public void testRequesterEditListActivity() {
@@ -206,13 +222,17 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.assertCurrentActivity("Wrong Activity", RequesterEditInfoActivity.class);
 
-        solo.enterText((EditText) solo.getView(R.id.edit_name),"wdong2");
+        solo.clearEditText((EditText) solo.getView(R.id.edit_name));
+
+        solo.enterText((EditText) solo.getView(R.id.edit_name),"wdong2_test");
 
         solo.enterText((EditText) solo.getView(R.id.edit_email),"wdong2@ualberta.ca");
 
         solo.enterText((EditText) solo.getView(R.id.edit_phone),"1234567890");
 
-        solo.enterText((EditText) solo.getView(R.id.edit_passward),"abc");
+        solo.clearEditText((EditText) solo.getView(R.id.edit_passward));
+
+        solo.enterText((EditText) solo.getView(R.id.edit_passward),"abcd");
 
         solo.clickOnButton("Save");
 
@@ -220,13 +240,53 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.goBack();
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterEditInfoActivity.class);
+        solo.goBack();
 
-        solo.enterText((EditText) solo.getView(R.id.edit_passward),"abc");
+        solo.goBack();
 
-        solo.clickOnButton("Back");
+        solo.goBack();
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
+
+        solo.clearEditText((EditText) solo.getView(R.id.login_name));
+
+        solo.enterText((EditText) solo.getView(R.id.login_name),"wdong2");
+
+        solo.clearEditText((EditText) solo.getView(R.id.login_password));
+
+        solo.enterText((EditText) solo.getView(R.id.login_password),"passward");
+
+        solo.clickOnButton("Log In");
+
+        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
+
+        solo.clearEditText((EditText) solo.getView(R.id.login_name));
+
+        solo.enterText((EditText) solo.getView(R.id.login_name),"wdong2_test");
+
+        solo.clearEditText((EditText) solo.getView(R.id.login_password));
+
+        solo.enterText((EditText) solo.getView(R.id.login_password),"abcd");
+
+        solo.clickOnButton("Log In");
+
+        solo.clickOnButton("Requester");
+
+        solo.clickOnButton("Edit Profile");
+
+        solo.clearEditText((EditText) solo.getView(R.id.edit_name));
+
+        solo.enterText((EditText) solo.getView(R.id.edit_name),"wdong2");
+
+        solo.enterText((EditText) solo.getView(R.id.edit_email),"");
+
+        solo.enterText((EditText) solo.getView(R.id.edit_phone),"");
+
+        solo.clearEditText((EditText) solo.getView(R.id.edit_passward));
+
+        solo.enterText((EditText) solo.getView(R.id.edit_passward),"passward");
+
+        solo.clickOnButton("Save");
     }
 
 }

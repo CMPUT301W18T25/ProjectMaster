@@ -35,10 +35,6 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
-    public void testStart() throws Exception {
-        Activity activity = getActivity();
-    }
-
     public void testCheckValidationButton() {
         SignUpActivity activity = (SignUpActivity)solo.getCurrentActivity();
 
