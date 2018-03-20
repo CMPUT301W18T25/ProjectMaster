@@ -554,13 +554,13 @@ public class TaskTest {
                 assertTrue(true);
             }
 
-            for (int i = 0; i < 5; i++){
+            for (int i = 0; i < rt_list.size(); i++){
                 Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
                 if (rt_list.get(i) == null){
                     break;
                 }
                 if (rt_list.get(i).getTaskStatus().equals("bidden")){
-                    if (rt_list.get(i).getTaskProvider().equals(send_list.get(i).getTaskProvider())){
+                    if (rt_list.get(i).getTaskProvider().contains("ke")){
                         assertTrue(true);
                     }
                 }
@@ -653,13 +653,13 @@ public class TaskTest {
                 assertTrue(true);
             }
 
-            for (int i = 0; i < 5; i++){
+            for (int i = 0; i < rt_list.size(); i++){
                 Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
                 if (rt_list.get(i) == null){
                     break;
                 }
                 if (rt_list.get(i).getTaskStatus().equals("assigned")){
-                    if (rt_list.get(i).getTaskProvider().equals(send_list.get(i).getTaskProvider())){
+                    if (rt_list.get(i).getTaskProvider().contains("so")){
                         assertTrue(true);
                     }
                 }
