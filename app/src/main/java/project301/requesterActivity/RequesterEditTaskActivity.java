@@ -82,11 +82,10 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         //time sleep
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
 
         //get newest data from database.
@@ -147,11 +146,12 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
 
 
                     //interface jump
-                    Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterViewTaskActivity.class);
+                    //Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterViewTaskActivity.class);
+                    Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterEditListActivity.class);
 
 
                     //get data from database
-                    task_list = new ArrayList<>();
+ /*                   task_list = new ArrayList<>();
                     if(merlinsBeard.isConnected()) {
                         TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
                         search.execute(userId);
@@ -167,7 +167,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                         FileSystemController FC = new FileSystemController();
                         task_list=FC.loadSentTasksFromFile(context);
                     }
-
+*/
                     // get index of target task
 
                     last_index = task_list.size()-1;
@@ -187,14 +187,14 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                     //upload to database
                     if(merlinsBeard.isConnected()) {
                         OfflineController offlineController = new OfflineController();
-                        offlineController.tryToExecuteOfflineTasks(context);
+                        offlineController.tryToExecuteOfflineTasks(getApplication());
                         TaskController.requesterUpdateTask update = new TaskController.requesterUpdateTask();
                         update.execute(target_task);
                     }
                     //offline
                     else{
                         FileSystemController fileSystemController = new FileSystemController();
-                        fileSystemController.saveToFile(target_task,"offlineEdit",context);
+                        fileSystemController.saveToFile(target_task,"offlineEdit",getApplication());
                         Log.i("offlineEdit","test");
                     }
 
@@ -235,8 +235,35 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart(){
 
 
+        super.onStart();
+        //fetch new list
+        task_list = new ArrayList<>();
+        if(merlinsBeard.isConnected()) {
+            OfflineController offlineController = new OfflineController();
+            offlineController.tryToExecuteOfflineTasks(getApplication());
+
+            TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+            search.execute(userId);
+            try {
+                task_list = search.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            FileSystemController FC = new FileSystemController();
+            task_list=FC.loadSentTasksFromFile(getApplication());
+        }
+
+
+
+    }
 
     /**
      * method check empty to make sure below parameters are not empty

@@ -19,6 +19,7 @@ import android.widget.Toast;
 import project301.R;
 import project301.Task;
 import project301.User;
+import project301.controller.FileSystemController;
 import project301.controller.UserListController;
 
 import java.util.ArrayList;
@@ -57,6 +58,8 @@ public class LogInActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        FileSystemController FC = new FileSystemController();
+        FC.deleteFiles(getApplication());
         setContentView(R.layout.log_in);
         usernameText = (EditText) findViewById(R.id.login_name);
         passwardText = (EditText) findViewById(R.id.login_password);

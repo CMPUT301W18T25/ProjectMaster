@@ -231,6 +231,7 @@ public class TaskController {
         protected Boolean doInBackground(Task... single_task) {
 
             verifySettings();
+            Boolean success = false;
             String query = TaskUtil.serializer(single_task[0]);
 
             Index index = new Index.Builder(query)
@@ -238,6 +239,7 @@ public class TaskController {
             try {
                 DocumentResult result = client.execute(index);
                 if (result.isSucceeded()) {
+                    success = true;
                     Log.i("Debug", "Successful update user profile");
                 } else {
                     Log.i("Error", "We failed to update user profile to elastic search!");
@@ -245,10 +247,15 @@ public class TaskController {
             } catch (IOException e) {
                 e.printStackTrace();
 
-                Log.i("Error", "We failed to connect Elasticsearch server");
-                return false;
+                Log.i("Error", "We failed to connect Elasticsearch server?");
+
+                return success;
             }
-            return true;
+            return success;
+        }
+        @Override
+        protected void onPostExecute(Boolean success){
+            Log.i("Finish","execution");
         }
     }
     /**
@@ -730,8 +737,7 @@ public class TaskController {
      */
     public static void verifySettings() {
         if (client == null) {
-            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080");
-            builder.connTimeout(20000).readTimeout(20000);
+            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080").connTimeout(20000).readTimeout(20000);
             DroidClientConfig config = builder.build();
 
 

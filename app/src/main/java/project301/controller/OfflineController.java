@@ -2,6 +2,7 @@ package project301.controller;
 
 import android.content.Context;
 import android.text.BoringLayout;
+import android.util.Log;
 
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class OfflineController {
      */
 
     public void tryToExecuteOfflineTasks(Context context){
+        Log.i("try to resume offline","Tasks");
         FileSystemController fileSystemController = new FileSystemController();
         ArrayList<Task> OfflineAddTasks = fileSystemController.loadOfflineAddTasksFromFile(context);
         for(Task task: OfflineAddTasks){
@@ -51,12 +53,13 @@ public class OfflineController {
         }
         ArrayList<Task> OfflineEditTasks = fileSystemController.loadOfflineEditTasksFromFile(context);
         for(Task task: OfflineEditTasks){
+            Log.i("offlineeditTaskId",task.getId());
             String fileName = "offlineEdit-" + task.getId() + ".json";
             String sentFileName = "sent-" + task.getId() + ".json";
 
             TaskController.requesterUpdateTask requesterUpdateTask=new TaskController.requesterUpdateTask();
             requesterUpdateTask.execute(task);
-            Boolean success = true;
+            Boolean success = false;
             try {
                 success=requesterUpdateTask.get();
             } catch (InterruptedException e) {
@@ -65,11 +68,17 @@ public class OfflineController {
                 e.printStackTrace();
             }
             if(success) {
+                Log.i("Success offEdit",".");
+
                 fileSystemController.deleteFileByName(fileName, context);
                 fileSystemController.deleteFileByName(sentFileName, context);
+                Log.i("Success delete",".");
 
                 FileIOUtil fileIOUtil = new FileIOUtil();
                 fileIOUtil.saveSentTaskInFile(task,context);
+            }
+            else{
+                Log.i("failed offEdit",".");
             }
 
         }

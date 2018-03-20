@@ -246,7 +246,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
         }
         else{
             FileSystemController FC = new FileSystemController();
-            tasklist = FC.loadSentTasksFromFile(context);
+            tasklist = FC.loadSentTasksFromFile(getApplication());
         }
 
 

@@ -112,20 +112,18 @@ public class RequesterEditListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-
         //doing offline
         if(!merlinsBeard.isConnected()){
             Log.i("go","offline");
             FileSystemController FC = new FileSystemController();
-            tasklist = FC.loadSentTasksFromFile(context);
+            tasklist = FC.loadSentTasksFromFile(getApplication());
             RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
             // Attach the adapter to a ListView
             this.postedTaskList.setAdapter(adapter);
         }
         else{
             OfflineController offlineController = new OfflineController();
-            offlineController.tryToExecuteOfflineTasks(this);
+            offlineController.tryToExecuteOfflineTasks(getApplication());
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -143,6 +141,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
             }
 
             RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
+            adapter.notifyDataSetChanged();
             // Attach the adapter to a ListView
             this.postedTaskList.setAdapter(adapter);
         }

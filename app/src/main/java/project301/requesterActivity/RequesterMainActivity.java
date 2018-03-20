@@ -92,16 +92,9 @@ public class RequesterMainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         FileSystemController FC = new FileSystemController();
-        FC.deleteAllFiles(getApplicationContext(),"sent");
-        FC.deleteAllFiles(getApplicationContext(),"offlineAdd");
-        FC.deleteAllFiles(getApplicationContext(),"offlineEdit");
         for(Task task: tasklist){
-            FC.saveToFile(task,"sent",getApplicationContext());
+            FC.saveToFile(task,"sent",getApplication());
         }
-
-
-
-
 
     }
 

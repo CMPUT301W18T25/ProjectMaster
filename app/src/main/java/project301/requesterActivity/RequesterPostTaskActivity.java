@@ -114,7 +114,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
                     if(merlinsBeard.isConnected()) {
                         //Log.i("MerlinBeard","connected");
                         OfflineController offlineController = new OfflineController();
-                        offlineController.tryToExecuteOfflineTasks(context);
+                        offlineController.tryToExecuteOfflineTasks(getApplication());
                         TaskController.addTask addTaskCtl = new TaskController.addTask();
                         addTaskCtl.execute(new_task);
                         FileIOUtil fileIOUtil = new FileIOUtil();
@@ -127,7 +127,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
                         String uniqueID = UUID.randomUUID().toString();
                         new_task.setId(uniqueID);
 
-                        fileSystemController.saveToFile(new_task,"offlineAdd",context);
+                        fileSystemController.saveToFile(new_task,"offlineAdd",getApplication());
                     }
 
                     info2.putExtra("userId",userId);
@@ -192,7 +192,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
     public void onConnect() {
         // try to update offline accepted request
         OfflineController offlineController = new OfflineController();
-        offlineController.tryToExecuteOfflineTasks(context);
+        offlineController.tryToExecuteOfflineTasks(getApplication());
     }
 
     @Override

@@ -7,6 +7,7 @@ import project301.utilities.TaskUtil;
 
 import java.util.ArrayList;
 import android.content.Context;
+import android.util.Log;
 
 /**
  * Save data and load Data in gson file.
@@ -35,7 +36,8 @@ public class FileSystemController {
         else if(instruction.equals("offlineAdd")){
             FileIOUtil.saveOfflineAddTaskInFile(task,context);
         }
-        else if(instruction.equals("offlineEdit")){
+        else{
+            Log.i("save offline","TASK");
             FileIOUtil.saveOfflineEditTaskInFile(task,context);
         }
     }
@@ -109,6 +111,18 @@ public class FileSystemController {
             throw new RuntimeException();
         }
     }
+
+
+    public void deleteFiles( Context context) {
+        String[] fileList = context.fileList();
+
+            for(String file: fileList){
+                context.deleteFile(file);
+            }
+
+    }
+
+
 
     /**
      * Delete json file based on the file name
