@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 
 /**
- * Task model contains all the features of a task
+ * Task model contains all the features of a task. Basic setters and getters are included.
  * @classname : Task
  * @Date :   18/03/2018
  * @author : Yuqi Zhang

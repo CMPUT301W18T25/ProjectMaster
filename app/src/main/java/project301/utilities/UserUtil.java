@@ -22,6 +22,13 @@ import com.google.gson.Gson;
 /**
  * Utility class that help to serilize
  * and deserialize the user object
+ * @classname : User
+ * @Date :   18/03/2018
+ * @author : Yuqi Zhang
+ * @author :Yue Ma
+ * @author :Julian Stys
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 public class UserUtil {
     /**

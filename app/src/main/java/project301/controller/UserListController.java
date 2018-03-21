@@ -23,7 +23,7 @@ import io.searchbox.core.SearchResult;
 
 /**
  * Activities can communicate with user model through this class.
- * The class contains method to renew data on the elasticsearch database
+ * The class contains methods to renew data on the elasticsearch database
  * @classname : UserListController
  * @Date :   18/03/2018
  * @author : Yuqi Zhang

@@ -10,7 +10,7 @@ import android.content.Context;
 import android.util.Log;
 
 /**
- * Save data and load Data in gson file.
+ * Save tasks in json files and load tasks from json file
  * @classname : FileSystemController
  * @Date :   18/03/2018
  * @author : Yuqi Zhang

@@ -12,7 +12,7 @@ import project301.Task;
 import project301.utilities.FileIOUtil;
 
 /**
- * Activities can execute offline tasks through this controller
+ * Activities can execute offline tasks when the App reconnects to the internet through this controller.
  * @classname : OfflineController
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
@@ -53,7 +53,6 @@ public class OfflineController {
         }
         ArrayList<Task> OfflineEditTasks = fileSystemController.loadOfflineEditTasksFromFile(context);
         for(Task task: OfflineEditTasks){
-            Log.i("offlineeditTaskId",task.getId());
             String fileName = "offlineEdit-" + task.getId() + ".json";
             String sentFileName = "sent-" + task.getId() + ".json";
 

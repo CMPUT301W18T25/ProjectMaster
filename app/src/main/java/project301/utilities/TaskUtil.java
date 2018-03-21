@@ -10,8 +10,14 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 
 /**
- *Task class that help to serilize
- * and deserialize a task object
+ *A class that helps to serilize and deserialize a task object
+ * @classname : User
+ * @Date :   18/03/2018
+ * @author : Yuqi Zhang
+ * @author :Yue Ma
+ * @author :Julian Stys
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
 public class TaskUtil {
