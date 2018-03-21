@@ -22,7 +22,7 @@ import com.google.gson.Gson;
 /**
  * Utility class that help to serilize
  * and deserialize the user object
- * @classname : User
+ * @classname : UserUtil
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
  * @author :Yue Ma

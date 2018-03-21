@@ -11,8 +11,7 @@ import java.util.ArrayList;
 
 /**
  *A class that helps to serilize and deserialize a task object
- * @classname : User
- * @Date :   18/03/2018
+ * @classname : TaskUtil
  * @author : Yuqi Zhang
  * @author :Yue Ma
  * @author :Julian Stys
@@ -23,7 +22,7 @@ import java.util.ArrayList;
 public class TaskUtil {
     /**
      * Convert task object into json format
-     * @param task
+     * @param task task object
      * @return  Json string
      */
     public static String serializer(Task task) {
@@ -33,7 +32,7 @@ public class TaskUtil {
 
     /**
      * Convert json format string into task object
-     * @param string
+     * @param string json string
      * @return task object
      */
     public static Task deserializer(BufferedReader string) {
@@ -43,24 +42,24 @@ public class TaskUtil {
 
     /**
      * Generate offline file title
-     * @param task
-     * @return
+     * @param task task object
+     * @return json file title
      */
     public static String generateOnlineSentTaskFileName(Task task) {
         return "sent-" + task.getId() + ".json";
     }
     /**
      * Generate offline adding file title
-     * @param task
-     * @return
+     * @param task task object
+     * @return json file title
      */
     public static String generateOfflineAddTaskFileName(Task task) {
         return "offlineAdd-" + task.getId() + ".json";
     }
     /**
      * Generate offline editing file title
-     * @param task
-     * @return
+     * @param task task object
+     * @return json file title
      */
     public static String generateOfflineEditTaskFileName(Task task) {
         return "offlineEdit-" + task.getId() + ".json";

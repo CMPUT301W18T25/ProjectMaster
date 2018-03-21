@@ -29,8 +29,7 @@ import android.util.Log;
 import project301.Task;
 /**
  * Save and load tasks from offline json file
- * @classname : User
- * @Date :   18/03/2018
+ * @classname : FileIOUtil
  * @author : Yuqi Zhang
  * @author :Yue Ma
  * @author :Julian Stys
