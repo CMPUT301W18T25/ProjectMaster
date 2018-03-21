@@ -43,4 +43,5 @@ public class Bid {
         return this.taskID;
     }
     public void setProviderId(String providerId){this.providerId = providerId;}
+
 }

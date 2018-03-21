@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -61,7 +62,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         user = uc.getAUserById(userId);
 
         //get all bidden task of this provider (user) into a list
-        TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
+        /*TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
         search.execute();
         try {
             taskList = search.get();
@@ -70,6 +71,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        */
 
         //settle back button
         Button backButton = (Button) findViewById(R.id.back_button);
@@ -143,7 +145,17 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         taskList.add(task1);
         */
 
-        RequesterAdapter adapter = new RequesterAdapter(this, taskList);
+        //get all bidden task of this provider (user) into a list
+        TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
+        search.execute();
+        try {
+            taskList = search.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        ProviderAdapter adapter = new ProviderAdapter(this, taskList);
         // Attach the adapter to a ListView
         this.bidHistoryList.setAdapter(adapter);
     }

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -18,6 +19,7 @@ import project301.Bid;
 import project301.R;
 import project301.Task;
 import project301.controller.TaskController;
+import project301.requesterActivity.RequesterAdapter;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -76,6 +78,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         taskIdealPrice = (TextView) findViewById(R.id.p_task_idealprice);
         taskLowestPrice = (TextView) findViewById(R.id.p_task_mybid);
         taskMybid = (EditText)findViewById(R.id.p_task_mybid);
+        BidListView = (ListView)findViewById(R.id.provider_bid_lkist);
 
         // get index of target task
         int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
@@ -83,18 +86,33 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
 
         //get tast status from last activity
         status = intent.getExtras().get("status").toString();
+
         //get data from database
         if (status.equals("request")) {
+            //request and bidden. if only request, he will not see other person's bidding tasks
             TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
             search.execute();
-
+            tasklist = new ArrayList<>();
+            ArrayList<Task> searchedTask = new ArrayList<>();
             try {
-                tasklist = search.get();
+                searchedTask = search.get();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
+            tasklist.addAll(searchedTask);
+
+            TaskController.searchAllBiddenTasks search2 = new TaskController.searchAllBiddenTasks();
+            search2.execute();
+            try {
+                searchedTask = search2.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            tasklist.addAll(searchedTask);
 
             //set initiallized bid
             //taskMybid.setText("0");
@@ -137,6 +155,10 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
             v1.setGravity(Gravity.CENTER);
             toast.show();
         }
+
+
+
+
 
         // get target task
         view_task=tasklist.get(view_index);
@@ -239,6 +261,8 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         searchAllBid.execute(view_task.getId());
         Double myBidAmount = 0.0;
         ArrayList<Bid> allBidOfThisTask = new ArrayList<>();
+        //currently, only bid amount is in it. Please add username in the future
+        ArrayList<String> allBidsString = new ArrayList<>();
         try {
             allBidOfThisTask = searchAllBid.get();
         } catch (InterruptedException e) {
@@ -247,7 +271,9 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         for(Bid bid: allBidOfThisTask){
+
             if(!bid.equals(null)) {
+                allBidsString.add(Double.toString(bid.getBidAmount()));
                 if (bid.getProviderId().equals(userId)) {
                     if (bid.getBidAmount() != null) {
                         myBidAmount = bid.getBidAmount();
@@ -259,6 +285,11 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
             }
         }
         taskMybid.setText(Double.toString(myBidAmount));
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.bid_list_item,allBidsString);
+        BidListView.setAdapter(adapter);
+
+
 
 
 

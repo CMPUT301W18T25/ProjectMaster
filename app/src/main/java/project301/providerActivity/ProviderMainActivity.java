@@ -113,15 +113,27 @@ public class ProviderMainActivity extends AppCompatActivity {
 
         TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
         search.execute();
-
+        taskList = new ArrayList<>();
+        ArrayList<Task> searchedTask = new ArrayList<>();
         try {
-            taskList = search.get();
+            searchedTask = search.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        taskList.addAll(searchedTask);
 
+        TaskController.searchAllBiddenTasks search2 = new TaskController.searchAllBiddenTasks();
+        search2.execute();
+        try {
+            searchedTask = search2.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        taskList.addAll(searchedTask);
         // Testing
         /*
         Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",taskList.get(0).getId());
