@@ -83,13 +83,7 @@ public class ProviderActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.assertCurrentActivity("Wrong Activity", ProviderEditInfoActivity.class);
 
-        solo.enterText((EditText) solo.getView(R.id.edit_name),"wdong2");
-
-        solo.enterText((EditText) solo.getView(R.id.edit_email),"wdong2@ualberta.ca");
-
-        solo.enterText((EditText) solo.getView(R.id.edit_phone),"1234567890");
-
-        solo.enterText((EditText) solo.getView(R.id.edit_passward),"abc");
+        solo.enterText((EditText) solo.getView(R.id.edit_passward),"");
 
         solo.goBack();
 
@@ -211,9 +205,16 @@ public class ProviderActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.assertCurrentActivity("Wrong Activity", ProviderMapActivity.class);
 
-        solo.goBack();
+        solo.clickOnButton("Show List");
 
         solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
+
+        //wait for update
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void testProviderBidHistoryActivity() {
