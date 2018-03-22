@@ -5,7 +5,6 @@ import android.widget.EditText;
 
 import project301.R;
 import project301.allUserActivity.LogInActivity;
-import project301.allUserActivity.SignUpActivity;
 import project301.allUserActivity.UserCharacterActivity;
 import project301.providerActivity.ProviderBidHistoryActivity;
 import project301.providerActivity.ProviderEditInfoActivity;
@@ -16,7 +15,6 @@ import project301.providerActivity.ProviderTaskBidActivity;
 import com.robotium.solo.Solo;
 
 /**
- * Test for all provider activities. Some of test based on requester activity test and sign up activity test.
  * @classname : ProviderActivityTest
  * @Date :   18/03/2018
  * @author : Wang Dong
