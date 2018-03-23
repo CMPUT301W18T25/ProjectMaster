@@ -105,9 +105,6 @@ public class RequesterEditListActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         FileSystemController FC = new FileSystemController();
-
-
-
         if(merlinsBeard.isConnected()){
             OfflineController offlineController = new OfflineController();
             offlineController.tryToExecuteOfflineTasks(getApplication());
@@ -122,6 +119,7 @@ public class RequesterEditListActivity extends AppCompatActivity {
             TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
             search.execute(userId);
 
+
             tasklist = new ArrayList<Task>();
             try {
                 tasklist= search.get();
@@ -130,10 +128,12 @@ public class RequesterEditListActivity extends AppCompatActivity {
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
+            FC.deleteAllFiles(getApplication(),"sent");
             for(Task task:tasklist){
                 FC.saveToFile(task,"sent",getApplication());
             }
         }
+       // FC.deleteAllFiles(getApplication(),"sent");
         tasklist = FC.loadSentTasksFromFile(getApplication());
         RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
         adapter.notifyDataSetChanged();

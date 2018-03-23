@@ -60,6 +60,7 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FileSystemController FC = new FileSystemController();
         FC.deleteFiles(getApplication());
+
         setContentView(R.layout.log_in);
         usernameText = (EditText) findViewById(R.id.login_name);
         passwardText = (EditText) findViewById(R.id.login_password);
