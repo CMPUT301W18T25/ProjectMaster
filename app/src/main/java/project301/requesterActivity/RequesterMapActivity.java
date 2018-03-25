@@ -1,6 +1,5 @@
 package project301.requesterActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -15,9 +14,10 @@ import android.widget.Button;
 
 import project301.R;
 
-import project301.controller.FileSystemController;
 import project301.controller.TaskController;
 import project301.providerActivity.ProviderMapActivity;
+import project301.providerActivity.ProviderTaskBidActivity;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,24 +29,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.novoda.merlin.MerlinsBeard;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * RequesterMapActivity handles the map activity for the Requester. The main purpose of
- * this task is too display all tasks within 5km of the Requester on the map UI, and
- * allow the Requester to click on each task to view further information. This activity
- * first asks user for permission to access the devices location. It then gets the current
- * location of the user and navigates the map camera to this location.
- *
- * Currently, the Task class doesn't have functionality for location, so a 'mockupTasks'
- * of ArrayList<Locations> is used to test the markers of each task.
- *
- * Source: The majority of the map code was implemented using the Google developer documentation
- * (https://developers.google.com/maps/documentation/android-api/start)
  * @classname : RequesterMapActivity
+ * @class Detail :
+ *
  * @Date :   18/03/2018
  * @author : Julian Stys
  * @author : Xingyuan Yang
@@ -61,7 +51,7 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
     private GoogleMap mMap;
     private String userId;
 
-    private static final String TAG = ProviderMapActivity.class.getSimpleName();
+    private static final String TAG = RequesterMapActivity.class.getSimpleName();
 
     private Boolean mLocationPermissionGranted;
 
@@ -70,17 +60,18 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
 
-    protected MerlinsBeard merlinsBeard;
 
     private Location mLastKnownLocation;
 
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private final LatLng mDefaultLocation = new LatLng(53.5273, -113.5296);
 
-    private ArrayList<Location> mockupTasks;
-    private Context context;
 
-    private ArrayList<project301.Task> tasklist;
+    private ArrayList<project301.Task> taskList;
+
+    // Testing variables
+    private ArrayList<Location> mockupTasks;
+
 
 
     @SuppressWarnings("ConstantConditions")
@@ -115,28 +106,6 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
         });
     }
 
-
-    private void getAllPostedTask(){
-        context = getApplicationContext();
-        merlinsBeard = MerlinsBeard.from(context);
-        tasklist = new ArrayList<project301.Task>();
-        //get data from database
-        if(merlinsBeard.isConnected()){
-            TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-            search.execute(userId);
-            try {
-                tasklist = search.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        }
-        else{
-            FileSystemController FC = new FileSystemController();
-            tasklist = FC.loadSentTasksFromFile(context);
-        }
-    }
     /**
      * Requests permission from user for app to access the device location. The user
      * only needs to give permission once, and then future launches will automatically
@@ -225,6 +194,8 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
                         if (task.isSuccessful() && task.getResult() != null) {
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
+                            displayTaskLocations();
+
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     new LatLng(mLastKnownLocation.getLatitude(),
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
@@ -265,22 +236,43 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
      * calls onMarkerClick and Logs the id of the pressed marker
      */
     private void displayTaskLocations() {
+
         mMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
+        for (int i = 0; i < taskList.size(); i++) {
+            project301.Task currTask = taskList.get(i);
 
-        for (int i=0;i<mockupTasks.size();i++){
-            Log.d(TAG,"Adding marker "+i+", lat: "+mockupTasks.get(i)
-                    .getLatitude()+", long: "+mockupTasks.get(i).getLongitude());
+            if (currTask.getTasklgtitude() != null
+                    && currTask.getTasklatitude() != null) {
 
-            Marker marker = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(mockupTasks.get(i).getLatitude(), mockupTasks.get(i).getLongitude()))
-                    .anchor(0.5f,0.5f)
-                    .title(String.valueOf(i)));
-            marker.showInfoWindow();
+                if (getTaskDistance(currTask) <= 5000) {
+                    Marker marker = mMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(currTask.getTasklatitude(), currTask.getTasklgtitude()))
+                            .anchor(0.5f, 0.5f)
+                            .title(currTask.getTaskName())
+                    );
+                    Log.d(TAG, "Adding marker task name: " + marker.getTitle());
+                    marker.setTag(i);
+                    marker.showInfoWindow();
+                } else {
+                    Log.d(TAG, "Task is located too far away: " + currTask.getTaskName());
+                }
+
+            } else {
+                Log.d(TAG, "No location for: " + taskList.get(i).getTaskName());
+
+            }
         }
-
     }
+    // source: https://stackoverflow.com/questions/2741403/get-the-distance-between-two-geo-points
+    private double getTaskDistance(project301.Task currentTask){
+        Location taskLocation = new Location("");
+        taskLocation.setLatitude(currentTask.getTasklatitude());
+        taskLocation.setLongitude(currentTask.getTasklgtitude());
 
+        double distance = taskLocation.distanceTo(mLastKnownLocation);
+        return distance;
+    }
 
     /**
      * Override the behavior when a user clicks on a map marker. Right now, it only
@@ -292,7 +284,17 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
      */
     @Override
     public boolean onMarkerClick(Marker marker){
-        Log.d(TAG,"Clicked on marker "+marker.getTitle());
+        int markerIndex = (Integer) marker.getTag();
+        project301.Task clickedTask = taskList.get(markerIndex);
+        Log.d(TAG,"Clicked on marker "+String.valueOf(markerIndex));
+        Log.d(TAG,"Task info: "+clickedTask.getTaskName());
+        Log.d(TAG,"Task info: "+clickedTask.getTaskAddress());
+
+        /*Intent info1 = new Intent(RequesterMapActivity.this, ProviderTaskBidActivity.class);
+        info1.putExtra("info", markerIndex);
+        info1.putExtra("status","request");
+        info1.putExtra("userId",userId);
+        startActivity(info1);*/
         return true;
     }
 
@@ -306,12 +308,35 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+
+        getAllTaksInfo();
         getLocationPermission();
         updateLocationUI();
         getDeviceLocation();
 
+
+
         // Don't call displayTaskLocations for now since it is used only for testing at the moment
         /*displayTaskLocations();*/
+    }
+
+    private void getAllTaksInfo() {
+
+        TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
+        search.execute();
+        taskList = new ArrayList<project301.Task>();
+        ArrayList<project301.Task> searchedTask = new ArrayList<>();
+        try {
+            searchedTask = search.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        taskList.addAll(searchedTask);
+        for (int i =0;i<taskList.size();i++){
+            Log.d(TAG,"TASK: "+taskList.get(i).getTaskName()+", "+taskList.get(i).getTaskStatus());
+        }
     }
 
 }
