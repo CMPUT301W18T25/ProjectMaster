@@ -9,9 +9,7 @@ import android.widget.EditText;
 
 import project301.R;
 import project301.User;
-import project301.controller.UserListController;
-import project301.providerActivity.ProviderEditInfoActivity;
-import project301.providerActivity.ProviderMainActivity;
+import project301.controller.UserController;
 
 /**
  * Detail :this class used to change profile of the user, such as user name.
@@ -38,7 +36,7 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
     private EditText passwordText;
     private Button saveButton;
     private Button backButton;
-    private UserListController userListControl;
+    private UserController userListControl;
     private String userId;
     private User user;
 
@@ -51,7 +49,7 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
-        UserListController uc = new UserListController();
+        UserController uc = new UserController();
         user = uc.getAUserById(userId);
 
         //match edit text
@@ -80,7 +78,7 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
                 user.setUserPassword(editPassword);
 
                 //update user
-                UserListController.updateUser updateUser= new UserListController.updateUser();
+                UserController.updateUser updateUser= new UserController.updateUser();
                 updateUser.execute(user);
 
                 //change activity
@@ -119,7 +117,7 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
         super.onStart();
 
         //get current user
-        UserListController uc2 = new UserListController();
+        UserController uc2 = new UserController();
         user = uc2.getAUserById(userId);
 
         // put user original info onto UI

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,8 +18,7 @@ import project301.R;
 import project301.Task;
 import project301.User;
 import project301.controller.TaskController;
-import project301.controller.UserListController;
-import project301.requesterActivity.RequesterAdapter;
+import project301.controller.UserController;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -58,7 +56,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
         this.context = getApplicationContext();
-        UserListController uc = new UserListController();
+        UserController uc = new UserController();
         user = uc.getAUserById(userId);
 
         //get all bidden task of this provider (user) into a list

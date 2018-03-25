@@ -295,14 +295,14 @@ public class TaskController {
                 e.printStackTrace();
                 Log.i("Error", "We failed to connect Elasticsearch server");
             }
-            //UserListController getUser = new UserListController();
+            //UserController getUser = new UserController();
             //User new_user = getUser.getAUserById(current_bid.getProviderId());
 
             //new_user.addProviderBiddenTask(current_task.getId());
 
             // update user
 
-            //UserListController uc= new UserListController();
+            //UserController uc= new UserController();
             //uc.updateUser(new_user);
 
 

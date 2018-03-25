@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import project301.R;
 import project301.User;
-import project301.controller.UserListController;
+import project301.controller.UserController;
 
 /**
  * @classname : ProviderEditInfoActivity
@@ -42,7 +42,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
     private EditText passwordText;
     private Button saveButton;
     private Button backButton;
-    private UserListController userListControl;
+    private UserController userListControl;
     private User user;
 
 
@@ -55,7 +55,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
         //noinspection ConstantConditions,ConstantConditions
         //get userId and user
         userId = intent.getExtras().get("userId").toString();
-        UserListController uc = new UserListController();
+        UserController uc = new UserController();
         user = uc.getAUserById(userId);
 
         //match edit text
@@ -86,7 +86,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
                 user.setUserPassword(editPassword);
 
                 //update user
-                UserListController.updateUser updateUser= new UserListController.updateUser();
+                UserController.updateUser updateUser= new UserController.updateUser();
                 updateUser.execute(user);
 
                 //testing result
@@ -126,7 +126,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
         super.onStart();
 
         //get current user
-        UserListController uc2 = new UserListController();
+        UserController uc2 = new UserController();
         user = uc2.getAUserById(userId);
 
         // put user original info onto UI

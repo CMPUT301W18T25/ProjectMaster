@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import project301.R;
 import project301.User;
-import project301.controller.UserListController;
+import project301.controller.UserController;
 
 /**
  * This activity is for a new user to sign up an account.
@@ -44,9 +44,9 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText mobileText;
     private EditText passwardText;
     private Button checkValidationButton;
-    private UserListController userListControl;
+    private UserController userListControl;
     private User newUser;
-    private UserListController userListController;
+    private UserController userController;
     private Context context;
 
     @Override
@@ -78,7 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
                 newUser.setId(enterName);
                 Log.i("Name: ",newUser.getUserName());
 
-                UserListController uc= new UserListController();
+                UserController uc= new UserController();
                 String newUserId;
                 newUserId = uc.addUserAndCheck(newUser);
 

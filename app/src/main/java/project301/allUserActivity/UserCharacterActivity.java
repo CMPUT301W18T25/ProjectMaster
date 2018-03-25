@@ -19,7 +19,7 @@ import project301.Task;
 import project301.User;
 import project301.controller.FileSystemController;
 import project301.controller.TaskController;
-import project301.controller.UserListController;
+import project301.controller.UserController;
 import project301.providerActivity.ProviderMainActivity;
 import project301.requesterActivity.RequesterMainActivity;
 
@@ -61,7 +61,7 @@ public class UserCharacterActivity extends AppCompatActivity {
                 User user = new User();
                 //noinspection ConstantConditions,ConstantConditions
                 Log.i("userId:",userId);
-                UserListController uc = new UserListController();
+                UserController uc = new UserController();
                 user = uc.getAUserById(userId);
 
                 Intent intent = new Intent (UserCharacterActivity.this, ProviderMainActivity.class);
@@ -81,7 +81,7 @@ public class UserCharacterActivity extends AppCompatActivity {
                 User user = new User();
                 //noinspection ConstantConditions,ConstantConditions
 
-                UserListController uc = new UserListController();
+                UserController uc = new UserController();
                 user = uc.getAUserById(userId);
 
 

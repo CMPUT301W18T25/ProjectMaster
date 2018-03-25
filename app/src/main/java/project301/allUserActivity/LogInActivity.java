@@ -20,7 +20,7 @@ import project301.R;
 import project301.Task;
 import project301.User;
 import project301.controller.FileSystemController;
-import project301.controller.UserListController;
+import project301.controller.UserController;
 
 import java.util.ArrayList;
 
@@ -75,16 +75,16 @@ public class LogInActivity extends AppCompatActivity {
                 String enterUsername = usernameText.getText().toString();
                 String enterPassward = passwardText.getText().toString();
 
-                UserListController userListController = new UserListController();
+                UserController userController = new UserController();
                 /** for testing!
                  if (enterUsername == "wdong2"){
                  Intent intent = new Intent (LogInActivity.this, UserCharacterActivity.class);
                  startActivity(intent);
                  }
                  */
-                if (userListController.checkUserByNameAndPassword(enterUsername,enterPassward) == true){
+                if (userController.checkUserByNameAndPassword(enterUsername,enterPassward) == true){
                     Intent intent = new Intent (LogInActivity.this, UserCharacterActivity.class);
-                    UserListController uc = new UserListController();
+                    UserController uc = new UserController();
 
                     thisUser = uc.getAUserByName(enterUsername);
                     String Id = thisUser.getId();
