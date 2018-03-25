@@ -36,14 +36,13 @@
                     android:textSize="8sp" />
 
                 <Button
-                    android:id="@+id/provider_button"
+                    android:id="@+id/requester_button"
                     android:layout_width="match_parent"
                     android:layout_height="126dp"
                     android:layout_weight="1"
                     android:background="@color/colorAccent"
                     android:fontFamily="serif"
-                    android:text="provider"
-                    android:textSize="14sp"
+                    android:text="Requester"
                     android:textStyle="bold|italic" />
             </LinearLayout>
 
@@ -71,7 +70,7 @@
                         android:id="@+id/textView11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="  " />
+                        android:text="     " />
 
                     <ImageView
                         android:id="@+id/imageView3"
@@ -79,17 +78,20 @@
                         android:layout_height="127dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/provider_icon" />
+
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/requester_button"
+                    android:id="@+id/provider_button"
                     android:layout_width="match_parent"
                     android:layout_height="126dp"
                     android:layout_weight="1"
                     android:background="@color/colorAccent"
                     android:fontFamily="serif"
-                    android:text="Requester"
+                    android:text="provider"
+                    android:textSize="14sp"
                     android:textStyle="bold|italic" />
+
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
