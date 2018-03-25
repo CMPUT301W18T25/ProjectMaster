@@ -27,6 +27,15 @@ public class Task {
     private String taskAddress;
     private Double lowestBid;
 
+
+
+    private Double tasklatitude;
+
+
+
+    private Double tasklgtitude;
+
+
     private String taskID;
 
     private ArrayList<Bid> taskBidList;
@@ -136,6 +145,22 @@ public class Task {
     public Double getLowestBid() {return this.lowestBid;}
     public Photo getTaskPhoto(){
         return taskPhoto;
+    }
+
+    public Double getTasklatitude() {
+        return tasklatitude;
+    }
+
+    public void setTasklatitude(Double tasklatitude) {
+        this.tasklatitude = tasklatitude;
+    }
+
+    public Double getTasklgtitude() {
+        return tasklgtitude;
+    }
+
+    public void setTasklgtitude(Double tasklgtitude) {
+        this.tasklgtitude = tasklgtitude;
     }
 
     /**
