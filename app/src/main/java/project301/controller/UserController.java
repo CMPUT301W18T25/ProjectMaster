@@ -348,8 +348,6 @@ public class UserController {
         }
     }
 
-
-
     /**
      * Static class that update user profile
      */
@@ -450,10 +448,7 @@ public class UserController {
         boolean found = false;
         //noinspection ConstantConditions
         for (User u: Userlist){
-
             Log.i("username",u.getUserName());
-
-
             if(u.getUserPassword().equals(userPassword)){
                 found = true;
                 return found;

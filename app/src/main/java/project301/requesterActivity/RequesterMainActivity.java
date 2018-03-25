@@ -1,8 +1,10 @@
 package project301.requesterActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -44,9 +46,7 @@ public class RequesterMainActivity extends AppCompatActivity {
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
-        BidController bidController = new BidController();
-        //initialize the counter
-        GlobalCounter.count = bidController.searchBidCounterOfThisRequester(userId);
+
 
         //settle postNewTask button
         Button postNewTaskButton = (Button) findViewById(R.id.post_button);
@@ -89,10 +89,24 @@ public class RequesterMainActivity extends AppCompatActivity {
         BidController bidController = new BidController();
         //check counter change
         int newCount = bidController.searchBidCounterOfThisRequester(userId);
+        Log.i("bidCount",Integer.toString(newCount));
         if(newCount!=GlobalCounter.count){
             GlobalCounter.count = newCount;
+            openRequestInfoDialog();
             Log.i("New Bid","New Bid");
         }
+    }
+
+    private void openRequestInfoDialog() {
+        // get request info, and show it on the dialog
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterMainActivity.this);
+        builder.setTitle("New Bid")
+                .setMessage("You got a new bid!");
+        // Create & Show the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 }
