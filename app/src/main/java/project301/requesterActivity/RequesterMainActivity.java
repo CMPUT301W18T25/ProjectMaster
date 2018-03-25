@@ -3,14 +3,17 @@ package project301.requesterActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
+import project301.controller.BidController;
 import project301.controller.FileSystemController;
 import project301.controller.TaskController;
 
@@ -41,6 +44,10 @@ public class RequesterMainActivity extends AppCompatActivity {
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
+        BidController bidController = new BidController();
+        //initialize the counter
+        GlobalCounter.count = bidController.searchBidCounterOfThisRequester(userId);
+
         //settle postNewTask button
         Button postNewTaskButton = (Button) findViewById(R.id.post_button);
         postNewTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -52,10 +59,6 @@ public class RequesterMainActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
         //settle view button
         Button viewButton = (Button) findViewById(R.id.edit_button);
         viewButton.setOnClickListener(new View.OnClickListener() {
@@ -79,9 +82,17 @@ public class RequesterMainActivity extends AppCompatActivity {
 
             }
         });
-        //clean offline files and load new files
+    }
+    protected void onStart(){
 
-
+        super.onStart();
+        BidController bidController = new BidController();
+        //check counter change
+        int newCount = bidController.searchBidCounterOfThisRequester(userId);
+        if(newCount!=GlobalCounter.count){
+            GlobalCounter.count = newCount;
+            Log.i("New Bid","New Bid");
+        }
     }
 
 }

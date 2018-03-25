@@ -17,8 +17,10 @@ import com.novoda.merlin.registerable.bind.Bindable;
 import com.novoda.merlin.registerable.connection.Connectable;
 import com.novoda.merlin.registerable.disconnection.Disconnectable;
 
+import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
+import project301.controller.BidController;
 import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
 import project301.controller.TaskController;
@@ -104,6 +106,13 @@ public class RequesterEditListActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+        BidController bidController = new BidController();
+        //check counter change
+        int newCount = bidController.searchBidCounterOfThisRequester(userId);
+        if(newCount!= GlobalCounter.count){
+            GlobalCounter.count = newCount;
+            Log.i("New Bid","New Bid");
+        }
         FileSystemController FC = new FileSystemController();
         if(merlinsBeard.isConnected()){
             OfflineController offlineController = new OfflineController();

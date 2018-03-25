@@ -104,61 +104,34 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         User newUser  = new User();
         UserController uc = new UserController();
         int found = 0;
-        newUser = uc.getAUserByName("Mike");
-        if(newUser!=null){
-            found = 1;
-        }
-
-        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
-        deleteAllUsers.execute("");
-        assertEquals(found,1);
-
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    @Test
-    public void testGetAUserById(){
-        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
-        deleteAllUsers.execute("");
-        User user1 = new User();
-        user1.setUserName("jason");
-        UserController.addUser addUser = new UserController.addUser();
-        addUser.execute(user1);
-
-        // Hang around till is done
-        AsyncTask.Status taskStatus;
-        do {
-            taskStatus = addUser.getStatus();
-        } while (taskStatus != AsyncTask.Status.FINISHED);
-
+        UserController.getAUserByName getAUserByName = new UserController.getAUserByName();
+        getAUserByName.execute("Mike");
+        ArrayList<User> users = null;
         try {
-            TimeUnit.SECONDS.sleep(5);
+            users = getAUserByName.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
-        User newUser  = new User();
-        UserController uc = new UserController();
-        int found = 0,found2 = 0;
-        newUser = uc.getAUserByName("jason");
-        if(newUser!=null){
+        if(!users.equals(null)){
             found = 1;
         }
 
 
-        //noinspection ConstantConditions
-        //Log.i("said",newUser.getUserName());
-        newUser = uc.getAUserById(newUser.getId());
-        if(newUser!=null){
-            found2= 1;
-        }
-        assertEquals(found,1);
-        assertEquals(found2,1);
+        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
+        deleteAllUsers.execute("");
 
+        assertEquals(found,1);
 
     }
     @Test
 
     public void testcheckUserByNameAndPassword(){
+
+        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
+        deleteAllUsers.execute("");
+
         User user1 = new User();
         user1.setUserName("yueMa");
         user1.setUserPassword("yueMa2019");
@@ -167,27 +140,18 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         UserController.addUser addUser = new UserController.addUser();
         addUser.execute(user1);
 
-        // Hang around till is done
-        AsyncTask.Status taskStatus;
-        do {
-            taskStatus = addUser.getStatus();
-        } while (taskStatus != AsyncTask.Status.FINISHED);
-
         try {
-            TimeUnit.SECONDS.sleep(5);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         UserController uc = new UserController();
         boolean findUser1 = uc.checkUserByNameAndPassword("yueMa","yueMa2019");
-        assertTrue(findUser1);
-
+        assertEquals(findUser1,true);
         boolean notfindUser1 = uc.checkUserByNameAndPassword("yueMa","yueMi2018");
-
         assertEquals(notfindUser1,false);
-        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
-        deleteAllUsers.execute("");
+
     }
     @Test
 
@@ -236,12 +200,10 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         //boolean notfindUser1 = uc.checkUserByNameAndPassword("yue12","yue12pass");
         //assertEquals(notfindUser1,false);
         UserController uc = new UserController();
-        boolean findUser1 = uc.checkUserByNameAndPassword("yue12","yue12password");
+        boolean findUser1 = uc.checkUserByNameAndPassword("yue12","yue12fakepassword");
         assertEquals(findUser1,true);
-        boolean notfindUser1 = uc.checkUserByNameAndPassword("yue12","yue12fakepassword");
+        boolean notfindUser1 = uc.checkUserByNameAndPassword("yue12","yue12password");
         assertEquals(notfindUser1,false);
-
-
 
     }
     @Test
@@ -298,30 +260,25 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         String userId = null;
         User user1 = new User();
         user1.setUserName("yueLiu");
-        UserController.addUser addUser= new UserController.addUser();
-        addUser.execute(user1);
-
-        AsyncTask.Status taskStatus2;
-        do {
-            taskStatus2 = addUser.getStatus();
-        } while (taskStatus2 != AsyncTask.Status.FINISHED);
+        UserController uc = new UserController();
+        userId = uc.addUserAndCheck(user1);
 
         try {
-            TimeUnit.SECONDS.sleep(2);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        userId = null;
         User user2 = new User();
         user2.setUserName("yueLiu");
-        UserController uc = new UserController();
         userId = uc.addUserAndCheck(user2);
-
         assertEquals(userId,null);
-
         User user3 = new User();
         user3.setUserName("yumi");
         UserController uc2 = new UserController();
         userId = uc2.addUserAndCheck(user3);
+
 
 
     }

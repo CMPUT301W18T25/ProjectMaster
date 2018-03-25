@@ -61,9 +61,10 @@ public class UserController {
 
         if (name == "wdong2"){return true;}
 
-        User newUser;
-        newUser = getAUserByName(name);
-        if(newUser==null){
+        User user;
+        user = getAUserByName(name);
+
+        if(user == null){
             return true;
         }
         else {
@@ -159,7 +160,6 @@ public class UserController {
             return null;
         }
         else {
-
             return Userlist.get(0);
         }
     }

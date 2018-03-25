@@ -18,6 +18,7 @@ import android.widget.Toast;
 import project301.Bid;
 import project301.R;
 import project301.Task;
+import project301.controller.BidController;
 import project301.controller.TaskController;
 import project301.requesterActivity.RequesterAdapter;
 
@@ -232,6 +233,10 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                //increase the bidcounter of this requester
+                BidController bidController = new BidController();
+                bidController.increaseBidCounterOfThisRequester(view_task.getTaskRequester());
+
                 Intent info2 = new Intent(ProviderTaskBidActivity.this, ProviderBidHistoryActivity.class);
                 info2.putExtra("userId",userId);
 

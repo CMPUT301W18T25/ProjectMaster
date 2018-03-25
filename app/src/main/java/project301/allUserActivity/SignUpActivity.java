@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import project301.R;
 import project301.User;
+import project301.controller.BidController;
 import project301.controller.UserController;
 
 /**
@@ -88,6 +89,9 @@ public class SignUpActivity extends AppCompatActivity {
                     newUser.setId(newUserId);
                     Log.i("Success sign up:",enterName);
                     Intent intent = new Intent(activity, UserCharacterActivity.class);
+                    //initializes a bidCounter for this new user.
+                    BidController bidController = new BidController();
+                    bidController.buildBidCounterOfThisRequester(newUserId);
 
                     //deliver userName
                     intent.putExtra("userId",newUserId);

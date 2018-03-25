@@ -3,12 +3,15 @@ package project301.requesterActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import project301.GlobalCounter;
 import project301.R;
 import project301.User;
+import project301.controller.BidController;
 import project301.controller.UserController;
 
 /**
@@ -116,6 +119,14 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
+        BidController bidController = new BidController();
+        //check counter change
+        int newCount = bidController.searchBidCounterOfThisRequester(userId);
+        if(newCount!= GlobalCounter.count){
+            GlobalCounter.count = newCount;
+            Log.i("New Bid","New Bid");
+        }
+
         //get current user
         UserController uc2 = new UserController();
         user = uc2.getAUserById(userId);
@@ -142,6 +153,9 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
         //set password
         String temp_status=user.getUserPassword();
         passwordText.setText(temp_status);
+
+
+
     }
 
 

@@ -17,6 +17,7 @@ import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
+import project301.Bid;
 import project301.BidCounter;
 
 /**
@@ -26,7 +27,69 @@ import project301.BidCounter;
 public class BidController {
     private static JestDroidClient client;
 
-    public static class increaseBidCounterOfThisRequester extends AsyncTask<BidCounter, Void, Void> {
+    /**
+     * When the user signed up, this function will be called to initialize a bid counter
+     * @param requesterId requesterId
+     * @return boolean value means success or not
+     */
+    public boolean buildBidCounterOfThisRequester(String requesterId){
+        BidCounter bidCounter = new BidCounter(requesterId,0);
+        BidController.buildBidCounterOfThisRequester buildBidCounterOfThisRequester = new BidController.buildBidCounterOfThisRequester();
+        buildBidCounterOfThisRequester.execute(bidCounter);
+        Boolean success = false;
+        try {
+            success = buildBidCounterOfThisRequester.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return success;
+
+    }
+    public int searchBidCounterOfThisRequester(String requesterId){
+        BidController.searchBidCounterOfThisRequester searchBidCounterOfThisRequester = new BidController.searchBidCounterOfThisRequester();
+        searchBidCounterOfThisRequester.execute(requesterId);
+        BidCounter bidCounter = null;
+        try {
+            bidCounter = searchBidCounterOfThisRequester.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        if(bidCounter.equals(null)){
+            return -1;
+        }
+        else{
+            return bidCounter.getCounter();
+        }
+    }
+    public Boolean increaseBidCounterOfThisRequester(String requesterId){
+        BidController.searchBidCounterOfThisRequester searchBidCounterOfThisRequester = new BidController.searchBidCounterOfThisRequester();
+        searchBidCounterOfThisRequester.execute(requesterId);
+        BidCounter bidCounter = null;
+        try {
+            bidCounter = searchBidCounterOfThisRequester.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        if(bidCounter.equals(null)){
+            return false;
+        }
+        //increase count by 1
+        int newCount = bidCounter.getCounter()+1;
+        bidCounter.setCounter(newCount);
+
+        BidController.updateBidCounterOfThisRequester updateBidCounterOfThisRequester = new BidController.updateBidCounterOfThisRequester();
+        updateBidCounterOfThisRequester.execute(bidCounter);
+        return true;
+
+    }
+
+    public static class updateBidCounterOfThisRequester extends AsyncTask<BidCounter, Void, Void> {
 
         @Override
         protected Void doInBackground(BidCounter... bidCounters) {
@@ -58,7 +121,7 @@ public class BidController {
             verifySettings();
             String query =
                     "\n{ \n"+
-                            "\"size\" : 1,\n"+
+                            "\"size\" : 2,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -90,11 +153,11 @@ public class BidController {
             return null;
         }
     }
-    public static class buildBidCounterOfThisRequester extends AsyncTask<BidCounter, Void, Void>{
+    public static class buildBidCounterOfThisRequester extends AsyncTask<BidCounter, Void, Boolean>{
 
-        protected Void doInBackground(BidCounter... bidCounters) {
+        protected Boolean doInBackground(BidCounter... bidCounters) {
             verifySettings();
-
+            Boolean success = false;
             Index index = new Index.Builder(bidCounters[0]).index("cmput301w18t25").type("bidCounter").build();
 
             try {
@@ -104,6 +167,7 @@ public class BidController {
                 if(result.isSucceeded())
                 {
                     bidCounters[0].setESid(result.getId());
+                    success = true;
                     Gson gson = new Gson();
                     String query = gson.toJson(bidCounters[0]);
 
@@ -134,7 +198,7 @@ public class BidController {
             }
 
 
-            return null;
+            return success;
         }
 
     }

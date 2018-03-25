@@ -16,6 +16,8 @@ import android.widget.Toast;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
+import project301.GlobalCounter;
+import project301.controller.BidController;
 import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
 import project301.utilities.FileIOUtil;
@@ -56,9 +58,6 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
     private String userId;
     protected Merlin merlin;
     protected MerlinsBeard merlinsBeard;
-
-
-
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -156,6 +155,18 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
 
             }
         });
+    }
+
+    protected void onStart(){
+
+        super.onStart();
+        BidController bidController = new BidController();
+        //check counter change
+        int newCount = bidController.searchBidCounterOfThisRequester(userId);
+        if(newCount!= GlobalCounter.count){
+            GlobalCounter.count = newCount;
+            Log.i("New Bid","New Bid");
+        }
     }
 
 

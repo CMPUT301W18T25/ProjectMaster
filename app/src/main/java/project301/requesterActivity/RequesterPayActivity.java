@@ -5,10 +5,13 @@ package project301.requesterActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import project301.GlobalCounter;
 import project301.R;
+import project301.controller.BidController;
 
 /**
  * Detail : pay class is to change the status of task from bidding to processing
@@ -58,5 +61,16 @@ public class RequesterPayActivity extends AppCompatActivity {
 
             }
         });
+    }
+    protected void onStart(){
+
+        super.onStart();
+        BidController bidController = new BidController();
+        //check counter change
+        int newCount = bidController.searchBidCounterOfThisRequester(userId);
+        if(newCount!= GlobalCounter.count){
+            GlobalCounter.count = newCount;
+            Log.i("New Bid","New Bid");
+        }
     }
 }

@@ -14,8 +14,10 @@ import android.widget.TextView;
 import com.novoda.merlin.MerlinsBeard;
 import com.novoda.merlin.NetworkStatus;
 
+import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
+import project301.controller.BidController;
 import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
 import project301.controller.TaskController;
@@ -232,6 +234,14 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+
+        BidController bidController = new BidController();
+        //check counter change
+        int newCount = bidController.searchBidCounterOfThisRequester(userId);
+        if(newCount!= GlobalCounter.count){
+            GlobalCounter.count = newCount;
+            Log.i("New Bid","New Bid");
         }
 
         //pull data from database
