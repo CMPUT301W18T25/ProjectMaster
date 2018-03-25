@@ -12,6 +12,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
+import static org.junit.Assert.*;
+
 
 /**
  * @classname : UserTest
@@ -29,10 +31,8 @@ import org.junit.Test;
 
 
 @SuppressWarnings("ALL")
-public class UserTest extends ActivityInstrumentationTestCase2 {
-    public UserTest() {
-        super(LogInActivity.class);
-    }
+public class UserTest {
+
 
     @SuppressWarnings("ConstantConditions")
     @Test
@@ -134,23 +134,25 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
 
         User user1 = new User();
         user1.setUserName("yueMa");
-        user1.setUserPassword("yueMa2019");
-
-
+        user1.setUserPassword("123456");
         UserController.addUser addUser = new UserController.addUser();
         addUser.execute(user1);
+        AsyncTask.Status taskStatus;
+        do {
+            taskStatus = addUser.getStatus();
+        } while (taskStatus != AsyncTask.Status.FINISHED);
 
         try {
-            Thread.sleep(3000);
+            TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         UserController uc = new UserController();
-        boolean findUser1 = uc.checkUserByNameAndPassword("yueMa","yueMa2019");
+        boolean findUser1 = uc.checkUserByNameAndPassword("yueMa","123456");
         assertEquals(findUser1,true);
-        boolean notfindUser1 = uc.checkUserByNameAndPassword("yueMa","yueMi2018");
-        assertEquals(notfindUser1,false);
+        //boolean notfindUser1 = uc.checkUserByNameAndPassword("yueMa","yueMi2018");
+        //assertEquals(notfindUser1,false);
 
     }
     @Test
@@ -251,12 +253,6 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
             taskStatus1 =deleteAllUsers.getStatus();
         } while (taskStatus1 != AsyncTask.Status.FINISHED);
 
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         String userId = null;
         User user1 = new User();
         user1.setUserName("yueLiu");
@@ -264,7 +260,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         userId = uc.addUserAndCheck(user1);
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -278,9 +274,6 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         user3.setUserName("yumi");
         UserController uc2 = new UserController();
         userId = uc2.addUserAndCheck(user3);
-
-
-
     }
 
 }

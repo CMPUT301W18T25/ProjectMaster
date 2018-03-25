@@ -3,6 +3,7 @@ package project301.requesterActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -109,9 +110,12 @@ public class RequesterEditListActivity extends AppCompatActivity {
         BidController bidController = new BidController();
         //check counter change
         int newCount = bidController.searchBidCounterOfThisRequester(userId);
+        Log.i("bidCount",Integer.toString(newCount));
+
         if(newCount!= GlobalCounter.count){
             GlobalCounter.count = newCount;
             Log.i("New Bid","New Bid");
+            openRequestInfoDialog();
         }
         FileSystemController FC = new FileSystemController();
         if(merlinsBeard.isConnected()){
@@ -150,5 +154,17 @@ public class RequesterEditListActivity extends AppCompatActivity {
         this.postedTaskList.setAdapter(adapter);
         //Log.i("Sign", Integer.toString(tasklist.size()));
 
+    }
+
+    private void openRequestInfoDialog() {
+        // get request info, and show it on the dialog
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterEditListActivity.this);
+        builder.setTitle("New Bid")
+                .setMessage("You got a new bid!");
+        // Create & Show the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

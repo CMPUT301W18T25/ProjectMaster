@@ -3,6 +3,7 @@ package project301.requesterActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -260,9 +261,11 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         BidController bidController = new BidController();
         //check counter change
         int newCount = bidController.searchBidCounterOfThisRequester(userId);
+        Log.i("bidCount",Integer.toString(newCount));
         if(newCount!= GlobalCounter.count){
             GlobalCounter.count = newCount;
             Log.i("New Bid","New Bid");
+            openRequestInfoDialog();
         }
         //fetch new list
         task_list = new ArrayList<>();
@@ -308,6 +311,19 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+
+    private void openRequestInfoDialog() {
+        // get request info, and show it on the dialog
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterEditTaskActivity.this);
+        builder.setTitle("New Bid")
+                .setMessage("You got a new bid!");
+        // Create & Show the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 

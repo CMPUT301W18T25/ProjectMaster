@@ -14,9 +14,11 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
 import project301.User;
+import project301.controller.BidController;
 import project301.controller.FileSystemController;
 import project301.controller.TaskController;
 import project301.controller.UserController;
@@ -108,8 +110,9 @@ public class UserCharacterActivity extends AppCompatActivity {
         for(Task task: tasklist){
             FC.saveToFile(task,"sent",getApplication());
         }
-
-
+        BidController bidController = new BidController();
+        //initialize the counter
+        GlobalCounter.count = bidController.searchBidCounterOfThisRequester(userId);
     }
 
     private void gotoRequester(){
