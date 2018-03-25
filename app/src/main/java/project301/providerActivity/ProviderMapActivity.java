@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 
 import project301.R;
+import project301.controller.TaskController;
+
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,6 +29,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 
 
@@ -81,6 +85,8 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
 
     // Testing variables
     private ArrayList<Location> mockupTasks;
+    private ArrayList<project301.Task> taskList;
+    private LatLng location;
 
 
     /**
@@ -148,6 +154,26 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
+    }
+
+    /**
+     * Get the info of all task
+     */
+
+    private  void getAllTaksInfo() {
+
+        TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
+        search.execute();
+        taskList = new ArrayList<project301.Task>();
+        ArrayList<project301.Task> searchedTask = new ArrayList<>();
+        try {
+            searchedTask = search.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        taskList.addAll(searchedTask);
     }
 
     /**

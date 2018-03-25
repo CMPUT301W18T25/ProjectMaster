@@ -1,5 +1,6 @@
 package project301.requesterActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -14,6 +15,8 @@ import android.widget.Button;
 
 import project301.R;
 
+import project301.controller.FileSystemController;
+import project301.controller.TaskController;
 import project301.providerActivity.ProviderMapActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -26,8 +29,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.novoda.merlin.MerlinsBeard;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * RequesterMapActivity handles the map activity for the Requester. The main purpose of
@@ -65,6 +70,7 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
 
+    protected MerlinsBeard merlinsBeard;
 
     private Location mLastKnownLocation;
 
@@ -72,7 +78,9 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
     private final LatLng mDefaultLocation = new LatLng(53.5273, -113.5296);
 
     private ArrayList<Location> mockupTasks;
+    private Context context;
 
+    private ArrayList<project301.Task> tasklist;
 
 
     @SuppressWarnings("ConstantConditions")
@@ -107,6 +115,28 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
         });
     }
 
+
+    private void getAllPostedTask(){
+        context = getApplicationContext();
+        merlinsBeard = MerlinsBeard.from(context);
+        tasklist = new ArrayList<project301.Task>();
+        //get data from database
+        if(merlinsBeard.isConnected()){
+            TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+            search.execute(userId);
+            try {
+                tasklist = search.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            FileSystemController FC = new FileSystemController();
+            tasklist = FC.loadSentTasksFromFile(context);
+        }
+    }
     /**
      * Requests permission from user for app to access the device location. The user
      * only needs to give permission once, and then future launches will automatically
