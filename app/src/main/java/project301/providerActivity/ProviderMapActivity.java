@@ -39,7 +39,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
  * this task is too display all tasks within 5km of the provider on the map UI, and
  * allow the provider to click on each task to view further information. This activity
  * first asks user for permission to access the devices location. It then gets the current
- * location of the user and navigates the map camera to this location.
+ * location of the user and navigates the map CameraActivity to this location.
  *
  * Currently, the Task class doesn't have functionality for location, so a 'mockupTasks'
  * of ArrayList<Locations> is used to test the markers of each task.
@@ -83,10 +83,12 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
     // Default location is set to the University of Alberta
     private final LatLng mDefaultLocation = new LatLng(53.5273, -113.5296);
 
+    private ArrayList<project301.Task> taskList;
+    //private LatLng location;
+
     // Testing variables
     private ArrayList<Location> mockupTasks;
-    private ArrayList<project301.Task> taskList;
-    private LatLng location;
+
 
 
     /**
@@ -160,7 +162,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
      * Get the info of all task
      */
 
-    private  void getAllTaksInfo() {
+    private void getAllTaksInfo() {
 
         TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
         search.execute();
@@ -174,6 +176,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
             e.printStackTrace();
         }
         taskList.addAll(searchedTask);
+
     }
 
     /**
@@ -203,7 +206,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
 
 
     /**
-     * Updates the user's location and sets the map camera to this location. Only works
+     * Updates the user's location and sets the map CameraActivity to this location. Only works
      * if user has given the app permission to access the current location
      *
      */
@@ -244,8 +247,11 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful() && task.getResult() != null) {
-                            // Set the map's camera position to the current location of the device.
+                            // Set the map's CameraActivity position to the current location of the device.
                             mLastKnownLocation = task.getResult();
+
+                            displayTaskLocations();
+
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     new LatLng(mLastKnownLocation.getLatitude(),
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
@@ -277,7 +283,6 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
         }
     }
 
-
     /**
      * For each task with a location, will display a marker on the map.
      * The markers will able to be pressed, which will transition to the
@@ -287,22 +292,47 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
      * calls onMarkerClick and Logs the id of the pressed marker
      */
     private void displayTaskLocations() {
+
         mMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
+        for (int i=0;i<taskList.size();i++){
+            project301.Task currTask=taskList.get(i);
 
-        for (int i=0;i<mockupTasks.size();i++){
-            Log.d(TAG,"Adding marker "+i+", lat: "+mockupTasks.get(i)
-                    .getLatitude()+", long: "+mockupTasks.get(i).getLongitude());
+            if (currTask.getTasklgtitude() != null
+                    && currTask.getTasklatitude() != null){
 
-            Marker marker = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(mockupTasks.get(i).getLatitude(), mockupTasks.get(i).getLongitude()))
-                    .anchor(0.5f,0.5f)
-                    .title(String.valueOf(i)));
-            marker.showInfoWindow();
+                if (getTaskDistance(currTask) <= 5000){
+                    Marker marker = mMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(currTask.getTasklatitude(), currTask.getTasklgtitude()))
+                            .anchor(0.5f,0.5f)
+                            .title(currTask.getTaskName())
+                    );
+                    Log.d(TAG,"Adding marker task name: "+marker.getTitle());
+                    marker.setTag(i);
+                    marker.showInfoWindow();
+                }
+                else{
+                    Log.d(TAG,"Task is located too far away: "+currTask.getTaskName());
+                }
+
+            }
+            else{
+                Log.d(TAG,"No location for: "+taskList.get(i).getTaskName());
+
+            }
         }
 
     }
 
+    // source: https://stackoverflow.com/questions/2741403/get-the-distance-between-two-geo-points
+    private double getTaskDistance(project301.Task currentTask){
+        Location taskLocation = new Location("");
+        taskLocation.setLatitude(currentTask.getTasklatitude());
+        taskLocation.setLongitude(currentTask.getTasklgtitude());
+
+        double distance = taskLocation.distanceTo(mLastKnownLocation);
+        return distance;
+    }
 
     /**
      * Override the behavior when a user clicks on a map marker. Right now, it only
@@ -314,7 +344,17 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
      */
     @Override
     public boolean onMarkerClick(Marker marker){
-        Log.d(TAG,"Clicked on marker "+marker.getTitle());
+        int markerIndex = (Integer) marker.getTag();
+        project301.Task clickedTask = taskList.get(markerIndex);
+        Log.d(TAG,"Clicked on marker "+String.valueOf(markerIndex));
+        Log.d(TAG,"Task info: "+clickedTask.getTaskName());
+        Log.d(TAG,"Task info: "+clickedTask.getTaskAddress());
+
+        Intent info1 = new Intent(ProviderMapActivity.this, ProviderTaskBidActivity.class);
+        info1.putExtra("info", markerIndex);
+        info1.putExtra("status","request");
+        info1.putExtra("userId",userId);
+        startActivity(info1);
         return true;
     }
 
@@ -328,12 +368,13 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        getAllTaksInfo();
         getLocationPermission();
         updateLocationUI();
         getDeviceLocation();
 
         // Don't call displayTaskLocations for now since it is used only for testing at the moment
-        /*displayTaskLocations();*/
+        //displayTaskLocations();
     }
 
 

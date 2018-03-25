@@ -153,8 +153,9 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        ProviderAdapter adapter = new ProviderAdapter(this, taskList);
+        ProviderBiddenAdapter adapter = new ProviderBiddenAdapter(this, taskList);
         // Attach the adapter to a ListView
+        adapter.setId(userId);
         this.bidHistoryList.setAdapter(adapter);
     }
 }

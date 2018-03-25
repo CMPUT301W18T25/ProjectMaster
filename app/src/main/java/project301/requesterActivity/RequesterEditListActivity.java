@@ -3,10 +3,13 @@ package project301.requesterActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -27,6 +30,7 @@ import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -40,7 +44,7 @@ import java.util.concurrent.ExecutionException;
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterEditListActivity extends AppCompatActivity {
+public class RequesterEditListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
     private ListView postedTaskList;
     private String userName;
     private String userId;
@@ -49,6 +53,8 @@ public class RequesterEditListActivity extends AppCompatActivity {
     protected MerlinsBeard merlinsBeard;
 
     protected Context context;
+    private ListView mListView;
+    private SwipeRefreshLayout mSwipeLayout;
 
 
     @SuppressWarnings("ConstantConditions")
@@ -102,11 +108,57 @@ public class RequesterEditListActivity extends AppCompatActivity {
         });
 
 
+        //设置在listview上下拉刷新的监听
+        ListView mListView = (ListView) findViewById(R.id.post_list);
+        final SwipeRefreshLayout mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_ly);
+
+        /**
+         * Showing Swipe Refresh animation on activity create
+         * As animation won't start on onCreate, post runnable is used
+         */
+        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //设置2秒的时间来执行以下事件
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        renewTheList();
+                        mSwipeLayout.setRefreshing(false);
+                    }
+                }, 2000);
+            }
+        });
+    }
+    /**
+     * This method is called when swipe refresh is pulled down
+     */
+    @Override
+    public void onRefresh() {
+        renewTheList();
     }
 
     @Override
     protected void onStart(){
         super.onStart();
+        renewTheList();
+
+        //Log.i("Sign", Integer.toString(tasklist.size()));
+
+    }
+
+    private void openRequestInfoDialog() {
+        // get request info, and show it on the dialog
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterEditListActivity.this);
+        builder.setTitle("New Bid")
+                .setMessage("You got a new bid!");
+        // Create & Show the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    public void renewTheList(){
+
         BidController bidController = new BidController();
         //check counter change
         int newCount = bidController.searchBidCounterOfThisRequester(userId);
@@ -146,25 +198,12 @@ public class RequesterEditListActivity extends AppCompatActivity {
                 FC.saveToFile(task,"sent",getApplication());
             }
         }
-       // FC.deleteAllFiles(getApplication(),"sent");
+        // FC.deleteAllFiles(getApplication(),"sent");
         tasklist = FC.loadSentTasksFromFile(getApplication());
         RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
         adapter.notifyDataSetChanged();
         // Attach the adapter to a ListView
         this.postedTaskList.setAdapter(adapter);
-        //Log.i("Sign", Integer.toString(tasklist.size()));
-
     }
 
-    private void openRequestInfoDialog() {
-        // get request info, and show it on the dialog
-
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterEditListActivity.this);
-        builder.setTitle("New Bid")
-                .setMessage("You got a new bid!");
-        // Create & Show the AlertDialog
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
 }

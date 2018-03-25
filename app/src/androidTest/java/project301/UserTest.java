@@ -33,7 +33,6 @@ import static org.junit.Assert.*;
 @SuppressWarnings("ALL")
 public class UserTest {
 
-
     @SuppressWarnings("ConstantConditions")
     @Test
     public void testAddUser() throws Exception{
@@ -158,6 +157,7 @@ public class UserTest {
     @Test
 
     public void testUpdateUser() throws InterruptedException {
+        /*
         UserController.deleteAllUsers deleteAllUsers1 = new UserController.deleteAllUsers();
         deleteAllUsers1.execute("");
         AsyncTask.Status taskStatus1;
@@ -170,6 +170,7 @@ public class UserTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        */
         User user1 = new User();
         user1.setUserName("yue12");
         user1.setUserPassword("yue12password");
@@ -206,6 +207,18 @@ public class UserTest {
         assertEquals(findUser1,true);
         boolean notfindUser1 = uc.checkUserByNameAndPassword("yue12","yue12password");
         assertEquals(notfindUser1,false);
+        UserController.deleteAllUsers deleteAllUsers1 = new UserController.deleteAllUsers();
+        deleteAllUsers1.execute("");
+        AsyncTask.Status taskStatus1;
+        do {
+            taskStatus1 = deleteAllUsers1.getStatus();
+        } while (taskStatus1 != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
     @Test
