@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import project301.GlobalCounter;
 import project301.R;
@@ -30,11 +31,11 @@ import project301.controller.UserController;
 public class RequesterEditInfoActivity extends AppCompatActivity {
 
     private String userName;
-    private String editName;
+    //private String editName;
     private String editEmail;
     private String editPhone;
     private String editPassword;
-    private EditText usernameText;
+    private TextView usernameText;
     private EditText emailText;
     private EditText mobileText;
     private EditText passwordText;
@@ -70,13 +71,13 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 //get user input
-                editName = usernameText.getText().toString();
+                //editName = usernameText.getText().toString();
                 editEmail = emailText.getText().toString();
                 editPhone = mobileText.getText().toString();
                 editPassword = passwordText.getText().toString();
 
                 //update user info
-                user.setUserName(editName);
+                //user.setUserName(editName);
                 user.setUserEmail(editEmail);
                 user.setUserPhone(editPhone);
                 user.setUserPassword(editPassword);
