@@ -7,11 +7,11 @@ import project301.utilities.TaskUtil;
 
 import java.util.ArrayList;
 import android.content.Context;
+import android.util.Log;
 
 /**
+ * Save tasks in json files and load tasks from json file
  * @classname : FileSystemController
- * @class Detail :Save data and load Data in gson file.
- *
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
  * @author : Yue Ma
@@ -36,7 +36,8 @@ public class FileSystemController {
         else if(instruction.equals("offlineAdd")){
             FileIOUtil.saveOfflineAddTaskInFile(task,context);
         }
-        else if(instruction.equals("offlineEdit")){
+        else{
+            Log.i("save offline","TASK");
             FileIOUtil.saveOfflineEditTaskInFile(task,context);
         }
     }
@@ -48,7 +49,7 @@ public class FileSystemController {
      */
     public ArrayList<Task> loadSentTasksFromFile(Context context){
         ArrayList<Task> Tasks;
-        ArrayList<String> SentTaskFiles = TaskUtil.getOfflineAddTaskFileList(context);
+        ArrayList<String> SentTaskFiles = TaskUtil.getSentTaskFileList(context);
         Tasks = FileIOUtil.loadMultipleTasksFromFile(context, SentTaskFiles);
         return Tasks;
     }
@@ -85,11 +86,11 @@ public class FileSystemController {
     public void deleteAllFiles( Context context,String instruction) {
         try {
             ArrayList<String> TaskFiles;
-            if(instruction == "sent"){
+            if(instruction.equals("sent")){
                 TaskFiles = TaskUtil.getSentTaskFileList(context);
 
             }
-            else if(instruction == "offlineAdd"){
+            else if(instruction.equals("offlineAdd")){
 
                 TaskFiles = TaskUtil.getOfflineAddTaskFileList(context);
 
@@ -110,6 +111,18 @@ public class FileSystemController {
             throw new RuntimeException();
         }
     }
+
+
+    public void deleteFiles( Context context) {
+        String[] fileList = context.fileList();
+
+        for(String file: fileList){
+            context.deleteFile(file);
+        }
+
+    }
+
+
 
     /**
      * Delete json file based on the file name

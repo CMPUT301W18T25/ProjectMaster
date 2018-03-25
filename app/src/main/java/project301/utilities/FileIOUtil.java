@@ -27,9 +27,14 @@ import android.content.Context;
 import android.util.Log;
 
 import project301.Task;
-
 /**
  * Save and load tasks from offline json file
+ * @classname : FileIOUtil
+ * @author : Yuqi Zhang
+ * @author :Yue Ma
+ * @author :Julian Stys
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class FileIOUtil {
@@ -46,10 +51,10 @@ public class FileIOUtil {
 		try {
 			String jsonStr= TaskUtil.serializer(task);
 			String fileName = TaskUtil.generateOnlineSentTaskFileName(task);
-			Log.i("asd","abbbbbb");
+			//Log.i("asd","abbbbbb");
 
 			FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
-			Log.i("asd","aaaaaa");
+			//yLog.i("asd","aaaaaa");
 			if (fos == null) {
 				Log.i("Debug", "null fos in save request");
 			}

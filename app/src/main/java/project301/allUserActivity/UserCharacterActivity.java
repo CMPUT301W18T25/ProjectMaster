@@ -11,21 +11,31 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
+import project301.GlobalCounter;
 import project301.R;
+import project301.Task;
 import project301.User;
-import project301.controller.UserListController;
+import project301.controller.BidController;
+import project301.controller.FileSystemController;
+import project301.controller.TaskController;
+import project301.controller.UserController;
 import project301.providerActivity.ProviderMainActivity;
 import project301.requesterActivity.RequesterMainActivity;
 
 /**
+ * User in this activity can choose to be a provider or requestor
  * @classname : UserCharacterActivity
- * @class Detail : User in this activity can choose to be a provider or requestor
  * @Date :   18/03/2018
- * @author : Yingnan Ma
  * @author : Wang Dong
- * @author : Xingyuan Yang
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
+/**
+ * User in this activity can choose to be a provider or requestor
  */
 
 @SuppressWarnings("ALL")
@@ -33,12 +43,13 @@ public class UserCharacterActivity extends AppCompatActivity {
 
     private Button providerButton;
     private Button requesterButton;
-
+    private String userId;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_character);
         final Intent intent = getIntent();
+        userId = intent.getExtras().get("userId").toString();
 
 
         providerButton = (Button) findViewById(R.id.provider_button);
@@ -51,14 +62,9 @@ public class UserCharacterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 User user = new User();
                 //noinspection ConstantConditions,ConstantConditions
-                @SuppressWarnings("ConstantConditions") String userId = intent.getExtras().get("userId").toString();
                 Log.i("userId:",userId);
-                UserListController uc = new UserListController();
+                UserController uc = new UserController();
                 user = uc.getAUserById(userId);
-
-                //set user type
-                user.setUserType("provider");
-                uc.updateUser(user);
 
                 Intent intent = new Intent (UserCharacterActivity.this, ProviderMainActivity.class);
                 intent.putExtra("userId",userId);
@@ -76,16 +82,11 @@ public class UserCharacterActivity extends AppCompatActivity {
 
                 User user = new User();
                 //noinspection ConstantConditions,ConstantConditions
-                @SuppressWarnings("ConstantConditions") String userId = intent.getExtras().get("userId").toString();
-                Log.i("userId",userId);
 
-                UserListController uc = new UserListController();
+                UserController uc = new UserController();
                 user = uc.getAUserById(userId);
-                Log.i("usernamedd",user.getUserName());
 
-                //set user type
-                user.setUserType("requester");
-                uc.updateUser(user);
+
 
 
                 Intent intent = new Intent (UserCharacterActivity.this, RequesterMainActivity.class);
@@ -95,8 +96,23 @@ public class UserCharacterActivity extends AppCompatActivity {
         });
 
 
-
-
+        ArrayList<Task> tasklist= new ArrayList<>();
+        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+        search.execute(userId);
+        try {
+            tasklist= search.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        FileSystemController FC = new FileSystemController();
+        for(Task task: tasklist){
+            FC.saveToFile(task,"sent",getApplication());
+        }
+        BidController bidController = new BidController();
+        //initialize the counter
+        GlobalCounter.count = bidController.searchBidCounterOfThisRequester(userId);
     }
 
     private void gotoRequester(){

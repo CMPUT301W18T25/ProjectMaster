@@ -5,11 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -18,28 +15,26 @@ import project301.Task;
 import project301.controller.TaskController;
 
 /**
+ * user could change profile, see bid history, as well as look into a requesting task.
  * @classname : ProviderMainActivity
- * @class Detail :
- *
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
+/**
+ * This is the main page of provider; it shows a list of requesting task;
+ */
+
 public class ProviderMainActivity extends AppCompatActivity {
 
-    private Button searchButton;
-    private Button editProfileButton;
-    private Button viewOnMapButton;
-    private Button bidHistoryButton;
+    Button searchButton;
+    Button editProfileButton;
+    Button viewOnMapButton;
+    Button bidHistoryButton;
     private ListView availablelist;
-    private TextView taskLabel;
     private ArrayList<Task> taskList;
-    private ArrayAdapter<Task> taskAdapter;
-    private String userName;
 
     private String userId;
 
@@ -51,18 +46,14 @@ public class ProviderMainActivity extends AppCompatActivity {
         setContentView(R.layout.provider_main);
         final Intent intent = getIntent();
 
+        //get userId
         userId = intent.getExtras().get("userId").toString();
 
-        //need to load task and store in the list
-        //use adapter to show on UI
-
-
         //settle viewOnMap button
-        viewOnMapButton = (Button) findViewById(R.id.provider_map_button);
+        viewOnMapButton = findViewById(R.id.provider_map_button);
         viewOnMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_OK);
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderMapActivity.class);
                 intent.putExtra("userId",userId);
                 startActivity(intent);
@@ -70,11 +61,10 @@ public class ProviderMainActivity extends AppCompatActivity {
         });
 
         //settle bidHistory button
-        bidHistoryButton = (Button) findViewById(R.id.provider_bid_button);
+        bidHistoryButton = findViewById(R.id.provider_bid_button);
         bidHistoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_OK);
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderBidHistoryActivity.class);
                 intent.putExtra("userId",userId);
                 startActivity(intent);
@@ -82,11 +72,10 @@ public class ProviderMainActivity extends AppCompatActivity {
         });
 
         //settle editProfile button
-        editProfileButton = (Button) findViewById(R.id.edit_profile_button);
+        editProfileButton = findViewById(R.id.edit_profile_button);
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_OK);
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderEditInfoActivity.class);
                 intent.putExtra("userId",userId);
                 startActivity(intent);
@@ -95,19 +84,18 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
         // settle click on list
-
-        availablelist = (ListView) findViewById(R.id.provider_list);
+        availablelist = findViewById(R.id.provider_list);
         availablelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent info1 = new Intent(ProviderMainActivity.this, ProviderTaskBidActivity.class);
                 info1.putExtra("info", index);
+                //provide the task status for the next activity
                 info1.putExtra("status","request");
                 info1.putExtra("userId",userId);
                 startActivity(info1);
             }
         });
-
 
         // to do search button
         searchButton = findViewById(R.id.search_button);
@@ -117,10 +105,6 @@ public class ProviderMainActivity extends AppCompatActivity {
                 //need search code
             }
         });
-
-
-
-
     }
 
     @Override
@@ -129,40 +113,43 @@ public class ProviderMainActivity extends AppCompatActivity {
 
         TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
         search.execute();
-
+        taskList = new ArrayList<>();
+        ArrayList<Task> searchedTask = new ArrayList<>();
         try {
-            taskList = search.get();
+            searchedTask = search.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        taskList.addAll(searchedTask);
 
-        /* Test
+        TaskController.searchAllBiddenTasks search2 = new TaskController.searchAllBiddenTasks();
+        search2.execute();
+        try {
+            searchedTask = search2.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        taskList.addAll(searchedTask);
+        // Testing
+        /*
         Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",taskList.get(0).getId());
         Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",taskList.get(0).getTaskName());
         Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",taskList.get(0).getTaskAddress());
         Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",Double.toString(taskList.get(0).getTaskIdealPrice()));
-
-
-                //Task task = taskList.get(0);
-        //Test
         Task task1 = new Task();
         task1.setTaskName("a");
         task1.setTaskAddress("a");
         task1.setTaskIdealPrice(1.0);
-        //taskList = new ArrayList<>();
+        taskList = new ArrayList<>();
         taskList.add(task1);
-        //
         */
 
-
-
-
-        ProviderAdapter adapter = new ProviderAdapter(this, taskList);
         // Attach the adapter to a ListView
+        ProviderAdapter adapter = new ProviderAdapter(this, taskList);
         this.availablelist.setAdapter(adapter);
-
     }
-
 }

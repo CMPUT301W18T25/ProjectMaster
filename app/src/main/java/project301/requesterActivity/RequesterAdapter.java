@@ -14,17 +14,14 @@ import project301.Task;
 import java.util.ArrayList;
 
 /**
- * @classname : RequesterActivity
- * @class Detail :
- *
+ * Detail :RequesterAdapter is to adapt task and do task arrangement in the arraylist.
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Yingnan Ma
+ * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ * @classname : RequesterActivity
  */
-
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterAdapter extends ArrayAdapter<Task> {
@@ -35,6 +32,10 @@ public class RequesterAdapter extends ArrayAdapter<Task> {
     @SuppressWarnings("ConstantConditions")
     @Override
 
+    /**
+     get the view of the list information;
+     load some info into each task in the task list
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
 
         // Get the data item for this position
@@ -54,7 +55,9 @@ public class RequesterAdapter extends ArrayAdapter<Task> {
         //noinspection ConstantConditions
         task_name.setText(task.getTaskName().toString());
         task_destination.setText(task.getTaskAddress());
-        task_idealprice.setText(Double.toString(task.getTaskIdealPrice()));
+        if("add".equalsIgnoreCase(task.getTaskAddress()) | true){
+            task_idealprice.setText(Double.toString(task.getTaskIdealPrice()));
+        }
 
         Log.i("a","a");
         return convertView;

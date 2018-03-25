@@ -15,6 +15,19 @@ import project301.allUserActivity.UserCharacterActivity;
 
 import com.robotium.solo.Solo;
 
+/**
+ * @classname : LogInActivityTest
+ * @Date :   18/03/2018
+ * @author : Wang Dong
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
+/**
+ * Test for user log in functionality. User should successfully log in by inputting correct user name and password.
+ */
+
+
 public class LogInActivityTest extends ActivityInstrumentationTestCase2 {
 
     private Solo solo;
@@ -33,16 +46,6 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testSignUp() {
-        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
-
-        solo.clickOnButton("Sign Up");
-
-        solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
-
-        solo.goBack();
-
-        solo.goBack();
-
         solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
 
         solo.clickOnButton("Sign Up");

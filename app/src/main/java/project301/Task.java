@@ -5,9 +5,8 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 
 /**
+ * Task model contains all the features of a task. Basic setters and getters are included.
  * @classname : Task
- * @class Detail : Task model contains all the features of a task
- *
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
  * @author :Julian Stys
@@ -27,6 +26,15 @@ public class Task {
     private String taskStatus;
     private String taskAddress;
     private Double lowestBid;
+
+
+
+    private Double tasklatitude;
+
+
+
+    private Double tasklgtitude;
+
 
     private String taskID;
 
@@ -137,6 +145,22 @@ public class Task {
     public Double getLowestBid() {return this.lowestBid;}
     public Photo getTaskPhoto(){
         return taskPhoto;
+    }
+
+    public Double getTasklatitude() {
+        return tasklatitude;
+    }
+
+    public void setTasklatitude(Double tasklatitude) {
+        this.tasklatitude = tasklatitude;
+    }
+
+    public Double getTasklgtitude() {
+        return tasklgtitude;
+    }
+
+    public void setTasklgtitude(Double tasklgtitude) {
+        this.tasklgtitude = tasklgtitude;
     }
 
     /**

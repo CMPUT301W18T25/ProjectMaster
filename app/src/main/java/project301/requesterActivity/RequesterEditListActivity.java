@@ -1,30 +1,41 @@
 package project301.requesterActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.novoda.merlin.Merlin;
+import com.novoda.merlin.MerlinsBeard;
+import com.novoda.merlin.NetworkStatus;
+import com.novoda.merlin.registerable.bind.Bindable;
+import com.novoda.merlin.registerable.connection.Connectable;
+import com.novoda.merlin.registerable.disconnection.Disconnectable;
+
+import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
+import project301.controller.BidController;
+import project301.controller.FileSystemController;
+import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * @classname : RequesterEditListActivity
- * @class Detail :
- *
+ * Detail : Requesdter edit list is to show a list of posted task, which support click to check details and edit task.
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ * @classname : RequesterEditListActivity
  */
 
 
@@ -35,6 +46,10 @@ public class RequesterEditListActivity extends AppCompatActivity {
     private String userId;
     private static final String FILENAME = "ProjectMaster.sav";
     private ArrayList<Task> tasklist;
+    protected MerlinsBeard merlinsBeard;
+
+    protected Context context;
+
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -42,8 +57,12 @@ public class RequesterEditListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_edit_list);
         final Intent intent = getIntent();
+        context=getApplicationContext();
+
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
+        merlinsBeard = MerlinsBeard.from(context);
+
 
 
         //settle mainMenu button
@@ -82,51 +101,70 @@ public class RequesterEditListActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        TaskController.searchAllTasksOfThisRequester getAll = new TaskController.searchAllTasksOfThisRequester();
-        getAll.execute("user id here");
-        try {
-            ArrayList<Task> save_tasks = getAll.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        */
+
     }
 
     @Override
     protected void onStart(){
         super.onStart();
+        BidController bidController = new BidController();
+        //check counter change
+        int newCount = bidController.searchBidCounterOfThisRequester(userId);
+        Log.i("bidCount",Integer.toString(newCount));
 
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if(newCount!= GlobalCounter.count){
+            GlobalCounter.count = newCount;
+            Log.i("New Bid","New Bid");
+            openRequestInfoDialog();
         }
+        FileSystemController FC = new FileSystemController();
+        if(merlinsBeard.isConnected()){
+            OfflineController offlineController = new OfflineController();
+            offlineController.tryToExecuteOfflineTasks(getApplication());
+            //try again, will change in the future
+            offlineController.tryToExecuteOfflineTasks(getApplication());
 
-        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-        search.execute(userId);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+            search.execute(userId);
 
-        tasklist = new ArrayList<Task>();
-        try {
-            tasklist= search.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+
+            tasklist = new ArrayList<Task>();
+            try {
+                tasklist= search.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            FC.deleteAllFiles(getApplication(),"sent");
+            for(Task task:tasklist){
+                FC.saveToFile(task,"sent",getApplication());
+            }
         }
-
-        //Log.i("Sign", Integer.toString(tasklist.size()));
-
+       // FC.deleteAllFiles(getApplication(),"sent");
+        tasklist = FC.loadSentTasksFromFile(getApplication());
         RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
+        adapter.notifyDataSetChanged();
         // Attach the adapter to a ListView
         this.postedTaskList.setAdapter(adapter);
+        //Log.i("Sign", Integer.toString(tasklist.size()));
 
     }
 
+    private void openRequestInfoDialog() {
+        // get request info, and show it on the dialog
 
 
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterEditListActivity.this);
+        builder.setTitle("New Bid")
+                .setMessage("You got a new bid!");
+        // Create & Show the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }

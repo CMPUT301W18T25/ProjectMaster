@@ -5,13 +5,10 @@ package project301;
 import java.util.Arrays;
 
 /**
+ * Photo model contains converted photo information.
  * @classname :Photo
- * @class Detail : Photo model contains converted photo information
- *
  * @Date :   18/03/2018
- * @author : Yuqi Zhang
  * @author :Julian Stys
- * @author :Yue Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
@@ -25,19 +22,42 @@ public class Photo {
 
     }
 
+    /**
+     * add photo
+     *
+     * @param newImage coded image
+     */
     public void  addPhoto(byte[] newImage){
         System.arraycopy(newImage, 0, this.compressedImage, 0, this.compressedImage.length);
     }
+
+    /**
+     * Update phto
+     * @param newImage coded image
+     */
     public void  updatePhoto(byte[] newImage){
         System.arraycopy(newImage, 0, this.compressedImage, 0, this.compressedImage.length);
 
     }
+
+    /**
+     * Upload photo
+     */
     public void savePhoto(){
 
     }
+
+    /**
+     * Delete photo
+     */
     public void  deletePhoto(){
         Arrays.fill(this.compressedImage, (byte) 0 );
     }
+
+    /**
+     * get photo
+     * @return coded image
+     */
     public byte[] getPhoto(){
         return this.compressedImage;
     }

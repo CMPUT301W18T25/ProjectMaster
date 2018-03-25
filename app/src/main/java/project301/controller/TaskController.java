@@ -12,6 +12,7 @@ import com.searchly.jestdroid.JestDroidClient;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -23,10 +24,9 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
 /**
+ * Activities can communicate with task model, bid model through this class.
+ * The class contains methods to renew data on the elasticsearch database
  * @classname : TaskController
- * @class Detail : Activities can communicate with task model, bid model through this class.
- * The class contains method to renew data on the elasticsearch database
- *
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
  * @author : Yue Ma
@@ -87,12 +87,13 @@ public class TaskController {
     /**
      * A static class to add a task to ES database
      */
-    public static class addTask extends AsyncTask<Task, Void, Void> {
+    public static class addTask extends AsyncTask<Task, Void, String>{
         public OnAsyncTaskCompleted listener;
         @Override
 
-        protected Void doInBackground(Task... a_task) {
+        protected String doInBackground(Task... a_task) {
             verifySettings();
+            String taskId = "taskId";
 
             a_task[0].setTaskStatus("request");
             Index index = new Index.Builder(a_task[0]).index("cmput301w18t25").type("task").build();
@@ -104,6 +105,7 @@ public class TaskController {
                 if(result.isSucceeded())
                 {
                     a_task[0].setId(result.getId());
+                    taskId = result.getId();
 
                     String query = TaskUtil.serializer(a_task[0]);
 
@@ -111,7 +113,7 @@ public class TaskController {
                             .index("cmput301w18t25").type("task").id(a_task[0].getId()).build();
                     try {
                         DocumentResult result2 = client.execute(index2);
-                        if (result.isSucceeded()) {
+                        if (result2.isSucceeded()) {
                             Log.i("Debug", "Successful update user profile");
                         } else {
                             Log.i("Error", "We failed to update user profile to elastic search!");
@@ -130,18 +132,14 @@ public class TaskController {
             }
             catch (Exception e) {
                 Log.i("Error", "The application failed to build and send the tasks");
+                e.printStackTrace();
+                return taskId;
             }
 
 
-            return null;
+            return taskId;
         }
 
-        @Override
-        protected void onPostExecute(Void Void) {
-
-                Log.i("Debug", ",");
-
-        }
     }
     /**
      * A static class to get a task by its id from ES database
@@ -226,29 +224,38 @@ public class TaskController {
      * A static class to update tasks in ES database
      */
 
-    public static class requesterUpdateTask extends AsyncTask<Task, Void, Void>{
+    public static class requesterUpdateTask extends AsyncTask<Task, Void, Boolean>{
 
         @Override
-        protected Void doInBackground(Task... single_task) {
+        protected Boolean doInBackground(Task... single_task) {
 
             verifySettings();
-
+            Boolean success = false;
             String query = TaskUtil.serializer(single_task[0]);
 
             Index index = new Index.Builder(query)
                     .index("cmput301w18t25").type("task").id(single_task[0].getId()).build();
             try {
+                Log.i("try to execute","update");
                 DocumentResult result = client.execute(index);
                 if (result.isSucceeded()) {
+                    success = true;
                     Log.i("Debug", "Successful update user profile");
                 } else {
                     Log.i("Error", "We failed to update user profile to elastic search!");
                 }
             } catch (IOException e) {
-                e.printStackTrace();
-                Log.i("Error", "We failed to connect Elasticsearch server");
+                //e.printStackTrace();
+
+                Log.i("Error", "We failed to connect Elasticsearch server?");
+
+                return success;
             }
-            return null;
+            return success;
+        }
+        @Override
+        protected void onPostExecute(Boolean success){
+            Log.i("Finish","execution");
         }
     }
     /**
@@ -271,9 +278,10 @@ public class TaskController {
 
             verifySettings();
 
-            String query = TaskUtil.serializer(this.current_task);
 
             this.current_task.setTaskStatus("bidden");
+            String query = TaskUtil.serializer(this.current_task);
+
             Index index = new Index.Builder(query)
                     .index("cmput301w18t25").type("task").id(this.current_task.getId()).build();
             try {
@@ -287,14 +295,14 @@ public class TaskController {
                 e.printStackTrace();
                 Log.i("Error", "We failed to connect Elasticsearch server");
             }
-            //UserListController getUser = new UserListController();
+            //UserController getUser = new UserController();
             //User new_user = getUser.getAUserById(current_bid.getProviderId());
 
             //new_user.addProviderBiddenTask(current_task.getId());
 
             // update user
 
-            //UserListController uc= new UserListController();
+            //UserController uc= new UserController();
             //uc.updateUser(new_user);
 
 
@@ -359,6 +367,8 @@ public class TaskController {
             verifySettings();
 
             String query = "{ \n"+
+                    "\"size\" : 30,\n"+
+
                     "\"query\":{\n"+
                     "\"term\":{\"userId\":\""+providerID[0]+"\"}\n"+
                     "}\n"+"}";
@@ -440,15 +450,16 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                    "   \"query\" : {\n"+
-                    "       \"bool\" : {\n"+
-                    "           \"must\" : [\n"+
-                    "               { \"term\" : {\"taskStatus\" : " + "\"bidden\"}}," + "\n"+
-                    "               { \"term\" : {\"taskProvider\" : " + "\"tester\"}}" + "\n"+
-                    "           ]\n"+
-                    "       }\n"+
-                    "   }\n"+
-                    "}\n";
+                            "\"size\" : 30,\n"+
+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"term\" : {\"taskStatus\" : " + "\"bidden\"}}" +
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
 
             Log.i("Query", "The query was " + query );
             Search search = new Search.Builder(query)
@@ -460,7 +471,21 @@ public class TaskController {
                 if (result.isSucceeded()) {
                     List<Task> rt
                             = result.getSourceAsObjectList(Task.class);
-                    result_tasks.addAll(rt);
+                    for(Task task:rt){
+
+                        ArrayList<Bid> BiddenList = task.getTaskBidList();
+                        for(Bid bid:BiddenList){
+                            if(bid.getProviderId().equals(providerId)){
+                                result_tasks.add(task);
+
+
+                            }
+                        }
+                    }
+
+                    Log.i("allbidden","test");
+
+
                     Log.i("Success", "Data retrieved from database: " + Integer.toString(rt.size()));
                 } else {
                     Log.i("Error", "The search query failed");
@@ -487,6 +512,8 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
+                            "\"size\" : 30,\n"+
+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
@@ -534,6 +561,8 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
+                            "\"size\" : 30,\n"+
+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
@@ -561,6 +590,9 @@ public class TaskController {
                 // TODO get the results of the query
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                Task faultTask = new Task();
+                faultTask.setId("-1");
+                result_tasks.add(faultTask);
             }
             return result_tasks;
         }
@@ -580,6 +612,8 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
+                            "\"size\" : 30,\n"+
+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
@@ -609,6 +643,102 @@ public class TaskController {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
             return result_tasks;
+        }
+
+    }
+
+    /**
+     * A static class to search all requesting tasks in ES database
+     */
+    //TODO do test for this method, which should be extremely similar to bidden tasks
+    public static class searchAllBiddenTasks extends AsyncTask<Void, Void, ArrayList<Task>>{
+
+        protected ArrayList<Task> doInBackground(Void... nul) {
+            verifySettings();
+
+            ArrayList<Task> result_tasks = new ArrayList<Task>();
+
+            String query =
+                    "\n{ \n"+
+                            "\"size\" : 30,\n"+
+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"should\" : [\n"+
+                            "               { \"term\" : {\"taskStatus\" : \"bidden\"}}" + "\n"+
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
+
+            Log.i("Query", "The query was " + query);
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t25")
+                    .addType("task")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<Task> foundUsers
+                            = result.getSourceAsObjectList(Task.class);
+                    result_tasks.addAll(foundUsers);
+                    Log.i("Success", "Data retrieved from database: ");
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return result_tasks;
+        }
+
+    }
+
+
+    /**
+     * A static class to search all bid of a task
+     */
+    //TODO do test for this method, which should be extremely similar to bidden tasks
+    public static class searchAllBid extends AsyncTask<String, Void, ArrayList<Bid>>{
+
+        protected ArrayList<Bid> doInBackground(String...taskIds) {
+            verifySettings();
+            ArrayList<Bid> bidList = new ArrayList<Bid>();
+
+            String query =
+                    "\n{ \n"+
+                            "\"size\" : 30,\n"+
+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"term\" : {\"_id\" : \"" + taskIds[0] + "\"}}" + "\n"+
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
+
+            Log.i("Query", "The query was " + query);
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t25")
+                    .addType("task")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<Task> foundTask
+                            = result.getSourceAsObjectList(Task.class);
+                    bidList.addAll(foundTask.get(0).getTaskBidList());
+
+                    Log.i("Success", "Data retrieved from database: ");
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return bidList;
         }
 
     }
@@ -650,28 +780,28 @@ public class TaskController {
                             "}\n";
             String pre_query =
                     "\n{     \n"+
-                    "   \"query\" : {\n"+
-                    "       \"bool\" : {\n"+
-                    "           \"must\" : [\n"+
-                    "               { \"multi_match\" : {\n" +
-                    "                   \"query\" : \""+ search_parameters[0] +"\", \n" +
-                    "                   \"fields : [ \"taskName\", \"taskDetails\" ]}  \n" +
-                    "               }";
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"multi_match\" : {\n" +
+                            "                   \"query\" : \""+ search_parameters[0] +"\", \n" +
+                            "                   \"fields : [ \"taskName\", \"taskDetails\" ]}  \n" +
+                            "               }";
 
             String body_query = "";
             for (int i = 1; i < search_parameters.length; i++){
                 body_query +=
                         "               , \n" +
-                        "               { \"multi_match\" : {\n" +
-                        "                   \"query\" : \""+ search_parameters[i] +"\", \n" +
-                        "                   \"fields : [ \"taskName\", \"taskDetails\" ]}  \n" +
-                        "               }";
+                                "               { \"multi_match\" : {\n" +
+                                "                   \"query\" : \""+ search_parameters[i] +"\", \n" +
+                                "                   \"fields : [ \"taskName\", \"taskDetails\" ]}  \n" +
+                                "               }";
             }
             String post_query =
                     "           ]\n"+
-                    "       }\n"+
-                    "   }\n"+
-                    "}\n";
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
 
             String final_query = pre_query + body_query + post_query;
             Log.i("Query", "The query was " + query);
@@ -713,8 +843,12 @@ public class TaskController {
      */
     public static void verifySettings() {
         if (client == null) {
-            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
+            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080").discoveryEnabled(true).multiThreaded(true);
+
+
+
             DroidClientConfig config = builder.build();
+
 
             JestClientFactory factory = new JestClientFactory();
             factory.setDroidClientConfig(config);

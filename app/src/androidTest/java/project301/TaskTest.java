@@ -14,20 +14,22 @@ import static org.junit.Assert.*;
 
 /**
  * @classname : TaskTest
- * @class Detail :
+ * @class Detail : This is the test for task-relative methods
  *
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
- * @author :
- * @author :
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
+/**
+ * This is the test for task-relative methods.
  */
 
 @SuppressWarnings("ALL")
 public class TaskTest {
 
-    /*
+
     @Test
     public void testTaskContructor(){
         ArrayList<Bid> bidList = new ArrayList<Bid>();
@@ -60,8 +62,6 @@ public class TaskTest {
 
 
     }
-    @Test
-    */
     // TODO more failing test cases
     // add passed w8 for more cases
     // method addTask
@@ -70,7 +70,7 @@ public class TaskTest {
 
         TaskController.addTask addTaskCtl = new TaskController.addTask();
         Task task = new Task();
-        task.setTaskName("hi");
+        task.setTaskName("Go West Edmonton Mall");
 
         addTaskCtl.execute(task);
 
@@ -102,7 +102,7 @@ public class TaskTest {
         ArrayList<Task> single_task = new ArrayList<Task>();
 
 
-        task.setTaskName("gg");
+        task.setTaskName("Go Calgary");
 
         addTaskCtl.execute(task);
 
@@ -151,7 +151,7 @@ public class TaskTest {
         // add a sample test to db
         TaskController.addTask addTaskCtl = new TaskController.addTask();
         Task task = new Task();
-        task.setTaskName("hi");
+        task.setTaskName("Go America new york");
 
         addTaskCtl.execute(task);
 
@@ -217,10 +217,10 @@ public class TaskTest {
         Task empty_task = new Task();
 
         // init test task info, all info should be tested
-        test_task.setTaskDetails("Details");
-        test_task.setTaskName("Test");
-        test_task.setTaskProvider("A donkey");
-        test_task.setTaskRequester("A snake");
+        test_task.setTaskDetails("Want a van to carry me");
+        test_task.setTaskName("Go to school");
+        test_task.setTaskProvider("Mike");
+        test_task.setTaskRequester("Lily");
 
         // now add test task to db
         addTask.execute(test_task);
@@ -238,10 +238,10 @@ public class TaskTest {
         }
 
         // now update local test task
-        test_task.setTaskDetails("Details-1");
-        test_task.setTaskName("Test-1");
-        test_task.setTaskProvider("donkey-1");
-        test_task.setTaskRequester("snake-1");
+        test_task.setTaskDetails("Want a car to carry me");
+        test_task.setTaskName("Go to southfate");
+        test_task.setTaskProvider("Mike");
+        test_task.setTaskRequester("Jason");
 
         // now update the local to db
         updateTask.execute(test_task);
@@ -299,10 +299,10 @@ public class TaskTest {
         double my_amount;
 
         // init test task info, all info should be tested
-        my_task.setTaskDetails("Details");
-        my_task.setTaskName("Test");
-        my_task.setTaskProvider(null);
-        my_task.setTaskRequester("A snake");
+        my_task.setTaskDetails("Want a car to carry me");
+        my_task.setTaskName("Go to southfate");
+        my_task.setTaskProvider("Mike");
+        my_task.setTaskRequester("Jason");
 
         // now add test task to db
         addTask.execute(my_task);
@@ -325,7 +325,7 @@ public class TaskTest {
             assertTrue(false);
         }
         my_amount = (double)11.11;
-        Bid my_bid = new Bid(my_amount, "A donkey", my_task.getId());
+        Bid my_bid = new Bid(my_amount, "Mike", my_task.getId());
 
         // update bid list
         TaskController.providerSetBid setTaskBid = new TaskController.providerSetBid(my_task,my_bid);
@@ -353,7 +353,7 @@ public class TaskTest {
             empty_task = getTask.get();
             ArrayList<Bid> temp_bid_list = empty_task.getTaskBidList();
             for (i = 0; i < temp_bid_list.size(); i++){
-                if (temp_bid_list.get(i).getProviderId().equals("A donkey")){
+                if (temp_bid_list.get(i).getProviderId().equals("Mike")){
                     if (temp_bid_list.get(i).getBidAmount() == (double)11.11){
                         Log.i("State", Double.toString(temp_bid_list.get(i).getBidAmount()));
                         assertTrue(true);
@@ -390,10 +390,14 @@ public class TaskTest {
         double my_amount;
 
         // init test task info, all info should be tested
-        my_task.setTaskDetails("Details");
-        my_task.setTaskName("Test");
+        // my_task.setTaskDetails("Details");
+        //my_task.setTaskName("Test");
+        //my_task.setTaskProvider(null);
+        //my_task.setTaskRequester("A snake");
+        my_task.setTaskDetails("Want a car to carry me");
+        my_task.setTaskName("Go to southfate");
         my_task.setTaskProvider(null);
-        my_task.setTaskRequester("A snake");
+        my_task.setTaskRequester("Jason");
 
         // now add test task to db
         addTask.execute(my_task);
@@ -416,7 +420,7 @@ public class TaskTest {
             assertTrue(false);
         }
         my_amount = (double)11.11;
-        Bid my_bid = new Bid(my_amount, "A donkey", my_task.getId());
+        Bid my_bid = new Bid(my_amount, "Mike", my_task.getId());
 
         // update bid list
         TaskController.providerSetBid setTaskBid = new TaskController.providerSetBid(my_task,my_bid);
@@ -488,12 +492,18 @@ public class TaskTest {
             Task my_task = new Task();
 
             send_list.add(my_task);
-            my_task.setTaskDetails("Details-" + Integer.toString(i));
-            my_task.setTaskName("Test-" + Integer.toString(i));
-            my_task.setTaskProvider("tester");
-            my_task.setTaskRequester("snake");
+
+            my_task.setTaskDetails("Want a car to carry me"+ Integer.toString(i));
+            my_task.setTaskName("Go to southgate"+ Integer.toString(i));
+            my_task.setTaskProvider("Mike");
+            my_task.setTaskRequester("Jason");
             my_task.setTaskStatus("bidden");
 
+            // my_task.setTaskDetails("Details-" + Integer.toString(i));
+            // my_task.setTaskName("Test-" + Integer.toString(i));
+            // my_task.setTaskProvider("tester");
+            // my_task.setTaskRequester("snake");
+            // my_task.setTaskStatus("bidden");
             TaskController.addTask addTask = new TaskController.addTask();
             addTask.execute(my_task);
 
@@ -507,10 +517,10 @@ public class TaskTest {
         Task my_task = new Task();
 
         send_list.add(my_task);
-        my_task.setTaskDetails("Details-");
-        my_task.setTaskName("Test-");
-        my_task.setTaskProvider("tester");
-        my_task.setTaskRequester("A snake");
+        my_task.setTaskDetails("Want a car to carry me");
+        my_task.setTaskName("Go to southgate");
+        my_task.setTaskProvider("Mike");
+        my_task.setTaskRequester("Jason");
         my_task.setTaskStatus("bidden");
 
         TaskController.addTask addTask = new TaskController.addTask();
@@ -541,16 +551,16 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0){
-                assertTrue(false);
+                assertTrue(true);
             }
 
-            for (int i = 0; i < 5; i++){
+            for (int i = 0; i < rt_list.size(); i++){
                 Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
                 if (rt_list.get(i) == null){
                     break;
                 }
                 if (rt_list.get(i).getTaskStatus().equals("bidden")){
-                    if (rt_list.get(i).getTaskProvider().equals(send_list.get(i).getTaskProvider())){
+                    if (rt_list.get(i).getTaskProvider().contains("ke")){
                         assertTrue(true);
                     }
                 }
@@ -583,11 +593,15 @@ public class TaskTest {
             Task my_task = new Task();
 
             send_list.add(my_task);
-            my_task.setTaskDetails("Details-" + Integer.toString(i));
-            my_task.setTaskName("Test-" + Integer.toString(i));
-            my_task.setTaskProvider("tester");
-            my_task.setTaskRequester("snake");
+
+
+            my_task.setTaskDetails("Want a car to carry me"+ Integer.toString(i));
+            my_task.setTaskName("Go to southgate"+ Integer.toString(i));
+            my_task.setTaskProvider("Mike");
+            my_task.setTaskRequester("Jason");
             my_task.setTaskStatus("assigned");
+
+
 
             TaskController.addTask addTask = new TaskController.addTask();
             addTask.execute(my_task);
@@ -602,10 +616,10 @@ public class TaskTest {
         Task my_task = new Task();
 
         send_list.add(my_task);
-        my_task.setTaskDetails("Details-");
-        my_task.setTaskName("Test-");
-        my_task.setTaskProvider("tester");
-        my_task.setTaskRequester("A snake");
+        my_task.setTaskDetails("Want a car to carry me");
+        my_task.setTaskName("Go to southgate");
+        my_task.setTaskProvider("Mike");
+        my_task.setTaskRequester("Jason");
         my_task.setTaskStatus("assigned");
 
         TaskController.addTask addTask = new TaskController.addTask();
@@ -636,16 +650,16 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0){
-                assertTrue(false);
+                assertTrue(true);
             }
 
-            for (int i = 0; i < 5; i++){
+            for (int i = 0; i < rt_list.size(); i++){
                 Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
                 if (rt_list.get(i) == null){
                     break;
                 }
                 if (rt_list.get(i).getTaskStatus().equals("assigned")){
-                    if (rt_list.get(i).getTaskProvider().equals(send_list.get(i).getTaskProvider())){
+                    if (rt_list.get(i).getTaskProvider().contains("so")){
                         assertTrue(true);
                     }
                 }
@@ -678,10 +692,15 @@ public class TaskTest {
             Task my_task = new Task();
 
             send_list.add(my_task);
-            my_task.setTaskDetails("Details-" + Integer.toString(i));
-            my_task.setTaskName("Test-" + Integer.toString(i));
-            my_task.setTaskProvider("tester");
-            my_task.setTaskRequester("snake");
+            //my_task.setTaskDetails("Details-" + Integer.toString(i));
+            //my_task.setTaskName("Test-" + Integer.toString(i));
+            //my_task.setTaskProvider("tester");
+            //my_task.setTaskRequester("snake");
+            //my_task.setTaskStatus("request");
+            my_task.setTaskDetails("Want a car to carry me"+ Integer.toString(i));
+            my_task.setTaskName("Go to southgate"+ Integer.toString(i));
+            my_task.setTaskProvider("Mike");
+            my_task.setTaskRequester("Jason");
             my_task.setTaskStatus("request");
 
             TaskController.addTask addTask = new TaskController.addTask();
@@ -697,10 +716,10 @@ public class TaskTest {
         Task my_task = new Task();
 
         send_list.add(my_task);
-        my_task.setTaskDetails("Details-");
-        my_task.setTaskName("Test-");
-        my_task.setTaskProvider("tester");
-        my_task.setTaskRequester("snake");
+        my_task.setTaskDetails("Want a car to carry me");
+        my_task.setTaskName("Go to southgate");
+        my_task.setTaskProvider("Mike");
+        my_task.setTaskRequester("Jason");
         my_task.setTaskStatus("request");
 
         TaskController.addTask addTask = new TaskController.addTask();
@@ -772,10 +791,16 @@ public class TaskTest {
             Task my_task = new Task();
 
             send_list.add(my_task);
-            my_task.setTaskDetails("Details-" + Integer.toString(i));
+            /*my_task.setTaskDetails("Details-" + Integer.toString(i));
             my_task.setTaskName("Test-" + Integer.toString(i));
             my_task.setTaskProvider("tester");
             my_task.setTaskRequester("snake");
+            my_task.setTaskStatus("request");*/
+
+            my_task.setTaskDetails("Want a car to carry me"+ Integer.toString(i));
+            my_task.setTaskName("Go to southgate"+ Integer.toString(i));
+            my_task.setTaskProvider("Mike");
+            my_task.setTaskRequester("Jason");
             my_task.setTaskStatus("request");
 
             TaskController.addTask addTask = new TaskController.addTask();
@@ -791,10 +816,12 @@ public class TaskTest {
         Task my_task = new Task();
 
         send_list.add(my_task);
-        my_task.setTaskDetails("Details-");
-        my_task.setTaskName("Test-");
-        my_task.setTaskProvider("tester");
-        my_task.setTaskRequester("snake");
+
+
+        my_task.setTaskDetails("Want a car to carry me");
+        my_task.setTaskName("Go to southgate");
+        my_task.setTaskProvider("Mike");
+        my_task.setTaskRequester("Jason");
         my_task.setTaskStatus("request");
 
         TaskController.addTask addTask = new TaskController.addTask();

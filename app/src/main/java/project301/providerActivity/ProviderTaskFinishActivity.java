@@ -13,14 +13,14 @@ import java.util.Map;
 
 /**
  * @classname : ProviderTaskFinishActivity
- * @class Detail :
- *
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
+/**
+ * After a task finished, this Activity class shows the detail of the finished task (project 5)
  */
 
 
@@ -52,10 +52,5 @@ public class ProviderTaskFinishActivity extends AppCompatActivity {
             }
         });
     }
-
-    public void showList(){}
-    public void editInfo(){}
-    public void OnClick(){}
-
 
 }

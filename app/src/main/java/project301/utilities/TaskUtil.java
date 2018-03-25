@@ -10,14 +10,19 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 
 /**
- *Task class that help to serilize
- * and deserialize a task object
+ *A class that helps to serilize and deserialize a task object
+ * @classname : TaskUtil
+ * @author : Yuqi Zhang
+ * @author :Yue Ma
+ * @author :Julian Stys
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
 public class TaskUtil {
     /**
      * Convert task object into json format
-     * @param task
+     * @param task task object
      * @return  Json string
      */
     public static String serializer(Task task) {
@@ -27,7 +32,7 @@ public class TaskUtil {
 
     /**
      * Convert json format string into task object
-     * @param string
+     * @param string json string
      * @return task object
      */
     public static Task deserializer(BufferedReader string) {
@@ -37,24 +42,24 @@ public class TaskUtil {
 
     /**
      * Generate offline file title
-     * @param task
-     * @return
+     * @param task task object
+     * @return json file title
      */
     public static String generateOnlineSentTaskFileName(Task task) {
         return "sent-" + task.getId() + ".json";
     }
     /**
      * Generate offline adding file title
-     * @param task
-     * @return
+     * @param task task object
+     * @return json file title
      */
     public static String generateOfflineAddTaskFileName(Task task) {
         return "offlineAdd-" + task.getId() + ".json";
     }
     /**
      * Generate offline editing file title
-     * @param task
-     * @return
+     * @param task task object
+     * @return json file title
      */
     public static String generateOfflineEditTaskFileName(Task task) {
         return "offlineEdit-" + task.getId() + ".json";
@@ -70,7 +75,7 @@ public class TaskUtil {
         ArrayList<String> sentTaskFileList = new ArrayList<>();
         for (String f : fileList) {
             if (f != null && f.startsWith("sent-")) {
-                Log.i("Debug", f);
+               // Log.i("Debug", f);
                 sentTaskFileList.add(f);
             }
         }
@@ -104,10 +109,12 @@ public class TaskUtil {
         ArrayList<String> OfflineEditTaskFileList = new ArrayList<>();
         for (String f : fileList) {
             if (f != null && f.startsWith("offlineEdit-")) {
-                Log.i("Debug", f);
+                //Log.i("Debug", f);
                 OfflineEditTaskFileList.add(f);
             }
         }
         return OfflineEditTaskFileList;
     }
+
+
 }

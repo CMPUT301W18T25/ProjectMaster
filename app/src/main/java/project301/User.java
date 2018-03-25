@@ -3,9 +3,8 @@ package project301;
 import java.util.ArrayList;
 
 /**
+ * User model contains all the features of a user. Basic setters and getters are included.
  * @classname : User
- * @class Detail: User model contains all the features of a user.
- *
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
  * @author :Yue Ma

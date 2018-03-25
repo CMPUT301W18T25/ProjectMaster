@@ -1,23 +1,31 @@
 package project301.requesterActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
+import project301.GlobalCounter;
 import project301.R;
+import project301.Task;
+import project301.controller.BidController;
+import project301.controller.FileSystemController;
+import project301.controller.TaskController;
 
 /**
- * @classname : RequesterMainActivity
- * @class Detail :
- *
+ * Detail : requester main is for user to choose their actions: post task,view and edit task or edit profile
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ * @classname : RequesterMainActivity
  */
 
 
@@ -29,12 +37,16 @@ public class RequesterMainActivity extends AppCompatActivity {
 
     @SuppressWarnings("ConstantConditions")
     @Override
+
+    //when on create, settle three buttons: postnewtask, view and edit, and edit profile
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_main);
         final Intent intent = getIntent();
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
+
+
 
         //settle postNewTask button
         Button postNewTaskButton = (Button) findViewById(R.id.post_button);
@@ -47,10 +59,6 @@ public class RequesterMainActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
         //settle view button
         Button viewButton = (Button) findViewById(R.id.edit_button);
         viewButton.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +82,31 @@ public class RequesterMainActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
+    protected void onStart(){
+
+        super.onStart();
+        BidController bidController = new BidController();
+        //check counter change
+        int newCount = bidController.searchBidCounterOfThisRequester(userId);
+        Log.i("bidCount",Integer.toString(newCount));
+        if(newCount!=GlobalCounter.count){
+            GlobalCounter.count = newCount;
+            openRequestInfoDialog();
+            Log.i("New Bid","New Bid");
+        }
+    }
+
+    private void openRequestInfoDialog() {
+        // get request info, and show it on the dialog
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterMainActivity.this);
+        builder.setTitle("New Bid")
+                .setMessage("You got a new bid!");
+        // Create & Show the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }

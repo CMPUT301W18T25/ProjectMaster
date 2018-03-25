@@ -16,20 +16,25 @@ import android.widget.Toast;
 
 import project301.R;
 import project301.User;
-import project301.controller.UserListController;
+import project301.controller.BidController;
+import project301.controller.UserController;
 
 /**
- * @classname : SignUpActivity
  * This activity is for a new user to sign up an account.
  * The user need to fill the blank on this activity for creating a new account.
  * The form contains name, phone number, password, and email.
+ * @classname : SignUpActivity
  * @Date :   18/03/2018
- * @author : Yingnan Ma
  * @author : Wang Dong
- * @author : Xingyuan Yang
+ * @author : Yue Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
+
+/**
+ * This activity is for a new user to sign up an account.
+ */
+
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -40,9 +45,9 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText mobileText;
     private EditText passwardText;
     private Button checkValidationButton;
-    private UserListController userListControl;
+    private UserController userListControl;
     private User newUser;
-    private UserListController userListController;
+    private UserController userController;
     private Context context;
 
     @Override
@@ -74,7 +79,7 @@ public class SignUpActivity extends AppCompatActivity {
                 newUser.setId(enterName);
                 Log.i("Name: ",newUser.getUserName());
 
-                UserListController uc= new UserListController();
+                UserController uc= new UserController();
                 String newUserId;
                 newUserId = uc.addUserAndCheck(newUser);
 
@@ -84,6 +89,9 @@ public class SignUpActivity extends AppCompatActivity {
                     newUser.setId(newUserId);
                     Log.i("Success sign up:",enterName);
                     Intent intent = new Intent(activity, UserCharacterActivity.class);
+                    //initializes a bidCounter for this new user.
+                    BidController bidController = new BidController();
+                    bidController.buildBidCounterOfThisRequester(newUserId);
 
                     //deliver userName
                     intent.putExtra("userId",newUserId);

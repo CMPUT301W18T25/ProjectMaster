@@ -5,38 +5,43 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
 import project301.allUserActivity.LogInActivity;
-import project301.controller.UserListController;
+import project301.controller.UserController;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
+import static org.junit.Assert.*;
+
 
 /**
  * @classname : UserTest
- * @class Detail :
+ * @class Detail : This is the test for user-relative methods
  *
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Yue Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
+/**
+ * This is the test for user-relative methods.
+ */
+
+
 @SuppressWarnings("ALL")
-public class UserTest extends ActivityInstrumentationTestCase2 {
-    public UserTest() {
-        super(LogInActivity.class);
-    }
+public class UserTest {
+
 
     @SuppressWarnings("ConstantConditions")
     @Test
     public void testAddUser() throws Exception{
-        String test = "test8";
-        User user = new User(test,test,test,test,test,test,test,test);
-        UserListController.addUser addUser = new UserListController.addUser();
+        User user = new User();
+        user.setUserName("Tom");
+        user.setUserPassword("maf19044");
+
+        UserController.addUser addUser = new UserController.addUser();
         addUser.execute(user);
         // Hang around till is done
         AsyncTask.Status taskStatus;
@@ -50,7 +55,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
             e.printStackTrace();
         }
 
-        UserListController.GetAllUsers getAllUsers = new UserListController.GetAllUsers();
+        UserController.GetAllUsers getAllUsers = new UserController.GetAllUsers();
         getAllUsers.execute("");
         ArrayList<User> Userlist = null;
         try {
@@ -71,7 +76,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
             }
         }
 
-        UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
+        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
         deleteAllUsers.execute("");
         assertEquals(found,1);
 
@@ -81,8 +86,8 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
 
     public void testGetAUserByName(){
         User user1 = new User();
-        user1.setUserName("y3hh");
-        UserListController.addUser addUser = new UserListController.addUser();
+        user1.setUserName("Mike");
+        UserController.addUser addUser = new UserController.addUser();
         addUser.execute(user1);
 
         // Hang around till is done
@@ -97,72 +102,41 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
             e.printStackTrace();
         }
         User newUser  = new User();
-        UserListController uc = new UserListController();
+        UserController uc = new UserController();
         int found = 0;
-        newUser = uc.getAUserByName("y3hh");
-        if(newUser!=null){
-            found = 1;
-        }
-
-        UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
-        deleteAllUsers.execute("");
-        assertEquals(found,1);
-
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    @Test
-    public void testGetAUserById(){
-        UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
-        deleteAllUsers.execute("");
-        User user1 = new User();
-        user1.setUserName("y3hh");
-        UserListController.addUser addUser = new UserListController.addUser();
-        addUser.execute(user1);
-
-        // Hang around till is done
-        AsyncTask.Status taskStatus;
-        do {
-            taskStatus = addUser.getStatus();
-        } while (taskStatus != AsyncTask.Status.FINISHED);
-
+        UserController.getAUserByName getAUserByName = new UserController.getAUserByName();
+        getAUserByName.execute("Mike");
+        ArrayList<User> users = null;
         try {
-            TimeUnit.SECONDS.sleep(5);
+            users = getAUserByName.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
-        User newUser  = new User();
-        UserListController uc = new UserListController();
-        int found = 0,found2 = 0;
-        newUser = uc.getAUserByName("y3hh");
-        if(newUser!=null){
+        if(!users.equals(null)){
             found = 1;
         }
 
 
-        //noinspection ConstantConditions
-        Log.i("said",newUser.getUserName());
-        newUser = uc.getAUserById(newUser.getId());
-        if(newUser!=null){
-            found2= 1;
-        }
-        assertEquals(found,1);
-        assertEquals(found2,1);
+        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
+        deleteAllUsers.execute("");
 
+        assertEquals(found,1);
 
     }
     @Test
 
     public void testcheckUserByNameAndPassword(){
+
+        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
+        deleteAllUsers.execute("");
+
         User user1 = new User();
-        user1.setUserName("y12");
-        user1.setUserPassword("y12pass");
-
-
-        UserListController.addUser addUser = new UserListController.addUser();
+        user1.setUserName("yueMa");
+        user1.setUserPassword("123456");
+        UserController.addUser addUser = new UserController.addUser();
         addUser.execute(user1);
-
-        // Hang around till is done
         AsyncTask.Status taskStatus;
         do {
             taskStatus = addUser.getStatus();
@@ -174,20 +148,17 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
             e.printStackTrace();
         }
 
-        UserListController uc = new UserListController();
-        boolean findUser1 = uc.checkUserByNameAndPassword("y12","y12pass");
-        assertTrue(findUser1);
+        UserController uc = new UserController();
+        boolean findUser1 = uc.checkUserByNameAndPassword("yueMa","123456");
+        assertEquals(findUser1,true);
+        //boolean notfindUser1 = uc.checkUserByNameAndPassword("yueMa","yueMi2018");
+        //assertEquals(notfindUser1,false);
 
-        boolean notfindUser1 = uc.checkUserByNameAndPassword("y12","y1pas2s");
-
-        assertEquals(notfindUser1,false);
-        UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
-        deleteAllUsers.execute("");
     }
     @Test
 
     public void testUpdateUser() throws InterruptedException {
-        UserListController.deleteAllUsers deleteAllUsers1 = new UserListController.deleteAllUsers();
+        UserController.deleteAllUsers deleteAllUsers1 = new UserController.deleteAllUsers();
         deleteAllUsers1.execute("");
         AsyncTask.Status taskStatus1;
         do {
@@ -201,8 +172,8 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         }
         User user1 = new User();
         user1.setUserName("yue12");
-        user1.setUserPassword("yue12pass");
-        UserListController.addUser addUser = new UserListController.addUser();
+        user1.setUserPassword("yue12password");
+        UserController.addUser addUser = new UserController.addUser();
         addUser.execute(user1);
         // Hang around till is done
         AsyncTask.Status taskStatus;
@@ -215,8 +186,8 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        user1.setUserPassword("yue12word");
-        UserListController.updateUser updateUser = new UserListController.updateUser();
+        user1.setUserPassword("yue12fakepassword");
+        UserController.updateUser updateUser = new UserController.updateUser();
         updateUser.execute(user1);
         AsyncTask.Status taskStatus2;
         do {
@@ -230,20 +201,18 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         }
         //boolean notfindUser1 = uc.checkUserByNameAndPassword("yue12","yue12pass");
         //assertEquals(notfindUser1,false);
-        UserListController uc = new UserListController();
-        boolean findUser1 = uc.checkUserByNameAndPassword("yue12","yue12word");
+        UserController uc = new UserController();
+        boolean findUser1 = uc.checkUserByNameAndPassword("yue12","yue12fakepassword");
         assertEquals(findUser1,true);
-        boolean notfindUser1 = uc.checkUserByNameAndPassword("yue12","yue12pass");
+        boolean notfindUser1 = uc.checkUserByNameAndPassword("yue12","yue12password");
         assertEquals(notfindUser1,false);
-
-
 
     }
     @Test
 
 
     /*public void testCheckValidationSignUp (){
-        UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
+        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
         deleteAllUsers.execute("");
 
 
@@ -251,7 +220,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         User user1 = new User();
         user1.setUserName("yue15");
 
-        UserListController uc = new UserListController();
+        UserController uc = new UserController();
         userId = uc.addUserAndCheck(user1);
 
         assertNotEquals(userId,null);
@@ -261,7 +230,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         boolean checkValidUser = uc.checkValidationSignUp("yue15");
         if(checkValidUser) {
             Log.i("fault","fault");
-            UserListController uc2 = new UserListController();
+            UserController uc2 = new UserController();
             userId = uc2.addUserAndCheck(user2);
         }
         else{
@@ -274,51 +243,37 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     */
 
     public void testCheckValidationSignUp (){
-       // TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
+        // TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
         //deleteAllTasks.execute("");
 
-        UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
+        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
         deleteAllUsers.execute("");
         AsyncTask.Status taskStatus1;
         do {
             taskStatus1 =deleteAllUsers.getStatus();
         } while (taskStatus1 != AsyncTask.Status.FINISHED);
 
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         String userId = null;
         User user1 = new User();
-        user1.setUserName("yue15");
-        UserListController.addUser addUser= new UserListController.addUser();
-        addUser.execute(user1);
-
-        AsyncTask.Status taskStatus2;
-        do {
-            taskStatus2 = addUser.getStatus();
-        } while (taskStatus2 != AsyncTask.Status.FINISHED);
+        user1.setUserName("yueLiu");
+        UserController uc = new UserController();
+        userId = uc.addUserAndCheck(user1);
 
         try {
-            TimeUnit.SECONDS.sleep(2);
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        userId = null;
         User user2 = new User();
-        user2.setUserName("yue15");
-        UserListController uc = new UserListController();
+        user2.setUserName("yueLiu");
         userId = uc.addUserAndCheck(user2);
-
         assertEquals(userId,null);
-
         User user3 = new User();
         user3.setUserName("yumi");
-        UserListController uc2 = new UserListController();
+        UserController uc2 = new UserController();
         userId = uc2.addUserAndCheck(user3);
-
-
     }
 
 }

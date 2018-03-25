@@ -16,13 +16,18 @@ import java.io.ByteArrayOutputStream;
 
 /**
  * @classname : PhotoTest
- * @class Detail :
+ * @class Detail : This is the test for photo handling methods
  *
  * @Date :   18/03/2018
  * @author : Julian Stys
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
+
+/**
+ * This is the test for photo handling methods.
+ */
+
 
 //https://www.dyclassroom.com/image-processing-project/how-to-read-and-write-image-file-in-java
 //https://stackoverflow.com/questions/4181774/show-image-view-from-file-path

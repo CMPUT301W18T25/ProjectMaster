@@ -1,9 +1,5 @@
 package project301.ActivityTest;
 
-/**
- * Created by wdong2 on 3/8/18.
- */
-
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
@@ -15,6 +11,19 @@ import project301.allUserActivity.UserCharacterActivity;
 import project301.providerActivity.ProviderMainActivity;
 import project301.requesterActivity.RequesterMainActivity;
 import com.robotium.solo.Solo;
+
+/**
+ * Test whether user in this activity can choose character or not.
+ * @classname : UserCharacterActivityTest
+ * @Date :   18/03/2018
+ * @author : Wang Dong
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
+ */
+
+/**
+ * Test whether user in this activity can choose character or not.
+ */
 
 public class UserCharacterActivityTest extends ActivityInstrumentationTestCase2 {
 
@@ -40,11 +49,6 @@ public class UserCharacterActivityTest extends ActivityInstrumentationTestCase2 
         solo.clickOnButton("Sign Up");
 
         solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
-/*
- solo.clickOnButton("Log In");
- solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
- solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
- */
 
         solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
 

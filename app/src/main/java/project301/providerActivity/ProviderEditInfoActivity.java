@@ -7,22 +7,25 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import project301.R;
 import project301.User;
-import project301.controller.UserListController;
+import project301.controller.UserController;
 
 /**
  * @classname : ProviderEditInfoActivity
- * @class Detail :
- *
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
+
+/**
+ * this class used to change profile of the user, such as user name.
+ */
+
+
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderEditInfoActivity extends AppCompatActivity {
@@ -30,17 +33,17 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
     private String userId;
 
     private String userName;
-    private String editName;
+    //private String editName;
     private String editEmail;
     private String editPhone;
     private String editPassword;
-    private EditText usernameText;
+    private TextView usernameText;
     private EditText emailText;
     private EditText mobileText;
     private EditText passwordText;
     private Button saveButton;
     private Button backButton;
-    private UserListController userListControl;
+    private UserController userListControl;
     private User user;
 
 
@@ -53,7 +56,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
         //noinspection ConstantConditions,ConstantConditions
         //get userId and user
         userId = intent.getExtras().get("userId").toString();
-        UserListController uc = new UserListController();
+        UserController uc = new UserController();
         user = uc.getAUserById(userId);
 
         //match edit text
@@ -64,34 +67,36 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
 
 
         //settle save button
-        Button saveButton = (Button) findViewById(R.id.save_button);
+        saveButton = (Button) findViewById(R.id.save_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //get user input
-                editName = usernameText.getText().toString();
+                //editName = usernameText.getText().toString();
                 editEmail = emailText.getText().toString();
                 editPhone = mobileText.getText().toString();
                 editPassword = passwordText.getText().toString();
 
                 Log.i("editEmail",editEmail);
 
-
-
                 //update user info
-                user.setUserName(editName);
+                //user.setUserName(editName);
                 user.setUserEmail(editEmail);
                 user.setUserPhone(editPhone);
                 user.setUserPassword(editPassword);
 
-                UserListController.updateUser updateUser= new UserListController.updateUser();
+                //update user
+                UserController.updateUser updateUser= new UserController.updateUser();
                 updateUser.execute(user);
-                // Log.i("resultid:",user.getResultId());
+
+                //testing result
+                Log.i("resultid:",user.getResultId());
 
                 //change activity
                 Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMainActivity.class);
                 info2.putExtra("userId",userId);
+
                 //wait for update
                 try {
                     Thread.sleep(2000);
@@ -104,11 +109,13 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
         });
 
 
-        //settle back button
-        Button backButton = (Button) findViewById(R.id.back_button);
+        //settle back button (no data saving)
+        backButton = (Button) findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //change activity
                 Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMainActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
@@ -119,10 +126,11 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-
-        UserListController uc2 = new UserListController();
+        //get current user
+        UserController uc2 = new UserController();
         user = uc2.getAUserById(userId);
-        // get information from target task and set information
+
+        // put user original info onto UI
         String temp_name=user.getUserName();
         usernameText.setText(temp_name);
 
@@ -142,15 +150,6 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
 
         String temp_status=user.getUserPassword();
         passwordText.setText(temp_status);
-
-        /*
-        Double temp_idealprice=view_task.getTaskIdealPrice();
-        taskIdealPrice.setText(Double.toString(temp_idealprice));
-
-        Double temp_lowestbid=view_task.getLowestBid();
-        taskLowestPrice.setText(Double.toString(temp_lowestbid));
-        */
-
     }
 
 }

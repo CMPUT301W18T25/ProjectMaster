@@ -1,5 +1,6 @@
 package project301.requesterActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,27 +11,34 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.novoda.merlin.MerlinsBeard;
+import com.novoda.merlin.NetworkStatus;
+
+import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
+import project301.controller.BidController;
+import project301.controller.FileSystemController;
+import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * @classname : RequesterViewTaskActivity
- * @class Detail :
- *
+ * Detail :RequesterViewTaskActivity is to allow user to view a target task and choose if to edit this task.
+ *                the bid list will accept data from provider to show all the bid for this task so that requester can choose bid.
+ *                this class also support delete task, jump back to showlist and choose bid.
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ * @classname : RequesterViewTaskActivity
  */
 
+
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterViewTaskActivity extends AppCompatActivity {
+public class RequesterViewTaskActivity extends AppCompatActivity  {
     private ListView bidList;
     private String userId;
     private TextView view_name;
@@ -44,6 +52,8 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
     private ArrayList<Task> tasklist;
     private ArrayList<Task> deletedlist;
     private String view_index;
+    protected MerlinsBeard merlinsBeard;
+    private Context context;
 
 
     @SuppressWarnings("ConstantConditions")
@@ -52,15 +62,15 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_view_task);
         final Intent intent = getIntent();
+        context = getApplicationContext();
+        merlinsBeard = MerlinsBeard.from(context);
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
         view_index=intent.getExtras().get("info").toString();
 
 
 
-        /**
-         * find view by id.
-         */
+        //find view by id.
         view_name = (TextView) findViewById(R.id.c_view_name);
         view_detail= (TextView) findViewById(R.id.c_view_detail);
         view_destination = (TextView) findViewById(R.id.c_view_destination);
@@ -68,19 +78,27 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
         view_idealprice = (TextView) findViewById(R.id.c_view_idealprice);
         view_lowestbid = (TextView) findViewById(R.id.c_lowest_bid);
 
+        tasklist = new ArrayList<Task>();
 
         //get data from database
-        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-        search.execute(userId);
-
-        tasklist = new ArrayList<>();
-        try {
-            tasklist= search.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        if(merlinsBeard.isConnected()){
+            TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+            search.execute(userId);
+            try {
+                tasklist= search.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
         }
+        else{
+            FileSystemController FC = new FileSystemController();
+            tasklist = FC.loadSentTasksFromFile(context);
+        }
+
+
+
 
 
         // get index of target task
@@ -156,6 +174,10 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
                 TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(target_task.getId());
                 deleteTaskById.execute(target_task.getId());
 
+                FileSystemController FC = new FileSystemController();
+                String FileName = "sent-"+target_task.getId()+".json";
+                FC.deleteFileByName(FileName,getApplication());
+
 
 
                 info2.putExtra("userId",userId);
@@ -203,28 +225,45 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
 
 
     @Override
+    //when on start, first get newest data from database and then update the information
     protected void onStart(){
         super.onStart();
-
-
+        FileSystemController FC = new FileSystemController();
+        //time sleep
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-        search.execute(userId);
-
-        tasklist = new ArrayList<Task>();
-        try {
-            tasklist= search.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        BidController bidController = new BidController();
+        //check counter change
+        int newCount = bidController.searchBidCounterOfThisRequester(userId);
+        if(newCount!= GlobalCounter.count){
+            GlobalCounter.count = newCount;
+            Log.i("New Bid","New Bid");
         }
-        Log.i("Sign", Integer.toString(tasklist.size()));
+
+        //pull data from database
+        if(merlinsBeard.isConnected()) {
+            TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+            search.execute(userId);
+
+            tasklist = new ArrayList<Task>();
+            try {
+                tasklist = search.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            for(Task task:tasklist){
+                FC.saveToFile(task,"sent",getApplication());
+            }
+        }
+        tasklist = FC.loadSentTasksFromFile(getApplication());
+
+
 
         // get target task
         final int index = Integer.parseInt(view_index);
@@ -255,5 +294,6 @@ public class RequesterViewTaskActivity extends AppCompatActivity {
 
 
     }
+
 
 }

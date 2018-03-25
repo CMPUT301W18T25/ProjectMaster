@@ -4,10 +4,18 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import project301.allUserActivity.LogInActivity;
 
-
-/*
- * Created by wdong2 on 3/7/18.
+/**
+ * @classname : MainActivityTest
+ * @Date :   18/03/2018
+ * @author : Wang Dong
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
+
+/**
+ * temp test class
+ */
+
 
 public class MainActivityTest extends ActivityInstrumentationTestCase2 {
 

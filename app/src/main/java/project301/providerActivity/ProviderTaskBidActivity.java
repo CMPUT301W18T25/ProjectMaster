@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -17,23 +18,24 @@ import android.widget.Toast;
 import project301.Bid;
 import project301.R;
 import project301.Task;
+import project301.controller.BidController;
 import project301.controller.TaskController;
+import project301.requesterActivity.RequesterAdapter;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
  * @classname : ProviderTaskBidActivity
- * @class Detail :
- *
  * @Date :   18/03/2018
- * @author :
- * @author :
- * @author :
+ * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
+/**
+ * This is the Activity class for user to bid on an exsiting task
+ */
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderTaskBidActivity extends AppCompatActivity {
@@ -59,7 +61,6 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
     private Bid bid;
     private Task view_task;
 
-
     @SuppressWarnings("ConstantConditions")
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,16 +72,14 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         userId = intent.getExtras().get("userId").toString();
 
 
-        /**
-         * find view by id.
-         */
+        // find view by id.
         taskName = (TextView) findViewById(R.id.p_task_name);
         taskDetail= (TextView) findViewById(R.id.p_task_detail);
         taskLocation = (TextView) findViewById(R.id.p_task_destination);
-        //taskStatus = (TextView) findViewById(R.id.p_task_status);
         taskIdealPrice = (TextView) findViewById(R.id.p_task_idealprice);
         taskLowestPrice = (TextView) findViewById(R.id.p_task_mybid);
         taskMybid = (EditText)findViewById(R.id.p_task_mybid);
+        BidListView = (ListView)findViewById(R.id.provider_bid_lkist);
 
         // get index of target task
         int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
@@ -88,21 +87,36 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
 
         //get tast status from last activity
         status = intent.getExtras().get("status").toString();
+
         //get data from database
         if (status.equals("request")) {
+            //request and bidden. if only request, he will not see other person's bidding tasks
             TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
             search.execute();
-
+            tasklist = new ArrayList<>();
+            ArrayList<Task> searchedTask = new ArrayList<>();
             try {
-                tasklist = search.get();
+                searchedTask = search.get();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
+            tasklist.addAll(searchedTask);
 
-            //set bid
-            taskMybid.setText("0");
+            TaskController.searchAllBiddenTasks search2 = new TaskController.searchAllBiddenTasks();
+            search2.execute();
+            try {
+                searchedTask = search2.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            tasklist.addAll(searchedTask);
+
+            //set initiallized bid
+            //taskMybid.setText("0");
 
         }else if(status.equals("bidden")){
             TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
@@ -143,9 +157,15 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
             toast.show();
         }
 
+
+
+
+
         // get target task
         view_task=tasklist.get(view_index);
-        Log.i("idddddddddddddddddd", view_task.getId());
+        // test id correctness
+        Log.i("id", view_task.getId());
+
 
         // get information from target task and set information
         String temp_name=view_task.getTaskName();
@@ -160,10 +180,15 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         String temp_status=view_task.getTaskStatus();
 
         Double temp_idealprice=view_task.getTaskIdealPrice();
-        taskIdealPrice.setText(Double.toString(temp_idealprice));
+        if(temp_idealprice!=null){
+            taskIdealPrice.setText(Double.toString(temp_idealprice));
+        }
+
 
         Double temp_lowestbid=view_task.getLowestBid();
-        taskLowestPrice.setText(Double.toString(temp_lowestbid));
+        if(temp_idealprice!=null) {
+            taskLowestPrice.setText(Double.toString(temp_lowestbid));
+        }
 
 
         //settle cancel button : cancel the old bid
@@ -190,16 +215,31 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String enterBid_s = taskMybid.getText().toString();
-                //Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaa",enterBid_s);
+
+                //test input type
+                //Log.i("enterBid_s",enterBid_s);
+
                 Double enterBid = Double.parseDouble(enterBid_s);
+
+                //test bid type
                 //System.out.println(enterBid);
+
                 bid = new Bid(enterBid,userId);
 
                 TaskController.providerSetBid setTaskBid = new TaskController.providerSetBid(view_task,bid);
                 setTaskBid.execute();
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //increase the bidcounter of this requester
+                BidController bidController = new BidController();
+                bidController.increaseBidCounterOfThisRequester(view_task.getTaskRequester());
 
                 Intent info2 = new Intent(ProviderTaskBidActivity.this, ProviderBidHistoryActivity.class);
                 info2.putExtra("userId",userId);
+
                 startActivity(info2);
 
             }
@@ -222,28 +262,44 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        /*
-        // get information from target task and set information
-        String temp_name=view_task.getTaskName();
-        taskName.setText(temp_name);
+        TaskController.searchAllBid searchAllBid = new TaskController.searchAllBid();
+        searchAllBid.execute(view_task.getId());
+        Double myBidAmount = 0.0;
+        ArrayList<Bid> allBidOfThisTask = new ArrayList<>();
+        //currently, only bid amount is in it. Please add username in the future
+        ArrayList<String> allBidsString = new ArrayList<>();
+        try {
+            allBidOfThisTask = searchAllBid.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        for(Bid bid: allBidOfThisTask){
 
-        String temp_detail=view_task.getTaskDetails();
-        taskDetail.setText(temp_detail);
+            if(!bid.equals(null)) {
+                allBidsString.add(Double.toString(bid.getBidAmount()));
+                if (bid.getProviderId().equals(userId)) {
+                    if (bid.getBidAmount() != null) {
+                        myBidAmount = bid.getBidAmount();
+                        break;
 
-        String temp_destination=view_task.getTaskAddress();
-        taskLocation.setText(temp_destination);
+                    }
 
-        String temp_status=view_task.getTaskStatus();
-        taskStatus.setText(temp_status);
+                }
+            }
+        }
+        taskMybid.setText(Double.toString(myBidAmount));
 
-        Double temp_idealprice=view_task.getTaskIdealPrice();
-        taskIdealPrice.setText(Double.toString(temp_idealprice));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.bid_list_item,allBidsString);
+        BidListView.setAdapter(adapter);
 
-        Double temp_lowestbid=view_task.getLowestBid();
-        taskLowestPrice.setText(Double.toString(temp_lowestbid));
-        */
+
+
+
+
+
 
     }
-
 
 }
