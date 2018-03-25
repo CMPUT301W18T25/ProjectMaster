@@ -37,6 +37,7 @@ public class ProviderMainActivity extends AppCompatActivity {
     private ArrayList<Task> taskList;
 
     private String userId;
+    private String taskId;
 
 
 
@@ -89,10 +90,14 @@ public class ProviderMainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent info1 = new Intent(ProviderMainActivity.this, ProviderTaskBidActivity.class);
+                Task tempTask = taskList.get(index);
+                taskId = tempTask.getId();
+                info1.putExtra("taskId",taskId);
                 info1.putExtra("info", index);
                 //provide the task status for the next activity
                 info1.putExtra("status","request");
                 info1.putExtra("userId",userId);
+
                 startActivity(info1);
             }
         });
