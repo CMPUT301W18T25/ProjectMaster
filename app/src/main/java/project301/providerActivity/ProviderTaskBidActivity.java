@@ -2,11 +2,15 @@ package project301.providerActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,6 +26,7 @@ import project301.controller.BidController;
 import project301.controller.TaskController;
 import project301.requesterActivity.RequesterAdapter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -60,6 +65,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
     private String index;
     private Bid bid;
     private Task view_task;
+    private String taskId;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -81,6 +87,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         taskMybid = (EditText)findViewById(R.id.p_task_mybid);
         BidListView = (ListView)findViewById(R.id.provider_bid_lkist);
 
+        /*
         // get index of target task
         int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
 
@@ -165,6 +172,21 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         view_task=tasklist.get(view_index);
         // test id correctness
         Log.i("id", view_task.getId());
+        */
+
+        // get target task (new)
+        taskId = intent.getExtras().get("taskId").toString();
+        TaskController.getTaskById getIt = new TaskController.getTaskById();
+        getIt.execute(taskId);
+        try{
+            view_task = getIt.get();
+        }catch (Exception e){
+            Log.d("boom", "shaka: ");
+        }
+
+        if (view_task == null){
+            Log.i("Error", "not getting task ");
+        }
 
 
         // get information from target task and set information
@@ -293,13 +315,6 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.bid_list_item,allBidsString);
         BidListView.setAdapter(adapter);
-
-
-
-
-
-
-
     }
 
 }

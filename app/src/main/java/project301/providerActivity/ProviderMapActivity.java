@@ -39,7 +39,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
  * this task is too display all tasks within 5km of the provider on the map UI, and
  * allow the provider to click on each task to view further information. This activity
  * first asks user for permission to access the devices location. It then gets the current
- * location of the user and navigates the map camera to this location.
+ * location of the user and navigates the map CameraActivity to this location.
  *
  * Currently, the Task class doesn't have functionality for location, so a 'mockupTasks'
  * of ArrayList<Locations> is used to test the markers of each task.
@@ -176,6 +176,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
             e.printStackTrace();
         }
         taskList.addAll(searchedTask);
+
     }
 
     /**
@@ -205,7 +206,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
 
 
     /**
-     * Updates the user's location and sets the map camera to this location. Only works
+     * Updates the user's location and sets the map CameraActivity to this location. Only works
      * if user has given the app permission to access the current location
      *
      */
@@ -246,7 +247,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful() && task.getResult() != null) {
-                            // Set the map's camera position to the current location of the device.
+                            // Set the map's CameraActivity position to the current location of the device.
                             mLastKnownLocation = task.getResult();
 
                             displayTaskLocations();

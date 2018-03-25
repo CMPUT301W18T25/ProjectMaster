@@ -891,7 +891,7 @@ public class TaskTest {
         TaskController.searchTaskByKeyword search = new TaskController.searchTaskByKeyword();
         ArrayList<Task> rt_list;
 
-        search.execute("Test");
+        search.execute("Test boom");
 
 
         try {
