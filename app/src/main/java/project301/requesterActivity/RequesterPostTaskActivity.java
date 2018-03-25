@@ -148,6 +148,16 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
                     new_task.setTaskAddress(post_destination.getText().toString());
                     new_task.setTaskIdealPrice(Double.parseDouble(post_ideal_price.getText().toString()));
                     new_task.setTaskRequester(userId);
+                    if (taskPlace != null){
+                        Log.d(LOG_TAG,"Task lat long: "+taskPlace.getLatLng());
+                        new_task.setTasklatitude(taskPlace.getLatLng().latitude);
+                        new_task.setTasklgtitude(taskPlace.getLatLng().longitude);
+                    }
+                    else{
+                        Log.d(LOG_TAG,"No task lat and long");
+                        new_task.setTasklatitude(null);
+                        new_task.setTasklgtitude(null);
+                    }
                     //to do:set photo
 
 
