@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 
 import project301.R;
+import project301.controller.TaskController;
+
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,19 +29,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
-
-
-/**
- * @classname : ProviderMapActivity
- * @class Detail :
- *
- * @Date :   18/03/2018
- * @author : Xingyuan Yang
- * @author : Julian Stys
- * @version 1.0
- * @copyright : copyright (c) 2018 CMPUT301W18T25
- */
 
 
 /**
@@ -54,7 +46,15 @@ import com.google.android.gms.location.FusedLocationProviderClient;
  *
  * Source: The majority of the map code was implemented using the Google developer documentation
  * (https://developers.google.com/maps/documentation/android-api/start)
+ *
+ * @Date :   18/03/2018
+ * @author : Xingyuan Yang
+ * @author : Julian Stys
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
+
+
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -85,6 +85,8 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
 
     // Testing variables
     private ArrayList<Location> mockupTasks;
+    private ArrayList<project301.Task> taskList;
+    private LatLng location;
 
 
     /**
@@ -151,6 +153,29 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+    }
+
+    /**
+     * Get the info of all task
+     */
+
+    private void getAllTaksInfo() {
+
+        TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
+        search.execute();
+        taskList = new ArrayList<project301.Task>();
+        ArrayList<project301.Task> searchedTask = new ArrayList<>();
+        try {
+            searchedTask = search.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        taskList.addAll(searchedTask);
+        for (int i=0;i<taskList.size();i++){
+            Log.d(TAG, taskList.get(i).getTaskName());
         }
     }
 
@@ -268,15 +293,21 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
         mMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
 
-        for (int i=0;i<mockupTasks.size();i++){
-            Log.d(TAG,"Adding marker "+i+", lat: "+mockupTasks.get(i)
-                    .getLatitude()+", long: "+mockupTasks.get(i).getLongitude());
+        for (int i=0;i<taskList.size();i++){
+            if (taskList.get(i).getTasklgtitude() != null
+                    && taskList.get(i).getTasklatitude() != null){
+                Log.d(TAG,"Adding marker "+i+", lat: "+taskList.get(i)
+                        .getTasklatitude()+", long: "+taskList.get(i).getTasklgtitude());
+                Marker marker = mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(taskList.get(i).getTasklatitude(), taskList.get(i).getTasklgtitude()))
+                        .anchor(0.5f,0.5f)
+                        .title(taskList.get(i).getTaskName()));
+                marker.showInfoWindow();
+            }
+            else{
+                Log.d(TAG,"No location for: "+taskList.get(i).getTaskName());
 
-            Marker marker = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(mockupTasks.get(i).getLatitude(), mockupTasks.get(i).getLongitude()))
-                    .anchor(0.5f,0.5f)
-                    .title(String.valueOf(i)));
-            marker.showInfoWindow();
+            }
         }
 
     }
@@ -292,7 +323,9 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
      */
     @Override
     public boolean onMarkerClick(Marker marker){
-        Log.d(TAG,"Clicked on marker "+marker.getTitle());
+
+        Log.d(TAG,"Clicked on marker "+marker.get());
+        Log.d(TAG,"Task info: "+taskList.get(marker.getId()).getTaskName());
         return true;
     }
 
@@ -306,12 +339,13 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        getAllTaksInfo();
         getLocationPermission();
         updateLocationUI();
         getDeviceLocation();
 
         // Don't call displayTaskLocations for now since it is used only for testing at the moment
-        /*displayTaskLocations();*/
+        displayTaskLocations();
     }
 
 
