@@ -750,6 +750,7 @@ public class TaskController {
             verifySettings();
 
             String [] search_parameters = keywords[0].split("\\s+");
+            String bodyQuery;
             ArrayList<Task> result_tasks = new ArrayList<Task>();
             /*
             String query =
@@ -767,45 +768,34 @@ public class TaskController {
                             "   }\n"+
                             "}\n";
             */
-            String query =
+            Log.i("Length", Integer.toString(search_parameters.length));
+
+            bodyQuery ="               { \"multi_match\" : {\"query\" : \"" +search_parameters[0] +"\", \"fields\" : [ \"taskName\", \"taskDetails\"] }}" + "\n";
+            for (int i = 1; i < search_parameters.length; i++) {
+                bodyQuery = bodyQuery + "               ,{ \"multi_match\" : {\"query\" : \"" + search_parameters[i] + "\", \"fields\" : [ \"taskName\", \"taskDetails\"] }}" + "\n";
+            }
+            //bodyQuery = bodyQuery + "               ,{ \"multi_match\" : {\"query\" : \"" + search_parameters[1] + "\", \"fields\" : [ \"taskName\", \"taskDetails\"] }}" + "\n";
+
+            String shellQuery =
                     "\n{ \n"+
                             "\"size\" : 10,\n"+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
-                            "               { \"multi_match\" : {\"query\" : \"" +keywords[0] +"\", \"fields\" : [ \"taskName\", \"taskDetails\"] }}" + "\n"+
+                            bodyQuery+
                             "           ]\n"+
                             "       }\n"+
                             "   }\n"+
                             "}\n";
-            String pre_query =
-                    "\n{     \n"+
-                            "   \"query\" : {\n"+
-                            "       \"bool\" : {\n"+
-                            "           \"must\" : [\n"+
-                            "               { \"multi_match\" : {\n" +
-                            "                   \"query\" : \""+ search_parameters[0] +"\", \n" +
-                            "                   \"fields : [ \"taskName\", \"taskDetails\" ]}  \n" +
-                            "               }";
 
-            String body_query = "";
-            for (int i = 1; i < search_parameters.length; i++){
-                body_query +=
-                        "               , \n" +
-                                "               { \"multi_match\" : {\n" +
-                                "                   \"query\" : \""+ search_parameters[i] +"\", \n" +
-                                "                   \"fields : [ \"taskName\", \"taskDetails\" ]}  \n" +
-                                "               }";
-            }
             String post_query =
                     "           ]\n"+
                             "       }\n"+
                             "   }\n"+
                             "}\n";
 
-            String final_query = pre_query + body_query + post_query;
-            Log.i("Query", "The query was " + query);
-            Search search = new Search.Builder(query)
+            Log.i("Query", "The query was " + shellQuery);
+            Search search = new Search.Builder(shellQuery)
                     .addIndex("cmput301w18t25")
                     .addType("user")
                     .build();
