@@ -46,6 +46,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
     private Context context;
     private String userId;
     private User user;
+    private String taskId;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -92,18 +93,27 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
                 String status = task.getTaskStatus();
                 if (status.equals("request")) {
                     Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskBidActivity.class);
+                    Task tempTask = taskList.get(index);
+                    taskId = tempTask.getId();
+                    info1.putExtra("taskId",taskId);
                     info1.putExtra("userId", userId);
                     info1.putExtra("info", index);
                     info1.putExtra("status","request");
                     startActivity(info1);
                 } else if (status.equals("bidden")) {
                     Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskBidActivity.class);
+                    Task tempTask = taskList.get(index);
+                    taskId = tempTask.getId();
+                    info1.putExtra("taskId",taskId);
                     info1.putExtra("userId", userId);
                     info1.putExtra("info", index);
                     info1.putExtra("status","bidden");
                     startActivity(info1);
                 } else if (status.equals("assigned")) {
                     Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskBidActivity.class);
+                    Task tempTask = taskList.get(index);
+                    taskId = tempTask.getId();
+                    info1.putExtra("taskId",taskId);
                     info1.putExtra("userId", userId);
                     info1.putExtra("info", index);
                     info1.putExtra("status","assigned");

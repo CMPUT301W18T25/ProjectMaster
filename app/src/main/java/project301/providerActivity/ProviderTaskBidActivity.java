@@ -60,6 +60,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
     private String index;
     private Bid bid;
     private Task view_task;
+    private String taskId;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -81,6 +82,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         taskMybid = (EditText)findViewById(R.id.p_task_mybid);
         BidListView = (ListView)findViewById(R.id.provider_bid_lkist);
 
+        /*
         // get index of target task
         int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
 
@@ -165,6 +167,21 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         view_task=tasklist.get(view_index);
         // test id correctness
         Log.i("id", view_task.getId());
+        */
+
+        // get target task (new)
+        taskId = intent.getExtras().get("taskId").toString();
+        TaskController.getTaskById getIt = new TaskController.getTaskById();
+        getIt.execute(taskId);
+        try{
+            view_task = getIt.get();
+        }catch (Exception e){
+            Log.d("boom", "shaka: ");
+        }
+
+        if (view_task == null){
+            Log.i("Error", "not getting task ");
+        }
 
 
         // get information from target task and set information
