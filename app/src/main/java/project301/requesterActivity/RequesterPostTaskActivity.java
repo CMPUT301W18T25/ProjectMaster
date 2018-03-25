@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,10 +22,24 @@ import project301.GlobalCounter;
 import project301.controller.BidController;
 import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
+import project301.controller.PlaceArrayAdapterController;
 import project301.utilities.FileIOUtil;
 import project301.R;
 import project301.Task;
 import project301.controller.TaskController;
+
+
+import static com.loopj.android.http.AsyncHttpClient.LOG_TAG;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBuffer;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.novoda.merlin.Merlin;
 import com.novoda.merlin.NetworkStatus;
 import com.novoda.merlin.registerable.bind.Bindable;
@@ -45,12 +61,13 @@ import com.novoda.merlin.MerlinsBeard;
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterPostTaskActivity extends AppCompatActivity implements Connectable, Disconnectable, Bindable{
+public class RequesterPostTaskActivity extends AppCompatActivity implements Connectable, Disconnectable, Bindable,
+    GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
     private Context context;
 
     private EditText post_name;
     private EditText post_detail;
-    private EditText post_destination;
+    private AutoCompleteTextView post_destination;
     private EditText post_ideal_price;
     private ImageView post_photo;
     private Button submitButton;
@@ -58,6 +75,15 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
     private String userId;
     protected Merlin merlin;
     protected MerlinsBeard merlinsBeard;
+
+    // Address autocomplete stuff
+    private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
+            new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
+    private PlaceArrayAdapterController mPlaceArrayAdapter;
+    private GoogleApiClient mGoogleApiClient;
+    private static final int GOOGLE_API_CLIENT_ID = 0;
+    private Place taskPlace;
+    //
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -79,11 +105,27 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
         //find view by id.
         post_name = (EditText) findViewById(R.id.c_task_name);
         post_detail = (EditText) findViewById(R.id.c_task_detail);
-        post_destination = (EditText) findViewById(R.id.c_task_location);
+
+        post_destination = (AutoCompleteTextView) findViewById(R.id.c_task_location);
+        post_destination.setThreshold(3);
+
         post_ideal_price = (EditText) findViewById(R.id.c_task_idealprice);
         post_photo = (ImageView) findViewById(R.id.c_task_photo);
         submitButton=(Button)findViewById(R.id.submit_button);
         cancelButton=(Button)findViewById(R.id.cancel_button);
+
+
+
+        // Location autocomplete stuff
+        mGoogleApiClient = new GoogleApiClient.Builder(RequesterPostTaskActivity.this)
+                .addApi(Places.GEO_DATA_API)
+                .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
+                .addConnectionCallbacks(this)
+                .build();
+        post_destination.setOnItemClickListener(mAutocompleteClickListener);
+        mPlaceArrayAdapter = new PlaceArrayAdapterController(this, android.R.layout.simple_list_item_1,
+                BOUNDS_MOUNTAIN_VIEW, null);
+        post_destination.setAdapter(mPlaceArrayAdapter);
 
 
         //submitButton click
@@ -220,8 +262,66 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
         return true;
     }
 
+    // Autocomplete address
+    private AdapterView.OnItemClickListener mAutocompleteClickListener
+            = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final PlaceArrayAdapterController.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
+            Log.i(LOG_TAG, "Selected: " + item.description);
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
+            Log.i(LOG_TAG, "Fetching details for ID: " + item.placeId);
+        }
+    };
+
+    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
+            = new ResultCallback<PlaceBuffer>() {
+        @Override
+        public void onResult(PlaceBuffer places) {
+            if (!places.getStatus().isSuccess()) {
+                Log.e(LOG_TAG, "Place query did not complete. Error: " +
+                        places.getStatus().toString());
+                return;
+            }
+            else{
+                Log.d(LOG_TAG,"ResultCallback success");
+            }
+            // Selecting the first object buffer.
+            final Place place = places.get(0);
+            taskPlace = place;
+            CharSequence attributions = places.getAttributions();
+
+
+        }
+    };
+
+    @Override
+    public void onConnected(Bundle bundle) {
+
+        mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
+        Log.d(LOG_TAG, "Google Places API connected.");
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Log.e(LOG_TAG, "Google Places API connection failed with error code: "
+                + connectionResult.getErrorCode());
+
+        Toast.makeText(this,
+                "Google Places API connection failed with error code:" +
+                        connectionResult.getErrorCode(),
+                Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        mPlaceArrayAdapter.setGoogleApiClient(null);
+        Log.e(LOG_TAG, "Google Places API connection suspended.");
+    }
+
 
 }
-
-
-
