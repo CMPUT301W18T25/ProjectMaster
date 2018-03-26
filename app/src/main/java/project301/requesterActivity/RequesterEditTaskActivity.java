@@ -3,6 +3,7 @@ package project301.requesterActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.novoda.merlin.MerlinsBeard;
 import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
+import project301.allUserActivity.CameraActivity;
 import project301.controller.BidController;
 import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
@@ -237,6 +239,27 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
 
 
 
+        //cameraButton click
+        FloatingActionButton cameraButton = (FloatingActionButton) findViewById(R.id.floating_editcamera);
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent info2 = new Intent(RequesterEditTaskActivity.this, CameraActivity.class);
+                startActivity(info2);
+
+            }
+        });
+
+        //photoButton click
+        FloatingActionButton photoButton = (FloatingActionButton) findViewById(R.id.floating_editphoto);
+        photoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent info2 = new Intent(RequesterEditTaskActivity.this, PhotoActivity.class);
+                //startActivity(info2);
+
+            }
+        });
 
         //settle back button
         Button backButton = (Button) findViewById(R.id.back_button);
