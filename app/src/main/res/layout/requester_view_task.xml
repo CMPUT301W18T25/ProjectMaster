@@ -237,15 +237,6 @@
                 android:textStyle="bold|italic" />
 
             <Button
-                android:id="@+id/choose_button"
-                android:layout_width="72dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="serif"
-                android:text="Choose Bid"
-                android:textStyle="bold|italic" />
-
-            <Button
                 android:id="@+id/showlist_button"
                 android:layout_width="84dp"
                 android:layout_height="wrap_content"

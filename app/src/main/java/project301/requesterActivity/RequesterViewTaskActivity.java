@@ -70,6 +70,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
 
 
 
+
         //find view by id.
         view_name = (TextView) findViewById(R.id.c_view_name);
         view_detail= (TextView) findViewById(R.id.c_view_detail);
@@ -187,17 +188,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
             }
         });
 
-        //settle chooseBid button
-        Button chooseBidButton = (Button) findViewById(R.id.choose_button);
-        chooseBidButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent info2 = new Intent(RequesterViewTaskActivity.this, RequesterPayActivity.class);
-                info2.putExtra("userId",userId);
-                startActivity(info2);
 
-            }
-        });
 
         //settle showlist button
         Button showlist_Button = (Button) findViewById(R.id.showlist_button);
@@ -218,6 +209,10 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
         bidList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
+                Intent info1 = new Intent(RequesterViewTaskActivity.this, RequesterPayActivity.class);
+                info1.putExtra("info", index);
+                info1.putExtra("userId",userId);
+                startActivity(info1);
 
             }
         });
