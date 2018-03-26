@@ -236,7 +236,7 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
      * calls onMarkerClick and Logs the id of the pressed marker
      */
     private void displayTaskLocations() {
-
+        Log.d(TAG,"displayTaskLocations");
         mMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
         for (int i = 0; i < taskList.size(); i++) {
@@ -309,10 +309,10 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
         mMap = googleMap;
 
 
-        getAllTaksInfo();
         getLocationPermission();
         updateLocationUI();
         getDeviceLocation();
+        getAllTaksInfo();
 
 
 
@@ -322,8 +322,8 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
 
     private void getAllTaksInfo() {
 
-        TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
-        search.execute();
+        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+        search.execute(userId);
         taskList = new ArrayList<project301.Task>();
         ArrayList<project301.Task> searchedTask = new ArrayList<>();
         try {
@@ -335,7 +335,7 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
         }
         taskList.addAll(searchedTask);
         for (int i =0;i<taskList.size();i++){
-            Log.d(TAG,"TASK: "+taskList.get(i).getTaskName()+", "+taskList.get(i).getTaskStatus());
+            Log.d(TAG,"Requester TASK: "+taskList.get(i).getTaskName()+", "+taskList.get(i).getTaskStatus());
         }
     }
 
