@@ -50,7 +50,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="serif"
-                    android:text="Info of task name"
                     android:textSize="18sp"
                     android:textStyle="bold|italic" />
             </LinearLayout>
@@ -84,7 +83,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="serif"
-                    android:text="Info of task detail"
                     android:textSize="18sp"
                     android:textStyle="bold|italic" />
 
@@ -119,7 +117,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="serif"
-                    android:text="Info of location"
                     android:textSize="18sp"
                     android:textStyle="bold|italic" />
 
@@ -154,7 +151,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="serif"
-                    android:text="Info of deal price"
                     android:textSize="18sp"
                     android:textStyle="bold|italic" />
 
