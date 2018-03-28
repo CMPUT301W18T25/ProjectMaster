@@ -2,6 +2,8 @@ package project301;
 
 
 
+import android.graphics.Bitmap;
+
 import java.util.Arrays;
 
 /**
@@ -18,6 +20,8 @@ public class Photo {
     private String photoName;
     private byte[] compressedImage;
 
+    private Bitmap bit_image;
+
     public void Photo(){
 
     }
@@ -27,8 +31,9 @@ public class Photo {
      *
      * @param newImage coded image
      */
-    public void  addPhoto(byte[] newImage){
-        System.arraycopy(newImage, 0, this.compressedImage, 0, this.compressedImage.length);
+    public void  addPhoto(Bitmap newImage){
+       // System.arraycopy(newImage, 0, this.compressedImage, 0, this.compressedImage.length);
+        bit_image = newImage;
     }
 
     /**
@@ -58,8 +63,8 @@ public class Photo {
      * get photo
      * @return coded image
      */
-    public byte[] getPhoto(){
-        return this.compressedImage;
+    public Bitmap getPhoto(){
+        return this.bit_image;
     }
 
 

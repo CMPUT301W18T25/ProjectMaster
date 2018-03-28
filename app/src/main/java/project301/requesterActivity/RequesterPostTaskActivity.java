@@ -1,10 +1,14 @@
 package project301.requesterActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,6 +20,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
@@ -85,7 +91,8 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
     private GoogleApiClient mGoogleApiClient;
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private Place taskPlace;
-    //
+    // Photo stuff
+    public static final int GET_FROM_GALLERY = 3;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -213,8 +220,9 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
         photoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent info2 = new Intent(RequesterPostTaskActivity.this, PhotoActivity.class);
-                //startActivity(info2);
+                Log.d("Requester post task activity","take photo clicked");
+                // source: https://stackoverflow.com/questions/9107900/how-to-upload-image-from-gallery-in-android
+                startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
 
             }
         });
@@ -230,6 +238,28 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
 
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Log.d("RequesterPostTask", "onActivityResult");
+        //Detects request codes
+        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+            Uri selectedImage = data.getData();
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            post_photo.setImageBitmap(bitmap);
+        }
     }
 
     protected void onStart(){

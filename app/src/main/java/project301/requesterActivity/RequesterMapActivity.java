@@ -114,6 +114,7 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
      * have permission
      */
     private void getLocationPermission() {
+        mLocationPermissionGranted=false;
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
