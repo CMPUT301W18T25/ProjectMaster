@@ -24,6 +24,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -243,14 +245,24 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
             project301.Task currTask = taskList.get(i);
 
             if (currTask.getTasklgtitude() != null
-                    && currTask.getTasklatitude() != null) {
+                    && currTask.getTasklatitude() != null
+                    && currTask.getTaskStatus() != "done") {
 
                 if (getTaskDistance(currTask) <= 5000) {
-                    Marker marker = mMap.addMarker(new MarkerOptions()
+
+                   Marker marker = mMap.addMarker(new MarkerOptions()
                             .position(new LatLng(currTask.getTasklatitude(), currTask.getTasklgtitude()))
                             .anchor(0.5f, 0.5f)
                             .title(currTask.getTaskName())
                     );
+                    // Make bidden tasks have blue icon
+                    if (currTask.getTaskStatus().equals("bidden")){
+                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                    }
+                    // Make assigned task have a green icon
+                    else if (currTask.getTaskStatus().equals("assigned")) {
+                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                    }
                     Log.d(TAG, "Adding marker task name: " + marker.getTitle());
                     marker.setTag(i);
                     marker.showInfoWindow();
@@ -289,6 +301,13 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
         Log.d(TAG,"Clicked on marker "+String.valueOf(markerIndex));
         Log.d(TAG,"Task info: "+clickedTask.getTaskName());
         Log.d(TAG,"Task info: "+clickedTask.getTaskAddress());
+
+
+
+        Intent info1 = new Intent(RequesterMapActivity.this, RequesterViewTaskActivity.class);
+        info1.putExtra("info", markerIndex);
+        info1.putExtra("userId",userId);
+        startActivity(info1);
 
         /*Intent info1 = new Intent(RequesterMapActivity.this, ProviderTaskBidActivity.class);
         info1.putExtra("info", markerIndex);
