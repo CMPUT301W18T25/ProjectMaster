@@ -26,6 +26,7 @@ import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 import project301.GlobalCounter;
+import project301.Photo;
 import project301.allUserActivity.CameraActivity;
 import project301.controller.BidController;
 import project301.controller.FileSystemController;
@@ -167,8 +168,13 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
                         new_task.setTasklatitude(null);
                         new_task.setTasklgtitude(null);
                     }
-                    //to do:set photo
 
+                    //to do:set photo
+                    if (post_photo != null){
+                        Photo new_photo = new Photo();
+                        new_photo.addPhoto(post_photo.getDrawingCache());
+                        new_task.setTaskPhoto(new_photo);
+                    }
 
                     //upload new task data to database
                     if(merlinsBeard.isConnected()) {
