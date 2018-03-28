@@ -164,7 +164,7 @@ public class RequesterEditListActivity extends AppCompatActivity implements Swip
         int newCount = bidController.searchBidCounterOfThisRequester(userId);
         Log.i("bidCount",Integer.toString(newCount));
 
-        if(newCount!= GlobalCounter.count){
+        if(newCount!= GlobalCounter.count && newCount>0){
             GlobalCounter.count = newCount;
             Log.i("New Bid","New Bid");
             openRequestInfoDialog();

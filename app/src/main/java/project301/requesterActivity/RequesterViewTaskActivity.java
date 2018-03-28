@@ -238,7 +238,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
         BidController bidController = new BidController();
         //check counter change
         int newCount = bidController.searchBidCounterOfThisRequester(userId);
-        if(newCount!= GlobalCounter.count){
+        if(newCount!= GlobalCounter.count && newCount>0){
             GlobalCounter.count = newCount;
             Log.i("New Bid","New Bid");
         }

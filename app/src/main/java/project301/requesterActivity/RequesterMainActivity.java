@@ -90,7 +90,7 @@ public class RequesterMainActivity extends AppCompatActivity {
         //check counter change
         int newCount = bidController.searchBidCounterOfThisRequester(userId);
         Log.i("bidCount",Integer.toString(newCount));
-        if(newCount!=GlobalCounter.count){
+        if(newCount!= GlobalCounter.count && newCount>0){
             GlobalCounter.count = newCount;
             openRequestInfoDialog();
             Log.i("New Bid","New Bid");
@@ -99,8 +99,6 @@ public class RequesterMainActivity extends AppCompatActivity {
 
     private void openRequestInfoDialog() {
         // get request info, and show it on the dialog
-
-
         AlertDialog.Builder builder = new AlertDialog.Builder(RequesterMainActivity.this);
         builder.setTitle("New Bid")
                 .setMessage("You got a new bid!");
