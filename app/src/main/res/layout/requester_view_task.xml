@@ -66,8 +66,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:gravity="center_vertical|center_horizontal"
+            android:layout_height="45dp"
+            android:gravity="top|center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <TextView
@@ -212,7 +212,7 @@
             <ListView
                 android:id="@+id/bid_list"
                 android:layout_width="395dp"
-                android:layout_height="320dp"
+                android:layout_height="315dp"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="202dp">
 
@@ -222,8 +222,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="36dp"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
@@ -234,15 +233,6 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="Delete Task"
-                android:textStyle="bold|italic" />
-
-            <Button
-                android:id="@+id/choose_button"
-                android:layout_width="72dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="serif"
-                android:text="Choose Bid"
                 android:textStyle="bold|italic" />
 
             <Button

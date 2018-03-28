@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.novoda.merlin.MerlinsBeard;
 import com.novoda.merlin.NetworkStatus;
 
+import project301.Bid;
 import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
@@ -54,6 +56,8 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
     private String view_index;
     protected MerlinsBeard merlinsBeard;
     private Context context;
+    private Bid bid;
+
 
 
     @SuppressWarnings("ConstantConditions")
@@ -70,6 +74,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
 
 
 
+
         //find view by id.
         view_name = (TextView) findViewById(R.id.c_view_name);
         view_detail= (TextView) findViewById(R.id.c_view_detail);
@@ -77,7 +82,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
         view_status = (TextView) findViewById(R.id.c_view_status);
         view_idealprice = (TextView) findViewById(R.id.c_view_idealprice);
         view_lowestbid = (TextView) findViewById(R.id.c_lowest_bid);
-
+        bidList = (ListView)findViewById(R.id.bid_list);
         tasklist = new ArrayList<Task>();
 
         //get data from database
@@ -187,17 +192,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
             }
         });
 
-        //settle chooseBid button
-        Button chooseBidButton = (Button) findViewById(R.id.choose_button);
-        chooseBidButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent info2 = new Intent(RequesterViewTaskActivity.this, RequesterPayActivity.class);
-                info2.putExtra("userId",userId);
-                startActivity(info2);
 
-            }
-        });
 
         //settle showlist button
         Button showlist_Button = (Button) findViewById(R.id.showlist_button);
@@ -213,11 +208,15 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
 
 
 
-        // settle click on bid list, no change to interface ,but the bid price get selected
+        // settle click on bid list, interface jump from view to pay.
         bidList = (ListView) findViewById(R.id.bid_list);
         bidList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
+                Intent info1 = new Intent(RequesterViewTaskActivity.this, RequesterPayActivity.class);
+                info1.putExtra("info", index);
+                info1.putExtra("userId",userId);
+                startActivity(info1);
 
             }
         });
@@ -239,7 +238,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
         BidController bidController = new BidController();
         //check counter change
         int newCount = bidController.searchBidCounterOfThisRequester(userId);
-        if(newCount!= GlobalCounter.count){
+        if(newCount!= GlobalCounter.count && newCount>0){
             GlobalCounter.count = newCount;
             Log.i("New Bid","New Bid");
         }
@@ -290,7 +289,31 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
         view_lowestbid.setText(Double.toString(temp_lowestbid));
 
 
+        //pull bid data from database
+        TaskController.searchAllBid searchAllBid = new TaskController.searchAllBid();
+        searchAllBid.execute(view_task.getId());
+        ArrayList<Bid> allBidOfThisTask = new ArrayList<>();
+        ArrayList<String> allBidsString = new ArrayList<>();
 
+        //get target data
+        try {
+            allBidOfThisTask = searchAllBid.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        //put target data into arraylist.
+        for(Bid bid: allBidOfThisTask){
+            if(!bid.equals(null)) {
+                allBidsString.add(Double.toString(bid.getBidAmount()));
+                 }
+        }
+
+        //set adapter
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.bid_list_item,allBidsString);
+        bidList.setAdapter(adapter);
 
 
     }

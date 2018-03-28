@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 import project301.GlobalCounter;
+import project301.allUserActivity.CameraActivity;
 import project301.controller.BidController;
 import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
@@ -195,6 +197,27 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
         });
 
 
+        //cameraButton click
+        FloatingActionButton cameraButton = (FloatingActionButton) findViewById(R.id.floating_addcamera);
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent info2 = new Intent(RequesterPostTaskActivity.this, CameraActivity.class);
+                startActivity(info2);
+
+            }
+        });
+
+        //photoButton click
+        FloatingActionButton photoButton = (FloatingActionButton) findViewById(R.id.floating_addphoto);
+        photoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent info2 = new Intent(RequesterPostTaskActivity.this, PhotoActivity.class);
+                //startActivity(info2);
+
+            }
+        });
 
 
         //cancelButton click
@@ -215,7 +238,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
         BidController bidController = new BidController();
         //check counter change
         int newCount = bidController.searchBidCounterOfThisRequester(userId);
-        if(newCount!= GlobalCounter.count){
+        if(newCount!= GlobalCounter.count && newCount>0){
             GlobalCounter.count = newCount;
             Log.i("New Bid","New Bid");
         }

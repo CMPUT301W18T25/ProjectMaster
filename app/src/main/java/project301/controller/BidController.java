@@ -50,7 +50,7 @@ public class BidController {
     public int searchBidCounterOfThisRequester(String requesterId){
         BidController.searchBidCounterOfThisRequester searchBidCounterOfThisRequester = new BidController.searchBidCounterOfThisRequester();
         searchBidCounterOfThisRequester.execute(requesterId);
-        BidCounter bidCounter = null;
+        BidCounter bidCounter = new BidCounter();
         try {
             bidCounter = searchBidCounterOfThisRequester.get();
         } catch (InterruptedException e) {
@@ -58,7 +58,7 @@ public class BidController {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        if(bidCounter.equals(null)){
+        if(bidCounter==null){
             return -1;
         }
         else{
@@ -76,7 +76,7 @@ public class BidController {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        if(bidCounter.equals(null)){
+        if(bidCounter == null){
             return false;
         }
         //increase count by 1

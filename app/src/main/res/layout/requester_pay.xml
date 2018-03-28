@@ -11,178 +11,156 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:orientation="horizontal">
+            android:layout_height="57dp">
 
-            <TextView
-                android:id="@+id/print6"
-                android:layout_width="142dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="serif"
-                android:text="Task Name :"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
-
-            <TextView
-                android:id="@+id/confirm_name"
+            <ImageView
+                android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="serif"
-                android:text="Info of task name"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/info" />
+        </android.support.v7.widget.CardView>
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:orientation="horizontal">
+            android:layout_height="120dp"
+            app:cardBackgroundColor="?android:attr/textColorHighlight"
+            app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
-            <TextView
-                android:id="@+id/print1"
-                android:layout_width="142dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="serif"
-                android:text="Task Detail :"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/confirm_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="serif"
-                android:text="Info of task detail"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
+                <TextView
+                    android:id="@+id/print6"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="serif"
+                    android:text="Provider Name :"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/confirm_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="serif"
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-        <LinearLayout
-            android:layout_width="394dp"
-            android:layout_height="70dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/print3"
-                android:layout_width="31dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="serif"
-                android:text="Deatination :"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
-
-            <TextView
-                android:id="@+id/confirm_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="serif"
-                android:text="Info of location"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:orientation="horizontal">
+            android:layout_height="120dp"
+            app:cardBackgroundColor="@color/common_google_signin_btn_text_light_disabled"
+            app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
-            <TextView
-                android:id="@+id/print7"
-                android:layout_width="35dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="serif"
-                android:text="Ideal Price :"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/confirm_ideal_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="serif"
-                android:text="Info of ideal price"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/print1"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="serif"
+                    android:text="Provider Phone :"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic" />
 
-        <LinearLayout
+                <TextView
+                    android:id="@+id/confirm_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="serif"
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:orientation="horizontal">
+            android:layout_height="120dp"
+            app:cardBackgroundColor="?android:attr/textColorHighlight"
+            app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
-            <TextView
-                android:id="@+id/print4"
-                android:layout_width="142dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="serif"
-                android:text="Deal Price :"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/confirm_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="serif"
-                android:text="Info of deal price"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
+                <TextView
+                    android:id="@+id/print3"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="serif"
+                    android:text="Provider Email :"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/confirm_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="serif"
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic" />
 
-        <LinearLayout
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:orientation="horizontal">
+            android:layout_height="120dp"
+            app:cardBackgroundColor="@color/common_google_signin_btn_text_light_disabled"
+            app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
-            <TextView
-                android:id="@+id/print5"
-                android:layout_width="142dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="serif"
-                android:text="Task Status :"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/confirm_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="serif"
-                android:text="Info if status"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
+                <TextView
+                    android:id="@+id/print4"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="serif"
+                    android:text="Task Deal Price :"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/confirm_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="serif"
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="141dp"
-            android:gravity="bottom|center_horizontal"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
             android:orientation="horizontal">
 
             <Button
@@ -190,24 +168,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/blue1"
+                android:elevation="@android:dimen/app_icon_size"
                 android:fontFamily="serif"
-                android:text="pay"
+                android:text="submit"
                 android:textStyle="bold|italic" />
 
             <Button
-                android:id="@+id/delete_button"
+                android:id="@+id/decline_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"
-                android:text="Delete"
-                android:visibility="invisible" />
+                android:backgroundTint="@color/blue1"
+                android:elevation="@android:dimen/app_icon_size"
+                android:fontFamily="serif"
+                android:text="decline"
+                android:textStyle="bold|italic" />
 
             <Button
                 android:id="@+id/back_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@color/blue1"
                 android:fontFamily="serif"
                 android:text="Back"
                 android:textStyle="bold|italic" />

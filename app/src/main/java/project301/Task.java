@@ -26,23 +26,15 @@ public class Task {
     private String taskStatus;
     private String taskAddress;
     private Double lowestBid;
-
-
-
     private Double tasklatitude;
-
-
-
     private Double tasklgtitude;
-
-
     private String taskID;
-
     private ArrayList<Bid> taskBidList;
-
     private Photo taskPhoto;
     private Double taskIdealPrice;
     private DateTime taskDateTime;
+    private ArrayList<Bid> canceledBidList;
+    private Bid choosenBid;
 
 
 
@@ -63,6 +55,8 @@ public class Task {
         this.taskStatus=null;
         this.taskAddress=null;
         this.taskBidList= new ArrayList<Bid>();
+        this.canceledBidList= new ArrayList<Bid>();
+        this.choosenBid = null;
         this.taskPhoto=null;
         this.taskIdealPrice=null;
         this.taskDateTime=null;
@@ -162,7 +156,30 @@ public class Task {
     public void setTasklgtitude(Double tasklgtitude) {
         this.tasklgtitude = tasklgtitude;
     }
-
+    public void setChoosenBid(Bid bid){this.choosenBid = bid;}
+    public void addCanceledBid(Bid bid){
+        canceledBidList.add(bid);
+    }
+    public ArrayList<Bid> getCanceledBidList(){
+        return canceledBidList;
+    }
+    public Bid getChoosenBid(){
+        return choosenBid;
+    }
+    //requester needs to see all the bids which he hasn't canceled
+    public ArrayList<Bid> getAvailableBidListOfThisTask(){
+        ArrayList<Bid> result = new ArrayList<>();
+        if(canceledBidList==null){
+            return taskBidList;
+        }
+        //find difference between taskbidlist and canceledBidlist
+        for(Bid bid:taskBidList){
+            if(!canceledBidList.contains(bid)){
+                result.add(bid);
+            }
+        }
+        return result;
+    }
     /**
      * Add a bid into task list
      * @param bid a bid object
@@ -197,5 +214,6 @@ public class Task {
         }
         return false;
     }
+
 
 }

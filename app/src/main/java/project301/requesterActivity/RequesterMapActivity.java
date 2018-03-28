@@ -162,6 +162,9 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
             return;
         }
         try {
+            if (mLocationPermissionGranted == null){
+                return;
+            }
             if (mLocationPermissionGranted) {
                 Log.d(TAG,"Location permission granted");
                 mMap.setMyLocationEnabled(true);
@@ -332,6 +335,9 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
         updateLocationUI();
         getDeviceLocation();
         getAllTaksInfo();
+
+        getAllTaksInfo();
+        Log.d(TAG, "getAllTaskInfo complete");
 
 
 

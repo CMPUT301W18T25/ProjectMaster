@@ -222,7 +222,6 @@ public class UserController {
                 }
 
             }
-            Log.i("newUserid",newuser.getId());
             return newuser;
 
 
