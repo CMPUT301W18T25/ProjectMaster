@@ -11,10 +11,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import project301.Bid;
 import project301.GlobalCounter;
 import project301.R;
+import project301.Task;
 import project301.User;
 import project301.controller.BidController;
 import project301.controller.TaskController;
@@ -34,11 +36,18 @@ import project301.controller.UserController;
 public class RequesterPayActivity extends AppCompatActivity {
 
     private String userId;
-    private User user;
+    private int bidIndex;
+    private String taskId;
+    private User provider;
+    private Task task;
     private TextView confirmName;
     private TextView confirmEmail;
     private TextView confirmPhone;
     private TextView confirmPrice;
+    private TextView view_idealprice;
+
+    private ArrayList<Bid> bidList;
+    private Bid thisBid;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -49,16 +58,24 @@ public class RequesterPayActivity extends AppCompatActivity {
 
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
+        bidIndex = Integer.parseInt(intent.getExtras().get("bidIndex").toString());
+        taskId = intent.getExtras().get("taskId").toString();
 
-        //get all bids
-
-        //get index of target bid
-
-        //get providerid of target bid
+        //get Task object
+        TaskController.getTaskById getTaskById = new TaskController.getTaskById();
+        getTaskById.execute(taskId);
+        try {
+            task = getTaskById.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        bidList = task.getAvailableBidListOfThisTask();
+        thisBid = bidList.get(bidIndex);
+        Log.i("Bid name",thisBid.getProviderId());
 
         //get user
-        UserController uc = new UserController();
-        user = uc.getAUserById(userId);
 
         // find view by id.
         confirmName = (TextView) findViewById(R.id.confirm_name);
@@ -67,24 +84,23 @@ public class RequesterPayActivity extends AppCompatActivity {
         confirmPrice = (TextView) findViewById(R.id.confirm_price);
 
 
+
+        UserController uc = new UserController();
+        provider = uc.getAUserById(thisBid.getProviderId());
+
         //set information to textview
-        String temp_name=user.getUserName();
+        String temp_name=provider.getUserName();
         confirmName.setText(temp_name);
 
-        String temp_email=user.getUserEmail();
+        String temp_email=provider.getUserEmail();
         confirmEmail.setText(temp_email);
 
-        String temp_phone=user.getUserPhone();
+        String temp_phone=provider.getUserPhone();
         confirmPhone.setText(temp_phone);
 
 
-        //Double temp_idealprice=view_task.getTaskIdealPrice();
-        //view_idealprice.setText(Double.toString(temp_idealprice));
-
-
-
-
-
+        Double temp_dealPrice=thisBid.getBidAmount();
+        confirmPrice.setText(Double.toString(temp_dealPrice));
 
 
         //settle pay button
@@ -101,9 +117,18 @@ public class RequesterPayActivity extends AppCompatActivity {
 
         //settle decline button
         Button declineButton = (Button) findViewById(R.id.decline_button);
-        payButton.setOnClickListener(new View.OnClickListener() {
+        declineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //store the bid into canceledBidList
+                task.addCanceledBid(thisBid);
+
+
+                TaskController.requesterUpdateTask update2 = new TaskController.requesterUpdateTask();
+                update2.execute(task);
+
+
+
                 Intent info2 = new Intent(RequesterPayActivity.this, RequesterEditListActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);

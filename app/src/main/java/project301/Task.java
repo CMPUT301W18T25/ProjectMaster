@@ -158,10 +158,10 @@ public class Task {
     }
     public void setChoosenBid(Bid bid){this.choosenBid = bid;}
     public void addCanceledBid(Bid bid){
-        canceledBidList.add(bid);
+        this.canceledBidList.add(bid);
     }
     public ArrayList<Bid> getCanceledBidList(){
-        return canceledBidList;
+        return this.canceledBidList;
     }
     public Bid getChoosenBid(){
         return choosenBid;
@@ -174,7 +174,13 @@ public class Task {
         }
         //find difference between taskbidlist and canceledBidlist
         for(Bid bid:taskBidList){
-            if(!canceledBidList.contains(bid)){
+            boolean success = true;
+            for(Bid canceledbid:canceledBidList){
+                if(canceledbid.getProviderId().equals(bid.getProviderId()) && canceledbid.getBidAmount().equals(bid.getBidAmount())){
+                    success = false;
+                }
+            }
+            if(success){
                 result.add(bid);
             }
         }

@@ -101,11 +101,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
             FileSystemController FC = new FileSystemController();
             tasklist = FC.loadSentTasksFromFile(context);
         }
-
-
-
-
-
+        /*
         // get index of target task
         final int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
 
@@ -131,8 +127,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
 
         Double temp_lowestbid=view_task.getLowestBid();
         view_lowestbid.setText(Double.toString(temp_lowestbid));
-
-
+        */
         //settle edit button
         Button editButton = (Button) findViewById(R.id.edit_button);
         editButton.setOnClickListener(new View.OnClickListener() {
@@ -206,16 +201,16 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
             }
         });
 
-
-
         // settle click on bid list, interface jump from view to pay.
         bidList = (ListView) findViewById(R.id.bid_list);
         bidList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent info1 = new Intent(RequesterViewTaskActivity.this, RequesterPayActivity.class);
-                info1.putExtra("info", index);
+                info1.putExtra("taskId",view_task.getId());
                 info1.putExtra("userId",userId);
+                info1.putExtra("bidIndex",index);
+
                 startActivity(info1);
 
             }
@@ -291,28 +286,26 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
 
         //pull bid data from database
         TaskController.searchAllBid searchAllBid = new TaskController.searchAllBid();
-        searchAllBid.execute(view_task.getId());
-        ArrayList<Bid> allBidOfThisTask = new ArrayList<>();
-        ArrayList<String> allBidsString = new ArrayList<>();
-
-        //get target data
-        try {
-            allBidOfThisTask = searchAllBid.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        ArrayList<String> availableBidsString = new ArrayList<>();
+        ArrayList<Bid> availableBid = new ArrayList<>();
+        availableBid = view_task.getAvailableBidListOfThisTask();
 
         //put target data into arraylist.
-        for(Bid bid: allBidOfThisTask){
-            if(!bid.equals(null)) {
-                allBidsString.add(Double.toString(bid.getBidAmount()));
-                 }
+        for(Bid bid: availableBid){
+            if(bid!=null) {
+                availableBidsString.add(Double.toString(bid.getBidAmount()));
+            }
         }
-
+        ArrayList<Bid> availabl2eBid = view_task.getAvailableBidListOfThisTask();
+        for(Bid bid:availabl2eBid){
+            Log.i("bid amount",bid.getProviderId());
+        }
+        ArrayList<Bid> canceledBid = view_task.getCanceledBidList();
+        for(Bid bid:canceledBid){
+            Log.i("canceled bid amount",bid.getProviderId());
+        }
         //set adapter
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.bid_list_item,allBidsString);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.bid_list_item,availableBidsString);
         bidList.setAdapter(adapter);
 
 
