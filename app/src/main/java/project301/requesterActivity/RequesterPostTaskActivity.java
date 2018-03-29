@@ -143,7 +143,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
             @Override
 
             public void onClick(View view) {
-                // check empty and lemgth of needed information
+                // check empty and length of needed information
                 if(check_detaillength(post_detail.getText().toString())){
                 if (check_titlelength(post_name.getText().toString())){
                 if (check_empty(post_name.getText().toString(),post_destination.getText().toString(),

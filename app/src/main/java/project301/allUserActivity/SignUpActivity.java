@@ -65,48 +65,61 @@ public class SignUpActivity extends AppCompatActivity {
         checkValidationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_OK);
-                String enterName = usernameText.getText().toString();
-                String enterEmail = emailText.getText().toString();
-                String enterPhone= mobileText.getText().toString();
-                String enterPassward = passwardText.getText().toString();
-                //deal with those variables
-                newUser = new User();
-                newUser.setUserName(enterName);
-                newUser.setUserEmail(enterEmail);
-                newUser.setUserPhone(enterPhone);
-                newUser.setUserPassword(enterPassward);
-                newUser.setId(enterName);
-                Log.i("Name: ",newUser.getUserName());
+                if (check_namelength(usernameText.getText().toString())) {
+                    //setResult(RESULT_OK);
+                    String enterName = usernameText.getText().toString();
+                    String enterEmail = emailText.getText().toString();
+                    String enterPhone = mobileText.getText().toString();
+                    String enterPassward = passwardText.getText().toString();
+                    //deal with those variables
+                    newUser = new User();
+                    newUser.setUserName(enterName);
+                    newUser.setUserEmail(enterEmail);
+                    newUser.setUserPhone(enterPhone);
+                    newUser.setUserPassword(enterPassward);
+                    newUser.setId(enterName);
+                    Log.i("Name: ", newUser.getUserName());
 
-                UserController uc= new UserController();
-                String newUserId;
-                newUserId = uc.addUserAndCheck(newUser);
+                    UserController uc = new UserController();
+                    String newUserId;
+                    newUserId = uc.addUserAndCheck(newUser);
 
 
+                    if (newUserId != null) {
+                        newUser.setId(newUserId);
+                        Log.i("Success sign up:", enterName);
+                        Intent intent = new Intent(activity, UserCharacterActivity.class);
+                        //initializes a bidCounter for this new user.
+                        BidController bidController = new BidController();
+                        bidController.buildBidCounterOfThisRequester(newUserId);
 
-                if  (newUserId!=null){
-                    newUser.setId(newUserId);
-                    Log.i("Success sign up:",enterName);
-                    Intent intent = new Intent(activity, UserCharacterActivity.class);
-                    //initializes a bidCounter for this new user.
-                    BidController bidController = new BidController();
-                    bidController.buildBidCounterOfThisRequester(newUserId);
+                        //deliver userName
+                        intent.putExtra("userId", newUserId);
+                        Log.i("newUserId", newUserId);
 
-                    //deliver userName
-                    intent.putExtra("userId",newUserId);
-                    Log.i("newUserId",newUserId);
+                        startActivity(intent);
+                    } else {
+                        Toast toast = Toast.makeText(context, "Invalid Sign Up information! Please Try Again!", Toast.LENGTH_LONG);
+                        TextView v1 = (TextView) toast.getView().findViewById(android.R.id.message);
+                        v1.setTextColor(Color.RED);
+                        v1.setTextSize(20);
+                        v1.setGravity(Gravity.CENTER);
+                        toast.show();
+                    }
 
-                    startActivity(intent);
-                }else{
-                    Toast toast = Toast.makeText(context, "Invalid Sign Up information! Please Try Again!", Toast.LENGTH_LONG);
-                    TextView v1 = (TextView) toast.getView().findViewById(android.R.id.message);
-                    v1.setTextColor(Color.RED);
-                    v1.setTextSize(20);
-                    v1.setGravity(Gravity.CENTER);
+                } else {
+                    Toast toast = Toast.makeText(context, "The maximum length of username is 8", Toast.LENGTH_LONG);
                     toast.show();
                 }
             }
         });
+    }
+
+    private boolean check_namelength(String name)
+    {
+        if(name.length()>=9 ){
+            return false;
+        }
+        return true;
     }
 }
