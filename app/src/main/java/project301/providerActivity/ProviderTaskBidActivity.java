@@ -261,6 +261,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
 
                 Intent info2 = new Intent(ProviderTaskBidActivity.this, ProviderBidHistoryActivity.class);
                 info2.putExtra("userId",userId);
+                //info2.putExtra("userName",userId);
 
                 startActivity(info2);
 

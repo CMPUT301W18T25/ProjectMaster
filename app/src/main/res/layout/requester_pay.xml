@@ -78,7 +78,7 @@
                     android:textStyle="bold|italic" />
 
                 <TextView
-                    android:id="@+id/confirm_detail"
+                    android:id="@+id/confirm_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -112,7 +112,7 @@
                     android:textStyle="bold|italic" />
 
                 <TextView
-                    android:id="@+id/confirm_location"
+                    android:id="@+id/confirm_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
