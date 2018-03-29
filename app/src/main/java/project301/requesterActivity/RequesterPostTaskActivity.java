@@ -143,7 +143,9 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
             @Override
 
             public void onClick(View view) {
-                // check empty of needed information
+                // check empty and lemgth of needed information
+                if(check_detaillength(post_detail.getText().toString())){
+                if (check_titlelength(post_name.getText().toString())){
                 if (check_empty(post_name.getText().toString(),post_destination.getText().toString(),
                         post_ideal_price.getText().toString())){
 
@@ -201,6 +203,13 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
 
                 }else{
                     Toast toast = Toast.makeText(context,"Enter name, detail destination, ideal price, date and time",Toast.LENGTH_LONG);
+                    toast.show();
+                }}else {
+                    Toast toast = Toast.makeText(context,"The maximum length of name is 30 characters",Toast.LENGTH_LONG);
+                    toast.show();
+
+                }}else {
+                    Toast toast = Toast.makeText(context, "The maximum length of detail is 300 characters", Toast.LENGTH_LONG);
                     toast.show();
                 }
 
@@ -326,6 +335,22 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
     private boolean check_empty(String name, String destination, String ideal_price)
     {
         if(name.length()==0 || destination.length()==0|| ideal_price.length()==0 ){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean check_titlelength(String name)
+    {
+        if(name.length()>=31 ){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean check_detaillength(String detail)
+    {
+        if(detail.length()>=301 ){
             return false;
         }
         return true;
