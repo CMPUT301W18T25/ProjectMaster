@@ -104,8 +104,8 @@ public class RequesterPayActivity extends AppCompatActivity {
 
 
         //settle pay button
-        Button payButton = (Button) findViewById(R.id.pay_button);
-        payButton.setOnClickListener(new View.OnClickListener() {
+        Button submitButton = (Button) findViewById(R.id.submit_button);
+        submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterPayActivity.this, RequesterEditListActivity.class);
