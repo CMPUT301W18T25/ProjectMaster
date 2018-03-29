@@ -55,6 +55,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
     private String view_index;
     private Integer last_index;
     protected MerlinsBeard merlinsBeard;
+    private String temp_status;
 
 
 
@@ -138,6 +139,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         Double temp_idealprice=target_task.getTaskIdealPrice();
         edit_idealprice.setText(Double.toString(temp_idealprice));
 
+        temp_status=target_task.getTaskStatus();
         //settle save button click
 
         Button saveButton = (Button) findViewById(R.id.save_button);
@@ -146,7 +148,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // first check empty, name,destination and idealprice cannot leave empty.
                 FileSystemController FC = new FileSystemController();
-
+                if(check_status(temp_status)){
                 if(check_detaillength(edit_detail.getText().toString())){
                 if (check_titlelength(edit_name.getText().toString())){
                 if (check_empty(edit_name.getText().toString(),edit_destination.getText().toString(),
@@ -236,9 +238,12 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                     toast.show();
 
                 }}else {
-                Toast toast = Toast.makeText(context, "The maximum length of detail is 300 characters", Toast.LENGTH_LONG);
-                toast.show();
-            }
+                    Toast toast = Toast.makeText(context, "The maximum length of detail is 300 characters", Toast.LENGTH_LONG);
+                    toast.show();
+                }}else {
+                    Toast toast = Toast.makeText(context, "Only requested status allow to edit", Toast.LENGTH_LONG);
+                    toast.show();
+                }
 
 
 
@@ -359,6 +364,14 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+    private boolean check_status(String status)
+    {
+        if(status.equals("request" )){
+
+            return true;
+        }
+        return false;
     }
 
     private void openRequestInfoDialog() {
