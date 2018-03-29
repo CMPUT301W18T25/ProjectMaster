@@ -110,6 +110,10 @@ public class RequesterPayActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterPayActivity.this, RequesterEditListActivity.class);
                 info2.putExtra("userId",userId);
+                task.setTaskStatus("assigned");
+                task.setChoosenBid(thisBid);
+                TaskController.requesterUpdateTask update2 = new TaskController.requesterUpdateTask();
+                update2.execute(task);
                 startActivity(info2);
 
             }
