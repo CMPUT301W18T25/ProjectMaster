@@ -13,7 +13,11 @@ public class BidCounter {
         this.counter = counter;
         this.ESid = "null";
     }
-    public BidCounter(){}
+    public BidCounter(){
+        this.requesterId = null;
+        this.counter = -1;
+        this.ESid = "null";
+    }
     public void setRequesterId(String requesterId){
         this.requesterId = requesterId;
     }
