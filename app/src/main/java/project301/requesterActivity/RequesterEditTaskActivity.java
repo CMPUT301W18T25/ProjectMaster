@@ -147,6 +147,8 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                 // first check empty, name,destination and idealprice cannot leave empty.
                 FileSystemController FC = new FileSystemController();
 
+                if(check_detaillength(edit_detail.getText().toString())){
+                if (check_titlelength(edit_name.getText().toString())){
                 if (check_empty(edit_name.getText().toString(),edit_destination.getText().toString(),
                         edit_idealprice.getText().toString())){
 
@@ -229,7 +231,14 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                 }else{
                     Toast toast = Toast.makeText(context,"Enter name, detail destination, ideal price, date and time",Toast.LENGTH_LONG);
                     toast.show();
-                }
+                }}else {
+                    Toast toast = Toast.makeText(context,"The maximum length of name is 30 characters",Toast.LENGTH_LONG);
+                    toast.show();
+
+                }}else {
+                Toast toast = Toast.makeText(context, "The maximum length of detail is 300 characters", Toast.LENGTH_LONG);
+                toast.show();
+            }
 
 
 
@@ -336,6 +345,21 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         return true;
     }
 
+    private boolean check_titlelength(String name)
+    {
+        if(name.length()>=31 ){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean check_detaillength(String detail)
+    {
+        if(detail.length()>=301 ){
+            return false;
+        }
+        return true;
+    }
 
     private void openRequestInfoDialog() {
         // get request info, and show it on the dialog
