@@ -9,7 +9,6 @@ import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
-import android.support.test.InstrumentationRegistry;
 import android.util.Log;
 
 import java.util.ArrayList;

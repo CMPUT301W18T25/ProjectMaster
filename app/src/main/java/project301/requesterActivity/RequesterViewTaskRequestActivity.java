@@ -176,7 +176,7 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
         bidList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent info1 = new Intent(RequesterViewTaskRequestActivity.this, RequesterPayActivity.class);
+                Intent info1 = new Intent(RequesterViewTaskRequestActivity.this, RequesterChooseBidActivity.class);
                 info1.putExtra("taskId",view_task.getId());
                 info1.putExtra("userId",userId);
                 info1.putExtra("bidIndex",index);
