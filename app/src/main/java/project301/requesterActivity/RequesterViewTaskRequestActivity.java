@@ -39,14 +39,12 @@ import java.util.concurrent.ExecutionException;
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
-    private ListView bidList;
     private String userId;
     private TextView view_name;
     private TextView view_detail;
     private TextView view_destination;
     private TextView view_status;
     private TextView view_idealprice;
-    private TextView view_lowestbid;
     private Task view_task;
     private Task target_task;
     private ArrayList<Task> tasklist;
@@ -62,43 +60,20 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.requester_view_task_bidden);
+        setContentView(R.layout.requester_view_task_requested);
         final Intent intent = getIntent();
         context = getApplicationContext();
         merlinsBeard = MerlinsBeard.from(context);
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
         view_index=intent.getExtras().get("info").toString();
-
-
-
-
         //find view by id.
         view_name = (TextView) findViewById(R.id.c_view_name);
         view_detail= (TextView) findViewById(R.id.c_view_detail);
         view_destination = (TextView) findViewById(R.id.c_view_destination);
         view_status = (TextView) findViewById(R.id.c_view_status);
         view_idealprice = (TextView) findViewById(R.id.c_view_idealprice);
-        view_lowestbid = (TextView) findViewById(R.id.c_lowest_bid);
-        bidList = (ListView)findViewById(R.id.bid_list);
-        tasklist = new ArrayList<Task>();
 
-        //get data from database
-        if(merlinsBeard.isConnected()){
-            TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-            search.execute(userId);
-            try {
-                tasklist= search.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        }
-        else{
-            FileSystemController FC = new FileSystemController();
-            tasklist = FC.loadSentTasksFromFile(context);
-        }
         Button editButton = (Button) findViewById(R.id.edit_button);
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,8 +123,6 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
                 String FileName = "sent-"+target_task.getId()+".json";
                 FC.deleteFileByName(FileName,getApplication());
 
-
-
                 info2.putExtra("userId",userId);
                 info2.putExtra("info",index);
                 startActivity(info2);
@@ -171,20 +144,6 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
             }
         });
 
-        // settle click on bid list, interface jump from view to pay.
-        bidList = (ListView) findViewById(R.id.bid_list);
-        bidList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent info1 = new Intent(RequesterViewTaskRequestActivity.this, RequesterChooseBidActivity.class);
-                info1.putExtra("taskId",view_task.getId());
-                info1.putExtra("userId",userId);
-                info1.putExtra("bidIndex",index);
-
-                startActivity(info1);
-
-            }
-        });
     }
 
 
@@ -226,14 +185,10 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
             }
         }
         tasklist = FC.loadSentTasksFromFile(getApplication());
-
-
-
         // get target task
         final int index = Integer.parseInt(view_index);
         view_task=tasklist.get(index);
         //Log.i("State", Integer.toString(index) + " " + tasklist.get(index).getTaskName());
-
         // get information from target task and set information
         String temp_name=view_task.getTaskName();
         view_name.setText(temp_name);
@@ -250,33 +205,7 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
         Double temp_idealprice=view_task.getTaskIdealPrice();
         view_idealprice.setText(Double.toString(temp_idealprice));
 
-        Double temp_lowestbid=view_task.getLowestBid();
-        view_lowestbid.setText(Double.toString(temp_lowestbid));
 
-
-        //pull bid data from database
-        TaskController.searchAllBid searchAllBid = new TaskController.searchAllBid();
-        ArrayList<String> availableBidsString = new ArrayList<>();
-        ArrayList<Bid> availableBid = new ArrayList<>();
-        availableBid = view_task.getAvailableBidListOfThisTask();
-
-        //put target data into arraylist.
-        for(Bid bid: availableBid){
-            if(bid!=null) {
-                availableBidsString.add(Double.toString(bid.getBidAmount()));
-            }
-        }
-        ArrayList<Bid> availabl2eBid = view_task.getAvailableBidListOfThisTask();
-        for(Bid bid:availabl2eBid){
-            Log.i("bid amount",bid.getProviderId());
-        }
-        ArrayList<Bid> canceledBid = view_task.getCanceledBidList();
-        for(Bid bid:canceledBid){
-            Log.i("canceled bid amount",bid.getProviderId());
-        }
-        //set adapter
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.bid_list_item,availableBidsString);
-        bidList.setAdapter(adapter);
     }
 
 
