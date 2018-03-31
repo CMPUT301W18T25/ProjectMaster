@@ -103,12 +103,9 @@ public class RequesterEditListActivity extends AppCompatActivity implements Swip
                 }
                 else if(status.equals("assigned")){
                     info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskAssignedActivity.class);
-
                 }
                 else{
                     info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskDoneActivity.class);
-
-
                 }
                 info1.putExtra("info", index);
                 info1.putExtra("userId",userId);
