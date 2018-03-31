@@ -195,8 +195,8 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         }
 
         //get all assigned task of this provider (user) into a list
-        TaskController.searchAssignTasksOfThisProvider search2 = new TaskController.searchAssignTasksOfThisProvider();
-        search2.execute(userId);
+        TaskController.searchAssignTasksOfThisProvider search2 = new TaskController.searchAssignTasksOfThisProvider(userId);
+        search2.execute();
         try {
             searchedTask = search2.get();
         } catch (InterruptedException e) {
