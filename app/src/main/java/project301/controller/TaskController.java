@@ -665,6 +665,55 @@ public class TaskController {
 
     }
 
+    public static class searchAllBiddenTasksOfThisProvider extends AsyncTask<String, Void, ArrayList<Task>>{
+
+        protected ArrayList<Task> doInBackground(String... providerId) {
+            verifySettings();
+
+            ArrayList<Task> result_tasks = new ArrayList<Task>();
+
+            String query =
+                    "\n{ \n"+
+                            "\"size\" : 30,\n"+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"term\" : {\"taskRequester\" : \"" + providerId[0] + "\"}}," + "\n"+
+                            "               { \"term\" : {\"taskStatus\" : \"bidden\"}}" + "\n"+
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
+
+            Log.i("Query", "The query was " + query);
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t25")
+                    .addType("task")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<Task> foundResults
+                            = result.getSourceAsObjectList(Task.class);
+                    result_tasks.addAll(foundResults);
+                    Log.i("Success", "Data retrieved from database: ");
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                Task faultTask = new Task();
+                faultTask.setId("-1");
+                result_tasks.add(faultTask);
+            }
+            return result_tasks;
+        }
+
+
+    }
+
+
     /**
      * A static class to search all tasks of this requester in ES database
      */
