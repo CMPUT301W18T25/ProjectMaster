@@ -889,9 +889,11 @@ public class TaskController {
             Log.i("Length", Integer.toString(search_parameters.length));
 
             bodyQuery ="               { \"multi_match\" : {\"query\" : \"" +search_parameters[0] +"\", \"fields\" : [ \"taskName\", \"taskDetails\"] }}" + "\n";
+
             for (int i = 1; i < search_parameters.length; i++) {
                 bodyQuery = bodyQuery + "               ,{ \"multi_match\" : {\"query\" : \"" + search_parameters[i] + "\", \"fields\" : [ \"taskName\", \"taskDetails\"] }}" + "\n";
             }
+
             //bodyQuery = bodyQuery + "               ,{ \"multi_match\" : {\"query\" : \"" + search_parameters[1] + "\", \"fields\" : [ \"taskName\", \"taskDetails\"] }}" + "\n";
 
             String shellQuery =
@@ -899,7 +901,7 @@ public class TaskController {
                             "\"size\" : 10,\n"+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
-                            "           \"must\" : [\n"+
+                            "           \"should\" : [\n"+
                             bodyQuery+
                             "           ]\n"+
                             "       }\n"+
@@ -915,7 +917,7 @@ public class TaskController {
             Log.i("Query", "The query was " + shellQuery);
             Search search = new Search.Builder(shellQuery)
                     .addIndex("cmput301w18t25")
-                    .addType("user")
+                    .addType("task")
                     .build();
             try {
                 SearchResult result = client.execute(search);
