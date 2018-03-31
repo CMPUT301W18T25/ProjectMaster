@@ -182,8 +182,8 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         ArrayList<Task> searchedTask = new ArrayList<>();
         if (this.content.equals("all")) {
             //get all bidden task of this provider (user) into a list
-            TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
-            search.execute();
+            TaskController.searchAllBiddenTasksOfThisProvider search = new TaskController.searchAllBiddenTasksOfThisProvider();
+            search.execute(userId);
             try {
                 searchedTask = search.get();
             } catch (InterruptedException e) {
@@ -196,8 +196,8 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
 
         //get all assigned task of this provider (user) into a list
         /*
-        TaskController.searchAssignTasksOfThisProvider search2 = new TaskController.searchAssignTasksOfThisProvider(userId);
-        search2.execute();
+        TaskController.searchAssignTasksOfThisProvider search2 = new TaskController.searchAssignTasksOfThisProvider();
+        search2.execute(userId);
         try {
             searchedTask = search2.get();
         } catch (InterruptedException e) {
@@ -206,12 +206,14 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         taskList.addAll(searchedTask);
+        */
 
         // Attach the adapter to a ListView
         ProviderBiddenAdapter adapter = new ProviderBiddenAdapter(this, taskList);
         adapter.setId(userId);
         this.bidHistoryList.setAdapter(adapter);
-        */
+
+
     }
 
     public Intent setIntent(String status,int index){

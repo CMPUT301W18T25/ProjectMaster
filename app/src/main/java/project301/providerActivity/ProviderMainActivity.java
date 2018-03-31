@@ -187,7 +187,8 @@ public class ProviderMainActivity extends AppCompatActivity {
     }
 
     public void setTaskList(ArrayList<Task> list){
-        ProviderAdapter adapter = new ProviderAdapter(this, list);
+        taskList = list;
+        ProviderAdapter adapter = new ProviderAdapter(this, taskList);
         this.availablelist.setAdapter(adapter);
     }
 }
