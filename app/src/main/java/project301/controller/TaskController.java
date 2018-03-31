@@ -503,7 +503,7 @@ public class TaskController {
      */
 
     //TODO do test for this method, which should be extremely similar to bidden tasks
-  /*  public static class searchAssignTasksOfThisProvider extends AsyncTask<String, Void, ArrayList<Task>>{
+    public static class searchAssignTasksOfThisProvider extends AsyncTask<String, Void, ArrayList<Task>>{
 
         protected ArrayList<Task> doInBackground(String... providerId) {
             verifySettings();
@@ -546,8 +546,8 @@ public class TaskController {
             return result_tasks;
         }
 
-    }*/
-
+    }
+    /*
     public static class searchAssignTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
         //ArrayList<Task> taskList = new ArrayList<Task> ();
         String providerId;
@@ -610,7 +610,7 @@ public class TaskController {
             return result_tasks;
         }
 
-    }
+    }*/
     /**
      * A static class to search all tasks of this requester in ES database
      */

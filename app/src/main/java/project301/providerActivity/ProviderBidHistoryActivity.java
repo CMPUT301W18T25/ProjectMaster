@@ -195,6 +195,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         }
 
         //get all assigned task of this provider (user) into a list
+        /*
         TaskController.searchAssignTasksOfThisProvider search2 = new TaskController.searchAssignTasksOfThisProvider(userId);
         search2.execute();
         try {
@@ -210,6 +211,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         ProviderBiddenAdapter adapter = new ProviderBiddenAdapter(this, taskList);
         adapter.setId(userId);
         this.bidHistoryList.setAdapter(adapter);
+        */
     }
 
     public Intent setIntent(String status,int index){
