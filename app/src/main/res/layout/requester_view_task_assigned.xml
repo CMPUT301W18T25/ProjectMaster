@@ -365,20 +365,28 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/edit_button"
-                android:layout_width="match_parent"
-                android:layout_height="37dp"
-                android:layout_weight="1"
-                android:fontFamily="serif"
-                android:text="Edit  Task"
-                android:textStyle="bold|italic" />
-
-            <Button
                 android:id="@+id/pay_button"
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
                 android:fontFamily="serif"
                 android:text="Pay task"
+                android:textStyle="bold|italic" />
+
+            <Button
+                android:id="@+id/edit_button"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_weight="1"
+                android:fontFamily="serif"
+                android:text="Edit Task"
+                android:textStyle="bold|italic" />
+
+            <Button
+                android:id="@+id/showlist_button"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:fontFamily="serif"
+                android:text="Show List"
                 android:textStyle="bold|italic" />
 
             <Button
@@ -389,13 +397,6 @@
                 android:text="decline deal"
                 android:textStyle="bold|italic" />
 
-            <Button
-                android:id="@+id/showlist_button"
-                android:layout_width="match_parent"
-                android:layout_height="37dp"
-                android:fontFamily="serif"
-                android:text="Show List"
-                android:textStyle="bold|italic" />
         </LinearLayout>
 
     </LinearLayout>
