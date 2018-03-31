@@ -182,9 +182,7 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
         alltasklist = FC.loadSentTasksFromFile(getApplication());
         if(activity.equals("assignedList")){
             for(Task task:alltasklist){
-
                 tasklist.add(task);
-
             }
         }
         else{
@@ -219,9 +217,19 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
         view_idealprice.setText(Double.toString(temp_idealprice));
         view_deal_price.setText(Double.toString(temp_dealprice));
 
-        view_provider_phone.setText(provider.getUserPhone());
-        view_provider_Email.setText(provider.getUserEmail());
-        view_provider_Name.setText(provider.getUserName());
+        String temp_phone  = provider.getUserPhone();
+        if(!temp_phone.equals(null)){
+            view_provider_phone.setText(provider.getUserPhone());
+        }
+        String temp_email = provider.getUserEmail();
+        if(!temp_email.equals(null)){
+            view_provider_Email.setText(provider.getUserEmail());
+        }
+        String temp_provider = provider.getUserName();
+        if(!temp_provider.equals(null)){
+            view_provider_Name.setText(provider.getUserName());
+
+        }
 
 
     }

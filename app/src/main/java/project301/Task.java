@@ -223,6 +223,7 @@ public class Task {
     public void changeStatusAfterDeclineDeal(Bid bid){
         this.canceledBidList.add(bid);
         this.choosenBid = null;
+        this.taskProvider=null;
         ArrayList<Bid> bidList = this.getAvailableBidListOfThisTask();
         if(bidList != null){
             this.taskStatus = "bidden";

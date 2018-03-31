@@ -112,6 +112,7 @@ public class RequesterChooseBidActivity extends AppCompatActivity {
                 info2.putExtra("userId",userId);
                 task.setTaskStatus("assigned");
                 task.setChoosenBid(thisBid);
+                task.setTaskProvider(thisBid.getProviderId());
                 TaskController.requesterUpdateTask update2 = new TaskController.requesterUpdateTask();
                 update2.execute(task);
                 startActivity(info2);

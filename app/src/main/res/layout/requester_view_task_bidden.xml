@@ -112,7 +112,7 @@
                             android:textStyle="bold|italic" />
 
                         <Button
-                            android:id="@+id/view_map"
+                            android:id="@+id/map_button"
                             android:layout_width="84dp"
                             android:layout_height="22dp"
                             android:background="@color/blue3"
@@ -311,15 +311,6 @@
             android:layout_height="35dp"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/edit_button"
-                android:layout_width="68dp"
-                android:layout_height="37dp"
-                android:layout_weight="1"
-                android:fontFamily="serif"
-                android:text="Edit Task "
-                android:textStyle="bold|italic" />
 
             <Button
                 android:id="@+id/delete_button"
