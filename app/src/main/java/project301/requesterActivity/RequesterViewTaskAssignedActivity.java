@@ -59,19 +59,19 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
     private Context context;
     private Bid bid;
     private String activity;
+    private Intent intent;
 
     @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_view_task_assigned);
-        final Intent intent = getIntent();
+        intent = getIntent();
         context = getApplicationContext();
         merlinsBeard = MerlinsBeard.from(context);
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
         view_index=intent.getExtras().get("info").toString();
-        activity = intent.getExtras().get("activity").toString();
 
         //find view by id.
         view_name = (TextView) findViewById(R.id.c_view_name);
@@ -162,6 +162,9 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
     //when on start, first get newest data from database and then update the information
     protected void onStart(){
         super.onStart();
+        intent = getIntent();
+        activity = getIntent().getExtras().get("activity").toString();
+
         FileSystemController FC = new FileSystemController();
         //time sleep
         try {
@@ -196,6 +199,7 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
             }
         }
         alltasklist = FC.loadSentTasksFromFile(getApplication());
+        Log.i("activity:",activity);
         if(activity.equals("assignedList")){
             for(Task task:alltasklist){
                 tasklist.add(task);

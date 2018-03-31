@@ -50,7 +50,7 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.requester_bidden_list);
+        setContentView(R.layout.requester_assigned_list);
         final Intent intent = getIntent();
         context=getApplicationContext();
 
@@ -87,7 +87,7 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         assignedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent info1 = new Intent(RequesterAssignedListActivity.this, RequesterViewTaskRequestActivity.class);
+                Intent info1 = new Intent(RequesterAssignedListActivity.this, RequesterViewTaskAssignedActivity.class);
                 info1.putExtra("info", index);
                 info1.putExtra("userId",userId);
                 info1.putExtra("acitivity","assignedList");
@@ -187,16 +187,16 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         }
         // FC.deleteAllFiles(getApplication(),"sent");
         tasklist = FC.loadSentTasksFromFile(getApplication());
-        ArrayList<Task> biddenTaskList = new ArrayList<>();
+        ArrayList<Task> assignedTaskList = new ArrayList<>();
         for(Task task: tasklist){
-            if(task.getTaskStatus().equals("bidden")){
+            if(task.getTaskStatus().equals("assigned")){
 
-                biddenTaskList.add(task);
+                assignedTaskList.add(task);
 
             }
         }
 
-        RequesterAdapter adapter = new RequesterAdapter(this, biddenTaskList);
+        RequesterAdapter adapter = new RequesterAdapter(this, assignedTaskList);
         adapter.notifyDataSetChanged();
         // Attach the adapter to a ListView
         this.assignedTaskList.setAdapter(adapter);
