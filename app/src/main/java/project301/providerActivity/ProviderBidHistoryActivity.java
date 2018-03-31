@@ -177,13 +177,12 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         taskList = new ArrayList<>();
         taskList.add(task1);
         */
-        //Log.i("contenttttttttttttttttttttttttttttt",this.content);
         taskList = new ArrayList<>();
         ArrayList<Task> searchedTask = new ArrayList<>();
         if (this.content.equals("all")) {
             //get all bidden task of this provider (user) into a list
-            TaskController.searchAllBiddenTasksOfThisProvider search = new TaskController.searchAllBiddenTasksOfThisProvider();
-            search.execute(userId);
+            TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
+            search.execute();
             try {
                 searchedTask = search.get();
             } catch (InterruptedException e) {
@@ -195,9 +194,9 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         }
 
         //get all assigned task of this provider (user) into a list
-        /*
-        TaskController.searchAssignTasksOfThisProvider search2 = new TaskController.searchAssignTasksOfThisProvider();
-        search2.execute(userId);
+
+        TaskController.searchAssignTasksOfThisProvider search2 = new TaskController.searchAssignTasksOfThisProvider(userId);
+        search2.execute();
         try {
             searchedTask = search2.get();
         } catch (InterruptedException e) {
@@ -206,7 +205,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         taskList.addAll(searchedTask);
-        */
+
 
         // Attach the adapter to a ListView
         ProviderBiddenAdapter adapter = new ProviderBiddenAdapter(this, taskList);
