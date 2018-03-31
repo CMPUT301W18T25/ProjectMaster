@@ -113,11 +113,11 @@
 
                         <Button
                             android:id="@+id/view_map"
-                            android:layout_width="88dp"
+                            android:layout_width="84dp"
                             android:layout_height="22dp"
                             android:background="@color/blue3"
                             android:fontFamily="serif"
-                            android:text="View On Map"
+                            android:text="View Map"
                             android:textAllCaps="false"
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp"
