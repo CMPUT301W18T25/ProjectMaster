@@ -58,9 +58,11 @@
         <activity android:name=".requesterActivity.RequesterPayActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterMainActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterEditListActivity" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".requesterActivity.RequesterViewTaskActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterViewTaskRequestActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterEditInfoActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterEditTaskActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterBidListActivity" android:windowSoftInputMode="stateHidden"/>
+
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

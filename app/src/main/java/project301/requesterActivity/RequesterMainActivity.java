@@ -71,12 +71,25 @@ public class RequesterMainActivity extends AppCompatActivity {
             }
         });
 
+
         //settle editProfile button
         Button profileButton = (Button) findViewById(R.id.profile_button);
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterMainActivity.this, RequesterEditInfoActivity.class);
+                info2.putExtra("userId",userId);
+                startActivity(info2);
+
+            }
+        });
+
+        //settle editProfile button
+        Button biddenButton = (Button) findViewById(R.id.bidden_button);
+        biddenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent info2 = new Intent(RequesterMainActivity.this, RequesterBidListActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 

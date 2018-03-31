@@ -12,9 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-
 import com.novoda.merlin.MerlinsBeard;
-
 import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
@@ -37,24 +35,22 @@ import java.util.concurrent.ExecutionException;
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterEditListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
-    private ListView postedTaskList;
+public class RequesterAssignedListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+    private ListView assignedTaskList;
     private String userName;
     private String userId;
     private static final String FILENAME = "ProjectMaster.sav";
     private ArrayList<Task> tasklist;
     protected MerlinsBeard merlinsBeard;
-
     protected Context context;
     private ListView mListView;
     private SwipeRefreshLayout mSwipeLayout;
-
 
     @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.requester_edit_list);
+        setContentView(R.layout.requester_bidden_list);
         final Intent intent = getIntent();
         context=getApplicationContext();
 
@@ -62,14 +58,12 @@ public class RequesterEditListActivity extends AppCompatActivity implements Swip
         userId = intent.getExtras().get("userId").toString();
         merlinsBeard = MerlinsBeard.from(context);
 
-
-
         //settle mainMenu button
         Button mainMenuButton = (Button) findViewById(R.id.main_button);
         mainMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterEditListActivity.this, RequesterMainActivity.class);
+                Intent info2 = new Intent(RequesterAssignedListActivity.this, RequesterMainActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
@@ -81,7 +75,7 @@ public class RequesterEditListActivity extends AppCompatActivity implements Swip
         viewOnMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterEditListActivity.this, RequesterMapActivity.class);
+                Intent info2 = new Intent(RequesterAssignedListActivity.this, RequesterMapActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
@@ -89,27 +83,11 @@ public class RequesterEditListActivity extends AppCompatActivity implements Swip
         });
 
         // settle click on post task list
-        postedTaskList = (ListView) findViewById(R.id.post_list);
-        postedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        assignedTaskList = (ListView) findViewById(R.id.post_list);
+        assignedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                String status = tasklist.get(index).getTaskStatus();
-                Intent info1;
-                if(status.equals("request")){
-                    info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskRequestActivity.class);
-                }
-                else if(status.equals("bidden")){
-                    info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskBiddenActivity.class);
-                }
-                else if(status.equals("assigned")){
-                    info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskAssignedActivity.class);
-
-                }
-                else{
-                    info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskDoneActivity.class);
-
-
-                }
+                Intent info1 = new Intent(RequesterAssignedListActivity.this, RequesterViewTaskRequestActivity.class);
                 info1.putExtra("info", index);
                 info1.putExtra("userId",userId);
                 startActivity(info1);
@@ -159,7 +137,7 @@ public class RequesterEditListActivity extends AppCompatActivity implements Swip
         // get request info, and show it on the dialog
 
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterEditListActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterAssignedListActivity.this);
         builder.setTitle("New Bid")
                 .setMessage("You got a new bid!");
         // Create & Show the AlertDialog
@@ -193,7 +171,6 @@ public class RequesterEditListActivity extends AppCompatActivity implements Swip
             TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
             search.execute(userId);
 
-
             tasklist = new ArrayList<Task>();
             try {
                 tasklist= search.get();
@@ -209,10 +186,19 @@ public class RequesterEditListActivity extends AppCompatActivity implements Swip
         }
         // FC.deleteAllFiles(getApplication(),"sent");
         tasklist = FC.loadSentTasksFromFile(getApplication());
-        RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
+        ArrayList<Task> biddenTaskList = new ArrayList<>();
+        for(Task task: tasklist){
+            if(task.getTaskStatus().equals("bidden")){
+
+                biddenTaskList.add(task);
+
+            }
+        }
+
+        RequesterAdapter adapter = new RequesterAdapter(this, biddenTaskList);
         adapter.notifyDataSetChanged();
         // Attach the adapter to a ListView
-        this.postedTaskList.setAdapter(adapter);
+        this.assignedTaskList.setAdapter(adapter);
     }
 
 }
