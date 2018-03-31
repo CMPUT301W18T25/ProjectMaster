@@ -62,6 +62,8 @@
         <activity android:name=".requesterActivity.RequesterEditInfoActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterEditTaskActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterBidListActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterViewTaskAssignedActivity" android:windowSoftInputMode="stateHidden"/>
+
 
 
         <!--

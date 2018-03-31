@@ -90,6 +90,7 @@ public class RequesterBidListActivity extends AppCompatActivity implements Swipe
                 Intent info1 = new Intent(RequesterBidListActivity.this, RequesterViewTaskRequestActivity.class);
                 info1.putExtra("info", index);
                 info1.putExtra("userId",userId);
+                info1.putExtra("activity","biddenList");
                 startActivity(info1);
             }
         });
