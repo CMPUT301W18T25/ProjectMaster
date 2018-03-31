@@ -367,7 +367,7 @@ public class TaskController {
             verifySettings();
 
             String query = "{ \n"+
-                    "\"size\" : 30,\n"+
+                    "\"size\" : 300,\n"+
 
                     "\"query\":{\n"+
                     "\"term\":{\"userId\":\""+providerID[0]+"\"}\n"+
@@ -450,7 +450,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 30,\n"+
+                            "\"size\" : 300,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -564,7 +564,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 30,\n"+
+                            "\"size\" : 300,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -626,7 +626,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 30,\n"+
+                            "\"size\" : 300,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -674,7 +674,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 30,\n"+
+                            "\"size\" : 300,\n"+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
@@ -728,7 +728,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 30,\n"+
+                            "\"size\" : 300,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -781,7 +781,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 30,\n"+
+                            "\"size\" : 300,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -829,7 +829,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 30,\n"+
+                            "\"size\" : 300,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -876,7 +876,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 30,\n"+
+                            "\"size\" : 300,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -948,7 +948,7 @@ public class TaskController {
 
             String shellQuery =
                     "\n{ \n"+
-                            "\"size\" : 10,\n"+
+                            "\"size\" : 300,\n"+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"should\" : [\n"+
