@@ -101,34 +101,6 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
             FileSystemController FC = new FileSystemController();
             tasklist = FC.loadSentTasksFromFile(context);
         }
-        /*
-        // get index of target task
-        final int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
-
-        // get target task
-        view_task=tasklist.get(view_index);
-
-
-        // get information from target task and set information
-        String temp_name=view_task.getTaskName();
-        view_name.setText(temp_name);
-
-        String temp_detail=view_task.getTaskDetails();
-        view_detail.setText(temp_detail);
-
-        String temp_destination=view_task.getTaskAddress();
-        view_destination.setText(temp_destination);
-
-        String temp_status=view_task.getTaskStatus();
-        view_status.setText(temp_status);
-
-        Double temp_idealprice=view_task.getTaskIdealPrice();
-        view_idealprice.setText(Double.toString(temp_idealprice));
-
-        Double temp_lowestbid=view_task.getLowestBid();
-        view_lowestbid.setText(Double.toString(temp_lowestbid));
-        */
-        //settle edit button
         Button editButton = (Button) findViewById(R.id.edit_button);
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -307,8 +279,6 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
         //set adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.bid_list_item,availableBidsString);
         bidList.setAdapter(adapter);
-
-
     }
 
 
