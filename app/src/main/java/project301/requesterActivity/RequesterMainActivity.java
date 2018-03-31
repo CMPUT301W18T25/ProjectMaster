@@ -91,7 +91,7 @@ public class RequesterMainActivity extends AppCompatActivity {
 
         //settle done button
         Button doneButton = (Button) findViewById(R.id.done_button);
-        biddenButton.setOnClickListener(new View.OnClickListener() {
+        doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterMainActivity.this, RequesterDoneListActivity.class);
