@@ -109,6 +109,7 @@ public class RequesterEditListActivity extends AppCompatActivity implements Swip
                 }
                 info1.putExtra("info", index);
                 info1.putExtra("userId",userId);
+                info1.putExtra("activity","allList");
                 startActivity(info1);
             }
         });
