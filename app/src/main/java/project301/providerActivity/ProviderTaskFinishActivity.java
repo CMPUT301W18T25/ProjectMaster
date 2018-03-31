@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import project301.R;
 
@@ -26,6 +29,12 @@ import java.util.Map;
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderTaskFinishActivity extends AppCompatActivity {
+    private TextView taskName;
+    private TextView taskDetail;
+    private TextView taskLocation;
+    private TextView taskIdealPrice;
+    private TextView taskBidPrice;
+    private TextView taskStatus;
     private Map providerMap;
     private ArrayList tasklist;
     private String userName;
@@ -39,6 +48,13 @@ public class ProviderTaskFinishActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("useId").toString();
+
+        // find view by id.
+        taskName = (TextView) findViewById(R.id.p_task_name);
+        taskDetail= (TextView) findViewById(R.id.p_task_detail);
+        taskLocation = (TextView) findViewById(R.id.p_task_destination);
+        taskIdealPrice = (TextView) findViewById(R.id.p_task_idealprice);
+        taskBidPrice = (TextView) findViewById(R.id.p_task_mybid);
 
         //settle back button : jump back to history
         Button backButton = (Button) findViewById(R.id.back_button);

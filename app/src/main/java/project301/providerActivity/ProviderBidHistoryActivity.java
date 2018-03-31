@@ -39,6 +39,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
     private Button showAssigned;
     private Button showAll;
     private Button viewOnMapButton;
+    private Button backButton;
     private ListView bidHistoryList;
     private TextView taskLabel;
     private ArrayList<Task> taskList;
@@ -105,6 +106,17 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
                 Intent info2 = new Intent(ProviderBidHistoryActivity.this, ProviderBidHistoryActivity.class);
                 info2.putExtra("userId",userId);
                 info2.putExtra("content","all");
+                startActivity(info2);
+            }
+        });
+
+        //settle back button
+        backButton = (Button) findViewById(R.id.c_back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent info2 = new Intent(ProviderBidHistoryActivity.this, ProviderMainActivity.class);
+                info2.putExtra("userId",userId);
                 startActivity(info2);
             }
         });
