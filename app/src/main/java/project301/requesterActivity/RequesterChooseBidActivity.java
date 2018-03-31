@@ -28,12 +28,12 @@ import project301.controller.UserController;
  * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
- * @classname : RequesterPayActivity
+ * @classname : RequesterChooseBidActivity
  */
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterPayActivity extends AppCompatActivity {
+public class RequesterChooseBidActivity extends AppCompatActivity {
 
     private String userId;
     private int bidIndex;
@@ -108,7 +108,7 @@ public class RequesterPayActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterPayActivity.this, RequesterEditListActivity.class);
+                Intent info2 = new Intent(RequesterChooseBidActivity.this, RequesterEditListActivity.class);
                 info2.putExtra("userId",userId);
                 task.setTaskStatus("assigned");
                 task.setChoosenBid(thisBid);
@@ -133,7 +133,7 @@ public class RequesterPayActivity extends AppCompatActivity {
 
 
 
-                Intent info2 = new Intent(RequesterPayActivity.this, RequesterEditListActivity.class);
+                Intent info2 = new Intent(RequesterChooseBidActivity.this, RequesterEditListActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
@@ -145,7 +145,7 @@ public class RequesterPayActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterPayActivity.this, RequesterViewTaskRequestActivity.class);
+                Intent info2 = new Intent(RequesterChooseBidActivity.this, RequesterViewTaskRequestActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 

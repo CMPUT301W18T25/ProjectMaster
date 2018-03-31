@@ -55,7 +55,7 @@
         <activity android:name=".providerActivity.ProviderEditInfoActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".providerActivity.ProviderBidHistoryActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterPostTaskActivity" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".requesterActivity.RequesterPayActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterChooseBidActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterMainActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterEditListActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterViewTaskRequestActivity" android:windowSoftInputMode="stateHidden"/>
