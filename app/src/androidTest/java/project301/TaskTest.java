@@ -583,7 +583,6 @@ public class TaskTest {
     @Test
     public void searchAssignTasksOfThisProviderTest(){
         TaskController.getTaskById getTask = new TaskController.getTaskById();
-        TaskController.searchAssignTasksOfThisProvider search = new TaskController.searchAssignTasksOfThisProvider();
         ArrayList<Task> rt_list;
         ArrayList<Task> send_list = new ArrayList<Task>();
 
@@ -630,8 +629,9 @@ public class TaskTest {
         do {
             taskStatus3 = addTask.getStatus();
         } while (taskStatus3 != AsyncTask.Status.FINISHED);
+        TaskController.searchAssignTasksOfThisProvider search = new TaskController.searchAssignTasksOfThisProvider("Mike");
 
-        search.execute("tester");
+        search.execute();
 
         // w8 for 5 sec
         AsyncTask.Status taskStatus;
@@ -731,7 +731,7 @@ public class TaskTest {
             taskStatus3 = addTask.getStatus();
         } while (taskStatus3 != AsyncTask.Status.FINISHED);
 
-        search.execute("snake");
+        search.execute("Jason");
 
         // w8 for 5 sec
         AsyncTask.Status taskStatus;

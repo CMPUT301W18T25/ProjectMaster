@@ -13,7 +13,7 @@
         <TextView
             android:id="@+id/c_task_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="34dp"
             android:fontFamily="serif"
             android:text="Posted Task List"
             android:textAlignment="center"
@@ -24,7 +24,7 @@
         <ListView
             android:id="@+id/post_list"
             android:layout_width="match_parent"
-            android:layout_height="379dp">
+            android:layout_height="463dp">
 
         </ListView>
 

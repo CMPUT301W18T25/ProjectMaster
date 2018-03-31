@@ -68,6 +68,7 @@ public class ProviderMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderBidHistoryActivity.class);
                 intent.putExtra("userId",userId);
+                intent.putExtra("content","all");
                 startActivity(intent);
             }
         });
@@ -108,6 +109,10 @@ public class ProviderMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //need search code
+                /*
+                TaskController.searchTaskByKeyword searchTask = new TaskController.searchTaskByKeyword();
+                searchTask.execute("dongwang xiongji");
+                */
             }
         });
     }

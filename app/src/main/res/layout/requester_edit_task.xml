@@ -145,6 +145,7 @@
                 android:textStyle="bold|italic" />
 
             <android.support.design.widget.FloatingActionButton
+                android:id="@+id/floating_editcamera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -158,6 +159,7 @@
                 android:text="        " />
 
             <android.support.design.widget.FloatingActionButton
+                android:id="@+id/floating_editphoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

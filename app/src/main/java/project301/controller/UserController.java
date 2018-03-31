@@ -222,7 +222,6 @@ public class UserController {
                 }
 
             }
-            Log.i("newUserid",newuser.getId());
             return newuser;
 
 
@@ -283,7 +282,7 @@ public class UserController {
 
             String query = "{ \n"+
                     "\"query\":{\n"+
-                    "\"term\":{\"userId\":\""+search_parameters[0]+"\"}\n"+
+                    "\"term\":{\"userId\":\""+search_parameters[0].toLowerCase()+"\"}\n"+
                     "}\n"+"}";
 
 
@@ -323,7 +322,7 @@ public class UserController {
 
             String query = "{ \n" +
                     "\"query\":{\n" +
-                    "\"term\":{\"userName\":\"" + search_parameters[0] + "\"}\n" +
+                    "\"term\":{\"userName\":\"" + search_parameters[0].toLowerCase() + "\"}\n" +
                     "}\n" + "}";
 
             Log.i("Query", "The query was " + query);

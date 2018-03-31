@@ -9,17 +9,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.novoda.merlin.Merlin;
 import com.novoda.merlin.MerlinsBeard;
-import com.novoda.merlin.NetworkStatus;
-import com.novoda.merlin.registerable.bind.Bindable;
-import com.novoda.merlin.registerable.connection.Connectable;
-import com.novoda.merlin.registerable.disconnection.Disconnectable;
 
 import project301.GlobalCounter;
 import project301.R;
@@ -30,7 +24,6 @@ import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -100,7 +93,20 @@ public class RequesterEditListActivity extends AppCompatActivity implements Swip
         postedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskActivity.class);
+                String status = tasklist.get(index).getTaskStatus();
+                Intent info1;
+                if(status.equals("request")){
+                    info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskRequestActivity.class);
+                }
+                else if(status.equals("bidden")){
+                    info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskBiddenActivity.class);
+                }
+                else if(status.equals("assigned")){
+                    info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskAssignedActivity.class);
+                }
+                else{
+                    info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskDoneActivity.class);
+                }
                 info1.putExtra("info", index);
                 info1.putExtra("userId",userId);
                 startActivity(info1);
@@ -164,7 +170,7 @@ public class RequesterEditListActivity extends AppCompatActivity implements Swip
         int newCount = bidController.searchBidCounterOfThisRequester(userId);
         Log.i("bidCount",Integer.toString(newCount));
 
-        if(newCount!= GlobalCounter.count){
+        if(newCount!= GlobalCounter.count && newCount>0){
             GlobalCounter.count = newCount;
             Log.i("New Bid","New Bid");
             openRequestInfoDialog();

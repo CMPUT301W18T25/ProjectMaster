@@ -54,6 +54,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:fontFamily="serif"
+                android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>

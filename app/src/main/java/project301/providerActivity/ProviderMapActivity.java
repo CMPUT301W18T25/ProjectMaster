@@ -147,6 +147,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
      * have permission
      */
     private void getLocationPermission() {
+        mLocationPermissionGranted=false;
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -351,6 +352,9 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
         Log.d(TAG,"Task info: "+clickedTask.getTaskAddress());
 
         Intent info1 = new Intent(ProviderMapActivity.this, ProviderTaskBidActivity.class);
+
+        info1.putExtra("taskId",clickedTask.getId());
+        //provide the task status for the next activity
         info1.putExtra("info", markerIndex);
         info1.putExtra("status","request");
         info1.putExtra("userId",userId);

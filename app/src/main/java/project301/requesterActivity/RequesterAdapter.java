@@ -50,6 +50,7 @@ public class RequesterAdapter extends ArrayAdapter<Task> {
         TextView task_name = convertView.findViewById(R.id.adapter_name);
         TextView task_destination = convertView.findViewById(R.id.adapter_destination);
         TextView task_idealprice = convertView.findViewById(R.id.adapter_idealprice);
+        TextView task_status = convertView.findViewById(R.id.adapter_status);
 
         // Return the completed view to render on screen
         //noinspection ConstantConditions
@@ -59,6 +60,7 @@ public class RequesterAdapter extends ArrayAdapter<Task> {
             task_idealprice.setText(Double.toString(task.getTaskIdealPrice()));
         }
 
+        task_status.setText(task.getTaskStatus().toString());
         Log.i("a","a");
         return convertView;
     }

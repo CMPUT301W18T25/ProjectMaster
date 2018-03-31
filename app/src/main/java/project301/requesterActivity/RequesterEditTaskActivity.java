@@ -3,6 +3,7 @@ package project301.requesterActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,11 +18,11 @@ import com.novoda.merlin.MerlinsBeard;
 import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
+import project301.allUserActivity.CameraActivity;
 import project301.controller.BidController;
 import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
 import project301.controller.TaskController;
-import project301.utilities.FileIOUtil;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -53,6 +54,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
     private String view_index;
     private Integer last_index;
     protected MerlinsBeard merlinsBeard;
+    private String temp_status;
 
 
 
@@ -136,6 +138,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         Double temp_idealprice=target_task.getTaskIdealPrice();
         edit_idealprice.setText(Double.toString(temp_idealprice));
 
+        temp_status=target_task.getTaskStatus();
         //settle save button click
 
         Button saveButton = (Button) findViewById(R.id.save_button);
@@ -144,13 +147,15 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // first check empty, name,destination and idealprice cannot leave empty.
                 FileSystemController FC = new FileSystemController();
-
+                if(check_status(temp_status)){
+                if(check_detaillength(edit_detail.getText().toString())){
+                if (check_titlelength(edit_name.getText().toString())){
                 if (check_empty(edit_name.getText().toString(),edit_destination.getText().toString(),
                         edit_idealprice.getText().toString())){
 
 
                     //interface jump
-                    //Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterViewTaskActivity.class);
+                    //Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterViewTaskRequestActivity.class);
                     Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterEditListActivity.class);
 
 
@@ -227,6 +232,16 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                 }else{
                     Toast toast = Toast.makeText(context,"Enter name, detail destination, ideal price, date and time",Toast.LENGTH_LONG);
                     toast.show();
+                }}else {
+                    Toast toast = Toast.makeText(context,"The maximum length of name is 30 characters",Toast.LENGTH_LONG);
+                    toast.show();
+
+                }}else {
+                    Toast toast = Toast.makeText(context, "The maximum length of detail is 300 characters", Toast.LENGTH_LONG);
+                    toast.show();
+                }}else {
+                    Toast toast = Toast.makeText(context, "Only requested status allow to edit", Toast.LENGTH_LONG);
+                    toast.show();
                 }
 
 
@@ -237,6 +252,27 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
 
 
 
+        //cameraButton click
+        FloatingActionButton cameraButton = (FloatingActionButton) findViewById(R.id.floating_editcamera);
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent info2 = new Intent(RequesterEditTaskActivity.this, CameraActivity.class);
+                startActivity(info2);
+
+            }
+        });
+
+        //photoButton click
+        FloatingActionButton photoButton = (FloatingActionButton) findViewById(R.id.floating_editphoto);
+        photoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent info2 = new Intent(RequesterEditTaskActivity.this, PhotoActivity.class);
+                //startActivity(info2);
+
+            }
+        });
 
         //settle back button
         Button backButton = (Button) findViewById(R.id.back_button);
@@ -244,7 +280,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //interface jump
-                Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterViewTaskActivity.class);
+                Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterViewTaskRequestActivity.class);
                 info2.putExtra("userId",userId);
                 info2.putExtra("info",view_index);
                 startActivity(info2);
@@ -262,7 +298,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         //check counter change
         int newCount = bidController.searchBidCounterOfThisRequester(userId);
         Log.i("bidCount",Integer.toString(newCount));
-        if(newCount!= GlobalCounter.count){
+        if(newCount!= GlobalCounter.count && newCount>0){
             GlobalCounter.count = newCount;
             Log.i("New Bid","New Bid");
             openRequestInfoDialog();
@@ -313,6 +349,29 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         return true;
     }
 
+    private boolean check_titlelength(String name)
+    {
+        if(name.length()>=31 ){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean check_detaillength(String detail)
+    {
+        if(detail.length()>=301 ){
+            return false;
+        }
+        return true;
+    }
+    private boolean check_status(String status)
+    {
+        if(status.equals("request" )){
+
+            return true;
+        }
+        return false;
+    }
 
     private void openRequestInfoDialog() {
         // get request info, and show it on the dialog

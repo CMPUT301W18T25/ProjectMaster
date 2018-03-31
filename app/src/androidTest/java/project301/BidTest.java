@@ -1,11 +1,15 @@
 package project301;
 
+import android.os.AsyncTask;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import project301.allUserActivity.LogInActivity;
-
+import project301.controller.BidController;
 
 
 /**
@@ -112,5 +116,84 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
         assertEquals(10, biddedTask.getTaskBidList ().get (0).getBidAmount());
 
     }
+    public void testSetBidCounter(){
+        BidCounter bidCounter = new BidCounter("lily3",0);
+
+        BidController.buildBidCounterOfThisRequester buildBidCounterOfThisRequester = new BidController.buildBidCounterOfThisRequester();
+        buildBidCounterOfThisRequester.execute(bidCounter);
+
+        AsyncTask.Status taskStatus;
+        do {
+            taskStatus =buildBidCounterOfThisRequester.getStatus();
+        } while (taskStatus != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        BidController.searchBidCounterOfThisRequester searchBidCounterOfThisRequester = new BidController.searchBidCounterOfThisRequester();
+        searchBidCounterOfThisRequester.execute("lily3");
+        BidCounter searchedBidCounter = new BidCounter();
+
+        try {
+            searchedBidCounter = searchBidCounterOfThisRequester.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(searchedBidCounter.getRequesterId(),bidCounter.getRequesterId());
+
+    }
+    public void testUpdateBidCounter(){
+        BidCounter bidCounter = new BidCounter("shell",0);
+        BidController.buildBidCounterOfThisRequester buildBidCounterOfThisRequester = new BidController.buildBidCounterOfThisRequester();
+        buildBidCounterOfThisRequester.execute(bidCounter);
+
+        AsyncTask.Status taskStatus;
+        do {
+            taskStatus =buildBidCounterOfThisRequester.getStatus();
+        } while (taskStatus != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        bidCounter.setCounter(2);
+        BidController.updateBidCounterOfThisRequester updateBidCounterOfThisRequester = new BidController.updateBidCounterOfThisRequester();
+        updateBidCounterOfThisRequester.execute(bidCounter);
+
+        do {
+            taskStatus =updateBidCounterOfThisRequester.getStatus();
+        } while (taskStatus != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        BidController.searchBidCounterOfThisRequester searchBidCounterOfThisRequester = new BidController.searchBidCounterOfThisRequester();
+        searchBidCounterOfThisRequester.execute("shell");
+        BidCounter searchedBidCounter = new BidCounter();
+
+        try {
+            searchedBidCounter = searchBidCounterOfThisRequester.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(searchedBidCounter.getRequesterId(),bidCounter.getRequesterId());
+        assertEquals(searchedBidCounter.getCounter(),2);
+
+
+    }
+
 
 }

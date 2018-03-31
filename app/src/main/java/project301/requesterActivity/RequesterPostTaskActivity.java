@@ -1,10 +1,15 @@
 package project301.requesterActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,10 +20,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 import project301.GlobalCounter;
+import project301.Photo;
+import project301.allUserActivity.CameraActivity;
 import project301.controller.BidController;
 import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
@@ -83,7 +92,8 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
     private GoogleApiClient mGoogleApiClient;
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private Place taskPlace;
-    //
+    // Photo stuff
+    public static final int GET_FROM_GALLERY = 3;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -133,7 +143,9 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
             @Override
 
             public void onClick(View view) {
-                // check empty of needed information
+                // check empty and length of needed information
+                if(check_detaillength(post_detail.getText().toString())){
+                if (check_titlelength(post_name.getText().toString())){
                 if (check_empty(post_name.getText().toString(),post_destination.getText().toString(),
                         post_ideal_price.getText().toString())){
 
@@ -148,8 +160,23 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
                     new_task.setTaskAddress(post_destination.getText().toString());
                     new_task.setTaskIdealPrice(Double.parseDouble(post_ideal_price.getText().toString()));
                     new_task.setTaskRequester(userId);
-                    //to do:set photo
+                    if (taskPlace != null){
+                        Log.d(LOG_TAG,"Task lat long: "+taskPlace.getLatLng());
+                        new_task.setTasklatitude(taskPlace.getLatLng().latitude);
+                        new_task.setTasklgtitude(taskPlace.getLatLng().longitude);
+                    }
+                    else{
+                        Log.d(LOG_TAG,"No task lat and long");
+                        new_task.setTasklatitude(null);
+                        new_task.setTasklgtitude(null);
+                    }
 
+                    //to do:set photo
+                    if (post_photo != null){
+                        Photo new_photo = new Photo();
+                        new_photo.addPhoto(post_photo.getDrawingCache());
+                        new_task.setTaskPhoto(new_photo);
+                    }
 
                     //upload new task data to database
                     if(merlinsBeard.isConnected()) {
@@ -177,6 +204,13 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
                 }else{
                     Toast toast = Toast.makeText(context,"Enter name, detail destination, ideal price, date and time",Toast.LENGTH_LONG);
                     toast.show();
+                }}else {
+                    Toast toast = Toast.makeText(context,"The maximum length of name is 30 characters",Toast.LENGTH_LONG);
+                    toast.show();
+
+                }}else {
+                    Toast toast = Toast.makeText(context, "The maximum length of detail is 300 characters", Toast.LENGTH_LONG);
+                    toast.show();
                 }
 
 
@@ -185,6 +219,28 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
         });
 
 
+        //cameraButton click
+        FloatingActionButton cameraButton = (FloatingActionButton) findViewById(R.id.floating_addcamera);
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent info2 = new Intent(RequesterPostTaskActivity.this, CameraActivity.class);
+                startActivity(info2);
+
+            }
+        });
+
+        //photoButton click
+        FloatingActionButton photoButton = (FloatingActionButton) findViewById(R.id.floating_addphoto);
+        photoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Requester post task activity","take photo clicked");
+                // source: https://stackoverflow.com/questions/9107900/how-to-upload-image-from-gallery-in-android
+                startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+
+            }
+        });
 
 
         //cancelButton click
@@ -199,13 +255,35 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Log.d("RequesterPostTask", "onActivityResult");
+        //Detects request codes
+        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+            Uri selectedImage = data.getData();
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            post_photo.setImageBitmap(bitmap);
+        }
+    }
+
     protected void onStart(){
 
         super.onStart();
         BidController bidController = new BidController();
         //check counter change
         int newCount = bidController.searchBidCounterOfThisRequester(userId);
-        if(newCount!= GlobalCounter.count){
+        if(newCount!= GlobalCounter.count && newCount>0){
             GlobalCounter.count = newCount;
             Log.i("New Bid","New Bid");
         }
@@ -257,6 +335,22 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
     private boolean check_empty(String name, String destination, String ideal_price)
     {
         if(name.length()==0 || destination.length()==0|| ideal_price.length()==0 ){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean check_titlelength(String name)
+    {
+        if(name.length()>=31 ){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean check_detaillength(String detail)
+    {
+        if(detail.length()>=301 ){
             return false;
         }
         return true;

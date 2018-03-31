@@ -1,5 +1,6 @@
 package project301.requesterActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import project301.GlobalCounter;
 import project301.R;
@@ -44,7 +46,7 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
     private UserController userListControl;
     private String userId;
     private User user;
-
+    private Context context;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -52,6 +54,7 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_info);
         final Intent intent = getIntent();
+        this.context = getApplicationContext();
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
         UserController uc = new UserController();
@@ -69,6 +72,7 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (check_namelength(usernameText.getText().toString())) {
 
                 //get user input
                 //editName = usernameText.getText().toString();
@@ -97,6 +101,10 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 startActivity(info2);
+                } else {
+                    Toast toast = Toast.makeText(context, "The maximum length of username is 8", Toast.LENGTH_LONG);
+                    toast.show();
+                }
 
             }
         });
@@ -125,7 +133,7 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
         //check counter change
         int newCount = bidController.searchBidCounterOfThisRequester(userId);
         Log.i("bidCount",Integer.toString(newCount));
-        if(newCount!= GlobalCounter.count){
+        if(newCount!= GlobalCounter.count && newCount>0){
             GlobalCounter.count = newCount;
             Log.i("New Bid","New Bid");
             openRequestInfoDialog();
@@ -170,6 +178,14 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
         // Create & Show the AlertDialog
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private boolean check_namelength(String name)
+    {
+        if(name.length()>=9 ){
+            return false;
+        }
+        return true;
     }
 
 

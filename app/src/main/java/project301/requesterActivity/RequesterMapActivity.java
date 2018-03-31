@@ -15,8 +15,6 @@ import android.widget.Button;
 import project301.R;
 
 import project301.controller.TaskController;
-import project301.providerActivity.ProviderMapActivity;
-import project301.providerActivity.ProviderTaskBidActivity;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -24,6 +22,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -112,6 +111,7 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
      * have permission
      */
     private void getLocationPermission() {
+        mLocationPermissionGranted=false;
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -160,6 +160,9 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
             return;
         }
         try {
+            if (mLocationPermissionGranted == null){
+                return;
+            }
             if (mLocationPermissionGranted) {
                 Log.d(TAG,"Location permission granted");
                 mMap.setMyLocationEnabled(true);
@@ -236,21 +239,31 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
      * calls onMarkerClick and Logs the id of the pressed marker
      */
     private void displayTaskLocations() {
-
+        Log.d(TAG,"displayTaskLocations");
         mMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
         for (int i = 0; i < taskList.size(); i++) {
             project301.Task currTask = taskList.get(i);
 
             if (currTask.getTasklgtitude() != null
-                    && currTask.getTasklatitude() != null) {
+                    && currTask.getTasklatitude() != null
+                    && currTask.getTaskStatus() != "done") {
 
                 if (getTaskDistance(currTask) <= 5000) {
-                    Marker marker = mMap.addMarker(new MarkerOptions()
+
+                   Marker marker = mMap.addMarker(new MarkerOptions()
                             .position(new LatLng(currTask.getTasklatitude(), currTask.getTasklgtitude()))
                             .anchor(0.5f, 0.5f)
                             .title(currTask.getTaskName())
                     );
+                    // Make bidden tasks have blue icon
+                    if (currTask.getTaskStatus().equals("bidden")){
+                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                    }
+                    // Make assigned task have a green icon
+                    else if (currTask.getTaskStatus().equals("assigned")) {
+                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                    }
                     Log.d(TAG, "Adding marker task name: " + marker.getTitle());
                     marker.setTag(i);
                     marker.showInfoWindow();
@@ -290,6 +303,13 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
         Log.d(TAG,"Task info: "+clickedTask.getTaskName());
         Log.d(TAG,"Task info: "+clickedTask.getTaskAddress());
 
+
+
+        Intent info1 = new Intent(RequesterMapActivity.this, RequesterViewTaskRequestActivity.class);
+        info1.putExtra("info", markerIndex);
+        info1.putExtra("userId",userId);
+        startActivity(info1);
+
         /*Intent info1 = new Intent(RequesterMapActivity.this, ProviderTaskBidActivity.class);
         info1.putExtra("info", markerIndex);
         info1.putExtra("status","request");
@@ -309,10 +329,13 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
         mMap = googleMap;
 
 
-        getAllTaksInfo();
         getLocationPermission();
         updateLocationUI();
         getDeviceLocation();
+        getAllTaksInfo();
+
+        getAllTaksInfo();
+        Log.d(TAG, "getAllTaskInfo complete");
 
 
 
@@ -322,8 +345,8 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
 
     private void getAllTaksInfo() {
 
-        TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
-        search.execute();
+        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
+        search.execute(userId);
         taskList = new ArrayList<project301.Task>();
         ArrayList<project301.Task> searchedTask = new ArrayList<>();
         try {
@@ -335,7 +358,7 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
         }
         taskList.addAll(searchedTask);
         for (int i =0;i<taskList.size();i++){
-            Log.d(TAG,"TASK: "+taskList.get(i).getTaskName()+", "+taskList.get(i).getTaskStatus());
+            Log.d(TAG,"Requester TASK: "+taskList.get(i).getTaskName()+", "+taskList.get(i).getTaskStatus());
         }
     }
 
