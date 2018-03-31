@@ -68,6 +68,7 @@ public class ProviderMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderBidHistoryActivity.class);
                 intent.putExtra("userId",userId);
+                intent.putExtra("content","all");
                 startActivity(intent);
             }
         });
