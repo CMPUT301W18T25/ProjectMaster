@@ -888,14 +888,18 @@ public class TaskTest {
             rt_list = search.get();
             Log.i("Success", "message");
 
+            if (rt_list.size() == 0){
+                assertTrue(false);
+            }
+
             for (int i = 0; i < rt_list.size(); i++) {
                 Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
                 if (rt_list.get(i) == null) {
                     break;
                 }
                 if (rt_list.get(i).getTaskStatus().equals("request")) {
-                    if (rt_list.get(i).getTaskName().contains("Test") || rt_list.get(i).getTaskDetails().contains("Test")) {
-                        assertTrue(true);
+                    if (rt_list.get(i).getTaskName().contains("test") || rt_list.get(i).getTaskDetails().contains("test")) {
+                        assertTrue(false);
                     }
                 } else {
                     assertTrue(false);
@@ -910,7 +914,6 @@ public class TaskTest {
             e.printStackTrace();
             Log.i("Error", "not getting anything");
         }
-
 
     }
 
