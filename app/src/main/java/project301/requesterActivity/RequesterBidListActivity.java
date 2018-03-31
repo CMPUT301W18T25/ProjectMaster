@@ -9,7 +9,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -23,7 +22,6 @@ import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -89,7 +87,7 @@ public class RequesterBidListActivity extends AppCompatActivity implements Swipe
         biddenTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent info1 = new Intent(RequesterBidListActivity.this, RequesterViewTaskActivity.class);
+                Intent info1 = new Intent(RequesterBidListActivity.this, RequesterViewTaskRequestActivity.class);
                 info1.putExtra("info", index);
                 info1.putExtra("userId",userId);
                 startActivity(info1);

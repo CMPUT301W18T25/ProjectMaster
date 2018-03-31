@@ -13,7 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.novoda.merlin.MerlinsBeard;
-import com.novoda.merlin.NetworkStatus;
 
 import project301.Bid;
 import project301.GlobalCounter;
@@ -21,26 +20,25 @@ import project301.R;
 import project301.Task;
 import project301.controller.BidController;
 import project301.controller.FileSystemController;
-import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Detail :RequesterViewTaskActivity is to allow user to view a target task and choose if to edit this task.
+ * Detail :RequesterViewTaskRequestActivity is to allow user to view a target task and choose if to edit this task.
  *                the bid list will accept data from provider to show all the bid for this task so that requester can choose bid.
  *                this class also support delete task, jump back to showlist and choose bid.
  * @Date :   18/03/2018
  * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
- * @classname : RequesterViewTaskActivity
+ * @classname : RequesterViewTaskRequestActivity
  */
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterViewTaskActivity extends AppCompatActivity  {
+public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
     private ListView bidList;
     private String userId;
     private TextView view_name;
@@ -64,7 +62,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.requester_view_task);
+        setContentView(R.layout.requester_view_task_bidden);
         final Intent intent = getIntent();
         context = getApplicationContext();
         merlinsBeard = MerlinsBeard.from(context);
@@ -106,7 +104,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 String index = intent.getExtras().get("info").toString();
-                Intent info2 = new Intent(RequesterViewTaskActivity.this, RequesterEditTaskActivity.class);
+                Intent info2 = new Intent(RequesterViewTaskRequestActivity.this, RequesterEditTaskActivity.class);
                 info2.putExtra("userId",userId);
                 info2.putExtra("info",index);
                 startActivity(info2);
@@ -122,7 +120,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
                 String index = intent.getExtras().get("info").toString();
 
                 //interface jump
-                Intent info2 = new Intent(RequesterViewTaskActivity.this, RequesterEditListActivity.class);
+                Intent info2 = new Intent(RequesterViewTaskRequestActivity.this, RequesterEditListActivity.class);
 
                 //get data from database
                 deletedlist = new ArrayList<>();
@@ -166,7 +164,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
         showlist_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterViewTaskActivity.this, RequesterEditListActivity.class);
+                Intent info2 = new Intent(RequesterViewTaskRequestActivity.this, RequesterEditListActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
@@ -178,7 +176,7 @@ public class RequesterViewTaskActivity extends AppCompatActivity  {
         bidList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent info1 = new Intent(RequesterViewTaskActivity.this, RequesterPayActivity.class);
+                Intent info1 = new Intent(RequesterViewTaskRequestActivity.this, RequesterPayActivity.class);
                 info1.putExtra("taskId",view_task.getId());
                 info1.putExtra("userId",userId);
                 info1.putExtra("bidIndex",index);

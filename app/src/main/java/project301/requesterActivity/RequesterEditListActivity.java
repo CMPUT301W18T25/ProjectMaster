@@ -9,17 +9,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.novoda.merlin.Merlin;
 import com.novoda.merlin.MerlinsBeard;
-import com.novoda.merlin.NetworkStatus;
-import com.novoda.merlin.registerable.bind.Bindable;
-import com.novoda.merlin.registerable.connection.Connectable;
-import com.novoda.merlin.registerable.disconnection.Disconnectable;
 
 import project301.GlobalCounter;
 import project301.R;
@@ -30,7 +24,6 @@ import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -100,7 +93,7 @@ public class RequesterEditListActivity extends AppCompatActivity implements Swip
         postedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskActivity.class);
+                Intent info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskRequestActivity.class);
                 info1.putExtra("info", index);
                 info1.putExtra("userId",userId);
                 startActivity(info1);

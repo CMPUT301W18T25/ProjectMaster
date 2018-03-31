@@ -145,7 +145,7 @@ public class RequesterPayActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterPayActivity.this, RequesterViewTaskActivity.class);
+                Intent info2 = new Intent(RequesterPayActivity.this, RequesterViewTaskRequestActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 

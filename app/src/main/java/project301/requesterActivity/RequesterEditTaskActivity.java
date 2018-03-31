@@ -23,7 +23,6 @@ import project301.controller.BidController;
 import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
 import project301.controller.TaskController;
-import project301.utilities.FileIOUtil;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -156,7 +155,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
 
 
                     //interface jump
-                    //Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterViewTaskActivity.class);
+                    //Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterViewTaskRequestActivity.class);
                     Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterEditListActivity.class);
 
 
@@ -281,7 +280,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //interface jump
-                Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterViewTaskActivity.class);
+                Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterViewTaskRequestActivity.class);
                 info2.putExtra("userId",userId);
                 info2.putExtra("info",view_index);
                 startActivity(info2);
