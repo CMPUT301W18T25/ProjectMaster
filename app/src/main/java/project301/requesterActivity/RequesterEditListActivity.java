@@ -93,7 +93,23 @@ public class RequesterEditListActivity extends AppCompatActivity implements Swip
         postedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskRequestActivity.class);
+                String status = tasklist.get(index).getTaskStatus();
+                Intent info1;
+                if(status.equals("request")){
+                    info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskRequestActivity.class);
+                }
+                else if(status.equals("bidden")){
+                    info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskBiddenActivity.class);
+                }
+                else if(status.equals("assigned")){
+                    info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskAssignedActivity.class);
+
+                }
+                else{
+                    info1 = new Intent(RequesterEditListActivity.this, RequesterViewTaskDoneActivity.class);
+
+
+                }
                 info1.putExtra("info", index);
                 info1.putExtra("userId",userId);
                 startActivity(info1);
