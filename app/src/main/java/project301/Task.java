@@ -65,12 +65,12 @@ public class Task {
 
     public Task(String taskName, String taskDetails, String taskRequester, String taskProvider,
                 String taskStatus, String taskAddress, ArrayList<Bid> taskBidList, Photo taskPhoto){
-        this.taskName=taskName;
-        this.taskDetails=taskDetails;
-        this.taskRequester=taskRequester;
-        this.taskProvider=taskProvider;
-        this.taskStatus=taskStatus;
-        this.taskAddress=taskAddress;
+        this.taskName=taskName.toLowerCase();
+        this.taskDetails=taskDetails.toLowerCase();
+        this.taskRequester=taskRequester.toLowerCase();
+        this.taskProvider=taskProvider.toLowerCase();
+        this.taskStatus=taskStatus.toLowerCase();
+        this.taskAddress=taskAddress.toLowerCase();
         this.taskBidList=taskBidList;
         this.taskPhoto=taskPhoto;
         this.taskIdealPrice=null;
@@ -84,26 +84,26 @@ public class Task {
 
     // Setters
     public void setTaskName(String taskName){
-        this.taskName=taskName;
+        this.taskName=taskName.toLowerCase();
     }
     public void setTaskDetails(String taskDetails){
-        this.taskDetails=taskDetails;
+        this.taskDetails=taskDetails.toLowerCase();
     }
     public void setTaskIdealPrice(Double taskIdealPrice){
         this.taskIdealPrice=taskIdealPrice;
     }
     public void setTaskDateTime(DateTime taskDateTime){this.taskDateTime=taskDateTime;}
     public void setTaskRequester(String taskRequester){
-        this.taskRequester=taskRequester;
+        this.taskRequester=taskRequester.toLowerCase();
     }
     public void setTaskProvider(String taskProvider){
-        this.taskProvider=taskProvider;
+        this.taskProvider=taskProvider.toLowerCase();
     }
     public void setTaskStatus(String taskStatus){
-        this.taskStatus=taskStatus;
+        this.taskStatus=taskStatus.toLowerCase();
     }
     public void setTaskAddress(String taskAddress){
-        this.taskAddress=taskAddress;
+        this.taskAddress=taskAddress.toLowerCase();
     }
     public void setTaskBidList(ArrayList<Bid> taskBidList){
         this.taskBidList=taskBidList;
