@@ -23,7 +23,7 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="196dp"
+            android:layout_height="214dp"
             app:cardBackgroundColor="@color/blue2"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
@@ -93,7 +93,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="42dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -111,18 +111,6 @@
                             android:textSize="14sp"
                             android:textStyle="bold|italic" />
 
-                        <Button
-                            android:id="@+id/view_map"
-                            android:layout_width="84dp"
-                            android:layout_height="22dp"
-                            android:background="@color/blue3"
-                            android:fontFamily="serif"
-                            android:text="View Map"
-                            android:textAllCaps="false"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="12sp"
-                            android:textStyle="bold|italic" />
-
                     </LinearLayout>
 
                     <TextView
@@ -135,6 +123,18 @@
                         android:textStyle="bold|italic" />
 
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/view_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:background="@color/blue3"
+                    android:fontFamily="serif"
+                    android:text="View On Map"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp"
+                    android:textStyle="bold|italic" />
 
 
                 <LinearLayout
@@ -376,7 +376,7 @@
         <TextView
             android:id="@+id/textView26"
             android:layout_width="match_parent"
-            android:layout_height="24dp" />
+            android:layout_height="11dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
