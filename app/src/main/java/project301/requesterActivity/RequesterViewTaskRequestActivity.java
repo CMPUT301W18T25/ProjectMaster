@@ -87,6 +87,15 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
             }
         });
 
+
+
+
+        //to do : map button to show location
+
+
+
+
+
         //settle deleteTask button
         Button deleteTaskButton = (Button) findViewById(R.id.delete_button);
         deleteTaskButton.setOnClickListener(new View.OnClickListener() {

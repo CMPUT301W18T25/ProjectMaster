@@ -54,7 +54,7 @@ public class RequesterEditListActivity extends AppCompatActivity implements Swip
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.requester_edit_list);
+        setContentView(R.layout.requester_all_list);
         final Intent intent = getIntent();
         context=getApplicationContext();
 
