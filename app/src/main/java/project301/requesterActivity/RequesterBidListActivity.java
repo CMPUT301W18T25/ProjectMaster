@@ -38,7 +38,7 @@ import java.util.concurrent.ExecutionException;
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterBidListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
-    private ListView postedTaskList;
+    private ListView biddenTaskList;
     private String userName;
     private String userId;
     private static final String FILENAME = "ProjectMaster.sav";
@@ -85,8 +85,8 @@ public class RequesterBidListActivity extends AppCompatActivity implements Swipe
         });
 
         // settle click on post task list
-        postedTaskList = (ListView) findViewById(R.id.post_list);
-        postedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        biddenTaskList = (ListView) findViewById(R.id.post_list);
+        biddenTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent info1 = new Intent(RequesterBidListActivity.this, RequesterViewTaskActivity.class);
@@ -200,7 +200,7 @@ public class RequesterBidListActivity extends AppCompatActivity implements Swipe
         RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
         adapter.notifyDataSetChanged();
         // Attach the adapter to a ListView
-        this.postedTaskList.setAdapter(adapter);
+        this.biddenTaskList.setAdapter(adapter);
     }
 
 }
