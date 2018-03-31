@@ -6,10 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.novoda.merlin.MerlinsBeard;
@@ -104,7 +101,7 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
                 String index = intent.getExtras().get("info").toString();
 
                 //interface jump
-                Intent info2 = new Intent(RequesterViewTaskRequestActivity.this, RequesterEditListActivity.class);
+                Intent info2 = new Intent(RequesterViewTaskRequestActivity.this, RequesterAllListActivity.class);
 
                 //get data from database
                 deletedlist = new ArrayList<>();
@@ -146,7 +143,7 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
         showlist_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterViewTaskRequestActivity.this, RequesterEditListActivity.class);
+                Intent info2 = new Intent(RequesterViewTaskRequestActivity.this, RequesterAllListActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 

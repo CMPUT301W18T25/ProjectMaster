@@ -12,7 +12,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
 import com.novoda.merlin.MerlinsBeard;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
 import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
@@ -21,22 +26,19 @@ import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-
 /**
  * Detail : Requesdter edit list is to show a list of posted task, which support click to check details and edit task.
  * @Date :   18/03/2018
  * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
- * @classname : RequesterEditListActivity
+ * @classname : RequesterAllListActivity
  */
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterBidListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
-    private ListView biddenTaskList;
+public class RequesterDoneListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+    private ListView doneTaskList;
     private String userName;
     private String userId;
     private static final String FILENAME = "ProjectMaster.sav";
@@ -50,7 +52,7 @@ public class RequesterBidListActivity extends AppCompatActivity implements Swipe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.requester_bidden_list);
+        setContentView(R.layout.requester_done_list);
         final Intent intent = getIntent();
         context=getApplicationContext();
 
@@ -63,7 +65,7 @@ public class RequesterBidListActivity extends AppCompatActivity implements Swipe
         mainMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterBidListActivity.this, RequesterMainActivity.class);
+                Intent info2 = new Intent(RequesterDoneListActivity.this, RequesterMainActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
@@ -75,7 +77,7 @@ public class RequesterBidListActivity extends AppCompatActivity implements Swipe
         viewOnMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterBidListActivity.this, RequesterMapActivity.class);
+                Intent info2 = new Intent(RequesterDoneListActivity.this, RequesterMapActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
@@ -83,11 +85,11 @@ public class RequesterBidListActivity extends AppCompatActivity implements Swipe
         });
 
         // settle click on post task list
-        biddenTaskList = (ListView) findViewById(R.id.post_list);
-        biddenTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        doneTaskList = (ListView) findViewById(R.id.post_list);
+        doneTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent info1 = new Intent(RequesterBidListActivity.this, RequesterViewTaskRequestActivity.class);
+                Intent info1 = new Intent(RequesterDoneListActivity.this, RequesterViewTaskDoneActivity.class);
                 info1.putExtra("info", index);
                 info1.putExtra("userId",userId);
                 info1.putExtra("activity","biddenList");
@@ -138,7 +140,7 @@ public class RequesterBidListActivity extends AppCompatActivity implements Swipe
         // get request info, and show it on the dialog
 
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterBidListActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterDoneListActivity.this);
         builder.setTitle("New Bid")
                 .setMessage("You got a new bid!");
         // Create & Show the AlertDialog
@@ -199,7 +201,7 @@ public class RequesterBidListActivity extends AppCompatActivity implements Swipe
         RequesterAdapter adapter = new RequesterAdapter(this, biddenTaskList);
         adapter.notifyDataSetChanged();
         // Attach the adapter to a ListView
-        this.biddenTaskList.setAdapter(adapter);
+        this.doneTaskList.setAdapter(adapter);
     }
 
 }

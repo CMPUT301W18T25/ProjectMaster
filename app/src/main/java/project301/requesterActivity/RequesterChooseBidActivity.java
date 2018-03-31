@@ -108,7 +108,7 @@ public class RequesterChooseBidActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterChooseBidActivity.this, RequesterEditListActivity.class);
+                Intent info2 = new Intent(RequesterChooseBidActivity.this, RequesterAllListActivity.class);
                 info2.putExtra("userId",userId);
                 task.setTaskStatus("assigned");
                 task.setChoosenBid(thisBid);
@@ -134,7 +134,7 @@ public class RequesterChooseBidActivity extends AppCompatActivity {
 
 
 
-                Intent info2 = new Intent(RequesterChooseBidActivity.this, RequesterEditListActivity.class);
+                Intent info2 = new Intent(RequesterChooseBidActivity.this, RequesterAllListActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 

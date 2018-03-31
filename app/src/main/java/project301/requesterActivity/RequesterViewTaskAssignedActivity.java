@@ -6,15 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.novoda.merlin.MerlinsBeard;
-
-import org.w3c.dom.Text;
 
 import project301.Bid;
 import project301.GlobalCounter;
@@ -105,7 +100,7 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
                     info2 = new Intent(RequesterViewTaskAssignedActivity.this, RequesterAssignedListActivity.class);
                 }
                 else{
-                    info2 = new Intent(RequesterViewTaskAssignedActivity.this, RequesterEditListActivity.class);
+                    info2 = new Intent(RequesterViewTaskAssignedActivity.this, RequesterAllListActivity.class);
 
 
                 }
@@ -135,7 +130,7 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
         showlist_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterViewTaskAssignedActivity.this, RequesterEditListActivity.class);
+                Intent info2 = new Intent(RequesterViewTaskAssignedActivity.this, RequesterAllListActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 

@@ -127,7 +127,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
                 String index = intent.getExtras().get("info").toString();
 
                 //interface jump
-                Intent info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterEditListActivity.class);
+                Intent info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterAllListActivity.class);
 
                 //get data from database
                 deletedlist = new ArrayList<>();
@@ -171,7 +171,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
         showlist_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterEditListActivity.class);
+                Intent info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterAllListActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
