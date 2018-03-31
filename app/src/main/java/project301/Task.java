@@ -1,5 +1,7 @@
 package project301;
 
+import android.util.Log;
+
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -97,7 +99,11 @@ public class Task {
         this.taskRequester=taskRequester.toLowerCase();
     }
     public void setTaskProvider(String taskProvider){
-        this.taskProvider=taskProvider.toLowerCase();
+        if(taskProvider==null){
+            this.taskProvider = null;
+        }
+        else{
+        this.taskProvider=taskProvider.toLowerCase();}
     }
     public void setTaskStatus(String taskStatus){
         this.taskStatus=taskStatus.toLowerCase();
@@ -222,14 +228,18 @@ public class Task {
     }
     public void changeStatusAfterDeclineDeal(Bid bid){
         this.canceledBidList.add(bid);
-        this.choosenBid = null;
-        this.taskProvider=null;
+        this.setChoosenBid(null);
+        this.setTaskProvider(null);
         ArrayList<Bid> bidList = this.getAvailableBidListOfThisTask();
-        if(bidList != null){
-            this.taskStatus = "bidden";
+        if(bidList.size() != 0){
+            this.setTaskStatus("bidden");
+
+            for(Bid b:bidList){
+                Log.i("BidProvider",b.getProviderId());
+            }
 
         }else{
-            this.taskStatus = "request";
+            this.setTaskStatus("request");
         }
     }
 }
