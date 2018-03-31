@@ -888,10 +888,10 @@ public class TaskController {
             */
             Log.i("Length", Integer.toString(search_parameters.length));
 
-            bodyQuery ="               { \"multi_match\" : {\"query\" : \"" +search_parameters[0] +"\", \"fields\" : [ \"taskName\", \"taskDetails\"] }}" + "\n";
+            bodyQuery ="               { \"multi_match\" : {\"query\" : \"" +search_parameters[0] +"\", \"fields\" : [ \"taskName\"] }}" + "\n";
 
             for (int i = 1; i < search_parameters.length; i++) {
-                bodyQuery = bodyQuery + "               ,{ \"multi_match\" : {\"query\" : \"" + search_parameters[i] + "\", \"fields\" : [ \"taskName\", \"taskDetails\"] }}" + "\n";
+                bodyQuery = bodyQuery + "               ,{ \"multi_match\" : {\"query\" : \"" + search_parameters[i] + "\", \"fields\" : [ \"taskName\"] }}" + "\n";
             }
 
             //bodyQuery = bodyQuery + "               ,{ \"multi_match\" : {\"query\" : \"" + search_parameters[1] + "\", \"fields\" : [ \"taskName\", \"taskDetails\"] }}" + "\n";
