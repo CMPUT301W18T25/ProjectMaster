@@ -48,12 +48,12 @@ public class Task {
     }
 
     public Task(){
-        this.taskName=null;
-        this.taskDetails=null;
-        this.taskRequester=null;
-        this.taskProvider=null;
-        this.taskStatus=null;
-        this.taskAddress=null;
+        this.taskName="";
+        this.taskDetails="";
+        this.taskRequester="";
+        this.taskProvider="";
+        this.taskStatus="";
+        this.taskAddress="";
         this.taskBidList= new ArrayList<Bid>();
         this.canceledBidList= new ArrayList<Bid>();
         this.choosenBid = null;
