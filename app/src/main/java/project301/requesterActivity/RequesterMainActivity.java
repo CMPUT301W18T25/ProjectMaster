@@ -89,6 +89,18 @@ public class RequesterMainActivity extends AppCompatActivity {
             }
         });
 
+        //settle done button
+        Button doneButton = (Button) findViewById(R.id.done_button);
+        biddenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent info2 = new Intent(RequesterMainActivity.this, RequesterDoneListActivity.class);
+                info2.putExtra("userId",userId);
+                startActivity(info2);
+
+            }
+        });
+
         //settle assigned button
         Button assignedButton = (Button) findViewById(R.id.assigned_button);
         assignedButton.setOnClickListener(new View.OnClickListener() {
