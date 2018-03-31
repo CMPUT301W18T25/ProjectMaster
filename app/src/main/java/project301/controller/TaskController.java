@@ -503,7 +503,7 @@ public class TaskController {
      */
 
     //TODO do test for this method, which should be extremely similar to bidden tasks
-    public static class searchAssignTasksOfThisProvider extends AsyncTask<String, Void, ArrayList<Task>>{
+  /*  public static class searchAssignTasksOfThisProvider extends AsyncTask<String, Void, ArrayList<Task>>{
 
         protected ArrayList<Task> doInBackground(String... providerId) {
             verifySettings();
@@ -536,6 +536,70 @@ public class TaskController {
                             = result.getSourceAsObjectList(Task.class);
                     result_tasks.addAll(foundTasks);
                     Log.i("Success", "Data retrieved from database: ");
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return result_tasks;
+        }
+
+    }*/
+
+    public static class searchAssignTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
+        //ArrayList<Task> taskList = new ArrayList<Task> ();
+        String providerId;
+
+        public searchAssignTasksOfThisProvider(String providerId){
+            this.providerId = providerId;
+        }
+
+        protected ArrayList<Task> doInBackground(Void... nul) {
+            verifySettings();
+
+            ArrayList<Task> result_tasks = new ArrayList<Task>();
+
+            String query =
+                    "\n{ \n"+
+                            "\"size\" : 30,\n"+
+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"term\" : {\"taskStatus\" : " + "\"assigned\"}}" +
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
+
+            Log.i("Query", "The query was " + query );
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t25")
+                    .addType("task")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<Task> rt
+                            = result.getSourceAsObjectList(Task.class);
+                    for(Task task:rt){
+
+                        ArrayList<Bid> BiddenList = task.getTaskBidList();
+                        for(Bid bid:BiddenList){
+                            if(bid.getProviderId().equals(providerId)){
+                                result_tasks.add(task);
+
+
+                            }
+                        }
+                    }
+
+                    Log.i("allbidden","test");
+
+
+                    Log.i("Success", "Data retrieved from database: " + Integer.toString(rt.size()));
                 } else {
                     Log.i("Error", "The search query failed");
                 }
