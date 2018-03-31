@@ -38,7 +38,7 @@ import java.util.concurrent.ExecutionException;
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterBidListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
-    private ListView postedTaskList;
+    private ListView biddenTaskList;
     private String userName;
     private String userId;
     private static final String FILENAME = "ProjectMaster.sav";
@@ -52,7 +52,7 @@ public class RequesterBidListActivity extends AppCompatActivity implements Swipe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.requester_edit_list);
+        setContentView(R.layout.requester_bidden_list);
         final Intent intent = getIntent();
         context=getApplicationContext();
 
@@ -85,8 +85,8 @@ public class RequesterBidListActivity extends AppCompatActivity implements Swipe
         });
 
         // settle click on post task list
-        postedTaskList = (ListView) findViewById(R.id.post_list);
-        postedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        biddenTaskList = (ListView) findViewById(R.id.post_list);
+        biddenTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent info1 = new Intent(RequesterBidListActivity.this, RequesterViewTaskActivity.class);
@@ -192,15 +192,15 @@ public class RequesterBidListActivity extends AppCompatActivity implements Swipe
         for(Task task: tasklist){
             if(task.getTaskStatus().equals("bidden")){
 
-
+                biddenTaskList.add(task);
 
             }
         }
 
-        RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
+        RequesterAdapter adapter = new RequesterAdapter(this, biddenTaskList);
         adapter.notifyDataSetChanged();
         // Attach the adapter to a ListView
-        this.postedTaskList.setAdapter(adapter);
+        this.biddenTaskList.setAdapter(adapter);
     }
 
 }
