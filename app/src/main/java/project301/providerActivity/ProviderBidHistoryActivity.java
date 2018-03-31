@@ -24,15 +24,12 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
+ * This class shows a list of task that the status of the tasks are bidden, assigned or done
  * @classname : ProviderBidHistoryActivity
  * @Date :   18/03/2018
  * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
- */
-
-/**
- * This class shows a list of task that the status of the tasks are bidden, assigned or done
  */
 
 
