@@ -17,7 +17,6 @@ public class User {
     private String userId;
     private String userName;
     private String userPhone;
-    private String userAddress;
     private String userEmail;
     private String userPassword;
     private String userType;
@@ -28,10 +27,9 @@ public class User {
     public User(){
         super();
     }
-    public User(String userId,String userName,String userPhone,String userAddress,String userEmail,String userPassword,String userType,String resultId){
+    public User(String userId,String userName,String userPhone,String userEmail,String userPassword,String userType,String resultId){
         this.userId = userId;
         this.userName = userName;
-        this.userAddress = userAddress;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.userType = userType;
@@ -55,7 +53,7 @@ public class User {
      * @param userName username
      */
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = userName.toLowerCase();
     }
 
     /**
@@ -73,24 +71,7 @@ public class User {
      */
 
     public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
-    }
-
-    /**
-     * get user address
-     * @return user address
-     */
-
-    public String getUserAddress() {
-        return userAddress;
-    }
-
-    /**
-     * set user address
-     * @param userAddress user address
-     */
-    public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress;
+        this.userPhone = userPhone.toLowerCase();
     }
 
     /**
@@ -155,7 +136,7 @@ public class User {
      * @param userId user id
      */
     public void setId(String userId){
-        this.userId = userId;
+        this.userId = userId.toLowerCase();
     }
 
     /**
@@ -172,7 +153,7 @@ public class User {
      * @param resultId ES id
      */
     public void setResultId(String resultId){
-        this.resultId = resultId;
+        this.resultId = resultId.toLowerCase();
     }
 
     /**

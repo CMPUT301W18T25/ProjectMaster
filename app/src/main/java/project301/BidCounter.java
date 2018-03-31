@@ -19,7 +19,7 @@ public class BidCounter {
         this.ESid = "null";
     }
     public void setRequesterId(String requesterId){
-        this.requesterId = requesterId;
+        this.requesterId = requesterId.toLowerCase();
     }
     public void setCounter(int counter){
         this.counter = counter;
