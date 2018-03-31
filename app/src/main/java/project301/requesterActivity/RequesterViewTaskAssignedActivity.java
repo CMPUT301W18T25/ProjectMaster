@@ -59,6 +59,7 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
     private User provider;
 
     private String view_index;
+    private int view_index_int;
     protected MerlinsBeard merlinsBeard;
     private Context context;
     private Bid bid;
@@ -87,13 +88,15 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
         view_provider_Email = (TextView) findViewById(R.id.c_view_email);
         view_deal_price = (TextView) findViewById(R.id.c_deal_price);
         view_idealprice = (TextView) findViewById(R.id.c_view_idealprice);
+        view_index = intent.getExtras().get("info").toString();
+        view_index_int = Integer.parseInt(intent.getExtras().get("info").toString());
+
 
         //settle deleteTask button
         final Button deleteDealButton = (Button) findViewById(R.id.delete_deal_button);
         deleteDealButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String index = intent.getExtras().get("info").toString();
 
                 //interface jump
                 //RequesterViewTaskAssignedActivity.super.onBackPressed();
@@ -107,9 +110,9 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
 
                 }
                 // get index of target task
-                final int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
+
                 // get target task
-                target_task = tasklist.get(view_index);
+                target_task = tasklist.get(view_index_int);
 
                 //delete task from database
                 Bid dealbid = target_task.getChoosenBid();
@@ -119,7 +122,7 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
                 requesterUpdateTask.execute(target_task);
                 Log.i("Target task changed status",target_task.getTaskStatus());
                 info2.putExtra("userId",userId);
-                info2.putExtra("info",index);
+                info2.putExtra("info",view_index);
                 startActivity(info2);
 
             }
@@ -138,6 +141,24 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
 
             }
         });
+
+
+
+        //settle pay button
+        Button pay_Button = (Button) findViewById(R.id.pay_button);
+        pay_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent info2 = new Intent(RequesterViewTaskAssignedActivity.this, RequesterMainActivity.class);
+                info2.putExtra("userId",userId);
+                target_task = tasklist.get(view_index_int);
+                target_task.setTaskStatus("done");
+                TaskController.requesterUpdateTask requesterUpdateTask = new TaskController.requesterUpdateTask();
+                requesterUpdateTask.execute(target_task);
+                startActivity(info2);
+            }
+        });
+
 
     }
 
