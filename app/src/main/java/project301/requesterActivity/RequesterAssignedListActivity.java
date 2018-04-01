@@ -90,7 +90,7 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
                 Intent info1 = new Intent(RequesterAssignedListActivity.this, RequesterViewTaskAssignedActivity.class);
                 info1.putExtra("info", index);
                 info1.putExtra("userId",userId);
-                info1.putExtra("acitivity","assignedList");
+                info1.putExtra("activity","assignedList");
                 startActivity(info1);
             }
         });

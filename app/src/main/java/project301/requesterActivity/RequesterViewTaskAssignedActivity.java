@@ -198,6 +198,7 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
                 FC.saveToFile(task,"sent",getApplication());
             }
         }
+        tasklist = new ArrayList<>();
         alltasklist = FC.loadSentTasksFromFile(getApplication());
         Log.i("activity:",activity);
         if(activity.equals("assignedList")){
