@@ -25,7 +25,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="serif"
-            android:text="TextView"
             android:textStyle="bold|italic" />
     </LinearLayout>
 
@@ -50,7 +49,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="serif"
-            android:text="TextView"
             android:textStyle="bold|italic" />
     </LinearLayout>
 
@@ -75,7 +73,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="serif"
-            android:text="TextView"
             android:textStyle="bold|italic" />
     </LinearLayout>
 
@@ -99,7 +96,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="serif"
-            android:text="TextView"
             android:textStyle="bold|italic" />
     </LinearLayout>
 
