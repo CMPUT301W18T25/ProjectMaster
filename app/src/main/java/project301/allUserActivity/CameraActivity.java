@@ -45,7 +45,6 @@ import java.util.List;
 import project301.R;
 import project301.providerActivity.ProviderMainActivity;
 import project301.providerActivity.ProviderMapActivity;
-import project301.requesterActivity.RequesterEditListActivity;
 import project301.requesterActivity.RequesterMapActivity;
 import project301.requesterActivity.RequesterPostTaskActivity;
 
@@ -171,7 +170,7 @@ public class CameraActivity extends Activity {
 
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         try {
-            Log.e(TAG,"cameraDevice.getId "+cameraDevice.getId());//查看选中的摄像头ID
+            Log.e(TAG,"cameraDevice.getId "+cameraDevice.getId());
 
             CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraDevice.getId());
 
@@ -201,7 +200,7 @@ public class CameraActivity extends Activity {
 
 
 
-            captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);//推荐采用这种最简单的设置请求模式
+            captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
 
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
 
