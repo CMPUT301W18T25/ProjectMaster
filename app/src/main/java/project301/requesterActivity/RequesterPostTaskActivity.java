@@ -172,7 +172,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
                     //to do:set photo
                     if (post_photo != null){
                         Photo new_photo = new Photo();
-                        new_photo.addPhoto(post_photo.getDrawingCache());
+                        new_photo.addPhoto(String.valueOf(post_photo.getDrawingCache()));
                         new_task.setTaskPhoto(new_photo);
                     }
 

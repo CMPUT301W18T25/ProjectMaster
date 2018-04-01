@@ -9,9 +9,8 @@
         android:id="@+id/texture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/btn_takepicture" />
+        android:layout_above="@+id/btn_takepicture"
+        android:layout_alignParentTop="true"/>
     <Button
         android:id="@+id/btn_takepicture"
         android:layout_width="wrap_content"
@@ -21,15 +20,4 @@
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
         android:text="take_picture" />
-
-    <Button
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/btn_takepicture"
-        android:layout_marginEnd="21dp"
-        android:text="back" />
-
-
 </RelativeLayout>
