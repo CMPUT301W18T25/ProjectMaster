@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +67,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
     private Bid bid;
     private Task view_task;
     private String taskId;
+    private ImageButton show_photo;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -86,6 +88,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         taskLowestPrice = (TextView) findViewById(R.id.p_task_mybid);
         taskMybid = (EditText)findViewById(R.id.p_task_mybid);
         BidListView = (ListView)findViewById(R.id.provider_bid_lkist);
+        show_photo = (ImageButton) findViewById(R.id.imageButton2);
 
         /*
         // get index of target task
@@ -279,6 +282,19 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
+            }
+        });
+
+        // show photo button
+        show_photo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Log.d("requesteredittask","showing photo");
+                if (view_task.getTaskPhoto() != null){
+                    Log.d("asdf","not null");
+
+                    view_task.getTaskPhoto().showImage(ProviderTaskBidActivity.this);
+                }
             }
         });
     }
