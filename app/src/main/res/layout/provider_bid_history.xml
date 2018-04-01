@@ -29,7 +29,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/blue3"
+            app:cardBackgroundColor="@color/blue_list"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/blue6"
+                android:background="@color/blue3"
                 android:fontFamily="serif"
                 android:text="Main Menu"
                 android:textStyle="bold|italic" />
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/blue7"
+                android:background="@color/blue2"
                 android:fontFamily="serif"
                 android:text="@string/view_on_map"
                 android:textStyle="bold|italic" />
