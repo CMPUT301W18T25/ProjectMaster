@@ -242,4 +242,20 @@ public class Task {
             this.setTaskStatus("request");
         }
     }
+    public Double findLowestbid(){
+        ArrayList<Bid> bidList = this.getAvailableBidListOfThisTask();
+        if(bidList.size()==0){
+            return null;
+        }
+
+        Double lowestBid = bidList.get(0).getBidAmount();
+        for(Bid bid:bidList){
+
+            if(bid.getBidAmount()<lowestBid){
+                lowestBid = bid.getBidAmount();
+
+            }
+        }
+        return lowestBid;
+    }
 }
