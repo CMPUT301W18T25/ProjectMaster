@@ -12,6 +12,7 @@ import com.searchly.jestdroid.JestDroidClient;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import android.os.AsyncTask;
@@ -984,6 +985,36 @@ public class TaskController {
             }
             return result_tasks;
         }
+    }
+    public ArrayList<Task> searchByKeyWord(String keyWord,String providerId){
+        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> keywordTasks = new ArrayList<>();
+        TaskController.searchBiddenTasksOfThisProvider searchBiddenTasksOfThisProvider = new TaskController.searchBiddenTasksOfThisProvider(providerId);
+        searchBiddenTasksOfThisProvider.execute();
+        try {
+            tasks.addAll(searchBiddenTasksOfThisProvider.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        TaskController.searchAllRequestingTasks searchAllRequestingTasks = new TaskController.searchAllRequestingTasks();
+        searchAllRequestingTasks.execute();
+        try {
+            tasks.addAll(searchAllRequestingTasks.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        for(Task task:tasks){
+            if(task.getTaskName().contains(keyWord)||task.getTaskDetails().contains(keyWord)) {
+                keywordTasks.add(task);
+
+            }
+        }
+        return keywordTasks;
+
     }
 
     public boolean testTrue(String name){

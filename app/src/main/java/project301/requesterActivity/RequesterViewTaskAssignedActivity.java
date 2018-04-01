@@ -3,18 +3,14 @@ package project301.requesterActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.novoda.merlin.MerlinsBeard;
-
-import org.w3c.dom.Text;
 
 import project301.Bid;
 import project301.GlobalCounter;
@@ -59,23 +55,24 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
     private User provider;
 
     private String view_index;
+    private int view_index_int;
     protected MerlinsBeard merlinsBeard;
     private Context context;
     private Bid bid;
     private String activity;
+    private Intent intent;
 
     @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_view_task_assigned);
-        final Intent intent = getIntent();
+        intent = getIntent();
         context = getApplicationContext();
         merlinsBeard = MerlinsBeard.from(context);
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
         view_index=intent.getExtras().get("info").toString();
-        activity = intent.getExtras().get("activity").toString();
 
         //find view by id.
         view_name = (TextView) findViewById(R.id.c_view_name);
@@ -87,13 +84,15 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
         view_provider_Email = (TextView) findViewById(R.id.c_view_email);
         view_deal_price = (TextView) findViewById(R.id.c_deal_price);
         view_idealprice = (TextView) findViewById(R.id.c_view_idealprice);
+        view_index = intent.getExtras().get("info").toString();
+        view_index_int = Integer.parseInt(intent.getExtras().get("info").toString());
+
 
         //settle deleteTask button
         final Button deleteDealButton = (Button) findViewById(R.id.delete_deal_button);
         deleteDealButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String index = intent.getExtras().get("info").toString();
 
                 //interface jump
                 //RequesterViewTaskAssignedActivity.super.onBackPressed();
@@ -102,14 +101,14 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
                     info2 = new Intent(RequesterViewTaskAssignedActivity.this, RequesterAssignedListActivity.class);
                 }
                 else{
-                    info2 = new Intent(RequesterViewTaskAssignedActivity.this, RequesterEditListActivity.class);
+                    info2 = new Intent(RequesterViewTaskAssignedActivity.this, RequesterAllListActivity.class);
 
 
                 }
                 // get index of target task
-                final int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
+
                 // get target task
-                target_task = tasklist.get(view_index);
+                target_task = tasklist.get(view_index_int);
 
                 //delete task from database
                 Bid dealbid = target_task.getChoosenBid();
@@ -119,7 +118,7 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
                 requesterUpdateTask.execute(target_task);
                 Log.i("Target task changed status",target_task.getTaskStatus());
                 info2.putExtra("userId",userId);
-                info2.putExtra("info",index);
+                info2.putExtra("info",view_index);
                 startActivity(info2);
 
             }
@@ -132,12 +131,30 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
         showlist_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterViewTaskAssignedActivity.this, RequesterEditListActivity.class);
+                Intent info2 = new Intent(RequesterViewTaskAssignedActivity.this, RequesterAssignedListActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
             }
         });
+
+
+
+        //settle pay button
+        Button pay_Button = (Button) findViewById(R.id.pay_button);
+        pay_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent info2 = new Intent(RequesterViewTaskAssignedActivity.this, RequesterMainActivity.class);
+                info2.putExtra("userId",userId);
+                target_task = tasklist.get(view_index_int);
+                target_task.setTaskStatus("done");
+                TaskController.requesterUpdateTask requesterUpdateTask = new TaskController.requesterUpdateTask();
+                requesterUpdateTask.execute(target_task);
+                startActivity(info2);
+            }
+        });
+
 
     }
 
@@ -146,6 +163,9 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
     //when on start, first get newest data from database and then update the information
     protected void onStart(){
         super.onStart();
+        intent = getIntent();
+        activity = getIntent().getExtras().get("activity").toString();
+
         FileSystemController FC = new FileSystemController();
         //time sleep
         try {
@@ -160,6 +180,7 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
         if(newCount!= GlobalCounter.count && newCount>0){
             GlobalCounter.count = newCount;
             Log.i("New Bid","New Bid");
+            openRequestInfoDialog();
         }
 
         //pull data from database
@@ -179,10 +200,14 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
                 FC.saveToFile(task,"sent",getApplication());
             }
         }
+        tasklist = new ArrayList<>();
         alltasklist = FC.loadSentTasksFromFile(getApplication());
+        Log.i("activity:",activity);
         if(activity.equals("assignedList")){
             for(Task task:alltasklist){
-                tasklist.add(task);
+                if(task.getTaskStatus().equals("assigned")) {
+                    tasklist.add(task);
+                }
             }
         }
         else{
@@ -232,6 +257,16 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
         }
 
 
+    }
+
+    private void openRequestInfoDialog() {
+        // get request info, and show it on the dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterViewTaskAssignedActivity.this);
+        builder.setTitle("New Bid")
+                .setMessage("You got a new bid!");
+        // Create & Show the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 

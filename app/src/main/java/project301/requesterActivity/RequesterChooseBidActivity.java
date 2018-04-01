@@ -4,6 +4,7 @@ package project301.requesterActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -108,7 +109,7 @@ public class RequesterChooseBidActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterChooseBidActivity.this, RequesterEditListActivity.class);
+                Intent info2 = new Intent(RequesterChooseBidActivity.this, RequesterAllListActivity.class);
                 info2.putExtra("userId",userId);
                 task.setTaskStatus("assigned");
                 task.setChoosenBid(thisBid);
@@ -127,6 +128,7 @@ public class RequesterChooseBidActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //store the bid into canceledBidList
                 task.addCanceledBid(thisBid);
+                task.changeStatusAfterDeclineBid(thisBid);
 
 
                 TaskController.requesterUpdateTask update2 = new TaskController.requesterUpdateTask();
@@ -134,7 +136,7 @@ public class RequesterChooseBidActivity extends AppCompatActivity {
 
 
 
-                Intent info2 = new Intent(RequesterChooseBidActivity.this, RequesterEditListActivity.class);
+                Intent info2 = new Intent(RequesterChooseBidActivity.this, RequesterAllListActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
@@ -146,17 +148,11 @@ public class RequesterChooseBidActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterChooseBidActivity.this, RequesterViewTaskRequestActivity.class);
-                info2.putExtra("userId",userId);
-                startActivity(info2);
+                onBackPressed();
 
             }
         });
     }
-
-
-
-
 
     protected void onStart(){
 
@@ -167,9 +163,16 @@ public class RequesterChooseBidActivity extends AppCompatActivity {
         if(newCount!= GlobalCounter.count){
             GlobalCounter.count = newCount;
             Log.i("New Bid","New Bid");
+            openRequestInfoDialog();
         }
-
-
-
+    }
+    private void openRequestInfoDialog() {
+        // get request info, and show it on the dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterChooseBidActivity.this);
+        builder.setTitle("New Bid")
+                .setMessage("You got a new bid!");
+        // Create & Show the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

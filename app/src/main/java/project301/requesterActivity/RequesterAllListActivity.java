@@ -12,7 +12,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
 import com.novoda.merlin.MerlinsBeard;
+
 import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
@@ -35,22 +37,24 @@ import java.util.concurrent.ExecutionException;
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterAssignedListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
-    private ListView assignedTaskList;
+public class RequesterAllListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+    private ListView postedTaskList;
     private String userName;
     private String userId;
     private static final String FILENAME = "ProjectMaster.sav";
     private ArrayList<Task> tasklist;
     protected MerlinsBeard merlinsBeard;
+
     protected Context context;
     private ListView mListView;
     private SwipeRefreshLayout mSwipeLayout;
+
 
     @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.requester_assigned_list);
+        setContentView(R.layout.requester_all_list);
         final Intent intent = getIntent();
         context=getApplicationContext();
 
@@ -58,12 +62,14 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         userId = intent.getExtras().get("userId").toString();
         merlinsBeard = MerlinsBeard.from(context);
 
+
+
         //settle mainMenu button
         Button mainMenuButton = (Button) findViewById(R.id.main_button);
         mainMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterAssignedListActivity.this, RequesterMainActivity.class);
+                Intent info2 = new Intent(RequesterAllListActivity.this, RequesterMainActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
@@ -75,7 +81,7 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         viewOnMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterAssignedListActivity.this, RequesterMapActivity.class);
+                Intent info2 = new Intent(RequesterAllListActivity.this, RequesterMapActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
@@ -83,14 +89,27 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         });
 
         // settle click on post task list
-        assignedTaskList = (ListView) findViewById(R.id.post_list);
-        assignedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        postedTaskList = (ListView) findViewById(R.id.post_list);
+        postedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
-                Intent info1 = new Intent(RequesterAssignedListActivity.this, RequesterViewTaskAssignedActivity.class);
+                String status = tasklist.get(index).getTaskStatus();
+                Intent info1;
+                if(status.equals("request")){
+                    info1 = new Intent(RequesterAllListActivity.this, RequesterViewTaskRequestActivity.class);
+                }
+                else if(status.equals("bidden")){
+                    info1 = new Intent(RequesterAllListActivity.this, RequesterViewTaskBiddenActivity.class);
+                }
+                else if(status.equals("assigned")){
+                    info1 = new Intent(RequesterAllListActivity.this, RequesterViewTaskAssignedActivity.class);
+                }
+                else{
+                    info1 = new Intent(RequesterAllListActivity.this, RequesterViewTaskDoneActivity.class);
+                }
                 info1.putExtra("info", index);
                 info1.putExtra("userId",userId);
-                info1.putExtra("activity","assignedList");
+                info1.putExtra("activity","allList");
                 startActivity(info1);
             }
         });
@@ -138,7 +157,7 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         // get request info, and show it on the dialog
 
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterAssignedListActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterAllListActivity.this);
         builder.setTitle("New Bid")
                 .setMessage("You got a new bid!");
         // Create & Show the AlertDialog
@@ -172,6 +191,7 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
             TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
             search.execute(userId);
 
+
             tasklist = new ArrayList<Task>();
             try {
                 tasklist= search.get();
@@ -187,19 +207,10 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         }
         // FC.deleteAllFiles(getApplication(),"sent");
         tasklist = FC.loadSentTasksFromFile(getApplication());
-        ArrayList<Task> assignedTaskList = new ArrayList<>();
-        for(Task task: tasklist){
-            if(task.getTaskStatus().equals("assigned")){
-
-                assignedTaskList.add(task);
-
-            }
-        }
-
-        RequesterAdapter adapter = new RequesterAdapter(this, assignedTaskList);
+        RequesterAdapter adapter = new RequesterAdapter(this, tasklist);
         adapter.notifyDataSetChanged();
         // Attach the adapter to a ListView
-        this.assignedTaskList.setAdapter(adapter);
+        this.postedTaskList.setAdapter(adapter);
     }
 
 }

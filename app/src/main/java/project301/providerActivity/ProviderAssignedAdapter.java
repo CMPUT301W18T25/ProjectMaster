@@ -7,14 +7,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import project301.Bid;
 import project301.R;
 import project301.Task;
 
 import java.util.ArrayList;
 
 /**
- * this class is an adapter for the task arrayList to show on the UI
- * @classname : ProviderAdapter
+ * this class is an adapter for the assigned task arrayList to show on the UI
+ * @classname : ProviderBiddenAdapter
  * @Date :   18/03/2018
  * @author : Wang Dong
  * @version 1.0
@@ -23,9 +24,16 @@ import java.util.ArrayList;
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class ProviderAdapter extends ArrayAdapter<Task> {
-    public ProviderAdapter(Context context, ArrayList<Task> users) {
+public class ProviderAssignedAdapter extends ArrayAdapter<Task> {
+    private String userId;
+
+    public ProviderAssignedAdapter(Context context, ArrayList<Task> users) {
         super(context, 0, users);
+    }
+
+
+    public void setId(String id){
+        userId = id;
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -42,45 +50,49 @@ public class ProviderAdapter extends ArrayAdapter<Task> {
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.adapter_search, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.adapter_assigned, parent, false);
         }
 
         // Lookup view for data population
-        TextView task_requester = convertView.findViewById(R.id.adapter_requester);
         TextView task_name = convertView.findViewById(R.id.adapter_name);
-        TextView task_lowestBid = convertView.findViewById(R.id.adapter_lowestBid);
+        TextView task_requester = convertView.findViewById(R.id.adapter_requester);
+        TextView task_acceptBid = convertView.findViewById(R.id.adapter_acceptBid);
         TextView task_status = convertView.findViewById(R.id.adapter_status);
-        TextView task_idealPrice = convertView.findViewById(R.id.adapter_idealprice);
 
         // Return the completed view to render on screen
         //noinspection ConstantConditions
-
-        //get taskRequester
-        String taskRequester = task.getTaskRequester().toString();
-
         //get taskName
         String taskName = task.getTaskName().toString();
 
-        //get taskLowestBid
-        String taskLowestBid;
-        if (task.findLowestbid()==null){
-            taskLowestBid = "";
+        //get task requester
+        String taskRequester;
+        if (task.getTaskRequester()==null){
+            taskRequester = "";
         }else{
-            taskLowestBid = Double.toString(task.findLowestbid());
+            taskRequester = task.getTaskRequester().toString();
         }
 
-        //get task status
-        String taskStatus = task.getTaskStatus().toString();
+        //get task accept bid
+        String acceptBid;
+        if (task.getChoosenBid().getBidAmount()==null){
+            acceptBid = "";
+        }else{
+            acceptBid = Double.toString(task.findLowestbid());
+        }
 
-        //get task ideal price
-        String taskIdealPrice = task.getTaskIdealPrice().toString();
+        //get taskStatus
+        String taskStatus;
+        if (task.getTaskStatus()==null){
+            taskStatus = "";
+        }else{
+            taskStatus = task.getTaskStatus();
+        }
 
         //set task info
-        task_requester.setText(taskRequester);
         task_name.setText(taskName);
-        task_lowestBid.setText(taskLowestBid);
+        task_requester.setText(taskRequester);
+        task_acceptBid.setText(acceptBid);
         task_status.setText(taskStatus);
-        task_idealPrice.setText(taskIdealPrice);
 
         //Log.i("a",task.getTaskAddress().toString());
         return convertView;

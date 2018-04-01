@@ -156,7 +156,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
 
                     //interface jump
                     //Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterViewTaskRequestActivity.class);
-                    Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterEditListActivity.class);
+                    Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterAllListActivity.class);
 
 
                     //get data from database

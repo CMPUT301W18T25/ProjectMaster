@@ -136,8 +136,10 @@ public class ProviderMainActivity extends AppCompatActivity {
                     ArrayList<Task> result = new ArrayList<>(); // search result
                     //need search code
 
-                    TaskController.searchTaskByKeyword searchTask = new TaskController.searchTaskByKeyword();
+                   /* TaskController.searchTaskByKeyword searchTask = new TaskController.searchTaskByKeyword();
                     searchTask.execute(searchText);
+
+
 
                     try {
                         result = searchTask.get();
@@ -146,6 +148,11 @@ public class ProviderMainActivity extends AppCompatActivity {
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     }
+                    */
+
+                    TaskController taskController = new TaskController();
+                    result = taskController.searchByKeyWord(searchText,userId);
+
                     setTaskList(result);
                 }
             }

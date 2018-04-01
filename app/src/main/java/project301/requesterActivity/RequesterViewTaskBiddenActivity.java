@@ -3,6 +3,7 @@ package project301.requesterActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -57,6 +58,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
     private Context context;
     private Bid bid;
     private String activity;
+    private Intent intent;
 
 
 
@@ -65,7 +67,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_view_task_bidden);
-        final Intent intent = getIntent();
+        intent = getIntent();
         context = getApplicationContext();
         merlinsBeard = MerlinsBeard.from(context);
         //noinspection ConstantConditions,ConstantConditions
@@ -83,27 +85,6 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
         view_lowestbid = (TextView) findViewById(R.id.c_lowest_bid);
         bidList = (ListView)findViewById(R.id.bid_list);
         tasklist = new ArrayList<Task>();
-
-        //get data from database
-        if(merlinsBeard.isConnected()){
-            TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-            search.execute(userId);
-            try {
-                tasklist= search.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        }
-        else{
-            FileSystemController FC = new FileSystemController();
-            tasklist = FC.loadSentTasksFromFile(context);
-        }
-
-
-
-
         //to do : map show location
         //set viewmap button
         Button mapButton = (Button) findViewById(R.id.map_button);
@@ -125,10 +106,13 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 String index = intent.getExtras().get("info").toString();
-
+                Intent info2;
                 //interface jump
-                Intent info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterEditListActivity.class);
-
+                if(activity.equals("allList")) {
+                    info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterAllListActivity.class);
+                }else{
+                    info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterBiddenListActivity.class);
+                }
                 //get data from database
                 deletedlist = new ArrayList<>();
                 TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
@@ -146,6 +130,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
 
                 // get target task
                 target_task=deletedlist.get(view_index);
+
 
                 //delete task from database
                 TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(target_task.getId());
@@ -171,7 +156,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
         showlist_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterEditListActivity.class);
+                Intent info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterBiddenListActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
@@ -199,6 +184,9 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
     //when on start, first get newest data from database and then update the information
     protected void onStart(){
         super.onStart();
+        activity = intent.getExtras().get("activity").toString();
+        Log.i("activity",activity);
+
         FileSystemController FC = new FileSystemController();
         //time sleep
         try {
@@ -213,6 +201,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
         if(newCount!= GlobalCounter.count && newCount>0){
             GlobalCounter.count = newCount;
             Log.i("New Bid","New Bid");
+            openRequestInfoDialog();
         }
 
         //pull data from database
@@ -222,7 +211,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
 
             alltasklist = new ArrayList<Task>();
             try {
-                tasklist = search.get();
+                alltasklist = search.get();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
@@ -240,6 +229,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
                     tasklist.add(task);
                 }
             }
+            Log.i("enter",activity);
 
         }
         else{
@@ -250,7 +240,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
         final int index = Integer.parseInt(view_index);
         view_task=tasklist.get(index);
         //Log.i("State", Integer.toString(index) + " " + tasklist.get(index).getTaskName());
-
+        Log.i("view task name",view_task.getTaskName());
         // get information from target task and set information
         String temp_name=view_task.getTaskName();
         view_name.setText(temp_name);
@@ -296,5 +286,14 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
         bidList.setAdapter(adapter);
     }
 
+    private void openRequestInfoDialog() {
+        // get request info, and show it on the dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterViewTaskBiddenActivity.this);
+        builder.setTitle("New Bid")
+                .setMessage("You got a new bid!");
+        // Create & Show the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
 }

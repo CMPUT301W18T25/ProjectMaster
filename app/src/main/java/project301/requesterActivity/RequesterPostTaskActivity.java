@@ -4,12 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +22,6 @@ import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 import project301.GlobalCounter;
 import project301.Photo;
@@ -151,7 +149,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
 
 
                     //interface jump
-                    Intent info2 = new Intent(RequesterPostTaskActivity.this, RequesterEditListActivity.class);
+                    Intent info2 = new Intent(RequesterPostTaskActivity.this, RequesterAllListActivity.class);
 
                     //set data
                     Task new_task = new Task();
@@ -286,6 +284,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
         if(newCount!= GlobalCounter.count && newCount>0){
             GlobalCounter.count = newCount;
             Log.i("New Bid","New Bid");
+            openRequestInfoDialog();
         }
     }
 
@@ -415,6 +414,16 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
     public void onConnectionSuspended(int i) {
         mPlaceArrayAdapter.setGoogleApiClient(null);
         Log.e(LOG_TAG, "Google Places API connection suspended.");
+    }
+
+    private void openRequestInfoDialog() {
+        // get request info, and show it on the dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterPostTaskActivity.this);
+        builder.setTitle("New Bid")
+                .setMessage("You got a new bid!");
+        // Create & Show the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 

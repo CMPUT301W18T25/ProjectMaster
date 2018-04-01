@@ -99,6 +99,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                         startActivity(intent);
                     } else {
+                        //error message
                         Toast toast = Toast.makeText(context, "Invalid Sign Up information! Please Try Again!", Toast.LENGTH_LONG);
                         TextView v1 = (TextView) toast.getView().findViewById(android.R.id.message);
                         v1.setTextColor(Color.RED);
@@ -108,7 +109,12 @@ public class SignUpActivity extends AppCompatActivity {
                     }
 
                 } else {
+                    //error message
                     Toast toast = Toast.makeText(context, "The maximum length of username is 8", Toast.LENGTH_LONG);
+                    TextView v1 = (TextView) toast.getView().findViewById(android.R.id.message);
+                    v1.setTextColor(Color.RED);
+                    v1.setTextSize(20);
+                    v1.setGravity(Gravity.CENTER);
                     toast.show();
                 }
             }

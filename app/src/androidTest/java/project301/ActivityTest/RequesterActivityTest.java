@@ -10,8 +10,8 @@ import project301.R;
 import project301.allUserActivity.LogInActivity;
 import project301.allUserActivity.UserCharacterActivity;
 
+import project301.requesterActivity.RequesterAllListActivity;
 import project301.requesterActivity.RequesterEditInfoActivity;
-import project301.requesterActivity.RequesterEditListActivity;
 import project301.requesterActivity.RequesterEditTaskActivity;
 import project301.requesterActivity.RequesterMainActivity;
 import project301.requesterActivity.RequesterMapActivity;
@@ -84,7 +84,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.clickOnButton("View And Edit");
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterEditListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
 
         solo.clickOnButton("Main menu");
 
@@ -125,7 +125,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.clickOnButton("submit");
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterEditListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
 
         solo.clickInList(-1);
 
@@ -155,7 +155,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.clickOnButton("Save");
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterEditListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
 
         solo.clickInList(-1);
 
@@ -163,7 +163,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.clickOnButton("Delete Task");
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterEditListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
     }
 
     public void testRequesterEditListActivity() {
@@ -184,7 +184,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.clickOnButton("View And Edit");
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterEditListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
 
         solo.clickOnButton("View On Map");
 
