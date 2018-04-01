@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -9,9 +11,14 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/textView37"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
             android:id="@+id/provider_list_name"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="40dp"
             android:fontFamily="serif"
             android:text="Bid History"
             android:textAlignment="center"
@@ -19,34 +26,40 @@
             android:textSize="20sp"
             android:textStyle="bold|italic" />
 
-        <ListView
-            android:id="@+id/provider_bid_history"
-            android:layout_width="match_parent"
-            android:layout_height="334dp">
-
-        </ListView>
-
-        <Button
-            android:id="@+id/show_assigned_button"
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="serif"
-            android:text="Show All Assigned Tasks"
-            android:textStyle="bold|italic" />
+            app:cardBackgroundColor="@color/blue3"
+            app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
+
+            <ListView
+                android:id="@+id/provider_bid_history"
+                android:layout_width="match_parent"
+                android:layout_height="328dp">
+
+            </ListView>
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView38"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/show_all_tasks_button"
+                android:id="@+id/c_back_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="serif"
-                android:text="Show All Tasks"
+                android:text="Main Menu"
                 android:textStyle="bold|italic" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -69,18 +82,31 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/c_back_button"
+                android:id="@+id/show_all_tasks_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="serif"
-                android:text="Main Menu"
+                android:text="Show All Tasks"
                 android:textStyle="bold|italic" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/show_assigned_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="serif"
+                android:text="Show Assigned Tasks"
+                android:textStyle="bold|italic" />
         </LinearLayout>
 
     </LinearLayout>
