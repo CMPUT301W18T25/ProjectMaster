@@ -285,8 +285,6 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 
             if (stream.toByteArray().length >= 65536){
-
-
                 Toast toast = Toast.makeText(context,"The maximum allowed size of the photo is 65536 bytes",Toast.LENGTH_LONG);
                 toast.show();
             }
