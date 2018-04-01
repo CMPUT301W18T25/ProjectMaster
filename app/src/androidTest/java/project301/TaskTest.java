@@ -618,9 +618,9 @@ public class TaskTest {
 
         }
 
-        TaskController.searchAssignTasksOfThisProvider search = new TaskController.searchAssignTasksOfThisProvider();
+        TaskController.searchAssignTasksOfThisProvider search = new TaskController.searchAssignTasksOfThisProvider("mikeking");
 
-        search.execute("mikeking");
+        search.execute();
 
         // w8 for 5 sec
         AsyncTask.Status taskStatus;
