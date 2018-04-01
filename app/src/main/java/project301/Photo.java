@@ -2,9 +2,21 @@ package project301;
 
 
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Base64;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import java.util.Arrays;
 
@@ -47,6 +59,44 @@ public class Photo {
      * Update phto
      * @param newImage coded image
      */
+
+
+    // source: https://stackoverflow.com/questions/7693633/android-image-dialog-popup
+    public void showImage( Context context) {
+
+        Bitmap image = Bitmap.createBitmap(
+                getBitmapImage());
+
+        Log.d("Photo", "showImage");
+        Log.d("Context", context.getPackageName());
+
+        Dialog builder = new Dialog(context);
+        builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        builder.getWindow().setBackgroundDrawable(
+                new ColorDrawable(android.graphics.Color.BLACK));
+        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                //nothing;
+            }
+        });
+
+        ImageView imageView = new ImageView(context);
+
+        imageView.setImageBitmap(image);
+
+        double iv_scale=1000/image.getWidth();
+        int iv_width=(int)iv_scale*image.getWidth();
+        int iv_height=(int)iv_scale*image.getHeight();
+
+        builder.addContentView(imageView, new LinearLayout.LayoutParams(
+                iv_width,iv_height));
+
+        builder.show();
+
+
+
+    }
 
 
     /**
