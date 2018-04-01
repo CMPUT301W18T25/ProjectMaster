@@ -5,12 +5,16 @@
     <color name="colorAccent">#018be1</color>
     <color name="blue1">#fbe9a0</color>
     <color name="green1">#7afac7</color>
-    <color name="blue2">#7be7f9</color>
+    <color name="blue2">#8ce6f4</color>
     <color name="purple1">#d9b1f9</color>
     <color name="pink1">#fba4eb</color>
     <color name="yellow1">#f3dc7f</color>
     <color name="purple2">#e8ddf1</color>
-    <color name="blue3">#cafcfb</color>
+    <color name="blue3">#c7fcfb</color>
     <color name="red1">#fb1f70</color>
     <color name="orange1">#f9c06c</color>
+    <color name="blue4">#a5d8fb</color>
+    <color name="blue5">#8fb6f9</color>
+    <color name="blue6">#95d1fb</color>
+    <color name="blue7">#78a5f4</color>
 </resources>

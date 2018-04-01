@@ -74,6 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/blue6"
                 android:fontFamily="serif"
                 android:text="Main Menu"
                 android:textStyle="bold|italic" />
@@ -91,6 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/blue7"
                 android:fontFamily="serif"
                 android:text="@string/view_on_map"
                 android:textStyle="bold|italic" />
@@ -107,6 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/blue4"
                 android:fontFamily="serif"
                 android:text="Show All Tasks"
                 android:textStyle="bold|italic" />
@@ -122,6 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/blue5"
                 android:fontFamily="serif"
                 android:text="Show Assigned Tasks"
                 android:textStyle="bold|italic" />
