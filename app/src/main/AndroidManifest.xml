@@ -58,14 +58,16 @@
         <activity android:name=".requesterActivity.RequesterChooseBidActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterMainActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterAllListActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterDoneListActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterViewTaskRequestActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterEditInfoActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterEditTaskActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterBiddenListActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterAssignedListActivity" android:windowSoftInputMode="stateHidden"/>
-
         <activity android:name=".requesterActivity.RequesterViewTaskAssignedActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterViewTaskBiddenActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterViewTaskDoneActivity" android:windowSoftInputMode="stateHidden"/>
+
 
 
 

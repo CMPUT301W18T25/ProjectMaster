@@ -203,7 +203,9 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
         Log.i("activity:",activity);
         if(activity.equals("assignedList")){
             for(Task task:alltasklist){
-                tasklist.add(task);
+                if(task.getTaskStatus().equals("assigned")) {
+                    tasklist.add(task);
+                }
             }
         }
         else{
