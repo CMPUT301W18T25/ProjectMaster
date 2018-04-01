@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.UUID;
@@ -172,7 +175,10 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
                     //to do:set photo
                     if (post_photo != null){
                         Photo new_photo = new Photo();
-                        new_photo.addPhoto(post_photo.getDrawingCache());
+                        BitmapDrawable bit_map_drawable = (BitmapDrawable) post_photo.getDrawable();
+                        Bitmap bitmap_photo = bit_map_drawable.getBitmap();
+                        new_photo.addPhoto(getStringFromBitmap(bitmap_photo));
+
                         new_task.setTaskPhoto(new_photo);
                     }
 
@@ -424,6 +430,19 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
         // Create & Show the AlertDialog
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    // Converts bitmap to string 64 format
+    // source: https://stackoverflow.com/questions/30818538/converting-json-object-with-bitmaps?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+    private String getStringFromBitmap(Bitmap bitmapPicture) {
+        final int COMPRESSION_QUALITY = 100;
+        String encodedImage;
+        ByteArrayOutputStream byteArrayBitmapStream = new ByteArrayOutputStream();
+        bitmapPicture.compress(Bitmap.CompressFormat.PNG, COMPRESSION_QUALITY,
+                byteArrayBitmapStream);
+        byte[] b = byteArrayBitmapStream.toByteArray();
+        encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+        return encodedImage;
     }
 
 

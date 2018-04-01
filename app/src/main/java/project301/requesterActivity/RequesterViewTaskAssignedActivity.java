@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.novoda.merlin.MerlinsBeard;
@@ -61,6 +62,8 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
     private Bid bid;
     private String activity;
     private Intent intent;
+    private ImageButton show_photo;
+
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -86,6 +89,7 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
         view_idealprice = (TextView) findViewById(R.id.c_view_idealprice);
         view_index = intent.getExtras().get("info").toString();
         view_index_int = Integer.parseInt(intent.getExtras().get("info").toString());
+        show_photo = (ImageButton) findViewById(R.id.imageButton);
 
 
         //settle deleteTask button
@@ -154,7 +158,18 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
                 startActivity(info2);
             }
         });
+        // show photo button
+        show_photo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Log.d("requesteredittask","showing photo");
+                if (view_task.getTaskPhoto() != null){
+                    Log.d("RequesterViewTaskBiddenActivity","not null");
 
+                    view_task.getTaskPhoto().showImage(RequesterViewTaskAssignedActivity.this);
+                }
+            }
+        });
 
     }
 
