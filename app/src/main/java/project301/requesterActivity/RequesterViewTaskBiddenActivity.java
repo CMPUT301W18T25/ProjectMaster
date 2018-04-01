@@ -152,7 +152,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
         showlist_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterAllListActivity.class);
+                Intent info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterBiddenListActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
