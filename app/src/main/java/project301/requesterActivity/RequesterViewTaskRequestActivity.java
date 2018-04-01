@@ -1,13 +1,22 @@
 package project301.requesterActivity;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.novoda.merlin.MerlinsBeard;
@@ -51,6 +60,7 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
     protected MerlinsBeard merlinsBeard;
     private Context context;
     private Bid bid;
+    private ImageButton show_photo;
 
 
 
@@ -71,6 +81,7 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
         view_destination = (TextView) findViewById(R.id.c_view_destination);
         view_status = (TextView) findViewById(R.id.c_view_status);
         view_idealprice = (TextView) findViewById(R.id.c_view_idealprice);
+        show_photo = (ImageButton) findViewById(R.id.imageButton);
 
         Button editButton = (Button) findViewById(R.id.edit_button);
         editButton.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +150,19 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
+            }
+        });
+
+        // show photo button
+        show_photo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Log.d("requesteredittask","showing photo");
+                if (view_task.getTaskPhoto() != null){
+                    Log.d("asdf","not null");
+
+                    view_task.getTaskPhoto().showImage(RequesterViewTaskRequestActivity.this);
+                }
             }
         });
 
@@ -216,6 +240,5 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 
 }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -59,6 +60,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
     private Bid bid;
     private String activity;
     private Intent intent;
+    private ImageButton show_photo;
 
 
 
@@ -85,6 +87,8 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
         view_lowestbid = (TextView) findViewById(R.id.c_lowest_bid);
         bidList = (ListView)findViewById(R.id.bid_list);
         tasklist = new ArrayList<Task>();
+        show_photo = (ImageButton) findViewById(R.id.imageButton);
+
         //to do : map show location
         //set viewmap button
         Button mapButton = (Button) findViewById(R.id.map_button);
@@ -175,6 +179,19 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
 
                 startActivity(info1);
 
+            }
+        });
+
+        // show photo button
+        show_photo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Log.d("requesteredittask","showing photo");
+                if (view_task.getTaskPhoto() != null){
+                    Log.d("RequesterViewTaskBiddenActivity","not null");
+
+                    view_task.getTaskPhoto().showImage(RequesterViewTaskBiddenActivity.this);
+                }
             }
         });
     }
