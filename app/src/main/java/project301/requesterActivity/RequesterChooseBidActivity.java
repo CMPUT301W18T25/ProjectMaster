@@ -127,6 +127,7 @@ public class RequesterChooseBidActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //store the bid into canceledBidList
                 task.addCanceledBid(thisBid);
+                task.changeStatusAfterDeclineBid(thisBid);
 
 
                 TaskController.requesterUpdateTask update2 = new TaskController.requesterUpdateTask();
