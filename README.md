@@ -6,7 +6,7 @@
 * github
 * Android Studio
 
-## Team website
+## Javadoc website
 LINK : https://cmput301w18t25.github.io/ProjectMaster/
 
 ## Note

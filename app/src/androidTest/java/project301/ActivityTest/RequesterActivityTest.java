@@ -4,26 +4,21 @@ package project301.ActivityTest;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import project301.R;
-import project301.Task;
 import project301.allUserActivity.LogInActivity;
 import project301.allUserActivity.UserCharacterActivity;
 
-import project301.providerActivity.ProviderMainActivity;
+import project301.requesterActivity.RequesterAllListActivity;
 import project301.requesterActivity.RequesterEditInfoActivity;
-import project301.requesterActivity.RequesterEditListActivity;
 import project301.requesterActivity.RequesterEditTaskActivity;
 import project301.requesterActivity.RequesterMainActivity;
 import project301.requesterActivity.RequesterMapActivity;
 import project301.requesterActivity.RequesterPostTaskActivity;
-import project301.requesterActivity.RequesterViewTaskActivity;
-import com.robotium.solo.Solo;
+import project301.requesterActivity.RequesterViewTaskRequestActivity;
 
-import java.util.ArrayList;
+import com.robotium.solo.Solo;
 
 /**
  * Test for all requester activities. Some of test based on provider activity test and sign up activity test.
@@ -89,7 +84,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.clickOnButton("View And Edit");
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterEditListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
 
         solo.clickOnButton("Main menu");
 
@@ -130,11 +125,11 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.clickOnButton("submit");
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterEditListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
 
         solo.clickInList(-1);
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskRequestActivity.class);
 
         solo.clickOnButton("Edit  Task  Information");
 
@@ -160,15 +155,15 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.clickOnButton("Save");
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterEditListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
 
         solo.clickInList(-1);
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskRequestActivity.class);
 
         solo.clickOnButton("Delete Task");
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterEditListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
     }
 
     public void testRequesterEditListActivity() {
@@ -189,7 +184,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.clickOnButton("View And Edit");
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterEditListActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
 
         solo.clickOnButton("View On Map");
 

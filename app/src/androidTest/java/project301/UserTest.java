@@ -31,8 +31,10 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     @SuppressWarnings("ConstantConditions")
     @Test
     public void testAddUser() throws Exception{
-        String test = "test8";
-        User user = new User(test,test,test,test,test,test,test,test);
+        String Name = "Lilian";
+        User user = new User();
+
+        user.setUserName(Name);
         UserController.addUser addUser = new UserController.addUser();
         addUser.execute(user);
         // Hang around till is done

@@ -1,12 +1,19 @@
 package project301.providerActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -16,6 +23,7 @@ import project301.controller.TaskController;
 
 /**
  * user could change profile, see bid history, as well as look into a requesting task.
+ * This is the main page of provider; it shows a list of requesting task;
  * @classname : ProviderMainActivity
  * @Date :   18/03/2018
  * @author : Wang Dong
@@ -23,18 +31,18 @@ import project301.controller.TaskController;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
-/**
- * This is the main page of provider; it shows a list of requesting task;
- */
 
 public class ProviderMainActivity extends AppCompatActivity {
 
-    Button searchButton;
-    Button editProfileButton;
-    Button viewOnMapButton;
-    Button bidHistoryButton;
+    private Button searchButton;
+    private Button editProfileButton;
+    private Button viewOnMapButton;
+    private Button bidHistoryButton;
+    private EditText searchEditText;
+    private String searchText;
     private ListView availablelist;
     private ArrayList<Task> taskList;
+    private Context context;
 
     private String userId;
     private String taskId;
@@ -45,7 +53,12 @@ public class ProviderMainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_main);
+
+        //get final intent
         final Intent intent = getIntent();
+
+        //get context
+        this.context = getApplicationContext();
 
         //get userId
         userId = intent.getExtras().get("userId").toString();
@@ -68,6 +81,7 @@ public class ProviderMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderBidHistoryActivity.class);
                 intent.putExtra("userId",userId);
+                intent.putExtra("content","all");
                 startActivity(intent);
             }
         });
@@ -107,7 +121,40 @@ public class ProviderMainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //need search code
+                searchEditText = findViewById(R.id.search_info);
+                searchText = searchEditText.getText().toString();
+                searchText = searchText.trim();
+                if (searchText.isEmpty()){
+                    //print error message
+                    Toast toast = Toast.makeText(context, "Search Key Cannot be Empty!", Toast.LENGTH_LONG);
+                    TextView v1 = toast.getView().findViewById(android.R.id.message);
+                    v1.setTextColor(Color.RED);
+                    v1.setTextSize(20);
+                    v1.setGravity(Gravity.CENTER);
+                    toast.show();
+                }else {
+                    ArrayList<Task> result = new ArrayList<>(); // search result
+                    //need search code
+
+                   /* TaskController.searchTaskByKeyword searchTask = new TaskController.searchTaskByKeyword();
+                    searchTask.execute(searchText);
+
+
+
+                    try {
+                        result = searchTask.get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+                    */
+
+                    TaskController taskController = new TaskController();
+                    result = taskController.searchByKeyWord(searchText,userId);
+
+                    setTaskList(result);
+                }
             }
         });
     }
@@ -139,21 +186,15 @@ public class ProviderMainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         taskList.addAll(searchedTask);
-        // Testing
-        /*
-        Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",taskList.get(0).getId());
-        Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",taskList.get(0).getTaskName());
-        Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",taskList.get(0).getTaskAddress());
-        Log.i("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaTaskList",Double.toString(taskList.get(0).getTaskIdealPrice()));
-        Task task1 = new Task();
-        task1.setTaskName("a");
-        task1.setTaskAddress("a");
-        task1.setTaskIdealPrice(1.0);
-        taskList = new ArrayList<>();
-        taskList.add(task1);
-        */
 
         // Attach the adapter to a ListView
+        setTaskList(taskList);
+        ProviderAdapter adapter = new ProviderAdapter(this, taskList);
+        this.availablelist.setAdapter(adapter);
+    }
+
+    public void setTaskList(ArrayList<Task> list){
+        taskList = list;
         ProviderAdapter adapter = new ProviderAdapter(this, taskList);
         this.availablelist.setAdapter(adapter);
     }

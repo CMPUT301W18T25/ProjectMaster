@@ -15,8 +15,6 @@ import android.widget.Button;
 import project301.R;
 
 import project301.controller.TaskController;
-import project301.providerActivity.ProviderMapActivity;
-import project301.providerActivity.ProviderTaskBidActivity;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -24,7 +22,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -98,7 +95,7 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Go Back pressed");
-                Intent intent = new Intent(RequesterMapActivity.this, RequesterEditListActivity.class);
+                Intent intent = new Intent(RequesterMapActivity.this, RequesterAllListActivity.class);
                 intent.putExtra("userId",userId);
                 startActivity(intent);
 
@@ -308,7 +305,7 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
 
 
 
-        Intent info1 = new Intent(RequesterMapActivity.this, RequesterViewTaskActivity.class);
+        Intent info1 = new Intent(RequesterMapActivity.this, RequesterViewTaskRequestActivity.class);
         info1.putExtra("info", markerIndex);
         info1.putExtra("userId",userId);
         startActivity(info1);

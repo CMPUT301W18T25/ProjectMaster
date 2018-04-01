@@ -16,6 +16,7 @@
             android:layout_weight="1"
             android:fontFamily="serif"
             android:text="Task name :"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold|italic" />
 
         <TextView
@@ -24,7 +25,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="serif"
-            android:text="TextView"
             android:textStyle="bold|italic" />
     </LinearLayout>
 
@@ -40,6 +40,7 @@
             android:layout_weight="1"
             android:fontFamily="serif"
             android:text="Requester :"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold|italic" />
 
         <TextView
@@ -48,7 +49,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="serif"
-            android:text="TextView"
             android:textStyle="bold|italic" />
     </LinearLayout>
 
@@ -64,6 +64,7 @@
             android:layout_weight="1"
             android:fontFamily="serif"
             android:text="Lowest Bid :"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold|italic" />
 
         <TextView
@@ -72,7 +73,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="serif"
-            android:text="TextView"
             android:textStyle="bold|italic" />
     </LinearLayout>
 
@@ -88,15 +88,15 @@
             android:layout_weight="1"
             android:fontFamily="serif"
             android:text="My Bid :"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/adapter_myBid_bid"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:fontFamily="serif"
-            android:text="TextView"
             android:textStyle="bold|italic" />
     </LinearLayout>
 
@@ -112,6 +112,7 @@
             android:layout_weight="1"
             android:fontFamily="serif"
             android:text="Status :"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold|italic" />
 
         <TextView
@@ -120,7 +121,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="serif"
-            android:text="TextView"
             android:textStyle="bold|italic" />
     </LinearLayout>
 </LinearLayout>

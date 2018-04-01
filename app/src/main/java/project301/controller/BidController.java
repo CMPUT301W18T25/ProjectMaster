@@ -121,8 +121,6 @@ public class BidController {
             verifySettings();
             String query =
                     "\n{ \n"+
-                            "\"size\" : 2,\n"+
-
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
@@ -140,14 +138,17 @@ public class BidController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<BidCounter> rt
-                            = result.getSourceAsObjectList(BidCounter.class);
-                    return rt.get(0);
+
+                    BidCounter bidCounter = result.getSourceAsObject(BidCounter.class);
+
+                    return bidCounter;
                 } else {
                     Log.i("Error", "The search query failed");
                 }
                 // TODO get the results of the query
             } catch (Exception e) {
+                e.printStackTrace();
+
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
             return null;

@@ -1,5 +1,6 @@
 package project301.providerActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import project301.R;
 import project301.User;
@@ -45,6 +47,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
     private Button backButton;
     private UserController userListControl;
     private User user;
+    private Context context;
 
 
     @SuppressWarnings("ConstantConditions")
@@ -53,6 +56,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_info);
         final Intent intent = getIntent();
+        this.context = getApplicationContext();
         //noinspection ConstantConditions,ConstantConditions
         //get userId and user
         userId = intent.getExtras().get("userId").toString();
@@ -71,7 +75,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (check_namelength(usernameText.getText().toString())) {
                 //get user input
                 //editName = usernameText.getText().toString();
                 editEmail = emailText.getText().toString();
@@ -105,7 +109,12 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
                 }
                 startActivity(info2);
 
+                } else {
+                    Toast toast = Toast.makeText(context, "The maximum length of username is 8", Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
+
         });
 
 
@@ -150,6 +159,15 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
 
         String temp_status=user.getUserPassword();
         passwordText.setText(temp_status);
+    }
+
+
+    private boolean check_namelength(String name)
+    {
+        if(name.length()>=9 ){
+            return false;
+        }
+        return true;
     }
 
 }

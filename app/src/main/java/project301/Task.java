@@ -1,5 +1,7 @@
 package project301;
 
+import android.util.Log;
+
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -48,12 +50,12 @@ public class Task {
     }
 
     public Task(){
-        this.taskName=null;
-        this.taskDetails=null;
-        this.taskRequester=null;
-        this.taskProvider=null;
-        this.taskStatus=null;
-        this.taskAddress=null;
+        this.taskName="";
+        this.taskDetails="";
+        this.taskRequester="";
+        this.taskProvider="";
+        this.taskStatus="";
+        this.taskAddress="";
         this.taskBidList= new ArrayList<Bid>();
         this.canceledBidList= new ArrayList<Bid>();
         this.choosenBid = null;
@@ -65,12 +67,12 @@ public class Task {
 
     public Task(String taskName, String taskDetails, String taskRequester, String taskProvider,
                 String taskStatus, String taskAddress, ArrayList<Bid> taskBidList, Photo taskPhoto){
-        this.taskName=taskName;
-        this.taskDetails=taskDetails;
-        this.taskRequester=taskRequester;
-        this.taskProvider=taskProvider;
-        this.taskStatus=taskStatus;
-        this.taskAddress=taskAddress;
+        this.taskName=taskName.toLowerCase();
+        this.taskDetails=taskDetails.toLowerCase();
+        this.taskRequester=taskRequester.toLowerCase();
+        this.taskProvider=taskProvider.toLowerCase();
+        this.taskStatus=taskStatus.toLowerCase();
+        this.taskAddress=taskAddress.toLowerCase();
         this.taskBidList=taskBidList;
         this.taskPhoto=taskPhoto;
         this.taskIdealPrice=null;
@@ -84,26 +86,30 @@ public class Task {
 
     // Setters
     public void setTaskName(String taskName){
-        this.taskName=taskName;
+        this.taskName=taskName.toLowerCase();
     }
     public void setTaskDetails(String taskDetails){
-        this.taskDetails=taskDetails;
+        this.taskDetails=taskDetails.toLowerCase();
     }
     public void setTaskIdealPrice(Double taskIdealPrice){
         this.taskIdealPrice=taskIdealPrice;
     }
     public void setTaskDateTime(DateTime taskDateTime){this.taskDateTime=taskDateTime;}
     public void setTaskRequester(String taskRequester){
-        this.taskRequester=taskRequester;
+        this.taskRequester=taskRequester.toLowerCase();
     }
     public void setTaskProvider(String taskProvider){
-        this.taskProvider=taskProvider;
+        if(taskProvider==null){
+            this.taskProvider = null;
+        }
+        else{
+        this.taskProvider=taskProvider.toLowerCase();}
     }
     public void setTaskStatus(String taskStatus){
-        this.taskStatus=taskStatus;
+        this.taskStatus=taskStatus.toLowerCase();
     }
     public void setTaskAddress(String taskAddress){
-        this.taskAddress=taskAddress;
+        this.taskAddress=taskAddress.toLowerCase();
     }
     public void setTaskBidList(ArrayList<Bid> taskBidList){
         this.taskBidList=taskBidList;
@@ -158,10 +164,10 @@ public class Task {
     }
     public void setChoosenBid(Bid bid){this.choosenBid = bid;}
     public void addCanceledBid(Bid bid){
-        canceledBidList.add(bid);
+        this.canceledBidList.add(bid);
     }
     public ArrayList<Bid> getCanceledBidList(){
-        return canceledBidList;
+        return this.canceledBidList;
     }
     public Bid getChoosenBid(){
         return choosenBid;
@@ -174,7 +180,13 @@ public class Task {
         }
         //find difference between taskbidlist and canceledBidlist
         for(Bid bid:taskBidList){
-            if(!canceledBidList.contains(bid)){
+            boolean success = true;
+            for(Bid canceledbid:canceledBidList){
+                if(canceledbid.getProviderId().equals(bid.getProviderId()) && canceledbid.getBidAmount().equals(bid.getBidAmount())){
+                    success = false;
+                }
+            }
+            if(success){
                 result.add(bid);
             }
         }
@@ -214,6 +226,52 @@ public class Task {
         }
         return false;
     }
+    public void changeStatusAfterDeclineDeal(Bid bid){
+        this.canceledBidList.add(bid);
+        this.setChoosenBid(null);
+        this.setTaskProvider(null);
+        ArrayList<Bid> bidList = this.getAvailableBidListOfThisTask();
+        if(bidList.size() != 0){
+            this.setTaskStatus("bidden");
 
+            for(Bid b:bidList){
+                Log.i("BidProvider",b.getProviderId());
+            }
 
+        }else{
+            this.setTaskStatus("request");
+        }
+    }
+
+    public void changeStatusAfterDeclineBid(Bid bid){
+        this.canceledBidList.add(bid);
+        ArrayList<Bid> bidList = this.getAvailableBidListOfThisTask();
+        if(bidList.size() != 0){
+            this.setTaskStatus("bidden");
+
+            for(Bid b:bidList){
+                Log.i("BidProvider",b.getProviderId());
+            }
+
+        }else{
+            this.setTaskStatus("request");
+        }
+    }
+
+    public Double findLowestbid(){
+        ArrayList<Bid> bidList = this.getAvailableBidListOfThisTask();
+        if(bidList.size()==0){
+            return null;
+        }
+
+        Double lowestBid = bidList.get(0).getBidAmount();
+        for(Bid bid:bidList){
+
+            if(bid.getBidAmount()<lowestBid){
+                lowestBid = bid.getBidAmount();
+
+            }
+        }
+        return lowestBid;
+    }
 }

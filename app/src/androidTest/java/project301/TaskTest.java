@@ -583,13 +583,12 @@ public class TaskTest {
     @Test
     public void searchAssignTasksOfThisProviderTest(){
         TaskController.getTaskById getTask = new TaskController.getTaskById();
-        TaskController.searchAssignTasksOfThisProvider search = new TaskController.searchAssignTasksOfThisProvider();
         ArrayList<Task> rt_list;
         ArrayList<Task> send_list = new ArrayList<Task>();
 
 
         // init test task info, all info should be tested
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 2; i++){
             Task my_task = new Task();
 
             send_list.add(my_task);
@@ -597,7 +596,7 @@ public class TaskTest {
 
             my_task.setTaskDetails("Want a car to carry me"+ Integer.toString(i));
             my_task.setTaskName("Go to southgate"+ Integer.toString(i));
-            my_task.setTaskProvider("Mike");
+            my_task.setTaskProvider("mikeking");
             my_task.setTaskRequester("Jason");
             my_task.setTaskStatus("assigned");
 
@@ -612,26 +611,16 @@ public class TaskTest {
                 taskStatus3 = addTask.getStatus();
             } while (taskStatus3 != AsyncTask.Status.FINISHED);
 
+            my_task.setTaskStatus("assigned");
+
+            TaskController.requesterUpdateTask update = new TaskController.requesterUpdateTask();
+            update.execute(my_task);
+
         }
-        Task my_task = new Task();
 
-        send_list.add(my_task);
-        my_task.setTaskDetails("Want a car to carry me");
-        my_task.setTaskName("Go to southgate");
-        my_task.setTaskProvider("Mike");
-        my_task.setTaskRequester("Jason");
-        my_task.setTaskStatus("assigned");
+        TaskController.searchAssignTasksOfThisProvider search = new TaskController.searchAssignTasksOfThisProvider("mikeking");
 
-        TaskController.addTask addTask = new TaskController.addTask();
-        addTask.execute(my_task);
-
-        // w8 for 5 sec
-        AsyncTask.Status taskStatus3;
-        do {
-            taskStatus3 = addTask.getStatus();
-        } while (taskStatus3 != AsyncTask.Status.FINISHED);
-
-        search.execute("tester");
+        search.execute();
 
         // w8 for 5 sec
         AsyncTask.Status taskStatus;
@@ -650,7 +639,7 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0){
-                assertTrue(true);
+                assertTrue(false);
             }
 
             for (int i = 0; i < rt_list.size(); i++){
@@ -659,8 +648,9 @@ public class TaskTest {
                     break;
                 }
                 if (rt_list.get(i).getTaskStatus().equals("assigned")){
+                    assertTrue(false);
                     if (rt_list.get(i).getTaskProvider().contains("so")){
-                        assertTrue(true);
+                        assertTrue(false);
                     }
                 }
                 else {
@@ -731,7 +721,7 @@ public class TaskTest {
             taskStatus3 = addTask.getStatus();
         } while (taskStatus3 != AsyncTask.Status.FINISHED);
 
-        search.execute("snake");
+        search.execute("Jason");
 
         // w8 for 5 sec
         AsyncTask.Status taskStatus;
@@ -898,14 +888,18 @@ public class TaskTest {
             rt_list = search.get();
             Log.i("Success", "message");
 
+            if (rt_list.size() == 0){
+                assertTrue(false);
+            }
+
             for (int i = 0; i < rt_list.size(); i++) {
                 Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
                 if (rt_list.get(i) == null) {
                     break;
                 }
                 if (rt_list.get(i).getTaskStatus().equals("request")) {
-                    if (rt_list.get(i).getTaskName().contains("Test") || rt_list.get(i).getTaskDetails().contains("Test")) {
-                        assertTrue(true);
+                    if (rt_list.get(i).getTaskName().contains("test") || rt_list.get(i).getTaskDetails().contains("test")) {
+                        assertTrue(false);
                     }
                 } else {
                     assertTrue(false);
@@ -920,7 +914,6 @@ public class TaskTest {
             e.printStackTrace();
             Log.i("Error", "not getting anything");
         }
-
 
     }
 
