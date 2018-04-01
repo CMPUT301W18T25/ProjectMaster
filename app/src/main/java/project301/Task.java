@@ -242,6 +242,22 @@ public class Task {
             this.setTaskStatus("request");
         }
     }
+
+    public void changeStatusAfterDeclineBid(Bid bid){
+        this.canceledBidList.add(bid);
+        ArrayList<Bid> bidList = this.getAvailableBidListOfThisTask();
+        if(bidList.size() != 0){
+            this.setTaskStatus("bidden");
+
+            for(Bid b:bidList){
+                Log.i("BidProvider",b.getProviderId());
+            }
+
+        }else{
+            this.setTaskStatus("request");
+        }
+    }
+
     public Double findLowestbid(){
         ArrayList<Bid> bidList = this.getAvailableBidListOfThisTask();
         if(bidList.size()==0){

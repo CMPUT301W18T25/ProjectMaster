@@ -127,6 +127,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
                 // get target task
                 target_task=deletedlist.get(view_index);
 
+
                 //delete task from database
                 TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(target_task.getId());
                 deleteTaskById.execute(target_task.getId());
