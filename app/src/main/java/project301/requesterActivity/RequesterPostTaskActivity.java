@@ -175,8 +175,11 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
                     //to do:set photo
                     if (post_photo != null){
                         Photo new_photo = new Photo();
+
                         BitmapDrawable bit_map_drawable = (BitmapDrawable) post_photo.getDrawable();
+
                         Bitmap bitmap_photo = bit_map_drawable.getBitmap();
+
                         new_photo.addPhoto(getStringFromBitmap(bitmap_photo));
 
                         new_task.setTaskPhoto(new_photo);
@@ -277,7 +280,19 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            post_photo.setImageBitmap(bitmap);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            byte[] imageInByte = stream.toByteArray();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
+            if (stream.toByteArray().length >= 65536){
+
+
+                Toast toast = Toast.makeText(context,"The maximum allowed size of the photo is 65536 bytes",Toast.LENGTH_LONG);
+                toast.show();
+            }
+            else{
+                post_photo.setImageBitmap(bitmap);
+            }
         }
     }
 
