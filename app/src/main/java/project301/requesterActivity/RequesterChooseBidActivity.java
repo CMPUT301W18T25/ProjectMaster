@@ -146,9 +146,7 @@ public class RequesterChooseBidActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterChooseBidActivity.this, RequesterViewTaskRequestActivity.class);
-                info2.putExtra("userId",userId);
-                startActivity(info2);
+                onBackPressed();
 
             }
         });
