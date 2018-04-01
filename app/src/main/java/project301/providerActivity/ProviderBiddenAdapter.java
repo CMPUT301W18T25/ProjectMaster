@@ -78,10 +78,10 @@ public class ProviderBiddenAdapter extends ArrayAdapter<Task> {
 
         //get taskIdealPrice
         String taskLowestPrice;
-        if (task.getLowestBid()==null){
+        if (task.findLowestbid()==null){
             taskLowestPrice = "";
         }else{
-            taskLowestPrice = Double.toString(task.getLowestBid());
+            taskLowestPrice = Double.toString(task.findLowestbid());
         }
 
         //get taskBid

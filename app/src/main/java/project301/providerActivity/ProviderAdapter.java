@@ -66,7 +66,7 @@ public class ProviderAdapter extends ArrayAdapter<Task> {
         if (task.findLowestbid()==null){
             taskLowestBid = "";
         }else{
-            taskLowestBid = Double.toString(task.getTaskIdealPrice());
+            taskLowestBid = Double.toString(task.findLowestbid());
         }
 
         //get task status

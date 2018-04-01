@@ -236,11 +236,15 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
 
 
         // Attach the adapter to a ListView
-        ProviderBiddenAdapter adapter = new ProviderBiddenAdapter(this, taskList);
-        adapter.setId(userId);
-        this.bidHistoryList.setAdapter(adapter);
-
-
+        if (this.content.equals("all")) {
+            ProviderBiddenAdapter adapter = new ProviderBiddenAdapter(this, taskList);
+            adapter.setId(userId);
+            this.bidHistoryList.setAdapter(adapter);
+        }else{
+            ProviderAssignedAdapter adapter = new ProviderAssignedAdapter(this, taskList);
+            adapter.setId(userId);
+            this.bidHistoryList.setAdapter(adapter);
+        }
     }
 
     public Intent setIntent(String status,int index){
