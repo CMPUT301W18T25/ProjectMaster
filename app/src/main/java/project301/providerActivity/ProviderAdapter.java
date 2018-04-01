@@ -50,6 +50,7 @@ public class ProviderAdapter extends ArrayAdapter<Task> {
         TextView task_name = convertView.findViewById(R.id.adapter_name);
         TextView task_lowestBid = convertView.findViewById(R.id.adapter_lowestBid);
         TextView task_status = convertView.findViewById(R.id.adapter_status);
+        TextView task_idealPrice = convertView.findViewById(R.id.adapter_idealprice);
 
         // Return the completed view to render on screen
         //noinspection ConstantConditions
@@ -71,11 +72,15 @@ public class ProviderAdapter extends ArrayAdapter<Task> {
         //get task status
         String taskStatus = task.getTaskStatus().toString();
 
+        //get task ideal price
+        String taskIdealPrice = task.getTaskIdealPrice().toString();
+
         //set task info
         task_requester.setText(taskRequester);
         task_name.setText(taskName);
         task_lowestBid.setText(taskLowestBid);
         task_status.setText(taskStatus);
+        task_idealPrice.setText(taskIdealPrice);
 
         //Log.i("a",task.getTaskAddress().toString());
         return convertView;
