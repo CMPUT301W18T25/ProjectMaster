@@ -105,10 +105,13 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 String index = intent.getExtras().get("info").toString();
-
+                Intent info2;
                 //interface jump
-                Intent info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterAllListActivity.class);
-
+                if(activity.equals("allList")) {
+                    info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterAllListActivity.class);
+                }else{
+                    info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterBiddenListActivity.class);
+                }
                 //get data from database
                 deletedlist = new ArrayList<>();
                 TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();

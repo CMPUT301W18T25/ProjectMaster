@@ -95,10 +95,17 @@ public class RequesterViewTaskDoneActivity extends AppCompatActivity  {
             public void onClick(View view) {
                 String index = intent.getExtras().get("info").toString();
 
-                //interface jump
-                Intent info2 = new Intent(RequesterViewTaskDoneActivity.this, RequesterAllListActivity.class);
+                Intent info2;
+                if(activity.equals("allList")) {
+                    info2 = new Intent(RequesterViewTaskDoneActivity.this, RequesterAllListActivity.class);
+                }
+                else{
+                    info2 = new Intent(RequesterViewTaskDoneActivity.this, RequesterDoneListActivity.class);
 
-                // get index of target task
+
+                }
+
+
 
                 // get target task
                 target_task=tasklist.get(view_index_int);
