@@ -84,27 +84,6 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
         view_lowestbid = (TextView) findViewById(R.id.c_lowest_bid);
         bidList = (ListView)findViewById(R.id.bid_list);
         tasklist = new ArrayList<Task>();
-
-        //get data from database
-        if(merlinsBeard.isConnected()){
-            TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-            search.execute(userId);
-            try {
-                tasklist= search.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        }
-        else{
-            FileSystemController FC = new FileSystemController();
-            tasklist = FC.loadSentTasksFromFile(context);
-        }
-
-
-
-
         //to do : map show location
         //set viewmap button
         Button mapButton = (Button) findViewById(R.id.map_button);
@@ -226,7 +205,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
 
             alltasklist = new ArrayList<Task>();
             try {
-                tasklist = search.get();
+                alltasklist = search.get();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
@@ -244,6 +223,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
                     tasklist.add(task);
                 }
             }
+            Log.i("enter",activity);
 
         }
         else{
@@ -254,7 +234,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
         final int index = Integer.parseInt(view_index);
         view_task=tasklist.get(index);
         //Log.i("State", Integer.toString(index) + " " + tasklist.get(index).getTaskName());
-
+        Log.i("view task name",view_task.getTaskName());
         // get information from target task and set information
         String temp_name=view_task.getTaskName();
         view_name.setText(temp_name);
