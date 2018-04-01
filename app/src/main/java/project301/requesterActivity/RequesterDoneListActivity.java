@@ -92,7 +92,7 @@ public class RequesterDoneListActivity extends AppCompatActivity implements Swip
                 Intent info1 = new Intent(RequesterDoneListActivity.this, RequesterViewTaskDoneActivity.class);
                 info1.putExtra("info", index);
                 info1.putExtra("userId",userId);
-                info1.putExtra("activity","biddenList");
+                info1.putExtra("activity","doneList");
                 startActivity(info1);
             }
         });
