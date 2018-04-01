@@ -3,6 +3,8 @@ package project301;
 
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 
 import java.util.Arrays;
 
@@ -17,10 +19,8 @@ import java.util.Arrays;
 
 
 public class Photo {
-    private String photoName;
-    private byte[] compressedImage;
 
-    private Bitmap bit_image;
+    private String encoded_image;
 
     public void Photo(){
 
@@ -31,19 +31,23 @@ public class Photo {
      *
      * @param newImage coded image
      */
-    public void  addPhoto(Bitmap newImage){
+    public void addPhoto(String encodedImage){
        // System.arraycopy(newImage, 0, this.compressedImage, 0, this.compressedImage.length);
-        bit_image = newImage;
+        encoded_image = encodedImage;
+    }
+
+    // source:
+    public Bitmap getBitmapImage(){
+        byte[] decodedString = Base64.decode(encoded_image, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return decodedByte;
     }
 
     /**
      * Update phto
      * @param newImage coded image
      */
-    public void  updatePhoto(byte[] newImage){
-        System.arraycopy(newImage, 0, this.compressedImage, 0, this.compressedImage.length);
 
-    }
 
     /**
      * Upload photo
@@ -56,15 +60,15 @@ public class Photo {
      * Delete photo
      */
     public void  deletePhoto(){
-        Arrays.fill(this.compressedImage, (byte) 0 );
+        encoded_image = null;
     }
 
     /**
      * get photo
      * @return coded image
      */
-    public Bitmap getPhoto(){
-        return this.bit_image;
+    public String getPhoto(){
+        return this.encoded_image;
     }
 
 
