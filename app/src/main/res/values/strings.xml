@@ -42,4 +42,10 @@
     <string name="password">Password</string>
     <string name="type_your_password">Type your password</string>
     <string name="title_activity_view_on_map">Map</string>
+    <string name="picture" />
+    <string name="description_info" />
+    <string name="camera_error" />
+    <string name="intro_message" />
+    <string name="request_permission" />
+    <string name="take_picture" />
 </resources>
