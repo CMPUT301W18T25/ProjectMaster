@@ -189,16 +189,16 @@ public class RequesterDoneListActivity extends AppCompatActivity implements Swip
         }
         // FC.deleteAllFiles(getApplication(),"sent");
         tasklist = FC.loadSentTasksFromFile(getApplication());
-        ArrayList<Task> biddenTaskList = new ArrayList<>();
+        ArrayList<Task> doneTaskList = new ArrayList<>();
         for(Task task: tasklist){
-            if(task.getTaskStatus().equals("bidden")){
+            if(task.getTaskStatus().equals("done")){
 
-                biddenTaskList.add(task);
+                doneTaskList.add(task);
 
             }
         }
 
-        RequesterAdapter adapter = new RequesterAdapter(this, biddenTaskList);
+        RequesterAdapter adapter = new RequesterAdapter(this, doneTaskList);
         adapter.notifyDataSetChanged();
         // Attach the adapter to a ListView
         this.doneTaskList.setAdapter(adapter);
