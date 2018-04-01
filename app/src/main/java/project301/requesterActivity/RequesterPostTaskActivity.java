@@ -95,10 +95,12 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
     private Place taskPlace;
     // Photo stuff
     public static final int GET_FROM_GALLERY = 3;
+    private boolean setImage;
 
     @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_post_task);
         context=getApplicationContext();
@@ -122,6 +124,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
 
         post_ideal_price = (EditText) findViewById(R.id.c_task_idealprice);
         post_photo = (ImageView) findViewById(R.id.c_task_photo);
+        setImage=false;
         submitButton=(Button)findViewById(R.id.submit_button);
         cancelButton=(Button)findViewById(R.id.cancel_button);
 
@@ -173,7 +176,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
                     }
 
                     //to do:set photo
-                    if (post_photo != null){
+                    if (setImage == true){
                         Photo new_photo = new Photo();
 
                         BitmapDrawable bit_map_drawable = (BitmapDrawable) post_photo.getDrawable();
@@ -289,6 +292,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
                 toast.show();
             }
             else{
+                setImage=true;
                 post_photo.setImageBitmap(bitmap);
             }
         }
