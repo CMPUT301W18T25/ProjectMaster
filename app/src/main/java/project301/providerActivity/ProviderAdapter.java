@@ -42,44 +42,39 @@ public class ProviderAdapter extends ArrayAdapter<Task> {
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.adapter_list, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.adapter_search, parent, false);
         }
 
         // Lookup view for data population
+        TextView task_requester = convertView.findViewById(R.id.adapter_requester);
         TextView task_name = convertView.findViewById(R.id.adapter_name);
-        TextView task_destination = convertView.findViewById(R.id.adapter_destination);
-        TextView task_idealprice = convertView.findViewById(R.id.adapter_idealprice);
+        TextView task_lowestBid = convertView.findViewById(R.id.adapter_lowestBid);
         TextView task_status = convertView.findViewById(R.id.adapter_status);
 
         // Return the completed view to render on screen
         //noinspection ConstantConditions
 
+        //get taskRequester
+        String taskRequester = task.getTaskRequester().toString();
+
         //get taskName
         String taskName = task.getTaskName().toString();
 
-        //get taskAddress
-        String taskAddress;
-        if (task.getTaskAddress()==null){
-            taskAddress = "";
+        //get taskLowestBid
+        String taskLowestBid;
+        if (task.findLowestbid()==null){
+            taskLowestBid = "";
         }else{
-            taskAddress = task.getTaskAddress().toString();
-        }
-
-        //get taskIdealPrice
-        String taskIdealPrice;
-        if (task.getTaskIdealPrice()==null){
-            taskIdealPrice = "";
-        }else{
-            taskIdealPrice = Double.toString(task.getTaskIdealPrice());
+            taskLowestBid = Double.toString(task.getTaskIdealPrice());
         }
 
         //get task status
         String taskStatus = task.getTaskStatus().toString();
 
         //set task info
+        task_requester.setText(taskRequester);
         task_name.setText(taskName);
-        task_destination.setText(taskAddress);
-        task_idealprice.setText(taskIdealPrice);
+        task_lowestBid.setText(taskLowestBid);
         task_status.setText(taskStatus);
 
         //Log.i("a",task.getTaskAddress().toString());
