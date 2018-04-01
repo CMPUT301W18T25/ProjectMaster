@@ -3,6 +3,7 @@ package project301.requesterActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -114,30 +115,21 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
-
                 // get index of target task
                 final int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
-
                 // get target task
                 target_task=deletedlist.get(view_index);
-
                 //delete task from database
                 TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(target_task.getId());
                 deleteTaskById.execute(target_task.getId());
-
                 FileSystemController FC = new FileSystemController();
                 String FileName = "sent-"+target_task.getId()+".json";
                 FC.deleteFileByName(FileName,getApplication());
-
                 info2.putExtra("userId",userId);
                 info2.putExtra("info",index);
                 startActivity(info2);
-
             }
         });
-
-
-
         //settle showlist button
         Button showlist_Button = (Button) findViewById(R.id.showlist_button);
         showlist_Button.setOnClickListener(new View.OnClickListener() {
@@ -171,6 +163,7 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
         if(newCount!= GlobalCounter.count && newCount>0){
             GlobalCounter.count = newCount;
             Log.i("New Bid","New Bid");
+            openRequestInfoDialog();
         }
 
         //pull data from database
@@ -212,6 +205,16 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
         view_idealprice.setText(Double.toString(temp_idealprice));
 
 
+    }
+
+    private void openRequestInfoDialog() {
+        // get request info, and show it on the dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(RequesterViewTaskRequestActivity.this);
+        builder.setTitle("New Bid")
+                .setMessage("You got a new bid!");
+        // Create & Show the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 
