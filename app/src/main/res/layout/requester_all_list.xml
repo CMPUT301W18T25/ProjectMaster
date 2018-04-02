@@ -40,7 +40,7 @@
                 <TextView
                     android:id="@+id/textView48"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="10dp" />
 
                 <ListView
                     android:id="@+id/post_list"
@@ -52,7 +52,7 @@
                 <TextView
                     android:id="@+id/textView49"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="10dp" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -72,11 +72,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/blue3"
+                android:background="@color/blue4"
                 android:fontFamily="serif"
                 android:text="Main menu"
                 android:textStyle="bold|italic" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView59"
+            android:layout_width="match_parent"
+            android:layout_height="14dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/blue4"
+                android:background="@color/blue5"
                 android:fontFamily="serif"
                 android:text="@string/view_on_map"
                 android:textStyle="bold|italic" />

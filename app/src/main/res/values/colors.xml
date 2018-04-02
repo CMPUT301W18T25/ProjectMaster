@@ -3,7 +3,7 @@
     <color name="colorPrimary">#06198f</color>
     <color name="colorPrimaryDark">#06198f</color>
     <color name="colorAccent">#018be1</color>
-    <color name="blue1">#fbe9a0</color>
+    <color name="blue1">#cee9fa</color>
     <color name="green1">#7afac7</color>
     <color name="blue2">#97e9f6</color>
     <color name="purple1">#d9b1f9</color>
@@ -19,6 +19,11 @@
     <color name="blue7">#78a5f4</color>
     <color name="blue_list">#b4e9fcfd</color>
     <color name="blue8">#bce0f9</color>
-    <color name="blue9">#9ed0f2</color>
-    <color name="blue_list2">#afd0f3fc</color>
+    <color name="blue9">#9fd2f4</color>
+    <color name="blue_list2">#f7d0f3fc</color>
+    <color name="blue10">#86c7f2</color>
+    <color name="blue11">#55a3eb</color>
+    <color name="blue12">#a4c2f6</color>
+    <color name="blue13">#5d8de0</color>
+    <color name="blue14">#718de8</color>
 </resources>
