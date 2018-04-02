@@ -25,7 +25,7 @@
                 <ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="match_parent"
-                    android:layout_height="127dp"
+                    android:layout_height="170dp"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/requester_icon" />
 
@@ -38,11 +38,12 @@
                 <Button
                     android:id="@+id/requester_button"
                     android:layout_width="match_parent"
-                    android:layout_height="126dp"
+                    android:layout_height="120dp"
                     android:layout_weight="1"
-                    android:background="?android:attr/colorAccent"
+                    android:background="@color/blue8"
                     android:fontFamily="serif"
                     android:text="Requester"
+                    android:textSize="24sp"
                     android:textStyle="bold|italic" />
             </LinearLayout>
 
@@ -75,7 +76,7 @@
                     <ImageView
                         android:id="@+id/imageView3"
                         android:layout_width="match_parent"
-                        android:layout_height="129dp"
+                        android:layout_height="170dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/provider_icon" />
 
@@ -84,12 +85,12 @@
                 <Button
                     android:id="@+id/provider_button"
                     android:layout_width="match_parent"
-                    android:layout_height="126dp"
+                    android:layout_height="58dp"
                     android:layout_weight="1"
-                    android:background="@color/colorAccent"
+                    android:background="@color/blue8"
                     android:fontFamily="serif"
                     android:text="provider"
-                    android:textSize="14sp"
+                    android:textSize="24sp"
                     android:textStyle="bold|italic" />
 
             </LinearLayout>

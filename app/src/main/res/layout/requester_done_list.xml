@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/blue4"
+                android:background="@color/blue16"
                 android:fontFamily="serif"
                 android:text="Main menu"
                 android:textStyle="bold|italic" />

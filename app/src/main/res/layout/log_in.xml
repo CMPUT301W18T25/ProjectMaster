@@ -50,11 +50,11 @@
 
                 <TextView
                     android:id="@+id/login_print_name"
-                    android:layout_width="170dp"
+                    android:layout_width="190dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="serif"
-                    android:text="@string/name"
+                    android:text="  UserName"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20sp"
                     android:textStyle="bold|italic" />
@@ -86,11 +86,11 @@
 
                 <TextView
                     android:id="@+id/login_print_password"
-                    android:layout_width="43dp"
+                    android:layout_width="64dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="serif"
-                    android:text="@string/password"
+                    android:text="  Password"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20sp"
                     android:textStyle="bold|italic" />

@@ -23,8 +23,8 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="176dp"
-            app:cardBackgroundColor="@color/blue_list2"
+            android:layout_height="174dp"
+            app:cardBackgroundColor="@color/blue5"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
@@ -35,7 +35,7 @@
                 <TextView
                     android:id="@+id/textView27"
                     android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+                    android:layout_height="7dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -115,11 +115,11 @@
                             android:id="@+id/map_button"
                             android:layout_width="84dp"
                             android:layout_height="23dp"
-                            android:background="@color/blue2"
+                            android:background="@color/cardview_dark_background"
                             android:fontFamily="serif"
                             android:text="View Map"
                             android:textAllCaps="false"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
                             android:textSize="12sp"
                             android:textStyle="bold|italic" />
 
@@ -156,7 +156,7 @@
                         android:layout_width="294dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@color/blue_list2"
+                        android:background="@color/blue5"
                         app:srcCompat="@android:drawable/ic_menu_gallery" />
                 </LinearLayout>
 
@@ -202,7 +202,7 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="54dp"
             app:cardBackgroundColor="@color/blue9"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
@@ -214,7 +214,7 @@
                 <TextView
                     android:id="@+id/textView19"
                     android:layout_width="match_parent"
-                    android:layout_height="9dp" />
+                    android:layout_height="6dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -289,22 +289,38 @@
                 android:textStyle="bold|italic" />
         </LinearLayout>
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/blue1"
+            app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
-            <ListView
-                android:id="@+id/bid_list"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="254dp"
-                android:background="@color/blue5"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="202dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            </ListView>
+                <TextView
+                    android:id="@+id/textView70"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
 
-        </LinearLayout>
+                <ListView
+                    android:id="@+id/bid_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="202dp">
+
+                </ListView>
+
+                <TextView
+                    android:id="@+id/textView69"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"

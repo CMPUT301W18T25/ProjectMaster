@@ -19,12 +19,12 @@
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="90dp"
-            app:cardBackgroundColor="@color/blue3"
+            app:cardBackgroundColor="@color/blue1"
             app:cardCornerRadius="@dimen/place_autocomplete_button_padding">
 
             <LinearLayout
@@ -118,7 +118,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="222dp"
-            app:cardBackgroundColor="@color/blue8"
+            app:cardBackgroundColor="@color/blue17"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
@@ -209,7 +209,7 @@
                             android:id="@+id/map_button"
                             android:layout_width="84dp"
                             android:layout_height="23dp"
-                            android:background="@color/blue6"
+                            android:background="@color/blue3"
                             android:fontFamily="serif"
                             android:text="View Map"
                             android:textAllCaps="false"
@@ -261,7 +261,7 @@
                         android:layout_width="294dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@color/blue8"
+                        android:background="@color/blue17"
                         app:srcCompat="@android:drawable/ic_menu_gallery" />
                 </LinearLayout>
 
