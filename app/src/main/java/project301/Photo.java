@@ -87,10 +87,10 @@ public class Photo {
 
         double iv_scale=1000/(double)image.getWidth();
 
-        int iv_width=(int)iv_scale*image.getWidth();
-        int iv_height=(int)iv_scale*image.getHeight();
-        Log.d("image width", String.valueOf(image.getWidth()));
-        Log.d("image height", String.valueOf(image.getHeight()));
+        int iv_width=(int)(iv_scale*image.getWidth());
+        int iv_height=(int)(iv_scale*image.getHeight());
+        Log.d("image width", String.valueOf(iv_width));
+        Log.d("image height", String.valueOf(iv_height));
 
         Log.d("scale", String.valueOf(iv_scale));
         builder.addContentView(imageView, new LinearLayout.LayoutParams(
