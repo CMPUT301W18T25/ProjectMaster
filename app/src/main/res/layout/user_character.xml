@@ -40,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="126dp"
                     android:layout_weight="1"
-                    android:background="@color/blue3"
+                    android:background="?android:attr/colorAccent"
                     android:fontFamily="serif"
                     android:text="Requester"
                     android:textStyle="bold|italic" />
@@ -75,7 +75,7 @@
                     <ImageView
                         android:id="@+id/imageView3"
                         android:layout_width="match_parent"
-                        android:layout_height="127dp"
+                        android:layout_height="129dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/provider_icon" />
 
@@ -86,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="126dp"
                     android:layout_weight="1"
-                    android:background="@color/blue8"
+                    android:background="@color/colorAccent"
                     android:fontFamily="serif"
                     android:text="provider"
                     android:textSize="14sp"
