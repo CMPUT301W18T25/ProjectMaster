@@ -7,16 +7,20 @@ package project301;
 public class BidCounter {
     private String requesterId;
     private int counter;
+    private int previousCounter;
     private String ESid;
     public BidCounter(String requesterId,int counter){
         this.requesterId = requesterId;
         this.counter = counter;
         this.ESid = "null";
+        this.previousCounter = counter;
+
     }
     public BidCounter(){
         this.requesterId = null;
         this.counter = -1;
         this.ESid = "null";
+        this.previousCounter = -1;
     }
     public void setRequesterId(String requesterId){
         this.requesterId = requesterId.toLowerCase();
@@ -36,4 +40,7 @@ public class BidCounter {
     public String getESid(){
         return this.ESid;
     }
+    public void setPreviousCounter(int previousCounter){this.previousCounter = previousCounter;}
+    public int getPreviousCounter(){return this.previousCounter;}
+
 }

@@ -110,9 +110,6 @@ public class UserCharacterActivity extends AppCompatActivity {
         for(Task task: tasklist){
             FC.saveToFile(task,"sent",getApplication());
         }
-        BidController bidController = new BidController();
-        //initialize the counter
-        GlobalCounter.count = bidController.searchBidCounterOfThisRequester(userId);
     }
 
     private void gotoRequester(){

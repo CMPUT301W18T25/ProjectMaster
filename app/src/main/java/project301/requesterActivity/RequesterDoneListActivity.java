@@ -18,6 +18,7 @@ import com.novoda.merlin.MerlinsBeard;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import project301.BidCounter;
 import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
@@ -151,13 +152,23 @@ public class RequesterDoneListActivity extends AppCompatActivity implements Swip
 
         BidController bidController = new BidController();
         //check counter change
-        int newCount = bidController.searchBidCounterOfThisRequester(userId);
-        Log.i("bidCount",Integer.toString(newCount));
+        BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
+        if(bidCounter==null){
+            Log.i("Bid counter search error",".");
+        }
+        else{
+            if(bidCounter.getCounter()!= bidCounter.getPreviousCounter()){
+                Log.i("New Bid","New Bid");
+                Log.i("bidCount",Integer.toString(bidCounter.getCounter()));
+                openRequestInfoDialog();
+                //update previousCounter
+                bidCounter.setPreviousCounter(bidCounter.getCounter());
+                BidController.updateBidCounterOfThisRequester updateBidCounterOfThisRequester = new BidController.updateBidCounterOfThisRequester();
+                updateBidCounterOfThisRequester.execute(bidCounter);
+            }
 
-        if(newCount!= GlobalCounter.count && newCount>0){
-            GlobalCounter.count = newCount;
-            Log.i("New Bid","New Bid");
-            openRequestInfoDialog();
+
+
         }
         FileSystemController FC = new FileSystemController();
         if(merlinsBeard.isConnected()){

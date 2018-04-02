@@ -47,7 +47,7 @@ public class BidController {
         return success;
 
     }
-    public int searchBidCounterOfThisRequester(String requesterId){
+    public BidCounter searchBidCounterOfThisRequester(String requesterId){
         BidController.searchBidCounterOfThisRequester searchBidCounterOfThisRequester = new BidController.searchBidCounterOfThisRequester();
         searchBidCounterOfThisRequester.execute(requesterId);
         BidCounter bidCounter = new BidCounter();
@@ -59,10 +59,10 @@ public class BidController {
             e.printStackTrace();
         }
         if(bidCounter==null){
-            return -1;
+            return null;
         }
         else{
-            return bidCounter.getCounter();
+            return bidCounter;
         }
     }
     public Boolean increaseBidCounterOfThisRequester(String requesterId){

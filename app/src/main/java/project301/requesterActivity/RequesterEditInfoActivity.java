@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import project301.BidCounter;
 import project301.GlobalCounter;
 import project301.R;
 import project301.User;
@@ -131,12 +132,23 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
 
         BidController bidController = new BidController();
         //check counter change
-        int newCount = bidController.searchBidCounterOfThisRequester(userId);
-        Log.i("bidCount",Integer.toString(newCount));
-        if(newCount!= GlobalCounter.count && newCount>0){
-            GlobalCounter.count = newCount;
-            Log.i("New Bid","New Bid");
-            openRequestInfoDialog();
+        BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
+        if(bidCounter==null){
+            Log.i("Bid counter search error",".");
+        }
+        else{
+            if(bidCounter.getCounter()!= bidCounter.getPreviousCounter()){
+                Log.i("New Bid","New Bid");
+                Log.i("bidCount",Integer.toString(bidCounter.getCounter()));
+                openRequestInfoDialog();
+                //update previousCounter
+                bidCounter.setPreviousCounter(bidCounter.getCounter());
+                BidController.updateBidCounterOfThisRequester updateBidCounterOfThisRequester = new BidController.updateBidCounterOfThisRequester();
+                updateBidCounterOfThisRequester.execute(bidCounter);
+            }
+
+
+
         }
 
         //get current user
