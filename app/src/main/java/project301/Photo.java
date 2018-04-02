@@ -85,13 +85,18 @@ public class Photo {
 
         imageView.setImageBitmap(image);
 
-        double iv_scale=1000/image.getWidth();
+        double iv_scale=1000/(double)image.getWidth();
+
         int iv_width=(int)iv_scale*image.getWidth();
         int iv_height=(int)iv_scale*image.getHeight();
+        Log.d("image width", String.valueOf(image.getWidth()));
+        Log.d("image height", String.valueOf(image.getHeight()));
 
+        Log.d("scale", String.valueOf(iv_scale));
         builder.addContentView(imageView, new LinearLayout.LayoutParams(
                 iv_width,iv_height));
-
+        //builder.addContentView(imageView, new RelativeLayout.LayoutParams(
+        //        ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
         builder.show();
 
 
