@@ -23,8 +23,10 @@ import android.widget.Toast;
 import project301.Bid;
 import project301.R;
 import project301.Task;
+import project301.User;
 import project301.controller.BidController;
 import project301.controller.TaskController;
+import project301.controller.UserController;
 import project301.requesterActivity.RequesterAdapter;
 
 import java.io.IOException;
@@ -46,12 +48,16 @@ import java.util.concurrent.ExecutionException;
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderTaskBidActivity extends AppCompatActivity {
 
+    //UI variable
     private TextView taskName;
     private TextView taskDetail;
     private TextView taskStatus;
     private TextView taskLocation;
     private TextView taskLowestPrice;
     private TextView taskIdealPrice;
+    private TextView requesterName_view;
+    private TextView requesterPhone_view;
+    private TextView requesterEmail_view;
     private EditText taskMybid;
     private ListView BidListView;
     private ArrayList<Bid> listOfBids;
@@ -60,6 +66,9 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
     private Button BackButton;
     private Button BidButton;
     private Button CancelButton;
+    private ImageButton show_photo;
+
+    // task variable
     private String userName;
     private String userId;
     private String status;
@@ -67,7 +76,12 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
     private Bid bid;
     private Task view_task;
     private String taskId;
-    private ImageButton show_photo;
+
+    // task requester variable
+    private User requester;
+    private String requesterName;
+    private String requesterPhone;
+    private String requesterEmail;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -79,13 +93,18 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         this.context = getApplicationContext();
         userId = intent.getExtras().get("userId").toString();
 
+        // find requester info view by id
+        requesterName_view = (TextView) findViewById(R.id.r_name);
+        requesterPhone_view = (TextView) findViewById(R.id.r_phone);
+        requesterEmail_view = (TextView) findViewById(R.id.r_email);
 
         // find view by id.
         taskName = (TextView) findViewById(R.id.p_task_name);
         taskDetail= (TextView) findViewById(R.id.p_task_detail);
+        taskStatus = (TextView) findViewById(R.id.p_task_status);
         taskLocation = (TextView) findViewById(R.id.p_task_destination);
         taskIdealPrice = (TextView) findViewById(R.id.p_task_idealprice);
-        taskLowestPrice = (TextView) findViewById(R.id.p_task_mybid);
+        taskLowestPrice = (TextView) findViewById(R.id.p_task_lowestbid);
         taskMybid = (EditText)findViewById(R.id.p_task_mybid);
         BidListView = (ListView)findViewById(R.id.provider_bid_lkist);
         show_photo = (ImageButton) findViewById(R.id.imageButton2);
@@ -191,8 +210,19 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
             Log.i("Error", "not getting task ");
         }
 
+        // get requester info
+        UserController uc = new UserController();
+        requesterName = view_task.getTaskRequester();
+        requester = uc.getAUserByName(requesterName);
+        requesterPhone = requester.getUserPhone();
+        requesterEmail = requester.getUserEmail();
 
-        // get information from target task and set information
+        // set requester info
+        requesterName_view.setText(requesterName);
+        requesterPhone_view.setText(requesterPhone);
+        requesterEmail_view.setText(requesterEmail);
+
+        // get and set task information
         String temp_name=view_task.getTaskName();
         taskName.setText(temp_name);
 
@@ -203,15 +233,15 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         taskLocation.setText(temp_destination);
 
         String temp_status=view_task.getTaskStatus();
+        taskStatus.setText(temp_status);
 
         Double temp_idealprice=view_task.getTaskIdealPrice();
         if(temp_idealprice!=null){
             taskIdealPrice.setText(Double.toString(temp_idealprice));
         }
 
-
-        Double temp_lowestbid=view_task.getLowestBid();
-        if(temp_idealprice!=null) {
+        Double temp_lowestbid=view_task.findLowestbid();
+        if(temp_lowestbid!=null) {
             taskLowestPrice.setText(Double.toString(temp_lowestbid));
         }
 

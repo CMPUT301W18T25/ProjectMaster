@@ -9,20 +9,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import project301.R;
-import project301.Task;
 import project301.User;
 import project301.controller.FileSystemController;
 import project301.controller.UserController;
-
-import java.util.ArrayList;
 
 /**
  * This is the login activity, when user open the app, this activity
@@ -41,18 +36,12 @@ import java.util.ArrayList;
 
 public class LogInActivity extends AppCompatActivity {
 
-    private LogInActivity activity = this;
-
-    private ListView taskListView;
-    private Button viewOnMap;
-    private ArrayList<Task> taskList;
-    private ArrayAdapter<Task> taskAdapter;
     private EditText usernameText;
     private EditText passwardText;
-    private Button loginButton;
-    private Button signUpButton;
     private Context context;
     private User thisUser;
+    Button loginButton;
+    Button signUpButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,12 +51,12 @@ public class LogInActivity extends AppCompatActivity {
         FC.deleteFiles(getApplication());
 
         setContentView(R.layout.log_in);
-        usernameText = (EditText) findViewById(R.id.login_name);
-        passwardText = (EditText) findViewById(R.id.login_password);
+        usernameText = findViewById(R.id.login_name);
+        passwardText = findViewById(R.id.login_password);
         this.context = getApplicationContext();
 
         //settle login button
-        Button loginButton = (Button) findViewById(R.id.login_button);
+        loginButton = findViewById(R.id.login_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +65,7 @@ public class LogInActivity extends AppCompatActivity {
                 String enterPassward = passwardText.getText().toString();
 
                 UserController userController = new UserController();
-                /** for testing!
+                /* for testing!
                  if (enterUsername == "wdong2"){
                  Intent intent = new Intent (LogInActivity.this, UserCharacterActivity.class);
                  startActivity(intent);
@@ -96,7 +85,7 @@ public class LogInActivity extends AppCompatActivity {
                 }else{
                     //print error message
                     Toast toast = Toast.makeText(context, "Invalid Login Information! Please Try Again!", Toast.LENGTH_LONG);
-                    TextView v1 = (TextView) toast.getView().findViewById(android.R.id.message);
+                    TextView v1 = toast.getView().findViewById(android.R.id.message);
                     v1.setTextColor(Color.RED);
                     v1.setTextSize(20);
                     v1.setGravity(Gravity.CENTER);
@@ -108,7 +97,7 @@ public class LogInActivity extends AppCompatActivity {
         });
 
         //settle signup button
-        Button signUpButton = (Button) findViewById(R.id.signup_button);
+        signUpButton = findViewById(R.id.signup_button);
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -13,7 +13,9 @@ import android.widget.TextView;
 import project301.Bid;
 import project301.R;
 import project301.Task;
+import project301.User;
 import project301.controller.TaskController;
+import project301.controller.UserController;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -29,18 +31,31 @@ import java.util.Map;
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderTaskFinishActivity extends AppCompatActivity {
+
+    //UI variable
     private TextView taskName;
     private TextView taskDetail;
     private TextView taskLocation;
     private TextView taskIdealPrice;
     private TextView taskBidPrice;
     private TextView taskStatus;
+    private TextView requesterName_view;
+    private TextView requesterPhone_view;
+    private TextView requesterEmail_view;
     private Map providerMap;
     private ArrayList tasklist;
+
+    // task variable
     private String userName;
     private String userId;
     private Task view_task;
     private String taskId;
+
+    // task requester variable
+    private User requester;
+    private String requesterName;
+    private String requesterPhone;
+    private String requesterEmail;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -59,6 +74,11 @@ public class ProviderTaskFinishActivity extends AppCompatActivity {
         taskBidPrice = (TextView) findViewById(R.id.p_task_bidprice);
         taskStatus = (TextView) findViewById(R.id.p_task_status);
 
+        // find requester info view by id
+        requesterName_view = (TextView) findViewById(R.id.r_name);
+        requesterPhone_view = (TextView) findViewById(R.id.r_phone);
+        requesterEmail_view = (TextView) findViewById(R.id.r_email);
+
         // get target task (new)
         taskId = intent.getExtras().get("taskId").toString();
         TaskController.getTaskById getIt = new TaskController.getTaskById();
@@ -72,6 +92,19 @@ public class ProviderTaskFinishActivity extends AppCompatActivity {
         if (view_task == null){
             Log.i("Error", "not getting task ");
         }
+
+        // get requester info
+        UserController uc = new UserController();
+        requesterName = view_task.getTaskRequester();
+        requester = uc.getAUserByName(requesterName);
+        requesterPhone = requester.getUserPhone();
+        requesterEmail = requester.getUserEmail();
+
+        // set requester info
+        requesterName_view.setText(requesterName);
+        requesterPhone_view.setText(requesterPhone);
+        requesterEmail_view.setText(requesterEmail);
+
 
         // get information from target task and set information
         String temp_name=view_task.getTaskName();
