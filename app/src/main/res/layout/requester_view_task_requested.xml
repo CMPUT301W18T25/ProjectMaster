@@ -19,12 +19,12 @@
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="523dp"
-            app:cardBackgroundColor="@color/blue8"
+            app:cardBackgroundColor="@color/grey1"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
@@ -49,9 +49,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="serif"
                         android:text="Task Name"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/c_view_name"
@@ -60,7 +60,7 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:textSize="16sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -76,9 +76,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="serif"
                         android:text="Task Detail"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/c_view_detail"
@@ -87,7 +87,7 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:textSize="16sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -102,9 +102,9 @@
                         android:layout_height="24dp"
                         android:fontFamily="serif"
                         android:text="Destination"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/c_view_destination"
@@ -113,7 +113,7 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:textSize="16sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -121,13 +121,13 @@
                     android:id="@+id/view_map"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:background="@color/blue5"
+                    android:background="@color/blue18"
                     android:fontFamily="serif"
                     android:text="View On Map"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp"
-                    android:textStyle="bold|italic" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView28"
@@ -146,9 +146,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="serif"
                         android:text="Ideal Price"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/c_view_idealprice"
@@ -157,7 +157,7 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:textSize="16sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -173,9 +173,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="serif"
                         android:text="Task Status"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/c_view_status"
@@ -184,7 +184,7 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:textSize="16sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -207,7 +207,7 @@
                         android:layout_width="294dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@color/blue8"
+                        android:background="@color/grey3"
                         app:srcCompat="@android:drawable/ic_menu_gallery" />
                 </LinearLayout>
 
@@ -227,7 +227,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="Edit Task "
-                android:textStyle="bold|italic" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/delete_button"
@@ -236,7 +237,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="Delete Task"
-                android:textStyle="bold|italic" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/showlist_button"
@@ -245,7 +247,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="Show List"
-                android:textStyle="bold|italic" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

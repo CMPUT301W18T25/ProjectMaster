@@ -31,7 +31,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
                     android:layout_weight="1"
                     android:textSize="8sp" />
 
@@ -43,7 +43,7 @@
                     android:background="@color/blue8"
                     android:fontFamily="serif"
                     android:text="Requester"
-                    android:textSize="24sp"
+                    android:textSize="21sp"
                     android:textStyle="bold|italic" />
             </LinearLayout>
 
@@ -82,6 +82,11 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/textView72"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
+
                 <Button
                     android:id="@+id/provider_button"
                     android:layout_width="match_parent"
@@ -90,7 +95,7 @@
                     android:background="@color/blue8"
                     android:fontFamily="serif"
                     android:text="provider"
-                    android:textSize="24sp"
+                    android:textSize="21sp"
                     android:textStyle="bold|italic" />
 
             </LinearLayout>

@@ -40,9 +40,9 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:text="  Name"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/signup_name"
@@ -53,7 +53,7 @@
                         android:fontFamily="serif"
                         android:hint="@string/type_your_name"
                         android:inputType="textPersonName"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -89,9 +89,9 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:text="  Phone"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/signup_phone"
@@ -102,7 +102,7 @@
                         android:fontFamily="serif"
                         android:hint="@string/type_your_phone"
                         android:inputType="phone"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -138,9 +138,9 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:text="  Email"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/signup_email"
@@ -151,7 +151,7 @@
                         android:fontFamily="serif"
                         android:hint="Type your email"
                         android:inputType="textEmailAddress"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -186,9 +186,9 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:text="  Password"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/signup_password"
@@ -199,7 +199,7 @@
                         android:fontFamily="serif"
                         android:hint="Type your password"
                         android:inputType="text"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -217,8 +217,9 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="@string/log_in"
+                android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

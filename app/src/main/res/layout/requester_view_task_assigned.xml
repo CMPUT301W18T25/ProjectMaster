@@ -19,7 +19,7 @@
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -49,9 +49,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="serif"
                         android:text="Task Name"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/c_view_name"
@@ -60,7 +60,7 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:textSize="16sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -76,9 +76,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="serif"
                         android:text="Task Detail"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/c_view_detail"
@@ -87,7 +87,7 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:textSize="16sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -107,9 +107,9 @@
                             android:layout_height="24dp"
                             android:fontFamily="serif"
                             android:text="Destination"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="14sp"
-                            android:textStyle="bold|italic" />
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -120,7 +120,7 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:textSize="16sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -134,7 +134,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp"
-                    android:textStyle="bold|italic" />
+                    android:textStyle="bold" />
 
 
                 <LinearLayout
@@ -149,9 +149,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="serif"
                         android:text="Task Status"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/c_view_status"
@@ -160,7 +160,7 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:textSize="16sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -176,15 +176,15 @@
                         android:text="Task photo"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <ImageButton
                         android:id="@+id/imageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@color/blue3"
-                        app:srcCompat="@color/blue1" />
+                        android:background="@color/blue25"
+                        app:srcCompat="@android:drawable/ic_menu_gallery" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -207,12 +207,12 @@
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="104dp"
-            app:cardBackgroundColor="@color/blue17"
+            app:cardBackgroundColor="@color/blue8"
             app:cardCornerRadius="@dimen/place_autocomplete_button_padding">
 
             <LinearLayout
@@ -237,7 +237,7 @@
                         android:fontFamily="serif"
                         android:text="Provider Name"
                         android:textColor="@color/colorPrimary"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/c_view_provider"
@@ -258,7 +258,7 @@
                         android:fontFamily="serif"
                         android:text="Provider Phone"
                         android:textColor="@color/colorPrimary"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/c_view_phone"
@@ -279,7 +279,7 @@
                         android:fontFamily="serif"
                         android:text="Provider Email"
                         android:textColor="@color/colorPrimary"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/c_view_email"
@@ -301,7 +301,7 @@
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -330,9 +330,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="serif"
                         android:text="Ideal Price"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/c_view_idealprice"
@@ -341,7 +341,7 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:textSize="16sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -356,9 +356,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="serif"
                         android:text="Deal Price "
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/c_deal_price"
@@ -367,7 +367,7 @@
                         android:layout_weight="1"
                         android:fontFamily="serif"
                         android:textSize="16sp"
-                        android:textStyle="bold|italic" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -389,7 +389,7 @@
                 android:layout_height="37dp"
                 android:fontFamily="serif"
                 android:text="Pay task"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/showlist_button"
@@ -397,7 +397,7 @@
                 android:layout_height="37dp"
                 android:fontFamily="serif"
                 android:text="Show List"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/delete_deal_button"
@@ -405,7 +405,7 @@
                 android:layout_height="37dp"
                 android:fontFamily="serif"
                 android:text="decline deal"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 

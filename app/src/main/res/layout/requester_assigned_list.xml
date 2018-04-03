@@ -22,14 +22,14 @@
             android:fontFamily="serif"
             android:text="Assigned Task List"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimary"
             android:textSize="20sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/blue_list"
+            app:cardBackgroundColor="@color/grey1"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
@@ -72,10 +72,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/blue16"
+                android:background="@color/black1"
                 android:fontFamily="serif"
                 android:text="Main menu"
-                android:textStyle="bold|italic" />
+                android:textColor="@android:color/background_light"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <TextView
@@ -94,10 +95,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/blue5"
+                android:background="@color/black1"
                 android:fontFamily="serif"
                 android:text="@string/view_on_map"
-                android:textStyle="bold|italic" />
+                android:textColor="@android:color/background_light"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

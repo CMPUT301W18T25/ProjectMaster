@@ -40,9 +40,9 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="serif"
                     android:text="Provider Name :"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
-                    android:textStyle="bold|italic" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/confirm_name"
@@ -51,7 +51,7 @@
                     android:layout_weight="1"
                     android:fontFamily="serif"
                     android:textSize="18sp"
-                    android:textStyle="bold|italic" />
+                    android:textStyle="bold" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
@@ -73,9 +73,9 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="serif"
                     android:text="Provider Phone :"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
-                    android:textStyle="bold|italic" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/confirm_phone"
@@ -84,7 +84,7 @@
                     android:layout_weight="1"
                     android:fontFamily="serif"
                     android:textSize="18sp"
-                    android:textStyle="bold|italic" />
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -107,9 +107,9 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="serif"
                     android:text="Provider Email :"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
-                    android:textStyle="bold|italic" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/confirm_email"
@@ -118,7 +118,7 @@
                     android:layout_weight="1"
                     android:fontFamily="serif"
                     android:textSize="18sp"
-                    android:textStyle="bold|italic" />
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -141,9 +141,9 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="serif"
                     android:text="Task Deal Price :"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
-                    android:textStyle="bold|italic" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/confirm_price"
@@ -152,7 +152,7 @@
                     android:layout_weight="1"
                     android:fontFamily="serif"
                     android:textSize="18sp"
-                    android:textStyle="bold|italic" />
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -171,7 +171,7 @@
                 android:elevation="@android:dimen/app_icon_size"
                 android:fontFamily="serif"
                 android:text="submit"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/decline_button"
@@ -181,7 +181,7 @@
                 android:elevation="@android:dimen/app_icon_size"
                 android:fontFamily="serif"
                 android:text="decline"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/back_button"
@@ -190,7 +190,7 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="Back"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>
