@@ -22,9 +22,9 @@
             android:fontFamily="serif"
             android:text="Bid History"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimary"
             android:textSize="20sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -77,7 +77,7 @@
                 android:background="@color/blue1"
                 android:fontFamily="serif"
                 android:text="Main Menu"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -95,7 +95,7 @@
                 android:background="@color/blue4"
                 android:fontFamily="serif"
                 android:text="@string/view_on_map"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -112,7 +112,7 @@
                 android:background="@color/blue17"
                 android:fontFamily="serif"
                 android:text="Show All Tasks"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -128,7 +128,7 @@
                 android:background="@color/blue5"
                 android:fontFamily="serif"
                 android:text="Show Assigned Tasks"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

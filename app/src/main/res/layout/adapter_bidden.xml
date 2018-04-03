@@ -17,7 +17,7 @@
             android:fontFamily="serif"
             android:text="Task name :"
             android:textColor="@color/colorPrimary"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/adapter_name_bid"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="serif"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -41,7 +41,7 @@
             android:fontFamily="serif"
             android:text="Requester :"
             android:textColor="@color/colorPrimary"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/adapter_requester_bid"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="serif"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -65,7 +65,7 @@
             android:fontFamily="serif"
             android:text="Lowest Bid :"
             android:textColor="@color/colorPrimary"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/adapter_idealprice_bid"
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="serif"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -89,7 +89,7 @@
             android:fontFamily="serif"
             android:text="My Bid :"
             android:textColor="@color/colorPrimary"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/adapter_myBid_bid"
@@ -97,7 +97,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:fontFamily="serif"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -113,7 +113,7 @@
             android:fontFamily="serif"
             android:text="Status :"
             android:textColor="@color/colorPrimary"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/adapter_status_bid"
@@ -121,6 +121,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="serif"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>
