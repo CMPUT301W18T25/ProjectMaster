@@ -96,8 +96,6 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
                 updateUser.execute(user);
 
                 //testing result
-                Log.i("resultid:",user.getResultId());
-
                 //change activity
                 Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMainActivity.class);
                 info2.putExtra("userId",userId);

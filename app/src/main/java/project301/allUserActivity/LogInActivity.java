@@ -75,8 +75,7 @@ public class LogInActivity extends AppCompatActivity {
                     Intent intent = new Intent (LogInActivity.this, UserCharacterActivity.class);
                     UserController uc = new UserController();
 
-                    thisUser = uc.getAUserByName(enterUsername);
-                    String Id = thisUser.getId();
+                    String Id = enterUsername;
                     Log.i("id",Id);
 
                     //deliver userName

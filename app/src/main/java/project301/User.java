@@ -22,12 +22,11 @@ public class User {
     private String userType;
     private String resultId;
     private ArrayList<String> providerBiddenTask;
-    private ArrayList<String> requesterBiddenTask;
 
     public User(){
         super();
     }
-    public User(String userId,String userName,String userPhone,String userEmail,String userPassword,String userType,String resultId){
+    public User(String userId,String userName,String userPhone,String userEmail,String userPassword,String userType,String resultId,ArrayList<String> providerBiddenTask){
         this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;
@@ -36,7 +35,6 @@ public class User {
         this.userPhone = userPhone;
         this.resultId = resultId;
         this.providerBiddenTask = new ArrayList<String>();
-        this.requesterBiddenTask = new ArrayList<String>();
 
     }
 
@@ -153,7 +151,7 @@ public class User {
      * @param resultId ES id
      */
     public void setResultId(String resultId){
-        this.resultId = resultId.toLowerCase();
+        this.resultId = resultId;
     }
 
     /**
@@ -169,40 +167,5 @@ public class User {
      * add his bidden task
      * @param taskID task id
      */
-    public void addProviderBiddenTask(String taskID){
-        providerBiddenTask.add(taskID);
-    }
 
-    /**
-     * remove his biddentask
-     * @param taskID task id
-     */
-    public void removeABiddenTask(String taskID){
-        providerBiddenTask.remove(taskID);
-    }
-
-    /**
-     * get his bidden task
-     * @return bidden tasks
-     */
-
-    public ArrayList<String> getRequesterBiddenTask(){
-        return this.requesterBiddenTask;
-    }
-
-    /**
-     * add his bidden task
-     * @param taskID bidden tasks
-     */
-    public void addRequesterBiddenTask(String taskID){
-        requesterBiddenTask.add(taskID);
-    }
-
-    /**
-     * remove his bidden task
-     * @param taskID bidden tasks
-     */
-    public void removeRequesterBiddenTask(String taskID){
-        requesterBiddenTask.remove(taskID);
-    }
 }
