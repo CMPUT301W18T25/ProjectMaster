@@ -11,7 +11,9 @@ import android.widget.Button;
 import project301.BidCounter;
 import project301.GlobalCounter;
 import project301.R;
+import project301.allUserActivity.LogInActivity;
 import project301.controller.BidController;
+import project301.providerActivity.ProviderMainActivity;
 
 /**
  * Detail : requester main is for user to choose their actions: post task,view and edit task or edit profile
@@ -113,7 +115,20 @@ public class RequesterMainActivity extends AppCompatActivity {
 
             }
         });
+
+        //settle logout Button
+        Button logoutButton = findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RequesterMainActivity.this, LogInActivity.class);
+                //intent.putExtra("userId",userId);
+                startActivity(intent);
+            }
+        });
     }
+
+
     protected void onStart(){
 
         super.onStart();

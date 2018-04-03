@@ -19,6 +19,7 @@ import java.util.concurrent.ExecutionException;
 
 import project301.R;
 import project301.Task;
+import project301.allUserActivity.LogInActivity;
 import project301.controller.TaskController;
 
 /**
@@ -38,6 +39,7 @@ public class ProviderMainActivity extends AppCompatActivity {
     private Button editProfileButton;
     private Button viewOnMapButton;
     private Button bidHistoryButton;
+    private Button logoutButton;
     private EditText searchEditText;
     private String searchText;
     private ListView availablelist;
@@ -70,6 +72,17 @@ public class ProviderMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProviderMainActivity.this, ProviderMapActivity.class);
                 intent.putExtra("userId",userId);
+                startActivity(intent);
+            }
+        });
+
+        //settle logout Button
+        logoutButton = findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProviderMainActivity.this, LogInActivity.class);
+                //intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });
