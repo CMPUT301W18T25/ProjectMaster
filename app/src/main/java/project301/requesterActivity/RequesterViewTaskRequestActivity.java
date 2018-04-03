@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -28,9 +31,12 @@ import project301.R;
 import project301.Task;
 import project301.controller.BidController;
 import project301.controller.FileSystemController;
+import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -62,6 +68,42 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
     private Context context;
     private Bid bid;
     private ImageButton show_photo;
+    private Timer timer;
+    MyTask myTask = new MyTask();
+    private class MyTask extends TimerTask {
+        public void run() {
+            Log.i("Timer13","run");
+            BidController bidController = new BidController();
+            //check counter change
+            BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
+            if(bidCounter==null){
+                Log.i("Bid counter search error",".");
+            }
+            else{
+                OfflineController offlineController = new OfflineController();
+                offlineController.tryToExecuteOfflineTasks(getApplication());
+
+                if(bidCounter.getCounter()!= bidCounter.getPreviousCounter()){
+                    Log.i("New Bid","New Bid");
+                    Log.i("bidCount",Integer.toString(bidCounter.getCounter()));
+                    Message msg = new Message();
+
+                    msg.arg1 = 1;
+                    handler.sendMessage(msg);
+
+
+                    //update previousCounter
+                    bidCounter.setPreviousCounter(bidCounter.getCounter());
+                    BidController.updateBidCounterOfThisRequester updateBidCounterOfThisRequester = new BidController.updateBidCounterOfThisRequester();
+                    updateBidCounterOfThisRequester.execute(bidCounter);
+
+
+                }
+            }
+
+
+        }
+    };
 
 
 
@@ -174,6 +216,16 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
     //when on start, first get newest data from database and then update the information
     protected void onStart(){
         super.onStart();
+        if(timer!=null) {
+
+            timer.cancel();
+        }
+        else{
+            timer = new Timer(true);
+            myTask = new MyTask();
+
+            timer.schedule(myTask,0,2000);
+        }
         FileSystemController FC = new FileSystemController();
         //time sleep
         try {
@@ -181,26 +233,7 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        BidController bidController = new BidController();
-        //check counter change
-        BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
-        if(bidCounter==null){
-            Log.i("Bid counter search error",".");
-        }
-        else{
-            if(bidCounter.getCounter()!= bidCounter.getPreviousCounter()){
-                Log.i("New Bid","New Bid");
-                Log.i("bidCount",Integer.toString(bidCounter.getCounter()));
-                openRequestInfoDialog();
-                //update previousCounter
-                bidCounter.setPreviousCounter(bidCounter.getCounter());
-                BidController.updateBidCounterOfThisRequester updateBidCounterOfThisRequester = new BidController.updateBidCounterOfThisRequester();
-                updateBidCounterOfThisRequester.execute(bidCounter);
-            }
 
-
-
-        }
         //pull data from database
         if(merlinsBeard.isConnected()) {
             TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
@@ -250,6 +283,37 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
         // Create & Show the AlertDialog
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+    Handler handler = new Handler(new Handler.Callback() {
+
+        @Override
+        public boolean handleMessage(Message msg) {
+            if(msg.arg1==1)
+            {
+                //Print Toast or open dialog
+                openRequestInfoDialog();
+                msg.arg1 = 0;
+
+            }
+            return false;
+
+        }
+    });
+    @Override
+    protected void onStop(){
+        super.onStop();
+        if(timer!=null){
+            timer.cancel();
+            timer = null;
+        }
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(timer!=null) {
+            timer.cancel();
+            timer = null;
+        }
     }
 
 }

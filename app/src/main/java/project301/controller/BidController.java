@@ -55,8 +55,11 @@ public class BidController {
             bidCounter = searchBidCounterOfThisRequester.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
+            throw null;
+
         } catch (ExecutionException e) {
             e.printStackTrace();
+            throw null;
         }
         if(bidCounter==null){
             return null;
@@ -130,7 +133,7 @@ public class BidController {
                             "   }\n"+
                             "}\n";
 
-            Log.i("Query", "The query was " + query );
+
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w18t25")
                     .addType("bidCounter")

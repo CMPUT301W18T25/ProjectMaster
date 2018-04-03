@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,8 @@ import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -38,8 +41,9 @@ import java.util.concurrent.ExecutionException;
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterAssignedListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
-    private ListView assignedTaskList;
+    private ListView assignedTaskListView;
     private String userName;
+
     private String userId;
     private static final String FILENAME = "ProjectMaster.sav";
     private ArrayList<Task> tasklist;
@@ -47,11 +51,53 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
     protected Context context;
     private ListView mListView;
     private SwipeRefreshLayout mSwipeLayout;
+    ArrayList<Task> assignedTaskList = new ArrayList<>();
+
+    RequesterAdapter adapter;
+
+    private Timer timer;
+    MyTask myTask = new MyTask();
+    private class MyTask extends TimerTask {
+        public void run() {
+            Log.i("Timer2","run");
+            BidController bidController = new BidController();
+            //check counter change
+            BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
+            if(bidCounter==null){
+                Log.i("Bid counter search error",".");
+            }
+            else{
+                OfflineController offlineController = new OfflineController();
+                boolean executeOffline = offlineController.tryToExecuteOfflineTasks(getApplication());
+                if(executeOffline){
+                    Message msg = new Message();
+                    msg.arg1 = 2;
+                    handler.sendMessage(msg);
+
+                }
+                if(bidCounter.getCounter()!= bidCounter.getPreviousCounter()){
+                    Log.i("New Bid","New Bid");
+                    Log.i("bidCount",Integer.toString(bidCounter.getCounter()));
+                    Message msg1 = new Message();
+                    msg1.arg1 = 1;
+                    handler.sendMessage(msg1);
+
+                    //update previousCounter
+                    bidCounter.setPreviousCounter(bidCounter.getCounter());
+                    BidController.updateBidCounterOfThisRequester updateBidCounterOfThisRequester = new BidController.updateBidCounterOfThisRequester();
+                    updateBidCounterOfThisRequester.execute(bidCounter);
+                }
+            }
+        }
+    }
+
 
     @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        adapter = new RequesterAdapter(this, assignedTaskList);
+
         setContentView(R.layout.requester_assigned_list);
         final Intent intent = getIntent();
         context=getApplicationContext();
@@ -85,8 +131,8 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         });
 
         // settle click on post task list
-        assignedTaskList = (ListView) findViewById(R.id.post_list);
-        assignedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        assignedTaskListView = (ListView) findViewById(R.id.post_list);
+        assignedTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent info1 = new Intent(RequesterAssignedListActivity.this, RequesterViewTaskAssignedActivity.class);
@@ -130,6 +176,16 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
     @Override
     protected void onStart(){
         super.onStart();
+        if(timer!=null) {
+
+            timer.cancel();
+        }
+        else{
+            timer = new Timer(true);
+            myTask = new MyTask();
+            timer.schedule(myTask,0,2000);
+        }
+
         renewTheList();
 
         //Log.i("Sign", Integer.toString(tasklist.size()));
@@ -171,10 +227,8 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         }
         FileSystemController FC = new FileSystemController();
         if(merlinsBeard.isConnected()){
-            OfflineController offlineController = new OfflineController();
-            offlineController.tryToExecuteOfflineTasks(getApplication());
+
             //try again, will change in the future
-            offlineController.tryToExecuteOfflineTasks(getApplication());
 
             try {
                 Thread.sleep(1000);
@@ -199,7 +253,6 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         }
         // FC.deleteAllFiles(getApplication(),"sent");
         tasklist = FC.loadSentTasksFromFile(getApplication());
-        ArrayList<Task> assignedTaskList = new ArrayList<>();
         for(Task task: tasklist){
             if(task.getTaskStatus().equals("assigned")){
 
@@ -208,10 +261,44 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
             }
         }
 
-        RequesterAdapter adapter = new RequesterAdapter(this, assignedTaskList);
         adapter.notifyDataSetChanged();
         // Attach the adapter to a ListView
-        this.assignedTaskList.setAdapter(adapter);
+        this.assignedTaskListView.setAdapter(adapter);
     }
+    Handler handler = new Handler(new Handler.Callback() {
+
+        @Override
+        public boolean handleMessage(Message msg) {
+            if(msg.arg1==1)
+            {
+                //Print Toast or open dialog
+                openRequestInfoDialog();
+                msg.arg1 = 0;
+
+            }
+            else if(msg.arg1 == 2){
+                adapter.notifyDataSetChanged();
+                msg.arg1=0;
+            }
+            return false;
+        }
+    });
+    @Override
+    protected void onStop(){
+        super.onStop();
+        if(timer!=null){
+            timer.cancel();
+            timer = null;
+        }
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(timer!=null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
+
 
 }

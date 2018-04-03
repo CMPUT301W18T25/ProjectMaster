@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -24,6 +26,8 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 import project301.BidCounter;
@@ -72,7 +76,7 @@ import com.novoda.merlin.MerlinsBeard;
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterPostTaskActivity extends AppCompatActivity implements Connectable, Disconnectable, Bindable,
+public class RequesterPostTaskActivity extends AppCompatActivity implements
     GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
     private Context context;
 
@@ -86,6 +90,40 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
     private String userId;
     protected Merlin merlin;
     protected MerlinsBeard merlinsBeard;
+    private Timer timer;
+    MyTask myTask = new MyTask();
+    private class MyTask extends TimerTask {
+        public void run() {
+            //Your code...
+            Log.i("Timer9","run");
+            BidController bidController = new BidController();
+            //check counter change
+            BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
+            if(bidCounter==null){
+                Log.i("Bid counter search error",".");
+
+            }
+            else{
+                OfflineController offlineController = new OfflineController();
+                offlineController.tryToExecuteOfflineTasks(getApplication());
+                if(bidCounter.getCounter()!= bidCounter.getPreviousCounter()){
+                    Log.i("New Bid","New Bid");
+                    Log.i("bidCount",Integer.toString(bidCounter.getCounter()));
+                    Message msg = new Message();
+
+                    msg.arg1 = 1;
+                    handler.sendMessage(msg);
+
+                    //update previousCounter
+                    bidCounter.setPreviousCounter(bidCounter.getCounter());
+                    BidController.updateBidCounterOfThisRequester updateBidCounterOfThisRequester = new BidController.updateBidCounterOfThisRequester();
+                    updateBidCounterOfThisRequester.execute(bidCounter);
+                }
+            }
+
+        }
+    }
+
 
     // Address autocomplete stuff
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
@@ -103,16 +141,13 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.requester_post_task);
         context=getApplicationContext();
         final Intent intent = getIntent();
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
         // monitor network connectivity
-        merlin = new Merlin.Builder().withConnectableCallbacks().withDisconnectableCallbacks().withBindableCallbacks().build(this);
-        merlin.registerConnectable(this);
-        merlin.registerDisconnectable(this);
-        merlin.registerBindable(this);
 
         merlinsBeard = MerlinsBeard.from(context);
 
@@ -191,9 +226,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
 
                     //upload new task data to database
                     if(merlinsBeard.isConnected()) {
-                        //Log.i("MerlinBeard","connected");
-                        OfflineController offlineController = new OfflineController();
-                        offlineController.tryToExecuteOfflineTasks(getApplication());
+
                         TaskController.addTask addTaskCtl = new TaskController.addTask();
                         addTaskCtl.execute(new_task);
                         FileIOUtil fileIOUtil = new FileIOUtil();
@@ -302,6 +335,15 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
     protected void onStart(){
 
         super.onStart();
+        if(timer!=null) {
+
+            timer.cancel();
+        }
+        else{
+            timer = new Timer(true);
+            myTask = new MyTask();
+            timer.schedule(myTask,0,2000);
+        }
         BidController bidController = new BidController();
         //check counter change
         BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
@@ -325,47 +367,6 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
     }
 
 
-    /**
-     * method check empty to make sure below parameters are not empty
-     * @param name
-     * @param detail
-     * @param destination
-     * @param ideal_price
-     * @return
-     */
-    @Override
-    protected void onResume() {
-        super.onResume();
-        merlin.bind();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        merlin.unbind();
-    }
-
-    @Override
-    public void onBind(NetworkStatus networkStatus) {
-        if (networkStatus.isAvailable()) {
-            onConnect();
-        } else if (!networkStatus.isAvailable()) {
-            onDisconnect();
-        }
-    }
-
-    @Override
-    public void onConnect() {
-        // try to update offline accepted request
-        OfflineController offlineController = new OfflineController();
-        offlineController.tryToExecuteOfflineTasks(getApplication());
-    }
-
-    @Override
-    public void onDisconnect() {
-        Log.i("Hasn't connected",".");
-
-    }
 
     private boolean check_empty(String name, String destination, String ideal_price)
     {
@@ -474,6 +475,35 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements Conn
         encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
         return encodedImage;
     }
+    Handler handler = new Handler(new Handler.Callback() {
 
+        @Override
+        public boolean handleMessage(Message msg) {
+            if(msg.arg1==1)
+            {
+                //Print Toast or open dialog
+                openRequestInfoDialog();
+                msg.arg1 = 0;
+
+            }
+            return false;
+        }
+    });
+    @Override
+    protected void onStop(){
+        super.onStop();
+        if(timer!=null){
+            timer.cancel();
+            timer = null;
+        }
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(timer!=null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
 
 }

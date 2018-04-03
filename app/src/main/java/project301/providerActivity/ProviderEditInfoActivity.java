@@ -89,6 +89,7 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
                 user.setUserEmail(editEmail);
                 user.setUserPhone(editPhone);
                 user.setUserPassword(editPassword);
+                Log.i(user.getUserPhone(),user.getUserEmail());
 
                 //update user
                 UserController.updateUser updateUser= new UserController.updateUser();

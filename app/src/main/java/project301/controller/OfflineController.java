@@ -28,10 +28,11 @@ public class OfflineController {
      * @param context current context
      */
 
-    public void tryToExecuteOfflineTasks(Context context){
+    public boolean tryToExecuteOfflineTasks(Context context){
         Log.i("try to resume offline","Tasks");
         FileSystemController fileSystemController = new FileSystemController();
         ArrayList<Task> OfflineAddTasks = fileSystemController.loadOfflineAddTasksFromFile(context);
+        Boolean change = false;
         for(Task task: OfflineAddTasks){
             String fileName = "offlineAdd-" + task.getId() + ".json";
             TaskController.addTask addTaskCtl=new TaskController.addTask();
@@ -45,6 +46,7 @@ public class OfflineController {
                 e.printStackTrace();
             }
             if(!taskId.equals("taskId")) {
+                change = true;
                 fileSystemController.deleteFileByName(fileName, context);
                 task.setId(taskId);
                 FileIOUtil fileIOUtil = new FileIOUtil();
@@ -68,6 +70,7 @@ public class OfflineController {
             }
             if(success) {
                 Log.i("Success offEdit",".");
+                change = true;
 
                 fileSystemController.deleteFileByName(fileName, context);
                 fileSystemController.deleteFileByName(sentFileName, context);
@@ -81,6 +84,6 @@ public class OfflineController {
             }
 
         }
-
+        return change;
     }
 }

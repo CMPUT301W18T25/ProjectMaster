@@ -3,6 +3,8 @@ package project301.requesterActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +28,8 @@ import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -57,6 +61,40 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
     protected MerlinsBeard merlinsBeard;
     private String temp_status;
 
+    private Timer timer;
+    MyTask myTask = new MyTask();
+    private class MyTask extends TimerTask {
+        public void run() {
+            Log.i("Timer7","run");
+            BidController bidController = new BidController();
+            //check counter change
+            BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
+            if(bidCounter==null){
+                Log.i("Bid counter search error",".");
+            }
+            else{
+                OfflineController offlineController = new OfflineController();
+                offlineController.tryToExecuteOfflineTasks(getApplication());
+                if(bidCounter.getCounter()!= bidCounter.getPreviousCounter()){
+                    Log.i("New Bid","New Bid");
+                    Log.i("bidCount",Integer.toString(bidCounter.getCounter()));
+                    Message msg = new Message();
+
+                    msg.arg1 = 1;
+                    handler.sendMessage(msg);
+
+                    //update previousCounter
+                    bidCounter.setPreviousCounter(bidCounter.getCounter());
+                    BidController.updateBidCounterOfThisRequester updateBidCounterOfThisRequester = new BidController.updateBidCounterOfThisRequester();
+                    updateBidCounterOfThisRequester.execute(bidCounter);
+                }
+            }
+
+
+
+        }
+    };
+
 
 
 
@@ -67,6 +105,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
     //then settle save button and back. Click save, information get saved, Click back, information not saved.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.requester_edit_task);
         context=getApplicationContext();
         final Intent intent = getIntent();
@@ -160,25 +199,6 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
                     Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterAllListActivity.class);
 
 
-                    //get data from database
- /*                   task_list = new ArrayList<>();
-                    if(merlinsBeard.isConnected()) {
-                        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-                        search.execute(userId);
-                        try {
-                            task_list = search.get();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        } catch (ExecutionException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    else{
-                        FileSystemController FC = new FileSystemController();
-                        task_list=FC.loadSentTasksFromFile(context);
-                    }
-*/
-                    // get index of target task
 
                     last_index = task_list.size()-1;
                     view_index=Integer.toString(last_index);
@@ -293,6 +313,16 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+        if(timer!=null) {
+
+            timer.cancel();
+        }
+        else{
+            timer = new Timer(true);
+            myTask = new MyTask();
+
+            timer.schedule(myTask,0,2000);
+        }
         BidController bidController = new BidController();
         //check counter change
         BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
@@ -318,8 +348,8 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         FileSystemController FC = new FileSystemController();
 
         if(merlinsBeard.isConnected()) {
-            OfflineController offlineController = new OfflineController();
-            offlineController.tryToExecuteOfflineTasks(getApplication());
+
+
 
             TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
             search.execute(userId);
@@ -394,7 +424,35 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+    Handler handler = new Handler(new Handler.Callback() {
 
+        @Override
+        public boolean handleMessage(Message msg) {
+            if(msg.arg1==1)
+            {
+                //Print Toast or open dialog
+                openRequestInfoDialog();
+                msg.arg1 = 0;
 
+            }
+            return false;
+        }
+    });
+    @Override
+    protected void onStop(){
+        super.onStop();
+        if(timer!=null){
+            timer.cancel();
+            timer = null;
+        }
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(timer!=null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
 
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +16,6 @@ import android.widget.ListView;
 import com.novoda.merlin.MerlinsBeard;
 
 import project301.BidCounter;
-import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
 import project301.controller.BidController;
@@ -24,6 +24,8 @@ import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -38,7 +40,7 @@ import java.util.concurrent.ExecutionException;
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterBiddenListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
-    private ListView biddenTaskList;
+    private ListView listView;
     private String userName;
     private String userId;
     private static final String FILENAME = "ProjectMaster.sav";
@@ -47,11 +49,53 @@ public class RequesterBiddenListActivity extends AppCompatActivity implements Sw
     protected Context context;
     private ListView mListView;
     private SwipeRefreshLayout mSwipeLayout;
+    ArrayList<Task> biddenTaskList = new ArrayList<>();
+    RequesterAdapter adapter;
+    private Timer timer;
+
+    MyTask myTask = new MyTask();
+    private class MyTask extends TimerTask {
+        public void run() {
+            Log.i("Timer3","run");
+            BidController bidController = new BidController();
+            //check counter change
+            BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
+            if(bidCounter==null){
+                Log.i("Bid counter search error",".");
+            }
+            else{
+                OfflineController offlineController = new OfflineController();
+                boolean executeOffline = offlineController.tryToExecuteOfflineTasks(getApplication());
+                if(executeOffline){
+                    Message msg = new Message();
+                    msg.arg1 = 2;
+                    handler.sendMessage(msg);
+
+                }
+
+                if(bidCounter.getCounter()!= bidCounter.getPreviousCounter()){
+                    Log.i("New Bid","New Bid");
+                    Log.i("bidCount",Integer.toString(bidCounter.getCounter()));
+                    Message msg1 = new Message();
+                    msg1.arg1 = 1;
+                    handler.sendMessage(msg1);
+
+                    //update previousCounter
+                    bidCounter.setPreviousCounter(bidCounter.getCounter());
+                    BidController.updateBidCounterOfThisRequester updateBidCounterOfThisRequester = new BidController.updateBidCounterOfThisRequester();
+                    updateBidCounterOfThisRequester.execute(bidCounter);
+                }
+            }
+
+        }
+    };
 
     @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        adapter = new RequesterAdapter(this, biddenTaskList);
+
         setContentView(R.layout.requester_bidden_list);
         final Intent intent = getIntent();
         context=getApplicationContext();
@@ -85,8 +129,8 @@ public class RequesterBiddenListActivity extends AppCompatActivity implements Sw
         });
 
         // settle click on post task list
-        biddenTaskList = (ListView) findViewById(R.id.post_list);
-        biddenTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView = (ListView) findViewById(R.id.post_list);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long r_id) {
                 Intent info1 = new Intent(RequesterBiddenListActivity.this, RequesterViewTaskBiddenActivity.class);
@@ -130,6 +174,19 @@ public class RequesterBiddenListActivity extends AppCompatActivity implements Sw
     @Override
     protected void onStart(){
         super.onStart();
+        if(timer!=null) {
+
+            timer.cancel();
+        }
+        else{
+            timer = new Timer(true);
+            myTask = new MyTask();
+
+
+            timer.schedule(myTask,0,2000);
+        }
+
+
         renewTheList();
 
         //Log.i("Sign", Integer.toString(tasklist.size()));
@@ -171,16 +228,7 @@ public class RequesterBiddenListActivity extends AppCompatActivity implements Sw
         }
         FileSystemController FC = new FileSystemController();
         if(merlinsBeard.isConnected()){
-            OfflineController offlineController = new OfflineController();
-            offlineController.tryToExecuteOfflineTasks(getApplication());
-            //try again, will change in the future
-            offlineController.tryToExecuteOfflineTasks(getApplication());
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
             search.execute(userId);
 
@@ -199,7 +247,7 @@ public class RequesterBiddenListActivity extends AppCompatActivity implements Sw
         }
         // FC.deleteAllFiles(getApplication(),"sent");
         tasklist = FC.loadSentTasksFromFile(getApplication());
-        ArrayList<Task> biddenTaskList = new ArrayList<>();
+        
         for(Task task: tasklist){
             if(task.getTaskStatus().equals("bidden")){
 
@@ -208,10 +256,43 @@ public class RequesterBiddenListActivity extends AppCompatActivity implements Sw
             }
         }
 
-        RequesterAdapter adapter = new RequesterAdapter(this, biddenTaskList);
         adapter.notifyDataSetChanged();
         // Attach the adapter to a ListView
-        this.biddenTaskList.setAdapter(adapter);
+        this.listView.setAdapter(adapter);
     }
+    Handler handler = new Handler(new Handler.Callback() {
 
+        @Override
+        public boolean handleMessage(Message msg) {
+            if(msg.arg1==1)
+            {
+                //Print Toast or open dialog
+                openRequestInfoDialog();
+                msg.arg1 = 0;
+
+            }
+            else if(msg.arg1 == 2){
+                adapter.notifyDataSetChanged();
+                msg.arg1 = 0;
+            }
+            return false;
+        }
+    });
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        if(timer!=null){
+            timer.cancel();
+            timer = null;
+        }
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(timer!=null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
 }
