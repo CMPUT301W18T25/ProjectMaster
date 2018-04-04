@@ -181,8 +181,6 @@ public class RequesterBiddenListActivity extends AppCompatActivity implements Sw
         else{
             timer = new Timer(true);
             myTask = new MyTask();
-
-
             timer.schedule(myTask,0,2000);
         }
 
@@ -247,6 +245,7 @@ public class RequesterBiddenListActivity extends AppCompatActivity implements Sw
         }
         // FC.deleteAllFiles(getApplication(),"sent");
         tasklist = FC.loadSentTasksFromFile(getApplication());
+        biddenTaskList.clear();
         
         for(Task task: tasklist){
             if(task.getTaskStatus().equals("bidden")){

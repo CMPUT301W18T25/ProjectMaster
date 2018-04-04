@@ -46,4 +46,7 @@
     <color name="blue29">#99bbf4</color>
     <color name="grey4">#b4edefef</color>
     <color name="blue30">#d2e0f9</color>
+    <color name="grey5">#fd706a6a</color>
+    <color name="bluedark">#111145</color>
+    <color name="grey6">#fd5a5656</color>
 </resources>

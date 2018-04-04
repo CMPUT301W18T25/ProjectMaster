@@ -253,6 +253,7 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         }
         // FC.deleteAllFiles(getApplication(),"sent");
         tasklist = FC.loadSentTasksFromFile(getApplication());
+        assignedTaskList.clear();
         for(Task task: tasklist){
             if(task.getTaskStatus().equals("assigned")){
 

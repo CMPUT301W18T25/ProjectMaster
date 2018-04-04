@@ -158,29 +158,24 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
                 }else{
                     info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterBiddenListActivity.class);
                 }
-                //get data from database
-                deletedlist = new ArrayList<>();
-                TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-                search.execute(userId);
-                try {
-                    deletedlist= search.get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
+
+
 
                 // get index of target task
                 final int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
 
                 // get target task
-                target_task=deletedlist.get(view_index);
+                target_task=tasklist.get(view_index);
 
 
                 //delete task from database
                 TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(target_task.getId());
                 deleteTaskById.execute(target_task.getId());
-
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 FileSystemController FC = new FileSystemController();
                 String FileName = "sent-"+target_task.getId()+".json";
                 FC.deleteFileByName(FileName,getApplication());
@@ -363,6 +358,8 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
         }
         //set adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.bid_list_item,availableBidsString);
+        adapter.notifyDataSetChanged();
+
         bidList.setAdapter(adapter);
     }
 

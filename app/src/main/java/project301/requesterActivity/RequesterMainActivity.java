@@ -179,7 +179,7 @@ public class RequesterMainActivity extends AppCompatActivity {
         else{
             timer = new Timer(true);
             myTask = new MyTask();
-            timer.schedule(myTask,0,2000);
+            timer.schedule(myTask,1000,2000);
         }
         BidController bidController = new BidController();
         //check counter change

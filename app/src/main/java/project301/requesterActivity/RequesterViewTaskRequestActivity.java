@@ -144,10 +144,6 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
 
         //to do : map button to show location
 
-
-
-
-
         //settle deleteTask button
         Button deleteTaskButton = (Button) findViewById(R.id.delete_button);
         deleteTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -159,24 +155,22 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
                 Intent info2 = new Intent(RequesterViewTaskRequestActivity.this, RequesterAllListActivity.class);
 
                 //get data from database
-                deletedlist = new ArrayList<>();
-                TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-                search.execute(userId);
-                try {
-                    deletedlist= search.get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
+                FileSystemController FC = new FileSystemController();
+                tasklist = FC.loadSentTasksFromFile(getApplication());
+
+
                 // get index of target task
                 final int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
                 // get target task
-                target_task=deletedlist.get(view_index);
+                target_task=tasklist.get(view_index);
                 //delete task from database
                 TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(target_task.getId());
                 deleteTaskById.execute(target_task.getId());
-                FileSystemController FC = new FileSystemController();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 String FileName = "sent-"+target_task.getId()+".json";
                 FC.deleteFileByName(FileName,getApplication());
                 info2.putExtra("userId",userId);

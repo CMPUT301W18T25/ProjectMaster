@@ -248,6 +248,7 @@ public class RequesterDoneListActivity extends AppCompatActivity implements Swip
             }
         }
         // FC.deleteAllFiles(getApplication(),"sent");
+        doneTaskList.clear();
         tasklist = FC.loadSentTasksFromFile(getApplication());
         for(Task task: tasklist){
             if(task.getTaskStatus().equals("done")){

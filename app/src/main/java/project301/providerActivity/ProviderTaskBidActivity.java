@@ -338,15 +338,15 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         ArrayList<Bid> allBidOfThisTask = new ArrayList<>();
         //currently, only bid amount is in it. Please add username in the future
         ArrayList<String> allBidsString = new ArrayList<>();
-        try {
+        /*try {
             allBidOfThisTask = searchAllBid.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
-        }
+        }*/
+        allBidOfThisTask =  view_task.getAvailableBidListOfThisTask();
         for(Bid bid: allBidOfThisTask){
-
             if(!bid.equals(null)) {
                 allBidsString.add(Double.toString(bid.getBidAmount()));
                 if (bid.getProviderId().equals(userId)) {
