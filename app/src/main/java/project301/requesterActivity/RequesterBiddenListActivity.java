@@ -247,6 +247,7 @@ public class RequesterBiddenListActivity extends AppCompatActivity implements Sw
         }
         // FC.deleteAllFiles(getApplication(),"sent");
         tasklist = FC.loadSentTasksFromFile(getApplication());
+        biddenTaskList.clear();
         
         for(Task task: tasklist){
             if(task.getTaskStatus().equals("bidden")){

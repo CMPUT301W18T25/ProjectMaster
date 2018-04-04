@@ -363,6 +363,8 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
         }
         //set adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.bid_list_item,availableBidsString);
+        adapter.notifyDataSetChanged();
+
         bidList.setAdapter(adapter);
     }
 
