@@ -158,23 +158,14 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
                 }else{
                     info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterBiddenListActivity.class);
                 }
-                //get data from database
-                deletedlist = new ArrayList<>();
-                TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-                search.execute(userId);
-                try {
-                    deletedlist= search.get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
+
+
 
                 // get index of target task
                 final int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
 
                 // get target task
-                target_task=deletedlist.get(view_index);
+                target_task=tasklist.get(view_index);
 
 
                 //delete task from database

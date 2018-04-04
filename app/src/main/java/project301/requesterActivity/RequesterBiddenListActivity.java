@@ -181,8 +181,6 @@ public class RequesterBiddenListActivity extends AppCompatActivity implements Sw
         else{
             timer = new Timer(true);
             myTask = new MyTask();
-
-
             timer.schedule(myTask,0,2000);
         }
 

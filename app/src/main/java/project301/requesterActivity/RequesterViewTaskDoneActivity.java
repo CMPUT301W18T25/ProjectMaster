@@ -149,8 +149,6 @@ public class RequesterViewTaskDoneActivity extends AppCompatActivity  {
 
                 }
 
-
-
                 // get target task
                 target_task=tasklist.get(view_index_int);
                 //delete task from database
