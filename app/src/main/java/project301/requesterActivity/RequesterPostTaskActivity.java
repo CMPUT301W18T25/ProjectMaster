@@ -15,17 +15,21 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.view.ViewGroup.LayoutParams;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
@@ -91,6 +95,9 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
     protected Merlin merlin;
     protected MerlinsBeard merlinsBeard;
     private Timer timer;
+    private LinearLayout myGallery;
+    private Photo photos;
+
     MyTask myTask = new MyTask();
     private class MyTask extends TimerTask {
         public void run() {
@@ -141,7 +148,6 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.requester_post_task);
         context=getApplicationContext();
         final Intent intent = getIntent();
@@ -159,12 +165,13 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         post_destination.setThreshold(3);
 
         post_ideal_price = (EditText) findViewById(R.id.c_task_idealprice);
-        post_photo = (ImageView) findViewById(R.id.c_task_photo);
+        //post_photo = (ImageView) findViewById(R.id.c_task_photo);
         setImage=false;
         submitButton=(Button)findViewById(R.id.submit_button);
         cancelButton=(Button)findViewById(R.id.cancel_button);
 
-
+        myGallery = (LinearLayout)findViewById(R.id.mygallery);
+        photos=new Photo();
 
         // Location autocomplete stuff
         mGoogleApiClient = new GoogleApiClient.Builder(RequesterPostTaskActivity.this)
@@ -213,7 +220,8 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
 
                     //to do:set photo
                     if (setImage == true){
-                        Photo new_photo = new Photo();
+                        new_task.setTaskPhoto(photos);
+                        /*Photo new_photo = new Photo();
 
                         BitmapDrawable bit_map_drawable = (BitmapDrawable) post_photo.getDrawable();
 
@@ -221,7 +229,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
 
                         new_photo.addPhoto(getStringFromBitmap(bitmap_photo));
 
-                        new_task.setTaskPhoto(new_photo);
+                        new_task.setTaskPhoto(new_photo);*/
                     }
 
                     //upload new task data to database
@@ -327,9 +335,31 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
             }
             else{
                 setImage=true;
-                post_photo.setImageBitmap(bitmap);
+                myGallery.addView(insertPhoto(bitmap));
+                photos.addPhoto(getStringFromBitmap(bitmap));
+                //post_photo.setImageBitmap(bitmap);
             }
         }
+    }
+    // source: modified from https://stackoverflow.com/questions/17489390/image-gallery-with-a-horizontal-scrollview
+    View insertPhoto(Bitmap bm){
+
+        LinearLayout layout = new LinearLayout(getApplicationContext());
+        double iv_scale=(double)bm.getWidth()/bm.getHeight();
+
+        layout.setLayoutParams(new LayoutParams((int)(iv_scale*700), 700));
+        layout.setGravity(Gravity.CENTER);
+
+        ImageView imageView = new ImageView(getApplicationContext());
+        Log.d("bm width", String.valueOf((int)((double)bm.getHeight()/bm.getWidth())*650));
+        Log.d("scaling", String.valueOf(iv_scale));
+
+        imageView.setLayoutParams(new LayoutParams((int)(iv_scale*650), 650));
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setImageBitmap(bm);
+
+        layout.addView(imageView);
+        return layout;
     }
 
     protected void onStart(){

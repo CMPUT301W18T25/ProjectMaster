@@ -2,22 +2,33 @@ package project301;
 
 
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.Xml;
+import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -32,10 +43,11 @@ import java.util.Arrays;
 
 public class Photo {
 
-    private String encoded_image;
+    private ArrayList<String> encoded_images;
 
-    public void Photo(){
-
+    public Photo(){
+        Log.d("Photo.java","Photo constructor");
+        this.encoded_images=new ArrayList<>();
     }
 
     /**
@@ -45,13 +57,15 @@ public class Photo {
      */
     public void addPhoto(String encodedImage){
        // System.arraycopy(newImage, 0, this.compressedImage, 0, this.compressedImage.length);
-        encoded_image = encodedImage;
+        encoded_images.add(encodedImage);
     }
 
     // source:
-    public Bitmap getBitmapImage(){
-        byte[] decodedString = Base64.decode(encoded_image, Base64.DEFAULT);
+    public Bitmap getBitmapImage(int index){
+
+        byte[] decodedString = Base64.decode(encoded_images.get(index), Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
         return decodedByte;
     }
 
@@ -63,10 +77,6 @@ public class Photo {
 
     // source: https://stackoverflow.com/questions/7693633/android-image-dialog-popup
     public void showImage( Context context) {
-
-        Bitmap image = Bitmap.createBitmap(
-                getBitmapImage());
-
         Log.d("Photo", "showImage");
         Log.d("Context", context.getPackageName());
 
@@ -81,29 +91,40 @@ public class Photo {
             }
         });
 
-        ImageView imageView = new ImageView(context);
+        HorizontalScrollView myScrollGallery=new HorizontalScrollView(context);
+        LinearLayout myGallery=new LinearLayout( context);
+        for (int i=0;i<encoded_images.size();i++){
+            myGallery.addView(insertPhoto(getBitmapImage(i), context));
+        }
 
-        imageView.setImageBitmap(image);
-
-        double iv_scale=1000/(double)image.getWidth();
-
-        int iv_width=(int)(iv_scale*image.getWidth());
-        int iv_height=(int)(iv_scale*image.getHeight());
-        Log.d("image width", String.valueOf(iv_width));
-        Log.d("image height", String.valueOf(iv_height));
-
-        Log.d("scale", String.valueOf(iv_scale));
-        builder.addContentView(imageView, new LinearLayout.LayoutParams(
-                iv_width,iv_height));
-        //builder.addContentView(imageView, new RelativeLayout.LayoutParams(
-        //        ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
+        myScrollGallery.addView(myGallery);
+        builder.addContentView(myScrollGallery, new LinearLayout.LayoutParams(
+                ActionBar.LayoutParams.MATCH_PARENT,700));
         builder.show();
 
 
 
     }
 
+    private View insertPhoto(Bitmap bm, Context context){
 
+        LinearLayout layout = new LinearLayout(context);
+        double iv_scale=(double)bm.getWidth()/bm.getHeight();
+
+        layout.setLayoutParams(new ViewGroup.LayoutParams((int)(iv_scale*700), 700));
+        layout.setGravity(Gravity.CENTER);
+
+        ImageView imageView = new ImageView(context);
+        Log.d("bm width", String.valueOf((int)((double)bm.getHeight()/bm.getWidth())*650));
+        Log.d("scaling", String.valueOf(iv_scale));
+
+        imageView.setLayoutParams(new ViewGroup.LayoutParams((int)(iv_scale*650), 650));
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setImageBitmap(bm);
+
+        layout.addView(imageView);
+        return layout;
+    }
     /**
      * Upload photo
      */
@@ -115,15 +136,15 @@ public class Photo {
      * Delete photo
      */
     public void  deletePhoto(){
-        encoded_image = null;
+        encoded_images = null;
     }
 
     /**
      * get photo
      * @return coded image
      */
-    public String getPhoto(){
-        return this.encoded_image;
+    public ArrayList<String> getPhotos(){
+        return this.encoded_images;
     }
 
 
