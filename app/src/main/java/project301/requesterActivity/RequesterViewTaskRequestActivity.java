@@ -166,6 +166,11 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
                 //delete task from database
                 TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(target_task.getId());
                 deleteTaskById.execute(target_task.getId());
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 String FileName = "sent-"+target_task.getId()+".json";
                 FC.deleteFileByName(FileName,getApplication());
                 info2.putExtra("userId",userId);

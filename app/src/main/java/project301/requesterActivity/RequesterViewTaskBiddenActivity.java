@@ -171,7 +171,11 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
                 //delete task from database
                 TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(target_task.getId());
                 deleteTaskById.execute(target_task.getId());
-
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 FileSystemController FC = new FileSystemController();
                 String FileName = "sent-"+target_task.getId()+".json";
                 FC.deleteFileByName(FileName,getApplication());

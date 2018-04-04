@@ -158,6 +158,11 @@ public class RequesterViewTaskDoneActivity extends AppCompatActivity  {
                 FileSystemController FC = new FileSystemController();
                 String FileName = "sent-"+target_task.getId()+".json";
                 FC.deleteFileByName(FileName,getApplication());
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
                 info2.putExtra("userId",userId);
                 info2.putExtra("info",index);
