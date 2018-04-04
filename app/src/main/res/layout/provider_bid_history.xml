@@ -111,7 +111,7 @@
                 android:layout_weight="1"
                 android:background="@color/blue5"
                 android:fontFamily="serif"
-                android:text="Show All Tasks"
+                android:text="Show My All Tasks"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -127,7 +127,7 @@
                 android:layout_weight="1"
                 android:background="@color/blue7"
                 android:fontFamily="serif"
-                android:text="Show Assigned Tasks"
+                android:text="Show My Assigned Tasks"
                 android:textStyle="bold" />
         </LinearLayout>
 
