@@ -140,9 +140,8 @@
 
             <Button
                 android:id="@+id/edit_profile_button"
-                android:layout_width="91dp"
+                android:layout_width="207dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="edit profile"
                 android:textStyle="bold" />
