@@ -29,7 +29,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="218dp"
-            app:cardBackgroundColor="@color/blue1"
+            app:cardBackgroundColor="@color/grey3"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
@@ -133,7 +133,7 @@
                     android:id="@+id/view_map"
                     android:layout_width="match_parent"
                     android:layout_height="22dp"
-                    android:background="@color/blue2"
+                    android:background="@color/blue3"
                     android:fontFamily="serif"
                     android:text="View On Map"
                     android:textAllCaps="false"
@@ -188,7 +188,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@color/blue25"
+                        android:background="@color/grey7"
                         app:srcCompat="@android:drawable/ic_menu_gallery" />
                 </LinearLayout>
 
@@ -215,7 +215,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="102dp"
-            app:cardBackgroundColor="@color/blue8"
+            app:cardBackgroundColor="@color/grey3"
             app:cardCornerRadius="@dimen/place_autocomplete_button_padding">
 
             <LinearLayout
@@ -314,7 +314,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            app:cardBackgroundColor="@color/blue5"
+            app:cardBackgroundColor="@color/grey3"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
@@ -395,8 +395,10 @@
                 android:id="@+id/back_button"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:background="@color/black1"
                 android:fontFamily="serif"
                 android:text="back"
+                android:textColor="@color/cardview_light_background"
                 android:textStyle="bold" />
 
         </LinearLayout>

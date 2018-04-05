@@ -23,8 +23,8 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="523dp"
-            app:cardBackgroundColor="@color/grey2"
+            android:layout_height="505dp"
+            app:cardBackgroundColor="@color/grey3"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
@@ -35,7 +35,7 @@
                 <TextView
                     android:id="@+id/textView27"
                     android:layout_width="match_parent"
-                    android:layout_height="86dp" />
+                    android:layout_height="82dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                     android:id="@+id/view_map"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:background="@color/blue30"
+                    android:background="@color/blue3"
                     android:fontFamily="serif"
                     android:text="View On Map"
                     android:textAllCaps="false"
@@ -207,12 +207,17 @@
                         android:layout_width="294dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@color/grey4"
+                        android:background="@color/grey7"
                         app:srcCompat="@android:drawable/ic_menu_gallery" />
                 </LinearLayout>
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView79"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -225,29 +230,42 @@
                 android:layout_width="68dp"
                 android:layout_height="44dp"
                 android:layout_weight="1"
+                android:background="@color/black1"
                 android:fontFamily="serif"
                 android:text="Edit Task "
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/cardview_light_background"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView81"
+                android:layout_width="4dp"
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/delete_button"
                 android:layout_width="72dp"
                 android:layout_height="44dp"
                 android:layout_weight="1"
+                android:background="@color/black1"
                 android:fontFamily="serif"
                 android:text="Delete Task"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/cardview_light_background"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView82"
+                android:layout_width="4dp"
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/showlist_button"
                 android:layout_width="84dp"
                 android:layout_height="44dp"
                 android:layout_weight="1"
+                android:background="@color/black1"
                 android:fontFamily="serif"
                 android:text="Show List"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/cardview_light_background"
                 android:textStyle="bold" />
         </LinearLayout>
 

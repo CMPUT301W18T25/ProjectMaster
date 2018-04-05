@@ -24,7 +24,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="214dp"
-            app:cardBackgroundColor="@color/blue1"
+            app:cardBackgroundColor="@color/grey3"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
@@ -128,7 +128,7 @@
                     android:id="@+id/view_map"
                     android:layout_width="match_parent"
                     android:layout_height="22dp"
-                    android:background="@color/blue2"
+                    android:background="@color/blue3"
                     android:fontFamily="serif"
                     android:text="View On Map"
                     android:textAllCaps="false"
@@ -183,7 +183,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@color/blue25"
+                        android:background="@color/grey7"
                         app:srcCompat="@android:drawable/ic_menu_gallery" />
                 </LinearLayout>
 
@@ -212,7 +212,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="104dp"
-            app:cardBackgroundColor="@color/blue8"
+            app:cardBackgroundColor="@color/grey3"
             app:cardCornerRadius="@dimen/place_autocomplete_button_padding">
 
             <LinearLayout
@@ -306,7 +306,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            app:cardBackgroundColor="@color/blue5"
+            app:cardBackgroundColor="@color/grey3"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
@@ -376,7 +376,7 @@
         <TextView
             android:id="@+id/textView26"
             android:layout_width="match_parent"
-            android:layout_height="11dp" />
+            android:layout_height="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -387,24 +387,40 @@
                 android:id="@+id/pay_button"
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
+                android:background="@color/black1"
                 android:fontFamily="serif"
                 android:text="Pay task"
+                android:textColor="@color/cardview_light_background"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView74"
+                android:layout_width="match_parent"
+                android:layout_height="4dp" />
 
             <Button
                 android:id="@+id/showlist_button"
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
+                android:background="@color/black1"
                 android:fontFamily="serif"
                 android:text="Show List"
+                android:textColor="@color/cardview_light_background"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView75"
+                android:layout_width="match_parent"
+                android:layout_height="4dp" />
 
             <Button
                 android:id="@+id/delete_deal_button"
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
+                android:background="@color/black1"
                 android:fontFamily="serif"
                 android:text="decline deal"
+                android:textColor="@color/cardview_light_background"
                 android:textStyle="bold" />
 
         </LinearLayout>

@@ -24,7 +24,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="174dp"
-            app:cardBackgroundColor="@color/blue27"
+            app:cardBackgroundColor="@color/grey3"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
@@ -115,7 +115,7 @@
                             android:id="@+id/map_button"
                             android:layout_width="84dp"
                             android:layout_height="25dp"
-                            android:background="@color/blue29"
+                            android:background="@color/blue3"
                             android:fontFamily="serif"
                             android:text="View Map"
                             android:textAllCaps="false"
@@ -156,7 +156,7 @@
                         android:layout_width="294dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@color/blue28"
+                        android:background="@color/grey7"
                         app:srcCompat="@android:drawable/ic_menu_gallery" />
                 </LinearLayout>
 
@@ -203,7 +203,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            app:cardBackgroundColor="@color/blue26"
+            app:cardBackgroundColor="@color/grey3"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
@@ -292,7 +292,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="@color/grey2"
+            app:cardBackgroundColor="@color/grey3"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
@@ -308,7 +308,7 @@
                 <ListView
                     android:id="@+id/bid_list"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="248dp"
                     tools:layout_editor_absoluteX="8dp"
                     tools:layout_editor_absoluteY="202dp">
 
@@ -322,6 +322,11 @@
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
+        <TextView
+            android:id="@+id/textView78"
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="35dp"
@@ -333,17 +338,26 @@
                 android:layout_width="72dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/black1"
                 android:fontFamily="serif"
                 android:text="Delete Task"
+                android:textColor="@color/cardview_light_background"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView76"
+                android:layout_width="4dp"
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/showlist_button"
                 android:layout_width="84dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/black1"
                 android:fontFamily="serif"
                 android:text="Show List"
+                android:textColor="@color/cardview_light_background"
                 android:textStyle="bold" />
         </LinearLayout>
 
