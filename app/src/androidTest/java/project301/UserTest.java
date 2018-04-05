@@ -317,9 +317,6 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         UserController uc2 = new UserController();
         userId = uc2.addUserAndCheck(user3);
         assertNotEquals(userId,null);
-
-
-
     }
 
 }

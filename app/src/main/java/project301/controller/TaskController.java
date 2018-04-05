@@ -989,10 +989,10 @@ public class TaskController {
     public ArrayList<Task> searchByKeyWord(String keyWord,String providerId){
         ArrayList<Task> tasks = new ArrayList<>();
         ArrayList<Task> keywordTasks = new ArrayList<>();
-        TaskController.searchBiddenTasksOfThisProvider searchBiddenTasksOfThisProvider = new TaskController.searchBiddenTasksOfThisProvider(providerId);
-        searchBiddenTasksOfThisProvider.execute();
+        TaskController.searchAllBiddenTasks searchAllBiddenTasks = new TaskController.searchAllBiddenTasks();
+        searchAllBiddenTasks.execute();
         try {
-            tasks.addAll(searchBiddenTasksOfThisProvider.get());
+            tasks.addAll(searchAllBiddenTasks.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -1008,7 +1008,7 @@ public class TaskController {
             e.printStackTrace();
         }
         for(Task task:tasks){
-            if(task.getTaskName().contains(keyWord)||task.getTaskDetails().contains(keyWord)) {
+            if(task.getTaskName().toLowerCase().indexOf(keyWord.toLowerCase()) != -1 ||task.getTaskDetails().toLowerCase().indexOf(keyWord.toLowerCase())!=-1) {
                 keywordTasks.add(task);
 
             }
