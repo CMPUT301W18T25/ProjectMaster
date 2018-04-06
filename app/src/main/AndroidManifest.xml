@@ -67,6 +67,11 @@
         <activity android:name=".requesterActivity.RequesterViewTaskAssignedActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterViewTaskBiddenActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".requesterActivity.RequesterViewTaskDoneActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterMapAssignedActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterMapBiddenActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".requesterActivity.RequesterMapDoneActivity" android:windowSoftInputMode="stateHidden"/>
+
+
 
 
 

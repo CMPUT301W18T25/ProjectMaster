@@ -123,7 +123,7 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         viewOnMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterAssignedListActivity.this, RequesterMapActivity.class);
+                Intent info2 = new Intent(RequesterAssignedListActivity.this, RequesterMapAssignedActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 

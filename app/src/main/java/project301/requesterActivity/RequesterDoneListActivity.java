@@ -126,7 +126,7 @@ public class RequesterDoneListActivity extends AppCompatActivity implements Swip
         viewOnMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterDoneListActivity.this, RequesterMapActivity.class);
+                Intent info2 = new Intent(RequesterDoneListActivity.this, RequesterMapDoneActivity.class);
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
