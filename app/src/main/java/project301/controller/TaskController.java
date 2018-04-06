@@ -50,7 +50,7 @@ public class TaskController {
             verifySettings();
             ArrayList<Task> tasks = new ArrayList<Task>();
 
-            String query = "{ \"size\": 500 }" ;
+            String query = "{ \"size\": 50 }" ;
             Log.i("Query", "The query was " + query);
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w18t25")
@@ -368,7 +368,7 @@ public class TaskController {
             verifySettings();
 
             String query = "{ \n"+
-                    "\"size\" : 300,\n"+
+                    "\"size\" : 50,\n"+
 
                     "\"query\":{\n"+
                     "\"term\":{\"userId\":\""+providerID[0]+"\"}\n"+
@@ -451,7 +451,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 300,\n"+
+                            "\"size\" : 50,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -518,7 +518,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 300,\n"+
+                            "\"size\" : 50,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -632,7 +632,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 300,\n"+
+                            "\"size\" : 50,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -694,7 +694,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 300,\n"+
+                            "\"size\" : 50,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -742,7 +742,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 300,\n"+
+                            "\"size\" : 50,\n"+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
@@ -796,7 +796,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 300,\n"+
+                            "\"size\" : 50,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -849,7 +849,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 300,\n"+
+                            "\"size\" : 50,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -897,7 +897,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 300,\n"+
+                            "\"size\" : 50,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -944,7 +944,7 @@ public class TaskController {
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 300,\n"+
+                            "\"size\" : 50,\n"+
 
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
@@ -1016,7 +1016,7 @@ public class TaskController {
 
             String shellQuery =
                     "\n{ \n"+
-                            "\"size\" : 300,\n"+
+                            "\"size\" : 50,\n"+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"should\" : [\n"+
