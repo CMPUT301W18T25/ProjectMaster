@@ -82,7 +82,7 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
-        setContentView(R.layout.view_on_map2);
+        setContentView(R.layout.view_on_map_req);
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -97,6 +97,7 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
                 Log.d(TAG, "Go Back pressed");
                 Intent intent = new Intent(RequesterMapActivity.this, RequesterAllListActivity.class);
                 intent.putExtra("userId",userId);
+
                 startActivity(intent);
 
 

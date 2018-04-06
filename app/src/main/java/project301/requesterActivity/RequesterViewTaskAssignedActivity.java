@@ -128,7 +128,6 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
         view_provider_Email = (TextView) findViewById(R.id.c_view_email);
         view_deal_price = (TextView) findViewById(R.id.c_deal_price);
         view_idealprice = (TextView) findViewById(R.id.c_view_idealprice);
-        view_index = intent.getExtras().get("info").toString();
         view_index_int = Integer.parseInt(intent.getExtras().get("info").toString());
         show_photo = (ImageButton) findViewById(R.id.imageButton);
 

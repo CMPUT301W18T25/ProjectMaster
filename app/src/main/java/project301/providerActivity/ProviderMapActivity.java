@@ -95,7 +95,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
      * The onCreate method checks if a previous state exists, and sets the last
      * known location if a previous state is found. The FusedLocationProviderClient
      * is initialized, and is responsible for getting the current location of the
-     * user. The content view is set to view_on_map.xml, and the map fragment is
+     * user. The content view is set to view_on_map_prov.xmlid.xml, and the map fragment is
      * initialized. The 'Show List' button is implemented which goes back to the
      * previous Provider Task view.
      *
@@ -118,7 +118,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
-        setContentView(R.layout.view_on_map);
+        setContentView(R.layout.view_on_map_prov);
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 

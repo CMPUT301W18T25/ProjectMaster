@@ -31,7 +31,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -85,7 +84,8 @@ public class RequesterMapBiddenActivity extends AppCompatActivity implements OnM
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
-        setContentView(R.layout.view_on_map3);
+
+        setContentView(R.layout.view_on_map_bidden);
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -98,8 +98,9 @@ public class RequesterMapBiddenActivity extends AppCompatActivity implements OnM
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Go Back pressed");
-                Intent intent = new Intent(RequesterMapBiddenActivity.this, RequesterViewTaskBiddenActivity.class);
+                Intent intent = new Intent(RequesterMapBiddenActivity.this, RequesterBiddenListActivity.class);
                 intent.putExtra("userId",userId);
+
                 startActivity(intent);
 
 

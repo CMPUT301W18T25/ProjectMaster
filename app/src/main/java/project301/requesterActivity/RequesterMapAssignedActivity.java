@@ -60,7 +60,9 @@ public class RequesterMapAssignedActivity extends AppCompatActivity implements O
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
     ArrayList<project301.Task> AssignedTaskList = new ArrayList<>();
-
+    private String view_index;
+    private int view_index_int;
+    private String activity;
 
     private Location mLastKnownLocation;
 
@@ -84,7 +86,9 @@ public class RequesterMapAssignedActivity extends AppCompatActivity implements O
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
-        setContentView(R.layout.view_on_map4);
+
+
+        setContentView(R.layout.view_on_map_assign);
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -97,7 +101,7 @@ public class RequesterMapAssignedActivity extends AppCompatActivity implements O
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Go Back pressed");
-                Intent intent = new Intent(RequesterMapAssignedActivity.this, RequesterViewTaskAssignedActivity.class);
+                Intent intent = new Intent(RequesterMapAssignedActivity.this, RequesterAssignedListActivity.class);
                 intent.putExtra("userId",userId);
                 startActivity(intent);
 

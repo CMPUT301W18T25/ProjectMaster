@@ -46,12 +46,12 @@ import java.util.concurrent.ExecutionException;
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterMapDoneActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class RequesterMapSpecActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private String userId;
 
-    private static final String TAG = RequesterMapDoneActivity.class.getSimpleName();
+    private static final String TAG = RequesterMapSpecActivity.class.getSimpleName();
 
     private Boolean mLocationPermissionGranted;
 
@@ -59,7 +59,6 @@ public class RequesterMapDoneActivity extends AppCompatActivity implements OnMap
     private static final int DEFAULT_ZOOM = 15;
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
-    ArrayList<project301.Task> DoneTaskList = new ArrayList<>();
 
 
     private Location mLastKnownLocation;
@@ -72,6 +71,7 @@ public class RequesterMapDoneActivity extends AppCompatActivity implements OnMap
 
     // Testing variables
     private ArrayList<Location> mockupTasks;
+    ArrayList<project301.Task> biddenTaskList = new ArrayList<>();
 
 
 
@@ -84,21 +84,23 @@ public class RequesterMapDoneActivity extends AppCompatActivity implements OnMap
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
-        setContentView(R.layout.view_on_map_done);
+
+        setContentView(R.layout.view_on_map_bidden);
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map_done);
+                .findFragmentById(R.id.map_bidden);
         mapFragment.getMapAsync(this);
 
-        Button back_done_Button = (Button) findViewById(R.id.go_back_done);
-        back_done_Button.setOnClickListener(new View.OnClickListener() {
+        Button back_bidden_Button = (Button) findViewById(R.id.go_back_bidden);
+        back_bidden_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Go Back pressed");
-                Intent intent = new Intent(RequesterMapDoneActivity.this, RequesterDoneListActivity.class);
+                Intent intent = new Intent(RequesterMapSpecActivity.this, RequesterAllListActivity.class);
                 intent.putExtra("userId",userId);
+
                 startActivity(intent);
 
 
@@ -244,8 +246,8 @@ public class RequesterMapDoneActivity extends AppCompatActivity implements OnMap
         Log.d(TAG,"displayTaskLocations");
         mMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
-        for (int i = 0; i < DoneTaskList.size(); i++) {
-            project301.Task currTask = DoneTaskList.get(i);
+        for (int i = 0; i < biddenTaskList.size(); i++) {
+            project301.Task currTask = biddenTaskList.get(i);
 
             if (currTask.getTasklgtitude() != null
                     && currTask.getTasklatitude() != null
@@ -274,7 +276,7 @@ public class RequesterMapDoneActivity extends AppCompatActivity implements OnMap
                 }
 
             } else {
-                Log.d(TAG, "No location for: " + DoneTaskList.get(i).getTaskName());
+                Log.d(TAG, "No location for: " + biddenTaskList.get(i).getTaskName());
 
             }
         }
@@ -300,14 +302,14 @@ public class RequesterMapDoneActivity extends AppCompatActivity implements OnMap
     @Override
     public boolean onMarkerClick(Marker marker){
         int markerIndex = (Integer) marker.getTag();
-        project301.Task clickedTask = DoneTaskList.get(markerIndex);
+        project301.Task clickedTask = biddenTaskList.get(markerIndex);
         Log.d(TAG,"Clicked on marker "+String.valueOf(markerIndex));
         Log.d(TAG,"Task info: "+clickedTask.getTaskName());
         Log.d(TAG,"Task info: "+clickedTask.getTaskAddress());
 
 
 
-        Intent info1 = new Intent(RequesterMapDoneActivity.this, RequesterViewTaskRequestActivity.class);
+        Intent info1 = new Intent(RequesterMapSpecActivity.this, RequesterViewTaskRequestActivity.class);
         info1.putExtra("info", markerIndex);
         info1.putExtra("userId",userId);
         startActivity(info1);
@@ -365,18 +367,19 @@ public class RequesterMapDoneActivity extends AppCompatActivity implements OnMap
 
         // FC.deleteAllFiles(getApplication(),"sent");
         tasklist = FC.loadSentTasksFromFile(getApplication());
-        DoneTaskList.clear();
+        biddenTaskList.clear();
 
         for(
                 project301.Task task: tasklist){
-            if(task.getTaskStatus().equals("done")){
+            if(task.getTaskStatus().equals("bidden")){
 
-                DoneTaskList.add(task);
+                biddenTaskList.add(task);
 
             }
         }
-        for (int i =0;i<DoneTaskList.size();i++){
-            Log.d(TAG,"Requester TASK: "+DoneTaskList.get(i).getTaskName()+", "+DoneTaskList.get(i).getTaskStatus());
+        for (int i =0;i<biddenTaskList.size();i++){
+            Log.d(TAG,"Requester TASK: "+biddenTaskList.get(i).getTaskName()+", "+biddenTaskList.get(i).getTaskStatus());
         }
     }
+
 }
