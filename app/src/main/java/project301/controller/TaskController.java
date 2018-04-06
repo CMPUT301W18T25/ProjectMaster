@@ -224,7 +224,6 @@ public class TaskController {
     /**
      * A static class to update tasks in ES database
      */
-
     public static class requesterUpdateTask extends AsyncTask<Task, Void, Boolean>{
 
         @Override
@@ -353,7 +352,6 @@ public class TaskController {
 
         }
     }
-
     //TODO test it
     /**
      * A static class to get provider bidden tasks in ES database
@@ -394,7 +392,6 @@ public class TaskController {
             return rtTasks;
         }
     }
-
     // TODO change provider variable to requester variable
     /**
      * A static class to get requester bidden tasks in ES database
@@ -499,7 +496,6 @@ public class TaskController {
         }
 
     }
-
     /**
      * A static class to search bidden tasks in ES database
      */
@@ -570,7 +566,6 @@ public class TaskController {
      * A static class to search all tasks of this provider in ES database
      */
     /*
-
     //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAssignTasksOfThisProvider extends AsyncTask<String, Void, ArrayList<Task>>{
 
@@ -683,7 +678,6 @@ public class TaskController {
     /**
      * A static class to search all tasks of this requester in ES database
      */
-
     //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAllTasksOfThisRequester extends AsyncTask<String, Void, ArrayList<Task>>{
 
@@ -700,110 +694,6 @@ public class TaskController {
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
                             "               { \"term\" : {\"taskRequester\" : \"" + requesterId[0] + "\"}}" + "\n"+
-                            "           ]\n"+
-                            "       }\n"+
-                            "   }\n"+
-                            "}\n";
-
-            Log.i("Query", "The query was " + query);
-            Search search = new Search.Builder(query)
-                    .addIndex("cmput301w18t25")
-                    .addType("task")
-                    .build();
-            try {
-                SearchResult result = client.execute(search);
-                if (result.isSucceeded()) {
-                    List<Task> foundResults
-                            = result.getSourceAsObjectList(Task.class);
-                    result_tasks.addAll(foundResults);
-                    Log.i("Success", "Data retrieved from database: ");
-                } else {
-                    Log.i("Error", "The search query failed");
-                }
-                // TODO get the results of the query
-            } catch (Exception e) {
-                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
-                Task faultTask = new Task();
-                faultTask.setId("-1");
-                result_tasks.add(faultTask);
-            }
-            return result_tasks;
-        }
-
-
-    }
-
-    public static class searchAllBiddenTasksOfThisProvider extends AsyncTask<String, Void, ArrayList<Task>>{
-
-        protected ArrayList<Task> doInBackground(String... providerId) {
-            verifySettings();
-
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
-
-            String query =
-                    "\n{ \n"+
-                            "\"size\" : 50,\n"+
-                            "   \"query\" : {\n"+
-                            "       \"bool\" : {\n"+
-                            "           \"must\" : [\n"+
-                            "               { \"term\" : {\"taskRequester\" : \"" + providerId[0] + "\"}}," + "\n"+
-                            "               { \"term\" : {\"taskStatus\" : \"bidden\"}}" + "\n"+
-                            "           ]\n"+
-                            "       }\n"+
-                            "   }\n"+
-                            "}\n";
-
-            Log.i("Query", "The query was " + query);
-            Search search = new Search.Builder(query)
-                    .addIndex("cmput301w18t25")
-                    .addType("task")
-                    .build();
-            try {
-                SearchResult result = client.execute(search);
-                if (result.isSucceeded()) {
-                    List<Task> foundResults
-                            = result.getSourceAsObjectList(Task.class);
-                    result_tasks.addAll(foundResults);
-                    Log.i("Success", "Data retrieved from database: ");
-                } else {
-                    Log.i("Error", "The search query failed");
-                }
-                // TODO get the results of the query
-            } catch (Exception e) {
-                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
-                Task faultTask = new Task();
-                faultTask.setId("-1");
-                result_tasks.add(faultTask);
-            }
-            return result_tasks;
-        }
-
-
-    }
-
-
-    /**
-     * A static class to search all tasks of this requester in ES database
-     */
-
-    //TODO do test for this method, which should be extremely similar to bidden tasks
-    public static class searchAllBiddenTasksOfThisRequester extends AsyncTask<String, Void, ArrayList<Task>>{
-
-        protected ArrayList<Task> doInBackground(String... requesterId) {
-            verifySettings();
-
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
-
-            String query =
-                    "\n{ \n"+
-                            "\"size\" : 50,\n"+
-
-                            "   \"query\" : {\n"+
-                            "       \"bool\" : {\n"+
-                            "           \"must\" : [\n"+
-                            "               { \"term\" : {\"taskRequester\" : \"" + requesterId[0] + "\"}}" + "\n"+
-                            "               { \"term\" : {\"taskStatus\" : \"bidden\"}}" + "\n"+
-
                             "           ]\n"+
                             "       }\n"+
                             "   }\n"+
@@ -883,7 +773,6 @@ public class TaskController {
         }
 
     }
-
     /**
      * A static class to search all requesting tasks in ES database
      */
@@ -931,7 +820,6 @@ public class TaskController {
         }
 
     }
-
     /**
      * A static class to search all bid of a task
      */
@@ -1084,18 +972,6 @@ public class TaskController {
 
     }
 
-    public boolean testTrue(String name){
-        return true;
-    } //created by wdong2 for testing
-
-    public boolean testFalse(String name){
-        return false;
-    } //created by wdong2 for testing
-
-    // no need to use it, providerSetBids is good enough
-
-    public void providerUpdateBid(Task task,Bid bid){}
-
     /**
      * verify ES database setting
      */
@@ -1103,54 +979,10 @@ public class TaskController {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080").discoveryEnabled(true).multiThreaded(true);
 
-
-
             DroidClientConfig config = builder.build();
-
-
             JestClientFactory factory = new JestClientFactory();
             factory.setDroidClientConfig(config);
             client = (JestDroidClient) factory.getObject();
         }
     }
-
-    /**
-     * For development, will delete finally
-     */
-    public static class yuqi8delete extends AsyncTask<String, Void, Void>{
-
-        private String id;
-
-        public yuqi8delete(String arg_id){
-            this.id = arg_id;
-        }
-
-        @Override
-        protected Void doInBackground(String... idToDelete) {
-            verifySettings();
-
-            String query = "{ \n"+
-                    "\"size\" : 1000" +
-
-                    "}\n"+"}";
-
-            Log.i("Query", "The query was " + query);
-
-            Delete delete = new Delete.Builder(idToDelete[0]).index("cmput301w18t25").type("task").build();
-            try {
-                DocumentResult result = client.execute(delete);
-                if (result.isSucceeded()) {
-                    Log.i("Success", "Successful delete");
-                } else {
-                    Log.i("Error", "Elastic search was not able to deletes.");
-                }
-            } catch (Exception e) {
-                Log.i("Error", "We failed to add a request to elastic search!");
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-    }
-
 }
