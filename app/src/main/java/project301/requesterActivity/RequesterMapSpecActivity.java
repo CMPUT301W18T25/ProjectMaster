@@ -71,7 +71,6 @@ public class RequesterMapSpecActivity extends AppCompatActivity implements OnMap
 
     // Testing variables
     private ArrayList<Location> mockupTasks;
-    ArrayList<project301.Task> biddenTaskList = new ArrayList<>();
 
 
 
@@ -85,16 +84,16 @@ public class RequesterMapSpecActivity extends AppCompatActivity implements OnMap
         userId = intent.getExtras().get("userId").toString();
 
 
-        setContentView(R.layout.view_on_map_bidden);
+        setContentView(R.layout.view_on_map_spec);
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map_bidden);
+                .findFragmentById(R.id.map_spec);
         mapFragment.getMapAsync(this);
 
-        Button back_bidden_Button = (Button) findViewById(R.id.go_back_bidden);
-        back_bidden_Button.setOnClickListener(new View.OnClickListener() {
+        Button back_spec_Button = (Button) findViewById(R.id.go_back_spec);
+        back_spec_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Go Back pressed");
@@ -246,8 +245,8 @@ public class RequesterMapSpecActivity extends AppCompatActivity implements OnMap
         Log.d(TAG,"displayTaskLocations");
         mMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
-        for (int i = 0; i < biddenTaskList.size(); i++) {
-            project301.Task currTask = biddenTaskList.get(i);
+        for (int i = 0; i < taskList.size(); i++) {
+            project301.Task currTask = taskList.get(i);
 
             if (currTask.getTasklgtitude() != null
                     && currTask.getTasklatitude() != null
@@ -276,7 +275,7 @@ public class RequesterMapSpecActivity extends AppCompatActivity implements OnMap
                 }
 
             } else {
-                Log.d(TAG, "No location for: " + biddenTaskList.get(i).getTaskName());
+                Log.d(TAG, "No location for: " + taskList.get(i).getTaskName());
 
             }
         }
@@ -302,7 +301,7 @@ public class RequesterMapSpecActivity extends AppCompatActivity implements OnMap
     @Override
     public boolean onMarkerClick(Marker marker){
         int markerIndex = (Integer) marker.getTag();
-        project301.Task clickedTask = biddenTaskList.get(markerIndex);
+        project301.Task clickedTask = taskList.get(markerIndex);
         Log.d(TAG,"Clicked on marker "+String.valueOf(markerIndex));
         Log.d(TAG,"Task info: "+clickedTask.getTaskName());
         Log.d(TAG,"Task info: "+clickedTask.getTaskAddress());
@@ -351,34 +350,18 @@ public class RequesterMapSpecActivity extends AppCompatActivity implements OnMap
 
         TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
         search.execute(userId);
-        FileSystemController FC = new FileSystemController();
-        ArrayList<project301.Task> tasklist = new ArrayList<project301.Task>();
+        taskList = new ArrayList<project301.Task>();
+        ArrayList<project301.Task> searchedTask = new ArrayList<>();
         try {
-            tasklist= search.get();
+            searchedTask = search.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        FC.deleteAllFiles(getApplication(),"sent");
-        for(project301.Task task:tasklist){
-            FC.saveToFile(task,"sent",getApplication());
-        }
-
-        // FC.deleteAllFiles(getApplication(),"sent");
-        tasklist = FC.loadSentTasksFromFile(getApplication());
-        biddenTaskList.clear();
-
-        for(
-                project301.Task task: tasklist){
-            if(task.getTaskStatus().equals("bidden")){
-
-                biddenTaskList.add(task);
-
-            }
-        }
-        for (int i =0;i<biddenTaskList.size();i++){
-            Log.d(TAG,"Requester TASK: "+biddenTaskList.get(i).getTaskName()+", "+biddenTaskList.get(i).getTaskStatus());
+        taskList.addAll(searchedTask);
+        for (int i =0;i<taskList.size();i++){
+            Log.d(TAG,"Requester TASK: "+taskList.get(i).getTaskName()+", "+taskList.get(i).getTaskStatus());
         }
     }
 
