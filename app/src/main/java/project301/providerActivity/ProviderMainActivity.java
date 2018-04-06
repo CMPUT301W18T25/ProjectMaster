@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -170,11 +172,42 @@ public class ProviderMainActivity extends AppCompatActivity {
                 }
             }
         });
+        //设置在listview上下拉刷新的监听
+        ListView mListView = (ListView) findViewById(R.id.provider_list);
+        final SwipeRefreshLayout mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_ly);
+
+        /**
+         * Showing Swipe Refresh animation on activity create
+         * As animation won't start on onCreate, post runnable is used
+         */
+        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //设置2秒的时间来执行以下事件
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        renewTheList();
+                        mSwipeLayout.setRefreshing(false);
+                    }
+                }, 1500);
+            }
+        });
     }
 
     @Override
     public void onStart(){
         super.onStart();
+        renewTheList();
+
+
+    }
+
+    public void setTaskList(ArrayList<Task> list){
+        taskList = list;
+        ProviderAdapter adapter = new ProviderAdapter(this, taskList);
+        this.availablelist.setAdapter(adapter);
+    }
+    public void renewTheList(){
 
         TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
         search.execute();
@@ -204,11 +237,6 @@ public class ProviderMainActivity extends AppCompatActivity {
         setTaskList(taskList);
         ProviderAdapter adapter = new ProviderAdapter(this, taskList);
         this.availablelist.setAdapter(adapter);
-    }
 
-    public void setTaskList(ArrayList<Task> list){
-        taskList = list;
-        ProviderAdapter adapter = new ProviderAdapter(this, taskList);
-        this.availablelist.setAdapter(adapter);
     }
 }
