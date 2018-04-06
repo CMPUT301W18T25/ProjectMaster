@@ -137,9 +137,10 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 String index = intent.getExtras().get("info").toString();
-                Intent info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterMapActivity.class);
+                Intent info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterMapSpecActivity.class);
                 info2.putExtra("userId",userId);
                 info2.putExtra("info",index);
+                info2.putExtra("taskId",view_task.getId());
                 startActivity(info2);
 
             }

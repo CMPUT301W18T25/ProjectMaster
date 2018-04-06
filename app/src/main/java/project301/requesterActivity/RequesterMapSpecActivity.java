@@ -59,7 +59,8 @@ public class RequesterMapSpecActivity extends AppCompatActivity implements OnMap
     private static final int DEFAULT_ZOOM = 15;
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
-
+    private String view_index;
+    private String taskId;
 
     private Location mLastKnownLocation;
 
@@ -82,6 +83,10 @@ public class RequesterMapSpecActivity extends AppCompatActivity implements OnMap
         final Intent intent = getIntent();
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
+        view_index = intent.getExtras().get("info").toString();
+        taskId = intent.getExtras().get("taskId").toString();
+
+
 
 
         setContentView(R.layout.view_on_map_spec);
@@ -360,6 +365,8 @@ public class RequesterMapSpecActivity extends AppCompatActivity implements OnMap
             e.printStackTrace();
         }
         taskList.addAll(searchedTask);
+
+
         for (int i =0;i<taskList.size();i++){
             Log.d(TAG,"Requester TASK: "+taskList.get(i).getTaskName()+", "+taskList.get(i).getTaskStatus());
         }
