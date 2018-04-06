@@ -217,11 +217,11 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         }
         taskList.addAll(searchedTask);
 
-        /*
+
         //get all finished task of this provider (user) into the list
         if (this.content.equals("all")) {
             //get all bidden task of this provider (user) into a list
-            TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
+            TaskController.searchDoneTasksOfThisProvider search = new TaskController.searchDoneTasksOfThisProvider(userId);
             search.execute();
             try {
                 searchedTask = search.get();
@@ -232,8 +232,6 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
             }
             taskList.addAll(searchedTask);
         }
-        */
-
 
         // Attach the adapter to a ListView
         if (this.content.equals("all")) {

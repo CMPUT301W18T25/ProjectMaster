@@ -499,6 +499,73 @@ public class TaskController {
         }
 
     }
+
+    /**
+     * A static class to search bidden tasks in ES database
+     */
+    public static class searchDoneTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
+        //ArrayList<Task> taskList = new ArrayList<Task> ();
+        String providerId;
+
+        public searchDoneTasksOfThisProvider(String providerId){
+            this.providerId = providerId;
+        }
+
+        protected ArrayList<Task> doInBackground(Void... nul) {
+            verifySettings();
+
+            ArrayList<Task> result_tasks = new ArrayList<Task>();
+
+            String query =
+                    "\n{ \n"+
+                            "\"size\" : 300,\n"+
+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"must\" : [\n"+
+                            "               { \"term\" : {\"taskStatus\" : " + "\"done\"}}" +
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
+
+            Log.i("Query", "The query was " + query );
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t25")
+                    .addType("task")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<Task> rt
+                            = result.getSourceAsObjectList(Task.class);
+                    for(Task task:rt){
+
+                        ArrayList<Bid> BiddenList = task.getTaskBidList();
+                        for(Bid bid:BiddenList){
+                            if(bid.getProviderId().equals(providerId)){
+                                result_tasks.add(task);
+
+
+                            }
+                        }
+                    }
+
+                    Log.i("alldone","test");
+
+
+                    Log.i("Success", "Data retrieved from database: " + Integer.toString(rt.size()));
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return result_tasks;
+        }
+
+    }
     /**
      * A static class to search all tasks of this provider in ES database
      */
