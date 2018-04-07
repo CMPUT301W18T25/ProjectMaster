@@ -141,9 +141,21 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
 
 
 
+         //to do : map show location
+        //set viewmap button
+        Button mapButton = (Button) findViewById(R.id.view_map);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String index = intent.getExtras().get("info").toString();
+                Intent info2 = new Intent(RequesterViewTaskRequestActivity.this, RequesterMapSpecActivity.class);
+                info2.putExtra("userId",userId);
+                info2.putExtra("info",index);
+                info2.putExtra("taskId",view_task.getId());
+                startActivity(info2);
 
-        //to do : map button to show location
-
+            }
+        });
         //settle deleteTask button
         Button deleteTaskButton = (Button) findViewById(R.id.delete_button);
         deleteTaskButton.setOnClickListener(new View.OnClickListener() {
