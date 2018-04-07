@@ -923,28 +923,13 @@ public class TaskController {
             String [] search_parameters = keywords[0].split("\\s+");
             String bodyQuery;
             ArrayList<Task> result_tasks = new ArrayList<Task>();
-            /*
-            String query =
-                    "\n{     \n"+
-                            "   \"query\" : {\n"+
-                            "       \"bool\" : {\n"+
-                            "           \"must\" : [\n"+
-                            "               { \"multi_match\" : {\n" +
-                            "                   \"query\" : \""+ search_parameters[0] +"\", \n" +
-                            "                   \"fields : [ \"taskName\", \"taskDetails\" ] \n " +
-                            "                   }  \n" +
-                            "               }\n" +
-                            "           ]\n"+
-                            "       }\n"+
-                            "   }\n"+
-                            "}\n";
-            */
+
             Log.i("Length", Integer.toString(search_parameters.length));
 
-            bodyQuery ="               { \"multi_match\" : {\"query\" : \"" +search_parameters[0] +"\", \"fields\" : [ \"taskName\"] }}" + "\n";
+            bodyQuery ="               { \"multi_match\" : {\"query\" : \"" +search_parameters[0] +"\",\"type\" : \"cross_fields\" ,\"fields\" : [\"taskName\", \"taskDetails\"], \"operator\" : \"and\" }}" + "\n";
 
             for (int i = 1; i < search_parameters.length; i++) {
-                bodyQuery = bodyQuery + "               ,{ \"multi_match\" : {\"query\" : \"" + search_parameters[i] + "\", \"fields\" : [ \"taskName\"] }}" + "\n";
+                bodyQuery = bodyQuery + "               ,{ \"multi_match\" : {\"query\" : \"" + search_parameters[i] + "\", \"type\" : \"cross_fields\" ,\"fields\" : [\"taskName\",\"taskDetails\"], \"operator\" : \"and\" }}" + "\n";
             }
 
             //bodyQuery = bodyQuery + "               ,{ \"multi_match\" : {\"query\" : \"" + search_parameters[1] + "\", \"fields\" : [ \"taskName\", \"taskDetails\"] }}" + "\n";
@@ -957,12 +942,6 @@ public class TaskController {
                             "           \"should\" : [\n"+
                             bodyQuery+
                             "           ]\n"+
-                            "       }\n"+
-                            "   }\n"+
-                            "}\n";
-
-            String post_query =
-                    "           ]\n"+
                             "       }\n"+
                             "   }\n"+
                             "}\n";
