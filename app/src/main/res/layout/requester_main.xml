@@ -1,216 +1,458 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/post_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:background="@color/grey5"
-        android:fontFamily="serif"
-        android:text="@string/post_new_task"
-        android:textColor="@color/cardview_light_background"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/floatingActionButton"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/edit_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="35dp"
-        android:background="@color/colorPrimary"
-        android:fontFamily="serif"
-        android:text="view all task"
-        android:textColor="@color/cardview_light_background"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/floatingActionButton3"
-        app:layout_constraintTop_toBottomOf="@+id/post_button" />
+        <TextView
+            android:id="@+id/textView130"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/bidden_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="35dp"
-        android:background="@color/grey5"
-        android:fontFamily="serif"
-        android:text="view bidden task"
-        android:textColor="@color/cardview_light_background"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/floatingActionButton5"
-        app:layout_constraintTop_toBottomOf="@+id/edit_button" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/assigned_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="35dp"
-        android:background="@color/colorPrimary"
-        android:fontFamily="serif"
-        android:text="view assigned task"
-        android:textColor="@color/cardview_light_background"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/floatingActionButton6"
-        app:layout_constraintTop_toBottomOf="@+id/bidden_button" />
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    <Button
-        android:id="@+id/done_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="35dp"
-        android:background="@color/grey5"
-        android:fontFamily="serif"
-        android:text="view done task"
-        android:textColor="@color/cardview_light_background"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/floatingActionButton7"
-        app:layout_constraintTop_toBottomOf="@+id/assigned_button" />
+                <TextView
+                    android:id="@+id/textView102"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp" />
 
-    <Button
-        android:id="@+id/profile_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="35dp"
-        android:background="@color/colorPrimary"
-        android:fontFamily="serif"
-        android:text="@string/edit_profile"
-        android:textColor="@color/cardview_light_background"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/floatingActionButton8"
-        app:layout_constraintTop_toBottomOf="@+id/done_button" />
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingActionButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    app:backgroundTint="@color/cardview_light_background"
+                    app:fabSize="mini"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:rippleColor="@color/cardview_shadow_start_color"
+                    app:srcCompat="@android:drawable/ic_menu_add"
+                    tools:layout_editor_absoluteY="32dp" />
 
-    <Button
-        android:id="@+id/logout_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="35dp"
-        android:background="@color/grey5"
-        android:fontFamily="serif"
-        android:text="Log out"
-        android:textColor="@color/cardview_light_background"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/floatingActionButton9"
-        app:layout_constraintTop_toBottomOf="@+id/profile_button" />
+                <TextView
+                    android:id="@+id/textView103"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:clickable="false"
-        app:backgroundTint="@color/cardview_light_background"
-        app:fabSize="mini"
-        app:layout_constraintEnd_toStartOf="@+id/post_button"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:rippleColor="@color/cardview_shadow_start_color"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+            </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
-        android:clickable="false"
-        app:backgroundTint="@android:color/background_light"
-        app:fabSize="mini"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton"
-        app:srcCompat="@android:drawable/ic_menu_view" />
+            <TextView
+                android:id="@+id/textView101"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="43dp"
-        android:clickable="false"
-        app:backgroundTint="@android:color/background_light"
-        app:fabSize="mini"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton3"
-        app:srcCompat="@android:drawable/ic_menu_view" />
+            <Button
+                android:id="@+id/post_button"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@color/grey5"
+                android:fontFamily="serif"
+                android:text="@string/post_new_task"
+                android:textColor="@color/cardview_light_background"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="28dp" />
+        </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="43dp"
-        android:clickable="false"
-        app:backgroundTint="@android:color/background_light"
-        app:fabSize="mini"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton5"
-        app:srcCompat="@android:drawable/ic_menu_view" />
+        <TextView
+            android:id="@+id/textView129"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="42dp"
-        android:clickable="false"
-        app:backgroundTint="@android:color/background_light"
-        app:fabSize="mini"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton6"
-        app:srcCompat="@android:drawable/ic_menu_view" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="43dp"
-        android:clickable="false"
-        app:backgroundTint="@android:color/background_light"
-        app:fabSize="mini"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton7"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="42dp"
-        android:clickable="false"
-        app:backgroundTint="@android:color/background_light"
-        app:fabSize="mini"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton8"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+                <TextView
+                    android:id="@+id/textView105"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingActionButton3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    app:backgroundTint="@android:color/background_light"
+                    app:fabSize="mini"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_view"
+                    tools:layout_editor_absoluteY="116dp" />
+
+                <TextView
+                    android:id="@+id/textView104"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView106"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/edit_button"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:fontFamily="serif"
+                android:text="view all task"
+                android:textColor="@color/cardview_light_background"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="111dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView128"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView108"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingActionButton5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    app:backgroundTint="@android:color/background_light"
+                    app:fabSize="mini"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_view"
+                    tools:layout_editor_absoluteY="199dp" />
+
+                <TextView
+                    android:id="@+id/textView107"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView109"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/bidden_button"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@color/grey5"
+                android:fontFamily="serif"
+                android:text="view bidden task"
+                android:textColor="@color/cardview_light_background"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="194dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView127"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView111"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingActionButton6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    app:backgroundTint="@android:color/background_light"
+                    app:fabSize="mini"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_view"
+                    tools:layout_editor_absoluteY="282dp" />
+
+                <TextView
+                    android:id="@+id/textView110"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView112"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/assigned_button"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:fontFamily="serif"
+                android:text="view assigned task"
+                android:textColor="@color/cardview_light_background"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="277dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView126"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView114"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingActionButton7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    app:backgroundTint="@android:color/background_light"
+                    app:fabSize="mini"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_view"
+                    tools:layout_editor_absoluteY="364dp" />
+
+                <TextView
+                    android:id="@+id/textView113"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView115"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/done_button"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@color/grey5"
+                android:fontFamily="serif"
+                android:text="view done task"
+                android:textColor="@color/cardview_light_background"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="360dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView125"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView117"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingActionButton8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    app:backgroundTint="@android:color/background_light"
+                    app:fabSize="mini"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_edit"
+                    tools:layout_editor_absoluteY="447dp" />
+
+                <TextView
+                    android:id="@+id/textView116"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView119"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/profile_button"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:fontFamily="serif"
+                android:text="@string/edit_profile"
+                android:textColor="@color/cardview_light_background"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="442dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView124"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView121"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingActionButton9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    app:backgroundTint="@android:color/background_light"
+                    app:fabSize="mini"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
+                    tools:layout_editor_absoluteY="529dp" />
+
+                <TextView
+                    android:id="@+id/textView120"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView122"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/logout_button"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@color/grey5"
+                android:fontFamily="serif"
+                android:text="Log out"
+                android:textColor="@color/cardview_light_background"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="526dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView123"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>

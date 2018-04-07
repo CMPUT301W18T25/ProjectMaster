@@ -427,7 +427,7 @@
                 android:fontFamily="serif"
                 android:text="   My Bid :"
                 android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <EditText

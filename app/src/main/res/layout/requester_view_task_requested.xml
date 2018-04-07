@@ -3,17 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView91"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/textView17"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
             android:fontFamily="serif"
             android:text="Task Information"
             android:textAlignment="center"
@@ -23,7 +34,8 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="505dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/grey3"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
@@ -35,11 +47,13 @@
                 <TextView
                     android:id="@+id/textView27"
                     android:layout_width="match_parent"
-                    android:layout_height="82dp" />
+                    android:layout_height="30dp"
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_weight="1"
                     android:gravity="top|center_vertical|center_horizontal"
                     android:orientation="horizontal">
 
@@ -67,6 +81,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="62dp"
+                    android:layout_weight="1"
                     android:gravity="top|center_vertical|center_horizontal"
                     android:orientation="horizontal">
 
@@ -94,6 +109,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -121,6 +137,7 @@
                     android:id="@+id/view_map"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
+                    android:layout_weight="1"
                     android:background="@color/blue3"
                     android:fontFamily="serif"
                     android:text="View On Map"
@@ -137,6 +154,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_weight="1"
                     android:gravity="top|center_vertical|center_horizontal"
                     android:orientation="horizontal">
 
@@ -164,6 +182,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_weight="1"
                     android:gravity="top|center_vertical|center_horizontal"
                     android:orientation="horizontal">
 
@@ -190,6 +209,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_weight="1"
                     android:gravity="top|center_vertical|center_horizontal"
                     android:orientation="horizontal">
 
@@ -217,11 +237,13 @@
         <TextView
             android:id="@+id/textView79"
             android:layout_width="match_parent"
-            android:layout_height="10dp" />
+            android:layout_height="20dp"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="49dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
@@ -267,7 +289,14 @@
                 android:text="Show List"
                 android:textColor="@color/cardview_light_background"
                 android:textStyle="bold" />
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView94"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_weight="1" />
 
     </LinearLayout>
 
