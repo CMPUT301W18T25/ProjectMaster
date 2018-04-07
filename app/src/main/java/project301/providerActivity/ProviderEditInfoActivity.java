@@ -2,9 +2,11 @@ package project301.providerActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import project301.R;
 import project301.User;
 import project301.controller.UserController;
+import project301.utilities.TaskUtil;
 
 /**
  * @classname : ProviderEditInfoActivity
@@ -75,43 +78,63 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check_namelength(usernameText.getText().toString())) {
-                //get user input
-                //editName = usernameText.getText().toString();
-                editEmail = emailText.getText().toString();
-                editPhone = mobileText.getText().toString();
-                editPassword = passwordText.getText().toString();
+            if (check_namelength(usernameText.getText().toString())) {
+            //get user input
+            //editName = usernameText.getText().toString();
+            editEmail = emailText.getText().toString();
+            editPhone = mobileText.getText().toString();
+            editPassword = passwordText.getText().toString();
 
-                Log.i("editEmail",editEmail);
+            Log.i("editEmail",editEmail);
 
-                //update user info
-                //user.setUserName(editName);
-                user.setUserEmail(editEmail);
+            //update user info
+            if (TaskUtil.validate_phone(editPhone)){
                 user.setUserPhone(editPhone);
-                user.setUserPassword(editPassword);
-                Log.i(user.getUserPhone(),user.getUserEmail());
+            }else{
+                //error message
+                Toast toast = Toast.makeText(context, "Invalid Phone Number! Please Try Again!", Toast.LENGTH_LONG);
+                TextView v1 = (TextView) toast.getView().findViewById(android.R.id.message);
+                v1.setTextColor(Color.RED);
+                v1.setTextSize(20);
+                v1.setGravity(Gravity.CENTER);
+                toast.show();
+                return;
+            }
+            if (TaskUtil.validate_email(editEmail)){
+                user.setUserEmail(editEmail);
+            }else {
+                //error message
+                Toast toast = Toast.makeText(context, "Invalid Email Address! Please Try Again!", Toast.LENGTH_LONG);
+                TextView v1 = (TextView) toast.getView().findViewById(android.R.id.message);
+                v1.setTextColor(Color.RED);
+                v1.setTextSize(20);
+                v1.setGravity(Gravity.CENTER);
+                toast.show();
+                return;
+            }
+            user.setUserPassword(editPassword);
 
-                //update user
-                UserController.updateUser updateUser= new UserController.updateUser();
-                updateUser.execute(user);
+            //update user
+            UserController.updateUser updateUser= new UserController.updateUser();
+            updateUser.execute(user);
 
-                //testing result
-                //change activity
-                Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMainActivity.class);
-                info2.putExtra("userId",userId);
+            //testing result
+            //change activity
+            Intent info2 = new Intent(ProviderEditInfoActivity.this, ProviderMainActivity.class);
+            info2.putExtra("userId",userId);
 
-                //wait for update
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                startActivity(info2);
+            //wait for update
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            startActivity(info2);
 
-                } else {
-                    Toast toast = Toast.makeText(context, "The maximum length of username is 8", Toast.LENGTH_LONG);
-                    toast.show();
-                }
+            } else {
+                Toast toast = Toast.makeText(context, "The maximum length of username is 8", Toast.LENGTH_LONG);
+                toast.show();
+            }
             }
 
         });
