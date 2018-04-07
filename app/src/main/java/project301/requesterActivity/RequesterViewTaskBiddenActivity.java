@@ -20,7 +20,6 @@ import com.novoda.merlin.MerlinsBeard;
 
 import project301.Bid;
 import project301.BidCounter;
-import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
 import project301.controller.BidController;
@@ -137,10 +136,12 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 String index = intent.getExtras().get("info").toString();
-                Intent info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterMapSpecActivity.class);
+                Intent info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterMapSpecBiddenActivity.class);
                 info2.putExtra("userId",userId);
                 info2.putExtra("info",index);
-                info2.putExtra("taskId",view_task.getId());
+                info2.putExtra("taskId",view_task.getId() );;
+                info2.putExtra("activity",activity);
+                Log.d("taskId", "onClick: " + view_task.getId());
                 startActivity(info2);
 
             }
