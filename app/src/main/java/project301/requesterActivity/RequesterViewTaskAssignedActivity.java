@@ -329,8 +329,9 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
         Double temp_idealprice=view_task.getTaskIdealPrice();
         Double temp_dealprice=view_task.getChoosenBid().getBidAmount();
 
-
-        view_idealprice.setText(Double.toString(temp_idealprice));
+        if(temp_idealprice!=null) {
+            view_idealprice.setText(Double.toString(temp_idealprice));
+        }
         view_deal_price.setText(Double.toString(temp_dealprice));
 
         String temp_phone  = provider.getUserPhone();

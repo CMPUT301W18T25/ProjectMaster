@@ -332,7 +332,9 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
         view_status.setText(temp_status);
 
         Double temp_idealprice=view_task.getTaskIdealPrice();
-        view_idealprice.setText(Double.toString(temp_idealprice));
+        if(temp_idealprice!=null) {
+            view_idealprice.setText(Double.toString(temp_idealprice));
+        }
 
         Double temp_lowestbid=view_task.findLowestbid();
         view_lowestbid.setText(Double.toString(temp_lowestbid));

@@ -194,8 +194,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
                 // check empty and length of needed information
                 if(check_detaillength(post_detail.getText().toString())){
                 if (check_titlelength(post_name.getText().toString())){
-                if (check_empty(post_name.getText().toString(),post_destination.getText().toString(),
-                        post_ideal_price.getText().toString())){
+                if (check_empty(post_name.getText().toString())){
 
 
                     //interface jump
@@ -204,9 +203,25 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
                     //set data
                     Task new_task = new Task();
                     new_task.setTaskName(post_name.getText().toString());
-                    new_task.setTaskDetails(post_detail.getText().toString());
-                    new_task.setTaskAddress(post_destination.getText().toString());
-                    new_task.setTaskIdealPrice(Double.parseDouble(post_ideal_price.getText().toString()));
+                    if(!check_empty(post_detail.getText().toString())){
+                        new_task.setTaskDetails(" ");
+                    }
+                    else {
+                        new_task.setTaskDetails(post_detail.getText().toString());
+                    }
+                    if(!check_empty(post_destination.getText().toString())){
+                        new_task.setTaskAddress(" ");
+                    }
+                    else {
+                        new_task.setTaskAddress(post_destination.getText().toString());
+                    }
+                    if(!check_empty(post_ideal_price.getText().toString())){
+                        new_task.setTaskIdealPrice(null);
+                    }
+                    else {
+                        new_task.setTaskIdealPrice(Double.parseDouble(post_ideal_price.getText().toString()));
+                    }
+
                     new_task.setTaskRequester(userId);
                     if (taskPlace != null){
                         Log.d(LOG_TAG,"Task lat long: "+taskPlace.getLatLng());
@@ -429,13 +444,14 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
 
 
 
-    private boolean check_empty(String name, String destination, String ideal_price)
+    private boolean check_empty(String name)
     {
-        if(name.length()==0 || destination.length()==0|| ideal_price.length()==0 ){
+        if(name.length()==0){
             return false;
         }
         return true;
     }
+
 
     private boolean check_titlelength(String name)
     {
