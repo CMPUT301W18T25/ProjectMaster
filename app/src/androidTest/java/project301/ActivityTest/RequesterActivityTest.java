@@ -29,11 +29,6 @@ import com.robotium.solo.Solo;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
-/**
- * Test for all requester activities. Some of test based on provider activity test and sign up activity test.
- */
-
-
 public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
     private Solo solo;
@@ -44,11 +39,8 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
     @Override
     public void setUp() throws Exception {
+        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
-    }
-
-    public void testStart() throws Exception {
-        Activity activity = getActivity();
     }
 
     public void testRequesterMainActivity() {

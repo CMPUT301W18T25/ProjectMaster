@@ -35,6 +35,7 @@ public class UserCharacterActivityTest extends ActivityInstrumentationTestCase2 
 
     @Override
     public void setUp() throws Exception {
+        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
 

@@ -15,6 +15,7 @@ import project301.providerActivity.ProviderTaskBidActivity;
 import com.robotium.solo.Solo;
 
 /**
+ * Test for all provider activities. Some of test based on requester activity test and sign up activity test.
  * @classname : ProviderActivityTest
  * @Date :   18/03/2018
  * @author : Wang Dong
@@ -22,9 +23,7 @@ import com.robotium.solo.Solo;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
-/**
- * Test for all provider activities. Some of test based on requester activity test and sign up activity test.
- */
+
 
 public class ProviderActivityTest extends ActivityInstrumentationTestCase2 {
 
@@ -36,6 +35,7 @@ public class ProviderActivityTest extends ActivityInstrumentationTestCase2 {
 
     @Override
     public void setUp() throws Exception {
+        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
