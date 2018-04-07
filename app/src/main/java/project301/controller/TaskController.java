@@ -496,6 +496,7 @@ public class TaskController {
         }
 
     }
+
     /**
      * A static class to search bidden tasks in ES database
      */
@@ -724,6 +725,52 @@ public class TaskController {
             return result_tasks;
         }
 
+
+    }
+    /**
+     * A static class to search all requesting tasks in ES database
+     */
+    //TODO do test for this method, which should be extremely similar to bidden tasks
+    public static class searchAllBiddenRequestingTasks extends AsyncTask<Void, Void, ArrayList<Task>>{
+
+        protected ArrayList<Task> doInBackground(Void... nul) {
+            verifySettings();
+
+            ArrayList<Task> result_tasks = new ArrayList<Task>();
+
+            String queryS =
+                    "\n{ \n"+
+                            "\"size\" : 50,\n"+
+                            "   \"query\" : {\n"+
+                            "       \"bool\" : {\n"+
+                            "           \"should\" : [\n"+
+                            "               { \"term\" : {\"taskStatus\" : \"request\"}}," + "\n"+
+                            "               { \"term\" : {\"taskStatus\" : \"bidden\"}}" + "\n"+
+                            "           ]\n"+
+                            "       }\n"+
+                            "   }\n"+
+                            "}\n";
+            Log.i("Query", "The query was " + queryS);
+            Search search = new Search.Builder(queryS)
+                    .addIndex("cmput301w18t25")
+                    .addType("task")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<Task> foundUsers
+                            = result.getSourceAsObjectList(Task.class);
+                    result_tasks.addAll(foundUsers);
+                    Log.i("Success", "Data retrieved from database: ");
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return result_tasks;
+        }
 
     }
     /**

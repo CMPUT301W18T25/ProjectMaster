@@ -209,23 +209,12 @@ public class ProviderMainActivity extends AppCompatActivity {
     }
     public void renewTheList(){
 
-        TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
+        TaskController.searchAllBiddenRequestingTasks search = new TaskController.searchAllBiddenRequestingTasks();
         search.execute();
         taskList = new ArrayList<>();
         ArrayList<Task> searchedTask = new ArrayList<>();
         try {
             searchedTask = search.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        taskList.addAll(searchedTask);
-
-        TaskController.searchAllBiddenTasks search2 = new TaskController.searchAllBiddenTasks();
-        search2.execute();
-        try {
-            searchedTask = search2.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
