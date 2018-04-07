@@ -2,6 +2,7 @@ package project301.allUserActivity;
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
@@ -43,6 +44,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import project301.R;
+import project301.requesterActivity.RequesterAllListActivity;
+import project301.requesterActivity.RequesterPostTaskActivity;
 
 public class CameraActivity extends AppCompatActivity {
     private static final String TAG = "AndroidCameraApi";
@@ -124,7 +127,10 @@ public class CameraActivity extends AppCompatActivity {
         public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
             super.onCaptureCompleted(session, request, result);
             Toast.makeText(CameraActivity.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
+            Log.d("Saved file","!");
+
             createCameraPreview();
+            //finish();
         }
     };
     protected void startBackgroundThread() {
@@ -160,7 +166,7 @@ public class CameraActivity extends AppCompatActivity {
                 width = jpegSizes[0].getWidth();
                 height = jpegSizes[0].getHeight();
             }
-            ImageReader reader = ImageReader.newInstance(width, height, ImageFormat.JPEG, 1);
+            ImageReader reader = ImageReader.newInstance(width, height, ImageFormat.JPEG, 2);
             List<Surface> outputSurfaces = new ArrayList<Surface>(2);
             outputSurfaces.add(reader.getSurface());
             outputSurfaces.add(new Surface(textureView.getSurfaceTexture()));
@@ -182,6 +188,8 @@ public class CameraActivity extends AppCompatActivity {
             getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
             final File finalFile = file;
+
+
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
                 public void onImageAvailable(ImageReader reader) {
@@ -202,6 +210,7 @@ public class CameraActivity extends AppCompatActivity {
                         }
                     }
                 }
+
                 private void save(byte[] bytes) throws IOException {
                     OutputStream output = null;
                     try {
@@ -222,6 +231,8 @@ public class CameraActivity extends AppCompatActivity {
                     super.onCaptureCompleted(session, request, result);
                     Toast.makeText(CameraActivity.this, "Saved:" + finalFile1, Toast.LENGTH_SHORT).show();
                     createCameraPreview();
+                    Log.d("Saved file","!!!");
+                    finish();
                 }
             };
             cameraDevice.createCaptureSession(outputSurfaces, new CameraCaptureSession.StateCallback() {
@@ -240,6 +251,7 @@ public class CameraActivity extends AppCompatActivity {
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
+
     }
     protected void createCameraPreview() {
         try {
@@ -316,7 +328,7 @@ public class CameraActivity extends AppCompatActivity {
             if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                 // close the app
                 Toast.makeText(CameraActivity.this, "Sorry!!!, you can't use this app without granting permission", Toast.LENGTH_LONG).show();
-                finish();
+                //finish();
             }
         }
     }
