@@ -359,6 +359,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         imageView.setImageBitmap(bm);
 
         layout.addView(imageView);
+        
         return layout;
     }
 
