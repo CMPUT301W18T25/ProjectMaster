@@ -5,6 +5,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
 import project301.R;
+import project301.allUserActivity.LogInActivity;
 import project301.allUserActivity.SignUpActivity;
 import com.robotium.solo.Solo;
 
@@ -22,7 +23,7 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
     public SignUpActivityTest() {
-        super(SignUpActivity.class);
+        super(LogInActivity.class);
     }
 
     @Override
@@ -32,7 +33,8 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testSignUp1() {
-        //SignUpActivity activity = (SignUpActivity)solo.getCurrentActivity();
+
+        solo.clickOnButton("Sign Up");
 
         solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
 
@@ -48,7 +50,7 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testSignUp2() {
-        //SignUpActivity activity = (SignUpActivity)solo.getCurrentActivity();
+        solo.clickOnButton("Sign Up");
 
         solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
 
@@ -64,7 +66,7 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testSignUp3() {
-        //SignUpActivity activity = (SignUpActivity)solo.getCurrentActivity();
+        solo.clickOnButton("Sign Up");
 
         solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
 
@@ -80,7 +82,7 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testInvalid1() {
-        //SignUpActivity activity = (SignUpActivity)solo.getCurrentActivity();
+        solo.clickOnButton("Sign Up");
 
         solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
 

@@ -1,10 +1,13 @@
 package project301.ActivityTest;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
+import project301.R;
 import project301.allUserActivity.LogInActivity;
+import project301.allUserActivity.SignUpActivity;
 
 /**
  * All important feature test class
@@ -36,7 +39,7 @@ public class AllImportantFeatureActivityTest extends ActivityInstrumentationTest
 
     public void testAddTaskActivity() {
 
-        SignUpActivityTest.testSignUp1();
+        signUp();
 
         RequesterActivityTest.testPostTaskActivity();
 
@@ -45,6 +48,39 @@ public class AllImportantFeatureActivityTest extends ActivityInstrumentationTest
         RequesterActivityTest.testAssignActivity();
 
     }
+
+    public void signUp(){
+        solo.clickOnButton("Sign Up");
+
+        solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
+
+        solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
+
+        solo.enterText((EditText) solo.getView(R.id.signup_phone),"1234567890");
+
+        solo.enterText((EditText) solo.getView(R.id.signup_email),"123@123.com");
+
+        solo.enterText((EditText) solo.getView(R.id.signup_password),"passward");
+
+        solo.clickOnButton("Log In");
+    }
+
+    public void postTask(){
+
+    }
+
+    public void bidOnTask(){
+
+    }
+
+    public void assignTask(){
+
+    }
+
+    public void payTask(){
+
+    }
+
 
 }
 
