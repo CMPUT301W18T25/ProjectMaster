@@ -2,7 +2,6 @@
 package project301.ActivityTest;
 
 
-import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
