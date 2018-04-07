@@ -275,4 +275,88 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnButton("Save");
     }
 
+    public void testPostTaskActivity() {
+        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
+
+        solo.enterText((EditText) solo.getView(R.id.login_name), "wdong2");
+
+        solo.enterText((EditText) solo.getView(R.id.login_password), "passward");
+
+        solo.clickOnButton("Log In");
+
+        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
+
+        solo.clickOnButton("Requester");
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
+
+        solo.clickOnButton("Post New Task");
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterPostTaskActivity.class);
+
+        solo.enterText((EditText) solo.getView(R.id.c_task_name), "GO!");
+
+        solo.enterText((EditText) solo.getView(R.id.c_task_detail), "two people");
+
+        solo.enterText((EditText) solo.getView(R.id.c_task_location), "NorthGate");
+
+        solo.enterText((EditText) solo.getView(R.id.c_task_idealprice), "12.34");
+
+        solo.clickOnButton("submit");
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
+
+        solo.clickInList(-1);
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskRequestActivity.class);
+
+        solo.clickOnButton("Edit  Task  Information");
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterEditTaskActivity.class);
+
+        solo.clearEditText((EditText) solo.getView(R.id.c_edit_name));
+
+        assertTrue(solo.waitForText("GO!"));
+
+        solo.clearEditText((EditText) solo.getView(R.id.c_edit_detail));
+
+        solo.clearEditText((EditText) solo.getView(R.id.c_edit_destination));
+
+        solo.clearEditText((EditText) solo.getView(R.id.c_edit_idealprice));
+
+        solo.enterText((EditText) solo.getView(R.id.c_edit_name), "GO!_test");
+
+        solo.enterText((EditText) solo.getView(R.id.c_edit_detail), "two people_test");
+
+        solo.enterText((EditText) solo.getView(R.id.c_edit_destination), "NorthGate_test");
+
+        solo.enterText((EditText) solo.getView(R.id.c_edit_idealprice), "12.34567");
+
+        solo.clickOnButton("Save");
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
+    }
+
+    public void testAssignActivity(){
+        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
+
+        solo.enterText((EditText) solo.getView(R.id.login_name), "wdong2");
+
+        solo.enterText((EditText) solo.getView(R.id.login_password), "passward");
+
+        solo.clickOnButton("Log In");
+
+        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
+
+        solo.clickOnButton("Requester");
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
+
+        solo.clickOnButton("view bidden task");
+
+        solo.clickInList(-1);
+
+        solo.clickOnButton("submit");
+
+    }
 }
