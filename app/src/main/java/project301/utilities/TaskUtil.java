@@ -8,6 +8,8 @@ import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *A class that helps to serilize and deserialize a task object
@@ -116,5 +118,20 @@ public class TaskUtil {
         return OfflineEditTaskFileList;
     }
 
+    /**
+     * constant of email format
+     * https://stackoverflow.com/questions/8204680/java-regex-email
+     */
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+    /**
+     * check email format
+     * https://stackoverflow.com/questions/8204680/java-regex-email
+     */
+    public static boolean validate(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        return matcher.find();
+    }
 
 }
