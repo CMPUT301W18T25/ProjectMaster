@@ -28,6 +28,8 @@ import project301.controller.BidController;
 import project301.controller.TaskController;
 import project301.controller.UserController;
 import project301.requesterActivity.RequesterAdapter;
+import project301.requesterActivity.RequesterMapSpecActivity;
+import project301.requesterActivity.RequesterViewTaskAssignedActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -325,6 +327,21 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
 
                     view_task.getTaskPhoto().showImage(ProviderTaskBidActivity.this);
                 }
+            }
+        });
+
+        //set viewmap button
+        Button mapButton = (Button) findViewById(R.id.map_button);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String index = intent.getExtras().get("info").toString();
+                Intent info2 = new Intent(ProviderTaskBidActivity.this, RequesterMapSpecActivity.class);
+                info2.putExtra("userId",userId);
+                info2.putExtra("info",index);
+                info2.putExtra("taskId",view_task.getId());
+                startActivity(info2);
+
             }
         });
     }

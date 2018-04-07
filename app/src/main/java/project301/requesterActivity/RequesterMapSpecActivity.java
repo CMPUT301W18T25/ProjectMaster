@@ -101,14 +101,7 @@ public class RequesterMapSpecActivity extends AppCompatActivity implements OnMap
         back_spec_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "Go Back pressed");
-                Intent intent = new Intent(RequesterMapSpecActivity.this, RequesterAllListActivity.class);
-                intent.putExtra("userId",userId);
-
-                startActivity(intent);
-
-
-                startActivity(intent);
+                finish();
             }
         });
     }
@@ -293,24 +286,7 @@ public class RequesterMapSpecActivity extends AppCompatActivity implements OnMap
      */
     @Override
     public boolean onMarkerClick(Marker marker){
-        int markerIndex = (Integer) marker.getTag();
-        project301.Task clickedTask = taskList.get(markerIndex);
-        Log.d(TAG,"Clicked on marker "+String.valueOf(markerIndex));
-        Log.d(TAG,"Task info: "+clickedTask.getTaskName());
-        Log.d(TAG,"Task info: "+clickedTask.getTaskAddress());
-
-
-
-        Intent info1 = new Intent(RequesterMapSpecActivity.this, RequesterViewTaskRequestActivity.class);
-        info1.putExtra("info", markerIndex);
-        info1.putExtra("userId",userId);
-        startActivity(info1);
-
-        /*Intent info1 = new Intent(RequesterMapActivity.this, ProviderTaskBidActivity.class);
-        info1.putExtra("info", markerIndex);
-        info1.putExtra("status","request");
-        info1.putExtra("userId",userId);
-        startActivity(info1);*/
+        finish();
         return true;
     }
 
