@@ -2,12 +2,14 @@ package project301.requesterActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +26,7 @@ import project301.User;
 import project301.controller.BidController;
 import project301.controller.OfflineController;
 import project301.controller.UserController;
+import project301.utilities.TaskUtil;
 
 /**
  * Detail :this class used to change profile of the user, such as user name.
@@ -112,35 +115,56 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check_namelength(usernameText.getText().toString())) {
+            if (check_namelength(usernameText.getText().toString())) {
 
-                //get user input
-                //editName = usernameText.getText().toString();
-                editEmail = emailText.getText().toString();
-                editPhone = mobileText.getText().toString();
-                editPassword = passwordText.getText().toString();
+            //get user input
+            //editName = usernameText.getText().toString();
+            editEmail = emailText.getText().toString();
+            editPhone = mobileText.getText().toString();
+            editPassword = passwordText.getText().toString();
 
                 //update user info
-                //user.setUserName(editName);
-                user.setUserEmail(editEmail);
-                user.setUserPhone(editPhone);
+                if (TaskUtil.validate_phone(editPhone)){
+                    user.setUserPhone(editPhone);
+                }else{
+                    //error message
+                    Toast toast = Toast.makeText(context, "Invalid Phone Number! Please Try Again!", Toast.LENGTH_LONG);
+                    TextView v1 = (TextView) toast.getView().findViewById(android.R.id.message);
+                    v1.setTextColor(Color.RED);
+                    v1.setTextSize(20);
+                    v1.setGravity(Gravity.CENTER);
+                    toast.show();
+                    return;
+                }
+                if (TaskUtil.validate_email(editEmail)){
+                    user.setUserEmail(editEmail);
+                }else {
+                    //error message
+                    Toast toast = Toast.makeText(context, "Invalid Email Address! Please Try Again!", Toast.LENGTH_LONG);
+                    TextView v1 = (TextView) toast.getView().findViewById(android.R.id.message);
+                    v1.setTextColor(Color.RED);
+                    v1.setTextSize(20);
+                    v1.setGravity(Gravity.CENTER);
+                    toast.show();
+                    return;
+                }
                 user.setUserPassword(editPassword);
 
 
 
-                //update user
-                UserController.updateUser updateUser= new UserController.updateUser();
-                updateUser.execute(user);
+            //update user
+            UserController.updateUser updateUser= new UserController.updateUser();
+            updateUser.execute(user);
 
-                //change activity
-                Intent info2 = new Intent(RequesterEditInfoActivity.this, RequesterMainActivity.class);
-                info2.putExtra("userId",userId);
+            //change activity
+            Intent info2 = new Intent(RequesterEditInfoActivity.this, RequesterMainActivity.class);
+            info2.putExtra("userId",userId);
 
-                startActivity(info2);
-                } else {
-                    Toast toast = Toast.makeText(context, "The maximum length of username is 8", Toast.LENGTH_LONG);
-                    toast.show();
-                }
+            startActivity(info2);
+            } else {
+                Toast toast = Toast.makeText(context, "The maximum length of username is 8", Toast.LENGTH_LONG);
+                toast.show();
+            }
 
             }
         });

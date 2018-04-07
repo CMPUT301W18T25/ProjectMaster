@@ -39,7 +39,6 @@ public class LogInActivity extends AppCompatActivity {
     private EditText usernameText;
     private EditText passwardText;
     private Context context;
-    private User thisUser;
     Button loginButton;
     Button signUpButton;
 
@@ -65,12 +64,7 @@ public class LogInActivity extends AppCompatActivity {
                 String enterPassward = passwardText.getText().toString();
 
                 UserController userController = new UserController();
-                /* for testing!
-                 if (enterUsername == "wdong2"){
-                 Intent intent = new Intent (LogInActivity.this, UserCharacterActivity.class);
-                 startActivity(intent);
-                 }
-                 */
+
                 if (userController.checkUserByNameAndPassword(enterUsername,enterPassward) == true){
                     Intent intent = new Intent (LogInActivity.this, UserCharacterActivity.class);
                     UserController uc = new UserController();

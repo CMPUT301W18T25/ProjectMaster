@@ -8,6 +8,8 @@ import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *A class that helps to serilize and deserialize a task object
@@ -116,5 +118,44 @@ public class TaskUtil {
         return OfflineEditTaskFileList;
     }
 
+    /**
+     * constant of email format
+     * https://stackoverflow.com/questions/8204680/java-regex-email
+     * @param nothing
+     * @return nothing
+     */
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+    /**
+     * check email format
+     * https://stackoverflow.com/questions/8204680/java-regex-email
+     * @param emailStr user input emali format
+     * @return is_correct_format
+     */
+    public static boolean validate_email(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        return matcher.find();
+    }
+
+    /**
+     * constant of email format
+     * https://stackoverflow.com/questions/8204680/java-regex-email
+     * @param nothing
+     * @return nothing
+     */
+    public static final Pattern VALID_PHONE_REGEX =
+            Pattern.compile("^[0-9]", Pattern.CASE_INSENSITIVE);
+
+    /**
+     * check email format
+     * https://stackoverflow.com/questions/8204680/java-regex-email
+     * @param phoneStr user input emali format
+     * @return is_correct_format
+     */
+    public static boolean validate_phone(String phoneStr) {
+        Matcher matcher = VALID_PHONE_REGEX .matcher(phoneStr);
+        return matcher.find();
+    }
 
 }

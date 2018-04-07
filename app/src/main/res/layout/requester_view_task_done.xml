@@ -3,48 +3,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView29"
             android:layout_width="match_parent"
-            android:layout_height="6dp" />
+            android:layout_height="6dp"
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/textView23"
             android:layout_width="match_parent"
-            android:layout_height="28dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
             android:fontFamily="serif"
             android:text="Task Information"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="214dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/grey3"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView22"
                     android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+                    android:layout_height="6dp"
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="28dp"
+                    android:layout_weight="1"
                     android:gravity="center_vertical|center_horizontal"
                     android:orientation="horizontal">
 
@@ -72,6 +83,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="42dp"
+                    android:layout_weight="1"
                     android:gravity="top|center_vertical|center_horizontal"
                     android:orientation="horizontal">
 
@@ -99,6 +111,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="42dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -133,6 +146,7 @@
                     android:id="@+id/view_map"
                     android:layout_width="match_parent"
                     android:layout_height="22dp"
+                    android:layout_weight="1"
                     android:background="@color/blue3"
                     android:fontFamily="serif"
                     android:text="View On Map"
@@ -145,6 +159,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="28dp"
+                    android:layout_weight="1"
                     android:gravity="center_vertical|center_horizontal"
                     android:orientation="horizontal">
 
@@ -171,6 +186,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="28dp"
+                    android:layout_weight="1"
                     android:gravity="center_vertical|center_horizontal"
                     android:orientation="horizontal">
 
@@ -199,22 +215,25 @@
         <TextView
             android:id="@+id/textView30"
             android:layout_width="match_parent"
-            android:layout_height="6dp" />
+            android:layout_height="6dp"
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/textView20"
             android:layout_width="match_parent"
-            android:layout_height="28dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
             android:fontFamily="serif"
             android:text="Provider Information"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="104dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/grey3"
             app:cardCornerRadius="@dimen/place_autocomplete_button_padding">
 
@@ -226,11 +245,13 @@
                 <TextView
                     android:id="@+id/textView21"
                     android:layout_width="match_parent"
-                    android:layout_height="14dp" />
+                    android:layout_height="10dp"
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="28dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -252,6 +273,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="28dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -273,6 +295,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="28dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -298,22 +321,25 @@
         <TextView
             android:id="@+id/textView31"
             android:layout_width="match_parent"
-            android:layout_height="6dp" />
+            android:layout_height="6dp"
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/textView24"
             android:layout_width="match_parent"
-            android:layout_height="28dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
             android:fontFamily="serif"
             android:text="Deal Information"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="82dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/grey3"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
@@ -325,11 +351,13 @@
                 <TextView
                     android:id="@+id/textView25"
                     android:layout_width="match_parent"
-                    android:layout_height="14dp" />
+                    android:layout_height="10dp"
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="28dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -355,6 +383,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="28dp"
+                    android:layout_weight="1"
                     android:gravity="center_vertical|center_horizontal"
                     android:orientation="horizontal">
 
@@ -384,17 +413,20 @@
         <TextView
             android:id="@+id/textView26"
             android:layout_width="match_parent"
-            android:layout_height="10dp" />
+            android:layout_height="14dp"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/showlist_button"
                 android:layout_width="match_parent"
-                android:layout_height="37dp"
+                android:layout_height="28dp"
+                android:layout_weight="1"
                 android:background="@color/black1"
                 android:fontFamily="serif"
                 android:text="Show List"
@@ -404,17 +436,25 @@
             <TextView
                 android:id="@+id/textView77"
                 android:layout_width="match_parent"
-                android:layout_height="4dp" />
+                android:layout_height="4dp"
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/delete_button"
                 android:layout_width="match_parent"
-                android:layout_height="37dp"
+                android:layout_height="28dp"
+                android:layout_weight="1"
                 android:background="@color/black1"
                 android:fontFamily="serif"
                 android:text="delete task"
                 android:textColor="@color/cardview_light_background"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView92"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
