@@ -14,7 +14,6 @@ import android.widget.Button;
 
 import project301.R;
 
-
 import project301.controller.FileSystemController;
 import project301.controller.TaskController;
 
@@ -47,12 +46,12 @@ import java.util.concurrent.ExecutionException;
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterMapSpecBiddenActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class RequesterMapSpecActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private String userId;
 
-    private static final String TAG = RequesterMapSpecBiddenActivity.class.getSimpleName();
+    private static final String TAG = RequesterMapSpecActivity.class.getSimpleName();
 
     private Boolean mLocationPermissionGranted;
 
@@ -62,7 +61,7 @@ public class RequesterMapSpecBiddenActivity extends AppCompatActivity implements
     private static final String KEY_LOCATION = "location";
     private String view_index;
     private String taskId;
-    private String activity;
+
     private Location mLastKnownLocation;
 
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -70,11 +69,10 @@ public class RequesterMapSpecBiddenActivity extends AppCompatActivity implements
 
 
     private ArrayList<project301.Task> taskList;
-
+    private project301.Task specTask;
     // Testing variables
     private ArrayList<Location> mockupTasks;
 
-    ArrayList<project301.Task> specTaskList = new ArrayList<>();
 
 
     @SuppressWarnings("ConstantConditions")
@@ -87,7 +85,6 @@ public class RequesterMapSpecBiddenActivity extends AppCompatActivity implements
         userId = intent.getExtras().get("userId").toString();
         view_index = intent.getExtras().get("info").toString();
         taskId = intent.getExtras().get("taskId").toString();
-        activity = intent.getExtras().get("activity").toString();
 
 
 
@@ -104,16 +101,7 @@ public class RequesterMapSpecBiddenActivity extends AppCompatActivity implements
         back_spec_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "Go Back pressed");
-                Intent intent = new Intent(RequesterMapSpecBiddenActivity.this, RequesterViewTaskBiddenActivity.class);
-                intent.putExtra("userId",userId);
-                intent.putExtra("info",view_index);
-                intent.putExtra("activity",activity);
-
-                startActivity(intent);
-
-
-                startActivity(intent);
+                finish();
             }
         });
     }
@@ -255,39 +243,27 @@ public class RequesterMapSpecBiddenActivity extends AppCompatActivity implements
         Log.d(TAG,"displayTaskLocations");
         mMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
-        for (int i = 0; i < specTaskList.size(); i++) {
-            project301.Task currTask = specTaskList.get(i);
 
-            if (currTask.getTasklgtitude() != null
-                    && currTask.getTasklatitude() != null
-                    && currTask.getTaskStatus() != "done") {
+        if (specTask.getTasklgtitude() != null
+                && specTask.getTasklatitude() != null) {
 
-                if (getTaskDistance(currTask) <= 5000) {
+            if (getTaskDistance(specTask) <= 5000) {
 
-                    Marker marker = mMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(currTask.getTasklatitude(), currTask.getTasklgtitude()))
-                            .anchor(0.5f, 0.5f)
-                            .title(currTask.getTaskName())
-                    );
-                    // Make bidden tasks have blue icon
-                    if (currTask.getTaskStatus().equals("bidden")){
-                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                    }
-                    // Make assigned task have a green icon
-                    else if (currTask.getTaskStatus().equals("assigned")) {
-                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                    }
-                    Log.d(TAG, "Adding marker task name: " + marker.getTitle());
-                    marker.setTag(i);
-                    marker.showInfoWindow();
-                } else {
-                    Log.d(TAG, "Task is located too far away: " + currTask.getTaskName());
-                }
+                Marker marker = mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(specTask.getTasklatitude(), specTask.getTasklgtitude()))
+                        .anchor(0.5f, 0.5f)
+                        .title(specTask.getTaskName())
+                );
 
+                Log.d(TAG, "Adding marker task name: " + marker.getTitle());
+                marker.showInfoWindow();
             } else {
-                Log.d(TAG, "No location for: " + specTaskList.get(i).getTaskName());
-
+                Log.d(TAG, "Task is located too far away: " + specTask.getTaskName());
             }
+
+        } else {
+            Log.d(TAG, "No location for: " + specTask.getTaskName());
+
         }
     }
     // source: https://stackoverflow.com/questions/2741403/get-the-distance-between-two-geo-points
@@ -310,24 +286,7 @@ public class RequesterMapSpecBiddenActivity extends AppCompatActivity implements
      */
     @Override
     public boolean onMarkerClick(Marker marker){
-        int markerIndex = (Integer) marker.getTag();
-        project301.Task clickedTask = specTaskList.get(markerIndex);
-        Log.d(TAG,"Clicked on marker "+String.valueOf(markerIndex));
-        Log.d(TAG,"Task info: "+clickedTask.getTaskName());
-        Log.d(TAG,"Task info: "+clickedTask.getTaskAddress());
-
-
-
-        Intent info1 = new Intent(RequesterMapSpecBiddenActivity.this, RequesterViewTaskRequestActivity.class);
-        info1.putExtra("info", markerIndex);
-        info1.putExtra("userId",userId);
-        startActivity(info1);
-
-        /*Intent info1 = new Intent(RequesterMapActivity.this, ProviderTaskBidActivity.class);
-        info1.putExtra("info", markerIndex);
-        info1.putExtra("status","request");
-        info1.putExtra("userId",userId);
-        startActivity(info1);*/
+        finish();
         return true;
     }
 
@@ -357,44 +316,20 @@ public class RequesterMapSpecBiddenActivity extends AppCompatActivity implements
     }
 
     private void getAllTaksInfo() {
+        TaskController.getTaskById search = new TaskController.getTaskById();
+        search.execute(taskId);
 
-        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-        search.execute(userId);
-        Log.d(TAG, "getAllTaksInfo: task id" + taskId);
-        FileSystemController FC = new FileSystemController();
-        taskList = new ArrayList<project301.Task>();
-        ArrayList<project301.Task> searchedTask = new ArrayList<>();
         try {
-            searchedTask = search.get();
+            specTask = search.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        taskList.addAll(searchedTask);
-        FC.deleteAllFiles(getApplication(),"sent");
-        for(project301.Task task:searchedTask){
-            FC.saveToFile(task,"sent",getApplication());
-        }
+        Log.d(TAG,"Requester TASK: "+specTask.getTaskName()+", "+specTask.getTaskStatus());
 
-        // FC.deleteAllFiles(getApplication(),"sent");
-        searchedTask = FC.loadSentTasksFromFile(getApplication());
-        specTaskList.clear();
 
-        Log.d(TAG, "getAllTaksInfo: list "+ taskList);
 
-        for(
-                project301.Task task: searchedTask){
-            if(task.getId().equals(taskId)){
-
-                specTaskList.add(task);
-
-            }
-        }
-
-        for (int i =0;i<specTaskList.size();i++){
-            Log.d(TAG,"Requester TASK: "+specTaskList.get(i).getTaskName()+", "+specTaskList.get(i).getTaskStatus());
-        }
     }
 
 }

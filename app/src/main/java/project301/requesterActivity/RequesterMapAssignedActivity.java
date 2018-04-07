@@ -373,7 +373,7 @@ public class RequesterMapAssignedActivity extends AppCompatActivity implements O
 
         for(
                 project301.Task task: tasklist){
-            if(task.getTaskStatus().equals("assign")){
+            if(task.getTaskStatus().equals("assigned")){
 
                 AssignedTaskList.add(task);
 

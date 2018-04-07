@@ -1,14 +1,16 @@
 package project301.providerActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import project301.Bid;
 import project301.R;
@@ -44,6 +46,7 @@ public class ProviderTaskFinishActivity extends AppCompatActivity {
     private TextView requesterEmail_view;
     private Map providerMap;
     private ArrayList tasklist;
+    private Context context;
 
     // task variable
     private String userName;
@@ -63,6 +66,8 @@ public class ProviderTaskFinishActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_task_finish);
         final Intent intent = getIntent();
+        this.context = getApplicationContext();
+
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
@@ -90,47 +95,54 @@ public class ProviderTaskFinishActivity extends AppCompatActivity {
         }
 
         if (view_task == null){
-            Log.i("Error", "not getting task ");
-        }
+            //print error message
+            Toast toast = Toast.makeText(context, "Task Deleted! Back To See Other Task", Toast.LENGTH_LONG);
+            TextView v1 = toast.getView().findViewById(android.R.id.message);
+            v1.setTextColor(Color.RED);
+            v1.setTextSize(20);
+            v1.setGravity(Gravity.CENTER);
+            toast.show();
+        } else {
 
-        // get requester info
-        UserController uc = new UserController();
-        requesterName = view_task.getTaskRequester();
-        requester = uc.getAUserByName(requesterName);
-        requesterPhone = requester.getUserPhone();
-        requesterEmail = requester.getUserEmail();
+            // get requester info
+            UserController uc = new UserController();
+            requesterName = view_task.getTaskRequester();
+            requester = uc.getAUserByName(requesterName);
+            requesterPhone = requester.getUserPhone();
+            requesterEmail = requester.getUserEmail();
 
-        // set requester info
-        requesterName_view.setText(requesterName);
-        requesterPhone_view.setText(requesterPhone);
-        requesterEmail_view.setText(requesterEmail);
-
-
-        // get information from target task and set information
-        String temp_name=view_task.getTaskName();
-        taskName.setText(temp_name);
-
-        String temp_detail=view_task.getTaskDetails();
-        taskDetail.setText(temp_detail);
-
-        String temp_destination=view_task.getTaskAddress();
-        if(temp_destination!=null){
-            taskLocation.setText(temp_destination);
-        }
+            // set requester info
+            requesterName_view.setText(requesterName);
+            requesterPhone_view.setText(requesterPhone);
+            requesterEmail_view.setText(requesterEmail);
 
 
-        String temp_status=view_task.getTaskStatus();
-        taskStatus.setText(temp_status);
+            // get information from target task and set information
+            String temp_name = view_task.getTaskName();
+            taskName.setText(temp_name);
 
-        Double temp_idealprice=view_task.getTaskIdealPrice();
-        if(temp_idealprice!=null){
-            taskIdealPrice.setText(Double.toString(temp_idealprice));
-        }
+            String temp_detail = view_task.getTaskDetails();
+            taskDetail.setText(temp_detail);
 
-        Bid temp_bid=view_task.getChoosenBid();
-        Double bidPrice = temp_bid.getBidAmount();
-        if(bidPrice!=null) {
-            taskBidPrice.setText(Double.toString(bidPrice));
+            String temp_destination = view_task.getTaskAddress();
+            if (temp_destination != null) {
+                taskLocation.setText(temp_destination);
+            }
+
+
+            String temp_status = view_task.getTaskStatus();
+            taskStatus.setText(temp_status);
+
+            Double temp_idealprice = view_task.getTaskIdealPrice();
+            if (temp_idealprice != null) {
+                taskIdealPrice.setText(Double.toString(temp_idealprice));
+            }
+
+            Bid temp_bid = view_task.getChoosenBid();
+            Double bidPrice = temp_bid.getBidAmount();
+            if (bidPrice != null) {
+                taskBidPrice.setText(Double.toString(bidPrice));
+            }
         }
 
         //settle back button : jump back to history

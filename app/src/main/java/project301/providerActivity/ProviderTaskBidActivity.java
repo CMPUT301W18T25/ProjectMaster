@@ -28,6 +28,8 @@ import project301.controller.BidController;
 import project301.controller.TaskController;
 import project301.controller.UserController;
 import project301.requesterActivity.RequesterAdapter;
+import project301.requesterActivity.RequesterMapSpecActivity;
+import project301.requesterActivity.RequesterViewTaskAssignedActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -109,93 +111,6 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         BidListView = (ListView)findViewById(R.id.provider_bid_lkist);
         show_photo = (ImageButton) findViewById(R.id.imageButton2);
 
-        /*
-        // get index of target task
-        int view_index = Integer.parseInt(intent.getExtras().get("info").toString());
-
-
-        //get tast status from last activity
-        status = intent.getExtras().get("status").toString();
-
-        //get data from database
-        if (status.equals("request")) {
-            //request and bidden. if only request, he will not see other person's bidding tasks
-            TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
-            search.execute();
-            tasklist = new ArrayList<>();
-            ArrayList<Task> searchedTask = new ArrayList<>();
-            try {
-                searchedTask = search.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-            tasklist.addAll(searchedTask);
-
-            TaskController.searchAllBiddenTasks search2 = new TaskController.searchAllBiddenTasks();
-            search2.execute();
-            try {
-                searchedTask = search2.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-            tasklist.addAll(searchedTask);
-
-            //set initiallized bid
-            //taskMybid.setText("0");
-
-        }else if(status.equals("bidden")){
-            TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
-            search.execute();
-
-            try {
-                tasklist = search.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-
-            //set bid
-            //bid = view_task.getBit();
-            //taskMybid.setText("0");
-
-        }else if(status.equals("assigned")){
-            TaskController.searchAssignTasksOfThisProvider search = new TaskController.searchAssignTasksOfThisProvider();
-            search.execute(userId);
-
-            try {
-                tasklist = search.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-
-
-        }else {
-            //print error message
-            Toast toast = Toast.makeText(context, "Task Type Wrong!(not request, bidden, assigned)", Toast.LENGTH_LONG);
-            TextView v1 = (TextView) toast.getView().findViewById(android.R.id.message);
-            v1.setTextColor(Color.RED);
-            v1.setTextSize(20);
-            v1.setGravity(Gravity.CENTER);
-            toast.show();
-        }
-
-
-
-
-
-        // get target task
-        view_task=tasklist.get(view_index);
-        // test id correctness
-        Log.i("id", view_task.getId());
-        */
-
         // get target task (new)
         taskId = intent.getExtras().get("taskId").toString();
         TaskController.getTaskById getIt = new TaskController.getTaskById();
@@ -207,102 +122,135 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         }
 
         if (view_task == null){
-            Log.i("Error", "not getting task ");
-        }
+            //print error message
+            Toast toast = Toast.makeText(context, "Task Deleted! Back To See Other Task", Toast.LENGTH_LONG);
+            TextView v1 = toast.getView().findViewById(android.R.id.message);
+            v1.setTextColor(Color.RED);
+            v1.setTextSize(20);
+            v1.setGravity(Gravity.CENTER);
+            toast.show();
+        } else {
 
-        // get requester info
-        UserController uc = new UserController();
-        requesterName = view_task.getTaskRequester();
-        requester = uc.getAUserByName(requesterName);
-        requesterPhone = requester.getUserPhone();
-        requesterEmail = requester.getUserEmail();
+            // get requester info
+            UserController uc = new UserController();
+            requesterName = view_task.getTaskRequester();
+            requester = uc.getAUserByName(requesterName);
+            requesterPhone = requester.getUserPhone();
+            requesterEmail = requester.getUserEmail();
 
-        // set requester info
-        requesterName_view.setText(requesterName);
-        requesterPhone_view.setText(requesterPhone);
-        requesterEmail_view.setText(requesterEmail);
+            // set requester info
+            requesterName_view.setText(requesterName);
+            requesterPhone_view.setText(requesterPhone);
+            requesterEmail_view.setText(requesterEmail);
 
-        // get and set task information
-        String temp_name=view_task.getTaskName();
-        taskName.setText(temp_name);
+            // get and set task information
+            String temp_name = view_task.getTaskName();
+            taskName.setText(temp_name);
 
-        String temp_detail=view_task.getTaskDetails();
-        taskDetail.setText(temp_detail);
+            String temp_detail = view_task.getTaskDetails();
+            taskDetail.setText(temp_detail);
 
-        String temp_destination=view_task.getTaskAddress();
-        taskLocation.setText(temp_destination);
+            String temp_destination = view_task.getTaskAddress();
+            taskLocation.setText(temp_destination);
 
-        String temp_status=view_task.getTaskStatus();
-        taskStatus.setText(temp_status);
+            String temp_status = view_task.getTaskStatus();
+            taskStatus.setText(temp_status);
 
-        Double temp_idealprice=view_task.getTaskIdealPrice();
-        if(temp_idealprice!=null){
-            taskIdealPrice.setText(Double.toString(temp_idealprice));
-        }
-
-        Double temp_lowestbid=view_task.findLowestbid();
-        if(temp_lowestbid!=null) {
-            taskLowestPrice.setText(Double.toString(temp_lowestbid));
-        }
-
-
-        //settle cancel button : cancel the old bid
-        Button cancelButton = (Button) findViewById(R.id.cancel_button);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //print error message
-                Toast toast = Toast.makeText(context, "You cannot cancle your bid!", Toast.LENGTH_LONG);
-                TextView v1 = (TextView) toast.getView().findViewById(android.R.id.message);
-                v1.setTextColor(Color.RED);
-                v1.setTextSize(20);
-                v1.setGravity(Gravity.CENTER);
-                toast.show();
-
+            Double temp_idealprice = view_task.getTaskIdealPrice();
+            if (temp_idealprice != null) {
+                taskIdealPrice.setText(Double.toString(temp_idealprice));
             }
-        });
+
+            Double temp_lowestbid = view_task.findLowestbid();
+            if (temp_lowestbid != null) {
+                taskLowestPrice.setText(Double.toString(temp_lowestbid));
+            }
 
 
+            //settle cancel button : cancel the old bid
+            Button cancelButton = (Button) findViewById(R.id.cancel_button);
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //print error message
+                    Toast toast = Toast.makeText(context, "You cannot cancle your bid!", Toast.LENGTH_LONG);
+                    TextView v1 = (TextView) toast.getView().findViewById(android.R.id.message);
+                    v1.setTextColor(Color.RED);
+                    v1.setTextSize(20);
+                    v1.setGravity(Gravity.CENTER);
+                    toast.show();
 
-        //settle bid button : add the bid to list and jump back to history
-        Button bidButton = (Button) findViewById(R.id.bid_button);
-        bidButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String enterBid_s = taskMybid.getText().toString();
-
-                //test input type
-                //Log.i("enterBid_s",enterBid_s);
-
-                Double enterBid = Double.parseDouble(enterBid_s);
-
-                //test bid type
-                //System.out.println(enterBid);
-
-                bid = new Bid(enterBid,userId);
-
-                TaskController.providerSetBid setTaskBid = new TaskController.providerSetBid(view_task,bid);
-                setTaskBid.execute();
-                try {
-                    Thread.sleep(1500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
-                //increase the bidcounter of this requester
-                BidController bidController = new BidController();
-                bidController.increaseBidCounterOfThisRequester(view_task.getTaskRequester());
-
-                Intent info2 = new Intent(ProviderTaskBidActivity.this, ProviderBidHistoryActivity.class);
-                info2.putExtra("userId",userId);
-                info2.putExtra("content","all");
-                //info2.putExtra("userName",userId);
-
-                startActivity(info2);
-
-            }
-        });
+            });
 
 
+            //settle bid button : add the bid to list and jump back to history
+            Button bidButton = (Button) findViewById(R.id.bid_button);
+            bidButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String enterBid_s = taskMybid.getText().toString();
+
+                    //test input type
+                    //Log.i("enterBid_s",enterBid_s);
+
+                    Double enterBid = Double.parseDouble(enterBid_s);
+
+                    //test bid type
+                    //System.out.println(enterBid);
+
+                    bid = new Bid(enterBid, userId);
+
+                    TaskController.providerSetBid setTaskBid = new TaskController.providerSetBid(view_task, bid);
+                    setTaskBid.execute();
+                    try {
+                        Thread.sleep(1500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    //increase the bidcounter of this requester
+                    BidController bidController = new BidController();
+                    bidController.increaseBidCounterOfThisRequester(view_task.getTaskRequester());
+
+                    Intent info2 = new Intent(ProviderTaskBidActivity.this, ProviderBidHistoryActivity.class);
+                    info2.putExtra("userId", userId);
+                    info2.putExtra("content", "all");
+                    //info2.putExtra("userName",userId);
+
+                    startActivity(info2);
+
+                }
+            });
+
+
+            // show photo button
+            show_photo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("requesteredittask", "showing photo");
+                    if (view_task.getTaskPhoto() != null) {
+                        Log.d("asdf", "not null");
+
+                        view_task.getTaskPhoto().showImage(ProviderTaskBidActivity.this);
+                    }
+                }
+            });
+
+            //set viewmap button
+            Button mapButton = (Button) findViewById(R.id.map_button);
+            mapButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String index = intent.getExtras().get("info").toString();
+                    Intent info2 = new Intent(ProviderTaskBidActivity.this, RequesterMapSpecActivity.class);
+                    info2.putExtra("userId", userId);
+                    info2.putExtra("info", index);
+                    info2.putExtra("taskId", view_task.getId());
+                    startActivity(info2);
+
+                }
+            });
+        }
         //settle back button : back to history, no change
         Button backButton = (Button) findViewById(R.id.Back);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -312,19 +260,6 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
                 info2.putExtra("userId",userId);
                 startActivity(info2);
 
-            }
-        });
-
-        // show photo button
-        show_photo.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Log.d("requesteredittask","showing photo");
-                if (view_task.getTaskPhoto() != null){
-                    Log.d("asdf","not null");
-
-                    view_task.getTaskPhoto().showImage(ProviderTaskBidActivity.this);
-                }
             }
         });
     }

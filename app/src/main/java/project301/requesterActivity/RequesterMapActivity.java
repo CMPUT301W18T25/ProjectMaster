@@ -247,8 +247,7 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
             project301.Task currTask = taskList.get(i);
 
             if (currTask.getTasklgtitude() != null
-                    && currTask.getTasklatitude() != null
-                    && currTask.getTaskStatus() != "done") {
+                    && currTask.getTasklatitude() != null) {
 
                 if (getTaskDistance(currTask) <= 5000) {
 
@@ -264,6 +263,10 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
                     // Make assigned task have a green icon
                     else if (currTask.getTaskStatus().equals("assigned")) {
                         marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                    }
+                    // Make assigned task have a green icon
+                    else if (currTask.getTaskStatus().equals("done")) {
+                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
                     }
                     Log.d(TAG, "Adding marker task name: " + marker.getTitle());
                     marker.setTag(i);

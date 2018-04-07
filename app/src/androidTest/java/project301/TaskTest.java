@@ -495,7 +495,7 @@ public class TaskTest {
 
             my_task.setTaskDetails("Want a car to carry me"+ Integer.toString(i));
             my_task.setTaskName("Go to southgate"+ Integer.toString(i));
-            my_task.setTaskProvider("Mike");
+            my_task.setTaskProvider("mike");
             my_task.setTaskRequester("Jason");
             my_task.setTaskStatus("bidden");
 
@@ -514,23 +514,6 @@ public class TaskTest {
             } while (taskStatus3 != AsyncTask.Status.FINISHED);
 
         }
-        Task my_task = new Task();
-
-        send_list.add(my_task);
-        my_task.setTaskDetails("Want a car to carry me");
-        my_task.setTaskName("Go to southgate");
-        my_task.setTaskProvider("Mike");
-        my_task.setTaskRequester("Jason");
-        my_task.setTaskStatus("bidden");
-
-        TaskController.addTask addTask = new TaskController.addTask();
-        addTask.execute(my_task);
-
-        // w8 for 5 sec
-        AsyncTask.Status taskStatus3;
-        do {
-            taskStatus3 = addTask.getStatus();
-        } while (taskStatus3 != AsyncTask.Status.FINISHED);
 
         search.execute();
 
@@ -551,7 +534,7 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0){
-                assertTrue(true);
+                assertTrue(false);
             }
 
             for (int i = 0; i < rt_list.size(); i++){
@@ -561,7 +544,7 @@ public class TaskTest {
                 }
                 if (rt_list.get(i).getTaskStatus().equals("bidden")){
                     if (rt_list.get(i).getTaskProvider().contains("ke")){
-                        assertTrue(true);
+                        assertTrue(false);
                     }
                 }
                 else {
@@ -618,9 +601,9 @@ public class TaskTest {
 
         }
 
-        TaskController.searchAssignTasksOfThisProvider search = new TaskController.searchAssignTasksOfThisProvider("mikeking");
+        TaskController.testSearchAssignTasksOfThisProvider search = new TaskController.testSearchAssignTasksOfThisProvider();
 
-        search.execute();
+        search.execute("mikeking");
 
         // w8 for 5 sec
         AsyncTask.Status taskStatus;
@@ -648,9 +631,9 @@ public class TaskTest {
                     break;
                 }
                 if (rt_list.get(i).getTaskStatus().equals("assigned")){
-                    assertTrue(false);
-                    if (rt_list.get(i).getTaskProvider().contains("so")){
-                        assertTrue(false);
+                    //assertTrue(false);
+                    if (rt_list.get(i).getTaskProvider().contains("mikeking")){
+                        assertTrue(true);
                     }
                 }
                 else {
@@ -881,7 +864,7 @@ public class TaskTest {
         TaskController.searchTaskByKeyword search = new TaskController.searchTaskByKeyword();
         ArrayList<Task> rt_list;
 
-        search.execute("Test boom");
+        search.execute("boom test");
 
 
         try {
@@ -889,7 +872,7 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0){
-                assertTrue(false);
+                    assertTrue(false);
             }
 
             for (int i = 0; i < rt_list.size(); i++) {
@@ -897,8 +880,11 @@ public class TaskTest {
                 if (rt_list.get(i) == null) {
                     break;
                 }
-                if (rt_list.get(i).getTaskStatus().equals("request")) {
-                    if (rt_list.get(i).getTaskName().contains("test") || rt_list.get(i).getTaskDetails().contains("test")) {
+                if (rt_list.get(i).getTaskStatus().equals("request") || rt_list.get(i).getTaskStatus().equals("bidden")) {
+                    assertTrue(true);
+                    if (rt_list.get(i).getTaskName().contains("1") || rt_list.get(i).getTaskDetails().contains("1")) {
+                        assertTrue(false);
+                    }else if (rt_list.get(i).getTaskName().contains("test") || rt_list.get(i).getTaskDetails().contains("test")){
                         assertTrue(false);
                     }
                 } else {
@@ -918,19 +904,5 @@ public class TaskTest {
     }
 
 }
-    /*
-
-    @Test
-    public void searchTaskByKeywordTest(){
-        TaskController tc = new TaskController();
-        Task task = new Task();
-        task.setTaskName("hihi");
-        tc.addTask(task);
-        assertTrue(tc.searchTaskByKeyword("hi").contains(task));
-
-    }
-
-    */
-
 
 

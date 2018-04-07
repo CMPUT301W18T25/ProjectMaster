@@ -45,6 +45,7 @@ public class OfflineTest extends ActivityInstrumentationTestCase2{
     }
     public void testOfflineAdd(){
         //assume no internet now
+
         Task new_task = new Task();
         new_task.setTaskName("go to New York");
         new_task.setTaskRequester("jason");
