@@ -40,7 +40,7 @@
             <TextView
                 android:id="@+id/textView35"
                 android:layout_width="match_parent"
-                android:layout_height="40dp" />
+                android:layout_height="10dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -50,13 +50,13 @@
 
                 <TextView
                     android:id="@+id/login_print_name"
-                    android:layout_width="190dp"
+                    android:layout_width="210dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="serif"
                     android:text="  Username"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -76,7 +76,7 @@
             <TextView
                 android:id="@+id/textView36"
                 android:layout_width="match_parent"
-                android:layout_height="60dp" />
+                android:layout_height="20dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -86,13 +86,13 @@
 
                 <TextView
                     android:id="@+id/login_print_password"
-                    android:layout_width="190dp"
+                    android:layout_width="210dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="serif"
                     android:text="  Password"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -110,7 +110,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="80dp"
                 android:gravity="bottom|center_vertical"
                 android:orientation="horizontal">
 
@@ -129,7 +129,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="65dp"
                 android:gravity="bottom|center_vertical|center_horizontal"
                 android:orientation="horizontal">
 
