@@ -73,7 +73,6 @@ public class RequesterViewTaskDoneActivity extends AppCompatActivity  {
     MyTask myTask = new MyTask();
     private class MyTask extends TimerTask {
         public void run() {
-            Log.i("Timer12","run");
             BidController bidController = new BidController();
             //check counter change
             BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
@@ -84,8 +83,6 @@ public class RequesterViewTaskDoneActivity extends AppCompatActivity  {
                 OfflineController offlineController = new OfflineController();
                 offlineController.tryToExecuteOfflineTasks(getApplication());
                 if(bidCounter.getCounter()!= bidCounter.getPreviousCounter()){
-                    Log.i("New Bid","New Bid");
-                    Log.i("bidCount",Integer.toString(bidCounter.getCounter()));
                     Message msg = new Message();
 
                     msg.arg1 = 1;

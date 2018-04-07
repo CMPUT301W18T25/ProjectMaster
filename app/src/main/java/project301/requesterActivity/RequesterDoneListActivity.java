@@ -58,7 +58,7 @@ public class RequesterDoneListActivity extends AppCompatActivity implements Swip
     MyTask myTask = new MyTask();
     private class MyTask extends TimerTask {
         public void run() {
-            Log.i("Timer5","run");
+           // Log.i("Timer5","run");
             BidController bidController = new BidController();
             //check counter change
             BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
@@ -75,8 +75,6 @@ public class RequesterDoneListActivity extends AppCompatActivity implements Swip
 
                 }
                 if(bidCounter.getCounter()!= bidCounter.getPreviousCounter()){
-                    Log.i("New Bid","New Bid");
-                    Log.i("bidCount",Integer.toString(bidCounter.getCounter()));
                     Message msg2 = new Message();
 
                     msg2.arg1 = 1;
