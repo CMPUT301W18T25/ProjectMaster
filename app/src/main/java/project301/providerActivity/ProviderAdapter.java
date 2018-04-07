@@ -73,7 +73,11 @@ public class ProviderAdapter extends ArrayAdapter<Task> {
         String taskStatus = task.getTaskStatus().toString();
 
         //get task ideal price
-        String taskIdealPrice = task.getTaskIdealPrice().toString();
+        String taskIdealPrice= "";
+        if(task.getTaskIdealPrice()!=null) {
+            taskIdealPrice = task.getTaskIdealPrice().toString();
+        }
+
 
         //set task info
         task_requester.setText(taskRequester);

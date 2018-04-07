@@ -72,7 +72,6 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
     MyTask myTask = new MyTask();
     private class MyTask extends TimerTask {
         public void run() {
-            Log.i("Timer13","run");
             BidController bidController = new BidController();
             //check counter change
             BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
@@ -84,8 +83,6 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
                 offlineController.tryToExecuteOfflineTasks(getApplication());
 
                 if(bidCounter.getCounter()!= bidCounter.getPreviousCounter()){
-                    Log.i("New Bid","New Bid");
-                    Log.i("bidCount",Integer.toString(bidCounter.getCounter()));
                     Message msg = new Message();
 
                     msg.arg1 = 1;
@@ -141,9 +138,21 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
 
 
 
+         //to do : map show location
+        //set viewmap button
+        Button mapButton = (Button) findViewById(R.id.view_map);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String index = intent.getExtras().get("info").toString();
+                Intent info2 = new Intent(RequesterViewTaskRequestActivity.this, RequesterMapSpecActivity.class);
+                info2.putExtra("userId",userId);
+                info2.putExtra("info",index);
+                info2.putExtra("taskId",view_task.getId());
+                startActivity(info2);
 
-        //to do : map button to show location
-
+            }
+        });
         //settle deleteTask button
         Button deleteTaskButton = (Button) findViewById(R.id.delete_button);
         deleteTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -264,7 +273,9 @@ public class RequesterViewTaskRequestActivity extends AppCompatActivity  {
         view_status.setText(temp_status);
 
         Double temp_idealprice=view_task.getTaskIdealPrice();
-        view_idealprice.setText(Double.toString(temp_idealprice));
+        if(temp_idealprice != null) {
+            view_idealprice.setText(Double.toString(temp_idealprice));
+        }
 
 
     }

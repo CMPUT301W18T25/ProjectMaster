@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -102,7 +103,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
     private class MyTask extends TimerTask {
         public void run() {
             //Your code...
-            Log.i("Timer9","run");
+            //Log.i("Timer9","run");
             BidController bidController = new BidController();
             //check counter change
             BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
@@ -114,10 +115,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
                 OfflineController offlineController = new OfflineController();
                 offlineController.tryToExecuteOfflineTasks(getApplication());
                 if(bidCounter.getCounter()!= bidCounter.getPreviousCounter()){
-                    Log.i("New Bid","New Bid");
-                    Log.i("bidCount",Integer.toString(bidCounter.getCounter()));
                     Message msg = new Message();
-
                     msg.arg1 = 1;
                     handler.sendMessage(msg);
 
@@ -193,8 +191,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
                 // check empty and length of needed information
                 if(check_detaillength(post_detail.getText().toString())){
                 if (check_titlelength(post_name.getText().toString())){
-                if (check_empty(post_name.getText().toString(),post_destination.getText().toString(),
-                        post_ideal_price.getText().toString())){
+                if (check_empty(post_name.getText().toString())){
 
 
                     //interface jump
@@ -203,9 +200,25 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
                     //set data
                     Task new_task = new Task();
                     new_task.setTaskName(post_name.getText().toString());
-                    new_task.setTaskDetails(post_detail.getText().toString());
-                    new_task.setTaskAddress(post_destination.getText().toString());
-                    new_task.setTaskIdealPrice(Double.parseDouble(post_ideal_price.getText().toString()));
+                    if(!check_empty(post_detail.getText().toString())){
+                        new_task.setTaskDetails(" ");
+                    }
+                    else {
+                        new_task.setTaskDetails(post_detail.getText().toString());
+                    }
+                    if(!check_empty(post_destination.getText().toString())){
+                        new_task.setTaskAddress(" ");
+                    }
+                    else {
+                        new_task.setTaskAddress(post_destination.getText().toString());
+                    }
+                    if(!check_empty(post_ideal_price.getText().toString())){
+                        new_task.setTaskIdealPrice(null);
+                    }
+                    else {
+                        new_task.setTaskIdealPrice(Double.parseDouble(post_ideal_price.getText().toString()));
+                    }
+
                     new_task.setTaskRequester(userId);
                     if (taskPlace != null){
                         Log.d(LOG_TAG,"Task lat long: "+taskPlace.getLatLng());
@@ -326,19 +339,48 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
                 e.printStackTrace();
             }
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            byte[] imageInByte = stream.toByteArray();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Log.d("Old image size", String.valueOf(bitmap.getByteCount()));
+            byte[] compressedImage = stream.toByteArray();
+            Bitmap compressedbBitmap = BitmapFactory.decodeByteArray(compressedImage, 0, compressedImage.length);
+            // If image is massive, compress it as much as possible
+            if (stream.toByteArray().length >= 15216000){
+                ByteArrayOutputStream new_stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 0, new_stream);
+                byte[] new_imageInByte = new_stream.toByteArray();
 
-            if (stream.toByteArray().length >= 65536){
-                Toast toast = Toast.makeText(context,"The maximum allowed size of the photo is 65536 bytes",Toast.LENGTH_LONG);
+                Bitmap new_bitmap = BitmapFactory.decodeByteArray(new_imageInByte, 0, new_imageInByte.length);
+                myGallery.addView(insertPhoto(new_bitmap));
+
+
+                Log.d("New image size (massive image)", String.valueOf(new_stream.toByteArray().length));
+                Toast toast = Toast.makeText(context,"Compressed image size",Toast.LENGTH_LONG);
                 toast.show();
+                photos.addPhoto(getStringFromBitmap(new_bitmap));
+
             }
+            // Else if image is big, compress it a little
+            else if (stream.toByteArray().length >= 65536){
+                ByteArrayOutputStream new_stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 8, new_stream);
+                byte[] new_imageInByte = new_stream.toByteArray();
+
+                Bitmap new_bitmap = BitmapFactory.decodeByteArray(new_imageInByte, 0, new_imageInByte.length);
+                myGallery.addView(insertPhoto(new_bitmap));
+
+
+                Log.d("New image size", String.valueOf(new_stream.toByteArray().length));
+                Toast toast = Toast.makeText(context,"Compressed image size",Toast.LENGTH_LONG);
+                toast.show();
+                photos.addPhoto(getStringFromBitmap(new_bitmap));
+
+            }
+            // Otherwise don't compress it
             else{
-                setImage=true;
                 myGallery.addView(insertPhoto(bitmap));
                 photos.addPhoto(getStringFromBitmap(bitmap));
-                //post_photo.setImageBitmap(bitmap);
             }
+            setImage=true;
         }
     }
     // source: modified from https://stackoverflow.com/questions/17489390/image-gallery-with-a-horizontal-scrollview
@@ -359,6 +401,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         imageView.setImageBitmap(bm);
 
         layout.addView(imageView);
+
         return layout;
     }
 
@@ -398,13 +441,14 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
 
 
 
-    private boolean check_empty(String name, String destination, String ideal_price)
+    private boolean check_empty(String name)
     {
-        if(name.length()==0 || destination.length()==0|| ideal_price.length()==0 ){
+        if(name.length()==0){
             return false;
         }
         return true;
     }
+
 
     private boolean check_titlelength(String name)
     {

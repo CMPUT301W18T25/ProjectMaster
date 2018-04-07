@@ -56,7 +56,7 @@ public class RequesterBiddenListActivity extends AppCompatActivity implements Sw
     MyTask myTask = new MyTask();
     private class MyTask extends TimerTask {
         public void run() {
-            Log.i("Timer3","run");
+            //Log.i("Timer3","run");
             BidController bidController = new BidController();
             //check counter change
             BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
@@ -74,8 +74,6 @@ public class RequesterBiddenListActivity extends AppCompatActivity implements Sw
                 }
 
                 if(bidCounter.getCounter()!= bidCounter.getPreviousCounter()){
-                    Log.i("New Bid","New Bid");
-                    Log.i("bidCount",Integer.toString(bidCounter.getCounter()));
                     Message msg1 = new Message();
                     msg1.arg1 = 1;
                     handler.sendMessage(msg1);

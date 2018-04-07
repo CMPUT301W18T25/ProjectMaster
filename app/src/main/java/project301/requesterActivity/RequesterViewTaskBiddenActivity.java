@@ -20,7 +20,6 @@ import com.novoda.merlin.MerlinsBeard;
 
 import project301.Bid;
 import project301.BidCounter;
-import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
 import project301.controller.BidController;
@@ -71,7 +70,7 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
     private Timer timer;
     MyTask myTask = new MyTask();
     private class MyTask extends TimerTask {
-        public void run() {            Log.i("Timer11","run");
+        public void run() {
             BidController bidController = new BidController();
             //check counter change
             BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
@@ -82,8 +81,6 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
                 OfflineController offlineController = new OfflineController();
                 offlineController.tryToExecuteOfflineTasks(getApplication());
                 if(bidCounter.getCounter()!= bidCounter.getPreviousCounter()){
-                    Log.i("New Bid","New Bid");
-                    Log.i("bidCount",Integer.toString(bidCounter.getCounter()));
                     Message msg = new Message();
 
                     msg.arg1 = 1;
@@ -140,7 +137,9 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
                 Intent info2 = new Intent(RequesterViewTaskBiddenActivity.this, RequesterMapSpecActivity.class);
                 info2.putExtra("userId",userId);
                 info2.putExtra("info",index);
-                info2.putExtra("taskId",view_task.getId());
+                info2.putExtra("taskId",view_task.getId() );;
+                info2.putExtra("activity",activity);
+                Log.d("taskId", "onClick: " + view_task.getId());
                 startActivity(info2);
 
             }
@@ -331,7 +330,9 @@ public class RequesterViewTaskBiddenActivity extends AppCompatActivity  {
         view_status.setText(temp_status);
 
         Double temp_idealprice=view_task.getTaskIdealPrice();
-        view_idealprice.setText(Double.toString(temp_idealprice));
+        if(temp_idealprice!=null) {
+            view_idealprice.setText(Double.toString(temp_idealprice));
+        }
 
         Double temp_lowestbid=view_task.findLowestbid();
         view_lowestbid.setText(Double.toString(temp_lowestbid));

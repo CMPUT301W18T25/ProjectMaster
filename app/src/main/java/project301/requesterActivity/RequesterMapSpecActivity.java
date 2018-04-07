@@ -69,7 +69,7 @@ public class RequesterMapSpecActivity extends AppCompatActivity implements OnMap
 
 
     private ArrayList<project301.Task> taskList;
-
+    private project301.Task specTask;
     // Testing variables
     private ArrayList<Location> mockupTasks;
 
@@ -250,39 +250,27 @@ public class RequesterMapSpecActivity extends AppCompatActivity implements OnMap
         Log.d(TAG,"displayTaskLocations");
         mMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
-        for (int i = 0; i < taskList.size(); i++) {
-            project301.Task currTask = taskList.get(i);
 
-            if (currTask.getTasklgtitude() != null
-                    && currTask.getTasklatitude() != null
-                    && currTask.getTaskStatus() != "done") {
+        if (specTask.getTasklgtitude() != null
+                && specTask.getTasklatitude() != null) {
 
-                if (getTaskDistance(currTask) <= 5000) {
+            if (getTaskDistance(specTask) <= 5000) {
 
-                    Marker marker = mMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(currTask.getTasklatitude(), currTask.getTasklgtitude()))
-                            .anchor(0.5f, 0.5f)
-                            .title(currTask.getTaskName())
-                    );
-                    // Make bidden tasks have blue icon
-                    if (currTask.getTaskStatus().equals("bidden")){
-                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                    }
-                    // Make assigned task have a green icon
-                    else if (currTask.getTaskStatus().equals("assigned")) {
-                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                    }
-                    Log.d(TAG, "Adding marker task name: " + marker.getTitle());
-                    marker.setTag(i);
-                    marker.showInfoWindow();
-                } else {
-                    Log.d(TAG, "Task is located too far away: " + currTask.getTaskName());
-                }
+                Marker marker = mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(specTask.getTasklatitude(), specTask.getTasklgtitude()))
+                        .anchor(0.5f, 0.5f)
+                        .title(specTask.getTaskName())
+                );
 
+                Log.d(TAG, "Adding marker task name: " + marker.getTitle());
+                marker.showInfoWindow();
             } else {
-                Log.d(TAG, "No location for: " + taskList.get(i).getTaskName());
-
+                Log.d(TAG, "Task is located too far away: " + specTask.getTaskName());
             }
+
+        } else {
+            Log.d(TAG, "No location for: " + specTask.getTaskName());
+
         }
     }
     // source: https://stackoverflow.com/questions/2741403/get-the-distance-between-two-geo-points
@@ -352,24 +340,20 @@ public class RequesterMapSpecActivity extends AppCompatActivity implements OnMap
     }
 
     private void getAllTaksInfo() {
+        TaskController.getTaskById search = new TaskController.getTaskById();
+        search.execute(taskId);
 
-        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-        search.execute(userId);
-        taskList = new ArrayList<project301.Task>();
-        ArrayList<project301.Task> searchedTask = new ArrayList<>();
         try {
-            searchedTask = search.get();
+            specTask = search.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        taskList.addAll(searchedTask);
+        Log.d(TAG,"Requester TASK: "+specTask.getTaskName()+", "+specTask.getTaskStatus());
 
 
-        for (int i =0;i<taskList.size();i++){
-            Log.d(TAG,"Requester TASK: "+taskList.get(i).getTaskName()+", "+taskList.get(i).getTaskStatus());
-        }
+
     }
 
 }

@@ -7,22 +7,22 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
-        android:layout_marginTop="2dp"
         android:orientation="vertical"
+        android:weightSum="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView37"
             android:layout_width="match_parent"
-            android:layout_height="7dp" />
+            android:layout_height="4dp" />
 
         <TextView
             android:id="@+id/provider_list_name"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="32dp"
             android:fontFamily="serif"
             android:text="Bid History"
             android:textAlignment="center"
@@ -33,12 +33,13 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/grey2"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
@@ -49,7 +50,8 @@
                 <ListView
                     android:id="@+id/provider_bid_history"
                     android:layout_width="match_parent"
-                    android:layout_height="322dp">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
                 </ListView>
 
@@ -65,95 +67,103 @@
         <TextView
             android:id="@+id/textView38"
             android:layout_width="match_parent"
-            android:layout_height="14dp" />
+            android:layout_height="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/c_back_button"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:background="@color/blue1"
-                android:fontFamily="serif"
-                android:text="Main Menu"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView83"
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/c_map_button"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:background="@color/blue16"
-                android:fontFamily="serif"
-                android:text="@string/view_on_map"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView84"
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/show_all_tasks_button"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:background="@color/blue5"
-                android:fontFamily="serif"
-                android:text="Show My bidden history"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView85"
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/show_assigned_button"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:background="@color/blue7"
-                android:fontFamily="serif"
-                android:text="Show My Assigned History"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView86"
-            android:layout_width="match_parent"
-            android:layout_height="4dp" />
+                <Button
+                    android:id="@+id/c_back_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/blue1"
+                    android:fontFamily="serif"
+                    android:text="Main Menu"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView83"
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/c_map_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:background="@color/blue16"
+                    android:fontFamily="serif"
+                    android:text="@string/view_on_map"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView84"
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/show_all_tasks_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:background="@color/blue5"
+                    android:fontFamily="serif"
+                    android:text="Show My bid history"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView85"
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/show_assigned_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:background="@color/blue7"
+                    android:fontFamily="serif"
+                    android:text="Show My Assigned History"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView86"
+                android:layout_width="match_parent"
+                android:layout_height="4dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

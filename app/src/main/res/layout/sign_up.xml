@@ -18,7 +18,8 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="115dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/blue1"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
@@ -30,12 +31,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/signup_print_name"
-                        android:layout_width="wrap_content"
+                        android:layout_width="88dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="serif"
@@ -66,8 +68,9 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="115dp"
-            app:cardBackgroundColor="@color/blue16"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/blue19"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
             <LinearLayout
@@ -84,7 +87,7 @@
 
                     <TextView
                         android:id="@+id/signup_print_phone"
-                        android:layout_width="wrap_content"
+                        android:layout_width="88dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="serif"
@@ -115,7 +118,8 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="115dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/blue5"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
@@ -133,7 +137,7 @@
 
                     <TextView
                         android:id="@+id/signup_print_email"
-                        android:layout_width="wrap_content"
+                        android:layout_width="88dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="serif"
@@ -163,7 +167,8 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="115dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/blue7"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
@@ -181,7 +186,7 @@
 
                     <TextView
                         android:id="@+id/signup_print_password"
-                        android:layout_width="48dp"
+                        android:layout_width="88dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="serif"
@@ -206,15 +211,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/check_validation"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
                 android:fontFamily="serif"
                 android:text="@string/log_in"
                 android:textColor="@color/colorPrimary"
