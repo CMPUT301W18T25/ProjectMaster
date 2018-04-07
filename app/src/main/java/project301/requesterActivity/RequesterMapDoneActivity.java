@@ -266,6 +266,10 @@ public class RequesterMapDoneActivity extends AppCompatActivity implements OnMap
                     else if (currTask.getTaskStatus().equals("assigned")) {
                         marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                     }
+                    // Make done tasks have a yellow icon
+                    else if (currTask.getTaskStatus().equals("done")) {
+                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                    }
                     Log.d(TAG, "Adding marker task name: " + marker.getTitle());
                     marker.setTag(i);
                     marker.showInfoWindow();

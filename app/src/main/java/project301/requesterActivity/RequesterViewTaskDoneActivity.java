@@ -189,6 +189,21 @@ public class RequesterViewTaskDoneActivity extends AppCompatActivity  {
             }
         });
 
+        //to do : map show location
+        //set viewmap button
+        Button mapButton = (Button) findViewById(R.id.view_map);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String index = intent.getExtras().get("info").toString();
+                Intent info2 = new Intent(RequesterViewTaskDoneActivity.this, RequesterMapSpecActivity.class);
+                info2.putExtra("userId",userId);
+                info2.putExtra("info",index);
+                info2.putExtra("taskId",view_task.getId());
+                startActivity(info2);
+
+            }
+        });
         // show photo button
         show_photo.setOnClickListener(new View.OnClickListener(){
             @Override
