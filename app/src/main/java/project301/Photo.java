@@ -96,7 +96,7 @@ public class Photo {
         for (int i=0;i<encoded_images.size();i++){
             myGallery.addView(insertPhoto(getBitmapImage(i), context));
         }
-
+        Log.d("Photo","Images added");
         myScrollGallery.addView(myGallery);
         builder.addContentView(myScrollGallery, new LinearLayout.LayoutParams(
                 ActionBar.LayoutParams.MATCH_PARENT,700));

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -236,6 +237,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
             attachTaskPhotos();
         }
 
+
         Button saveButton = (Button) findViewById(R.id.save_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -397,20 +399,50 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            byte[] imageInByte = stream.toByteArray();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-
-            if (stream.toByteArray().length >= 65536){
-                Toast toast = Toast.makeText(context,"The maximum allowed size of the photo is 65536 bytes",Toast.LENGTH_LONG);
-                toast.show();
+            if (task_photos == null){
+                task_photos = new Photo();
             }
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Log.d("Old image size", String.valueOf(bitmap.getByteCount()));
+            byte[] compressedImage = stream.toByteArray();
+            Bitmap compressedbBitmap = BitmapFactory.decodeByteArray(compressedImage, 0, compressedImage.length);
+            // If image is massive, compress it as much as possible
+            if (stream.toByteArray().length >= 15216000){
+                ByteArrayOutputStream new_stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 0, new_stream);
+                byte[] new_imageInByte = new_stream.toByteArray();
+
+                Bitmap new_bitmap = BitmapFactory.decodeByteArray(new_imageInByte, 0, new_imageInByte.length);
+                myGallery.addView(insertPhoto(new_bitmap));
+
+
+                Log.d("New image size (massive image)", String.valueOf(new_stream.toByteArray().length));
+
+                task_photos.addPhoto(getStringFromBitmap(new_bitmap));
+
+            }
+            // Else if image is big, compress it a little
+            else if (stream.toByteArray().length >= 65536){
+                ByteArrayOutputStream new_stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 8, new_stream);
+                byte[] new_imageInByte = new_stream.toByteArray();
+
+                Bitmap new_bitmap = BitmapFactory.decodeByteArray(new_imageInByte, 0, new_imageInByte.length);
+                myGallery.addView(insertPhoto(new_bitmap));
+
+
+                Log.d("New image size", String.valueOf(new_stream.toByteArray().length));
+
+                task_photos.addPhoto(getStringFromBitmap(new_bitmap));
+
+            }
+            // Otherwise don't compress it
             else{
-                setImage=true;
                 myGallery.addView(insertPhoto(bitmap));
                 task_photos.addPhoto(getStringFromBitmap(bitmap));
-                //post_photo.setImageBitmap(bitmap);
             }
+            setImage=true;
         }
     }
 
