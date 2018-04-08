@@ -1,5 +1,7 @@
 package project301;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -147,7 +149,15 @@ public class User {
      */
 
     public void addProviderBiddenTask(String taskID){
-        this.providerBiddenTask.add(taskID);
+        Boolean sign = true;
+        for (int i = 0; i < this.providerBiddenTask.size(); i++){
+            if (this.providerBiddenTask.get(i).equals(taskID) ){
+                sign = false;
+            }
+        }
+        if (sign){
+            this.providerBiddenTask.add(taskID);
+        }
     }
 
     /**
