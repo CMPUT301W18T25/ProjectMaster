@@ -13,18 +13,25 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="57dp">
+            android:layout_height="53dp"
+            app:cardBackgroundColor="@color/cardview_light_background">
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="53dp"
                 app:srcCompat="@drawable/info" />
         </android.support.v7.widget.CardView>
 
+        <TextView
+            android:id="@+id/textView96"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/blue1"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
@@ -55,9 +62,15 @@
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
+        <TextView
+            android:id="@+id/textView100"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/blue16"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
@@ -89,9 +102,15 @@
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
+        <TextView
+            android:id="@+id/textView97"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/blue5"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
@@ -123,9 +142,15 @@
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
+        <TextView
+            android:id="@+id/textView99"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/blue7"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
@@ -157,9 +182,14 @@
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
+        <TextView
+            android:id="@+id/textView98"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 

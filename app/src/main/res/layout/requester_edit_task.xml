@@ -7,13 +7,20 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/grey2"
             app:cardCornerRadius="@dimen/place_autocomplete_prediction_horizontal_margin">
 
@@ -25,11 +32,13 @@
                 <TextView
                     android:id="@+id/textView64"
                     android:layout_width="match_parent"
-                    android:layout_height="8dp" />
+                    android:layout_height="8dp"
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -40,7 +49,7 @@
                         android:fontFamily="serif"
                         android:text="Task Name :"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -58,7 +67,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -69,7 +79,7 @@
                         android:fontFamily="serif"
                         android:text="Task Detail :"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -88,7 +98,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -99,7 +110,7 @@
                         android:fontFamily="serif"
                         android:text="Destination :"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <AutoCompleteTextView
@@ -117,7 +128,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -128,7 +140,7 @@
                         android:fontFamily="serif"
                         android:text="Ideal Price :"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -147,7 +159,8 @@
                 <TextView
                     android:id="@+id/textView63"
                     android:layout_width="match_parent"
-                    android:layout_height="8dp" />
+                    android:layout_height="8dp"
+                    android:layout_weight="1" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -155,18 +168,21 @@
         <TextView
             android:id="@+id/textView65"
             android:layout_width="match_parent"
-            android:layout_height="10dp" />
+            android:layout_height="14dp"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/print7"
-                android:layout_width="141dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="Task Photo :      "
                 android:textColor="@color/colorPrimary"
@@ -185,6 +201,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="        " />
 
             <android.support.design.widget.FloatingActionButton
@@ -201,23 +218,26 @@
         <TextView
             android:id="@+id/textView39"
             android:layout_width="match_parent"
-            android:layout_height="6dp" />
+            android:layout_height="6dp"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="200dp"
+            android:layout_weight="1"
             android:gravity="top"
             android:orientation="horizontal">
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
                 <LinearLayout
                     android:id="@+id/mygallery2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    />
+                    android:orientation="horizontal" />
             </HorizontalScrollView>
         </LinearLayout>
 
@@ -231,7 +251,7 @@
             <Button
                 android:id="@+id/save_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="Save"
@@ -240,7 +260,7 @@
             <Button
                 android:id="@+id/back_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="back"

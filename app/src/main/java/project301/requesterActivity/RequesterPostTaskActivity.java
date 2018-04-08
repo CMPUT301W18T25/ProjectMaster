@@ -28,6 +28,7 @@ import android.widget.Toast;
 import android.view.ViewGroup.LayoutParams;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -96,7 +97,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
     protected Merlin merlin;
     protected MerlinsBeard merlinsBeard;
     private Timer timer;
-    private LinearLayout myGallery;
+    public LinearLayout myGallery;
     private Photo photos;
 
     MyTask myTask = new MyTask();
@@ -290,8 +291,11 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 Intent info2 = new Intent(RequesterPostTaskActivity.this, CameraActivity.class);
-                startActivity(info2);
 
+                startActivityForResult(info2, 5);
+
+
+                Log.d("POINT","back form camera");
             }
         });
 
@@ -320,11 +324,61 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         });
     }
 
+    private void cameraActivity(){
+
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("RequesterPostTaskActivity","onPause");
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        Log.e("RequesterPostTaskActivity","onRestart");
+
+    }
+
+
+    private void attachCameraPhoto(){
+        Log.d("RequesterPostTaskActivity","Sleeping");
+
+        File file = new File("/storage/emulated/0/DCIM/Camera", "pic.jpg");
+        int counter=1;
+        while (file.exists()) {
+            //file.delete();
+            Log.d("RequesterPostTaskActivity","/storage/emulated/0/DCIM/Camera/pic" + String.format("%02d", counter-1) + ".jpg");
+            file = new File("/storage/emulated/0/DCIM/Camera", "pic" + String.format("%02d", counter) + ".jpg");
+            counter++;
+        }
+        String filePath;
+        if (counter == 2){
+            filePath = "/storage/emulated/0/DCIM/Camera/pic.jpg";
+        }
+        else{
+            filePath = "/storage/emulated/0/DCIM/Camera/pic" + String.format("%02d", counter-2) + ".jpg";
+
+        }
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+
+        Log.d("Photo file",filePath);
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
+        byte[] compressedImage = stream.toByteArray();
+        Bitmap compressedbBitmap = BitmapFactory.decodeByteArray(compressedImage, 0, compressedImage.length);
+        myGallery.addView(insertPhoto(compressedbBitmap));
+        photos.addPhoto(getStringFromBitmap(compressedbBitmap));
+        setImage=true;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Log.d("RequesterPostTask", "onActivityResult");
+        Log.e("RequesterPostTask", "onActivityResult");
         //Detects request codes
         if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
@@ -354,7 +408,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
 
 
                 Log.d("New image size (massive image)", String.valueOf(new_stream.toByteArray().length));
-                Toast toast = Toast.makeText(context,"Compressed image size",Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(context,"Compressed image size (massive)",Toast.LENGTH_LONG);
                 toast.show();
                 photos.addPhoto(getStringFromBitmap(new_bitmap));
 
@@ -382,9 +436,13 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
             }
             setImage=true;
         }
+        else if(requestCode==5) {
+            Log.d("RequesterPostActivity","RETURNED FROM CAMERA");
+            attachCameraPhoto();
+        }
     }
     // source: modified from https://stackoverflow.com/questions/17489390/image-gallery-with-a-horizontal-scrollview
-    View insertPhoto(Bitmap bm){
+    public View insertPhoto(Bitmap bm){
 
         LinearLayout layout = new LinearLayout(getApplicationContext());
         double iv_scale=(double)bm.getWidth()/bm.getHeight();
