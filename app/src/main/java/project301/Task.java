@@ -70,7 +70,9 @@ public class Task {
         this.taskName=taskName.toLowerCase();
         this.taskDetails=taskDetails.toLowerCase();
         this.taskRequester=taskRequester.toLowerCase();
-        this.taskProvider=taskProvider.toLowerCase();
+        if (this.getTaskProvider() != null){
+            this.taskProvider=taskProvider.toLowerCase();
+        }
         this.taskStatus=taskStatus.toLowerCase();
         this.taskAddress=taskAddress.toLowerCase();
         this.taskBidList=taskBidList;

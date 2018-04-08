@@ -19,6 +19,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import project301.Bid;
+import project301.Photo;
 import project301.R;
 import project301.Task;
 import project301.allUserActivity.LogInActivity;
@@ -213,6 +215,7 @@ public class ProviderMainActivity extends AppCompatActivity {
         search.execute();
         taskList = new ArrayList<>();
         ArrayList<Task> searchedTask = new ArrayList<>();
+
         try {
             searchedTask = search.get();
         } catch (InterruptedException e) {
@@ -222,7 +225,14 @@ public class ProviderMainActivity extends AppCompatActivity {
         }
         taskList.addAll(searchedTask);
 
+
         // Attach the adapter to a ListView
+        /* TEST HERE ROMOVE IS PERFORMANCE IS IMPROVED
+        ArrayList<Bid> bidList = new ArrayList<Bid>();
+        Photo emptyPhoto = new Photo();
+        taskList = new ArrayList<>();
+        taskList.add(new Task("Fetch","Fetchcar","Michael",null,"bidding","random address",bidList,emptyPhoto));
+        */
         setTaskList(taskList);
         ProviderAdapter adapter = new ProviderAdapter(this, taskList);
         this.availablelist.setAdapter(adapter);

@@ -619,8 +619,6 @@ public class TaskController {
     /**
      * A static class to search all tasks of this provider in ES database
      */
-
-    //TODO test passed, REPLACE searchAssignTasksOfThisProvider
     public static class searchAssignTasksOfThisProvider extends AsyncTask<String, Void, ArrayList<Task>>{
 
         protected ArrayList<Task> doInBackground(String... providerId) {
@@ -665,71 +663,6 @@ public class TaskController {
         }
 
     }
-
-        /*
-    public static class searchAssignTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
-        String providerId;
-
-        public searchAssignTasksOfThisProvider(String providerId){
-            this.providerId = providerId;
-        }
-
-        protected ArrayList<Task> doInBackground(Void... nul) {
-            verifySettings();
-
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
-
-            String query =
-                    "\n{ \n"+
-                            "\"size\" : 50,\n"+
-
-                            "   \"query\" : {\n"+
-                            "       \"bool\" : {\n"+
-                            "           \"must\" : [\n"+
-                            "               { \"term\" : {\"taskStatus\" : " + "\"assigned\"}}" +
-                            "           ]\n"+
-                            "       }\n"+
-                            "   }\n"+
-                            "}\n";
-
-            Log.i("Query", "The query was " + query );
-            Search search = new Search.Builder(query)
-                    .addIndex("cmput301w18t25")
-                    .addType("task")
-                    .build();
-            try {
-                SearchResult result = client.execute(search);
-                if (result.isSucceeded()) {
-                    List<Task> rt
-                            = result.getSourceAsObjectList(Task.class);
-                    for(Task task:rt){
-
-                        ArrayList<Bid> BiddenList = task.getTaskBidList();
-                        for(Bid bid:BiddenList){
-                            if(bid.getProviderId().equals(providerId)){
-                                result_tasks.add(task);
-
-
-                            }
-                        }
-                    }
-
-                    Log.i("allbidden","test");
-
-
-                    Log.i("Success", "Data retrieved from database: " + Integer.toString(rt.size()));
-                } else {
-                    Log.i("Error", "The search query failed");
-                }
-                // TODO get the results of the query
-            } catch (Exception e) {
-                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
-            }
-            return result_tasks;
-        }
-
-    }
-    */
     /**
      * A static class to search all tasks of this requester in ES database
      */
@@ -793,7 +726,7 @@ public class TaskController {
 
             String queryS =
                     "\n{ \n"+
-                            "\"size\" : 50,\n"+
+                            "\"size\" : 1,\n"+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"should\" : [\n"+
