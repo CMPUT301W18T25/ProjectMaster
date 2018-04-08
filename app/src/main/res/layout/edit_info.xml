@@ -215,7 +215,8 @@
                 android:fontFamily="serif"
                 android:text="Save"
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/back_button"
@@ -225,7 +226,8 @@
                 android:fontFamily="serif"
                 android:text="Back"
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
 
         </LinearLayout>
 

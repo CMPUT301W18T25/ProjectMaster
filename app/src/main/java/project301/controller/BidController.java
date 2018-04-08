@@ -1,6 +1,5 @@
 package project301.controller;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -19,9 +18,7 @@ import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
-import project301.Bid;
 import project301.BidCounter;
-import project301.User;
 
 /**
  * Detail : Bid controller is used to implement bidding notification feature.
@@ -46,9 +43,7 @@ public class BidController {
         Boolean success = false;
         try {
             success = buildBidCounterOfThisRequester.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
         return success;
@@ -63,16 +58,14 @@ public class BidController {
     public BidCounter searchBidCounterOfThisRequester(String requesterId){
         BidController.searchBidCounterOfThisRequester searchBidCounterOfThisRequester = new BidController.searchBidCounterOfThisRequester();
         searchBidCounterOfThisRequester.execute(requesterId);
-        BidCounter bidCounter = new BidCounter();
+        @SuppressWarnings("UnusedAssignment") BidCounter bidCounter = new BidCounter();
         try {
             bidCounter = searchBidCounterOfThisRequester.get();
-        } catch (InterruptedException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
+            //noinspection ConstantConditions
             throw null;
 
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-            throw null;
         }
         if(bidCounter==null){
             return null;
@@ -93,9 +86,7 @@ public class BidController {
         BidCounter bidCounter = null;
         try {
             bidCounter = searchBidCounterOfThisRequester.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
         if(bidCounter == null){
@@ -167,9 +158,7 @@ public class BidController {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
 
-                    BidCounter bidCounter = result.getSourceAsObject(BidCounter.class);
-
-                    return bidCounter;
+                    return result.getSourceAsObject(BidCounter.class);
                 } else {
                     Log.i("Error", "The search query failed");
                 }
@@ -245,7 +234,7 @@ public class BidController {
         @Override
         protected Void doInBackground(String... search_parameters) {
             verifySettings();
-            ArrayList<BidCounter> bidCounters = new ArrayList<BidCounter>();
+            ArrayList<BidCounter> bidCounters = new ArrayList<> ();
 
             String query = "{ \"size\": 100 }" ;
             Log.i("Query", "The query was " + query);
@@ -256,7 +245,7 @@ public class BidController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<BidCounter> founds
+                    @SuppressWarnings("deprecation") List<BidCounter> founds
                             = result.getSourceAsObjectList(BidCounter.class);
                     bidCounters.addAll(founds);
                 } else {
@@ -287,7 +276,7 @@ public class BidController {
     /**
      * Setting ES database
      */
-    public static void verifySettings() {
+    private static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080").discoveryEnabled(true).multiThreaded(true);
 

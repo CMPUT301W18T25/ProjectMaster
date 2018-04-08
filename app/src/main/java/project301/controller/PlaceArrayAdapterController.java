@@ -1,6 +1,7 @@
 package project301.controller;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
@@ -34,8 +35,8 @@ public class PlaceArrayAdapterController
         extends ArrayAdapter<PlaceArrayAdapterController.PlaceAutocomplete> implements Filterable {
     private static final String TAG = "PlaceArrayAdapter";
     private GoogleApiClient mGoogleApiClient;
-    private AutocompleteFilter mPlaceFilter;
-    private LatLngBounds mBounds;
+    private final AutocompleteFilter mPlaceFilter;
+    private final LatLngBounds mBounds;
     private ArrayList<PlaceAutocomplete> mResultList;
 
     /**
@@ -104,22 +105,25 @@ public class PlaceArrayAdapterController
             ArrayList resultList = new ArrayList<>(autocompletePredictions.getCount());
             while (iterator.hasNext()) {
                 AutocompletePrediction prediction = iterator.next();
+                //noinspection unchecked
                 resultList.add(new PlaceAutocomplete(prediction.getPlaceId(),
                         prediction.getFullText(null)));
             }
             // Buffer release
             autocompletePredictions.release();
+            //noinspection unchecked
             return resultList;
         }
         Log.e(TAG, "Google API client is not connected.");
         return null;
     }
 
+    @NonNull
     @Override
     public Filter getFilter() {
         Log.d("PlaceArrayAdapterContro","getFilter");
 
-        Filter filter = new Filter() {
+        return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();
@@ -146,13 +150,12 @@ public class PlaceArrayAdapterController
                 }
             }
         };
-        return filter;
     }
 
     public class PlaceAutocomplete {
 
-        public CharSequence placeId;
-        public CharSequence description;
+        public final CharSequence placeId;
+        public final CharSequence description;
 
         PlaceAutocomplete(CharSequence placeId, CharSequence description) {
             Log.d("PlaceArrayAdapterContro","PlaceAutocomplete");

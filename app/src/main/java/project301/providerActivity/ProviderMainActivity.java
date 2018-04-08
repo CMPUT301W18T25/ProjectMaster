@@ -42,18 +42,13 @@ import project301.controller.TaskController;
 
 public class ProviderMainActivity extends AppCompatActivity {
 
-    private Button searchButton;
-    private Button editProfileButton;
-    private Button viewOnMapButton;
-    private Button bidHistoryButton;
-    private Button logoutButton;
     private EditText searchEditText;
     private String searchText;
     private ListView availablelist;
-    private ArrayList<Task> taskList = new ArrayList<>();
+    private final ArrayList<Task> taskList = new ArrayList<>();
     private Context context;
     private static JestDroidClient client;
-    ProviderAdapter adapter;
+    private ProviderAdapter adapter;
     private String userId;
     private String taskId;
 
@@ -72,10 +67,11 @@ public class ProviderMainActivity extends AppCompatActivity {
 
 
         //get userId
+        //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
 
         //settle viewOnMap button
-        viewOnMapButton = findViewById(R.id.provider_map_button);
+        Button viewOnMapButton = findViewById (R.id.provider_map_button);
         viewOnMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +82,7 @@ public class ProviderMainActivity extends AppCompatActivity {
         });
 
         //settle logout Button
-        logoutButton = findViewById(R.id.logout_button);
+        Button logoutButton = findViewById (R.id.logout_button);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +93,7 @@ public class ProviderMainActivity extends AppCompatActivity {
         });
 
         //settle bidHistory button
-        bidHistoryButton = findViewById(R.id.provider_bid_button);
+        Button bidHistoryButton = findViewById (R.id.provider_bid_button);
         bidHistoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,7 +105,7 @@ public class ProviderMainActivity extends AppCompatActivity {
         });
 
         //settle editProfile button
-        editProfileButton = findViewById(R.id.edit_profile_button);
+        Button editProfileButton = findViewById (R.id.edit_profile_button);
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,7 +135,7 @@ public class ProviderMainActivity extends AppCompatActivity {
         });
 
         // to do search button
-        searchButton = findViewById(R.id.search_button);
+        Button searchButton = findViewById (R.id.search_button);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,7 +151,7 @@ public class ProviderMainActivity extends AppCompatActivity {
                     v1.setGravity(Gravity.CENTER);
                     toast.show();
                 }else {
-                    ArrayList<Task> result = new ArrayList<>(); // search result
+                    @SuppressWarnings("UnusedAssignment") ArrayList<Task> result = new ArrayList<>(); // search result
                     //need search code
 
 
@@ -173,10 +169,6 @@ public class ProviderMainActivity extends AppCompatActivity {
         ListView mListView = (ListView) findViewById(R.id.provider_list);
         final SwipeRefreshLayout mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_ly);
 
-        /**
-         * Showing Swipe Refresh animation on activity create
-         * As animation won't start on onCreate, post runnable is used
-         */
         mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -199,7 +191,7 @@ public class ProviderMainActivity extends AppCompatActivity {
 
     }
 
-    public void renewTheList(){
+    private void renewTheList(){
 
         new searchAllBiddenRequestingTasks().execute();
 
@@ -219,7 +211,7 @@ public class ProviderMainActivity extends AppCompatActivity {
         protected ArrayList<Task> doInBackground(Void... nul) {
             verifySettings();
 
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
+            ArrayList<Task> result_tasks = new ArrayList<> ();
 
             String queryS =
                     "\n{ \n"+
@@ -241,7 +233,7 @@ public class ProviderMainActivity extends AppCompatActivity {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<Task> foundUsers
+                    @SuppressWarnings("deprecation") List<Task> foundUsers
                             = result.getSourceAsObjectList(Task.class);
                     result_tasks.addAll(foundUsers);
                     Log.i("Success", "Data retrieved from database: ");
@@ -264,7 +256,7 @@ public class ProviderMainActivity extends AppCompatActivity {
     /**
      * verify ES database setting
      */
-    public static void verifySettings() {
+    private static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080").discoveryEnabled(true).multiThreaded(true);
 

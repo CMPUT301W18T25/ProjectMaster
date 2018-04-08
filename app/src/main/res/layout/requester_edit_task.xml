@@ -261,7 +261,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="Save"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/back_button"
@@ -270,7 +271,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="back"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
         </LinearLayout>
 
     </LinearLayout>

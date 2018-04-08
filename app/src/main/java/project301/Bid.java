@@ -11,9 +11,9 @@ package project301;
  */
 
 public class Bid {
-    private String taskID;
+    private final String taskID;
     private Double bidAmount;
-    private String providerId;
+    private final String providerId;
 
     public Bid(Double bidAmount, String providerId, String taskID){
         this.bidAmount = bidAmount;

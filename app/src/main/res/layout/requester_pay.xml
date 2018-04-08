@@ -202,7 +202,8 @@
                 android:elevation="@android:dimen/app_icon_size"
                 android:fontFamily="serif"
                 android:text="submit"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/decline_button"
@@ -212,7 +213,8 @@
                 android:elevation="@android:dimen/app_icon_size"
                 android:fontFamily="serif"
                 android:text="decline"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/back_button"
@@ -221,7 +223,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="Back"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
         </LinearLayout>
 
     </LinearLayout>

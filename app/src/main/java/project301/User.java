@@ -20,7 +20,7 @@ public class User {
     private String userEmail;
     private String userPassword;
     private String resultId;
-    private ArrayList<String> providerBiddenTask;
+    private final ArrayList<String> providerBiddenTask;
 
     /**
      * Default construct
@@ -77,6 +77,7 @@ public class User {
      * set user email
      * @param userEmail
      */
+    @SuppressWarnings("JavaDoc")
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }

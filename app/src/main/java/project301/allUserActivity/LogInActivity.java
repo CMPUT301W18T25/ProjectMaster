@@ -15,20 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import project301.R;
-import project301.User;
 import project301.controller.FileSystemController;
 import project301.controller.UserController;
-
-/**
- * This is the login activity, when user open the app, this activity
- * will ask the user to sign up an account or login.
- * @classname : LoginActivity
- * @Date :   18/03/2018
- * @author : Wang Dong
- * @author : Yue Ma
- * @version 1.0
- * @copyright : copyright (c) 2018 CMPUT301W18T25
- */
 
 /**
  * This is the login activity.
@@ -39,8 +27,8 @@ public class LogInActivity extends AppCompatActivity {
     private EditText usernameText;
     private EditText passwardText;
     private Context context;
-    Button loginButton;
-    Button signUpButton;
+    private Button loginButton;
+    private Button signUpButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,15 +53,14 @@ public class LogInActivity extends AppCompatActivity {
 
                 UserController userController = new UserController();
 
-                if (userController.checkUserByNameAndPassword(enterUsername,enterPassward) == true){
+                if (userController.checkUserByNameAndPassword (enterUsername, enterPassward)){
                     Intent intent = new Intent (LogInActivity.this, UserCharacterActivity.class);
                     UserController uc = new UserController();
 
-                    String Id = enterUsername;
-                    Log.i("id",Id);
+                    Log.i("id", enterUsername);
 
                     //deliver userName
-                    intent.putExtra("userId",Id);
+                    intent.putExtra("userId", enterUsername);
                     startActivity(intent);
                 }else{
                     //print error message

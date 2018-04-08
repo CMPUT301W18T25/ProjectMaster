@@ -49,9 +49,8 @@ public class Photo {
     public Bitmap getBitmapImage(int index){
 
         byte[] decodedString = Base64.decode(encoded_images.get(index), Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-        return decodedByte;
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
 
@@ -63,6 +62,7 @@ public class Photo {
 
         Dialog builder = new Dialog(context);
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //noinspection ConstantConditions
         builder.getWindow().setBackgroundDrawable(
                 new ColorDrawable(android.graphics.Color.BLACK));
         builder.setOnDismissListener(new DialogInterface.OnDismissListener() {

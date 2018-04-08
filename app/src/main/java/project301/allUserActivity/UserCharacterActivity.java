@@ -25,15 +25,6 @@ import project301.requesterActivity.RequesterMainActivity;
 
 /**
  * User in this activity can choose to be a provider or requestor
- * @classname : UserCharacterActivity
- * @Date :   18/03/2018
- * @author : Wang Dong
- * @version 1.0
- * @copyright : copyright (c) 2018 CMPUT301W18T25
- */
-
-/**
- * User in this activity can choose to be a provider or requestor
  */
 
 @SuppressWarnings("ALL")
