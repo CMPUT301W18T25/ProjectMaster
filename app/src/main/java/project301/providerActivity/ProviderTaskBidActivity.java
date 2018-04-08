@@ -2,15 +2,11 @@ package project301.providerActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,7 +15,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import project301.Bid;
 import project301.R;
 import project301.Task;
@@ -27,16 +22,11 @@ import project301.User;
 import project301.controller.BidController;
 import project301.controller.TaskController;
 import project301.controller.UserController;
-import project301.requesterActivity.RequesterAdapter;
 import project301.requesterActivity.RequesterMapSpecActivity;
-import project301.requesterActivity.RequesterViewTaskAssignedActivity;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 /**
- * Detail :
+ * This is the Activity class for user to bid on an exsiting task
  * @classname : ProviderTaskBidActivity
  * @Date :   18/03/2018
  * @author : Wang Dong
@@ -44,9 +34,7 @@ import java.util.concurrent.ExecutionException;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
-/**
- * This is the Activity class for user to bid on an exsiting task
- */
+
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderTaskBidActivity extends AppCompatActivity {
@@ -193,13 +181,9 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
                     String enterBid_s = taskMybid.getText().toString();
 
                     //test input type
-                    //Log.i("enterBid_s",enterBid_s);
-
                     Double enterBid = Double.parseDouble(enterBid_s);
 
                     //test bid type
-                    //System.out.println(enterBid);
-
                     bid = new Bid(enterBid, userId);
 
                     TaskController.providerSetBid setTaskBid = new TaskController.providerSetBid(view_task, bid);
@@ -216,7 +200,6 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
                     Intent info2 = new Intent(ProviderTaskBidActivity.this, ProviderBidHistoryActivity.class);
                     info2.putExtra("userId", userId);
                     info2.putExtra("content", "all");
-                    //info2.putExtra("userName",userId);
 
                     startActivity(info2);
 
@@ -274,13 +257,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
         ArrayList<Bid> allBidOfThisTask = new ArrayList<>();
         //currently, only bid amount is in it. Please add username in the future
         ArrayList<String> allBidsString = new ArrayList<>();
-        /*try {
-            allBidOfThisTask = searchAllBid.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }*/
+
         allBidOfThisTask =  view_task.getAvailableBidListOfThisTask();
         for(Bid bid: allBidOfThisTask){
             if(!bid.equals(null)) {

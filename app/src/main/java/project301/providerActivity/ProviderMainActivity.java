@@ -17,19 +17,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
-import project301.Bid;
-import project301.Photo;
 import project301.R;
 import project301.Task;
 import project301.allUserActivity.LogInActivity;
@@ -59,19 +53,15 @@ public class ProviderMainActivity extends AppCompatActivity {
     private ArrayList<Task> taskList = new ArrayList<>();
     private Context context;
     private static JestDroidClient client;
-
     ProviderAdapter adapter;
-
     private String userId;
     private String taskId;
-
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_main);
-
 
         //get final intent
         final Intent intent = getIntent();
@@ -168,19 +158,6 @@ public class ProviderMainActivity extends AppCompatActivity {
                     ArrayList<Task> result = new ArrayList<>(); // search result
                     //need search code
 
-                   /* TaskController.searchTaskByKeyword searchTask = new TaskController.searchTaskByKeyword();
-                    searchTask.execute(searchText);
-
-
-
-                    try {
-                        result = searchTask.get();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
-                    */
 
                     TaskController taskController = new TaskController();
                     result = taskController.searchByKeyWord(searchText,userId);
@@ -191,7 +168,8 @@ public class ProviderMainActivity extends AppCompatActivity {
                 }
             }
         });
-        //设置在listview上下拉刷新的监听
+
+        //set listview pulldown renew
         ListView mListView = (ListView) findViewById(R.id.provider_list);
         final SwipeRefreshLayout mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_ly);
 
@@ -202,7 +180,7 @@ public class ProviderMainActivity extends AppCompatActivity {
         mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //设置2秒的时间来执行以下事件
+                //set 2 seconds inmplement
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
                         renewTheList();
@@ -226,12 +204,6 @@ public class ProviderMainActivity extends AppCompatActivity {
         new searchAllBiddenRequestingTasks().execute();
 
         // Attach the adapter to a ListView
-        /* TEST HERE ROMOVE IS PERFORMANCE IS IMPROVED
-        ArrayList<Bid> bidList = new ArrayList<Bid>();
-        Photo emptyPhoto = new Photo();
-        taskList = new ArrayList<>();
-        taskList.add(new Task("Fetch","Fetchcar","Michael",null,"bidding","random address",bidList,emptyPhoto));
-        */
 
         ProviderAdapter adapter = new ProviderAdapter(this, taskList);
         adapter.notifyDataSetChanged();
@@ -239,6 +211,9 @@ public class ProviderMainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * method search of entend asyntask
+     */
     public class searchAllBiddenRequestingTasks extends AsyncTask<Void, Void, ArrayList<Task>> {
 
         protected ArrayList<Task> doInBackground(Void... nul) {

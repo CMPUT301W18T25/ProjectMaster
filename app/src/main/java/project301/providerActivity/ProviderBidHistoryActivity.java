@@ -2,25 +2,19 @@ package project301.providerActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import project301.R;
 import project301.Task;
 import project301.User;
 import project301.controller.TaskController;
 import project301.controller.UserController;
-
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -63,17 +57,6 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         user = uc.getAUserById(userId);
         this.content = intent.getExtras().get("content").toString();
 
-        //get all bidden task of this provider (user) into a list
-        /*TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider(userId);
-        search.execute();
-        try {
-            taskList = search.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        */
 
         //settle viewOnMap button
         viewOnMapButton = findViewById(R.id.c_map_button);
@@ -129,44 +112,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
                 Task tempTask = taskList.get(index);
                 taskId = tempTask.getId();
                 String status = tempTask.getTaskStatus();
-                /*
-                if (status.equals("request")) {
-                    Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskBidActivity.class);
-                    info1.putExtra("taskId",taskId);
-                    info1.putExtra("userId", userId);
-                    info1.putExtra("info", index);
-                    info1.putExtra("status","request");
-                    startActivity(info1);
-                } else if (status.equals("bidden")) {
-                    Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskBidActivity.class);
-                    info1.putExtra("taskId",taskId);
-                    info1.putExtra("userId", userId);
-                    info1.putExtra("info", index);
-                    info1.putExtra("status","bidden");
-                    startActivity(info1);
-                } else if (status.equals("assigned")) {
-                    Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskFinishActivity.class);
-                    info1.putExtra("taskId",taskId);
-                    info1.putExtra("userId", userId);
-                    info1.putExtra("info", index);
-                    info1.putExtra("status","assigned");
-                    startActivity(info1);
-                } else if (status.equals("done")) {
-                    Intent info1 = new Intent(ProviderBidHistoryActivity.this, ProviderTaskFinishActivity.class);
-                    info1.putExtra("taskId",taskId);
-                    info1.putExtra("userId", userId);
-                    info1.putExtra("info", index);
-                    startActivity(info1);
-                } else {
-                    //print error message
-                    Toast toast = Toast.makeText(context, "Task Type Wrong!", Toast.LENGTH_LONG);
-                    TextView v1 = (TextView) toast.getView().findViewById(android.R.id.message);
-                    v1.setTextColor(Color.RED);
-                    v1.setTextSize(20);
-                    v1.setGravity(Gravity.CENTER);
-                    toast.show();
-                }
-                */
+
                 Intent intent = setIntent(status,index);
                 startActivity(intent);
             }
@@ -178,17 +124,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        //the following code is for testing
-        /*
-        Task task = taskList.get(0);
-        Task task1 = new Task();
-        task1.setTaskName("a");
-        task1.setTaskAddress("a");
-        task1.setTaskIdealPrice(1.0);
-        task1.setTaskStatus("bidden");
-        taskList = new ArrayList<>();
-        taskList.add(task1);
-        */
+
         taskList = new ArrayList<>();
         ArrayList<Task> searchedTask = new ArrayList<>();
         if (this.content.equals("all")) {
@@ -245,6 +181,7 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
         }
     }
 
+    //set intent
     public Intent setIntent(String status,int index){
         Intent intent;
         if (status.equals("request")|status.equals("bidden")) {

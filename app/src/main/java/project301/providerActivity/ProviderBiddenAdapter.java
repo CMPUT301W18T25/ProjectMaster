@@ -6,14 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import project301.Bid;
 import project301.R;
 import project301.Task;
-
 import java.util.ArrayList;
 
 /**
+ * this class is an adapter for the bidden task arrayList to show on the UI
  * @classname : ProviderBiddenAdapter
  * @Date :   18/03/2018
  * @author : Wang Dong
@@ -21,9 +20,6 @@ import java.util.ArrayList;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
-/**
- * this class is an adapter for the bidden task arrayList to show on the UI
- */
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})

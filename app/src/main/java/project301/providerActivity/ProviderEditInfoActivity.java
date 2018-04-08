@@ -12,13 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import project301.R;
 import project301.User;
 import project301.controller.UserController;
 import project301.utilities.TaskUtil;
 
 /**
+ * this class used to change profile of the user, such as user name.
  * @classname : ProviderEditInfoActivity
  * @Date :   18/03/2018
  * @author : Wang Dong
@@ -26,19 +26,12 @@ import project301.utilities.TaskUtil;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
-/**
- * this class used to change profile of the user, such as user name.
- */
-
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class ProviderEditInfoActivity extends AppCompatActivity {
-
     private String userId;
-
     private String userName;
-    //private String editName;
     private String editEmail;
     private String editPhone;
     private String editPassword;
@@ -51,7 +44,6 @@ public class ProviderEditInfoActivity extends AppCompatActivity {
     private UserController userListControl;
     private User user;
     private Context context;
-
 
     @SuppressWarnings("ConstantConditions")
     @Override

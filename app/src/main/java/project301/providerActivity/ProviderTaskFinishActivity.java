@@ -11,14 +11,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import project301.Bid;
 import project301.R;
 import project301.Task;
 import project301.User;
 import project301.controller.TaskController;
 import project301.controller.UserController;
-
 import java.util.ArrayList;
 import java.util.Map;
 

@@ -32,10 +32,8 @@ import project301.controller.TaskController;
 import project301.requesterActivity.RequesterViewTaskRequestActivity;
 
 /**
- * Detail : Click the view on map on a specific task, we can see the location of the specific task
- * on the map.
+ * Detail : Click the view on map on a specific task, we can see the location of the specific task on the map.
  * @classname : ProviderMapSpecActivity
- *
  * @Date :   18/03/2018
  * @author : Julian Stys
  * @author : Xingyuan Yang
@@ -49,24 +47,17 @@ public class ProviderMapSpecActivity extends AppCompatActivity implements OnMapR
 
     private GoogleMap mMap;
     private String userId;
-
     private static final String TAG = ProviderMapSpecActivity.class.getSimpleName();
-
     private Boolean mLocationPermissionGranted;
-
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION=1;
     private static final int DEFAULT_ZOOM = 15;
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
     private String view_index;
     private String taskId;
-
     private Location mLastKnownLocation;
-
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private final LatLng mDefaultLocation = new LatLng(53.5273, -113.5296);
-
-
     private ArrayList<project301.Task> taskList;
     private project301.Task specTask;
     // Testing variables
@@ -84,9 +75,6 @@ public class ProviderMapSpecActivity extends AppCompatActivity implements OnMapR
         userId = intent.getExtras().get("userId").toString();
         view_index = intent.getExtras().get("info").toString();
         taskId = intent.getExtras().get("taskId").toString();
-
-
-
 
         setContentView(R.layout.view_on_map_spec);
 
@@ -291,18 +279,11 @@ public class ProviderMapSpecActivity extends AppCompatActivity implements OnMapR
         Log.d(TAG,"Task info: "+clickedTask.getTaskName());
         Log.d(TAG,"Task info: "+clickedTask.getTaskAddress());
 
-
-
         Intent info1 = new Intent(ProviderMapSpecActivity.this, RequesterViewTaskRequestActivity.class);
         info1.putExtra("info", markerIndex);
         info1.putExtra("userId",userId);
         startActivity(info1);
 
-        /*Intent info1 = new Intent(RequesterMapActivity.this, ProviderTaskBidActivity.class);
-        info1.putExtra("info", markerIndex);
-        info1.putExtra("status","request");
-        info1.putExtra("userId",userId);
-        startActivity(info1);*/
         return true;
     }
 

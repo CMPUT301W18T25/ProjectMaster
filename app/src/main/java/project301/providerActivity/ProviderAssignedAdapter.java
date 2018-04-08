@@ -6,11 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import project301.Bid;
 import project301.R;
 import project301.Task;
-
 import java.util.ArrayList;
 
 /**
