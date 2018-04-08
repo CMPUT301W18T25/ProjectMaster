@@ -248,7 +248,7 @@ public class ProviderMainActivity extends AppCompatActivity {
 
             String queryS =
                     "\n{ \n"+
-                            "\"size\" : 10,\n"+
+                            "\"size\" : 30,\n"+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"should\" : [\n"+
