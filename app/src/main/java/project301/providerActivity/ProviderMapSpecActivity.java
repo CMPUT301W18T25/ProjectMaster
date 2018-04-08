@@ -32,8 +32,8 @@ import project301.controller.TaskController;
 import project301.requesterActivity.RequesterViewTaskRequestActivity;
 
 /**
- * @classname : RequesterMapActivity
- * @class Detail :
+ * Detail : Click the view on map on a specific task,
+ * @classname : ProviderMapSpecActivity
  *
  * @Date :   18/03/2018
  * @author : Julian Stys
