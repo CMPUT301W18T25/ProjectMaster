@@ -69,7 +69,6 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:fontFamily="serif"
-                    android:hint="@string/type_your_name"
                     android:inputType="textPersonName"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
@@ -101,8 +100,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:fontFamily="serif"
-                    android:hint="@string/type_your_password"
-                    android:inputType="text"
+                    android:inputType="textPassword"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold" />
             </LinearLayout>
