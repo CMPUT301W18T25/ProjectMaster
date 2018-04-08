@@ -21,6 +21,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -165,7 +166,7 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
 
     private void getAllTaksInfo() {
 
-        TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
+        TaskController.searchAllBiddenRequestingTasks search = new TaskController.searchAllBiddenRequestingTasks();
         search.execute();
         taskList = new ArrayList<project301.Task>();
         ArrayList<project301.Task> searchedTask = new ArrayList<>();
@@ -308,6 +309,18 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
                             .anchor(0.5f,0.5f)
                             .title(currTask.getTaskName())
                     );
+                    // Make bidden tasks have blue icon
+                    if (currTask.getTaskStatus().equals("bidden")){
+                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                    }
+                    // Make assigned task have a green icon
+                    else if (currTask.getTaskStatus().equals("assigned")) {
+                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                    }
+                    // Make assigned task have a green icon
+                    else if (currTask.getTaskStatus().equals("done")) {
+                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                    }
                     Log.d(TAG,"Adding marker task name: "+marker.getTitle());
                     marker.setTag(i);
                     marker.showInfoWindow();
