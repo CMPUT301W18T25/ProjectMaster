@@ -31,12 +31,12 @@ import project301.controller.OfflineController;
 import project301.controller.TaskController;
 
 /**
- * Detail : Requesdter edit list is to show a list of posted task, which support click to check details and edit task.
- * @Date :   18/03/2018
+ * Detail : Requesdter Done list is to show a list of done task, which support click to check task information.
+ * @Date :   01/04/2018
  * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
- * @classname : RequesterAllListActivity
+ * @classname : RequesterDoneListActivity
  */
 
 

@@ -32,7 +32,6 @@ import project301.utilities.TaskUtil;
  * Detail :this class used to change profile of the user, such as user name.
  * @Date :   18/03/2018
  * @author : Yingnan Ma
- * @author : Wang Dong
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  * @classname : RequesterEditInfoActivity

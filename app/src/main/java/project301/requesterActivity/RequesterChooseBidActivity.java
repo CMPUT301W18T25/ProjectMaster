@@ -30,8 +30,8 @@ import project301.controller.TaskController;
 import project301.controller.UserController;
 
 /**
- * Detail : pay class is to change the status of task from bidding to processing
- * @Date :   18/03/2018
+ * Detail : Requester choose bid class is to change the status of task from bidden to assigned
+ * @Date :   01/04/2018
  * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25

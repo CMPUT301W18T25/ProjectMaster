@@ -30,12 +30,12 @@ import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Detail : Requesdter edit list is to show a list of posted task, which support click to check details and edit task.
- * @Date :   18/03/2018
+ * Detail : Requesdter assigned list is to show a list of assigned task, which support click to get information of task.
+ * @Date :   01/04/2018
  * @author : Yingnan Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
- * @classname : RequesterAllListActivity
+ * @classname : RequesterAssignedListActivity
  */
 
 
