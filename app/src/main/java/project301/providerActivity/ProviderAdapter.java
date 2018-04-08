@@ -1,6 +1,7 @@
 package project301.providerActivity;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,5 +89,15 @@ public class ProviderAdapter extends ArrayAdapter<Task> {
 
         //Log.i("a",task.getTaskAddress().toString());
         return convertView;
+    }
+
+    @Override
+    public void registerDataSetObserver(DataSetObserver observer) {
+        super.registerDataSetObserver(observer);
+    }
+
+    @Override
+    public void unregisterDataSetObserver(DataSetObserver observer) {
+        super.unregisterDataSetObserver(observer);
     }
 }

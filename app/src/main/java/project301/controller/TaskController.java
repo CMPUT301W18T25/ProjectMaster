@@ -957,19 +957,11 @@ public class TaskController {
     public ArrayList<Task> searchByKeyWord(String keyWord,String providerId){
         ArrayList<Task> tasks = new ArrayList<>();
         ArrayList<Task> keywordTasks = new ArrayList<>();
-        TaskController.searchAllBiddenTasks searchAllBiddenTasks = new TaskController.searchAllBiddenTasks();
-        searchAllBiddenTasks.execute();
+
+        TaskController.searchAllBiddenRequestingTasks searchAllBiddenRequestingTasks = new TaskController.searchAllBiddenRequestingTasks();
+        searchAllBiddenRequestingTasks.execute();
         try {
-            tasks.addAll(searchAllBiddenTasks.get());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        TaskController.searchAllRequestingTasks searchAllRequestingTasks = new TaskController.searchAllRequestingTasks();
-        searchAllRequestingTasks.execute();
-        try {
-            tasks.addAll(searchAllRequestingTasks.get());
+            tasks.addAll(searchAllBiddenRequestingTasks.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
