@@ -8,10 +8,8 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="1dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="8dp"
         android:gravity="fill_vertical|fill_horizontal"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,13 +20,13 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="10dp"
             android:layout_weight="1" />
 
         <TextView
             android:id="@+id/textView23"
             android:layout_width="match_parent"
-            android:layout_height="38dp"
+            android:layout_height="34dp"
             android:layout_weight="1"
             android:fontFamily="serif"
             android:text="Task Information"
@@ -52,7 +50,7 @@
                 <TextView
                     android:id="@+id/textView22"
                     android:layout_width="match_parent"
-                    android:layout_height="12dp"
+                    android:layout_height="7dp"
                     android:layout_weight="1" />
 
                 <LinearLayout
@@ -226,7 +224,7 @@
         <TextView
             android:id="@+id/textView20"
             android:layout_width="match_parent"
-            android:layout_height="38dp"
+            android:layout_height="34dp"
             android:layout_weight="1"
             android:fontFamily="serif"
             android:text="Requester Information"
@@ -250,7 +248,7 @@
                 <TextView
                     android:id="@+id/textView21"
                     android:layout_width="match_parent"
-                    android:layout_height="13dp"
+                    android:layout_height="7dp"
                     android:layout_weight="1" />
 
                 <LinearLayout
@@ -332,7 +330,7 @@
         <TextView
             android:id="@+id/textView24"
             android:layout_width="match_parent"
-            android:layout_height="38dp"
+            android:layout_height="34dp"
             android:layout_weight="1"
             android:fontFamily="serif"
             android:text="Deal Information"
@@ -356,7 +354,7 @@
                 <TextView
                     android:id="@+id/textView25"
                     android:layout_width="match_parent"
-                    android:layout_height="14dp" />
+                    android:layout_height="5dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -417,14 +415,14 @@
         <TextView
             android:id="@+id/textView26"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="10dp"
             android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:gravity="top|center_vertical|center_horizontal"
+            android:gravity="center_vertical|center_horizontal"
             android:orientation="vertical">
 
             <Button

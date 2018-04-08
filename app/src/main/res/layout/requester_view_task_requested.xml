@@ -17,13 +17,13 @@
         <TextView
             android:id="@+id/textView91"
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="2dp"
             android:layout_weight="1" />
 
         <TextView
             android:id="@+id/textView17"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:fontFamily="serif"
             android:text="Task Information"
@@ -237,13 +237,12 @@
         <TextView
             android:id="@+id/textView79"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="14dp"
             android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
@@ -295,7 +294,7 @@
         <TextView
             android:id="@+id/textView94"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="8dp"
             android:layout_weight="1" />
 
     </LinearLayout>
