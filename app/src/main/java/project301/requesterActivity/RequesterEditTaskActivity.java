@@ -25,7 +25,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -36,7 +35,6 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.novoda.merlin.MerlinsBeard;
-
 import project301.BidCounter;
 import project301.Photo;
 import project301.R;
@@ -47,7 +45,6 @@ import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
 import project301.controller.PlaceArrayAdapterController;
 import project301.controller.TaskController;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -55,7 +52,6 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
-
 import static com.loopj.android.http.AsyncHttpClient.LOG_TAG;
 
 /**
@@ -99,12 +95,14 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
     public static final int GET_FROM_GALLERY = 3;
     private boolean setImage;
     private Photo task_photos;
-
     private Timer timer;
     MyTask myTask = new MyTask();
+
+    /**
+     * monitor the new status and update.
+     */
     private class MyTask extends TimerTask {
         public void run() {
-            //Log.i("Timer7","run");
             BidController bidController = new BidController();
             //check counter change
             BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
@@ -201,10 +199,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
         start_list = FC.loadSentTasksFromFile(context);
 
 
-
-
         // get index of target task
-
         view_index = intent.getExtras().get("info").toString();
         final int index = Integer.parseInt(view_index);
 
@@ -255,7 +250,6 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
                     Intent info2 = new Intent(RequesterEditTaskActivity.this, RequesterAllListActivity.class);
 
 
-
                     last_index = task_list.size()-1;
                     view_index=Integer.toString(last_index);
 
@@ -272,15 +266,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
                     //to do:set photo
                     if (setImage == true){
                         target_task.setTaskPhoto(task_photos);
-                        /*Photo new_photo = new Photo();
 
-                        BitmapDrawable bit_map_drawable = (BitmapDrawable) post_photo.getDrawable();
-
-                        Bitmap bitmap_photo = bit_map_drawable.getBitmap();
-
-                        new_photo.addPhoto(getStringFromBitmap(bitmap_photo));
-
-                        new_task.setTaskPhoto(new_photo);*/
                     }
                     //upload to database
                     if(merlinsBeard.isConnected()) {
@@ -315,8 +301,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
 
                     startActivity(info2);
 
-
-
+                //toast to make attention
 
                 }else{
                     Toast toast = Toast.makeText(context,"Enter name, detail destination, ideal price, date and time",Toast.LENGTH_LONG);
@@ -614,6 +599,13 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
     }
 
 
+    /**
+     * the function to check empty
+     * @param name
+     * @param destination
+     * @param ideal_price
+     * @return
+     */
     private boolean check_empty(String name, String destination, String ideal_price)
     {
         if(name.length()==0 || destination.length()==0|| ideal_price.length()==0 ){
@@ -622,6 +614,11 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
         return true;
     }
 
+    /**
+     * check title length function
+     * @param name
+     * @return
+     */
     private boolean check_titlelength(String name)
     {
         if(name.length()>=31 ){
@@ -630,6 +627,11 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
         return true;
     }
 
+    /**
+     * check detail length function
+     * @param detail
+     * @return
+     */
     private boolean check_detaillength(String detail)
     {
         if(detail.length()>=301 ){
@@ -637,6 +639,12 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
         }
         return true;
     }
+
+    /**
+     * check status function
+     * @param status
+     * @return
+     */
     private boolean check_status(String status)
     {
         if(status.equals("request" )){
@@ -646,6 +654,9 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
         return false;
     }
 
+    /**
+     * the function to support open requester info dialog
+     */
     private void openRequestInfoDialog() {
         // get request info, and show it on the dialog
 

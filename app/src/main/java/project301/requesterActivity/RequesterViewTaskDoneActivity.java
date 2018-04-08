@@ -12,9 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import com.novoda.merlin.MerlinsBeard;
-
 import project301.Bid;
 import project301.BidCounter;
 import project301.R;
@@ -25,7 +23,6 @@ import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
 import project301.controller.TaskController;
 import project301.controller.UserController;
-
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -58,7 +55,6 @@ public class RequesterViewTaskDoneActivity extends AppCompatActivity  {
     private ArrayList<Task> tasklist;
     private ArrayList<Task> alltasklist;
     private User provider;
-
     private String view_index;
     private int view_index_int;
     protected MerlinsBeard merlinsBeard;

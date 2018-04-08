@@ -15,10 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.Timer;
 import java.util.TimerTask;
-
 import project301.BidCounter;
 import project301.R;
 import project301.User;
@@ -55,12 +53,14 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
     private String userId;
     private User user;
     private Context context;
-
     private Timer timer;
     MyTask myTask = new MyTask();
+
+    /**
+     * monitor the new status and update
+     */
     private class MyTask extends TimerTask {
         public void run() {
-           // Log.i("Timer6","run");
             BidController bidController = new BidController();
             //check counter change
             BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
@@ -82,8 +82,6 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
                     updateBidCounterOfThisRequester.execute(bidCounter);
                 }
             }
-
-
 
         }
     };
@@ -174,7 +172,6 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
                 //change activity
                 Intent info2 = new Intent(RequesterEditInfoActivity.this, RequesterMainActivity.class);
                 info2.putExtra("userId",userId);
@@ -249,7 +246,6 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
     private void openRequestInfoDialog() {
         // get request info, and show it on the dialog
 
-
         AlertDialog.Builder builder = new AlertDialog.Builder(RequesterEditInfoActivity.this);
         builder.setTitle("New Bid")
                 .setMessage("You got a new bid!");
@@ -258,6 +254,11 @@ public class RequesterEditInfoActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * method to check name length
+     * @param name
+     * @return
+     */
     private boolean check_namelength(String name)
     {
         if(name.length()>=9 ){

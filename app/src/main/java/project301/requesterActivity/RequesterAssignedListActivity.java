@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import com.novoda.merlin.MerlinsBeard;
-
 import project301.BidCounter;
 import project301.R;
 import project301.Task;
@@ -22,7 +21,6 @@ import project301.controller.BidController;
 import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
 import project301.controller.TaskController;
-
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -42,7 +40,6 @@ import java.util.concurrent.ExecutionException;
 public class RequesterAssignedListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
     private ListView assignedTaskListView;
     private String userName;
-
     private String userId;
     private static final String FILENAME = "ProjectMaster.sav";
     private ArrayList<Task> tasklist;
@@ -51,14 +48,15 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
     private ListView mListView;
     private SwipeRefreshLayout mSwipeLayout;
     ArrayList<Task> assignedTaskList = new ArrayList<>();
-
     RequesterAdapter adapter;
-
     private Timer timer;
     MyTask myTask = new MyTask();
+
+    /**
+     * monitor the new status.
+     */
     private class MyTask extends TimerTask {
         public void run() {
-           // Log.i("Timer2","run");
             BidController bidController = new BidController();
             //check counter change
             BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
@@ -141,7 +139,7 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         });
 
 
-        //设置在listview上下拉刷新的监听
+        //set listview pull down to renew
         ListView mListView = (ListView) findViewById(R.id.post_list);
         final SwipeRefreshLayout mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_ly);
 
@@ -152,7 +150,7 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //设置2秒的时间来执行以下事件
+                //set 2 seconds to implement
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
                         renewTheList();
@@ -173,6 +171,8 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
     @Override
     protected void onStart(){
         super.onStart();
+
+        //check timer status
         if(timer!=null) {
 
             timer.cancel();
@@ -185,13 +185,13 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
 
         renewTheList();
 
-        //Log.i("Sign", Integer.toString(tasklist.size()));
-
     }
 
+    /**
+     * function to support open requester info dialoog
+     */
     private void openRequestInfoDialog() {
         // get request info, and show it on the dialog
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(RequesterAssignedListActivity.this);
         builder.setTitle("New Bid")
@@ -200,6 +200,10 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    /**
+     * the function to renew the list, which used in timer
+     */
     public void renewTheList(){
 
         BidController bidController = new BidController();
@@ -263,6 +267,8 @@ public class RequesterAssignedListActivity extends AppCompatActivity implements 
         // Attach the adapter to a ListView
         this.assignedTaskListView.setAdapter(adapter);
     }
+
+    //check handler
     Handler handler = new Handler(new Handler.Callback() {
 
         @Override

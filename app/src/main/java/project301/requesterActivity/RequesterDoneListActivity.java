@@ -13,14 +13,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-
 import com.novoda.merlin.MerlinsBeard;
-
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
-
 import project301.BidCounter;
 import project301.R;
 import project301.Task;
@@ -52,12 +49,14 @@ public class RequesterDoneListActivity extends AppCompatActivity implements Swip
     private SwipeRefreshLayout mSwipeLayout;
     ArrayList<Task> doneTaskList = new ArrayList<>();
     RequesterAdapter adapter;
-
     private Timer timer;
     MyTask myTask = new MyTask();
+
+    /**
+     * monitor the new status and update
+     */
     private class MyTask extends TimerTask {
         public void run() {
-           // Log.i("Timer5","run");
             BidController bidController = new BidController();
             //check counter change
             BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
@@ -144,7 +143,7 @@ public class RequesterDoneListActivity extends AppCompatActivity implements Swip
         });
 
 
-        //设置在listview上下拉刷新的监听
+        //set listview pulldown renew
         ListView mListView = (ListView) findViewById(R.id.post_list);
         final SwipeRefreshLayout mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_ly);
 
@@ -155,7 +154,7 @@ public class RequesterDoneListActivity extends AppCompatActivity implements Swip
         mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //设置2秒的时间来执行以下事件
+                //set 2 second to implement
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
                         renewTheList();
@@ -188,13 +187,11 @@ public class RequesterDoneListActivity extends AppCompatActivity implements Swip
         }
         renewTheList();
 
-        //Log.i("Sign", Integer.toString(tasklist.size()));
 
     }
 
     private void openRequestInfoDialog() {
         // get request info, and show it on the dialog
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(RequesterDoneListActivity.this);
         builder.setTitle("New Bid")
@@ -259,6 +256,7 @@ public class RequesterDoneListActivity extends AppCompatActivity implements Swip
         // Attach the adapter to a ListView
         this.doneTaskListView.setAdapter(adapter);
     }
+    //check handler
     Handler handler = new Handler(new Handler.Callback() {
 
         @Override

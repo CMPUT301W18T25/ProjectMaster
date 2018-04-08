@@ -58,7 +58,6 @@ public class RequesterChooseBidActivity extends AppCompatActivity {
     MyTask myTask = new MyTask();
     private class MyTask extends TimerTask {
         public void run() {
-            //Log.i("Timer4","run");
             BidController bidController = new BidController();
             //check counter change
             BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
@@ -113,7 +112,6 @@ public class RequesterChooseBidActivity extends AppCompatActivity {
         thisBid = bidList.get(bidIndex);
         Log.i("Bid name",thisBid.getProviderId());
 
-        //get user
 
         // find view by id.
         confirmName = (TextView) findViewById(R.id.confirm_name);

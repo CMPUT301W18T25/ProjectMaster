@@ -47,20 +47,20 @@ public class RequesterAllListActivity extends AppCompatActivity implements Swipe
     private static final String FILENAME = "ProjectMaster.sav";
     private ArrayList<Task> tasklist = new ArrayList<>();
     protected MerlinsBeard merlinsBeard;
-
     protected Context context;
     private ListView mListView;
     private SwipeRefreshLayout mSwipeLayout;
     ArrayList<Task> assignedTaskList = new ArrayList<>();
-
     RequesterAdapter adapter;
-
     private Timer timer;
     MyTask myTask = new MyTask();
+
+    /**
+     * monitor the new status update
+     */
     private class MyTask extends TimerTask{
 
         public void run(){
-            //Log.i("Timer1","run");
             BidController bidController = new BidController();
             //check counter change
             BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
@@ -78,8 +78,6 @@ public class RequesterAllListActivity extends AppCompatActivity implements Swipe
                 }
 
                 if(bidCounter.getCounter()!= bidCounter.getPreviousCounter()){
-                    //Log.i("New Bid","New Bid");
-                    //Log.i("bidCount",Integer.toString(bidCounter.getCounter()));
                     Message msg1 = new Message();
                     msg1.arg1 = 1;
                     handler.sendMessage(msg1);
@@ -162,7 +160,7 @@ public class RequesterAllListActivity extends AppCompatActivity implements Swipe
         });
 
 
-        //设置在listview上下拉刷新的监听
+        //set listview pull down to renew
         ListView mListView = (ListView) findViewById(R.id.post_list);
         final SwipeRefreshLayout mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_ly);
 
@@ -173,7 +171,7 @@ public class RequesterAllListActivity extends AppCompatActivity implements Swipe
         mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //设置2秒的时间来执行以下事件
+                //set 2 seconds to implement
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
                         renewTheList();
@@ -205,17 +203,15 @@ public class RequesterAllListActivity extends AppCompatActivity implements Swipe
         }
         renewTheList();
 
-        //Log.i("Sign", Integer.toString(tasklist.size()));
 
     }
 
     private void openRequestInfoDialog() {
         // get request info, and show it on the dialog
-
-
         AlertDialog.Builder builder = new AlertDialog.Builder(RequesterAllListActivity.this);
         builder.setTitle("New Bid")
                 .setMessage("You got a new bid!");
+
         // Create & Show the AlertDialog
         AlertDialog dialog = builder.create();
         dialog.show();

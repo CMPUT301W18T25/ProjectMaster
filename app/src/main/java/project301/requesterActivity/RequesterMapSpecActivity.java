@@ -11,25 +11,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
 import project301.R;
-
-import project301.controller.FileSystemController;
 import project301.controller.TaskController;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -86,8 +80,6 @@ public class RequesterMapSpecActivity extends AppCompatActivity implements OnMap
         userId = intent.getExtras().get("userId").toString();
         view_index = intent.getExtras().get("info").toString();
         taskId = intent.getExtras().get("taskId").toString();
-
-
 
 
         setContentView(R.layout.view_on_map_spec);

@@ -9,10 +9,8 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
 import java.util.Timer;
 import java.util.TimerTask;
-
 import project301.BidCounter;
 import project301.R;
 import project301.allUserActivity.LogInActivity;
@@ -36,9 +34,13 @@ public class RequesterMainActivity extends AppCompatActivity {
     private String userId;
     private Timer timer;
     MyTask myTask = new MyTask();
+
+    /**
+     * monitor the new status and update
+     */
     private class MyTask extends TimerTask {
         public void run() {
-            //Log.i("Timer8","run");
+
             BidController bidController = new BidController();
             //check counter change
             BidCounter bidCounter = bidController.searchBidCounterOfThisRequester(userId);
@@ -198,6 +200,10 @@ public class RequesterMainActivity extends AppCompatActivity {
 
         }
     }
+
+    /**
+     * the method to support open requester info dialog
+     */
 
     private void openRequestInfoDialog() {
         // get request info, and show it on the dialog

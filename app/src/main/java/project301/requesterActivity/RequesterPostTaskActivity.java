@@ -25,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.view.ViewGroup.LayoutParams;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,7 +32,6 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
-
 import project301.BidCounter;
 import project301.Photo;
 import project301.allUserActivity.CameraActivity;
@@ -45,10 +43,7 @@ import project301.utilities.FileIOUtil;
 import project301.R;
 import project301.Task;
 import project301.controller.TaskController;
-
-
 import static com.loopj.android.http.AsyncHttpClient.LOG_TAG;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -73,12 +68,10 @@ import com.novoda.merlin.MerlinsBeard;
 
 
 
-
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterPostTaskActivity extends AppCompatActivity implements
     GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
     private Context context;
-
     private EditText post_name;
     private EditText post_detail;
     private AutoCompleteTextView post_destination;
@@ -229,15 +222,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
                     //to do:set photo
                     if (setImage == true){
                         new_task.setTaskPhoto(photos);
-                        /*Photo new_photo = new Photo();
 
-                        BitmapDrawable bit_map_drawable = (BitmapDrawable) post_photo.getDrawable();
-
-                        Bitmap bitmap_photo = bit_map_drawable.getBitmap();
-
-                        new_photo.addPhoto(getStringFromBitmap(bitmap_photo));
-
-                        new_task.setTaskPhoto(new_photo);*/
                     }
 
                     //upload new task data to database
@@ -261,6 +246,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
                     info2.putExtra("userId",userId);
                     startActivity(info2);
 
+                //toast to make attention to remind
                 }else{
                     Toast toast = Toast.makeText(context,"Enter name, detail destination, ideal price, date and time",Toast.LENGTH_LONG);
                     toast.show();
@@ -335,6 +321,9 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
     }
 
 
+    /**
+     * method to attach photo
+     */
     private void attachCameraPhoto(){
         Log.d("RequesterPostTaskActivity","Sleeping");
 
@@ -368,6 +357,12 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         setImage=true;
     }
 
+    /**
+     * the method on activityresult is to support the photo gallery
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -435,7 +430,15 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
             attachCameraPhoto();
         }
     }
+
+
     // source: modified from https://stackoverflow.com/questions/17489390/image-gallery-with-a-horizontal-scrollview
+
+    /**
+     * method to insert photo
+     * @param bm
+     * @return
+     */
     public View insertPhoto(Bitmap bm){
 
         LinearLayout layout = new LinearLayout(getApplicationContext());
@@ -491,8 +494,11 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         }
     }
 
-
-
+    /**
+     * method to check empty
+     * @param name
+     * @return
+     */
     private boolean check_empty(String name)
     {
         if(name.length()==0){
@@ -501,6 +507,11 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         return true;
     }
 
+    /**
+     * method to check title length
+     * @param name
+     * @return
+     */
 
     private boolean check_titlelength(String name)
     {
@@ -510,6 +521,11 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         return true;
     }
 
+    /**
+     * method to check detail length
+     * @param detail
+     * @return
+     */
     private boolean check_detaillength(String detail)
     {
         if(detail.length()>=301 ){
