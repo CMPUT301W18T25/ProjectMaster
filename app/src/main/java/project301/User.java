@@ -25,6 +25,7 @@ public class User {
 
     public User(){
         super();
+        this.providerBiddenTask = new ArrayList<>();
     }
     public User(String userId,String userName,String userPhone,String userEmail,String userPassword,String userType,String resultId,ArrayList<String> providerBiddenTask){
         this.userId = userId;
@@ -34,7 +35,7 @@ public class User {
         this.userType = userType;
         this.userPhone = userPhone;
         this.resultId = resultId;
-        this.providerBiddenTask = new ArrayList<String>();
+        this.providerBiddenTask = new ArrayList<>();
 
     }
 
@@ -167,5 +168,10 @@ public class User {
      * add his bidden task
      * @param taskID task id
      */
+
+    public void addProviderBiddenTask(String taskID){
+        this.providerBiddenTask.add(taskID);
+    }
+
 
 }

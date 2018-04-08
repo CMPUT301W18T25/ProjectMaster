@@ -258,6 +258,7 @@ public class TaskController {
             Log.i("Finish","execution");
         }
     }
+    // TODO first step optimized, used taskbidder in user object
     /**
      * A static class to set bid in ES database
      */
@@ -269,6 +270,16 @@ public class TaskController {
             this.current_task = current_task;
             this.current_bid = current_bid;
             this.current_task.addBid(this.current_bid);
+
+            UserController getUser = new UserController();
+            User new_user = getUser.getAUserById(this.current_bid.getProviderId());
+
+            new_user.addProviderBiddenTask(this.current_task.getId());
+
+            // update user
+
+            UserController uc= new UserController();
+            uc.updateUser(new_user);
         }
 
         @Override
@@ -293,17 +304,6 @@ public class TaskController {
                 e.printStackTrace();
                 Log.i("Error", "We failed to connect Elasticsearch server");
             }
-            //UserController getUser = new UserController();
-            //User new_user = getUser.getAUserById(current_bid.getProviderId());
-
-            //new_user.addProviderBiddenTask(current_task.getId());
-
-            // update user
-
-            //UserController uc= new UserController();
-            //uc.updateUser(new_user);
-
-
             return null;
         }
     }
@@ -389,6 +389,7 @@ public class TaskController {
             return rtTasks;
         }
     }
+    // TODO this method should not work, but program seems good? is it ghost
     /**
      * A static class to get requester bidden tasks in ES database
      */
@@ -426,30 +427,81 @@ public class TaskController {
             return rtTasks;
         }
     }
-    //TODO optimized, w8 for test
+    //TODO optimized first step
     /**
      * A static class to search bidden tasks in ES database
      */
     public static class searchBiddenTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
         String providerId;
+        ArrayList<String> result_tasks_id = new ArrayList<String>();
+        searchBiddenTasksOfThisProviderGetTaskList search;
+        ArrayList<Task> result_tasks = new ArrayList<>();
 
         public searchBiddenTasksOfThisProvider(String providerId){
             this.providerId = providerId;
+            this.search = new searchBiddenTasksOfThisProviderGetTaskList(this.providerId);
+            this.search.execute();
+
+
+            try {
+                this.result_tasks_id = this.search.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+            for (int i = 0; i < this.result_tasks_id.size(); i++){
+                TaskController.getTaskById getTaskById = new TaskController.getTaskById();
+
+                getTaskById.execute(this.result_tasks_id.get(i));
+
+                try {
+                    this.result_tasks.add(getTaskById.get());
+                    Log.i("State", "searchBiddenTasksOfThisProvider: sub method pass1");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    Log.i("Error", "doInBackground: get task failed");
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                    Log.i("Error", "doInBackground: connection failed");
+                }
+            }
         }
 
         protected ArrayList<Task> doInBackground(Void... nul) {
+
+            return this.result_tasks;
+        }
+
+    }
+    //TODO optimized, w8 for test
+    /**
+     * A static class to search bidden tasks in ES database
+     */
+    public static class searchBiddenTasksOfThisProviderGetTaskList extends AsyncTask<Void, Void, ArrayList<String>>{
+        String providerId;
+        ArrayList<String> result_tasks = new ArrayList<String>();
+
+
+        public searchBiddenTasksOfThisProviderGetTaskList(String providerId){
+            this.providerId = providerId;
+        }
+
+        protected ArrayList<String> doInBackground(Void... nul) {
             verifySettings();
 
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
+            User found_user = new User();
+            ArrayList<String> result_tasks_id;
+
 
             String query =
                     "\n{ \n"+
-                            "\"size\" : 50,\n"+
+                            "\"size\" : 1,\n"+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
-                            "               { \"term\" : {\"taskStatus\" : " + "\"bidden\"}}," +"\n" +
-                            "               { \"term\" : {\"taskProvider\" : " + "\""+this.providerId+"\"}}" +"\n" +
+                            "               { \"term\" : {\"userId\" : " + "\""+this.providerId+"\"}}" +"\n" +
                             "           ]\n"+
                             "       }\n"+
                             "   }\n"+
@@ -458,14 +510,14 @@ public class TaskController {
             Log.i("Query", "The query was " + query );
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w18t25")
-                    .addType("task")
+                    .addType("userst")
                     .build();
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<Task> rt
-                            = result.getSourceAsObjectList(Task.class);
-                    result_tasks.addAll(rt);
+                    User rt
+                            = result.getSourceAsObject(User.class);
+                    found_user = rt;
                     /*
                     for(Task task:rt){
 
@@ -482,14 +534,17 @@ public class TaskController {
                     Log.i("allbidden","test");
 
 
-                    Log.i("Success", "Data retrieved from database: " + Integer.toString(rt.size()));
-                } else {
+                    Log.i("Success", "Data retrieved from database: ");
+                } else   {
                     Log.i("Error", "The search query failed");
                 }
                 // TODO get the results of the query
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
+
+            result_tasks = found_user.getProviderBiddenTask();
+
             return result_tasks;
         }
 
@@ -516,7 +571,7 @@ public class TaskController {
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"must\" : [\n"+
-                            "               { \"term\" : {\"taskStatus\" : " + "\"done\"}}" + "\n" +
+                            "               { \"term\" : {\"taskStatus\" : " + "\"done\"}}," + "\n" +
                             "               { \"term\" : {\"taskProvider\" : " + "\""+this.providerId+"\"}}" +"\n"+
                             "           ]\n"+
                             "       }\n"+
@@ -566,7 +621,7 @@ public class TaskController {
      */
 
     //TODO test passed, REPLACE searchAssignTasksOfThisProvider
-    public static class testSearchAssignTasksOfThisProvider extends AsyncTask<String, Void, ArrayList<Task>>{
+    public static class searchAssignTasksOfThisProvider extends AsyncTask<String, Void, ArrayList<Task>>{
 
         protected ArrayList<Task> doInBackground(String... providerId) {
             verifySettings();
@@ -611,6 +666,7 @@ public class TaskController {
 
     }
 
+        /*
     public static class searchAssignTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
         String providerId;
 
@@ -673,6 +729,7 @@ public class TaskController {
         }
 
     }
+    */
     /**
      * A static class to search all tasks of this requester in ES database
      */
