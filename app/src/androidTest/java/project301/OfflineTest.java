@@ -85,6 +85,10 @@ public class OfflineTest extends ActivityInstrumentationTestCase2{
             }
         }
         assertEquals(found,true);
+        TaskController.deleteAllTasks deleteAllTasks2 = new TaskController.deleteAllTasks();
+        deleteAllTasks2.execute("");
+        UserController.deleteAllUsers deleteAllUsers2 = new UserController.deleteAllUsers();
+        deleteAllUsers2.execute("");
     }
 
     public void testOfflineEdit(){
