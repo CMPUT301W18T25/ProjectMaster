@@ -1,8 +1,15 @@
 package project301;
 
 /**
- * Created by a123456 on 2018-03-22.
+ * Detail:
+ * @classname : BidCounter
+ * @Date :   18/03/2018
+ * @author : Yuqi Zhang
+ * @author :Yue Ma
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
+
 
 public class BidCounter {
     private String requesterId;

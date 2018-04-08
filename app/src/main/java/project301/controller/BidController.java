@@ -21,9 +21,14 @@ import project301.Bid;
 import project301.BidCounter;
 
 /**
- * Created by a123456 on 2018-03-22.
+ * Detail :
+ * @classname : BidController
+ * @Date :   18/03/2018
+ * @author : Yuqi Zhang
+ * @author : Yue Ma
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
-
 public class BidController {
     private static JestDroidClient client;
 

@@ -8,8 +8,6 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="2dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,9 +15,15 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/textView132"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
             android:id="@+id/textView23"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="18dp"
             android:layout_weight="1"
             android:fontFamily="serif"
             android:text="Task Information"
@@ -43,7 +47,7 @@
                 <TextView
                     android:id="@+id/textView22"
                     android:layout_width="match_parent"
-                    android:layout_height="10dp"
+                    android:layout_height="4dp"
                     android:layout_weight="1" />
 
                 <LinearLayout
@@ -202,14 +206,26 @@
                         app:srcCompat="@android:drawable/ic_menu_gallery" />
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/textView137"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_weight="1" />
+
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
 
         <TextView
+            android:id="@+id/textView135"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
             android:id="@+id/textView20"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="18dp"
             android:layout_weight="1"
             android:fontFamily="serif"
             android:text="Provider Information"
@@ -233,7 +249,7 @@
                 <TextView
                     android:id="@+id/textView21"
                     android:layout_width="match_parent"
-                    android:layout_height="14dp"
+                    android:layout_height="4dp"
                     android:layout_weight="1" />
 
                 <LinearLayout
@@ -307,9 +323,15 @@
         </android.support.v7.widget.CardView>
 
         <TextView
+            android:id="@+id/textView136"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
             android:id="@+id/textView24"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="18dp"
             android:layout_weight="1"
             android:fontFamily="serif"
             android:text="Deal Information"
@@ -333,7 +355,7 @@
                 <TextView
                     android:id="@+id/textView25"
                     android:layout_width="match_parent"
-                    android:layout_height="14dp"
+                    android:layout_height="4dp"
                     android:layout_weight="1" />
 
                 <LinearLayout
@@ -395,7 +417,7 @@
         <TextView
             android:id="@+id/textView26"
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="1dp"
             android:layout_weight="1" />
 
         <LinearLayout
@@ -407,7 +429,7 @@
             <Button
                 android:id="@+id/pay_button"
                 android:layout_width="match_parent"
-                android:layout_height="28dp"
+                android:layout_height="24dp"
                 android:layout_weight="1"
                 android:background="@color/black1"
                 android:fontFamily="serif"
@@ -418,13 +440,13 @@
             <TextView
                 android:id="@+id/textView74"
                 android:layout_width="match_parent"
-                android:layout_height="4dp"
+                android:layout_height="1dp"
                 android:layout_weight="1" />
 
             <Button
                 android:id="@+id/showlist_button"
                 android:layout_width="match_parent"
-                android:layout_height="28dp"
+                android:layout_height="24dp"
                 android:layout_weight="1"
                 android:background="@color/black1"
                 android:fontFamily="serif"
@@ -435,13 +457,13 @@
             <TextView
                 android:id="@+id/textView75"
                 android:layout_width="match_parent"
-                android:layout_height="4dp"
+                android:layout_height="1dp"
                 android:layout_weight="1" />
 
             <Button
                 android:id="@+id/delete_deal_button"
                 android:layout_width="match_parent"
-                android:layout_height="28dp"
+                android:layout_height="24dp"
                 android:layout_weight="1"
                 android:background="@color/black1"
                 android:fontFamily="serif"
@@ -452,7 +474,7 @@
             <TextView
                 android:id="@+id/textView95"
                 android:layout_width="match_parent"
-                android:layout_height="4dp"
+                android:layout_height="1dp"
                 android:layout_weight="1" />
 
         </LinearLayout>

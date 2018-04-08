@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="com.novoda:merlin-0.8.0">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/merlin-0.8.0.aar/359ed17d2f096f7cb756470c5725af95/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/merlin-0.8.0.aar/359ed17d2f096f7cb756470c5725af95/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/merlin-0.8.0.aar/660f096200cd10638b98c823f287c32c/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/merlin-0.8.0.aar/660f096200cd10638b98c823f287c32c/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

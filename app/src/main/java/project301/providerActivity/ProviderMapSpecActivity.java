@@ -1,4 +1,4 @@
-package project301.requesterActivity;
+package project301.providerActivity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,18 +12,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import project301.R;
-
-import project301.controller.FileSystemController;
-import project301.controller.TaskController;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -33,9 +27,14 @@ import com.google.android.gms.tasks.Task;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import project301.R;
+import project301.controller.TaskController;
+import project301.requesterActivity.RequesterViewTaskRequestActivity;
+
 /**
- * Detail : view all the assigned tasks on the map for requester
- * @classname : RequesterMapActivity
+ * Detail : Click the view on map on a specific task, we can see the location of the specific task
+ * on the map.
+ * @classname : ProviderMapSpecActivity
  *
  * @Date :   18/03/2018
  * @author : Julian Stys
@@ -46,12 +45,12 @@ import java.util.concurrent.ExecutionException;
 
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
-public class RequesterMapBiddenActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class ProviderMapSpecActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private String userId;
 
-    private static final String TAG = RequesterMapBiddenActivity.class.getSimpleName();
+    private static final String TAG = ProviderMapSpecActivity.class.getSimpleName();
 
     private Boolean mLocationPermissionGranted;
 
@@ -59,7 +58,8 @@ public class RequesterMapBiddenActivity extends AppCompatActivity implements OnM
     private static final int DEFAULT_ZOOM = 15;
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
-
+    private String view_index;
+    private String taskId;
 
     private Location mLastKnownLocation;
 
@@ -68,10 +68,9 @@ public class RequesterMapBiddenActivity extends AppCompatActivity implements OnM
 
 
     private ArrayList<project301.Task> taskList;
-
+    private project301.Task specTask;
     // Testing variables
     private ArrayList<Location> mockupTasks;
-    ArrayList<project301.Task> biddenTaskList = new ArrayList<>();
 
 
 
@@ -83,28 +82,25 @@ public class RequesterMapBiddenActivity extends AppCompatActivity implements OnM
         final Intent intent = getIntent();
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
+        view_index = intent.getExtras().get("info").toString();
+        taskId = intent.getExtras().get("taskId").toString();
 
 
-        setContentView(R.layout.view_on_map_bidden);
+
+
+        setContentView(R.layout.view_on_map_spec);
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map_bidden);
+                .findFragmentById(R.id.map_spec);
         mapFragment.getMapAsync(this);
 
-        Button back_bidden_Button = (Button) findViewById(R.id.go_back_bidden);
-        back_bidden_Button.setOnClickListener(new View.OnClickListener() {
+        Button back_spec_Button = (Button) findViewById(R.id.go_back_spec);
+        back_spec_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "Go Back pressed");
-                Intent intent = new Intent(RequesterMapBiddenActivity.this, RequesterBiddenListActivity.class);
-                intent.putExtra("userId",userId);
-
-                startActivity(intent);
-
-
-                startActivity(intent);
+                finish();
             }
         });
     }
@@ -246,39 +242,27 @@ public class RequesterMapBiddenActivity extends AppCompatActivity implements OnM
         Log.d(TAG,"displayTaskLocations");
         mMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
 
-        for (int i = 0; i < biddenTaskList.size(); i++) {
-            project301.Task currTask = biddenTaskList.get(i);
 
-            if (currTask.getTasklgtitude() != null
-                    && currTask.getTasklatitude() != null
-                    && currTask.getTaskStatus() != "done") {
+        if (specTask.getTasklgtitude() != null
+                && specTask.getTasklatitude() != null) {
 
-                if (getTaskDistance(currTask) <= 5000) {
+            if (getTaskDistance(specTask) <= 5000) {
 
-                    Marker marker = mMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(currTask.getTasklatitude(), currTask.getTasklgtitude()))
-                            .anchor(0.5f, 0.5f)
-                            .title(currTask.getTaskName())
-                    );
-                    // Make bidden tasks have blue icon
-                    if (currTask.getTaskStatus().equals("bidden")){
-                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                    }
-                    // Make assigned task have a green icon
-                    else if (currTask.getTaskStatus().equals("assigned")) {
-                        marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                    }
-                    Log.d(TAG, "Adding marker task name: " + marker.getTitle());
-                    marker.setTag(i);
-                    marker.showInfoWindow();
-                } else {
-                    Log.d(TAG, "Task is located too far away: " + currTask.getTaskName());
-                }
+                Marker marker = mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(specTask.getTasklatitude(), specTask.getTasklgtitude()))
+                        .anchor(0.5f, 0.5f)
+                        .title(specTask.getTaskName())
+                );
 
+                Log.d(TAG, "Adding marker task name: " + marker.getTitle());
+                marker.showInfoWindow();
             } else {
-                Log.d(TAG, "No location for: " + biddenTaskList.get(i).getTaskName());
-
+                Log.d(TAG, "Task is located too far away: " + specTask.getTaskName());
             }
+
+        } else {
+            Log.d(TAG, "No location for: " + specTask.getTaskName());
+
         }
     }
     // source: https://stackoverflow.com/questions/2741403/get-the-distance-between-two-geo-points
@@ -302,14 +286,14 @@ public class RequesterMapBiddenActivity extends AppCompatActivity implements OnM
     @Override
     public boolean onMarkerClick(Marker marker){
         int markerIndex = (Integer) marker.getTag();
-        project301.Task clickedTask = biddenTaskList.get(markerIndex);
+        project301.Task clickedTask = taskList.get(markerIndex);
         Log.d(TAG,"Clicked on marker "+String.valueOf(markerIndex));
         Log.d(TAG,"Task info: "+clickedTask.getTaskName());
         Log.d(TAG,"Task info: "+clickedTask.getTaskAddress());
 
 
 
-        Intent info1 = new Intent(RequesterMapBiddenActivity.this, RequesterViewTaskRequestActivity.class);
+        Intent info1 = new Intent(ProviderMapSpecActivity.this, RequesterViewTaskRequestActivity.class);
         info1.putExtra("info", markerIndex);
         info1.putExtra("userId",userId);
         startActivity(info1);
@@ -348,38 +332,20 @@ public class RequesterMapBiddenActivity extends AppCompatActivity implements OnM
     }
 
     private void getAllTaksInfo() {
+        TaskController.getTaskById search = new TaskController.getTaskById();
+        search.execute(taskId);
 
-        TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-        search.execute(userId);
-        FileSystemController FC = new FileSystemController();
-        ArrayList<project301.Task> tasklist = new ArrayList<project301.Task>();
         try {
-            tasklist= search.get();
+            specTask = search.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        FC.deleteAllFiles(getApplication(),"sent");
-        for(project301.Task task:tasklist){
-            FC.saveToFile(task,"sent",getApplication());
-        }
+        Log.d(TAG,"Requester TASK: "+specTask.getTaskName()+", "+specTask.getTaskStatus());
 
-    // FC.deleteAllFiles(getApplication(),"sent");
-        tasklist = FC.loadSentTasksFromFile(getApplication());
-        biddenTaskList.clear();
 
-        for(
-    project301.Task task: tasklist){
-        if(task.getTaskStatus().equals("bidden")){
 
-            biddenTaskList.add(task);
-
-        }
-    }
-        for (int i =0;i<biddenTaskList.size();i++){
-            Log.d(TAG,"Requester TASK: "+biddenTaskList.get(i).getTaskName()+", "+biddenTaskList.get(i).getTaskStatus());
-        }
     }
 
 }

@@ -34,8 +34,8 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
+ * Detail : view all the done tasks on the map for requester
  * @classname : RequesterMapActivity
- * @class Detail :
  *
  * @Date :   18/03/2018
  * @author : Julian Stys

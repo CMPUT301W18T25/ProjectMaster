@@ -33,8 +33,8 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
+ * See all the requesters tasks on the map.
  * @classname : RequesterMapActivity
- * @class Detail :
  *
  * @Date :   18/03/2018
  * @author : Julian Stys
