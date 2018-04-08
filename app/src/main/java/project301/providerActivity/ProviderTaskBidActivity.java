@@ -156,21 +156,7 @@ public class ProviderTaskBidActivity extends AppCompatActivity {
             }
 
 
-            //settle cancel button : cancel the old bid
-            Button cancelButton = (Button) findViewById(R.id.cancel_button);
-            cancelButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //print error message
-                    Toast toast = Toast.makeText(context, "You cannot cancle your bid!", Toast.LENGTH_LONG);
-                    TextView v1 = (TextView) toast.getView().findViewById(android.R.id.message);
-                    v1.setTextColor(Color.RED);
-                    v1.setTextSize(20);
-                    v1.setGravity(Gravity.CENTER);
-                    toast.show();
 
-                }
-            });
 
 
             //settle bid button : add the bid to list and jump back to history

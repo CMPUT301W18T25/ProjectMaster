@@ -639,6 +639,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
             timer = null;
         }
     }
+
     @Override
     protected void onDestroy(){
         super.onDestroy();
