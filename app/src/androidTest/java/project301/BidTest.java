@@ -151,6 +151,8 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
         }
 
         assertEquals(searchedBidCounter.getRequesterId(),bidCounter.getRequesterId());
+        BidController.deleteAllBidCounters deleteAllBidCounters2 = new BidController.deleteAllBidCounters();
+        deleteAllBidCounters2.execute("");
 
     }
     public void testUpdateBidCounter(){
@@ -198,6 +200,8 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
 
         assertEquals(searchedBidCounter.getRequesterId(),bidCounter.getRequesterId());
         assertEquals(searchedBidCounter.getCounter(),2);
+        BidController.deleteAllBidCounters deleteAllBidCounters2 = new BidController.deleteAllBidCounters();
+        deleteAllBidCounters2.execute("");
 
 
     }
