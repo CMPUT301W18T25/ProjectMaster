@@ -852,12 +852,7 @@ public class TaskTest {
         }
 
     }
-    @Test
-    public void deleteTaskTest(){
 
-        TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
-        deleteAllTasks.execute("");
-    }
 
     @Test
     public void searchTaskByKeywordTest(){

@@ -8,6 +8,7 @@ import project301.allUserActivity.LogInActivity;
 import project301.controller.FileSystemController;
 import project301.controller.OfflineController;
 import project301.controller.TaskController;
+import project301.controller.UserController;
 
 import android.util.Log;
 
@@ -46,6 +47,11 @@ public class OfflineTest extends ActivityInstrumentationTestCase2{
     public void testOfflineAdd(){
         //assume no internet now
 
+        TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
+        deleteAllTasks.execute("");
+        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
+        deleteAllUsers.execute("");
+
         Task new_task = new Task();
         new_task.setTaskName("go to New York");
         new_task.setTaskRequester("jason");
@@ -82,6 +88,10 @@ public class OfflineTest extends ActivityInstrumentationTestCase2{
     }
 
     public void testOfflineEdit(){
+        TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
+        deleteAllTasks.execute("");
+        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
+        deleteAllUsers.execute("");
         //add task. have internet
         Task new_task = new Task();
         new_task.setTaskName("go to New York");

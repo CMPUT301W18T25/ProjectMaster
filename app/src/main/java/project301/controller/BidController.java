@@ -10,15 +10,18 @@ import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 import project301.Bid;
 import project301.BidCounter;
+import project301.User;
 
 /**
  * Detail : Bid controller is used to implement bidding notification feature.
@@ -119,7 +122,7 @@ public class BidController {
             Gson gson = new Gson();
             String query = gson.toJson(bidCounters[0]);
             Index index2 = new Index.Builder(query)
-                    .index("cmput301w18t25").type("bidCounter").id(bidCounters[0].getESid()).build();
+                    .index("cmput301w18t25").type("bidcount").id(bidCounters[0].getESid()).build();
             try {
                 DocumentResult result2 = client.execute(index2);
                 if (result2.isSucceeded()) {
@@ -158,7 +161,7 @@ public class BidController {
 
             Search search = new Search.Builder(query)
                     .addIndex("cmput301w18t25")
-                    .addType("bidCounter")
+                    .addType("bidcount")
                     .build();
             try {
                 SearchResult result = client.execute(search);
@@ -188,7 +191,7 @@ public class BidController {
         protected Boolean doInBackground(BidCounter... bidCounters) {
             verifySettings();
             Boolean success = false;
-            Index index = new Index.Builder(bidCounters[0]).index("cmput301w18t25").type("bidCounter").build();
+            Index index = new Index.Builder(bidCounters[0]).index("cmput301w18t25").type("bidcount").build();
 
             try {
                 // where is the client?
@@ -202,7 +205,7 @@ public class BidController {
                     String query = gson.toJson(bidCounters[0]);
 
                     Index index2 = new Index.Builder(query)
-                            .index("cmput301w18t25").type("bidCounter").id(bidCounters[0].getESid()).build();
+                            .index("cmput301w18t25").type("bidcount").id(bidCounters[0].getESid()).build();
                     try {
                         DocumentResult result2 = client.execute(index2);
                         if (result2.isSucceeded()) {
@@ -232,6 +235,54 @@ public class BidController {
         }
 
     }
+    /**
+     * A static class used to delete all user from the ES database
+     */
+
+
+    public static class deleteAllBidCounters extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String... search_parameters) {
+            verifySettings();
+            ArrayList<BidCounter> bidCounters = new ArrayList<BidCounter>();
+
+            String query = "{ \"size\": 100 }" ;
+            Log.i("Query", "The query was " + query);
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301w18t25")
+                    .addType("bidcount")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<BidCounter> founds
+                            = result.getSourceAsObjectList(BidCounter.class);
+                    bidCounters.addAll(founds);
+                } else {
+                    Log.i("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+
+            for (BidCounter u: bidCounters){
+                Delete delete = new Delete.Builder(u.getESid()).index("cmput301w18t25").type("bidcount").build();
+
+                try {
+                    client.execute(delete);
+
+                } catch (Exception e) {
+                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                }
+
+            }
+            return null;
+
+        }
+    }
+
 
     /**
      * Setting ES database

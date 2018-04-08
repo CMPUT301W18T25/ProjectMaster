@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Test;
 
 import project301.User;
+import project301.controller.TaskController;
 import project301.controller.UserController;
 
 import static org.junit.Assert.*;
@@ -31,7 +32,9 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     @SuppressWarnings("ConstantConditions")
     @Test
     public void testAddUser() throws Exception{
-        String Name = "Lilian";
+        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
+        deleteAllUsers.execute("");
+        String Name = "lilian";
         User user = new User();
 
         user.setUserName(Name);
@@ -69,9 +72,6 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
                 found = 1;
             }
         }
-
-        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
-        deleteAllUsers.execute("");
         assertEquals(found,1);
 
 
@@ -184,7 +184,6 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         deleteAllUsers.execute("");
     }
     @Test
-
     public void testUpdateUser() throws InterruptedException {
         UserController.deleteAllUsers deleteAllUsers1 = new UserController.deleteAllUsers();
         deleteAllUsers1.execute("");
@@ -227,8 +226,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //boolean notfindUser1 = uc.checkUserByNameAndPassword("yue12","yue12pass");
-        //assertEquals(notfindUser1,false);
+
         UserController uc = new UserController();
         boolean findUser1 = uc.checkUserByNameAndPassword("yue12","yue12word");
         assertEquals(findUser1,true);
@@ -238,44 +236,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
 
 
     }
-    @Test
-
-
-    /*public void testCheckValidationSignUp (){
-        UserListController.deleteAllUsers deleteAllUsers = new UserListController.deleteAllUsers();
-        deleteAllUsers.execute("");
-
-
-        String userId = null;
-        User user1 = new User();
-        user1.setUserName("yue15");
-
-        UserListController uc = new UserListController();
-        userId = uc.addUserAndCheck(user1);
-
-        assertNotEquals(userId,null);
-
-        User user2 = new User();
-        user2.setUserName("yue15");
-        boolean checkValidUser = uc.checkValidationSignUp("yue15");
-        if(checkValidUser) {
-            Log.i("fault","fault");
-            UserListController uc2 = new UserListController();
-            userId = uc2.addUserAndCheck(user2);
-        }
-        else{
-            userId = null;
-        }
-
-        assertEquals(userId,null);
-
-    }
-    */
-
     public void testCheckValidationSignUp (){
-        // TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
-        //deleteAllTasks.execute("");
-
         UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
         deleteAllUsers.execute("");
         AsyncTask.Status taskStatus1;

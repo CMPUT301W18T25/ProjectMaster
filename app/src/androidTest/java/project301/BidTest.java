@@ -116,9 +116,14 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
         assertEquals(10, biddedTask.getTaskBidList ().get (0).getBidAmount());
 
     }
-    public void testSetBidCounter(){
-        BidCounter bidCounter = new BidCounter("lily3",0);
 
+    /**
+     * Test for bidCounter
+     */
+    public void testSetBidCounter(){
+        BidController.deleteAllBidCounters deleteAllBidCounters = new BidController.deleteAllBidCounters();
+        deleteAllBidCounters.execute("");
+        BidCounter bidCounter = new BidCounter("lily3",0);
         BidController.buildBidCounterOfThisRequester buildBidCounterOfThisRequester = new BidController.buildBidCounterOfThisRequester();
         buildBidCounterOfThisRequester.execute(bidCounter);
 
@@ -149,6 +154,8 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
 
     }
     public void testUpdateBidCounter(){
+        BidController.deleteAllBidCounters deleteAllBidCounters = new BidController.deleteAllBidCounters();
+        deleteAllBidCounters.execute("");
         BidCounter bidCounter = new BidCounter("shell",0);
         BidController.buildBidCounterOfThisRequester buildBidCounterOfThisRequester = new BidController.buildBidCounterOfThisRequester();
         buildBidCounterOfThisRequester.execute(bidCounter);
