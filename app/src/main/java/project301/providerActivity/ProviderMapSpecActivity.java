@@ -32,7 +32,8 @@ import project301.controller.TaskController;
 import project301.requesterActivity.RequesterViewTaskRequestActivity;
 
 /**
- * Detail : Click the view on map on a specific task,
+ * Detail : Click the view on map on a specific task, we can see the location of the specific task
+ * on the map.
  * @classname : ProviderMapSpecActivity
  *
  * @Date :   18/03/2018

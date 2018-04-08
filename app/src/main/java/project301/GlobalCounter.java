@@ -1,7 +1,12 @@
 package project301;
 
 /**
- * Created by a123456 on 2018-03-25.
+ * Detail :
+ * @classname : GlobalCounter
+ * @Date :   18/03/2018
+ * @author :Yue Ma
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
 public class GlobalCounter {
