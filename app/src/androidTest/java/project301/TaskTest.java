@@ -601,7 +601,7 @@ public class TaskTest {
 
         }
 
-        TaskController.testSearchAssignTasksOfThisProvider search = new TaskController.testSearchAssignTasksOfThisProvider();
+        TaskController.searchAssignTasksOfThisProvider search = new TaskController.searchAssignTasksOfThisProvider();
 
         search.execute("mikeking");
 
