@@ -37,9 +37,7 @@ public class OfflineController {
             String taskId = "taskId";
             try {
                 taskId=addTaskCtl.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
+            } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
             if(!taskId.equals("taskId")) {
@@ -60,9 +58,7 @@ public class OfflineController {
             Boolean success = false;
             try {
                 success=requesterUpdateTask.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
+            } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
             if(success) {

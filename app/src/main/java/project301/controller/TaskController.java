@@ -44,7 +44,7 @@ public class TaskController {
         @Override
         protected Void doInBackground(String... search_parameters) {
             verifySettings();
-            ArrayList<Task> tasks = new ArrayList<Task>();
+            ArrayList<Task> tasks = new ArrayList<> ();
 
             String query = "{ \"size\": 50 }" ;
             Log.i("Query", "The query was " + query);
@@ -55,7 +55,7 @@ public class TaskController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<Task> foundTasks
+                    @SuppressWarnings("deprecation") List<Task> foundTasks
                             = result.getSourceAsObjectList(Task.class);
                     tasks.addAll(foundTasks);
                 } else {
@@ -164,6 +164,7 @@ public class TaskController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
+                    //noinspection deprecation
                     task = result.getSourceAsObject(Task.class);
                     Log.i("Success",task.getId());
                 } else {
@@ -182,7 +183,7 @@ public class TaskController {
      */
     public static class deleteTaskById extends AsyncTask<String, Void, Void>{
 
-        private String id;
+        private final String id;
 
         public deleteTaskById(String arg_id){
             this.id = arg_id;
@@ -244,6 +245,7 @@ public class TaskController {
 
                 Log.i("Error", "We failed to connect Elasticsearch server?");
 
+                //noinspection ConstantConditions
                 return success;
             }
             return success;
@@ -258,8 +260,8 @@ public class TaskController {
      * A static class to set bid in ES database
      */
     public static class providerSetBid extends AsyncTask<Void, Void, Void>{
-        Task current_task;
-        Bid current_bid;
+        final Task current_task;
+        final Bid current_bid;
 
         public providerSetBid(Task current_task, Bid current_bid){
             this.current_task = current_task;
@@ -307,9 +309,9 @@ public class TaskController {
      */
     public static class providerCancelBid extends AsyncTask<Void, Void, Boolean>{
 
-        Task current_task;
-        String providerId;
-        Boolean rt_val;
+        final Task current_task;
+        final String providerId;
+        final Boolean rt_val;
 
         public providerCancelBid(Task current_task, String providerId){
             this.current_task = current_task;
@@ -352,7 +354,7 @@ public class TaskController {
 
         @Override
         protected ArrayList<String> doInBackground(String... providerID) {
-            ArrayList<String> rtTasks = new ArrayList<>();
+            @SuppressWarnings("UnusedAssignment") ArrayList<String> rtTasks = new ArrayList<>();
             User foundUser;
 
             verifySettings();
@@ -427,10 +429,10 @@ public class TaskController {
      * A static class to search bidden tasks in ES database
      */
     public static class searchBiddenTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
-        String providerId;
-        ArrayList<String> result_tasks_id = new ArrayList<String>();
-        searchBiddenTasksOfThisProviderGetTaskList search;
-        ArrayList<Task> result_tasks = new ArrayList<>();
+        final String providerId;
+        ArrayList<String> result_tasks_id = new ArrayList<> ();
+        final searchBiddenTasksOfThisProviderGetTaskList search;
+        final ArrayList<Task> result_tasks = new ArrayList<>();
 
         public searchBiddenTasksOfThisProvider(String providerId){
             this.providerId = providerId;
@@ -440,9 +442,7 @@ public class TaskController {
 
             try {
                 this.result_tasks_id = this.search.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
+            } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
 
@@ -475,8 +475,8 @@ public class TaskController {
      * A static class to search bidden tasks in ES database
      */
     public static class searchBiddenTasksOfThisProviderGetTaskList extends AsyncTask<Void, Void, ArrayList<String>>{
-        String providerId;
-        ArrayList<String> result_tasks = new ArrayList<String>();
+        final String providerId;
+        ArrayList<String> result_tasks = new ArrayList<> ();
 
 
         public searchBiddenTasksOfThisProviderGetTaskList(String providerId){
@@ -510,9 +510,7 @@ public class TaskController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    User rt
-                            = result.getSourceAsObject(User.class);
-                    found_user = rt;
+                    found_user = result.getSourceAsObject(User.class);
                     /*
                     for(Task task:rt){
 
@@ -549,7 +547,7 @@ public class TaskController {
      * A static class to search bidden tasks in ES database
      */
     public static class searchDoneTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
-        String providerId;
+        final String providerId;
 
         public searchDoneTasksOfThisProvider(String providerId){
             this.providerId = providerId;
@@ -558,7 +556,7 @@ public class TaskController {
         protected ArrayList<Task> doInBackground(Void... nul) {
             verifySettings();
 
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
+            ArrayList<Task> result_tasks = new ArrayList<> ();
 
             String query =
                     "\n{ \n"+
@@ -581,7 +579,7 @@ public class TaskController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<Task> rt
+                    @SuppressWarnings("deprecation") List<Task> rt
                             = result.getSourceAsObjectList(Task.class);
                     result_tasks.addAll(rt);
                     /*
@@ -619,7 +617,7 @@ public class TaskController {
         protected ArrayList<Task> doInBackground(String... providerId) {
             verifySettings();
 
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
+            ArrayList<Task> result_tasks = new ArrayList<> ();
 
             String query =
                     "\n{ \n"+
@@ -643,7 +641,7 @@ public class TaskController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<Task> foundTasks
+                    @SuppressWarnings("deprecation") List<Task> foundTasks
                             = result.getSourceAsObjectList(Task.class);
                     result_tasks.addAll(foundTasks);
                     Log.i("Success", "Data retrieved from database: ");
@@ -667,7 +665,7 @@ public class TaskController {
         protected ArrayList<Task> doInBackground(String... requesterId) {
             verifySettings();
 
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
+            ArrayList<Task> result_tasks = new ArrayList<> ();
 
             String query =
                     "\n{ \n"+
@@ -689,7 +687,7 @@ public class TaskController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<Task> foundResults
+                    @SuppressWarnings("deprecation") List<Task> foundResults
                             = result.getSourceAsObjectList(Task.class);
                     result_tasks.addAll(foundResults);
                     Log.i("Success", "Data retrieved from database: ");
@@ -717,7 +715,7 @@ public class TaskController {
         protected ArrayList<Task> doInBackground(Void... nul) {
             verifySettings();
 
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
+            ArrayList<Task> result_tasks = new ArrayList<> ();
 
             String queryS =
                     "\n{ \n"+
@@ -739,7 +737,7 @@ public class TaskController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<Task> foundUsers
+                    @SuppressWarnings("deprecation") List<Task> foundUsers
                             = result.getSourceAsObjectList(Task.class);
                     result_tasks.addAll(foundUsers);
                     Log.i("Success", "Data retrieved from database: ");
@@ -763,7 +761,7 @@ public class TaskController {
         protected ArrayList<Task> doInBackground(Void... nul) {
             verifySettings();
 
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
+            ArrayList<Task> result_tasks = new ArrayList<> ();
 
             String query =
                     "\n{ \n"+
@@ -786,7 +784,7 @@ public class TaskController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<Task> foundUsers
+                    @SuppressWarnings("deprecation") List<Task> foundUsers
                             = result.getSourceAsObjectList(Task.class);
                     result_tasks.addAll(foundUsers);
                     Log.i("Success", "Data retrieved from database: ");
@@ -805,7 +803,7 @@ public class TaskController {
      * A static class to search all requesting tasks in ES database
      */
     //TODO do test for this method, which should be extremely similar to bidden tasks
-    public static class searchAllBiddenTasks extends AsyncTask<Void, Void, ArrayList<Task>>{
+    private static class searchAllBiddenTasks extends AsyncTask<Void, Void, ArrayList<Task>>{
 
         protected ArrayList<Task> doInBackground(Void... nul) {
             verifySettings();
@@ -833,7 +831,7 @@ public class TaskController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<Task> foundUsers
+                    @SuppressWarnings("deprecation") List<Task> foundUsers
                             = result.getSourceAsObjectList(Task.class);
                     result_tasks.addAll(foundUsers);
                     Log.i("Success", "Data retrieved from database: ");
@@ -856,7 +854,7 @@ public class TaskController {
 
         protected ArrayList<Bid> doInBackground(String...taskIds) {
             verifySettings();
-            ArrayList<Bid> bidList = new ArrayList<Bid>();
+            ArrayList<Bid> bidList = new ArrayList<> ();
 
             String query =
                     "\n{ \n"+
@@ -879,7 +877,7 @@ public class TaskController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<Task> foundTask
+                    @SuppressWarnings("deprecation") List<Task> foundTask
                             = result.getSourceAsObjectList(Task.class);
                     bidList.addAll(foundTask.get(0).getTaskBidList());
 
@@ -904,7 +902,7 @@ public class TaskController {
 
             String [] search_parameters = keywords[0].split("\\s+");
             String bodyQuery;
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
+            ArrayList<Task> result_tasks = new ArrayList<> ();
 
             Log.i("Length", Integer.toString(search_parameters.length));
 
@@ -936,7 +934,7 @@ public class TaskController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    List<Task> foundUsers
+                    @SuppressWarnings("deprecation") List<Task> foundUsers
                             = result.getSourceAsObjectList(Task.class);
                     result_tasks.addAll(foundUsers);
                 } else {
@@ -957,9 +955,7 @@ public class TaskController {
         searchAllBiddenRequestingTasks.execute();
         try {
             tasks.addAll(searchAllBiddenRequestingTasks.get());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
         for(Task task:tasks){
@@ -975,7 +971,7 @@ public class TaskController {
     /**
      * verify ES database setting
      */
-    public static void verifySettings() {
+    private static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080").discoveryEnabled(true).multiThreaded(true);
 

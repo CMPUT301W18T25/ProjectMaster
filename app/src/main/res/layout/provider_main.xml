@@ -2,6 +2,7 @@
 <android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id = "@+id/swipe_ly"
 
     android:layout_width="match_parent"
@@ -133,7 +134,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="@string/view_on_map"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/provider_bid_button"
@@ -142,7 +144,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="  bid history "
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
         </LinearLayout>
 
         <LinearLayout
@@ -159,7 +162,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="edit profile"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/logout_button"
@@ -168,7 +172,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="       log out     "
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
         </LinearLayout>
 
     </LinearLayout>

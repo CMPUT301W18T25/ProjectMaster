@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -265,7 +266,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="submit"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/cancel_button"
@@ -274,7 +276,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="Cancel"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="ButtonOrder,ButtonStyle" />
         </LinearLayout>
 
     </LinearLayout>

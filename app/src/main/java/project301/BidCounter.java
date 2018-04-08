@@ -10,7 +10,7 @@ package project301;
  */
 
 public class BidCounter {
-    private String requesterId;
+    private final String requesterId;
     private int counter;
     private int previousCounter;
     private String ESid;

@@ -242,7 +242,8 @@
                             android:textAllCaps="false"
                             android:textColor="@color/colorPrimary"
                             android:textSize="11sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="SmallSp" />
 
                     </LinearLayout>
 
@@ -272,7 +273,8 @@
                             android:id="@+id/textView58"
                             android:layout_width="match_parent"
                             android:layout_height="3dp"
-                            android:textSize="2sp" />
+                            android:textSize="2sp"
+                            tools:ignore="SmallSp" />
 
                         <TextView
                             android:layout_width="match_parent"

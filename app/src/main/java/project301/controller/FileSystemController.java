@@ -20,7 +20,7 @@ import android.util.Log;
  */
 
 public class FileSystemController {
-    public FileIOUtil FileIOUtil = new FileIOUtil();
+    private final FileIOUtil FileIOUtil = new FileIOUtil();
     /**
      * Save tasks into json file
      * @param task a task object
@@ -28,15 +28,17 @@ public class FileSystemController {
      * @param context current context
      */
     public void saveToFile(Task task,String instruction,Context context){
-        if(instruction.equals("sent")){
-            FileIOUtil.saveSentTaskInFile(task,context);
-        }
-        else if(instruction.equals("offlineAdd")){
-            FileIOUtil.saveOfflineAddTaskInFile(task,context);
-        }
-        else{
-            Log.i("save offline","TASK");
-            FileIOUtil.saveOfflineEditTaskInFile(task,context);
+        switch (instruction) {
+            case "sent":
+                FileIOUtil.saveSentTaskInFile (task, context);
+                break;
+            case "offlineAdd":
+                FileIOUtil.saveOfflineAddTaskInFile (task, context);
+                break;
+            default:
+                Log.i ("save offline", "TASK");
+                FileIOUtil.saveOfflineEditTaskInFile (task, context);
+                break;
         }
     }
 
@@ -104,20 +106,21 @@ public class FileSystemController {
     public void deleteAllFiles( Context context,String instruction) {
         try {
             ArrayList<String> TaskFiles;
-            if(instruction.equals("sent")){
-                TaskFiles = TaskUtil.getSentTaskFileList(context);
+            switch (instruction) {
+                case "sent":
+                    TaskFiles = TaskUtil.getSentTaskFileList (context);
 
-            }
-            else if(instruction.equals("offlineAdd")){
+                    break;
+                case "offlineAdd":
 
-                TaskFiles = TaskUtil.getOfflineAddTaskFileList(context);
+                    TaskFiles = TaskUtil.getOfflineAddTaskFileList (context);
 
-            }
+                    break;
+                default:
 
-            else{
+                    TaskFiles = TaskUtil.getOfflineEditTaskFileList (context);
 
-                TaskFiles = TaskUtil.getOfflineEditTaskFileList(context);
-
+                    break;
             }
 
             for(String file: TaskFiles){

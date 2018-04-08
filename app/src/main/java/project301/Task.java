@@ -56,8 +56,8 @@ public class Task {
         this.taskProvider="";
         this.taskStatus="";
         this.taskAddress="";
-        this.taskBidList= new ArrayList<Bid>();
-        this.canceledBidList= new ArrayList<Bid>();
+        this.taskBidList= new ArrayList<> ();
+        this.canceledBidList= new ArrayList<> ();
         this.choosenBid = null;
         this.taskPhoto=null;
         this.taskIdealPrice=null;
@@ -199,6 +199,7 @@ public class Task {
      * @param bid a bid object
      * @return
      */
+    @SuppressWarnings("JavaDoc")
     public boolean addBid(Bid bid){
         if (bid.getBidAmount() < this.lowestBid){
             this.lowestBid = (Double) bid.getBidAmount();
@@ -219,6 +220,7 @@ public class Task {
      * @param providerName provider name
      * @return
      */
+    @SuppressWarnings("JavaDoc")
     public boolean cancelBid(String providerName){
         for (int i = 0; i<taskBidList.size();i++){
             if (providerName.equals(taskBidList.get(i).getProviderId())){
