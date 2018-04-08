@@ -225,7 +225,9 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
         edit_destination.setText(temp_destination);
 
         Double temp_idealprice=target_task.getTaskIdealPrice();
-        edit_idealprice.setText(Double.toString(temp_idealprice));
+        if(temp_idealprice!=null){
+            edit_idealprice.setText(Double.toString(temp_idealprice));
+        }
 
         temp_status=target_task.getTaskStatus();
         //settle save button click

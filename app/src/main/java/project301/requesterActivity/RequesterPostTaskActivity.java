@@ -200,6 +200,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
 
                     //set data
                     Task new_task = new Task();
+                    new_task.setTaskStatus("request");
                     new_task.setTaskName(post_name.getText().toString());
                     if(!check_empty(post_detail.getText().toString())){
                         new_task.setTaskDetails(" ");
@@ -447,14 +448,14 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         LinearLayout layout = new LinearLayout(getApplicationContext());
         double iv_scale=(double)bm.getWidth()/bm.getHeight();
 
-        layout.setLayoutParams(new LayoutParams((int)(iv_scale*700), 700));
+        layout.setLayoutParams(new LayoutParams((int)(iv_scale*600), 600));
         layout.setGravity(Gravity.CENTER);
 
         ImageView imageView = new ImageView(getApplicationContext());
-        Log.d("bm width", String.valueOf((int)((double)bm.getHeight()/bm.getWidth())*650));
+        Log.d("bm width", String.valueOf((int)((double)bm.getHeight()/bm.getWidth())*550));
         Log.d("scaling", String.valueOf(iv_scale));
 
-        imageView.setLayoutParams(new LayoutParams((int)(iv_scale*650), 650));
+        imageView.setLayoutParams(new LayoutParams((int)(iv_scale*550), 550));
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setImageBitmap(bm);
 

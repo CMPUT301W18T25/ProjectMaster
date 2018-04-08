@@ -49,8 +49,28 @@ public class FileSystemController {
      */
     public ArrayList<Task> loadSentTasksFromFile(Context context){
         ArrayList<Task> Tasks;
+        ArrayList<Task> EditTasks;
+        ArrayList<Task> AddTasks;
+
+
         ArrayList<String> SentTaskFiles = TaskUtil.getSentTaskFileList(context);
+        ArrayList<String> OfflineAddTaskFiles = TaskUtil.getOfflineAddTaskFileList(context);
+
+        ArrayList<String> OfflineEditTaskFiles = TaskUtil.getOfflineEditTaskFileList(context);
         Tasks = FileIOUtil.loadMultipleTasksFromFile(context, SentTaskFiles);
+        AddTasks = FileIOUtil.loadMultipleTasksFromFile(context, OfflineAddTaskFiles);
+
+        EditTasks =  FileIOUtil.loadMultipleTasksFromFile(context, OfflineEditTaskFiles);
+        for(Task editTask:EditTasks){
+            for(Task task:Tasks){
+                if(editTask.getId().equals(task.getId())){
+                    Tasks.remove(task);
+                    Tasks.add(editTask);
+                }
+            }
+        }
+        Tasks.addAll(AddTasks);
+
         return Tasks;
     }
 
