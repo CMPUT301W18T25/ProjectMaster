@@ -253,7 +253,6 @@ public class TaskController {
             Log.i("Finish","execution");
         }
     }
-    // TODO first step optimized, used taskbidder in user object
     /**
      * A static class to set bid in ES database
      */
@@ -272,7 +271,6 @@ public class TaskController {
             new_user.addProviderBiddenTask(this.current_task.getId());
 
             // update user
-
             UserController uc= new UserController();
             uc.updateUser(new_user);
         }
@@ -281,7 +279,6 @@ public class TaskController {
         protected Void doInBackground(Void... nul) {
 
             verifySettings();
-
 
             this.current_task.setTaskStatus("bidden");
             String query = TaskUtil.serializer(this.current_task);
@@ -346,6 +343,46 @@ public class TaskController {
         }
     }
     /**
+     * A static class to cancel a bid of user in ES database
+     */
+    public static class providerCancelBidUser extends AsyncTask<Void, Void, Boolean>{
+
+        Task current_task;
+        String providerId;
+        Boolean rt_val;
+        User provider;
+        ArrayList<String> taskList;
+
+        public providerCancelBidUser(Task current_task, String providerId){
+            this.current_task = current_task;
+            this.providerId = providerId;
+            this.rt_val = this.current_task.cancelBid(this.providerId);
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... nul) {
+            if (this.rt_val){
+                verifySettings();
+
+                // get user profile
+
+                UserController usrCtrl = new UserController();
+
+                provider = usrCtrl.getAUserById(this.providerId);
+
+                provider.removeProviderBiddenTask(this.current_task.getId());
+
+                // update user
+
+                usrCtrl.updateUser(provider);
+            }
+            else {
+                return false;
+            }
+            return true;
+        }
+    }
+    /**
      * A static class to get provider bidden tasks in ES database
      */
     public static class providerGetBiddenTasks extends AsyncTask<String, Void, ArrayList<String>>{
@@ -384,7 +421,6 @@ public class TaskController {
             return rtTasks;
         }
     }
-    // TODO this method should not work, but program seems good? is it ghost
     /**
      * A static class to get requester bidden tasks in ES database
      */
@@ -422,7 +458,6 @@ public class TaskController {
             return rtTasks;
         }
     }
-    //TODO optimized first step
     /**
      * A static class to search bidden tasks in ES database
      */
@@ -436,7 +471,6 @@ public class TaskController {
             this.providerId = providerId;
             this.search = new searchBiddenTasksOfThisProviderGetTaskList(this.providerId);
             this.search.execute();
-
 
             try {
                 this.result_tasks_id = this.search.get();
@@ -470,14 +504,12 @@ public class TaskController {
         }
 
     }
-    //TODO optimized, w8 for test
     /**
      * A static class to search bidden tasks in ES database
      */
     public static class searchBiddenTasksOfThisProviderGetTaskList extends AsyncTask<Void, Void, ArrayList<String>>{
         String providerId;
         ArrayList<String> result_tasks = new ArrayList<String>();
-
 
         public searchBiddenTasksOfThisProviderGetTaskList(String providerId){
             this.providerId = providerId;
@@ -488,7 +520,6 @@ public class TaskController {
 
             User found_user = new User();
             ArrayList<String> result_tasks_id;
-
 
             String query =
                     "\n{ \n"+
@@ -513,22 +544,7 @@ public class TaskController {
                     User rt
                             = result.getSourceAsObject(User.class);
                     found_user = rt;
-                    /*
-                    for(Task task:rt){
-
-                        ArrayList<Bid> BiddenList = task.getTaskBidList();
-                        for(Bid bid:BiddenList){
-                            if(bid.getProviderId().equals(providerId)){
-                                result_tasks.add(task);
-
-
-                            }
-                        }
-                    }*/
-
                     Log.i("allbidden","test");
-
-
                     Log.i("Success", "Data retrieved from database: ");
                 } else   {
                     Log.i("Error", "The search query failed");
@@ -544,7 +560,6 @@ public class TaskController {
         }
 
     }
-    //TODO optimized, w8 for test
     /**
      * A static class to search bidden tasks in ES database
      */
@@ -584,22 +599,7 @@ public class TaskController {
                     List<Task> rt
                             = result.getSourceAsObjectList(Task.class);
                     result_tasks.addAll(rt);
-                    /*
-                    for(Task task:rt){
-
-                        ArrayList<Bid> BiddenList = task.getTaskBidList();
-                        for(Bid bid:BiddenList){
-                            if(bid.getProviderId().equals(providerId)){
-                                result_tasks.add(task);
-
-
-                            }
-                        }
-                    }*/
-
                     Log.i("alldone","test");
-
-
                     Log.i("Success", "Data retrieved from database: " + Integer.toString(rt.size()));
                 } else {
                     Log.i("Error", "The search query failed");
@@ -661,7 +661,6 @@ public class TaskController {
     /**
      * A static class to search all tasks of this requester in ES database
      */
-    //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAllTasksOfThisRequester extends AsyncTask<String, Void, ArrayList<Task>>{
 
         protected ArrayList<Task> doInBackground(String... requesterId) {
@@ -711,7 +710,6 @@ public class TaskController {
     /**
      * A static class to search all requesting tasks in ES database
      */
-    //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAllBiddenRequestingTasks extends AsyncTask<Void, Void, ArrayList<Task>>{
 
         protected ArrayList<Task> doInBackground(Void... nul) {
@@ -757,7 +755,6 @@ public class TaskController {
     /**
      * A static class to search all requesting tasks in ES database
      */
-    //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAllRequestingTasks extends AsyncTask<Void, Void, ArrayList<Task>>{
 
         protected ArrayList<Task> doInBackground(Void... nul) {
@@ -804,7 +801,6 @@ public class TaskController {
     /**
      * A static class to search all requesting tasks in ES database
      */
-    //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAllBiddenTasks extends AsyncTask<Void, Void, ArrayList<Task>>{
 
         protected ArrayList<Task> doInBackground(Void... nul) {

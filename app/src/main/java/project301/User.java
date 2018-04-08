@@ -149,5 +149,14 @@ public class User {
         this.providerBiddenTask.add(taskID);
     }
 
+    /**
+     * remove his bidden task
+     * @param taskID task id
+     */
+
+    public void removeProviderBiddenTask(String taskID){
+        this.providerBiddenTask.remove(taskID);
+    }
+
 
 }
