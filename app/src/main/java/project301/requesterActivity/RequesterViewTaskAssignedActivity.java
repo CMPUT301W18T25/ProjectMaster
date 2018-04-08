@@ -200,7 +200,7 @@ public class RequesterViewTaskAssignedActivity extends AppCompatActivity  {
         pay_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterViewTaskAssignedActivity.this, RequesterMainActivity.class);
+                Intent info2 = new Intent(RequesterViewTaskAssignedActivity.this, RequesterDoneListActivity.class);
                 info2.putExtra("userId",userId);
                 target_task = tasklist.get(view_index_int);
                 target_task.setTaskStatus("done");
