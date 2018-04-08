@@ -726,7 +726,7 @@ public class TaskController {
 
             String queryS =
                     "\n{ \n"+
-                            "\"size\" : 1,\n"+
+                            "\"size\" : 10,\n"+
                             "   \"query\" : {\n"+
                             "       \"bool\" : {\n"+
                             "           \"should\" : [\n"+
