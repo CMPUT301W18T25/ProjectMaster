@@ -38,7 +38,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.novoda.merlin.MerlinsBeard;
 
 import project301.BidCounter;
-import project301.GlobalCounter;
 import project301.Photo;
 import project301.R;
 import project301.Task;

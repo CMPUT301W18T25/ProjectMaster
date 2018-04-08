@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,13 +30,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
 
 import project301.BidCounter;
-import project301.GlobalCounter;
 import project301.Photo;
 import project301.allUserActivity.CameraActivity;
 import project301.controller.BidController;
@@ -62,10 +59,6 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.novoda.merlin.Merlin;
-import com.novoda.merlin.NetworkStatus;
-import com.novoda.merlin.registerable.bind.Bindable;
-import com.novoda.merlin.registerable.connection.Connectable;
-import com.novoda.merlin.registerable.disconnection.Disconnectable;
 import com.novoda.merlin.MerlinsBeard;
 
 

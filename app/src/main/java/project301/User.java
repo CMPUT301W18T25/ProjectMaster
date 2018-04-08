@@ -3,7 +3,7 @@ package project301;
 import java.util.ArrayList;
 
 /**
- * User model contains all the features of a user. Basic setters and getters are included.
+ * User object contains all the features of a user. Basic setters and getters are included.
  * @classname : User
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
@@ -19,25 +19,17 @@ public class User {
     private String userPhone;
     private String userEmail;
     private String userPassword;
-    private String userType;
     private String resultId;
     private ArrayList<String> providerBiddenTask;
 
+    /**
+     * Default construct
+     */
     public User(){
         super();
         this.providerBiddenTask = new ArrayList<>();
     }
-    public User(String userId,String userName,String userPhone,String userEmail,String userPassword,String userType,String resultId,ArrayList<String> providerBiddenTask){
-        this.userId = userId;
-        this.userName = userName;
-        this.userEmail = userEmail;
-        this.userPassword = userPassword;
-        this.userType = userType;
-        this.userPhone = userPhone;
-        this.resultId = resultId;
-        this.providerBiddenTask = new ArrayList<>();
 
-    }
 
     /**
      * Get user name
@@ -104,22 +96,6 @@ public class User {
      */
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
-    }
-
-    /**
-     * set user type
-     * @return user type
-     */
-    public String getUserType() {
-        return userType;
-    }
-
-    /**
-     * get user type
-     * @param userType user type
-     */
-    public void setUserType(String userType) {
-        this.userType = userType;
     }
 
     /**

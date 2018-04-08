@@ -14,12 +14,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import project301.BidCounter;
-import project301.GlobalCounter;
 import project301.R;
 import project301.allUserActivity.LogInActivity;
 import project301.controller.BidController;
 import project301.controller.OfflineController;
-import project301.providerActivity.ProviderMainActivity;
 
 /**
  * Detail : requester main is for user to choose their actions: post task,view and edit task or edit profile

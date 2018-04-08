@@ -3,33 +3,22 @@ package project301;
 
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Base64;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.Xml;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Photo model contains converted photo information.
@@ -50,11 +39,7 @@ public class Photo {
         this.encoded_images=new ArrayList<>();
     }
 
-    /**
-     * add photo
-     *
-     * @param newImage coded image
-     */
+
     public void addPhoto(String encodedImage){
        // System.arraycopy(newImage, 0, this.compressedImage, 0, this.compressedImage.length);
         encoded_images.add(encodedImage);
@@ -69,10 +54,6 @@ public class Photo {
         return decodedByte;
     }
 
-    /**
-     * Update phto
-     * @param newImage coded image
-     */
 
 
     // source: https://stackoverflow.com/questions/7693633/android-image-dialog-popup

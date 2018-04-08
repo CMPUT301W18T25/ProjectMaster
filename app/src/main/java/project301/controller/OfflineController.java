@@ -1,7 +1,6 @@
 package project301.controller;
 
 import android.content.Context;
-import android.text.BoringLayout;
 import android.util.Log;
 
 
@@ -12,10 +11,9 @@ import project301.Task;
 import project301.utilities.FileIOUtil;
 
 /**
- * Activities can execute offline tasks when the App reconnects to the internet through this controller.
+ * Execute offline tasks when the App reconnects to the internet.
  * @classname : OfflineController
  * @Date :   18/03/2018
- * @author : Yuqi Zhang
  * @author : Yue Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
@@ -27,9 +25,8 @@ public class OfflineController {
      * After the app reconnect to the internet, it will try to execute previously stored offline tasks
      * @param context current context
      */
-
     public boolean tryToExecuteOfflineTasks(Context context){
-        Log.i("try to resume offline","Tasks");
+        //Log.i("try to resume offline","Tasks");
         FileSystemController fileSystemController = new FileSystemController();
         ArrayList<Task> OfflineAddTasks = fileSystemController.loadOfflineAddTasksFromFile(context);
         Boolean change = false;

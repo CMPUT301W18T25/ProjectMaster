@@ -1,7 +1,6 @@
 package project301.controller;
 
 import project301.Bid;
-import project301.OnAsyncTaskCompleted;
 import project301.Task;
 import project301.User;
 import project301.utilities.TaskUtil;
@@ -13,7 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -30,14 +28,12 @@ import io.searchbox.core.SearchResult;
  * @classname : TaskController
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
- * @author : Yue Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
 public class TaskController {
 
-    private Task current_task;
     private static JestDroidClient client;
 
     /**
@@ -89,7 +85,6 @@ public class TaskController {
      * A static class to add a task to ES database
      */
     public static class addTask extends AsyncTask<Task, Void, String>{
-        public OnAsyncTaskCompleted listener;
         @Override
 
         protected String doInBackground(Task... a_task) {

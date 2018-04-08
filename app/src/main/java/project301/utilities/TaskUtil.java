@@ -12,11 +12,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *A class that helps to serilize and deserialize a task object
+ * A class that helps to serialize and deserialize a task object
  * @classname : TaskUtil
- * @author : Yuqi Zhang
- * @author :Yue Ma
- * @author :Julian Stys
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */

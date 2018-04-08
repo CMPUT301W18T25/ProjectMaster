@@ -23,10 +23,9 @@ import io.searchbox.core.SearchResult;
 
 /**
  * Activities can communicate with user model through this class.
- * The class contains methods to renew data on the elasticsearch database
+ * The class contains methods to renew data related User on the elasticsearch database
  * @classname : UserController
  * @Date :   18/03/2018
- * @author : Yuqi Zhang
  * @author : Yue Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
@@ -43,7 +42,7 @@ public class UserController {
      * @param name Username
      * @return
      */
-    public boolean checkLogInInfo(String name){   //created by wdong2 for testing
+    public boolean checkLogInInfo(String name){
         /**
          * return true for valid user name and passward; false otherwise
          */
@@ -231,8 +230,6 @@ public class UserController {
     /**
      * A static class used to get all user to the ES database
      */
-
-
     public static class GetAllUsers extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
         protected ArrayList<User> doInBackground(String... search_parameters) {
@@ -268,7 +265,6 @@ public class UserController {
     /**
      * A static class used to get a user by its Id from the ES database
      */
-
     public static class getAUserById extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
         protected ArrayList<User> doInBackground(String... search_parameters) {
@@ -312,7 +308,6 @@ public class UserController {
     /**
      * A static class used to get a user by its name from the ES database
      */
-
     public static class getAUserByName extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
         protected ArrayList<User> doInBackground(String... search_parameters) {
@@ -428,7 +423,7 @@ public class UserController {
      * Check whether the user name and password matching with each other
      * @param userName username
      * @param userPassword userpassword
-     * @return
+     * @return found or not found
      */
     public Boolean checkUserByNameAndPassword(String userName, String userPassword){
 
@@ -457,7 +452,7 @@ public class UserController {
     }
 
     /**
-     * elastic search database setting
+     * Elastic search database setting
      */
     public static void verifySettings() {
         if (client == null) {

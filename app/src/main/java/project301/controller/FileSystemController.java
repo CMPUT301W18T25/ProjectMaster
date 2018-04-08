@@ -10,7 +10,7 @@ import android.content.Context;
 import android.util.Log;
 
 /**
- * Save tasks in json files and load tasks from json file
+ * Controller to convert tasks from TaskObject and Json format. Create Json file and delete Json files
  * @classname : FileSystemController
  * @Date :   18/03/2018
  * @author : Yuqi Zhang
@@ -21,8 +21,6 @@ import android.util.Log;
 
 public class FileSystemController {
     public FileIOUtil FileIOUtil = new FileIOUtil();
-
-
     /**
      * Save tasks into json file
      * @param task a task object
@@ -132,6 +130,10 @@ public class FileSystemController {
         }
     }
 
+    /**
+     * Delete all json files
+     * @param context current context
+     */
 
     public void deleteFiles( Context context) {
         String[] fileList = context.fileList();
@@ -143,9 +145,8 @@ public class FileSystemController {
     }
 
 
-
     /**
-     * Delete json file based on the file name
+     * Delete json file by the file name
      * @param fileName json file name
      * @param context current context
      */

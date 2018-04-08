@@ -24,8 +24,6 @@ import java.util.concurrent.TimeUnit;
  * Detail :
  * @classname : PlaceArrayAdapterController
  * @Date :   18/03/2018
- * @author : Yuqi Zhang
- * @author : Yue Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */

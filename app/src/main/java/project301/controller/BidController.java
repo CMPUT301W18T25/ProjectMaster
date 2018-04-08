@@ -21,17 +21,16 @@ import project301.Bid;
 import project301.BidCounter;
 
 /**
- * Detail :
+ * Detail : Bid controller is used to implement bidding notification feature.
+ * Each user has a bid counter which is used to detect new bid.
  * @classname : BidController
  * @Date :   18/03/2018
- * @author : Yuqi Zhang
  * @author : Yue Ma
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 public class BidController {
     private static JestDroidClient client;
-
     /**
      * When the user signed up, this function will be called to initialize a bid counter
      * @param requesterId requesterId
@@ -52,6 +51,12 @@ public class BidController {
         return success;
 
     }
+
+    /**
+     * Search the bidCounter by requesterId
+     * @param requesterId requester id
+     * @return bidcounter
+     */
     public BidCounter searchBidCounterOfThisRequester(String requesterId){
         BidController.searchBidCounterOfThisRequester searchBidCounterOfThisRequester = new BidController.searchBidCounterOfThisRequester();
         searchBidCounterOfThisRequester.execute(requesterId);
@@ -73,6 +78,12 @@ public class BidController {
             return bidCounter;
         }
     }
+
+    /**
+     * Increase BidCounter of this requester
+     * @param requesterId requesterId
+     * @return success or fail
+     */
     public Boolean increaseBidCounterOfThisRequester(String requesterId){
         BidController.searchBidCounterOfThisRequester searchBidCounterOfThisRequester = new BidController.searchBidCounterOfThisRequester();
         searchBidCounterOfThisRequester.execute(requesterId);
@@ -97,6 +108,9 @@ public class BidController {
 
     }
 
+    /**
+     * Update bidcounter of this requester from ES database
+     */
     public static class updateBidCounterOfThisRequester extends AsyncTask<BidCounter, Void, Void> {
 
         @Override
@@ -122,6 +136,9 @@ public class BidController {
         }
     }
 
+    /**
+     * Search bid counter from ES database
+     */
     public static class searchBidCounterOfThisRequester extends AsyncTask<String, Void, BidCounter>{
 
         @Override
@@ -162,6 +179,10 @@ public class BidController {
             return null;
         }
     }
+
+    /**
+     * Create BidCounter in ES database
+     */
     public static class buildBidCounterOfThisRequester extends AsyncTask<BidCounter, Void, Boolean>{
 
         protected Boolean doInBackground(BidCounter... bidCounters) {
@@ -212,6 +233,9 @@ public class BidController {
 
     }
 
+    /**
+     * Setting ES database
+     */
     public static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080").discoveryEnabled(true).multiThreaded(true);

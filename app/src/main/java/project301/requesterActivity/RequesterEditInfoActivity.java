@@ -20,7 +20,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import project301.BidCounter;
-import project301.GlobalCounter;
 import project301.R;
 import project301.User;
 import project301.controller.BidController;

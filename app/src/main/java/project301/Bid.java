@@ -4,9 +4,8 @@ package project301;
  * Bid model contains all the features of a single bid
  * @classname : Bid
  * @Date :   18/03/2018
- * @author : Yuqi Zhang
- * @author :Julian Stys
  * @author :Yue Ma
+ * @author :Yuqi Zhang
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
@@ -36,12 +35,7 @@ public class Bid {
     public String getProviderId(){
         return this.providerId;
     }
-    public void setTaskID(String ID){
-        this.taskID = ID;
-    }
     public String getTaskID(){
         return this.taskID;
     }
-    public void setProviderId(String providerId){this.providerId = providerId;}
-
 }

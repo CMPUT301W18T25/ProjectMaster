@@ -17,7 +17,6 @@ import com.novoda.merlin.MerlinsBeard;
 
 import project301.Bid;
 import project301.BidCounter;
-import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
 import project301.User;

@@ -1,32 +1,22 @@
 package project301.requesterActivity;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.novoda.merlin.MerlinsBeard;
 
 import project301.Bid;
 import project301.BidCounter;
-import project301.GlobalCounter;
 import project301.R;
 import project301.Task;
 import project301.controller.BidController;
