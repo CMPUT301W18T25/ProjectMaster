@@ -11,6 +11,9 @@ import project301.R;
 import project301.allUserActivity.LogInActivity;
 import project301.allUserActivity.SignUpActivity;
 import project301.allUserActivity.UserCharacterActivity;
+import project301.controller.BidController;
+import project301.controller.TaskController;
+import project301.controller.UserController;
 import project301.providerActivity.ProviderBidHistoryActivity;
 import project301.providerActivity.ProviderMainActivity;
 import project301.providerActivity.ProviderTaskBidActivity;
@@ -72,7 +75,7 @@ public class AllImportantFeatureActivityTest extends ActivityInstrumentationTest
             e.printStackTrace();
         }
 
-        solo.enterText((EditText) solo.getView(R.id.search_info),"wdong");
+        solo.enterText((EditText) solo.getView(R.id.search_info),"Hub");
 
         solo.clickOnButton("Search");
 
@@ -107,7 +110,91 @@ public class AllImportantFeatureActivityTest extends ActivityInstrumentationTest
         payTask();
     }
 
-    public void logIn(){
+    public void testAllFeature(){
+        deleteDataBase();
+
+        logIn();
+
+        solo.clickOnButton("Requester");
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        postTask();
+
+        solo.clickOnButton("Show List");
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        solo.clickOnButton("Main menu");
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
+
+        solo.clickOnButton("Log out");
+
+        logIn();
+
+        solo.clickOnButton("provider");
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        solo.enterText((EditText) solo.getView(R.id.search_info),"Hub");
+
+        solo.clickOnButton("Search");
+
+        bidOnTask();
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        solo.clickOnButton("back");
+
+        solo.clickOnButton("       log out     ");
+
+        logIn();
+
+        solo.clickOnButton("Requester");
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        assignTask();
+
+        solo.clickOnButton("Pay task");
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterDoneListActivity.class);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        solo.clickInList(0);
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskDoneActivity.class);
+    }
+
+    private void logIn(){
         solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
 
         solo.enterText((EditText) solo.getView(R.id.login_name),"wdong2");
@@ -115,6 +202,8 @@ public class AllImportantFeatureActivityTest extends ActivityInstrumentationTest
         solo.enterText((EditText) solo.getView(R.id.login_password),"passward");
 
         solo.clickOnButton("Log In");
+
+        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
 
         try {
             Thread.sleep(2000);
@@ -124,12 +213,12 @@ public class AllImportantFeatureActivityTest extends ActivityInstrumentationTest
 
         Activity Activity = solo.getCurrentActivity();
 
-        if ( Activity.getClass().equals(UserCharacterActivity.class) ){}else {
+        if (!Activity.getClass().equals(UserCharacterActivity.class) ){
             signUp();
         }
     }
 
-    public void signUp(){
+    private void signUp(){
         while(!solo.getCurrentActivity().getClass().equals(LogInActivity.class)){
             solo.goBack();
         }
@@ -147,7 +236,7 @@ public class AllImportantFeatureActivityTest extends ActivityInstrumentationTest
         solo.clickOnButton("Log In");
     }
 
-    public void postTask(){
+    private void postTask(){
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
 
         solo.clickOnButton("Post New Task");
@@ -172,7 +261,7 @@ public class AllImportantFeatureActivityTest extends ActivityInstrumentationTest
 
     }
 
-    public void bidOnTask(){
+    private void bidOnTask(){
 
         solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
 
@@ -186,33 +275,23 @@ public class AllImportantFeatureActivityTest extends ActivityInstrumentationTest
 
         solo.clickOnButton("Bid");
 
-        while (true) {
-            if (solo.getCurrentActivity().getClass().equals(ProviderBidHistoryActivity.class)) {
-                break;
-            } else {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
         try {
-            Thread.sleep(6000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        solo.clickInList(0);
+        //solo.clickInList(0);
 
-        solo.assertCurrentActivity("Wrong Activity", ProviderTaskBidActivity.class);
+        //solo.assertCurrentActivity("Wrong Activity", ProviderTaskBidActivity.class);
 
     }
 
-    public void assignTask(){
+    private void assignTask(){
 
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
+
+        solo.clickLongOnScreen(3,3);
 
         solo.clickOnButton("view bidden task");
 
@@ -231,7 +310,7 @@ public class AllImportantFeatureActivityTest extends ActivityInstrumentationTest
         solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskAssignedActivity.class);
     }
 
-    public void payTask(){
+    private void payTask(){
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
 
         solo.clickOnButton("view assigned task");
@@ -254,6 +333,18 @@ public class AllImportantFeatureActivityTest extends ActivityInstrumentationTest
 
     }
 
+    private void deleteDataBase(){
+        TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
+        deleteAllTasks.execute("");
+
+
+        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
+        deleteAllUsers.execute("");
+
+
+        BidController.deleteAllBidCounters deleteAllBidCounters = new BidController.deleteAllBidCounters();
+        deleteAllBidCounters.execute("");
+    }
 
 }
 
