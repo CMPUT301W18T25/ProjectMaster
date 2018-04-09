@@ -21,7 +21,11 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 
 /**
- * Photo model contains converted photo information.
+ * Photo class contains information for an array of base string64 bitmaps.
+ * If photo(s) exist for a task, a single Photo class instance will exist
+ * in that task object and will contain all the information about each photo
+ * form that task.
+ *
  * @classname :Photo
  * @Date :   18/03/2018
  * @author :Julian Stys
@@ -41,11 +45,20 @@ public class Photo {
 
 
     public void addPhoto(String encodedImage){
-       // System.arraycopy(newImage, 0, this.compressedImage, 0, this.compressedImage.length);
         encoded_images.add(encodedImage);
     }
 
     // source:
+
+    /**
+     * Converts a base64 string encoded bitmap to a bitmap. 'index' refers to the
+     * position of the desired bitamap in the encoded_images ArrayList
+     *
+     * source: https://stackoverflow.com/questions/30818538/converting-json-object-with-bitmaps?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+     *
+     * @param index
+     * @return
+     */
     public Bitmap getBitmapImage(int index){
 
         byte[] decodedString = Base64.decode(encoded_images.get(index), Base64.DEFAULT);
@@ -55,7 +68,15 @@ public class Photo {
 
 
 
-    // source: https://stackoverflow.com/questions/7693633/android-image-dialog-popup
+
+    /**
+     * Creates a popup in 'context' showing a Horizontal Scroll Bar of all
+     * the images that belong in encoded_images
+     *
+     * source: https://stackoverflow.com/questions/7693633/android-image-dialog-popup
+     *
+     * @param context
+     */
     public void showImage( Context context) {
         Log.d("Photo", "showImage");
         Log.d("Context", context.getPackageName());
@@ -82,11 +103,17 @@ public class Photo {
         builder.addContentView(myScrollGallery, new LinearLayout.LayoutParams(
                 ActionBar.LayoutParams.MATCH_PARENT,700));
         builder.show();
-
-
-
     }
 
+    /**
+     * Inserts a photo into the Horizontal Scroll View from showImage.
+     *
+     * source: https://stackoverflow.com/questions/17489390/image-gallery-with-a-horizontal-scrollview
+     *
+     * @param bm
+     * @param context
+     * @return
+     */
     private View insertPhoto(Bitmap bm, Context context){
 
         LinearLayout layout = new LinearLayout(context);
@@ -106,23 +133,11 @@ public class Photo {
         layout.addView(imageView);
         return layout;
     }
-    /**
-     * Upload photo
-     */
-    public void savePhoto(){
-
-    }
 
     /**
-     * Delete photo
-     */
-    public void  deletePhoto(){
-        encoded_images = null;
-    }
-
-    /**
-     * get photo
-     * @return coded image
+     * Returns the photos as encoded_images, i.e. as ArraList of base64 Strings
+     *
+     * @return encoded image
      */
     public ArrayList<String> getPhotos(){
         return this.encoded_images;
