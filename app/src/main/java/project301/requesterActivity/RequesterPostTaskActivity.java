@@ -366,7 +366,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
 
         if(bitmap!=null) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 3, stream);
             byte[] compressedImage = stream.toByteArray();
             Bitmap compressedbBitmap = BitmapFactory.decodeByteArray(compressedImage, 0, compressedImage.length);
             myGallery.addView(insertPhoto(compressedbBitmap));
@@ -423,7 +423,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
             // Else if image is big, compress it a little
             else if (stream.toByteArray().length >= 65536){
                 ByteArrayOutputStream new_stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 8, new_stream);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 5, new_stream);
                 byte[] new_imageInByte = new_stream.toByteArray();
 
                 Bitmap new_bitmap = BitmapFactory.decodeByteArray(new_imageInByte, 0, new_imageInByte.length);
