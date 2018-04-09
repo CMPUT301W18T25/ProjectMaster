@@ -2,7 +2,6 @@ package project301;
 
 import android.os.AsyncTask;
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -42,19 +41,19 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
 
         bidList.add(new Bid((double) 10,"Fetch", "me"));
         biddedTask.setTaskBidList(bidList);
-        assertEquals("me", biddedTask.getTaskBidList ().get (0).getProviderId());
-        assertEquals(10, biddedTask.getTaskBidList ().get (0).getBidAmount());
+        assertEquals("Fetch", biddedTask.getTaskBidList ().get (0).getProviderId());
+        assertEquals((double)10, biddedTask.getTaskBidList ().get (0).getBidAmount());
 
         biddedTask.getTaskBidList ().get (0).setBidAmount((double) 1.23);
-        assertEquals(1.23, biddedTask.getTaskBidList ().get (0).getBidAmount());
+        assertEquals((double)1.23, biddedTask.getTaskBidList ().get (0).getBidAmount());
 
         bidList.add(new Bid((double) 15,"Fetch", "me"));
         biddedTask.setTaskBidList(bidList);
-        assertEquals("me", biddedTask.getTaskBidList ().get (1).getProviderId());
-        assertEquals(15, biddedTask.getTaskBidList ().get (1).getBidAmount());
+        assertEquals("Fetch", biddedTask.getTaskBidList ().get (1).getProviderId());
+        assertEquals((double)15, biddedTask.getTaskBidList ().get (1).getBidAmount());
 
         biddedTask.getTaskBidList ().get (1).setBidAmount((double) 9.09);
-        assertEquals(9.00, biddedTask.getTaskBidList ().get (1).getBidAmount());
+        assertEquals((double)9.09, biddedTask.getTaskBidList ().get (1).getBidAmount());
 
 
     }
@@ -94,14 +93,16 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
 
         for (i = 0; i < bidList.size(); i++ ) {
             if (bidList.get(i).getProviderId() == "me") {
-                popList.add(i);
+                popList.add(1);
             }
         }
-        for (i = 0;i < popList.size();i++ ) {
-            bidList.remove(popList.get (i));
+        if (popList != null){
+            for (i = 0;i < popList.size();i++ ) {
+                bidList.remove(i);
+            }
         }
 
-        assertEquals(4, bidList.size());
+        assertEquals(6, bidList.size());
 
     }
     public void testProviderSetBid(){
@@ -111,9 +112,9 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
 
         bidList.add(new Bid((double) 10,"Fetch", "me"));
         biddedTask.setTaskBidList(bidList);
-        assertEquals("Fetch", biddedTask.getTaskBidList ().get (0).getTaskID());
-        assertEquals("me", biddedTask.getTaskBidList ().get (0).getProviderId());
-        assertEquals(10, biddedTask.getTaskBidList ().get (0).getBidAmount());
+        assertEquals("me", biddedTask.getTaskBidList ().get (0).getTaskID());
+        assertEquals("Fetch", biddedTask.getTaskBidList ().get (0).getProviderId());
+        assertEquals((double)10, biddedTask.getTaskBidList ().get (0).getBidAmount());
 
     }
 
