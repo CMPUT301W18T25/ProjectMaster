@@ -44,7 +44,7 @@ public class TaskController {
         @Override
         protected Void doInBackground(String... search_parameters) {
             verifySettings();
-            ArrayList<Task> tasks = new ArrayList<Task>();
+            ArrayList<Task> tasks = new ArrayList<>();
 
             String query = "{ \"size\": 50 }" ;
             Log.i("Query", "The query was " + query);
@@ -61,7 +61,6 @@ public class TaskController {
                 } else {
                     Log.i("Error", "The search query failed");
                 }
-                // TODO get the results of the query
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
@@ -142,8 +141,6 @@ public class TaskController {
      */
     public static class getTaskById extends AsyncTask<String, Void, Task> {
 
-        private String id;
-
         @Override
         protected Task doInBackground(String... arg_id) {
             verifySettings();
@@ -169,7 +166,6 @@ public class TaskController {
                 } else {
                     Log.i("Error", "The task search query failed");
                 }
-                // TODO get the results of the query
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
@@ -182,10 +178,8 @@ public class TaskController {
      */
     public static class deleteTaskById extends AsyncTask<String, Void, Void>{
 
-        private String id;
-
         public deleteTaskById(String arg_id){
-            this.id = arg_id;
+
         }
 
         @Override
@@ -244,7 +238,6 @@ public class TaskController {
 
                 Log.i("Error", "We failed to connect Elasticsearch server?");
 
-                return success;
             }
             return success;
         }
@@ -253,7 +246,6 @@ public class TaskController {
             Log.i("Finish","execution");
         }
     }
-    // TODO first step optimized, used taskbidder in user object
     /**
      * A static class to set bid in ES database
      */
@@ -388,7 +380,6 @@ public class TaskController {
             return rtTasks;
         }
     }
-    // TODO this method should not work, but program seems good? is it ghost
     /**
      * A static class to get requester bidden tasks in ES database
      */
@@ -426,13 +417,12 @@ public class TaskController {
             return rtTasks;
         }
     }
-    //TODO optimized first step
     /**
      * A static class to search bidden tasks in ES database
      */
     public static class searchBiddenTasksOfThisProvider extends AsyncTask<Void, Void, ArrayList<Task>>{
         String providerId;
-        ArrayList<String> result_tasks_id = new ArrayList<String>();
+        ArrayList<String> result_tasks_id = new ArrayList<>();
         searchBiddenTasksOfThisProviderGetTaskList search;
         ArrayList<Task> result_tasks = new ArrayList<>();
 
@@ -474,16 +464,15 @@ public class TaskController {
         }
 
     }
-    //TODO optimized, w8 for test
     /**
      * A static class to search bidden tasks in ES database
      */
     public static class searchBiddenTasksOfThisProviderGetTaskList extends AsyncTask<Void, Void, ArrayList<String>>{
         String providerId;
-        ArrayList<String> result_tasks = new ArrayList<String>();
+        ArrayList<String> result_tasks = new ArrayList<>();
 
 
-        public searchBiddenTasksOfThisProviderGetTaskList(String providerId){
+        private searchBiddenTasksOfThisProviderGetTaskList(String providerId){
             this.providerId = providerId;
         }
 
@@ -491,7 +480,6 @@ public class TaskController {
             verifySettings();
 
             User found_user = new User();
-            ArrayList<String> result_tasks_id;
 
 
             String query =
@@ -537,7 +525,6 @@ public class TaskController {
                 } else   {
                     Log.i("Error", "The search query failed");
                 }
-                // TODO get the results of the query
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
@@ -551,7 +538,6 @@ public class TaskController {
         }
 
     }
-    //TODO optimized, w8 for test
     /**
      * A static class to search bidden tasks in ES database
      */
@@ -626,7 +612,7 @@ public class TaskController {
         protected ArrayList<Task> doInBackground(String... providerId) {
             verifySettings();
 
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
+            ArrayList<Task> result_tasks = new ArrayList<>();
 
             String query =
                     "\n{ \n"+
@@ -657,7 +643,6 @@ public class TaskController {
                 } else {
                     Log.i("Error", "The search query failed");
                 }
-                // TODO get the results of the query
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
@@ -668,13 +653,12 @@ public class TaskController {
     /**
      * A static class to search all tasks of this requester in ES database
      */
-    //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAllTasksOfThisRequester extends AsyncTask<String, Void, ArrayList<Task>>{
 
         protected ArrayList<Task> doInBackground(String... requesterId) {
             verifySettings();
 
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
+            ArrayList<Task> result_tasks = new ArrayList<>();
 
             String query =
                     "\n{ \n"+
@@ -703,7 +687,6 @@ public class TaskController {
                 } else {
                     Log.i("Error", "The search query failed");
                 }
-                // TODO get the results of the query
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
                 Task faultTask = new Task();
@@ -718,13 +701,12 @@ public class TaskController {
     /**
      * A static class to search all requesting tasks in ES database
      */
-    //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAllBiddenRequestingTasks extends AsyncTask<Void, Void, ArrayList<Task>>{
 
         protected ArrayList<Task> doInBackground(Void... nul) {
             verifySettings();
 
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
+            ArrayList<Task> result_tasks = new ArrayList<>();
 
             String queryS =
                     "\n{ \n"+
@@ -753,7 +735,6 @@ public class TaskController {
                 } else {
                     Log.i("Error", "The search query failed");
                 }
-                // TODO get the results of the query
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
@@ -764,13 +745,12 @@ public class TaskController {
     /**
      * A static class to search all requesting tasks in ES database
      */
-    //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAllRequestingTasks extends AsyncTask<Void, Void, ArrayList<Task>>{
 
         protected ArrayList<Task> doInBackground(Void... nul) {
             verifySettings();
 
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
+            ArrayList<Task> result_tasks = new ArrayList<>();
 
             String query =
                     "\n{ \n"+
@@ -800,7 +780,6 @@ public class TaskController {
                 } else {
                     Log.i("Error", "The search query failed");
                 }
-                // TODO get the results of the query
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
@@ -811,13 +790,12 @@ public class TaskController {
     /**
      * A static class to search all requesting tasks in ES database
      */
-    //TODO do test for this method, which should be extremely similar to bidden tasks
     public static class searchAllBiddenTasks extends AsyncTask<Void, Void, ArrayList<Task>>{
 
         protected ArrayList<Task> doInBackground(Void... nul) {
             verifySettings();
 
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
+            ArrayList<Task> result_tasks = new ArrayList<>();
 
             String query =
                     "\n{ \n"+
@@ -847,7 +825,6 @@ public class TaskController {
                 } else {
                     Log.i("Error", "The search query failed");
                 }
-                // TODO get the results of the query
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
@@ -858,12 +835,11 @@ public class TaskController {
     /**
      * A static class to search all bid of a task
      */
-    //TODO check what is it for????
     public static class searchAllBid extends AsyncTask<String, Void, ArrayList<Bid>>{
 
         protected ArrayList<Bid> doInBackground(String...taskIds) {
             verifySettings();
-            ArrayList<Bid> bidList = new ArrayList<Bid>();
+            ArrayList<Bid> bidList = new ArrayList<>();
 
             String query =
                     "\n{ \n"+
@@ -901,7 +877,6 @@ public class TaskController {
         }
 
     }
-    //TODO replace old
     /**
      * A static class to search task by key word in ES database
      */
@@ -911,7 +886,7 @@ public class TaskController {
 
             String [] search_parameters = keywords[0].split("\\s+");
             String bodyQuery;
-            ArrayList<Task> result_tasks = new ArrayList<Task>();
+            ArrayList<Task> result_tasks = new ArrayList<>();
 
             Log.i("Length", Integer.toString(search_parameters.length));
 
@@ -949,13 +924,15 @@ public class TaskController {
                 } else {
                     Log.i("Error", "The search query failed");
                 }
-                // TODO get the results of the query
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
             return result_tasks;
         }
     }
+    /**
+     * A class to search task by key word for shorter keyword length
+     */
     public ArrayList<Task> searchByKeyWord(String keyWord,String providerId){
         ArrayList<Task> tasks = new ArrayList<>();
         ArrayList<Task> keywordTasks = new ArrayList<>();
@@ -978,11 +955,10 @@ public class TaskController {
         return keywordTasks;
 
     }
-
     /**
      * verify ES database setting
      */
-    public static void verifySettings() {
+    private static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://192.30.35.214:8080").discoveryEnabled(true).multiThreaded(true);
 

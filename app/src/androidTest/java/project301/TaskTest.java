@@ -1,4 +1,8 @@
+
+
 package project301;
+
+
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -23,9 +27,7 @@ import static org.junit.Assert.*;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
-/**
- * This is the test for task-relative methods.
- */
+
 
 @SuppressWarnings("ALL")
 public class TaskTest {
