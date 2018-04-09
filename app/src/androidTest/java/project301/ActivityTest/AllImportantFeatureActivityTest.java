@@ -210,7 +210,7 @@ public class AllImportantFeatureActivityTest extends ActivityInstrumentationTest
         solo.clickOnButton("Log In");
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -336,29 +336,6 @@ public class AllImportantFeatureActivityTest extends ActivityInstrumentationTest
         solo.clickInList(0);
 
         solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskAssignedActivity.class);
-    }
-
-    private void payTask(){
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
-
-        solo.clickOnButton("view assigned task");
-
-        solo.clickInList(-1);
-
-        solo.clickOnButton("Pay task");
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterDoneListActivity.class);
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        solo.clickInList(0);
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskDoneActivity.class);
-
     }
 
     private void deleteDataBase(){
