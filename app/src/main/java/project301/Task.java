@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 /* status: request, bidden, assigned, done */
 
-//TODO add idealprice, photo, time set to current by built-in methods?
 public class Task {
     private String taskName;
     private String taskDetails;
@@ -39,7 +38,11 @@ public class Task {
     private Bid choosenBid;
 
 
-
+    /**
+     * construct task with not init parameter
+     * @param s, s1,  michael,  o,  bidding,  s2, bidList,  emptyPhoto,  idealprice,  datetime
+     * @return
+     */
     public Task(String s, String s1, String michael, Object o, String bidding, String s2, ArrayList<Bid> bidList, Photo emptyPhoto, Double idealprice, DateTime datetime) {
     }
     public String getId(){
@@ -49,6 +52,11 @@ public class Task {
         this.taskID = id;
     }
 
+    /**
+     * construct task with no init parameter
+     * @param
+     * @return
+     */
     public Task(){
         this.taskName="";
         this.taskDetails="";
@@ -65,6 +73,11 @@ public class Task {
         this.lowestBid = 0.0;
     }
 
+    /**
+     * construct task with some init parameter
+     * @param taskName,  taskDetails,  taskRequester,  taskProvider  taskStatus,  taskAddress, \ taskBidList,  taskPhoto
+     * @return
+     */
     public Task(String taskName, String taskDetails, String taskRequester, String taskProvider,
                 String taskStatus, String taskAddress, ArrayList<Bid> taskBidList, Photo taskPhoto){
         this.taskName=taskName.toLowerCase();
@@ -175,6 +188,11 @@ public class Task {
         return choosenBid;
     }
     //requester needs to see all the bids which he hasn't canceled
+    /**
+     * find and return bidlist of this task
+     * @param
+     * @return bidList
+     */
     public ArrayList<Bid> getAvailableBidListOfThisTask(){
         ArrayList<Bid> result = new ArrayList<>();
         if(canceledBidList==null){
@@ -230,6 +248,11 @@ public class Task {
         }
         return false;
     }
+    /**
+     * change task status after cancelling
+     * @param bid
+     * @return
+     */
     public void changeStatusAfterDeclineDeal(Bid bid){
         this.canceledBidList.add(bid);
         this.setChoosenBid(null);
@@ -246,7 +269,11 @@ public class Task {
             this.setTaskStatus("request");
         }
     }
-
+    /**
+     * change task status after cancelling
+     * @param bid
+     * @return
+     */
     public void changeStatusAfterDeclineBid(Bid bid){
         this.canceledBidList.add(bid);
         ArrayList<Bid> bidList = this.getAvailableBidListOfThisTask();
@@ -262,6 +289,11 @@ public class Task {
         }
     }
 
+    /**
+     * find the lowest bid of this task
+     * @param
+     * @return
+     */
     public Double findLowestbid(){
         ArrayList<Bid> bidList = this.getAvailableBidListOfThisTask();
         if(bidList.size()==0){

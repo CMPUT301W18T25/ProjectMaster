@@ -27,12 +27,12 @@ import static org.junit.Assert.*;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
-
-
 @SuppressWarnings("ALL")
 public class TaskTest {
 
-
+    /**
+     * A static class to test TaskContructor in taskcontroller
+     */
     @Test
     public void testTaskContructor(){
         ArrayList<Bid> bidList = new ArrayList<Bid>();
@@ -49,6 +49,9 @@ public class TaskTest {
 
 
     }
+    /**
+     * A static class to test TaskNoConstructor in taskcontroller
+     */
     @Test
     public void testTaskNoConstructor(){
         ArrayList<Bid> bidList = new ArrayList<Bid>();
@@ -65,8 +68,9 @@ public class TaskTest {
 
 
     }
-    // add passed w8 for more cases
-    // method addTask
+    /**
+     * A static class to test AddTask in taskcontroller
+     */
     @Test
     public void testAddTask(){
         ArrayList<Bid> bidList = new ArrayList<Bid>();
@@ -110,8 +114,9 @@ public class TaskTest {
         } while (taskStatu != AsyncTask.Status.FINISHED);
     }
 
-    // method getTaskById
-    // basic passed, w8 for failure test cases
+    /**
+     * A static class to test GetTask in taskcontroller
+     */
     @Test
     public void testGetTask(){
         ArrayList<Bid> bidList = new ArrayList<Bid>();
@@ -170,7 +175,9 @@ public class TaskTest {
         } while (taskStatu != AsyncTask.Status.FINISHED);
     }
 
-    // deleteTaskById
+    /**
+     * A static class to test DeleteTask in taskcontroller
+     */
     @Test
     public void testDeleteTask(){
         ArrayList<Bid> bidList = new ArrayList<Bid>();
@@ -236,7 +243,9 @@ public class TaskTest {
 
     }
 
-    // requesterUpdateTask
+    /**
+     * A static class to test requesterUpdateTask in taskcontroller
+     */
     @Test
     public void requesterUpdateTaskTest(){
         TaskController.requesterUpdateTask updateTask = new TaskController.requesterUpdateTask();
@@ -319,7 +328,9 @@ public class TaskTest {
 
     }
 
-    // providerSetBid
+    /**
+     * A static class to test providerSetBid in taskcontroller
+     */
     @Test
     public void providerSetBidTest(){
         // init methods to use
@@ -411,7 +422,9 @@ public class TaskTest {
         deleteTaskById.execute(empty_task.getId());
     }
 
-    // searchBiddenTasksOfThisProvider
+    /**
+     * A static class to test searchBiddenTasksOfThisProvider in taskcontroller
+     */
     @Test
     public void searchBiddenTasksOfThisProviderTest(){
         TaskController.getTaskById getTask = new TaskController.getTaskById();
@@ -505,7 +518,9 @@ public class TaskTest {
         }
     }
 
-    // searchAssignTasksOfThisProvider
+    /**
+     * A static class to test searchAssignTasksOfThisProvider in taskcontroller
+     */
     @Test
     public void searchAssignTasksOfThisProviderTest(){
         TaskController.getTaskById getTask = new TaskController.getTaskById();
@@ -604,7 +619,9 @@ public class TaskTest {
         }
     }
 
-    // searchAllTasksOfThisRequester
+    /**
+     * A static class to test searchAllTasksOfThisRequester in taskcontroller
+     */
     @Test
     public void searchAllTasksOfThisRequesterTest() {
         TaskController.getTaskById getTask = new TaskController.getTaskById();
@@ -705,6 +722,9 @@ public class TaskTest {
 
     }
 
+    /**
+     * A static class to test searchAllRequestingTasks in taskcontroller
+     */
     @Test
     public void searchAllRequestingTasksTest(){
         TaskController.getTaskById getTask = new TaskController.getTaskById();
@@ -810,7 +830,9 @@ public class TaskTest {
         }
     }
 
-    // passed
+    /**
+     * A static class to test searchTaskByKeyword in taskcontroller
+     */
     @Test
     public void searchTaskByKeywordTest(){
         TaskController.searchTaskByKeyword search = new TaskController.searchTaskByKeyword();
@@ -845,6 +867,9 @@ public class TaskTest {
 
     }
 
+    /**
+     * A static class to test searchAllBiddenTask in taskcontroller
+     */
     @Test
     public void searchAllBiddenTaskTest(){
         TaskController.getTaskById getTask = new TaskController.getTaskById();
@@ -948,6 +973,9 @@ public class TaskTest {
         }
     }
 
+    /**
+     * A static class to test searchAllBiddenRequestingTasks in taskcontroller
+     */
     @Test
     public void searchAllBiddenRequestingTasksTest(){
         TaskController.getTaskById getTask = new TaskController.getTaskById();
@@ -1051,6 +1079,9 @@ public class TaskTest {
         }
     }
 
+    /**
+     * A static class to test searchDoneTasksOfThisProvider in taskcontroller
+     */
     @Test
     public void searchDoneTasksOfThisProviderTest(){
         TaskController.getTaskById getTask = new TaskController.getTaskById();
