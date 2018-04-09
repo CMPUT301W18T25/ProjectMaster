@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
@@ -342,23 +343,10 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
     private void attachCameraPhoto(){
         Log.d("RequesterPostTaskActivity","Sleeping");
 
-        File file = new File("/storage/emulated/0/DCIM/Camera", "pic.jpg");
-        int counter=1;
-        while (file.exists()) {
-            //file.delete();
-            Log.d("RequesterPostTaskActivity","/storage/emulated/0/DCIM/Camera/pic" + String.format("%02d", counter-1) + ".jpg");
-            file = new File("/storage/emulated/0/DCIM/Camera", "pic" + String.format("%02d", counter) + ".jpg");
-            file.delete();
-            counter++;
-        }
-        String filePath;
-        if (counter == 2){
-            filePath = "/storage/emulated/0/DCIM/Camera/pic.jpg";
-        }
-        else{
-            filePath = "/storage/emulated/0/DCIM/Camera/pic" + String.format("%02d", counter-2) + ".jpg";
 
-        }
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "pic.jpg");
+        String filePath = file.getPath();
+
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         File file2 = new File(filePath);

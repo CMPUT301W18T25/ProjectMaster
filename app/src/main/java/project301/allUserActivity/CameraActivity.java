@@ -17,6 +17,7 @@ import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.provider.MediaStore;
@@ -184,12 +185,8 @@ public class CameraActivity extends AppCompatActivity {
             // Orientation
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
-            File file = new File("/storage/emulated/0/DCIM/Camera", "pic.jpg");
-            int counter=1;
-            while (file.exists()) {
-                file = new File("/storage/emulated/0/DCIM/Camera", "pic" + String.format("%02d", counter) + ".jpg");
-                counter++;
-            }
+            File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "pic.jpg");
+
             ContentValues values = new ContentValues();
             values.put(MediaStore.Images.Media.DATA, String.valueOf(file));
             values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
@@ -229,6 +226,7 @@ public class CameraActivity extends AppCompatActivity {
                     }
                 }
             };
+            reader.setOnImageAvailableListener(readerListener, mBackgroundHandler);
             reader.setOnImageAvailableListener(readerListener, mBackgroundHandler);
             final File finalFile1 = file;
             //noinspection NullableProblems,NullableProblems,NullableProblems
