@@ -16,9 +16,7 @@ LINK : https://cmput301w18t25.github.io/ProjectMaster/
 * BuildToolsVersion 26.0.2
 
 ## Commerical Video
-
-## Demo Video
-
+LINK : https://www.youtube.com/watch?v=_pmvUhQDCgc
 
 ## Authors:
 * Xingyuan(Roy) Yang
