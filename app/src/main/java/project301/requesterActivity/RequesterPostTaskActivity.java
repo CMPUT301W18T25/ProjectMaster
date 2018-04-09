@@ -270,12 +270,16 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterPostTaskActivity.this, CameraActivity.class);
+                if (photos.getPhotos().size() >= 10) {
+                    Toast toast = Toast.makeText(context,"Cannot exceed 10 images per task",Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                else{
+                    Log.d("Requester post task activity","take photo clicked");
+                    // source: https://stackoverflow.com/questions/9107900/how-to-upload-image-from-gallery-in-android
+                    startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
 
-                startActivityForResult(info2, 5);
-
-
-                Log.d("POINT","back form camera");
+                }
             }
         });
 
@@ -284,10 +288,16 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         photoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Requester post task activity","take photo clicked");
-                // source: https://stackoverflow.com/questions/9107900/how-to-upload-image-from-gallery-in-android
-                startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+                if (photos.getPhotos().size() >= 10) {
+                    Toast toast = Toast.makeText(context,"Cannot exceed 10 images per task",Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                else{
+                    Log.d("Requester post task activity","take photo clicked");
+                    // source: https://stackoverflow.com/questions/9107900/how-to-upload-image-from-gallery-in-android
+                    startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
 
+                }
             }
         });
 
@@ -390,9 +400,9 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
             byte[] compressedImage = stream.toByteArray();
             Bitmap compressedbBitmap = BitmapFactory.decodeByteArray(compressedImage, 0, compressedImage.length);
             // If image is massive, compress it as much as possible
-            if (stream.toByteArray().length >= 15216000){
+            if (stream.toByteArray().length >= 252160){
                 ByteArrayOutputStream new_stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 0, new_stream);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 5, new_stream);
                 byte[] new_imageInByte = new_stream.toByteArray();
 
                 Bitmap new_bitmap = BitmapFactory.decodeByteArray(new_imageInByte, 0, new_imageInByte.length);
