@@ -19,12 +19,12 @@ LINK : https://cmput301w18t25.github.io/ProjectMaster/
 LINK : https://www.youtube.com/watch?v=_pmvUhQDCgc
 
 ## Authors:
-* Xingyuan(Roy) Yang
-* Yuqi Zhang
-* Yue Ma
 * Wang Dong
 * Yingnan Ma
+* Yue Ma
 * Julian Stys
+* Xingyuan(Roy) Yang
+* Yuqi Zhang
 
 
 ## License:
