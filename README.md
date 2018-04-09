@@ -1,6 +1,6 @@
-## CMPUT301 T02 Group Project
+## CMPUT301 T25 Group Project
 
-* group name : Project Master 
+* Group name : Project Master 
 * Project ManageMent
 * Trello
 * github
@@ -15,16 +15,16 @@ LINK : https://cmput301w18t25.github.io/ProjectMaster/
 * CompiledSdkVersion 22 and above 
 * BuildToolsVersion 26.0.2
 
-## Commerical Video
+## Commercial Video
 LINK : https://www.youtube.com/watch?v=_pmvUhQDCgc
 
 ## Authors:
-* Xingyuan(Roy) Yang
-* Yuqi Zhang
-* Yue Ma
 * Wang Dong
 * Yingnan Ma
+* Yue Ma
 * Julian Stys
+* Xingyuan(Roy) Yang
+* Yuqi Zhang
 
 
 ## License:
