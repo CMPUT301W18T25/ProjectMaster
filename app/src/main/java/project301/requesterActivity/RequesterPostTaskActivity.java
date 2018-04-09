@@ -282,8 +282,8 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
                 else{
                     Log.d("Requester post task activity","take photo clicked");
                     // source: https://stackoverflow.com/questions/9107900/how-to-upload-image-from-gallery-in-android
-                    startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
-
+                    Intent info2 = new Intent(RequesterPostTaskActivity.this, CameraActivity.class);
+                    startActivityForResult(info2, 5);
                 }
             }
         });
