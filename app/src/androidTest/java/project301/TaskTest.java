@@ -27,8 +27,6 @@ import static org.junit.Assert.*;
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
 
-
-
 @SuppressWarnings("ALL")
 public class TaskTest {
 
