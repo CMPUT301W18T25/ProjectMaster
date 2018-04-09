@@ -12,6 +12,7 @@ import project301.allUserActivity.UserCharacterActivity;
 
 import project301.controller.BidController;
 import project301.controller.TaskController;
+import project301.controller.UserController;
 import project301.providerActivity.ProviderMainActivity;
 import project301.providerActivity.ProviderTaskBidActivity;
 import project301.requesterActivity.RequesterAllListActivity;
@@ -53,15 +54,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testRequesterMainActivity() {
-        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
-
-        solo.enterText((EditText) solo.getView(R.id.login_name),"wdong2");
-
-        solo.enterText((EditText) solo.getView(R.id.login_password),"passward");
-
-        solo.clickOnButton("Log In");
-
-        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
+        logIn();
 
         solo.clickOnButton("Requester");
 
@@ -98,15 +91,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
     public void testRequesterPostAndDeleteTaskActivity() {
 
-        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
-
-        solo.enterText((EditText) solo.getView(R.id.login_name),"wdong2");
-
-        solo.enterText((EditText) solo.getView(R.id.login_password),"passward");
-
-        solo.clickOnButton("Log In");
-
-        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
+        logIn();
 
         solo.clickOnButton("Requester");
 
@@ -120,7 +105,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.enterText((EditText) solo.getView(R.id.c_task_detail),"two people");
 
-        solo.enterText((EditText) solo.getView(R.id.c_task_location),"ETLC");
+        solo.enterText((EditText) solo.getView(R.id.c_task_location),"9107 116St NW");
 
         solo.enterText((EditText) solo.getView(R.id.c_task_idealprice),"12.34");
 
@@ -137,17 +122,8 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
         solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
     }
 
-    public void testRequesterEditListActivity() {
-
-        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
-
-        solo.enterText((EditText) solo.getView(R.id.login_name),"wdong2");
-
-        solo.enterText((EditText) solo.getView(R.id.login_password),"passward");
-
-        solo.clickOnButton("Log In");
-
-        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
+    public void testRequesterMapActivity() {
+        logIn();
 
         solo.clickOnButton("Requester");
 
@@ -160,80 +136,6 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnButton("View On Map");
 
         solo.assertCurrentActivity("Wrong Activity", RequesterMapActivity.class);
-
-        solo.goBack();
-
-        solo.clickOnButton("Main menu");
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
-    }
-
-    public void testRequesterEditInfoActivity() {
-        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
-
-        logIn();
-
-        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
-
-        solo.clickOnButton("Requester");
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
-
-        solo.clickOnButton("Edit Profile");
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterEditInfoActivity.class);
-
-        solo.clearEditText((EditText) solo.getView(R.id.edit_email));
-
-        solo.enterText((EditText) solo.getView(R.id.edit_email),"wdong2@ualberta.ca");
-
-        solo.clearEditText((EditText) solo.getView(R.id.edit_phone));
-
-        solo.enterText((EditText) solo.getView(R.id.edit_phone),"1234567890");
-
-        solo.clearEditText((EditText) solo.getView(R.id.edit_passward));
-
-        solo.enterText((EditText) solo.getView(R.id.edit_passward),"abcd");
-
-        solo.clickOnButton("Save");
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
-
-        solo.clickOnButton("Log out");
-
-        solo.clearEditText((EditText) solo.getView(R.id.login_name));
-
-        solo.enterText((EditText) solo.getView(R.id.login_name), "wdong2");
-
-        solo.clearEditText((EditText) solo.getView(R.id.login_password));
-
-        solo.enterText((EditText) solo.getView(R.id.login_password), "passward");
-
-        solo.clickOnButton("Log In");
-
-        solo.enterText((EditText) solo.getView(R.id.login_name), "wdong2");
-
-        solo.enterText((EditText) solo.getView(R.id.login_password), "abcd");
-
-        solo.clickOnButton("Log In");
-
-        solo.clickOnButton("Requester");
-
-        solo.clickOnButton("Edit Profile");
-
-        solo.clearEditText((EditText) solo.getView(R.id.edit_name));
-
-        solo.enterText((EditText) solo.getView(R.id.edit_name),"wdong2");
-
-        solo.enterText((EditText) solo.getView(R.id.edit_email),"abc@abc.com");
-
-        solo.enterText((EditText) solo.getView(R.id.edit_phone),"7807104756");
-
-        solo.clearEditText((EditText) solo.getView(R.id.edit_passward));
-
-        solo.enterText((EditText) solo.getView(R.id.edit_passward),"passward");
-
-        solo.clickOnButton("Save");
     }
 
     public void testPostTaskActivity() {
@@ -243,43 +145,37 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.clickOnButton("Requester");
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
-
-        solo.clickOnButton("Post New Task");
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterPostTaskActivity.class);
-
-        solo.enterText((EditText) solo.getView(R.id.c_task_name),"Go to Hub");
-
-        solo.enterText((EditText) solo.getView(R.id.c_task_detail),"two people");
-
-        solo.enterText((EditText) solo.getView(R.id.c_task_location),"ETLC");
-
-        solo.enterText((EditText) solo.getView(R.id.c_task_idealprice),"12.34");
-
-        solo.clickOnButton("submit");
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
-
-        solo.clickInList(-1);
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskRequestActivity.class);
+        postTask();
     }
 
     public void testAssignActivity(){
+        deleteDataBase();
+
         logIn();
 
         solo.clickOnButton("Requester");
 
+        postTask();
+
+        solo.clickOnButton("Show List");
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        solo.clickOnButton("Main menu");
+
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
 
-        solo.clickOnButton("view bidden task");
+        solo.clickOnButton("Log out");
 
-        solo.clickInList(-1);
+        logIn();
 
-        solo.clickOnButton("submit");
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterAssignedListActivity.class);
+        solo.clickOnButton("provider");
 
         try {
             Thread.sleep(1000);
@@ -287,10 +183,27 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
             e.printStackTrace();
         }
 
-        solo.clickInList(0);
+        solo.enterText((EditText) solo.getView(R.id.search_info),"Hub");
 
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskAssignedActivity.class);
+        solo.clickOnButton("Search");
 
+        bidOnTask();
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        solo.clickOnButton("back");
+
+        solo.clickOnButton("       log out     ");
+
+        logIn();
+
+        solo.clickOnButton("Requester");
+
+        assignTask();
     }
 
     public void testEditTaskActivity(){
@@ -351,7 +264,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnButton("Log In");
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -392,7 +305,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.enterText((EditText) solo.getView(R.id.c_task_detail),"two people");
 
-        solo.enterText((EditText) solo.getView(R.id.c_task_location),"ETLC");
+        solo.enterText((EditText) solo.getView(R.id.c_task_location),"9107 116St NW");
 
         solo.enterText((EditText) solo.getView(R.id.c_task_idealprice),"12.34");
 
@@ -455,37 +368,14 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
         solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskAssignedActivity.class);
     }
 
-    private void payTask(){
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
-
-        solo.clickOnButton("view assigned task");
-
-        solo.clickInList(-1);
-
-        solo.clickOnButton("Pay task");
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterDoneListActivity.class);
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        solo.clickInList(0);
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskDoneActivity.class);
-
-    }
-
     private void deleteDataBase(){
         TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
         deleteAllTasks.execute("");
 
-        /*
+
         UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
         deleteAllUsers.execute("");
-        */
+
 
         BidController.deleteAllBidCounters deleteAllBidCounters = new BidController.deleteAllBidCounters();
         deleteAllBidCounters.execute("");
