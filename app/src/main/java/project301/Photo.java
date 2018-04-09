@@ -57,7 +57,7 @@ public class Photo {
      * source: https://stackoverflow.com/questions/30818538/converting-json-object-with-bitmaps?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
      *
      * @param index
-     * @return
+     * @return bitmap
      */
     public Bitmap getBitmapImage(int index){
 
