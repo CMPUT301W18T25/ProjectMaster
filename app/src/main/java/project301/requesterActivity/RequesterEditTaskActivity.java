@@ -244,8 +244,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
                 if(check_status(temp_status)){
                 if(check_detaillength(edit_detail.getText().toString())){
                 if (check_titlelength(edit_name.getText().toString())){
-                if (check_empty(edit_name.getText().toString(),edit_destination.getText().toString(),
-                        edit_idealprice.getText().toString())){
+                if (check_empty(edit_name.getText().toString())){
 
 
                     //interface jump
@@ -261,10 +260,25 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
 
                     //set data
                     target_task.setTaskName(edit_name.getText().toString());
-                    target_task.setTaskDetails(edit_detail.getText().toString());
-                    target_task.setTaskAddress(edit_destination.getText().toString());
-                    target_task.setTaskIdealPrice(Double.parseDouble(edit_idealprice.getText().toString()));
-                    target_task.setTaskRequester(userId);
+
+                    if(!check_empty(edit_detail.getText().toString())){
+                        target_task.setTaskDetails(" ");
+                    }
+                    else {
+                        target_task.setTaskDetails(edit_detail.getText().toString());
+                    }
+                    if(!check_empty(edit_destination.getText().toString())){
+                        target_task.setTaskAddress(" ");
+                    }
+                    else {
+                        target_task.setTaskAddress(edit_destination.getText().toString());
+                    }
+                    if(!check_empty(edit_idealprice.getText().toString())){
+                        target_task.setTaskIdealPrice(null);
+                    }
+                    else {
+                        target_task.setTaskIdealPrice(Double.parseDouble(edit_idealprice.getText().toString()));
+                    }
 
                     //to do:set photo
                     if (setImage == true){
@@ -654,9 +668,9 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
      * @param ideal_price
      * @return
      */
-    private boolean check_empty(String name, String destination, String ideal_price)
+    private boolean check_empty(String name)
     {
-        if(name.length()==0 || destination.length()==0|| ideal_price.length()==0 ){
+        if(name.length()==0 ){
             return false;
         }
         return true;
