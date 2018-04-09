@@ -22,7 +22,7 @@ import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Detail :
+ * Detail :The adapter to place array adapter
  * @classname : PlaceArrayAdapterController
  * @Date :   18/03/2018
  * @version 1.0

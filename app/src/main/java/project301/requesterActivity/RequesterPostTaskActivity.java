@@ -348,13 +348,16 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
 
         Log.d("Photo file",filePath);
         Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
-        byte[] compressedImage = stream.toByteArray();
-        Bitmap compressedbBitmap = BitmapFactory.decodeByteArray(compressedImage, 0, compressedImage.length);
-        myGallery.addView(insertPhoto(compressedbBitmap));
-        photos.addPhoto(getStringFromBitmap(compressedbBitmap));
-        setImage=true;
+
+        if(bitmap!=null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
+            byte[] compressedImage = stream.toByteArray();
+            Bitmap compressedbBitmap = BitmapFactory.decodeByteArray(compressedImage, 0, compressedImage.length);
+            myGallery.addView(insertPhoto(compressedbBitmap));
+            photos.addPhoto(getStringFromBitmap(compressedbBitmap));
+            setImage = true;
+        }
     }
 
     /**

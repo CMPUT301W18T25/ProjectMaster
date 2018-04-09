@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 /**
  * Detail : Click the view on map on a specific task, we can see the location of the specific task

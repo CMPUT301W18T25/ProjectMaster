@@ -30,7 +30,7 @@ import project301.allUserActivity.LogInActivity;
 import project301.controller.TaskController;
 
 /**
- * user could change profile, see bid history, as well as look into a requesting task.
+ * User could change profile, see bid history, as well as look into a requesting task.
  * This is the main page of provider; it shows a list of requesting task;
  * @classname : ProviderMainActivity
  * @Date :   18/03/2018
