@@ -36,8 +36,6 @@ import com.google.android.gms.location.FusedLocationProviderClient;
  * allow the provider to click on each task to view further information. This activity
  * first asks user for permission to access the devices location. It then gets the current
  * location of the user and navigates the map CameraActivity to this location.
- * Currently, the Task class doesn't have functionality for location, so a 'mockupTasks'
- * of ArrayList<Locations> is used to test the markers of each task.
  *
  * Source: The majority of the map code was implemented using the Google developer documentation
  * (https://developers.google.com/maps/documentation/android-api/start)
@@ -72,10 +70,6 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
     private final LatLng mDefaultLocation = new LatLng(53.5273, -113.5296);
 
     private ArrayList<project301.Task> taskList;
-    //private LatLng location;
-
-    // Testing variables
-    private ArrayList<Location> mockupTasks;
 
 
 
@@ -150,7 +144,6 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
     /**
      * Get the info of all task
      */
-
     private void getAllTaksInfo() {
 
         TaskController.searchAllBiddenRequestingTasks search = new TaskController.searchAllBiddenRequestingTasks();
@@ -325,8 +318,16 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
 
     }
 
-    // source: https://stackoverflow.com/questions/2741403/get-the-distance-between-two-geo-points
-    private double getTaskDistance(project301.Task currentTask){
+    /**
+     * Returns the distance from the current position of the user to
+     * the task location passed in as a parameter. Resulting distance is
+     * return in meters
+     *
+     * source: https://stackoverflow.com/questions/2741403/get-the-distance-between-two-geo-points
+     *
+     * @param currentTask
+     * @return
+     */    private double getTaskDistance(project301.Task currentTask){
         Location taskLocation = new Location("");
         taskLocation.setLatitude(currentTask.getTasklatitude());
         taskLocation.setLongitude(currentTask.getTasklgtitude());
@@ -377,8 +378,6 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
         updateLocationUI();
         getDeviceLocation();
 
-        // Don't call displayTaskLocations for now since it is used only for testing at the moment
-        //displayTaskLocations();
     }
 
 
