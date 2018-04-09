@@ -44,8 +44,12 @@ import java.util.List;
 import project301.R;
 
 /**
- * This is the camera activity
+ * The camera activity allows requesters to take a photo using the
+ * devices camera, and then attaching the photo to the task directly.
+ * Called by RequesterPostTaskActivity
+ *
  * @Date :   01/04/2018
+ * @author : Xingyuan Yang
  * @author : Julian Stys
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
