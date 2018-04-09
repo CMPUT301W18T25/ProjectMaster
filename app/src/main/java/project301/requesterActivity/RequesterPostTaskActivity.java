@@ -348,6 +348,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
             //file.delete();
             Log.d("RequesterPostTaskActivity","/storage/emulated/0/DCIM/Camera/pic" + String.format("%02d", counter-1) + ".jpg");
             file = new File("/storage/emulated/0/DCIM/Camera", "pic" + String.format("%02d", counter) + ".jpg");
+            file.delete();
             counter++;
         }
         String filePath;
@@ -360,9 +361,11 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         }
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        File file2 = new File(filePath);
 
         Log.d("Photo file",filePath);
         Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
+        file2.delete();
 
         if(bitmap!=null) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
