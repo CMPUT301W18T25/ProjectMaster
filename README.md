@@ -1,6 +1,6 @@
-## CMPUT301 T02 Group Project
+## CMPUT301 T25 Group Project
 
-* group name : Project Master 
+* Group name : Project Master 
 * Project ManageMent
 * Trello
 * github
