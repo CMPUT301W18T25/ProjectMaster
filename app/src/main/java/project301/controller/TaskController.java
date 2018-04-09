@@ -267,10 +267,6 @@ public class TaskController {
                 UserController uc= new UserController();
                 uc.updateUser(new_user);
             }
-
-            // update user
-
-
         }
 
         @Override
@@ -296,49 +292,6 @@ public class TaskController {
                 Log.i("Error", "We failed to connect Elasticsearch server");
             }
             return null;
-        }
-    }
-    /**
-     * A static class to cancel a bid in ES database
-     */
-    public static class providerCancelBid extends AsyncTask<Void, Void, Boolean>{
-
-        Task current_task;
-        String providerId;
-        Boolean rt_val;
-
-        public providerCancelBid(Task current_task, String providerId){
-            this.current_task = current_task;
-            this.providerId = providerId;
-            this.rt_val = this.current_task.cancelBid(this.providerId);
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... nul) {
-            if (this.rt_val){
-                verifySettings();
-
-                String query = TaskUtil.serializer(this.current_task);
-
-                Index index = new Index.Builder(query)
-                        .index("cmput301w18t25").type("task").id(this.current_task.getId()).build();
-                try {
-                    DocumentResult result = client.execute(index);
-                    if (result.isSucceeded()) {
-                        Log.i("Success", "Successful cancel provider's bid");
-                    } else {
-                        Log.i("Error", "We failed to cancel provider's bid to elastic search!");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.i("Error", "We failed to connect Elasticsearch server");
-                }
-                return true;
-            }
-            else {
-                return false;
-            }
-
         }
     }
     /**
