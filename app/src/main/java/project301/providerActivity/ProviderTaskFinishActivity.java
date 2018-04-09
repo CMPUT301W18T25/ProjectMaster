@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import project301.Bid;
@@ -17,6 +18,8 @@ import project301.Task;
 import project301.User;
 import project301.controller.TaskController;
 import project301.controller.UserController;
+import project301.requesterActivity.RequesterMapSpecActivity;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -45,6 +48,7 @@ public class ProviderTaskFinishActivity extends AppCompatActivity {
     private Map providerMap;
     private ArrayList tasklist;
     private Context context;
+    private ImageButton show_photo;
 
     // task variable
     private String userName;
@@ -155,6 +159,35 @@ public class ProviderTaskFinishActivity extends AppCompatActivity {
 
             }
         });
+        //set viewmap button
+        Button mapButton = (Button) findViewById(R.id.view_map);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String index = intent.getExtras().get("info").toString();
+                Intent info2 = new Intent(ProviderTaskFinishActivity.this, RequesterMapSpecActivity.class);
+                info2.putExtra("userId", userId);
+                info2.putExtra("info", index);
+                info2.putExtra("taskId", view_task.getId());
+                startActivity(info2);
+
+            }
+        });
+        // show photo button
+        show_photo = (ImageButton) findViewById(R.id.imageButton);
+
+        show_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("requesteredittask", "showing photo");
+                if (view_task.getTaskPhoto() != null) {
+                    Log.d("asdf", "not null");
+
+                    view_task.getTaskPhoto().showImage(ProviderTaskFinishActivity.this);
+                }
+            }
+        });
+
     }
 
 }
