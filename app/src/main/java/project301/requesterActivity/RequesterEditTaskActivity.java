@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
@@ -46,6 +47,7 @@ import project301.controller.OfflineController;
 import project301.controller.PlaceArrayAdapterController;
 import project301.controller.TaskController;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,6 +85,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
     protected MerlinsBeard merlinsBeard;
     private String temp_status;
     private LinearLayout myGallery;
+
 
     // Address autocomplete stuff
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
@@ -140,6 +143,7 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
     //then settle save button and back. Click save, information get saved, Click back, information not saved.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        task_photos = new Photo();
 
         setContentView(R.layout.requester_edit_task);
         context=getApplicationContext();
@@ -147,7 +151,6 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
         //noinspection ConstantConditions,ConstantConditions
         userId = intent.getExtras().get("userId").toString();
         merlinsBeard = MerlinsBeard.from(context);
-
         FileSystemController FC = new FileSystemController();
 
         //find view by id.
@@ -331,9 +334,20 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent info2 = new Intent(RequesterEditTaskActivity.this, CameraActivity.class);
-                startActivity(info2);
 
+
+
+                if (task_photos.getPhotos().size() >= 10) {
+                    Toast toast = Toast.makeText(context, "Cannot exceed 10 images per task", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+
+                else{
+                    Log.d("Requester post task activity","take photo clicked");
+                    // source: https://stackoverflow.com/questions/9107900/how-to-upload-image-from-gallery-in-android
+                    Intent info2 = new Intent(RequesterEditTaskActivity.this, CameraActivity.class);
+                    startActivityForResult(info2, 5);
+                }
             }
         });
 
@@ -428,7 +442,41 @@ public class RequesterEditTaskActivity extends AppCompatActivity implements
             }
             setImage=true;
         }
+        else if(requestCode==5) {
+            Log.d("Edit task photo","RETURNED FROM CAMERA");
+            attachCameraPhoto();
+        }
+
     }
+    /**
+     * method to attach photo
+     */
+    private void attachCameraPhoto(){
+        Log.d("RequesterPostTaskActivity","Sleeping");
+
+
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "pic.jpg");
+        String filePath = file.getPath();
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        File file2 = new File(filePath);
+
+        Log.d("Photo file",filePath);
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
+        file2.delete();
+
+        if(bitmap!=null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 3, stream);
+            byte[] compressedImage = stream.toByteArray();
+            Bitmap compressedbBitmap = BitmapFactory.decodeByteArray(compressedImage, 0, compressedImage.length);
+            myGallery.addView(insertPhoto(compressedbBitmap));
+            task_photos.addPhoto(getStringFromBitmap(compressedbBitmap));
+            setImage = true;
+        }
+    }
+
 
     private String getStringFromBitmap(Bitmap bitmapPicture) {
         final int COMPRESSION_QUALITY = 100;
