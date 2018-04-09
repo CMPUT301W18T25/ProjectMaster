@@ -203,10 +203,8 @@ public class AllImportantFeatureActivityTest extends ActivityInstrumentationTest
 
         solo.clickOnButton("Log In");
 
-        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
-
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -281,9 +279,9 @@ public class AllImportantFeatureActivityTest extends ActivityInstrumentationTest
             e.printStackTrace();
         }
 
-        //solo.clickInList(0);
+        solo.clickInList(0);
 
-        //solo.assertCurrentActivity("Wrong Activity", ProviderTaskBidActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ProviderTaskBidActivity.class);
 
     }
 
