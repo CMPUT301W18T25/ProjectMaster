@@ -29,7 +29,12 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * See all the requesters tasks on the map.
+ * Shows all requester tasks on the Google Maps API. Shows only tasks
+ * that have a location, and are within 5km of the user. The icons displayed
+ * on the map are clickable, and navigates the program to RequesterViewTaskRequestActivity.
+ * The icons are color coded based on the following: red -> requester task, blue ->
+ * bidded task, green -> assigned task, yellow -> complete task
+ *
  * @classname : RequesterMapActivity
  *
  * @Date :   18/03/2018
@@ -64,8 +69,6 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
 
     private ArrayList<project301.Task> taskList;
 
-    // Testing variables
-    private ArrayList<Location> mockupTasks;
 
 
 
@@ -277,7 +280,17 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
             }
         }
     }
-    // source: https://stackoverflow.com/questions/2741403/get-the-distance-between-two-geo-points
+
+    /**
+     * Returns the distance from the current position of the user to
+     * the task location passed in as a parameter. Resulting distance is
+     * return in meters
+     *
+     * source: https://stackoverflow.com/questions/2741403/get-the-distance-between-two-geo-points
+     *
+     * @param currentTask
+     * @return
+     */
     private double getTaskDistance(project301.Task currentTask){
         Location taskLocation = new Location("");
         taskLocation.setLatitude(currentTask.getTasklatitude());
@@ -303,18 +316,11 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
         Log.d(TAG,"Task info: "+clickedTask.getTaskName());
         Log.d(TAG,"Task info: "+clickedTask.getTaskAddress());
 
-
-
         Intent info1 = new Intent(RequesterMapActivity.this, RequesterViewTaskRequestActivity.class);
         info1.putExtra("info", markerIndex);
         info1.putExtra("userId",userId);
         startActivity(info1);
 
-        /*Intent info1 = new Intent(RequesterMapActivity.this, ProviderTaskBidActivity.class);
-        info1.putExtra("info", markerIndex);
-        info1.putExtra("status","request");
-        info1.putExtra("userId",userId);
-        startActivity(info1);*/
         return true;
     }
 
@@ -336,11 +342,6 @@ public class RequesterMapActivity extends AppCompatActivity implements OnMapRead
 
         getAllTaksInfo();
         Log.d(TAG, "getAllTaskInfo complete");
-
-
-
-        // Don't call displayTaskLocations for now since it is used only for testing at the moment
-        /*displayTaskLocations();*/
     }
 
     private void getAllTaksInfo() {
