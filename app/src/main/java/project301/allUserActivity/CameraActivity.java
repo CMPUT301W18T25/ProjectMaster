@@ -43,6 +43,14 @@ import java.util.List;
 
 import project301.R;
 
+/**
+ * This is the camera activity
+ * @Date :   01/04/2018
+ * @author : Julian Stys
+ * @version 1.0
+ * @copyright : copyright (c) 2018 CMPUT301W18T25
+ * @classname : CameraActivity
+ */
 public class CameraActivity extends AppCompatActivity {
     private static final String TAG = "AndroidCameraApi";
     private TextureView textureView;

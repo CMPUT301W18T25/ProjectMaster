@@ -19,8 +19,15 @@ import project301.controller.TaskController;
 import project301.controller.UserController;
 
 import static org.junit.Assert.*;
+
+
+
 /**
  * Created by wdong2 on 2/15/18.
+ */
+
+/**
+ * This is the user test
  */
 
 @SuppressWarnings("ALL")

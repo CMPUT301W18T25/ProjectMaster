@@ -18,7 +18,7 @@ import project301.controller.UserController;
 import project301.utilities.TaskUtil;
 
 /**
- * this class used to change profile of the user, such as user name.
+ * This class used to change profile of the user, such as user name.
  * @classname : ProviderEditInfoActivity
  * @Date :   18/03/2018
  * @author : Wang Dong

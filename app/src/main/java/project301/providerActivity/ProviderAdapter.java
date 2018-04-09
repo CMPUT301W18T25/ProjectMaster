@@ -12,7 +12,7 @@ import project301.Task;
 import java.util.ArrayList;
 
 /**
- * this class is an adapter for the task arrayList to show on the UI
+ * This class is an adapter for the task arrayList to show on the UI
  * @classname : ProviderAdapter
  * @Date :   18/03/2018
  * @author : Wang Dong
