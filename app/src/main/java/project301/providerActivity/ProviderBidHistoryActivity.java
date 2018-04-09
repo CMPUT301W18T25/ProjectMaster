@@ -138,7 +138,11 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-            taskList.addAll(searchedTask);
+            for(int i = 0; i < searchedTask.size(); i++){
+                if (searchedTask.get(i).getTaskStatus() == "bidden"){
+                    taskList.add(searchedTask.get(i));
+                }
+            }
         }
 
         //get all assigned task of this provider (user) into the list
