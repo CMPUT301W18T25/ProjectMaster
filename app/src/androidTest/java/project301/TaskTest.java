@@ -845,6 +845,310 @@ public class TaskTest {
 
     }
 
+    @Test
+    public void searchAllBiddenTaskTest(){
+        TaskController.getTaskById getTask = new TaskController.getTaskById();
+        TaskController.searchAllBiddenTasks search = new TaskController.searchAllBiddenTasks();
+        ArrayList<Task> rt_list = new ArrayList<>();
+        ArrayList<Task> send_list = new ArrayList<Task>();
+
+        // init test task info, all info should be tested
+        for (int i = 0; i < 5; i++) {
+            Task my_task = new Task();
+
+            send_list.add(my_task);
+
+            my_task.setTaskDetails("Want a car to carry me"+ Integer.toString(i));
+            my_task.setTaskName("Go to southgate"+ Integer.toString(i));
+            my_task.setTaskProvider("Mike");
+            my_task.setTaskRequester("Jason");
+            my_task.setTaskStatus("bidden");
+
+            TaskController.addTask addTask = new TaskController.addTask();
+            addTask.execute(my_task);
+
+            // w8 for 5 sec
+            AsyncTask.Status taskStatus3;
+            do {
+                taskStatus3 = addTask.getStatus();
+            } while (taskStatus3 != AsyncTask.Status.FINISHED);
+
+        }
+        Task my_task = new Task();
+
+        send_list.add(my_task);
+
+
+        my_task.setTaskDetails("Want a car to carry me");
+        my_task.setTaskName("Go to southgate");
+        my_task.setTaskProvider("Mike");
+        my_task.setTaskRequester("Jason");
+        my_task.setTaskStatus("bidden");
+
+        TaskController.addTask addTask = new TaskController.addTask();
+        addTask.execute(my_task);
+
+        // w8 for 5 sec
+        AsyncTask.Status taskStatus3;
+        do {
+            taskStatus3 = addTask.getStatus();
+        } while (taskStatus3 != AsyncTask.Status.FINISHED);
+
+        search.execute();
+
+        // w8 for 5 sec
+        AsyncTask.Status taskStatus;
+        do {
+            taskStatus = search.getStatus();
+        } while (taskStatus != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            rt_list = search.get();
+            Log.i("Success", "message");
+
+            if (rt_list.size() == 0) {
+                assertTrue(true);
+            }
+
+            for (int i = 0; i < rt_list.size(); i++) {
+                Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
+                if (rt_list.get(i) == null) {
+                    break;
+                }
+                if (rt_list.get(i).getTaskStatus().equals("bidden")) {
+                    assertTrue(true);
+                } else {
+                    assertTrue(false);
+                }
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.i("Error", "return fail");
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            Log.i("Error", "not getting anything");
+        }
+
+        for (int i = 0; i < min(rt_list.size(),send_list.size()); i++){
+            TaskController.deleteTaskById deleteTaskById1 = new TaskController.deleteTaskById(rt_list.get(i).getId());
+            deleteTaskById1.execute(rt_list.get(i).getId());
+
+            AsyncTask.Status taskStatu;
+            do {
+                taskStatu = deleteTaskById1.getStatus();
+            } while (taskStatu != AsyncTask.Status.FINISHED);
+        }
+    }
+
+    @Test
+    public void searchAllBiddenRequestingTasksTest(){
+        TaskController.getTaskById getTask = new TaskController.getTaskById();
+        TaskController.searchAllBiddenRequestingTasks search = new TaskController.searchAllBiddenRequestingTasks();
+        ArrayList<Task> rt_list = new ArrayList<>();
+        ArrayList<Task> send_list = new ArrayList<Task>();
+
+        // init test task info, all info should be tested
+        for (int i = 0; i < 5; i++) {
+            Task my_task = new Task();
+
+            send_list.add(my_task);
+
+            my_task.setTaskDetails("Want a car to carry me"+ Integer.toString(i));
+            my_task.setTaskName("Go to southgate"+ Integer.toString(i));
+            my_task.setTaskProvider("Mike");
+            my_task.setTaskRequester("Jason");
+            my_task.setTaskStatus("bidden");
+
+            TaskController.addTask addTask = new TaskController.addTask();
+            addTask.execute(my_task);
+
+            // w8 for 5 sec
+            AsyncTask.Status taskStatus3;
+            do {
+                taskStatus3 = addTask.getStatus();
+            } while (taskStatus3 != AsyncTask.Status.FINISHED);
+
+        }
+        Task my_task = new Task();
+
+        send_list.add(my_task);
+
+
+        my_task.setTaskDetails("Want a car to carry me");
+        my_task.setTaskName("Go to southgate");
+        my_task.setTaskProvider("Mike");
+        my_task.setTaskRequester("Jason");
+        my_task.setTaskStatus("bidden");
+
+        TaskController.addTask addTask = new TaskController.addTask();
+        addTask.execute(my_task);
+
+        // w8 for 5 sec
+        AsyncTask.Status taskStatus3;
+        do {
+            taskStatus3 = addTask.getStatus();
+        } while (taskStatus3 != AsyncTask.Status.FINISHED);
+
+        search.execute();
+
+        // w8 for 5 sec
+        AsyncTask.Status taskStatus;
+        do {
+            taskStatus = search.getStatus();
+        } while (taskStatus != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            rt_list = search.get();
+            Log.i("Success", "message");
+
+            if (rt_list.size() == 0) {
+                assertTrue(true);
+            }
+
+            for (int i = 0; i < rt_list.size(); i++) {
+                Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
+                if (rt_list.get(i) == null) {
+                    break;
+                }
+                if (rt_list.get(i).getTaskStatus().equals("bidden") || rt_list.get(i).getTaskStatus().equals("request")) {
+                    assertTrue(true);
+                } else {
+                    assertTrue(false);
+                }
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.i("Error", "return fail");
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            Log.i("Error", "not getting anything");
+        }
+
+        for (int i = 0; i < min(rt_list.size(),send_list.size()); i++){
+            TaskController.deleteTaskById deleteTaskById1 = new TaskController.deleteTaskById(rt_list.get(i).getId());
+            deleteTaskById1.execute(send_list.get(i).getId());
+
+            AsyncTask.Status taskStatu;
+            do {
+                taskStatu = deleteTaskById1.getStatus();
+            } while (taskStatu != AsyncTask.Status.FINISHED);
+        }
+    }
+
+    @Test
+    public void searchDoneTasksOfThisProviderTest(){
+        TaskController.getTaskById getTask = new TaskController.getTaskById();
+        ArrayList<Task> rt_list = new ArrayList<>();
+        ArrayList<Task> send_list = new ArrayList<Task>();
+
+
+        // init test task info, all info should be tested
+        for (int i = 0; i < 2; i++){
+            Task my_task = new Task();
+
+            send_list.add(my_task);
+
+
+            my_task.setTaskDetails("Want a car to carry me"+ Integer.toString(i));
+            my_task.setTaskName("Go to southgate"+ Integer.toString(i));
+            my_task.setTaskProvider("mikeking");
+            my_task.setTaskRequester("Jason");
+            my_task.setTaskStatus("assigned");
+
+
+
+            TaskController.addTask addTask = new TaskController.addTask();
+            addTask.execute(my_task);
+
+            // w8 for 5 sec
+            AsyncTask.Status taskStatus3;
+            do {
+                taskStatus3 = addTask.getStatus();
+            } while (taskStatus3 != AsyncTask.Status.FINISHED);
+
+            my_task.setTaskStatus("assigned");
+
+            TaskController.requesterUpdateTask update = new TaskController.requesterUpdateTask();
+            update.execute(my_task);
+
+        }
+
+        TaskController.searchAssignTasksOfThisProvider search = new TaskController.searchAssignTasksOfThisProvider();
+
+        search.execute("mikeking");
+
+        // w8 for 5 sec
+        AsyncTask.Status taskStatus;
+        do {
+            taskStatus = search.getStatus();
+        } while (taskStatus != AsyncTask.Status.FINISHED);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            rt_list = search.get();
+            Log.i("Success", "message");
+
+            if (rt_list.size() == 0){
+                assertTrue(true);
+            }
+
+            for (int i = 0; i < rt_list.size(); i++){
+                Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
+                if (rt_list.get(i) == null){
+                    break;
+                }
+                if (rt_list.get(i).getTaskStatus().equals("done")){
+                    //assertTrue(false);
+                    if (rt_list.get(i).getTaskProvider().contains("mikeking")){
+                        assertTrue(true);
+                    }
+                }
+                else {
+                    assertTrue(false);
+                }
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.i("Error", "return fail");
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            Log.i("Error", "not getting anything");
+        }
+
+        for (int i = 0; i < rt_list.size(); i++){
+            TaskController.deleteTaskById deleteTaskById1 = new TaskController.deleteTaskById(rt_list.get(i).getId());
+            deleteTaskById1.execute(send_list.get(i).getId());
+
+            AsyncTask.Status taskStatu;
+            do {
+                taskStatu = deleteTaskById1.getStatus();
+            } while (taskStatu != AsyncTask.Status.FINISHED);
+        }
+    }
+
 }
 
 
