@@ -88,7 +88,12 @@ public class ProviderMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProviderMainActivity.this, LogInActivity.class);
                 //intent.putExtra("userId",userId);
+                //finish();
+                //startActivity(intent);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
+
             }
         });
 
