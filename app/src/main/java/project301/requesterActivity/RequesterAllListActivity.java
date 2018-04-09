@@ -58,6 +58,7 @@ public class RequesterAllListActivity extends AppCompatActivity implements Swipe
     /**
      * monitor the new status update
      */
+    //https://developer.android.com/reference/java/util/Timer.html
     private class MyTask extends TimerTask{
 
         public void run(){
@@ -279,6 +280,7 @@ public class RequesterAllListActivity extends AppCompatActivity implements Swipe
         // Attach the adapter to a ListView
         this.listView.setAdapter(adapter);
     }
+    //https://developer.android.com/reference/android/os/Handler.html
     Handler handler = new Handler(new Handler.Callback() {
 
         @Override
