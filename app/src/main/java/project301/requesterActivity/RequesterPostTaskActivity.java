@@ -254,7 +254,7 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
 
                 //toast to make attention to remind
                 }else{
-                    Toast toast = Toast.makeText(context,"Enter name, detail destination, ideal price, date and time",Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(context,"Please enter task name!",Toast.LENGTH_LONG);
                     toast.show();
                 }}else {
                     Toast toast = Toast.makeText(context,"The maximum length of name is 30 characters",Toast.LENGTH_LONG);
