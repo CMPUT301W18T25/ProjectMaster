@@ -62,53 +62,56 @@ public class ProviderBiddenAdapter extends ArrayAdapter<Task> {
         // Return the completed view to render on screen
         //noinspection ConstantConditions
         //get taskName
-        String taskName = task.getTaskName().toString();
+        if (task!=null) {
+            String taskName = task.getTaskName().toString();
 
-        //get task requester
-        String taskRequester;
-        if (task.getTaskRequester()==null){
-            taskRequester = "";
-        }else{
-            taskRequester = task.getTaskRequester().toString();
-        }
-        //get taskIdealPrice
-        String taskLowestPrice;
-        if (task.findLowestbid()==null){
-            taskLowestPrice = "";
-        }else{
-            taskLowestPrice = Double.toString(task.findLowestbid());
-        }
-
-        //get taskBid
-        String taskBid = null;
-        ArrayList<Bid> bidList = task.getTaskBidList();
-        for (int counter = 0; counter < bidList.size(); counter++) {
-            Bid bid = bidList.get(counter);
-            if (bid.getProviderId().equals(userId)){
-                taskBid = bid.getBidAmount().toString();
-                break;
+            //get task requester
+            String taskRequester;
+            if (task.getTaskRequester() == null) {
+                taskRequester = "";
+            } else {
+                taskRequester = task.getTaskRequester().toString();
             }
-        }
-        if (taskBid == null){
-            taskBid = "Cannot find";
-        }
+            //get taskIdealPrice
+            String taskLowestPrice;
+            if (task.findLowestbid() == null) {
+                taskLowestPrice = "";
+            } else {
+                taskLowestPrice = Double.toString(task.findLowestbid());
+            }
 
-        //get taskStatus
-        String taskStatus;
-        if (task.getTaskStatus()==null){
-            taskStatus = "";
-        }else{
-            taskStatus = task.getTaskStatus();
+            //get taskBid
+            String taskBid = null;
+            ArrayList<Bid> bidList = task.getTaskBidList();
+            for (int counter = 0; counter < bidList.size(); counter++) {
+                Bid bid = bidList.get(counter);
+                if (bid.getProviderId().equals(userId)) {
+                    taskBid = bid.getBidAmount().toString();
+                    break;
+                }
+            }
+            if (taskBid == null) {
+                taskBid = "Cannot find";
+            }
+
+            //get taskStatus
+            String taskStatus;
+            if (task.getTaskStatus() == null) {
+                taskStatus = "";
+            } else {
+                taskStatus = task.getTaskStatus();
+            }
+
+            //set task info
+            task_name.setText(taskName);
+            task_requester.setText(taskRequester);
+            task_idealprice.setText(taskLowestPrice);
+            task_bid.setText(taskBid);
+            task_status.setText(taskStatus);
+
+            //Log.i("a",task.getTaskAddress().toString());
         }
-
-        //set task info
-        task_name.setText(taskName);
-        task_requester.setText(taskRequester);
-        task_idealprice.setText(taskLowestPrice);
-        task_bid.setText(taskBid);
-        task_status.setText(taskStatus);
-
-        //Log.i("a",task.getTaskAddress().toString());
         return convertView;
+
     }
 }
