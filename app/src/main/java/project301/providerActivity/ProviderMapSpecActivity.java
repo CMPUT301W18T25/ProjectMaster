@@ -60,9 +60,6 @@ public class ProviderMapSpecActivity extends AppCompatActivity implements OnMapR
     private final LatLng mDefaultLocation = new LatLng(53.5273, -113.5296);
     private ArrayList<project301.Task> taskList;
     private project301.Task specTask;
-    // Testing variables
-    private ArrayList<Location> mockupTasks;
-
 
 
     @SuppressWarnings("ConstantConditions")
@@ -253,8 +250,16 @@ public class ProviderMapSpecActivity extends AppCompatActivity implements OnMapR
 
         }
     }
-    // source: https://stackoverflow.com/questions/2741403/get-the-distance-between-two-geo-points
-    private double getTaskDistance(project301.Task currentTask){
+    /**
+     * Returns the distance from the current position of the user to
+     * the task location passed in as a parameter. Resulting distance is
+     * return in meters
+     *
+     * source: https://stackoverflow.com/questions/2741403/get-the-distance-between-two-geo-points
+     *
+     * @param currentTask
+     * @return
+     */    private double getTaskDistance(project301.Task currentTask){
         Location taskLocation = new Location("");
         taskLocation.setLatitude(currentTask.getTasklatitude());
         taskLocation.setLongitude(currentTask.getTasklgtitude());

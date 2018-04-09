@@ -327,7 +327,8 @@ public class ProviderMapActivity extends AppCompatActivity implements OnMapReady
      *
      * @param currentTask
      * @return
-     */    private double getTaskDistance(project301.Task currentTask){
+     */
+    private double getTaskDistance(project301.Task currentTask){
         Location taskLocation = new Location("");
         taskLocation.setLatitude(currentTask.getTasklatitude());
         taskLocation.setLongitude(currentTask.getTasklgtitude());
