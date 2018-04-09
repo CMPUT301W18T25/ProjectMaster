@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import static org.apache.commons.lang3.math.NumberUtils.min;
 import static org.junit.Assert.*;
 
 /**
@@ -37,12 +38,12 @@ public class TaskTest {
 
         Task task = new Task("Fetch","Fetchcar","Michael",null,"bidding","random address",bidList,emptyPhoto);
 
-        assertEquals("Michael", task.getTaskRequester());
-        assertEquals("Michael", task.getTaskRequester());
+        assertEquals("michael", task.getTaskRequester());
+        assertEquals("michael", task.getTaskRequester());
 
         assertNull(task.getTaskProvider());
         task.setTaskProvider("James");
-        assertEquals("James", task.getTaskProvider());
+        assertEquals("james", task.getTaskProvider());
 
 
     }
@@ -51,26 +52,28 @@ public class TaskTest {
         ArrayList<Bid> bidList = new ArrayList<Bid>();
         Photo emptyPhoto = new Photo();
         Task task = new Task("Fetch car","Fetch my car","Michael",null,"bidding","random address",bidList,emptyPhoto);
-        task.setTaskName("Fetch car");
-        task.setTaskDetails("Fetch my car from lister hall");
-        task.setTaskAddress("HUB mall");
-        task.setTaskRequester("Julian");
+        task.setTaskName("fetch car");
+        task.setTaskDetails("fetch my car from lister hall");
+        task.setTaskAddress("hub mall");
+        task.setTaskRequester("julian");
         task.setTaskProvider(null);
-        assertEquals("Julian", task.getTaskRequester());
-        task.setTaskRequester("Chris");
-        assertEquals("Chris", task.getTaskRequester());
+        assertEquals("julian", task.getTaskRequester());
+        task.setTaskRequester("chris");
+        assertEquals("chris", task.getTaskRequester());
 
 
     }
-    // TODO more failing test cases
     // add passed w8 for more cases
     // method addTask
     @Test
     public void testAddTask(){
+        ArrayList<Bid> bidList = new ArrayList<Bid>();
+        Photo emptyPhoto = new Photo();
+        Task task = new Task("Go West Edmonton Mall","Fetchcar","Michael",null,"bidding","random address",bidList,emptyPhoto);
 
         TaskController.addTask addTaskCtl = new TaskController.addTask();
-        Task task = new Task();
         task.setTaskName("Go West Edmonton Mall");
+        task.setTaskIdealPrice(1.1);
 
         addTaskCtl.execute(task);
 
@@ -90,17 +93,19 @@ public class TaskTest {
                 assertTrue(true);
             }
         }
+
+        TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(task.getId());
+        deleteTaskById.execute();
     }
 
     // method getTaskById
-    @Test
     // basic passed, w8 for failure test cases
+    @Test
     public void testGetTask(){
         TaskController.addTask addTaskCtl = new TaskController.addTask();
         Task task = new Task();
         Task rt_task = new Task();
         ArrayList<Task> single_task = new ArrayList<Task>();
-
 
         task.setTaskName("Go Calgary");
 
@@ -143,6 +148,8 @@ public class TaskTest {
             Log.i("Error", "not getting anything");
         }
 
+        TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(rt_task.getId());
+        deleteTaskById.execute();
     }
 
     // deleteTaskById
@@ -205,6 +212,8 @@ public class TaskTest {
             assertTrue(true);
             Log.i("Error", "not getting anything");
         }
+
+
     }
 
     // requesterUpdateTask
@@ -284,6 +293,9 @@ public class TaskTest {
             assertTrue(false);
             Log.i("Error", "not getting anything");
         }
+
+        TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(empty_task.getId());
+        deleteTaskById.execute();
 
     }
 
@@ -375,107 +387,8 @@ public class TaskTest {
             assertTrue(false);
             Log.i("Error", "not getting anything");
         }
-
-    }
-
-    // providerCancelBid
-    @Test
-    public void providerCancelBidTest(){
-        // init methods to use
-        TaskController.addTask addTask = new TaskController.addTask();
-        TaskController.getTaskById getTask = new TaskController.getTaskById();
-
-        Task my_task = new Task();
-        Task empty_task = new Task();
-        double my_amount;
-
-        // init test task info, all info should be tested
-        // my_task.setTaskDetails("Details");
-        //my_task.setTaskName("Test");
-        //my_task.setTaskProvider(null);
-        //my_task.setTaskRequester("A snake");
-        my_task.setTaskDetails("Want a car to carry me");
-        my_task.setTaskName("Go to southfate");
-        my_task.setTaskProvider(null);
-        my_task.setTaskRequester("Jason");
-
-        // now add test task to db
-        addTask.execute(my_task);
-
-        // w8 for 5sec
-        AsyncTask.Status taskStatus2;
-        do {
-            taskStatus2 = addTask.getStatus();
-        } while (taskStatus2 != AsyncTask.Status.FINISHED);
-
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // now update local task bidlist
-        if (my_task.getId() == null){
-            Log.i("Error", "get ID error ");
-            assertTrue(false);
-        }
-        my_amount = (double)11.11;
-        Bid my_bid = new Bid(my_amount, "Mike", my_task.getId());
-
-        // update bid list
-        TaskController.providerSetBid setTaskBid = new TaskController.providerSetBid(my_task,my_bid);
-        setTaskBid.execute();
-
-        // w8 for 5 sec
-        AsyncTask.Status taskStatus;
-        do {
-            taskStatus = addTask.getStatus();
-        } while (taskStatus != AsyncTask.Status.FINISHED);
-
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // now try to cancel my bid
-        TaskController.providerCancelBid cancelBid = new TaskController.providerCancelBid(my_task, my_bid.getProviderId());
-        cancelBid.execute();
-
-        // w8 for 5 sec
-        AsyncTask.Status taskStatus3;
-        do {
-            taskStatus3 = addTask.getStatus();
-        } while (taskStatus3 != AsyncTask.Status.FINISHED);
-
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // get task should be updated
-        getTask.execute(my_task.getId());
-
-        try {
-            empty_task = getTask.get();
-            Log.i("Success", "message");
-
-            if (empty_task.getTaskBidList().size() > 0){
-                assertTrue(false);
-            }
-            else{
-                assertTrue(true);
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            Log.i("Error", "return fail");
-
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-            Log.i("Error", "not getting anything");
-        }
-
+        TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(empty_task.getId());
+        deleteTaskById.execute();
     }
 
     // searchBiddenTasksOfThisProvider
@@ -483,7 +396,7 @@ public class TaskTest {
     public void searchBiddenTasksOfThisProviderTest(){
         TaskController.getTaskById getTask = new TaskController.getTaskById();
         TaskController.searchBiddenTasksOfThisProvider search = new TaskController.searchBiddenTasksOfThisProvider("tester");
-        ArrayList<Task> rt_list;
+        ArrayList<Task> rt_list = new ArrayList<>();
         ArrayList<Task> send_list = new ArrayList<Task>();
 
 
@@ -560,13 +473,23 @@ public class TaskTest {
             e.printStackTrace();
             Log.i("Error", "not getting anything");
         }
+
+        for (int i = 0; i < rt_list.size(); i++){
+            TaskController.deleteTaskById deleteTaskById1 = new TaskController.deleteTaskById(rt_list.get(i).getId());
+            deleteTaskById1.execute();
+
+            AsyncTask.Status taskStatu;
+            do {
+                taskStatu = deleteTaskById1.getStatus();
+            } while (taskStatu != AsyncTask.Status.FINISHED);
+        }
     }
 
     // searchAssignTasksOfThisProvider
     @Test
     public void searchAssignTasksOfThisProviderTest(){
         TaskController.getTaskById getTask = new TaskController.getTaskById();
-        ArrayList<Task> rt_list;
+        ArrayList<Task> rt_list = new ArrayList<>();
         ArrayList<Task> send_list = new ArrayList<Task>();
 
 
@@ -650,6 +573,15 @@ public class TaskTest {
             Log.i("Error", "not getting anything");
         }
 
+        for (int i = 0; i < rt_list.size(); i++){
+            TaskController.deleteTaskById deleteTaskById1 = new TaskController.deleteTaskById(rt_list.get(i).getId());
+            deleteTaskById1.execute();
+
+            AsyncTask.Status taskStatu;
+            do {
+                taskStatu = deleteTaskById1.getStatus();
+            } while (taskStatu != AsyncTask.Status.FINISHED);
+        }
     }
 
     // searchAllTasksOfThisRequester
@@ -657,7 +589,7 @@ public class TaskTest {
     public void searchAllTasksOfThisRequesterTest() {
         TaskController.getTaskById getTask = new TaskController.getTaskById();
         TaskController.searchAllTasksOfThisRequester search = new TaskController.searchAllTasksOfThisRequester();
-        ArrayList<Task> rt_list;
+        ArrayList<Task> rt_list = new ArrayList<>();
         ArrayList<Task> send_list = new ArrayList<Task>();
 
         // init test task info, all info should be tested
@@ -665,15 +597,10 @@ public class TaskTest {
             Task my_task = new Task();
 
             send_list.add(my_task);
-            //my_task.setTaskDetails("Details-" + Integer.toString(i));
-            //my_task.setTaskName("Test-" + Integer.toString(i));
-            //my_task.setTaskProvider("tester");
-            //my_task.setTaskRequester("snake");
-            //my_task.setTaskStatus("request");
             my_task.setTaskDetails("Want a car to carry me"+ Integer.toString(i));
             my_task.setTaskName("Go to southgate"+ Integer.toString(i));
             my_task.setTaskProvider("Mike");
-            my_task.setTaskRequester("Jason");
+            my_task.setTaskRequester("jason");
             my_task.setTaskStatus("request");
 
             TaskController.addTask addTask = new TaskController.addTask();
@@ -692,7 +619,7 @@ public class TaskTest {
         my_task.setTaskDetails("Want a car to carry me");
         my_task.setTaskName("Go to southgate");
         my_task.setTaskProvider("Mike");
-        my_task.setTaskRequester("Jason");
+        my_task.setTaskRequester("jason");
         my_task.setTaskStatus("request");
 
         TaskController.addTask addTask = new TaskController.addTask();
@@ -704,7 +631,7 @@ public class TaskTest {
             taskStatus3 = addTask.getStatus();
         } while (taskStatus3 != AsyncTask.Status.FINISHED);
 
-        search.execute("Jason");
+        search.execute("jason");
 
         // w8 for 5 sec
         AsyncTask.Status taskStatus;
@@ -722,16 +649,13 @@ public class TaskTest {
             rt_list = search.get();
             Log.i("Success", "message");
 
-            if (rt_list.size() == 0) {
-                assertTrue(false);
-            }
-
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < min(rt_list.size(), send_list.size()); i++) {
                 Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
                 if (rt_list.get(i) == null) {
                     break;
                 }
-                if (rt_list.get(i).getTaskRequester().equals("snake")) {
+                Log.i("State","that is AAAAAAAAAAAAAAAAAAA" + rt_list.get(i).getTaskRequester());
+                if (rt_list.get(i).getTaskRequester().equals("jason")) {
                     if (rt_list.get(i).getTaskProvider().equals(send_list.get(i).getTaskProvider())) {
                         assertTrue(true);
                     }
@@ -749,14 +673,23 @@ public class TaskTest {
             Log.i("Error", "not getting anything");
         }
 
-    }
+        for (int i = 0; i < send_list.size(); i++){
+            TaskController.deleteTaskById deleteTaskById1 = new TaskController.deleteTaskById(rt_list.get(i).getId());
+            deleteTaskById1.execute();
 
+            AsyncTask.Status taskStatu;
+            do {
+                taskStatu = deleteTaskById1.getStatus();
+            } while (taskStatu != AsyncTask.Status.FINISHED);
+        }
+
+    }
 
     @Test
     public void searchAllRequestingTasksTest(){
         TaskController.getTaskById getTask = new TaskController.getTaskById();
         TaskController.searchAllRequestingTasks search = new TaskController.searchAllRequestingTasks();
-        ArrayList<Task> rt_list;
+        ArrayList<Task> rt_list = new ArrayList<>();
         ArrayList<Task> send_list = new ArrayList<Task>();
 
         // init test task info, all info should be tested
@@ -851,49 +784,43 @@ public class TaskTest {
             Log.i("Error", "not getting anything");
         }
 
+        for (int i = 0; i < rt_list.size(); i++){
+            TaskController.deleteTaskById deleteTaskById1 = new TaskController.deleteTaskById(rt_list.get(i).getId());
+            deleteTaskById1.execute();
+        }
     }
 
-
+    // passed
     @Test
     public void searchTaskByKeywordTest(){
         TaskController.searchTaskByKeyword search = new TaskController.searchTaskByKeyword();
-        ArrayList<Task> rt_list;
+        ArrayList<Task> rt_list = new ArrayList<>();
+        TaskController ctrl = new TaskController();
 
-        search.execute("boom test");
+        search.execute("a b");
 
 
-        try {
-            rt_list = search.get();
-            Log.i("Success", "message");
+        rt_list = ctrl.searchByKeyWord("a b", "empty_id");
+        Log.i("Success", "message");
 
-            if (rt_list.size() == 0){
-                    assertTrue(false);
+        if (rt_list.size() == 0){
+            assertTrue(true);
+        }
+
+        for (int i = 0; i < rt_list.size(); i++) {
+            Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
+            if (rt_list.get(i) == null) {
+                break;
             }
-
-            for (int i = 0; i < rt_list.size(); i++) {
-                Log.i("State", Integer.toString(i) + Integer.toString(rt_list.size()));
-                if (rt_list.get(i) == null) {
-                    break;
-                }
-                if (rt_list.get(i).getTaskStatus().equals("request") || rt_list.get(i).getTaskStatus().equals("bidden")) {
+            if (rt_list.get(i).getTaskStatus().equals("request") || rt_list.get(i).getTaskStatus().equals("bidden")) {
+                if (rt_list.get(i).getTaskName().contains("a") || rt_list.get(i).getTaskDetails().contains("a")) {
                     assertTrue(true);
-                    if (rt_list.get(i).getTaskName().contains("1") || rt_list.get(i).getTaskDetails().contains("1")) {
-                        assertTrue(false);
-                    }else if (rt_list.get(i).getTaskName().contains("test") || rt_list.get(i).getTaskDetails().contains("test")){
-                        assertTrue(false);
-                    }
-                } else {
-                    assertTrue(false);
+                }else if (rt_list.get(i).getTaskName().contains("b") || rt_list.get(i).getTaskDetails().contains("b")){
+                    assertTrue(true);
                 }
+            } else {
+                assertTrue(false);
             }
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            Log.i("Error", "return fail");
-
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-            Log.i("Error", "not getting anything");
         }
 
     }
