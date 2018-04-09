@@ -17,6 +17,7 @@ import project301.providerActivity.ProviderMainActivity;
 import project301.providerActivity.ProviderTaskBidActivity;
 import project301.requesterActivity.RequesterAllListActivity;
 import project301.requesterActivity.RequesterAssignedListActivity;
+import project301.requesterActivity.RequesterChooseBidActivity;
 import project301.requesterActivity.RequesterDoneListActivity;
 import project301.requesterActivity.RequesterEditInfoActivity;
 import project301.requesterActivity.RequesterEditTaskActivity;
@@ -24,6 +25,7 @@ import project301.requesterActivity.RequesterMainActivity;
 import project301.requesterActivity.RequesterMapActivity;
 import project301.requesterActivity.RequesterPostTaskActivity;
 import project301.requesterActivity.RequesterViewTaskAssignedActivity;
+import project301.requesterActivity.RequesterViewTaskBiddenActivity;
 import project301.requesterActivity.RequesterViewTaskDoneActivity;
 import project301.requesterActivity.RequesterViewTaskRequestActivity;
 
@@ -155,6 +157,12 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.clickOnButton("Requester");
 
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         postTask();
 
         solo.clickOnButton("Show List");
@@ -202,6 +210,12 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
         logIn();
 
         solo.clickOnButton("Requester");
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         assignTask();
     }
@@ -339,9 +353,9 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
             e.printStackTrace();
         }
 
-        //solo.clickInList(0);
+        solo.clickInList(0);
 
-        //solo.assertCurrentActivity("Wrong Activity", ProviderTaskBidActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", ProviderTaskBidActivity.class);
 
     }
 
@@ -349,11 +363,35 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
 
-        solo.clickLongOnScreen(3,3);
+        while(!solo.getCurrentActivity().getClass().equals(UserCharacterActivity.class)){
+            solo.goBack();
+        }
+
+        solo.assertCurrentActivity("Wrong Activity", UserCharacterActivity.class);
+
+        solo.clickOnButton("Requester");
 
         solo.clickOnButton("view bidden task");
 
-        solo.clickInList(-1);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        solo.clickInList(0);
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskBiddenActivity.class);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        solo.clickInList(0);
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterChooseBidActivity.class);
 
         solo.clickOnButton("submit");
 

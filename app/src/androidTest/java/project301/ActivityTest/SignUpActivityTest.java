@@ -7,6 +7,10 @@ import android.widget.EditText;
 import project301.R;
 import project301.allUserActivity.LogInActivity;
 import project301.allUserActivity.SignUpActivity;
+import project301.controller.BidController;
+import project301.controller.TaskController;
+import project301.controller.UserController;
+
 import com.robotium.solo.Solo;
 
 /**
@@ -32,70 +36,41 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2 {
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
-    public void testSignUp1() {
+    public void testSignUp() {
+        deleteDataBase();
+
+        signUp();
+    }
+
+
+    private void signUp(){
+        while(!solo.getCurrentActivity().getClass().equals(LogInActivity.class)){
+            solo.goBack();
+        }
 
         solo.clickOnButton("Sign Up");
 
-        solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
+        solo.enterText((EditText) solo.getView(R.id.signup_name), "wdong2");
 
-        solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
+        solo.enterText((EditText) solo.getView(R.id.signup_phone), "1234567890");
 
-        solo.enterText((EditText) solo.getView(R.id.signup_phone),"1234567890");
+        solo.enterText((EditText) solo.getView(R.id.signup_email), "123@123.com");
 
-        solo.enterText((EditText) solo.getView(R.id.signup_email),"123@123.com");
-
-        solo.enterText((EditText) solo.getView(R.id.signup_password),"passward");
+        solo.enterText((EditText) solo.getView(R.id.signup_password), "passward");
 
         solo.clickOnButton("Log In");
     }
 
-    public void testSignUp2() {
-        solo.clickOnButton("Sign Up");
+    private void deleteDataBase(){
+        TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
+        deleteAllTasks.execute("");
 
-        solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
 
-        solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong22");
+        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
+        deleteAllUsers.execute("");
 
-        solo.enterText((EditText) solo.getView(R.id.signup_phone),"1234567890");
 
-        solo.enterText((EditText) solo.getView(R.id.signup_email),"123@123.com");
-
-        solo.enterText((EditText) solo.getView(R.id.signup_password),"passward");
-
-        solo.clickOnButton("Log In");
+        BidController.deleteAllBidCounters deleteAllBidCounters = new BidController.deleteAllBidCounters();
+        deleteAllBidCounters.execute("");
     }
-
-    public void testSignUp3() {
-        solo.clickOnButton("Sign Up");
-
-        solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
-
-        solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong222");
-
-        solo.enterText((EditText) solo.getView(R.id.signup_phone),"1234567890");
-
-        solo.enterText((EditText) solo.getView(R.id.signup_email),"123@123.com");
-
-        solo.enterText((EditText) solo.getView(R.id.signup_password),"passward");
-
-        solo.clickOnButton("Log In");
-    }
-
-    public void testInvalid1() {
-        solo.clickOnButton("Sign Up");
-
-        solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
-
-        solo.enterText((EditText) solo.getView(R.id.signup_name),"wdong2");
-
-        solo.enterText((EditText) solo.getView(R.id.signup_phone),"1234567890");
-
-        solo.enterText((EditText) solo.getView(R.id.signup_email),"123@123.com");
-
-        solo.enterText((EditText) solo.getView(R.id.signup_password),"pa");
-
-        solo.clickOnButton("Log In");
-    }
-
-
 }
