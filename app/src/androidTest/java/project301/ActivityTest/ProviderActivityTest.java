@@ -193,11 +193,11 @@ public class ProviderActivityTest extends ActivityInstrumentationTestCase2 {
 
         solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
 
-        solo.clickOnButton("Bid History");
+        solo.clickOnButton("  bid history ");
 
         solo.assertCurrentActivity("Wrong Activity", ProviderBidHistoryActivity.class);
 
-        solo.clickOnButton("Back");
+        solo.clickOnButton("Main Menu");
 
         solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
 
@@ -241,115 +241,5 @@ public class ProviderActivityTest extends ActivityInstrumentationTestCase2 {
         solo.enterText((EditText) solo.getView(R.id.signup_password), "passward");
 
         solo.clickOnButton("Log In");
-    }
-
-    private void postTask(){
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
-
-        solo.clickOnButton("Post New Task");
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterPostTaskActivity.class);
-
-        solo.enterText((EditText) solo.getView(R.id.c_task_name),"Go to Hub");
-
-        solo.enterText((EditText) solo.getView(R.id.c_task_detail),"two people");
-
-        solo.enterText((EditText) solo.getView(R.id.c_task_location),"ETLC");
-
-        solo.enterText((EditText) solo.getView(R.id.c_task_idealprice),"12.34");
-
-        solo.clickOnButton("submit");
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterAllListActivity.class);
-
-        solo.clickInList(-1);
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskRequestActivity.class);
-
-    }
-
-    private void bidOnTask(){
-
-        solo.assertCurrentActivity("Wrong Activity", ProviderMainActivity.class);
-
-        solo.clickInList(0);
-
-        solo.assertCurrentActivity("Wrong Activity", ProviderTaskBidActivity.class);
-
-        solo.clearEditText((EditText) solo.getView(R.id.p_task_mybid));
-
-        solo.enterText((EditText) solo.getView(R.id.p_task_mybid),"3.5");
-
-        solo.clickOnButton("Bid");
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        //solo.clickInList(0);
-
-        //solo.assertCurrentActivity("Wrong Activity", ProviderTaskBidActivity.class);
-
-    }
-
-    private void assignTask(){
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
-
-        solo.clickLongOnScreen(3,3);
-
-        solo.clickOnButton("view bidden task");
-
-        solo.clickInList(-1);
-
-        solo.clickOnButton("submit");
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        solo.clickInList(0);
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskAssignedActivity.class);
-    }
-
-    private void payTask(){
-        solo.assertCurrentActivity("Wrong Activity", RequesterMainActivity.class);
-
-        solo.clickOnButton("view assigned task");
-
-        solo.clickInList(-1);
-
-        solo.clickOnButton("Pay task");
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterDoneListActivity.class);
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        solo.clickInList(0);
-
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskDoneActivity.class);
-
-    }
-
-    private void deleteDataBase() {
-        TaskController.deleteAllTasks deleteAllTasks = new TaskController.deleteAllTasks();
-        deleteAllTasks.execute("");
-
-
-        UserController.deleteAllUsers deleteAllUsers = new UserController.deleteAllUsers();
-        deleteAllUsers.execute("");
-
-
-        BidController.deleteAllBidCounters deleteAllBidCounters = new BidController.deleteAllBidCounters();
-        deleteAllBidCounters.execute("");
     }
 }
