@@ -139,9 +139,11 @@ public class ProviderBidHistoryActivity extends AppCompatActivity {
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-            for(int i = 0; i < searchedTask.size(); i++){
-                if (searchedTask.get(i).getTaskStatus().equals("bidden")){
-                    taskList.add(searchedTask.get(i));
+            for(Task task:searchedTask){
+                if(task!=null) {
+                    if (task.getTaskStatus().equals("bidden")) {
+                        taskList.add(task);
+                    }
                 }
             }
         }
