@@ -505,18 +505,6 @@ public class TaskController {
                     User rt
                             = result.getSourceAsObject(User.class);
                     found_user = rt;
-                    /*
-                    for(Task task:rt){
-
-                        ArrayList<Bid> BiddenList = task.getTaskBidList();
-                        for(Bid bid:BiddenList){
-                            if(bid.getProviderId().equals(providerId)){
-                                result_tasks.add(task);
-
-
-                            }
-                        }
-                    }*/
 
                     Log.i("allbidden","test");
 
@@ -577,18 +565,7 @@ public class TaskController {
                     List<Task> rt
                             = result.getSourceAsObjectList(Task.class);
                     result_tasks.addAll(rt);
-                    /*
-                    for(Task task:rt){
 
-                        ArrayList<Bid> BiddenList = task.getTaskBidList();
-                        for(Bid bid:BiddenList){
-                            if(bid.getProviderId().equals(providerId)){
-                                result_tasks.add(task);
-
-
-                            }
-                        }
-                    }*/
 
                     Log.i("alldone","test");
 
