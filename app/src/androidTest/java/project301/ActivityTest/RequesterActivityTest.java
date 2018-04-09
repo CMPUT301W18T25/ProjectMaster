@@ -158,7 +158,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnButton("Requester");
 
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -186,7 +186,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnButton("provider");
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -198,7 +198,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
         bidOnTask();
 
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -212,7 +212,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnButton("Requester");
 
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -228,7 +228,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnButton("Requester");
 
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -374,7 +374,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnButton("view bidden task");
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -384,7 +384,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
         solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskBiddenActivity.class);
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -396,7 +396,7 @@ public class RequesterActivityTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnButton("submit");
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
