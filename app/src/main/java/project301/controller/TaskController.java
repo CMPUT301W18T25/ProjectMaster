@@ -269,12 +269,16 @@ public class TaskController {
             UserController getUser = new UserController();
             User new_user = getUser.getAUserById(this.current_bid.getProviderId());
 
-            new_user.addProviderBiddenTask(this.current_task.getId());
+            if (new_user != null){
+                new_user.addProviderBiddenTask(this.current_task.getId());
+
+                UserController uc= new UserController();
+                uc.updateUser(new_user);
+            }
 
             // update user
 
-            UserController uc= new UserController();
-            uc.updateUser(new_user);
+
         }
 
         @Override
@@ -538,7 +542,10 @@ public class TaskController {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
 
-            result_tasks = found_user.getProviderBiddenTask();
+            if (found_user != null){
+                result_tasks = found_user.getProviderBiddenTask();
+
+            }
 
             return result_tasks;
         }

@@ -72,7 +72,6 @@ public class TaskTest {
         Task task = new Task("Go West Edmonton Mall","Fetchcar","Michael",null,"bidding","random address",bidList,emptyPhoto);
 
         TaskController.addTask addTaskCtl = new TaskController.addTask();
-        task.setTaskName("Go West Edmonton Mall");
         task.setTaskIdealPrice(1.1);
 
         addTaskCtl.execute(task);
@@ -94,20 +93,32 @@ public class TaskTest {
             }
         }
 
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(task.getId());
-        deleteTaskById.execute();
+        deleteTaskById.execute(task.getId());
+
+        AsyncTask.Status taskStatu;
+        do {
+            taskStatu = deleteTaskById.getStatus();
+        } while (taskStatu != AsyncTask.Status.FINISHED);
     }
 
     // method getTaskById
     // basic passed, w8 for failure test cases
     @Test
     public void testGetTask(){
+        ArrayList<Bid> bidList = new ArrayList<Bid>();
+        Photo emptyPhoto = new Photo();
+
         TaskController.addTask addTaskCtl = new TaskController.addTask();
-        Task task = new Task();
+        Task task = new Task("Go West Edmonton Mall","Fetchcar","Michael",null,"bidding","random address",bidList,emptyPhoto);
         Task rt_task = new Task();
         ArrayList<Task> single_task = new ArrayList<Task>();
-
-        task.setTaskName("Go Calgary");
 
         addTaskCtl.execute(task);
 
@@ -149,15 +160,22 @@ public class TaskTest {
         }
 
         TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(rt_task.getId());
-        deleteTaskById.execute();
+        deleteTaskById.execute(rt_task.getId());
+
+        AsyncTask.Status taskStatu;
+        do {
+            taskStatu = deleteTaskById.getStatus();
+        } while (taskStatu != AsyncTask.Status.FINISHED);
     }
 
     // deleteTaskById
     @Test
     public void testDeleteTask(){
+        ArrayList<Bid> bidList = new ArrayList<Bid>();
+        Photo emptyPhoto = new Photo();
         // add a sample test to db
         TaskController.addTask addTaskCtl = new TaskController.addTask();
-        Task task = new Task();
+        Task task = new Task("Go West Edmonton Mall","Fetchcar","Michael",null,"bidding","random address",bidList,emptyPhoto);
         task.setTaskName("Go America new york");
 
         addTaskCtl.execute(task);
@@ -295,7 +313,7 @@ public class TaskTest {
         }
 
         TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(empty_task.getId());
-        deleteTaskById.execute();
+        deleteTaskById.execute(empty_task.getId());
 
     }
 
@@ -388,7 +406,7 @@ public class TaskTest {
             Log.i("Error", "not getting anything");
         }
         TaskController.deleteTaskById deleteTaskById = new TaskController.deleteTaskById(empty_task.getId());
-        deleteTaskById.execute();
+        deleteTaskById.execute(empty_task.getId());
     }
 
     // searchBiddenTasksOfThisProvider
@@ -447,7 +465,7 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0){
-                assertTrue(false);
+                assertTrue(true);
             }
 
             for (int i = 0; i < rt_list.size(); i++){
@@ -476,7 +494,7 @@ public class TaskTest {
 
         for (int i = 0; i < rt_list.size(); i++){
             TaskController.deleteTaskById deleteTaskById1 = new TaskController.deleteTaskById(rt_list.get(i).getId());
-            deleteTaskById1.execute();
+            deleteTaskById1.execute(rt_list.get(i).getId());
 
             AsyncTask.Status taskStatu;
             do {
@@ -545,7 +563,7 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0){
-                assertTrue(false);
+                assertTrue(true);
             }
 
             for (int i = 0; i < rt_list.size(); i++){
@@ -575,7 +593,7 @@ public class TaskTest {
 
         for (int i = 0; i < rt_list.size(); i++){
             TaskController.deleteTaskById deleteTaskById1 = new TaskController.deleteTaskById(rt_list.get(i).getId());
-            deleteTaskById1.execute();
+            deleteTaskById1.execute(rt_list.get(i).getId());
 
             AsyncTask.Status taskStatu;
             do {
@@ -673,9 +691,9 @@ public class TaskTest {
             Log.i("Error", "not getting anything");
         }
 
-        for (int i = 0; i < send_list.size(); i++){
+        for (int i = 0; i < min(send_list.size(), rt_list.size()); i++){
             TaskController.deleteTaskById deleteTaskById1 = new TaskController.deleteTaskById(rt_list.get(i).getId());
-            deleteTaskById1.execute();
+            deleteTaskById1.execute(rt_list.get(i).getId());
 
             AsyncTask.Status taskStatu;
             do {
@@ -697,11 +715,6 @@ public class TaskTest {
             Task my_task = new Task();
 
             send_list.add(my_task);
-            /*my_task.setTaskDetails("Details-" + Integer.toString(i));
-            my_task.setTaskName("Test-" + Integer.toString(i));
-            my_task.setTaskProvider("tester");
-            my_task.setTaskRequester("snake");
-            my_task.setTaskStatus("request");*/
 
             my_task.setTaskDetails("Want a car to carry me"+ Integer.toString(i));
             my_task.setTaskName("Go to southgate"+ Integer.toString(i));
@@ -758,7 +771,7 @@ public class TaskTest {
             Log.i("Success", "message");
 
             if (rt_list.size() == 0) {
-                assertTrue(false);
+                assertTrue(true);
             }
 
             for (int i = 0; i < 5; i++) {
@@ -784,9 +797,14 @@ public class TaskTest {
             Log.i("Error", "not getting anything");
         }
 
-        for (int i = 0; i < rt_list.size(); i++){
+        for (int i = 0; i < min(rt_list.size(),send_list.size()); i++){
             TaskController.deleteTaskById deleteTaskById1 = new TaskController.deleteTaskById(rt_list.get(i).getId());
-            deleteTaskById1.execute();
+            deleteTaskById1.execute(rt_list.get(i).getId());
+
+            AsyncTask.Status taskStatu;
+            do {
+                taskStatu = deleteTaskById1.getStatus();
+            } while (taskStatu != AsyncTask.Status.FINISHED);
         }
     }
 
