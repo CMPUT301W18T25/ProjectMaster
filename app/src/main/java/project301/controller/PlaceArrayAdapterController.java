@@ -22,15 +22,18 @@ import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Detail :The adapter to place array adapter
+ * Calls Google Place API to get suggestions for requester when posting
+ * a new task
+ *
  * @classname : PlaceArrayAdapterController
  * @Date :   18/03/2018
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
+ *
+ * source: http://www.truiton.com/2015/04/android-places-api-autocomplete-getplacebyid/
  */
 
 
-// SOURCE: http://www.truiton.com/2015/04/android-places-api-autocomplete-getplacebyid/
 public class PlaceArrayAdapterController
         extends ArrayAdapter<PlaceArrayAdapterController.PlaceAutocomplete> implements Filterable {
     private static final String TAG = "PlaceArrayAdapter";
@@ -63,6 +66,11 @@ public class PlaceArrayAdapterController
         }
     }
 
+    /**
+     * Returns the number of suggestions the Google Places API found
+     *
+     * @return mResultList.size() int
+     */
     @Override
     public int getCount() {
         Log.d("PlaceArrayAdapterContro","getCount");
@@ -70,6 +78,12 @@ public class PlaceArrayAdapterController
         return mResultList.size();
     }
 
+    /**
+     * Returns a Place when the user clicks on a suggestion.
+     *
+     * @param position int
+     * @return PlaceAutocomplete
+     */
     @Override
     public PlaceAutocomplete getItem(int position) {
         Log.d("PlaceArrayAdapterContro","PlaceAutoComplete");
@@ -77,6 +91,12 @@ public class PlaceArrayAdapterController
         return mResultList.get(position);
     }
 
+    /**
+     * Returns a list of predictions based on the input provided y the user
+     *
+     * @param constraint
+     * @return
+     */
     private ArrayList<PlaceAutocomplete> getPredictions(CharSequence constraint) {
         Log.d("PlaceArrayAdapterContro","getPredictions");
 
@@ -118,11 +138,16 @@ public class PlaceArrayAdapterController
         return null;
     }
 
+    /**
+     * Calls getPredictions() method and filters the results to show only
+     * the suggestions return by getPredictions()
+     *
+     * @return Filter
+     */
     @NonNull
     @Override
     public Filter getFilter() {
         Log.d("PlaceArrayAdapterContro","getFilter");
-
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
