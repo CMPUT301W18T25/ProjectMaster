@@ -15,7 +15,7 @@ LINK : https://cmput301w18t25.github.io/ProjectMaster/
 * CompiledSdkVersion 22 and above 
 * BuildToolsVersion 26.0.2
 
-## Commerical Video
+## Commercial Video
 LINK : https://www.youtube.com/watch?v=_pmvUhQDCgc
 
 ## Authors:
