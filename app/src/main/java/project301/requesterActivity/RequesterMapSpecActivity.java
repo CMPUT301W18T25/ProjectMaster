@@ -29,8 +29,8 @@ import java.util.concurrent.ExecutionException;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 /**
- * Detail : Click the view on map on a specific task, we can see the location of the specific task
- * on the map.
+ * Shows a single task, for all of status requested, bidden, accepted, and done
+ *
  * @classname : RequesterMapActivity
  *
  * @Date :   18/03/2018

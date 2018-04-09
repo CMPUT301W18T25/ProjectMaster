@@ -30,8 +30,9 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Detail : view all the assigned tasks on the map for requester
- * @classname : RequesterMapAssignedActivity
+ * Similar to RequesterMapActivity, however only shows Assigned tasks
+ *
+ * @classname : RequesterMapActivity
  *
  * @Date :   18/03/2018
  * @author : Julian Stys
@@ -39,7 +40,6 @@ import java.util.concurrent.ExecutionException;
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  */
-
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class RequesterMapAssignedActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
