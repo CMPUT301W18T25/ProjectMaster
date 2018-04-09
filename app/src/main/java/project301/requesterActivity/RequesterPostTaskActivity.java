@@ -58,9 +58,14 @@ import com.novoda.merlin.MerlinsBeard;
 
 
 /**
- * Detail : RequesterPostTaskActivity is to allow user to post a new task , some informatin cannot be leaft empty.
+ * Detail : RequesterPostTaskActivity is to allow user to post a new task , some
+ * informatin cannot be left empty. Handles the task name, details, location, price,
+ * and attaching any photos. Only the task name is required. Handles offline activity.
+ *
+ *
  * @Date :   18/03/2018
  * @author : Yingnan Ma
+ * @author: Julian Stys
  * @version 1.0
  * @copyright : copyright (c) 2018 CMPUT301W18T25
  * @classname : RequesterPostTaskActivity
@@ -446,11 +451,12 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
 
 
     // source: modified from https://stackoverflow.com/questions/17489390/image-gallery-with-a-horizontal-scrollview
-
     /**
-     * method to insert photo
-     * @param bm
-     * @return
+     * Takes as input a bitmap and returns a view with the bitmap attached into it
+     * Takes care of automatically sizing the view based on the width and height of the bitmap
+     *
+     * @param Bitmap
+     * @return View
      */
     public View insertPhoto(Bitmap bm){
 
@@ -473,8 +479,9 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         return layout;
     }
 
-    protected void onStart(){
 
+
+    protected void onStart(){
         super.onStart();
         if(timer!=null) {
 
@@ -501,9 +508,6 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
                 BidController.updateBidCounterOfThisRequester updateBidCounterOfThisRequester = new BidController.updateBidCounterOfThisRequester();
                 updateBidCounterOfThisRequester.execute(bidCounter);
             }
-
-
-
         }
     }
 
@@ -547,7 +551,14 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         return true;
     }
 
-    // Autocomplete address
+
+    /**
+     * Called when user enters information into the task destination
+     * edit text. Called whenever user types additional keys or deletes
+     * keys
+     *
+     * source: https://developers.google.com/places/android-api/autocomplete
+     */
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
         @Override
@@ -562,6 +573,14 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         }
     };
 
+
+    /**
+     * Called when user clicks on a suggestion from the aurocomplete
+     * text view. Sets up a new Place object as the result from the
+     * autocompletion
+     *
+     * source: https://developers.google.com/places/android-api/autocomplete
+     */
     private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
             = new ResultCallback<PlaceBuffer>() {
         @Override
@@ -585,10 +604,8 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
 
     @Override
     public void onConnected(Bundle bundle) {
-
         mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
         Log.d(LOG_TAG, "Google Places API connected.");
-
     }
 
     @Override
@@ -618,8 +635,15 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         dialog.show();
     }
 
-    // Converts bitmap to string 64 format
-    // source: https://stackoverflow.com/questions/30818538/converting-json-object-with-bitmaps?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+
+    /**
+     * Converts bitmap to string 64 format
+     *
+     * source: https://stackoverflow.com/questions/30818538/converting-json-object-with-bitmaps?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+     *
+     * @param Bitmap
+     * @return String
+     */
     private String getStringFromBitmap(Bitmap bitmapPicture) {
         final int COMPRESSION_QUALITY = 100;
         String encodedImage;
@@ -631,7 +655,6 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
         return encodedImage;
     }
     Handler handler = new Handler(new Handler.Callback() {
-
         @Override
         public boolean handleMessage(Message msg) {
             if(msg.arg1==1)
@@ -639,7 +662,6 @@ public class RequesterPostTaskActivity extends AppCompatActivity implements
                 //Print Toast or open dialog
                 openRequestInfoDialog();
                 msg.arg1 = 0;
-
             }
             return false;
         }
